@@ -39,11 +39,6 @@ db.once('open', function() {
     option: {type: Number, required: true},
   });
 
-  var User_has_voted_at_question = new Schema({// Who has voted at what but not for what
-    question: {type: Schema.Types.ObjectId, required: true},
-    votes_schema: Schema.Types.ObjectId
-  });
-
   var Vote_demand_schema = new Schema({// Just so we can set more later, not really nessecary, but why not! It makes it easy if 6/9 is needed for the question to be accepted
     title: {type: String, required: true},
     percent: {type: Number, required: true},
