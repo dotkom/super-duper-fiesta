@@ -32,16 +32,16 @@ db.once('open', function() {
   var Answer_schema = new Schema({
     question: {type: Schema.Types.ObjectId, required: true},
     option: {type: Number, required: true},
-    name: String,
-    user: Schema.Types.ObjectId,
+    name: String, //Not needed
+    user: Schema.Types.ObjectId, // So to know who has voted but not for what we have a User_has_voted_at_question thingi
   });
 
-  var User_has_voted_at_question = new Schema({
+  var User_has_voted_at_question = new Schema({// Who has voted at what but not for what
     User: {type: Schema.Types.ObjectId, required: true},
     Question: {type: Schema.Types.ObjectId, required: true}
   });
 
-  var Vote_demand_schema = new Schema({
+  var Vote_demand_schema = new Schema({// Just so we can set more later, not really nessecary, but why not! It makes it easy if 6/9 is needed for the question to be accepted
     title: {type: String, required: true},
     percent: {type: Number, required: true},
   });
@@ -97,7 +97,5 @@ db.once('open', function() {
 
   });
 */
-
-
 
 });
