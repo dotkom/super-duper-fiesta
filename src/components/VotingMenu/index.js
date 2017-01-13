@@ -12,7 +12,7 @@ const VotingMenu = ({ alternatives }) => (
 );
 
 VotingMenu.propTypes = {
-  alternatives: React.PropTypes.arrayOf(React.propTypes.shape({
+  alternatives: React.PropTypes.arrayOf(React.PropTypes.shape({
     id: React.PropTypes.number,
     text: React.PropTypes.string,
   })).isRequired,

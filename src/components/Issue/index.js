@@ -7,8 +7,12 @@ const Issue = ({ issue }) => (
   </div>
 );
 
+Issue.defaultProps = {
+  issue: undefined,
+};
+
 Issue.propTypes = {
-  issue: React.PropTypes.string.isRequired,
+  issue: React.PropTypes.string,
 };
 
 export default Issue;

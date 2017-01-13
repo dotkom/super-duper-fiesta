@@ -7,8 +7,8 @@ const LiveCount = ({ userCount, voteCount }) => (
 );
 
 LiveCount.propTypes = {
-  userCount: React.propTypes.number.isRequired,
-  voteCount: React.propTypes.number.isRequired,
+  userCount: React.PropTypes.number.isRequired,
+  voteCount: React.PropTypes.number.isRequired,
 };
 
 export default LiveCount;
