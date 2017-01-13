@@ -1,10 +1,11 @@
 import React from 'react';
+import ActiveIssue from '../ActiveIssue';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        Hello world!
+        <ActiveIssue issue="Hello world" />
       </div>
     );
   }
