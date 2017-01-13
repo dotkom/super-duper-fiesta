@@ -3,6 +3,8 @@ var app = express()
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+app.use('/public', express.static('public'))
+
 app.get('/', function (req, res) {
 	  res.sendFile(__dirname + '/index.html', function(err) {
 				if (err) {
@@ -12,7 +14,9 @@ app.get('/', function (req, res) {
 		})
 })
 
-app.use('/public', express.static('public'))
+app.get('/questions', function(req, res) {
+	res.json([ { title: 'temporary question title' } ])
+})
 
 io.on('connection', function (socket) {
   socket.broadcast.emit('news', { hello: 'world', message: "Hello world!" });
