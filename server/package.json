@@ -1,0 +1,24 @@
+{
+  "name": "super-duper-fiesta",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotKom/super-duper-fiesta.git"
+  },
+  "author": "dotkom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dotKom/super-duper-fiesta/issues"
+  },
+  "homepage": "https://github.com/dotKom/super-duper-fiesta#readme"
+}
