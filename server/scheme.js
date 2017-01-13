@@ -23,22 +23,25 @@ db.once('open', function() {
   var User_schema = new Schema({
     genfors: {type: Schema.Types.ObjectId, required: true},
     name: {type: String, required: true},
-    password_hash: {type: String, required: true},
-    onlineweb_id: {type: Number, required: true},
+    onlineweb_id: {type: String, required: true},
     register_date: {type: Date, required: true},
     can_vote: {type: Boolean, required: true},
+    notes: {type: String, required: true},
   });
 
-  var Answer_schema = new Schema({
+  var Anonymous_user = new Schema({
+    password_hash: {type: String, required: true},
+  });
+
+  var Votes_schema = new Schema({
+    user: {type: Schema.Types.ObjectId, required: true},
     question: {type: Schema.Types.ObjectId, required: true},
     option: {type: Number, required: true},
-    name: String, //Not needed
-    user: Schema.Types.ObjectId, // So to know who has voted but not for what we have a User_has_voted_at_question thingi
   });
 
   var User_has_voted_at_question = new Schema({// Who has voted at what but not for what
-    User: {type: Schema.Types.ObjectId, required: true},
-    Question: {type: Schema.Types.ObjectId, required: true}
+    question: {type: Schema.Types.ObjectId, required: true},
+    votes_schema: Schema.Types.ObjectId
   });
 
   var Vote_demand_schema = new Schema({// Just so we can set more later, not really nessecary, but why not! It makes it easy if 6/9 is needed for the question to be accepted
