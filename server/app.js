@@ -1,5 +1,7 @@
 var express = require('express')
 var app = express()
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 app.get('/', function (req, res) {
 	  res.sendFile(__dirname + '/index.html', function(err) {
@@ -10,6 +12,15 @@ app.get('/', function (req, res) {
 		})
 })
 
-app.listen(3000, function () {
+app.use('/public', express.static('public'))
+
+io.on('connection', function (socket) {
+  socket.broadcast.emit('news', { hello: 'world', message: "Hello world!" });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
+server.listen(3000, function () {
 	  console.log('Example app listening on port 3000!')
 })
