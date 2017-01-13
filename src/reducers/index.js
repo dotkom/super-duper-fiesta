@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import { issues } from './issues';
 
 const votingApp = combineReducers({

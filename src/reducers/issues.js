@@ -4,6 +4,9 @@ export const issue = (state = {}, action) => {
       return {
         text: action.text,
       };
+
+    default:
+      return state;
   }
 };
 

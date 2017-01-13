@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import App from './components/App';
 import votingApp from './reducers';
 
-let store = createStore(votingApp);
+const store = createStore(votingApp);
 
 ReactDOM.render(
   <Provider store={store}>

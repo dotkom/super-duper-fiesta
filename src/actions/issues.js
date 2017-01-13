@@ -1,3 +1,3 @@
-export const createIssue = (text) => ({
+export const createIssue = text => ({
   text,
 });
