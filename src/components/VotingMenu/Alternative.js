@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import './Alternative.css';
 
 const Alternative = ({ id, text, ...other }) => (
   <div className="Alternative" key={id}>

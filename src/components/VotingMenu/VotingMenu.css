@@ -23,32 +23,3 @@
   color: white;
   cursor: not-allowed
 }
-
-.Alternatives {
-  margin-top: 2rem;
-}
-
-.Alternative {
-  margin: 1rem 0;
-  background: #6b71a5;
-  color: #ffffff;
-  font-size: 1.8rem;
-  display: flex;
-  box-shadow: 0px -2px 0px 0px rgba(0, 0, 0, 0.25) inset,
-              0px 2px 1px 0px rgba(0, 0, 0, 0.2);
-}
-
-.Alternative:hover {
-  background: #afb0c1;
-}
-
-.Alternative label {
-  cursor: pointer;
-  flex-grow: 1;
-  padding: 1rem;
-}
-
-.Alternative input {
-  cursor: pointer;
-  width: 2rem;
-}
