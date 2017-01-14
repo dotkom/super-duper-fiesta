@@ -1,4 +1,5 @@
 import React from 'react';
+import './VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor() {
@@ -38,20 +39,21 @@ class VotingMenu extends React.Component {
         <div className="Alternatives">
           {this.props.alternatives.map(alternative => (
             <div className="Alternative" key={alternative.id}>
-              <input
-                type="radio"
-                name="vote"
-                value={alternative.id}
-                id={alternative.id}
-                onChange={this.handleChange}
-              />
-
-              <label htmlFor={alternative.id}>{alternative.text}</label>
+              <label>
+                <input
+                  type="radio"
+                  name="vote"
+                  value={alternative.id}
+                  id={alternative.id}
+                  onChange={this.handleChange}
+                />
+                {alternative.text}
+              </label>
             </div>
           ))}
         </div>
 
-        <button onClick={this.handleClick} disabled={buttonDisabled}>Submit vote</button>
+        <button className="VotingMenu-submit" onClick={this.handleClick} disabled={buttonDisabled}>Submit vote</button>
       </div>
     );
   }
