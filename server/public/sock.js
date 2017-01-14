@@ -3,9 +3,9 @@ socket.on('connection', function (data) {
   console.log('connected')
 })
 socket.on('meeting', function (data) {
-  console.log(data)
+  console.log('d', data)
   socket.emit('my other event', { my: 'data' })
   var node = document.createElement('p')
-  node.innerHTML = data.title
+  node.innerHTML = data.title || 'temporary title'
   document.getElementById('log').appendChild(node)
 });

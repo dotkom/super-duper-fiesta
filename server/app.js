@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const db = require('./scheme.js');
 const logger = require('./logging');
+
+const getActiveGenfors = require('./helpers').getActiveGenfors
 
 app.use('/public', express.static('public'))
 
@@ -40,10 +41,14 @@ io.on('connection', function (socket) {
   });
 	// End dummy code
 
-	db.getActiveGenfors(function(data) {
+	getActiveGenfors(function(data) {
 		logger.debug('genfors data', data)
-		if (!data) { socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' }) }
-		socket.emit('meeting', data)
+		if (!data) { 
+			socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' })
+		}
+		else {
+			socket.emit('meeting', data)
+		}
 	})
 });
 
