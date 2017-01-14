@@ -1,3 +1,8 @@
+dist/
+
+# JetBrains
+.idea/
+
 # Logs
 logs
 *.log
