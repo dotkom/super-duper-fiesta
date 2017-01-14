@@ -6,7 +6,7 @@ const app = express();
 const server = require('http').Server(app);
 const routes = require('./routes');
 
-require('./channels').listen(server);
+require('./channels/index').listen(server);
 
 app.use('/public', express.static('public'));
 app.use('/', routes);

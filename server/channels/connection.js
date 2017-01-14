@@ -1,7 +1,6 @@
-const socketio = require('socket.io');
-const logger = require('./logging');
+const logger = require('../logging');
 
-const getActiveGenfors = require('./helpers').getActiveGenfors;
+const getActiveGenfors = require('../helpers').getActiveGenfors;
 
 const connection = (socket) => {
   // Some dummy code
@@ -27,17 +26,4 @@ const connection = (socket) => {
   });
 };
 
-const issue = (socket) => {
-  if (socket.data.status === true) {
-    // create issue
-  }
-  if (socket.data.status === false) {
-    // closeIssue(socket.data)
-  }
-};
-
-module.exports.listen = (server) => {
-  const io = socketio(server);
-  io.on('connection', connection);
-  io.on('issue', issue);
-};
+module.exports = connection;
