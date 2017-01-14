@@ -1,4 +1,5 @@
 import React from 'react';
+import Alternatives from './Alternatives';
 import './VotingMenu.css';
 
 class VotingMenu extends React.Component {
@@ -36,24 +37,14 @@ class VotingMenu extends React.Component {
 
     return (
       <div className="VotingMenu">
-        <div className="Alternatives">
-          {this.props.alternatives.map(alternative => (
-            <div className="Alternative" key={alternative.id}>
-              <label>
-                <input
-                  type="radio"
-                  name="vote"
-                  value={alternative.id}
-                  id={alternative.id}
-                  onChange={this.handleChange}
-                />
-                {alternative.text}
-              </label>
-            </div>
-          ))}
-        </div>
-
-        <button className="VotingMenu-submit" onClick={this.handleClick} disabled={buttonDisabled}>Submit vote</button>
+        <Alternatives alternatives={this.props.alternatives} handleChange={this.handleChange} />
+        <button
+          className="VotingMenu-submit"
+          onClick={this.handleClick}
+          disabled={buttonDisabled}
+        >
+          Submit vote
+        </button>
       </div>
     );
   }
@@ -61,14 +52,11 @@ class VotingMenu extends React.Component {
 
 VotingMenu.defaultProps = {
   voterKey: undefined,
+  alternatives: [],
 };
 
 VotingMenu.propTypes = {
-  alternatives: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number,
-    text: React.PropTypes.string,
-  })).isRequired,
-
+  alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
   id: React.PropTypes.number.isRequired,
 
