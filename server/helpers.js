@@ -28,9 +28,9 @@ function canEdit(genfors, user, securityLevel, cb) {
 
 // Add functions
 // TODO add security function
-function addGenfors(title, date, passwordHash, cb) {
+function addGenfors(title, date, passwordHash) {
   // Only allow one at a time
-  getActiveGenfors().catch(handleError).then((meeting) => {
+  getActiveGenfors().then((meeting) => {
     // @TODO Prompt user for confirmations and disable active genfors
 
     if (meeting) return handleError("You can't add a new because there is one active");
@@ -43,7 +43,7 @@ function addGenfors(title, date, passwordHash, cb) {
       pin: parseInt(Math.random() * 10000, 10),
       password: passwordHash,
     });
-    genfors.save().then(cb).catch(handleError);
+    genfors.save();
     return null;
   });
 }
