@@ -185,11 +185,15 @@ db.once('open', function() {
 
   //Get requests
   function getActiveGenfors(cb){
-    Genfors.findOne().exec(function(err, genfors){
+    Genfors.findOne({status: "Open"}).exec(function(err, genfors){
       if(err) return handleError(err);
 
       cb(genfors);
     });
+  }
+
+  function endGenfors(genfors, cb){
+    Genfors.update({_id: genfors}, {status: "Closed"}, cb);
   }
 
 
@@ -214,12 +218,22 @@ db.once('open', function() {
     console.log(genfors);
     getActiveGenfors(function(genfors){
       console.log(genfors);
-      addUser(genfors, 'Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
-        console.log(user);
-        console.log(auser);
-        getUsers(genfors, false, function(users){
-          console.log(users);
+      endGenfors(genfors, function(err){
+        if(err) handleError(err);
+        console.log("Ended");
+        getActiveGenfors(function(genfors){
+          console.log(genfors);
         });
+      });
+    });
+    addUser(genfors, 'Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
+      console.log(user);
+      console.log(auser);
+      getUsers(genfors, false, function(users){
+        console.log(users);
+      });
+      getUsers(genfors, true, function(users){
+        console.log(users);
       });
     });
   });
