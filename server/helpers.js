@@ -1,60 +1,64 @@
-// { Anonymous_user, Genfors, Question, User, Vote, Vote_demand }
 const Anonymous_user = require('./scheme').Anonymous_user;
 const Genfors = require('./scheme').Genfors;
 const Question = require('./scheme').Question;
 const User = require('./scheme').User;
 const Vote = require('./scheme').Vote;
 const Vote_demand = require('./scheme').Vote_demand;
+const logger = require('./logging');
 
-function handleError(err){
-  logger.error("Error doing something", { err: err });
+function handleError(err) {
+  logger.error('Error doing something', { err });
 }
 
-function addGenfors(title, date, passwordHash, cb){
-  //Only allow one at a time
-  getActiveGenfors(function(genfors){
+// Get requests
+function getActiveGenfors(cb) {
+  return Genfors.findOne({ status: 'Open' }).exec().then(cb).catch(handleError);
+}
 
-    //@TODO Prompt user for confirmations and disable active genfors
+function addGenfors(title, date, passwordHash, cb) {
+  // Only allow one at a time
+  getActiveGenfors((genfors) => {
+    // @TODO Prompt user for confirmations and disable active genfors
 
-    if(genfors) return handleError("You can't add a new because there is one active");
+    if (genfors) return handleError("You can't add a new because there is one active");
 
-    //Add a new genfors
+    // Add a new genfors
     var genfors = new Genfors({
-      title: title,
-      date: date,
-      status: "Open",
-      pin: parseInt(Math.random()*10000),
-      password: passwordHash
+      title,
+      date,
+      status: 'Open',
+      pin: parseInt(Math.random() * 10000),
+      password: passwordHash,
     });
-    genfors.save(function(err){
-      if(err) return handleError(err);
+    genfors.save((err) => {
+      if (err) return handleError(err);
       cb(genfors);
     });
   });
 }
 
-function addUser(name, onlineweb_id, password_hash, cb){
-  getActiveGenfors(function(genfors){
-    if(!genfors) return handleError("No active genfors");
-    var user = new User({
-      genfors: genfors,
-      name: name,
-      onlineweb_id: onlineweb_id,
+function addUser(name, onlineweb_id, password_hash, cb) {
+  getActiveGenfors((genfors) => {
+    if (!genfors) return handleError('No active genfors');
+    const user = new User({
+      genfors,
+      name,
+      onlineweb_id,
       register_date: new Date(),
       can_vote: false,
-      notes: "",
-      security: 0
+      notes: '',
+      security: 0,
     });
 
-    var anonymousUser = new Anonymous_user({
-      genfors: genfors,
-      password_hash: password_hash,
+    const anonymousUser = new Anonymous_user({
+      genfors,
+      password_hash,
     });
 
-    user.save(function(err){
-      if(err) return handleError(err);
-      anonymousUser.save(function(err){
-        if(err) return handleError(err);
+    user.save((err) => {
+      if (err) return handleError(err);
+      anonymousUser.save((err) => {
+        if (err) return handleError(err);
         cb(user, anonymousUser);
       });
     });
@@ -62,110 +66,99 @@ function addUser(name, onlineweb_id, password_hash, cb){
 }
 
 
-function addVoteDemands(title, percent, cb){
-  var voteDemand = new Vote_demand({
-    title: title,
-    percent: percent
+function addVoteDemands(title, percent, cb) {
+  const voteDemand = new Vote_demand({
+    title,
+    percent,
   });
 
-  voteDemand.save(function(err){
-    if(err) return handleError(err);
+  voteDemand.save((err) => {
+    if (err) return handleError(err);
     cb(voteDemand);
-  })
+  });
 }
 
 
-function addQuestion(description, options, secret, show_only_winner, counting_blank_votes, vote_demand, cb){
-  getActiveGenfors(function(genfors){
-    if(!genfors) return handleError("No genfors active");
+function addQuestion(description, options, secret, show_only_winner, counting_blank_votes, vote_demand, cb) {
+  getActiveGenfors((genfors) => {
+    if (!genfors) return handleError('No genfors active');
 
-    getQualifiedUsers(genfors, secret, function(users){
-      var question = new Question({
-        genfors: genfors,
-        description: description,
+    getQualifiedUsers(genfors, secret, (users) => {
+      const question = new Question({
+        genfors,
+        description,
         active: true,
         deleted: false,
-        options: options,//Format {description, id}
-        secret: secret,
-        show_only_winner: show_only_winner,
-        counting_blank_votes: counting_blank_votes,
-        vote_demand: vote_demand,
-        qualifiedVoters: users.length
+        options, // Format {description, id}
+        secret,
+        show_only_winner,
+        counting_blank_votes,
+        vote_demand,
+        qualifiedVoters: users.length,
       });
 
-      question.save(function(err){
-        if(err) return handleError(err);
+      question.save((err) => {
+        if (err) return handleError(err);
         cb(question);
       });
     });
-
   });
 }
 
-function addVote(question, user, option, cb){
-  Question.findOne({_id: question}, function(err, question){
-    if(err || !question.active) return handleError(err || "Not an active question");
+function addVote(question, user, option, cb) {
+  Question.findOne({ _id: question }, (err, question) => {
+    if (err || !question.active) return handleError(err || 'Not an active question');
 
-    var vote = new Vote({
-      user: user,
-      question: question,
-      option: option,
+    const vote = new Vote({
+      user,
+      question,
+      option,
     });
-    vote.save(function (err){
-      if(err) return handleError(err);
+    vote.save((err) => {
+      if (err) return handleError(err);
       cb(vote);
     });
   });
 }
 
-//Update functions
-//TODO Unable activity if genfors is ended
-function endGenfors(genfors, cb){
-  Genfors.update({_id: genfors}, {status: "Closed"}, cb);
+// Update functions
+// TODO Unable activity if genfors is ended
+function endGenfors(genfors, cb) {
+  Genfors.update({ _id: genfors }, { status: 'Closed' }, cb);
 }
-function endQuestion(question, cb){
-  Genfors.update({_id: question}, {active: false}, cb);
-}
-
-
-
-//Get requests
-function getActiveGenfors(cb){
-  Genfors.findOne({status: "Open"}).exec(function(err, genfors){
-    if(err) return handleError(err);
-
-    cb(genfors);
-  });
+function endQuestion(question, cb) {
+  Genfors.update({ _id: question }, { active: false }, cb);
 }
 
-function getUsers(genfors, anonymous, cb){
-  if(anonymous){
-    Anonymous_user.find({genfors: genfors}, function(err, users){
-      if(err) return handleError(err);
+function getUsers(genfors, anonymous, cb) {
+  if (anonymous) {
+    Anonymous_user.find({ genfors }, (err, users) => {
+      if (err) return handleError(err);
       cb(users);
     });
-  }else{
-    User.find({genfors: genfors}, function(err, users){
-      if(err) return handleError(err);
+  } else {
+    User.find({ genfors }, (err, users) => {
+      if (err) return handleError(err);
       cb(users);
     });
   }
 }
 
-function getQualifiedUsers(genfors, secret, cb){
-  if(secret){
-    return Anonymous_user.find({genfors: genfors, can_vote: true}, function(err, users){
-      if(err) return handleError(err);
+function getQualifiedUsers(genfors, secret, cb) {
+  if (secret) {
+    return Anonymous_user.find({ genfors, can_vote: true }, (err, users) => {
+      if (err) return handleError(err);
       cb(users);
     });
-  }else{
-    return User.find({genfors: genfors, can_vote: true}, function(err, users){
-      if(err) return handleError(err);
+  } else {
+    return User.find({ genfors, can_vote: true }, (err, users) => {
+      if (err) return handleError(err);
       cb(users);
     });
   }
 }
 
 module.exports = {
-  getActiveGenfors: getActiveGenfors
-}
+  addGenfors,
+  getActiveGenfors,
+};
