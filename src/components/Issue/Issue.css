@@ -2,6 +2,7 @@
   background: #fff;
   padding: 1rem;
   border: 1px solid whitesmoke;
+  flex-grow: 2;
 }
 
 .Issue p {

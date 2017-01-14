@@ -9,9 +9,13 @@ import './App.css';
 const App = () => (
   <div className="App">
     <Heading />
-    <ActiveIssue />
-    <LiveVoteCount />
-    <VoteHandler />
+    <div className="App-components">
+      <div className="ActiveIssue-Vote-wrapper">
+        <ActiveIssue />
+        <VoteHandler />
+      </div>
+      <LiveVoteCount />
+    </div>
     <ConcludedIssueListContainer />
   </div>
   );

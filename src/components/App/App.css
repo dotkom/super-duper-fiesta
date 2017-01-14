@@ -11,3 +11,13 @@ body {
 .App {
   padding: 1rem 2rem;
 }
+
+.App-components {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ActiveIssue-Vote-wrapper {
+  flex-grow: 2;
+  padding: 1rem;
+}
