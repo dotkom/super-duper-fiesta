@@ -11,56 +11,52 @@ function handleError(err) {
 }
 
 // Get requests
-function getActiveGenfors(cb) {
-  return Genfors.findOne({ status: 'Open' }).exec().then(cb).catch(handleError);
+function getActiveGenfors() {
+  return Genfors.findOne({ status: 'Open' }).exec();
 }
 
 function addGenfors(title, date, passwordHash, cb) {
   // Only allow one at a time
-  getActiveGenfors((genfors) => {
+  getActiveGenfors().catch(handleError).then((meeting) => {
     // @TODO Prompt user for confirmations and disable active genfors
 
-    if (genfors) return handleError("You can't add a new because there is one active");
+    if (meeting) return handleError("You can't add a new because there is one active");
 
     // Add a new genfors
-    var genfors = new Genfors({
+    const genfors = new Genfors({
       title,
       date,
       status: 'Open',
-      pin: parseInt(Math.random() * 10000),
+      pin: parseInt(Math.random() * 10000, 10),
       password: passwordHash,
     });
-    genfors.save((err) => {
-      if (err) return handleError(err);
-      cb(genfors);
-    });
+    genfors.save().then(cb).catch(handleError);
+    return null;
   });
 }
 
-function addUser(name, onlineweb_id, password_hash, cb) {
-  getActiveGenfors((genfors) => {
-    if (!genfors) return handleError('No active genfors');
-    const user = new User({
-      genfors,
-      name,
-      onlineweb_id,
-      register_date: new Date(),
-      can_vote: false,
-      notes: '',
-      security: 0,
-    });
-
-    const anonymousUser = new Anonymous_user({
-      genfors,
-      password_hash,
-    });
-
-    user.save((err) => {
-      if (err) return handleError(err);
-      anonymousUser.save((err) => {
-        if (err) return handleError(err);
-        cb(user, anonymousUser);
+function addUser(name, onlinewebId, passwordHash) {
+  return new Promise((resolve, reject) => {
+    getActiveGenfors().then((genfors) => {
+      const user = new User({
+        genfors,
+        name,
+        onlineweb_id: onlinewebId,
+        register_date: new Date(),
+        can_vote: false,
+        notes: '',
+        security: 0,
       });
+
+      const anonymousUser = new Anonymous_user({
+        genfors,
+        password_hash: passwordHash,
+      });
+
+      Promise.all([user.save(), anonymousUser.save()])
+        .then((p) => {
+          resolve({ user: p[0], anonymousUser: p[1] });
+        }).catch(reject);
     });
   });
 }
@@ -202,6 +198,7 @@ function getQuestions(genfors, cb) {
 
 module.exports = {
   addGenfors,
+  addUser,
   getActiveGenfors,
   getVotes,
   getQuestions,

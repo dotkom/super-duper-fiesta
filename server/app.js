@@ -42,12 +42,15 @@ io.on('connection', (socket) => {
   });
   // End dummy code
 
-  getActiveGenfors((meeting) => {
+  getActiveGenfors().then((meeting) => {
     if (!meeting) {
       socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
       socket.emit('meeting', meeting);
     }
+  }).catch((err) => {
+    logger.err('Something went wrong.', { err });
+    socket.emit('error', 'Noe gikk galt. Vennligst prøve igjen.');
   });
 });
 

@@ -53,3 +53,10 @@ db.once('open', function() {
   }
 
 });
+
+
+// addUser('hakon', 'sklirg', '1234abcd').then((d) => {
+//   console.log('creted', Object.keys(d), d)
+// }).catch((err) => {
+//   console.log(err)
+// })
