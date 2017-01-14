@@ -1,4 +1,4 @@
-export const updateVoterKey = (key) => ({
+export const updateVoterKey = key => ({
   type: 'UPDATE_VOTER_KEY',
   key,
 });
