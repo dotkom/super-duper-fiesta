@@ -1,7 +1,24 @@
+.Heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid #323A7F;
+}
+
 .Heading-header {
   color: #323A7F;
+  font-size: 3.4rem;
 }
 
 .Heading-logout {
-  float: right;
+  background: #323A7F;
+  color: #F7F7F7;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.Heading-logout:hover {
+  background: #515CCC;
 }
