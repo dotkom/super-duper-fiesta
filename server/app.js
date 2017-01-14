@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-// const db = require('./scheme.js');
+const db = require('./scheme.js');
 
 app.use('/public', express.static('public'))
 
@@ -39,10 +39,21 @@ io.on('connection', function (socket) {
   });
 	// End dummy code
 
-	// var meeting = getActiveMeeting()
-	// if (!meeting) { socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' }) }
-	socket.emit('meeting', { title: 'Some meeting' })
+	db.getActiveGenfors(function(data) {
+		console.log('genfors data', data)
+		if (!data) { socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' }) }
+		socket.emit('meeting', data)
+	})
 });
+
+io.on('issue', function(socket) {
+	if (socket.data.status === true) {
+		// create issue
+	}
+	if (socket.data.status === false) {
+		// closeIssue(socket.data)
+	}
+})
 
 server.listen(3000, function () {
 	  console.log('Example app listening on port 3000!')

@@ -15,10 +15,6 @@ mongoose.connect('mongodb://localhost');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-db.once('open', function() {
-  // we're connected!
-  console.log("Connected");
-
   //Creating all the Schemas
   var User_schema = new Schema({
     genfors: {type: Schema.Types.ObjectId, required: true},
@@ -78,8 +74,6 @@ db.once('open', function() {
   var Vote_demand = mongoose.model('Vote_demand', Vote_demand_schema);
   var Genfors = mongoose.model('Genfors', Genfors_schema);
 
-
-//Creating db functions
 
   function handleError(err){
     console.log("Error doing somehitng");
@@ -213,7 +207,10 @@ db.once('open', function() {
 
 
   //Testing
-
+  db.once('open', function() {
+    // we're connected!
+    console.log("Connected");
+  //Creating db functions
   addGenfors('Wioioioioio', new Date(), "passwordHash", function(genfors){
     console.log(genfors);
     getActiveGenfors(function(genfors){
@@ -240,4 +237,12 @@ db.once('open', function() {
 
 });
 
-//export db;
+module.exports = {
+  User: User,
+  Anonymous_user: Anonymous_user,
+  Vote: Vote,
+  Question: Question,
+  Vote_demand: Vote_demand,
+  Genfors: Genfors,
+  getActiveGenfors: getActiveGenfors,
+}
