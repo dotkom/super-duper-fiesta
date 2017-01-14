@@ -3,6 +3,7 @@ import LiveVoteCount from '../../containers/LiveVoteCount';
 import VoteHandler from '../../containers/VoteHandler';
 import ActiveIssue from '../../containers/ActiveIssue';
 import Heading from '../Heading';
+import './App.css';
 
 const App = () => (
   <div className="App">
