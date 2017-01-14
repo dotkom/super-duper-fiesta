@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-//db.once('open', function() {
+db.once('open', function() {
   // we're connected!
   console.log("Connected");
 
@@ -26,7 +26,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
     onlineweb_id: {type: String, required: true},
     register_date: {type: Date, required: true},
     can_vote: {type: Boolean, required: true},
-    notes: {type: String, required: true},
+    notes: String,
+    security: Number
   });
 
   var Anonymous_user_schema = new Schema({
@@ -65,6 +66,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
     date: {type: Date, required: true},
     status: {type: String, required: true}, //Open/Closed/Whatever
     pin: {type: Number, required: true},
+    password: {type: String, required: true}
   });
 
 
@@ -77,18 +79,36 @@ db.on('error', console.error.bind(console, 'connection error:'));
   var Genfors = mongoose.model('Genfors', Genfors_schema);
 
 
-//Testing stuff
+//Creating db functions
 
-  function addGenfors(title, date, cb){
-    var genfors = new Genfors({
-      title: title,
-      date: date,
-      status: "Open",
-      pin: parseInt(Math.random()*10000)
-    });
-    genfors.save(function(err){
-      if(err) return handleError(err);
-      cb(this);
+  function handleError(err){
+    console.log("Error doing somehitng");
+    console.log(err);
+  }
+
+
+
+
+  function addGenfors(title, date, passwordHash, cb){
+    //Only allow one at a time
+    getActiveGenfors(function(genfors){
+
+      //@TODO Prompt user for confirmations and disable active genfors
+
+      if(genfors) return handleError("You can't add a new because there is one active");
+
+      //Add a new genfors
+      var genfors = new Genfors({
+        title: title,
+        date: date,
+        status: "Open",
+        pin: parseInt(Math.random()*10000),
+        password: passwordHash
+      });
+      genfors.save(function(err){
+        if(err) return handleError(err);
+        cb(genfors);
+      });
     });
   }
 
@@ -100,6 +120,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
       register_date: new Date(),
       can_vote: false,
       notes: "",
+      security: 0
     });
 
     var anonymousUser = new Anonymous_user({
@@ -111,7 +132,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
       if(err) return handleError(err);
       anonymousUser.save(function(err){
         if(err) return handleError(err);
-        cb(user, this);
+        cb(user, anonymousUser);
       });
     });
   }
@@ -125,7 +146,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
     voteDemand.save(function(err){
       if(err) return handleError(err);
-      cb(this);
+      cb(voteDemand);
     })
   }
 
@@ -144,7 +165,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
     });
     question.save(function(err){
       if(err) return handleError(err);
-      cb(this);
+      cb(question);
     });
   }
 
@@ -156,7 +177,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
     });
     vote.save(function (err){
       if(err) return handleError(err);
-      cb(this);
+      cb(vote);
     });
   }
 
@@ -188,17 +209,21 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 
   //Testing
-/*
-  addGenfors('Wioioioioio', new Date(), function(genfors){
+
+  addGenfors('Wioioioioio', new Date(), "passwordHash", function(genfors){
+    console.log(genfors);
     getActiveGenfors(function(genfors){
       console.log(genfors);
       addUser(genfors, 'Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
         console.log(user);
         console.log(auser);
+        getUsers(genfors, false, function(users){
+          console.log(users);
+        });
       });
     });
   });
-*/
-//});
 
-export db;
+});
+
+//export db;
