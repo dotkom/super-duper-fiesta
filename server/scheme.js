@@ -106,27 +106,30 @@ function addGenfors(title, date, passwordHash, cb){
   });
 }
 
-function addUser(genfors, name, onlineweb_id, password_hash, cb){
-  var user = new User({
-    genfors: genfors,
-    name: name,
-    onlineweb_id: onlineweb_id,
-    register_date: new Date(),
-    can_vote: false,
-    notes: "",
-    security: 0
-  });
+function addUser(name, onlineweb_id, password_hash, cb){
+  getActiveGenfors(function(genfors){
+    if(!genfors) return handleError("No active genfors");
+    var user = new User({
+      genfors: genfors,
+      name: name,
+      onlineweb_id: onlineweb_id,
+      register_date: new Date(),
+      can_vote: false,
+      notes: "",
+      security: 0
+    });
 
-  var anonymousUser = new Anonymous_user({
-    genfors: genfors,
-    password_hash: password_hash,
-  });
+    var anonymousUser = new Anonymous_user({
+      genfors: genfors,
+      password_hash: password_hash,
+    });
 
-  user.save(function(err){
-    if(err) return handleError(err);
-    anonymousUser.save(function(err){
+    user.save(function(err){
       if(err) return handleError(err);
-      cb(user, anonymousUser);
+      anonymousUser.save(function(err){
+        if(err) return handleError(err);
+        cb(user, anonymousUser);
+      });
     });
   });
 }
@@ -145,34 +148,56 @@ function addVoteDemands(title, percent, cb){
 }
 
 
-function addQuestion(genfors, description, options, secret, show_only_winner, counting_blank_votes, vote_demand, cb){
-  var question = new Question({
-    genfors: genfors,
-    description: description,
-    active: true,
-    deleted: false,
-    options: options,//Format {description, id}
-    secret: secret,
-    show_only_winner: show_only_winner,
-    counting_blank_votes: counting_blank_votes,
-    vote_demand: vote_demand
-  });
-  question.save(function(err){
-    if(err) return handleError(err);
-    cb(question);
+function addQuestion(description, options, secret, show_only_winner, counting_blank_votes, vote_demand, cb){
+  getActiveGenfors(function(genfors){
+    if(!genfors) return handleError("No genfors active");
+
+    getQualifiedUsers(genfors, secret, function(users){
+      var question = new Question({
+        genfors: genfors,
+        description: description,
+        active: true,
+        deleted: false,
+        options: options,//Format {description, id}
+        secret: secret,
+        show_only_winner: show_only_winner,
+        counting_blank_votes: counting_blank_votes,
+        vote_demand: vote_demand,
+        qualifiedVoters: users.length
+      });
+
+      question.save(function(err){
+        if(err) return handleError(err);
+        cb(question);
+      });
+    });
+
   });
 }
 
 function addVote(question, user, option, cb){
-  var vote = new Schema({
-    user: user,
-    question: question,
-    option: option,
+  Question.findOne({_id: question}, function(err, question){
+    if(err || !question.active) return handleError(err || "Not an active question");
+    
+    var vote = new Vote({
+      user: user,
+      question: question,
+      option: option,
+    });
+    vote.save(function (err){
+      if(err) return handleError(err);
+      cb(vote);
+    });
   });
-  vote.save(function (err){
-    if(err) return handleError(err);
-    cb(vote);
-  });
+}
+
+//Update functions
+//TODO Unable activity if genfors is ended
+function endGenfors(genfors, cb){
+  Genfors.update({_id: genfors}, {status: "Closed"}, cb);
+}
+function endQuestion(question, cb){
+  Genfors.update({_id: question}, {active: false}, cb);
 }
 
 
@@ -185,11 +210,6 @@ function getActiveGenfors(cb){
     cb(genfors);
   });
 }
-
-function endGenfors(genfors, cb){
-  Genfors.update({_id: genfors}, {status: "Closed"}, cb);
-}
-
 
 function getUsers(genfors, anonymous, cb){
   if(anonymous){
@@ -205,35 +225,75 @@ function getUsers(genfors, anonymous, cb){
   }
 }
 
+function getQualifiedUsers(genfors, secret, cb){
+  if(secret){
+    return Anonymous_user.find({genfors: genfors, can_vote: true}, function(err, users){
+      if(err) return handleError(err);
+      cb(users);
+    });
+  }else{
+    return User.find({genfors: genfors, can_vote: true}, function(err, users){
+      if(err) return handleError(err);
+      cb(users);
+    });
+  }
+}
+
+
 
 //Testing
 db.once('open', function() {
   // we're connected!
   console.log("Connected");
-  //Creating db functions
-  addGenfors('Wioioioioio', new Date(), "passwordHash", function(genfors){
-    console.log(genfors);
-    getActiveGenfors(function(genfors){
+
+
+  getActiveGenfors(function(genfors){
+    if(genfors){
+      endGenfors(genfors, function(){
+        go();
+      });
+    }else{
+      go();
+    }
+  });
+
+  function go(){
+    addGenfors('Wioioioioio', new Date(), "passwordHash", function(genfors){
       console.log(genfors);
-      endGenfors(genfors, function(err){
-        if(err) handleError(err);
-        console.log("Ended");
-        getActiveGenfors(function(genfors){
-          console.log(genfors);
+
+      getActiveGenfors(function(genfors){
+        console.log(genfors);
+      });
+
+      addUser('Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
+        console.log(user);
+        console.log(auser);
+        getUsers(genfors, false, function(users){
+          console.log(users);
+        });
+        getUsers(genfors, true, function(users){
+          console.log(users);
+        });
+
+        addVoteDemands("Noe fint", 3/4, function(vote_demand){
+          addQuestion("Verdens beste spørsmål", [{description: "Yes!", id: 0}, {description: "Pizzzza", id: 1}, {description: "No!", id: 2}], false, false, false, vote_demand, function(question){
+            console.log(question);
+            addVote(question, user, 0, function(vote){
+              console.log(vote);
+
+              endGenfors(genfors, function(err){
+                if(err) handleError(err);
+                console.log("Ended");
+                getActiveGenfors(function(genfors){
+                  console.log(genfors);
+                });
+              });
+            });
+          });
         });
       });
     });
-    addUser(genfors, 'Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
-      console.log(user);
-      console.log(auser);
-      getUsers(genfors, false, function(users){
-        console.log(users);
-      });
-      getUsers(genfors, true, function(users){
-        console.log(users);
-      });
-    });
-  });
+  }
 
 });
 
