@@ -28,6 +28,24 @@ export const issue = (state = {}, action, currentIssue) => {
         ],
       };
 
+    case 'RECEIVE_VOTE':
+      if (state.id !== currentIssue || state.id !== action.id) {
+        return state;
+      }
+
+      return {
+        ...state,
+
+        votes: [
+          ...state.votes,
+
+          {
+            alternative: action.alternative,
+            voter: action.voter,
+          },
+        ],
+      };
+
     default:
       return state;
   }
@@ -54,6 +72,9 @@ export const issues = (state = defaultIssues, action) => {
 
     case 'SEND_VOTE':
       return state.map(i => issue(i, action, state[state.length - 1].id));
+
+    case 'RECEIVE_VOTE':
+      return state.map(i  => issue(i, action, state[state.length - 1].id));
 
     default:
       return state;

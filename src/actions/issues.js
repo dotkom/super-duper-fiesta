@@ -11,3 +11,10 @@ export const sendVote = (id, alternative, voter) => ({
   alternative,
   voter,
 });
+
+export const receiveVote = (id, alternative, voter) => ({
+  type: 'RECEIVE_VOTE',
+  id,
+  alternative,
+  voter,
+});
