@@ -25,6 +25,12 @@ function canEdit(genfors, user, securityLevel, cb) {
   });
 }
 
+function getQualifiedUsers(genfors, secret) {
+  if (secret) {
+    return AnonymousUser.find({ genfors, can_vote: true });
+  }
+  return User.find({ genfors, can_vote: true });
+}
 
 // Add functions
 // TODO add security function
@@ -54,7 +60,7 @@ function addUser(name, onlinewebId, passwordHash) {
       const user = new User({
         genfors,
         name,
-        onlinewebId: onlinewebId,
+        onlinewebId,
         registerDate: new Date(),
         canVote: false,
         notes: '',
@@ -63,7 +69,7 @@ function addUser(name, onlinewebId, passwordHash) {
 
       const anonymousUser = new AnonymousUser({
         genfors,
-        passwordHash: passwordHash,
+        passwordHash,
       });
 
       Promise.all([user.save(), anonymousUser.save()])
@@ -74,25 +80,21 @@ function addUser(name, onlinewebId, passwordHash) {
   });
 }
 
-
-function addVoteDemands(title, percent, cb) {
+function addVoteDemands(title, percent) {
   const voteDemand = new VoteDemand({
     title,
     percent,
   });
 
-  voteDemand.save((err) => {
-    if (err) return handleError(err);
-    cb(voteDemand);
-  });
+  voteDemand.save();
 }
 
-
-function addQuestion(description, options, secret, showOnlyWinner, countingBlankVotes, VoteDemand, cb) {
-  getActiveGenfors((genfors) => {
+function addQuestion(description, options, secret, showOnlyWinner,
+  countingBlankVotes, voteDemand) {
+  getActiveGenfors().then((genfors) => {
     if (!genfors) return handleError('No genfors active');
 
-    getQualifiedUsers(genfors, secret, (users) => {
+    getQualifiedUsers(genfors, secret).then((users) => {
       const question = new Question({
         genfors,
         description,
@@ -102,20 +104,18 @@ function addQuestion(description, options, secret, showOnlyWinner, countingBlank
         secret,
         showOnlyWinner,
         countingBlankVotes,
-        VoteDemand,
+        voteDemand,
         qualifiedVoters: users.length,
       });
 
-      question.save((err) => {
-        if (err) return handleError(err);
-        cb(question);
-      });
+      question.save();
     });
+    return null;
   });
 }
 
-function addVote(question, user, option, cb) {
-  Question.findOne({ _id: question }, (err, question) => {
+function addVote(_question, user, option) {
+  Question.findOne({ _id: _question }).then((err, question) => {
     if (err || !question.active) return handleError(err || 'Not an active question');
 
     const vote = new Vote({
@@ -123,26 +123,23 @@ function addVote(question, user, option, cb) {
       question,
       option,
     });
-    vote.save((err) => {
-      if (err) return handleError(err);
-      cb(vote);
-    });
+
+    vote.save();
+    return null;
   });
 }
 
 
 // Update functions
-
-
-function endGenfors(genfors, user, cb) {
-  return canEdit(3, user, genfors, () => {
-    Genfors.update({ _id: genfors }, { status: 'Closed' }).then(cb).catch(handleError);
+function endGenfors(genfors, user) {
+  return canEdit(genfors, user, () => {
+    Genfors.update({ _id: genfors }, { status: 'Closed' });
   });
 }
 
-function endQuestion(question, user, cb) {
-  return canEdit(2, user, question.genfors, () => {
-    Genfors.update({ _id: question }, { active: false }).then(cb).catch(handleError);
+function endQuestion(question, user) {
+  return canEdit(question.genfors, user, () => {
+    Genfors.update({ _id: question }, { active: false });
   });
 }
 
@@ -158,20 +155,12 @@ function setCanVote(user, targetUser, canVote, cb) {
   });
 }
 
-
 // Get functions
-function getUsers(genfors, anonymous, cb) {
+function getUsers(genfors, anonymous) {
   if (anonymous) {
-    return AnonymousUser.find({ genfors }).exec().then(cb).catch(handleError);
+    return AnonymousUser.find({ genfors, canVote: true }).exec();
   }
-  return User.find({ genfors }).exec().then(cb).catch(handleError);
-}
-
-function getQualifiedUsers(genfors, secret, cb) {
-  if (secret) {
-    return AnonymousUser.find({ genfors, canVote: true }).exec().then(cb).catch(handleError);
-  }
-  return User.find({ genfors, canVote: true }).exec().then(cb).catch(handleError);
+  return User.find({ genfors, canVote: true }).exec();
 }
 
 function getVotes(question, cb) {
@@ -189,15 +178,15 @@ function getQuestions(genfors, cb) {
 module.exports = {
   getActiveGenfors,
   addGenfors,
+  addQuestion,
   addUser,
   addVote,
-  addQuestion,
   addVoteDemands,
   endGenfors,
   endQuestion,
-  setNote,
-  setCanVote,
   getUsers,
   getVotes,
   getQuestions,
+  setNote,
+  setCanVote,
 };
