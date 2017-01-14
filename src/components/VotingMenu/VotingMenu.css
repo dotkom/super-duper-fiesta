@@ -1,16 +1,16 @@
 .VotingMenu {
-  padding: 0rem;
+  margin-top: 3rem;
 }
 
 .VotingMenu-submit {
   margin-top: 2rem;
   background: #595C7F;
-  border: 0px solid #5e6077;
+  border: 1px solid rgba(0, 0, 0, 0.04);
   color: #ffffff;
   padding: 1.5rem;
   font-size: 2rem;
   box-shadow: 0px -2px 0px 0px rgba(0, 0, 0, 0.25) inset,
-              0px 2px 1px 0px rgba(0, 0, 0, 0.25);
+              0px 0px 1px 0px rgba(0, 0, 0, 0.25);
 }
 
 .VotingMenu-submit:hover {

@@ -3,9 +3,10 @@ html {
 }
 
 body {
-  background: #f7f7f7;
+  background: #ffffff;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.4rem;
+  margin: 0;
 }
 
 h1, h2, h3, h4, h5 {
@@ -16,18 +17,14 @@ button {
     font-family: inherit;
 }
 
-.App {
-  padding: 1rem 2rem;
+.App-components {
+  padding: 0 2rem;
   max-width: 100rem;
   margin: 0 auto;
-}
-
-.App-components {
   display: flex;
   flex-wrap: wrap;
 }
 
 .ActiveIssue-Vote-wrapper {
   flex-grow: 2;
-  padding: 1rem;
 }
