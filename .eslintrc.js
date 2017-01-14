@@ -1,10 +1,6 @@
 module.exports = {
   extends: "airbnb",
 
-  globals: {
-    Urls: true,
-  },
-
   env: {
     browser: true,
     jest: true,
