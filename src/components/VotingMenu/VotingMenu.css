@@ -1,0 +1,46 @@
+.VotingMenu {
+  padding: 0rem;
+}
+
+.VotingMenu-submit {
+  background: #595C7F;
+  border: 0px solid #5e6077;
+  color: #ffffff;
+  padding: 1.5rem;
+  font-size: 2rem;
+}
+
+.VotingMenu-submit:hover {
+  background: #34364c;
+  cursor: pointer;
+}
+
+.VotingMenu-submit:disabled {
+  background: lightgray;
+  color: white;
+  cursor: not-allowed
+}
+
+.Alternative {
+  margin: 1rem 0;
+  background: #DFE2FC;
+  color: #595C7F;
+  font-size: 2rem;
+  display: flex;
+}
+
+.Alternative:hover {
+  background: #afb0c1;
+  font-weight: bold;
+}
+
+.Alternative label {
+  cursor: pointer;
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+.Alternative input {
+  cursor: pointer;
+  width: 2rem;
+}
