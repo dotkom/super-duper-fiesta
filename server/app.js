@@ -11,6 +11,9 @@ require('./channels/index').listen(server);
 app.use('/public', express.static('public'));
 app.use('/', routes);
 
-server.listen(3000, () => {
-  logger.info('Example app listening on port 3000!');
+const HOST = process.env.SDF_HOST || 'localhost';
+const PORT = process.env.SDF_PORT || 3000;
+
+server.listen(PORT, HOST, () => {
+  logger.info('Webserver running on %s:%s', HOST, PORT);
 });
