@@ -1,4 +1,4 @@
-export const issue = (state = {}, action, currentIssue) => {
+const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
     case 'CREATE_ISSUE':
       return {
@@ -66,7 +66,7 @@ const defaultIssues = [{
   isActive: false,
 }];
 
-export const issues = (state = defaultIssues, action) => {
+const issues = (state = defaultIssues, action) => {
   switch (action.type) {
     case 'CREATE_ISSUE':
       return [
@@ -78,9 +78,11 @@ export const issues = (state = defaultIssues, action) => {
       return state.map(i => issue(i, action, state[state.length - 1].id));
 
     case 'RECEIVE_VOTE':
-      return state.map(i  => issue(i, action, state[state.length - 1].id));
+      return state.map(i => issue(i, action, state[state.length - 1].id));
 
     default:
       return state;
   }
 };
+
+export default issues;

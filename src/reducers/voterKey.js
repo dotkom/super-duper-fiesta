@@ -1,4 +1,4 @@
-export const voterKey = (state = 1, action) => {
+const voterKey = (state = 1, action) => {
   switch (action.type) {
     case 'UPDATE_VOTER_KEY':
       return action.key;
@@ -7,3 +7,5 @@ export const voterKey = (state = 1, action) => {
       return state;
   }
 };
+
+export default voterKey;

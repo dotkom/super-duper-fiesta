@@ -1,10 +1,6 @@
 module.exports = {
   extends: "airbnb",
 
-  globals: {
-    Urls: true,
-  },
-
   env: {
     browser: true,
     jest: true,
@@ -20,6 +16,11 @@ module.exports = {
         ],
       },
     ],
+    // Disabled until eslint-plugin-import gets proper support for webpack externals
+    // https://github.com/benmosher/eslint-plugin-import/issues/479
+    // https://github.com/benmosher/eslint-plugin-import/issues/605
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": 0,
   },
 
   settings: {
