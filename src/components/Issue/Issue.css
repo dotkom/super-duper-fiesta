@@ -1,0 +1,15 @@
+.Issue {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid whitesmoke;
+}
+
+.Issue p {
+  font-size: 2rem;
+}
+
+.Issue-heading {
+  font-weight: normal;
+  margin: 0;
+  color: #7b7979;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
+import './Issue.css';
 
 const Issue = ({ issue }) => (
-  <div className="ActiveIssue">
-    <h3>Aktiv sak</h3>
+  <div className="Issue">
+    <h3 className="Issue-heading">Aktiv sak</h3>
     <p>{issue}</p>
   </div>
 );

@@ -6,6 +6,7 @@ const issue = (state = {}, action, currentIssue) => {
         text: action.text,
         alternatives: action.alternatives,
         votes: [],
+        resolutionType: action.resolutionType,
       };
 
     case 'SEND_VOTE':
@@ -60,6 +61,9 @@ const defaultIssues = [{
   }],
 
   votes: [],
+
+  majorityTreshold: 0.5,
+  isActive: false,
 }];
 
 const issues = (state = defaultIssues, action) => {
