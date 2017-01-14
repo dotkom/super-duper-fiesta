@@ -120,9 +120,9 @@ function addVote(question, user, option, cb) {
 
 // Update functions
 
-function canEdit(genfors, user, cb) {
+function canEdit(genfors, user, securityLevel, cb) {
   return getActiveGenfors((active) => {
-    if (active === genfors === user.genfors) {
+    if (active === genfors === user.genfors && user.permissions > securityLevel) {
       cb();
     } else {
       logger.error('Unable to end genfors that is not active');
@@ -131,25 +131,25 @@ function canEdit(genfors, user, cb) {
 }
 
 function endGenfors(genfors, user, cb) {
-  return canEdit(genfors, user, () => {
+  return canEdit(3, user, genfors, () => {
     Genfors.update({ _id: genfors }, { status: 'Closed' }).then(cb).catch(handleError);
   });
 }
 
 function endQuestion(question, user, cb) {
-  return canEdit(question.genfors, user, () => {
+  return canEdit(2, user, question.genfors, () => {
     Genfors.update({ _id: question }, { active: false }).then(cb).catch(handleError);
   });
 }
 
 function setNote(user, targetUser, note, cb) {
-  return canEdit(targetUser.genfors, user, () => {
+  return canEdit(2, user, targetUser.genfors, () => {
     User.update({ _id: user }).exec().then(cb).catch(handleError);
   });
 }
 
 function setCanVote(user, targetUser, canVote, cb) {
-  return canEdit(targetUser.genfors, user, () => {
+  return canEdit(2, user, targetUser.genfors, () => {
     User.update({ _id: user }).exec().then(cb).catch(handleError);
   });
 }

@@ -24,7 +24,7 @@ const User_schema = new Schema({
   register_date: { type: Date, required: true },
   can_vote: { type: Boolean, required: true },
   notes: String,
-  security: Number,
+  permissions: Number,
 });
 
 const Anonymous_user_schema = new Schema({
