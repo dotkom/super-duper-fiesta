@@ -23,6 +23,7 @@ export const issue = (state = {}, action, currentIssue) => {
 
           {
             alternative: action.alternative,
+            voter: action.voter,
           },
         ],
       };

@@ -19,10 +19,20 @@ class VotingMenu extends React.Component {
   }
 
   handleClick() {
-    this.props.handleVote(this.props.id, parseInt(this.state.selectedVote, 10));
+    // Voting is only allowed when you have a key.
+    if (this.props.voterKey) {
+      this.props.handleVote(
+        this.props.id,
+        parseInt(this.state.selectedVote, 10),
+        this.props.voterKey,
+      );
+    }
   }
 
   render() {
+    const buttonDisabled = !this.state.selectedVote ||
+      (this.props.votes.some(vote => vote.voter === this.props.voterKey));
+
     return (
       <div className="VotingMenu">
         <div className="Alternatives">
@@ -41,11 +51,15 @@ class VotingMenu extends React.Component {
           ))}
         </div>
 
-        <button onClick={this.handleClick} disabled={!this.state.selectedVote}>Submit vote</button>
+        <button onClick={this.handleClick} disabled={buttonDisabled}>Submit vote</button>
       </div>
     );
   }
 }
+
+VotingMenu.defaultProps = {
+  voterKey: undefined,
+};
 
 VotingMenu.propTypes = {
   alternatives: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -55,6 +69,13 @@ VotingMenu.propTypes = {
 
   handleVote: React.PropTypes.func.isRequired,
   id: React.PropTypes.number.isRequired,
+
+  votes: React.PropTypes.arrayOf(React.PropTypes.shape({
+    alternative: React.PropTypes.number,
+    id: React.PropTypes.number,
+  })).isRequired,
+
+  voterKey: React.PropTypes.number,
 };
 
 export default VotingMenu;
