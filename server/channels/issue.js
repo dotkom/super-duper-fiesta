@@ -1,9 +1,12 @@
-const issue = (socket) => {
-  if (socket.data.status === true) {
-    // create issue
+const logger = require('../logging');
+
+const issue = (data) => {
+  logger.debug('issue data', data);
+  if (data.action === 'open') {
+    logger.info('received issue open');
   }
-  if (socket.data.status === false) {
-    // closeIssue(socket.data)
+  if (data.action === 'close') {
+    logger.info('received issue close');
   }
 };
 
