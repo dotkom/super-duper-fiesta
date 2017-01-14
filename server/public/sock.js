@@ -3,9 +3,16 @@ socket.on('connection', function (data) {
   console.log('connected')
 })
 socket.on('meeting', function (data) {
+  let title = 'Ingen aktiv generalforsamling.';
   console.log('d', data)
+
+  if (data && data.title) {
+    title = data.title;
+  }
+  document.getElementById('meeting-title').innerHTML = title;
+
   socket.emit('my other event', { my: 'data' })
-  var node = document.createElement('p')
-  node.innerHTML = data.title || 'temporary title'
+  const node = document.createElement('p')
+  node.innerHTML = title
   document.getElementById('log').appendChild(node)
 });
