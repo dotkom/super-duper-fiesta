@@ -3,13 +3,14 @@ const app = express()
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const db = require('./scheme.js');
+const logger = require('./logging');
 
 app.use('/public', express.static('public'))
 
 app.get('/', function (req, res) {
 	  res.sendFile(__dirname + '/index.html', function(err) {
 				if (err) {
-					console.error("respond with file failed", err)
+					logger.error("respond with file failed", err)
 					res.status(err.status).end()
 				}
 		})
@@ -35,12 +36,12 @@ io.on('connection', function (socket) {
   socket.broadcast.emit('public', { hello: 'world', message: "Hello world!" });
 	// Do something when we receive this kind of event
   socket.on('my other event', function (data) {
-    console.log(data);
+    logger.debug(data);
   });
 	// End dummy code
 
 	db.getActiveGenfors(function(data) {
-		console.log('genfors data', data)
+		logger.debug('genfors data', data)
 		if (!data) { socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' }) }
 		socket.emit('meeting', data)
 	})
@@ -56,5 +57,5 @@ io.on('issue', function(socket) {
 })
 
 server.listen(3000, function () {
-	  console.log('Example app listening on port 3000!')
+	  logger.info('Example app listening on port 3000!')
 })

@@ -5,15 +5,16 @@ If any problems, please install and add mongoose to package.json file
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
-console.log("Connectiong to db");
+const logger = require('./logging');
 
 //Connectiong to db
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost');
 
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', err => {
+  logger.error('Could not connect to database.', err)
+});
 
 //Creating all the Schemas
 var User_schema = new Schema({
@@ -76,8 +77,7 @@ var Genfors = mongoose.model('Genfors', Genfors_schema);
 
 
 function handleError(err){
-  console.log("Error doing somehitng");
-  console.log(err);
+  logger.error("Error doing something", err);
 }
 
 
