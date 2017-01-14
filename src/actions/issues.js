@@ -5,8 +5,8 @@ export const createIssue = (id, text, alternatives) => ({
   alternatives,
 });
 
-export const vote = (id, alternative, voter) => ({
-  type: 'VOTE',
+export const sendVote = (id, alternative, voter) => ({
+  type: 'SEND_VOTE',
   id,
   alternative,
   voter,

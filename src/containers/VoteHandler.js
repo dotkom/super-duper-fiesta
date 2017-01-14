@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import VotingMenu from '../components/VotingMenu';
-import { vote } from '../actions/issues';
+import { sendVote } from '../actions/issues';
 
 const mapStateToProps = state => ({
   alternatives: state.issues.length ? state.issues[state.issues.length - 1].alternatives : [],
@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleVote: (id, alternative, voter) => {
-    dispatch(vote(id, alternative, voter));
+    dispatch(sendVote(id, alternative, voter));
   },
 });
 

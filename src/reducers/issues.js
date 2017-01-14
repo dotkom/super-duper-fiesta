@@ -8,7 +8,7 @@ export const issue = (state = {}, action, currentIssue) => {
         votes: [],
       };
 
-    case 'VOTE':
+    case 'SEND_VOTE':
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
       if (state.id !== currentIssue || state.id !== action.id) {
@@ -52,7 +52,7 @@ export const issues = (state = defaultIssues, action) => {
         issue(undefined, action),
       ];
 
-    case 'VOTE':
+    case 'SEND_VOTE':
       return state.map(i => issue(i, action, state[state.length - 1].id));
 
     default:
