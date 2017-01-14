@@ -4,7 +4,7 @@ const logger = require('./logging');
 const app = express();
 
 const server = require('http').Server(app);
-const routes = require('./routes');
+const routes = require('./routes/index');
 
 require('./channels/index').listen(server);
 
