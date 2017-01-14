@@ -121,15 +121,45 @@ function addVote(question, user, option, cb) {
   });
 }
 
+
 // Update functions
-// TODO Unable activity if genfors is ended
-function endGenfors(genfors, cb) {
-  Genfors.update({ _id: genfors }, { status: 'Closed' }, cb);
-}
-function endQuestion(question, cb) {
-  Genfors.update({ _id: question }, { active: false }, cb);
+
+function canEdit(genfors, user, cb) {
+  return getActiveGenfors((active) => {
+    if (active === genfors === user.genfors) {
+      cb();
+    } else {
+      logger.error('Unable to end genfors that is not active');
+    }
+  });
 }
 
+function endGenfors(genfors, user, cb) {
+  return canEdit(genfors, user, () => {
+    Genfors.update({ _id: genfors }, { status: 'Closed' }).then(cb).catch(handleError);
+  });
+}
+
+function endQuestion(question, user, cb) {
+  return canEdit(question.genfors, user, () => {
+    Genfors.update({ _id: question }, { active: false }).then(cb).catch(handleError);
+  });
+}
+
+function setNote(user, targetUser, note, cb) {
+  return canEdit(targetUser.genfors, user, () => {
+    User.update({ _id: user }).exec().then(cb).catch(handleError);
+  });
+}
+
+function setCanVote(user, targetUser, canVote, cb) {
+  return canEdit(targetUser.genfors, user, () => {
+    User.update({ _id: user }).exec().then(cb).catch(handleError);
+  });
+}
+
+
+// Get functions
 function getUsers(genfors, anonymous, cb) {
   if (anonymous) {
     Anonymous_user.find({ genfors }, (err, users) => {
@@ -158,7 +188,21 @@ function getQualifiedUsers(genfors, secret, cb) {
   }
 }
 
+function getVotes(question, cb) {
+  if (!question.active || !question.secret) {
+    return Vote.find({ question }).exec().then(cb).catch(handleError);
+  }
+  return null;
+}
+
+function getQuestions(genfors, cb) {
+  return Question.find({ genfors }).exec().then(cb).catch(handleError);
+}
+
+
 module.exports = {
   addGenfors,
   getActiveGenfors,
+  getVotes,
+  getQuestions,
 };
