@@ -1,13 +1,25 @@
 import React from 'react';
+import classNames from 'classnames';
+import './ConcludedIssue.css';
 
-export default ({ text, alternatives, votes, majorityTreshold, totalUsers }) => (
+const ConcludedIssue = ({ text, alternatives, votes, majorityTreshold, totalUsers }) => (
   <div className="ConcludedIssue">
     <p>{text}</p>
-    {alternatives.map(alternative => (
-      <progress
-        key={alternative.id}
-        value={votes.filter(vote => vote.alternative === alternative.id).length / votes.length}
-      />
-    ))}
+    <ul>
+      {alternatives.map(alternative => (
+        <li
+          key={alternative.id}
+          className={classNames({
+            winner: votes.length && votes
+              .filter(vote => vote.alternative === alternative.id)
+              .length / votes.length >= majorityTreshold,
+          })}
+        >
+          {alternative.text}
+        </li>
+      ))}
+    </ul>
   </div>
 );
+
+export default ConcludedIssue;
