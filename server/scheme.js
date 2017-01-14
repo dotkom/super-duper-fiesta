@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-db.once('open', function() {
+//db.once('open', function() {
   // we're connected!
   console.log("Connected");
 
@@ -29,11 +29,12 @@ db.once('open', function() {
     notes: {type: String, required: true},
   });
 
-  var Anonymous_user = new Schema({
+  var Anonymous_user_schema = new Schema({
+    genfors: {type: Schema.Types.ObjectId, required: true},
     password_hash: {type: String, required: true},
   });
 
-  var Votes_schema = new Schema({
+  var Vote_schema = new Schema({
     user: {type: Schema.Types.ObjectId, required: true},
     question: {type: Schema.Types.ObjectId, required: true},
     option: {type: Number, required: true},
@@ -49,51 +50,155 @@ db.once('open', function() {
     description: {type: String, required: true},
     active: {type: Boolean, required: true},
     deleted: {type: Boolean, required: true},
-    options: [{description: String, id: Number, blank: Boolean}],
+    options: [{description: {type: String, required: true}, id: {type: Number, required: true}}],
     secret: {type: Boolean, required: true},
     show_only_winner: {type: Boolean, required: true},
     counting_blank_votes: {type: Boolean, required: true},
     vote_demand: {type: Schema.Types.ObjectId, required: true},
+    qualifiedVoters: Number,
+    result: Boolean,
   });
 
 
   var Genfors_schema = new Schema({
     title: {type: String, required: true},
     date: {type: Date, required: true},
-    status: {type: Boolean, required: true}, //Open/Closed?
+    status: {type: String, required: true}, //Open/Closed/Whatever
     pin: {type: Number, required: true},
   });
 
 
   //Generating the models
   var User = mongoose.model('User', User_schema);
-  var Answer = mongoose.model('Answer', Answer_schema);
+  var Anonymous_user = mongoose.model('Anonymous_user', Anonymous_user_schema);
+  var Vote = mongoose.model('Vote', Vote_schema);
   var Question = mongoose.model('Question', Question_schema);
   var Vote_demand = mongoose.model('Vote_demand', Vote_demand_schema);
   var Genfors = mongoose.model('Genfors', Genfors_schema);
 
-/*
+
 //Testing stuff
 
-  var genfors1984 = Genfors({
-    title: "Weeeeeeeeee",
-    date: new Date(),
-    status: true,
-    pin: 789
-  });
+  function addGenfors(title, date, cb){
+    var genfors = new Genfors({
+      title: title,
+      date: date,
+      status: "Open",
+      pin: parseInt(Math.random()*10000)
+    });
+    genfors.save(function(err){
+      if(err) return handleError(err);
+      cb(this);
+    });
+  }
 
-  Genfors.remove({}, function(){});
-
-  genfors1984.save(function(err){
-    if(err) return handleError(err);
-
-
-    var gens = Genfors.find();
-    gens.find().exec(function(err, genfors){
-      console.log(genfors);
+  function addUser(genfors, name, onlineweb_id, password_hash, cb){
+    var user = new User({
+      genfors: genfors,
+      name: name,
+      onlineweb_id: onlineweb_id,
+      register_date: new Date(),
+      can_vote: false,
+      notes: "",
     });
 
+    var anonymousUser = new Anonymous_user({
+      genfors: genfors,
+      password_hash: password_hash,
+    });
+
+    user.save(function(err){
+      if(err) return handleError(err);
+      anonymousUser.save(function(err){
+        if(err) return handleError(err);
+        cb(user, this);
+      });
+    });
+  }
+
+
+  function addVoteDemands(title, percent, cb){
+    var voteDemand = new Vote_demand({
+      title: title,
+      percent: percent
+    });
+
+    voteDemand.save(function(err){
+      if(err) return handleError(err);
+      cb(this);
+    })
+  }
+
+
+  function addQuestion(genfors, description, options, secret, show_only_winner, counting_blank_votes, vote_demand, cb){
+    var question = new Question({
+      genfors: genfors,
+      description: description,
+      active: true,
+      deleted: false,
+      options: options,//Format {description, id}
+      secret: secret,
+      show_only_winner: show_only_winner,
+      counting_blank_votes: counting_blank_votes,
+      vote_demand: vote_demand
+    });
+    question.save(function(err){
+      if(err) return handleError(err);
+      cb(this);
+    });
+  }
+
+  function addVote(question, user, option, cb){
+    var vote = new Schema({
+      user: user,
+      question: question,
+      option: option,
+    });
+    vote.save(function (err){
+      if(err) return handleError(err);
+      cb(this);
+    });
+  }
+
+
+
+  //Get requests
+  function getActiveGenfors(cb){
+    Genfors.findOne().exec(function(err, genfors){
+      if(err) return handleError(err);
+
+      cb(genfors);
+    });
+  }
+
+
+  function getUsers(genfors, anonymous, cb){
+    if(anonymous){
+      Anonymous_user.find({genfors: genfors}, function(err, users){
+        if(err) return handleError(err);
+        cb(users);
+      });
+    }else{
+      User.find({genfors: genfors}, function(err, users){
+        if(err) return handleError(err);
+        cb(users);
+      });
+    }
+  }
+
+
+  //Testing
+/*
+  addGenfors('Wioioioioio', new Date(), function(genfors){
+    getActiveGenfors(function(genfors){
+      console.log(genfors);
+      addUser(genfors, 'Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
+        console.log(user);
+        console.log(auser);
+      });
+    });
   });
 */
+//});
 
-});
+export db;
