@@ -7,6 +7,10 @@ import votingApp from './reducers';
 
 const store = createStore(votingApp);
 
+store.subscribe(() => {
+  console.log('Store updated:', store.getState());
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
