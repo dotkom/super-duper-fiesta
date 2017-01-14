@@ -1,4 +1,4 @@
-export const totalUsers = (state = 0, action) => {
+const totalUsers = (state = 0, action) => {
   switch (action.type) {
     case 'TOTAL_USERS_UPDATED':
       return state.totalUsers;
@@ -7,3 +7,5 @@ export const totalUsers = (state = 0, action) => {
       return state;
   }
 };
+
+export default totalUsers;
