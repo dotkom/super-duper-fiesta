@@ -4,6 +4,7 @@ import VoteHandler from '../containers/VoteHandler';
 import ActiveIssue from '../containers/ActiveIssue';
 import Heading from './Heading';
 import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
+import AdminPanelContainer from '../containers/AdminPanelContainer';
 import '../css/App.css';
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
         <LiveVoteCount />
       </div>
       <ConcludedIssueListContainer />
+      <AdminPanelContainer />
     </div>
   </div>
   );

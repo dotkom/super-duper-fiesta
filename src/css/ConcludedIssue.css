@@ -1,17 +1,24 @@
 .ConcludedIssue {
   margin: 1rem;
   background: #90ccb4;
-  padding-top: .5rem;
-  padding-left: 2rem;
+}
+
+.ConcludedIssue:hover {
+  background: #74b39a;
+}
+
+.ConcludedIssue-toggle {
   display: block;
   width: 100%;
   text-align: left;
   border: none;
   cursor: pointer;
+  background: transparent;
+  padding: 1rem 2rem;
 }
 
-.ConcludedIssue:hover {
-  background: #74b39a;
+.ConcludedIssue-toggle:focus {
+  outline: none;
 }
 
 .ConcludedIssue-NotMajority {
@@ -22,6 +29,10 @@
 .ConcludedIssue-NotMajority:hover {
   border: 1px solid red;
   background: #ca7979;
+}
+
+.ConcludedIssue-alternatives--hidden {
+  display: none;
 }
 
 .winner {
