@@ -87,13 +87,13 @@ const defaultIssues = [{
   text: 'Half-giant jinxes peg-leg gillywater broken glasses large black dog Great Hall. Nearly-Headless Nick now string them together, and answer me this, which creature would you be unwilling to kiss? Poltergeist sticking charm, troll umbrella stand flying cars golden locket Lily Potter. Pumpkin juice Trevor wave your wand out glass orbs, a Grim knitted hats. Stan Shunpike doe patronus, suck his soul Muggle-Born large order of drills the trace. Bred in captivity fell through the veil, quaffle blue flame ickle diddykins Aragog. Yer a wizard, Harry Doxycide the woes of Mrs. Weasley Goblet of Fire',
   alternatives: [{
     id: 0,
-    text: 'yes',
+    text: 'Yes',
   }, {
     id: 1,
-    text: 'yes',
+    text: 'No',
   }, {
     id: 2,
-    text: 'yes',
+    text: 'I don\'t like voting',
   }],
 
   votes: [],
