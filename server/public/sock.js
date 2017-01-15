@@ -44,5 +44,5 @@ socket.on('issue', (data) => {
   if (data && data.description && data.action !== 'close') {
     issue = data.description;
   }
-  document.getElementById('question').innerHTML = question;
+  document.getElementById('issue').innerHTML = issue;
 });
