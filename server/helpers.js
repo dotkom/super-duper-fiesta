@@ -93,8 +93,18 @@ function endGenfors(genfors, user) {
 }
 
 function endQuestion(question, user) {
-  return canEdit(2, user, question.genfors, () => {
-    Genfors.update({ _id: question }, { active: false });
+  return new Promise((resolve, reject) => {
+    logger.debug('endquestion', { question });
+    getActiveGenfors().then((genfors) => {
+      canEdit(2, user, genfors).then((result) => {
+        logger.debug('security check returned', { result });
+        if (result === true) {
+          return Question.findByIdAndUpdate(question, { active: false })
+          .then(resolve).catch(reject);
+        }
+        return reject(new Error('permission denied'));
+      }).catch(reject).then(resolve);
+    }).catch(reject);
   });
 }
 
