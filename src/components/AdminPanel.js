@@ -1,5 +1,6 @@
 import React from 'react';
 import ActiveIssue from '../containers/ActiveIssue';
+import AdminPanelAlternativesContainer from '../containers/AdminPanelAlternativesContainer';
 
 class AdminPanel extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ class AdminPanel extends React.Component {
       <div className="AdminPanel">
         <h2>Admin panel</h2>
         <ActiveIssue className="fefef" />
+        <AdminPanelAlternativesContainer />
         <div className="MeetingAdmin">
           <button onClick={this.toggleRegistration}>{registrationOpen}</button>
           <button onClick={this.userAdministration}>Brukeradministrasjon</button>
