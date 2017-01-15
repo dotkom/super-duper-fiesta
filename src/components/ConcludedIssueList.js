@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ConcludedIssue from './ConcludedIssue';
 
-export default ({ issues }) => (
+const ConcludedIssueList = ({ issues }) => (
   <div className="ConcludedIssueList">
     {issues.map(issue => (
       <ConcludedIssue key={issue.id} {...issue} />
     ))}
   </div>
 );
+
+ConcludedIssueList.propTypes = {
+  issues: PropTypes.arrayOf(PropTypes.shape(ConcludedIssue.propTypes)).isRequired,
+};
+
+export default ConcludedIssueList;
