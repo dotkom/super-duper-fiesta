@@ -7,10 +7,11 @@ class ConcludedIssue extends React.Component {
   // Maps over alternatives to see if any of them got majority vote
   static calculateMajority(alternatives, votes, majorityTreshold) {
     let majority = false;
+    const numTotalVotes = votes.length > 0 ? votes.length : 1;
     alternatives.forEach((alternative) => {
       if (votes
         .filter(vote => vote.alternative === alternative.id)
-        .length / votes.length >= majorityTreshold) {
+        .length / numTotalVotes >= majorityTreshold) {
         majority = true;
       }
     });
