@@ -1,3 +1,5 @@
+const broadcast = require('../utils').broadcast;
+const emit = require('../utils').emit;
 const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
@@ -21,8 +23,10 @@ const connection = (socket) => {
       socket.emit('meeting', meeting);
     }
   }).catch((err) => {
-    logger.err('Something went wrong.', { err });
-    socket.emit('error', 'Noe gikk galt. Vennligst prøve igjen.');
+    logger.error('Something went wrong.', { err });
+    emit(socket, 'issue', {}, {
+      error: 'Noe gikk galt. Vennligst prøv igjen.',
+    });
   });
 };
 

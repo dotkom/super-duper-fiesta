@@ -1,5 +1,24 @@
 /* global: io */
 const socket = io.connect('http://localhost:3000');
+
+let activeIssue = null;
+
+const emit = (channel, data, metadata) => {
+  // Merge any additional metadata with data we send in every request,
+  // then add the actual payload in the `data` property.
+  const obj = Object.assign({
+    user: localStorage.getItem('userid'), // Uses react states in prod
+  }, metadata);
+  obj.data = data;
+  socket.emit(channel, obj);
+};
+
+const addToLog = (type, message) => {
+  const node = document.createElement('p');
+  node.innerHTML = type + ': ' + message;
+  document.getElementById('log').appendChild(node);
+}
+
 socket.on('connection', () => {});
 socket.on('meeting', (data) => {
   let title = 'Ingen aktiv generalforsamling.';
@@ -9,26 +28,30 @@ socket.on('meeting', (data) => {
   }
   document.getElementById('meeting-title').innerHTML = title;
 
-  socket.emit('my other event', { my: 'data' });
-  const node = document.createElement('p');
-  node.innerHTML = title;
-  document.getElementById('log').appendChild(node);
+  // addToLog('G', title); might not be so relevant to log genfors change atm
+});
 
-  console.log('emitting issue thingy');
+document.getElementById('btn-open').addEventListener('click', (e) => {
+  console.log('emitting issue open thingy');
   const issue = {
-    action: 'open',
     description: 'Mitt spørsmål',
     secret: false,
     showOnlyWinner: false,
     countingBlankVotes: false,
-    voteDemand: null,
+    voteDemand: 0.5,
   };
-  socket.emit('issue', issue);
-  setTimeout(() => {
-    issue.action = 'close';
-    socket.emit('issue', issue);
-  }, 10000);
-});
+  emit('issue', issue, { action: 'open' });
+})
+
+document.getElementById('btn-close').addEventListener('click', (e) => {
+  console.log('emitting issue close thingy');
+
+  if (activeIssue) {
+    emit('issue', activeIssue, { action: 'close' });
+  } else {
+    console.error('no active question found');
+  }
+})
 
 socket.on('public', (data) => {
   console.log('public', data);
@@ -40,9 +63,20 @@ socket.on('private', (data) => {
 
 socket.on('issue', (data) => {
   console.log('issue', data);
-  let issue = 'Ingen aktiv sak for øyeblikket.';
-  if (data && data.description && data.action !== 'close') {
-    issue = data.description;
+  const issue = data.data;
+  let issueDescription = 'Ingen aktiv sak for øyeblikket.';
+  if (issue && issue.active && issue.description) {
+    activeIssue = issue;
+    issueDescription = activeIssue.description;
   }
-  document.getElementById('issue').innerHTML = issue;
+  if (!data.error) {
+    document.getElementById('issue').innerHTML = issueDescription;
+    addToLog('Q', issueDescription);
+  }
+
+  if (data.action === 'close') {
+    activeIssue = null;
+    document.getElementById('issue').innerHTML = 'Ingen aktiv sak for øyeblikket.';
+    return;
+  }
 });

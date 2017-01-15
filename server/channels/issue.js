@@ -1,3 +1,5 @@
+const broadcast = require('../utils').broadcast;
+const emit = require('../utils').emit;
 const logger = require('../logging');
 
 const addQuestion = require('../models/issue').addQuestion;
@@ -12,16 +14,19 @@ const issue = (socket) => {
       addQuestion(data)
       .then((question) => {
         logger.debug('Added new question. Broadcasting ...', { question: question.description });
-        socket.broadcast.emit('issue', question);
+        broadcast(socket, 'issue', question, { action: 'open' });
         return null;
       }).catch((err) => {
         logger.error('Adding new question failed.', { err });
+        emit(socket, 'issue', {}, {
+          error: 'Adding new question failed',
+        });
         return null;
       });
       return null;
     } else if (data.action === 'close') {
       if (!data.user) {
-        socket.emit('issue', {
+        emit(socket, 'issue', {}, {
           error: 'User id required to be able to close an ongoing issue.',
         });
         return null;
@@ -32,13 +37,20 @@ const issue = (socket) => {
         endQuestion(data._id, user)
         .catch((err) => {
           logger.error('closing issue failed', { err });
+          emit(socket, 'issue', {}, {
+            error: 'Closing issue failed',
+          });
         }).then((d) => {
-          logger.info('closed question', { question: d._id });
-          socket.broadcast.emit('issue', data);
+          logger.info('closed question', { question: payload._id, response: d._id });
+          broadcast(socket, 'issue', payload, { action: 'close' });
         });
         return null;
       }).catch((err) => {
         logger.error('getting user failed', { err });
+        emit(socket, 'issue', {}, {
+          error: 'Something went wrong. Please try again. If the issue persists,' +
+          'try logging in and out again',
+        });
         return null;
       });
       return null;
