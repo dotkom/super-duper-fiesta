@@ -1,12 +1,25 @@
-import React from 'react';
-import Button from './Button';
+import React, { PropTypes } from 'react';
 import '../css/Heading.css';
 
-export default () => (
+const Heading = ({ title, children }) => (
   <div className="Heading">
     <div className="Heading-content">
-      <h2 className="Heading-header">Onlines generalforsamling 2017</h2>
-      <Button>Logg ut</Button>
+      <h2 className="Heading-header">{title}</h2>
+      {children}
     </div>
   </div>
 );
+
+Heading.defaultProps = {
+  children: null,
+};
+
+Heading.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
+};
+
+export default Heading;
