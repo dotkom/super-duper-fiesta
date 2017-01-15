@@ -16,17 +16,28 @@ function getActiveGenfors() {
 }
 
 function canEdit(securityLevel, user, genfors, cb) {
-  return getActiveGenfors().then((active) => {
-    if (active.id === genfors.id && genfors.id === user.genfors.toString()
-    && user.permissions >= securityLevel) {
-      logger.debug('cleared security check');
-      cb();
-    } else {
-      logger.error('Failed security check');
-      logger.debug('permission', user.permissions >= 3);
-      logger.debug(active.id === genfors.id && genfors.id === user.genfors.toString()
-        && user.permissions >= securityLevel);
-    }
+  return new Promise((resolve, reject) => {
+    getActiveGenfors().then((active) => {
+      logger.silly('security check', {
+        active: active.id,
+        genfors: genfors.id,
+        usergenfors: user.genfors.toString(),
+        userperms: user.permissions,
+        securityLevel,
+      });
+      if (active.id === genfors.id && genfors.id === user.genfors.toString()
+      && user.permissions >= securityLevel) {
+        logger.debug('cleared security check');
+        resolve(true);
+        cb();
+      } else {
+        logger.error('Failed security check', {
+          userpermission: user.permission,
+          clearance: securityLevel,
+        });
+        reject(new Error('User does not have the required permissions.'));
+      }
+    }).catch(reject);
   });
 }
 
