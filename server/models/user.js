@@ -5,9 +5,8 @@ const canEdit = require('./meeting').canEdit;
 
 const Schema = mongoose.Schema;
 
-
 const UserSchema = new Schema({
-  genfors: { type: Schema.Types.ObjectId, required: true },
+  genfors: { type: Schema.Types.ObjectId, required: false },
   name: { type: String, required: true },
   onlinewebId: { type: String, required: true },
   registerDate: { type: Date, default: Date.now() },
@@ -46,9 +45,13 @@ function getUsers(genfors, anonymous) {
   return User.find({ genfors, canVote: true }).exec();
 }
 
+
 function addUser(name, onlinewebId, passwordHash, securityLevel) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
+      if (!genfors && securityLevel < 3) {// TODO make sure to connect all users to genfors
+        return reject(new Error('Ingen aktive generalforsamlinger'));
+      }
       const user = new User({
         genfors,
         name,
@@ -66,9 +69,12 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
         .then((p) => {
           resolve({ user: p[0], anonymousUser: p[1] });
         }).catch(reject);
+      return null;
     });
   });
 }
+
+
 //TODO fix promise
 function setNote(user, targetUser, note, cb) {
   return canEdit(2, user, targetUser.genfors, () => {

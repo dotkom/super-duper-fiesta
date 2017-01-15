@@ -104,5 +104,4 @@ module.exports = {
   getClosedQuestions,
   getQuestions,
   endQuestion,
-//  closeCurrentIssue,
 };

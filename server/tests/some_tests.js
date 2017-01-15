@@ -1,62 +1,101 @@
-//Testing
-db.once('open', function() {
-  // we're connected!
-  console.log("Connected");
+const logger = require('../logging');
+
+require('../models/essentials');
+
+const Issue = require('../models/issue');
+const Meeting = require('../models/meeting');
+const User = require('../models/user');
+const Vote = require('../models/vote');
 
 
-  getActiveGenfors(function(genfors){
-    if(genfors){
-      endGenfors(genfors, function(){
-        go();
-      });
-    }else{
-      go();
-    }
+// we're connected!
+logger.info('connected and starting tests');
+
+const go = () => {
+  Meeting.addGenfors('Wioioioiooo', new Date(), 'passhash').then((genfors) => {
+    logger.debug(genfors.title);
   });
+};
 
-  function go(){
-    addGenfors('Wioioioioio', new Date(), "passwordHash", function(genfors){
-      console.log(genfors);
-
-      getActiveGenfors(function(genfors){
-        console.log(genfors);
-      });
-
-      addUser('Lol Lolsen', 'onlineweb_id1', 'hashash', function(user, auser){
-        console.log(user);
-        console.log(auser);
-        getUsers(genfors, false, function(users){
-          console.log(users);
+Meeting.getActiveGenfors().then((genfors) => {
+  if (genfors) {
+    logger.debug('Genfors is active, creating user to remove it', genfors.title);
+    User.addUser('Delete Me', 'oid', 'hahahah', 3).then((object) => {
+      logger.debug('added user', { 'name': object.user.name });
+      Meeting.endGenfors(genfors, object.user).then(go);
+    });
+  }
+});
+/*
+function go() {
+  logger.info('adding genfors');
+  getActiveGenfors().then((genfors) => {
+    logger.log('dsa', genfors);
+    addGenfors('Wioioioioio', new Date(), 'passwordHash');
+  });
+  const loop = () => {
+    getActiveGenfors().then((genfors) => {
+      if (genfors) {
+        logger.info('genfors is right');
+        addUser('Lol Lolsen', 'onlineweb_id1', 'hashash', 3).then((obj) => {
+          logger.info(obj.user.name);
         });
-        getUsers(genfors, true, function(users){
-          console.log(users);
+
+/*        getUsers(genfors, false, (users) => {
+          logger.info(users === user);
+        });
+        getUsers(genfors, true, (users) => {
+          logger.info(users === auser);
         });
 
-        addVoteDemands("Noe fint", 3/4, function(vote_demand){
-          addQuestion("Verdens beste spørsmål", [{description: "Yes!", id: 0}, {description: "Pizzzza", id: 1}, {description: "No!", id: 2}], false, false, false, vote_demand, function(question){
-            console.log(question);
-            addVote(question, user, 0, function(vote){
-              console.log(vote);
+        addVoteDemands('Noe fint', (3 / 4), (voteDemand) => {
+          addQuestion('Verdens beste spørsmål', [{ description: 'Yes!', id: 0 },
+          { description: 'Pizzzza', id: 1 }, { description: 'No!', id: 2 }], false, false, false, voteDemand, (question) => {
+            logger.info(question);
+            addVote(question, user, 0, (vote) => {
+              logger.info(vote);
 
-              endGenfors(genfors, function(err){
-                if(err) handleError(err);
-                console.log("Ended");
-                getActiveGenfors(function(genfors){
-                  console.log(genfors);
+              endGenfors(genfors, () => {
+                getActiveGenfors((genfors2) => {
+                  logger.info(genfors2 == null);
                 });
               });
             });
           });
         });
+      } else {
+        logger.info('loooooop');
+        loop();
+      }
+    });
+  };
+
+  loop();
+}
+
+
+logger.info('Getting active genfors');
+getActiveGenfors().then((genfors) => {
+  if (genfors) {
+    logger.info('stopping genfors');
+    addUser('Temp deleter', 'onlineweb_id1', 'hashash', 3).then((obj) => {
+      logger.info(obj.user.name);
+      endGenfors(genfors, obj.user).then(() => {
+        getActiveGenfors().then((genforsNew) => {
+          logger.info(genforsNew.status);
+          go();
+        });
       });
     });
+
+    return;
   }
-
+  go();
 });
-
+*/
 
 // addUser('hakon', 'sklirg', '1234abcd').then((d) => {
-//   console.log('creted', Object.keys(d), d)
+//   logger.info('creted', Object.keys(d), d)
 // }).catch((err) => {
-//   console.log(err)
+//   logger.info(err)
 // })
