@@ -43,7 +43,7 @@ class ConcludedIssue extends React.Component {
   render() {
     return (
       <button
-        className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': this.state.majority })}
+        className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}
         onClick={this.handleClick}
       >
         <p>{this.props.text}</p>
