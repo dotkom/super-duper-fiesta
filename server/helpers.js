@@ -150,8 +150,7 @@ function addVoteDemands(title, percent) {
   voteDemand.save();
 }
 
-function addQuestion(description, options, secret,
-  showOnlyWinner, countingBlankVotes, voteDemand, closeCurrentIssue) {
+function addQuestion(issueData, closeCurrentIssue) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
       if (!genfors) reject('No genfors active');
@@ -170,17 +169,11 @@ function addQuestion(description, options, secret,
           });
           endQuestion(_issue);
         }
-        getQualifiedUsers(genfors, secret).then((users) => {
-          const issue = new Question({
+        getQualifiedUsers(genfors, issueData.secret).then((users) => {
+          const issue = Object.assign(issueData, {
             genfors,
-            description,
             active: true,
             deleted: false,
-            options, // Format {description, id}
-            secret,
-            showOnlyWinner,
-            countingBlankVotes,
-            voteDemand,
             qualifiedVoters: users.length,
             currentVotes: 0,
           });
