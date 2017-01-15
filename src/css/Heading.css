@@ -18,6 +18,10 @@
   font-size: 3.4rem;
 }
 
+.Heading-components {
+  text-align: right;
+}
+
 .Heading-logout {
   background: #323A7F;
   color: #F7F7F7;

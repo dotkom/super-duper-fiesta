@@ -5,7 +5,9 @@ const Heading = ({ title, children }) => (
   <div className="Heading">
     <div className="Heading-content">
       <h2 className="Heading-header">{title}</h2>
-      {children}
+      <div className="Heading-components">
+        {children}
+      </div>
     </div>
   </div>
 );
