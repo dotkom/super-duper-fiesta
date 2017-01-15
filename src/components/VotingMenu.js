@@ -17,7 +17,7 @@ class VotingMenu extends React.Component {
 
   handleChange(event) {
     this.setState({
-      selectedVote: event.currentTarget.value,
+      selectedVote: parseInt(event.currentTarget.value, 10),
     });
   }
 
@@ -26,7 +26,7 @@ class VotingMenu extends React.Component {
     if (this.props.voterKey) {
       this.props.handleVote(
         this.props.id,
-        parseInt(this.state.selectedVote, 10),
+        this.state.selectedVote,
         this.props.voterKey,
       );
     }
@@ -41,8 +41,8 @@ class VotingMenu extends React.Component {
         <Alternatives
           alternatives={arrayShuffle(this.props.alternatives)}
           handleChange={this.handleChange}
+          selectedVote={this.state.selectedVote}
         />
-
         <button
           className="VotingMenu-submit"
           onClick={this.handleClick}
