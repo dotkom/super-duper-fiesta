@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import AdminPanel from '../components/AdminPanel';
 import { toggleRegistration } from '../actions/adminButtons';
 
-const mapStateToProps = state => ({
-  openRegistration: state.registrationEnabled,
+const mapStateToProps = ({ registrationEnabled }) => ({
+  registrationEnabled,
 });
 
 const mapDispatchToProps = dispatch => ({

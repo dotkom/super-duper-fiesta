@@ -13,13 +13,8 @@ class AdminPanel extends React.Component {
       openRegistration: false,
     };
 
-    this.toggleRegistration = this.toggleRegistration.bind(this);
     this.userAdministration = this.userAdministration.bind(this);
     this.endGAM = this.endGAM.bind(this);
-  }
-
-  toggleRegistration() {
-    this.props.toggleRegistration();
   }
 
   userAdministration() {
@@ -31,13 +26,14 @@ class AdminPanel extends React.Component {
   }
 
   render() {
-    const registrationOpen = this.state.registrationOpen ?
+    const { registrationEnabled, toggleRegistration } = this.props;
+    const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
     return (
       <div className="AdminPanel">
         <Heading title="Generalforsamling adminpanel">
-          <Button onClick={this.toggleRegistration}>{registrationOpen}</Button>
+          <Button onClick={toggleRegistration}>{registrationText}</Button>
           <Button onClick={this.userAdministration}>Brukeradmin</Button>
           <Button onClick={this.endGAM}>Avslutt</Button>
         </Heading>
