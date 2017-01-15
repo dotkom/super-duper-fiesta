@@ -42,9 +42,9 @@ function getUserById(userId, anonymous) {
 
 function getUsers(genfors, anonymous) {
   if (anonymous) {
-    return AnonymousUser.find({ genfors, canVote: true }).exec();
+    return AnonymousUser.find({ genfors });
   }
-  return User.find({ genfors, canVote: true }).exec();
+  return User.find({ genfors });
 }
 
 
