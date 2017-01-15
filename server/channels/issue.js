@@ -11,7 +11,7 @@ const issue = (socket) => {
     const payload = data.data;
     logger.debug('issue payload', { payload, action: data.action });
     if (data.action === 'open') {
-      addQuestion(data)
+      addQuestion(payload)
       .then((question) => {
         logger.debug('Added new question. Broadcasting ...', { question: question.description });
         broadcast(socket, 'issue', question, { action: 'open' });
@@ -31,10 +31,11 @@ const issue = (socket) => {
         });
         return null;
       }
-      logger.info('Closing issue.', { issue: data._id, user: data.user });
+      logger.info('Closing issue.', { issue: payload._id, user: data.user });
       getUserById(data.user).then((user) => {
         logger.debug('Fetched user profile', { user: user.name });
-        endQuestion(data._id, user)
+        logger.debug('endq', { t: typeof endQuestion, endQuestion })
+        endQuestion(payload._id, user)
         .catch((err) => {
           logger.error('closing issue failed', { err });
           emit(socket, 'issue', {}, {
@@ -44,7 +45,6 @@ const issue = (socket) => {
           logger.info('closed question', { question: payload._id, response: d._id });
           broadcast(socket, 'issue', payload, { action: 'close' });
         });
-        return null;
       }).catch((err) => {
         logger.error('getting user failed', { err });
         emit(socket, 'issue', {}, {
