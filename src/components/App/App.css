@@ -3,18 +3,24 @@ html {
 }
 
 body {
-  background: #f7f7f7;
-  font-family: Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.4rem;
+  margin: 0;
 }
 
-.App {
-  padding: 1rem 2rem;
-  max-width: 100rem;
-  margin: 0 auto;
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+}
+
+button {
+    font-family: inherit;
 }
 
 .App-components {
+  padding: 0 2rem;
+  max-width: 100rem;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #323A7F;
@@ -22,7 +28,6 @@ body {
 
 .ActiveIssue-Vote-wrapper {
   flex-grow: 2;
-  padding: 1rem;
 }
 
 .hidden {
