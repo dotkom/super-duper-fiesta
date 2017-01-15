@@ -50,6 +50,13 @@ function getQualifiedUsers(genfors, secret) {
 
 
 // Get functions
+function getUserById(userId, anonymous) {
+  if (anonymous) {
+    return AnonymousUser.findOne({ _id: userId }).exec();
+  }
+  return User.findOne({ _id: userId }).exec();
+}
+
 function getUsers(genfors, anonymous) {
   if (anonymous) {
     return AnonymousUser.find({ genfors, canVote: true }).exec();
@@ -227,6 +234,7 @@ module.exports = {
   setNote,
   setCanVote,
   getUsers,
+  getUserById,
   getVotes,
   getQuestions,
   getActiveQuestions,
