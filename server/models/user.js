@@ -3,6 +3,8 @@ const logger = require('../logging');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
 
+const permissionLevel = require('./permissions');
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -49,8 +51,14 @@ function getUsers(genfors, anonymous) {
 function addUser(name, onlinewebId, passwordHash, securityLevel) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
-      if (!genfors && securityLevel < 3) {// TODO make sure to connect all users to genfors
+      // @TODO make sure to connect all users to genfors
+      if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
         return reject(new Error('Ingen aktive generalforsamlinger'));
+      }
+      if (securityLevel >= permissionLevel.IS_SUPERUSER) {
+        logger.info('Creating a user with high security clearance.', {
+          name, onlinewebId, securityLevel,
+        });
       }
       const user = new User({
         genfors,
@@ -58,6 +66,7 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
         onlinewebId,
         notes: '',
         permissions: securityLevel || 0,
+        // @ToDo: Make sure to update this^ to IS_LOGGED_IN when logging users in
       });
 
       const anonymousUser = new AnonymousUser({
@@ -75,16 +84,20 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
 }
 
 
-//TODO fix promise
-function setNote(user, targetUser, note, cb) {
-  return canEdit(2, user, targetUser.genfors, () => {
-    User.update({ _id: user }).exec();
+function setNote(user, targetUser, note) {
+  return new Promise((resolve, reject) => {
+    canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
+      User.findByIdAndUpdate(user, { note }).then(resolve).catch(reject);
+    });
   });
 }
 
-function setCanVote(user, targetUser, canVote, cb) {
-  return canEdit(2, user, targetUser.genfors, () => {
-    User.update({ _id: user }).exec();
+function setCanVote(user, targetUser) {
+  return new Promise((resolve, reject) => {
+    canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
+      User.findByIdAndUpdate(user, { permissions: permissionLevel.CAN_VOTE })
+      .then(resolve).catch(reject);
+    });
   });
 }
 

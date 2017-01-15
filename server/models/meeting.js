@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
 
+const permissionLevel = require('./permissions');
 
 const Schema = mongoose.Schema;
 
@@ -53,7 +54,7 @@ function canEdit(securityLevel, user, genfors, cb) {
 
 function endGenfors(genfors, user) {
   return new Promise((resolve, reject) => {
-    canEdit(3, user, genfors, () => {
+    canEdit(permissionLevel.IS_MANAGER, user, genfors, () => {
       Genfors.update({ _id: genfors }, { status: 'Closed' });
       resolve();
     }).then(resolve).catch(reject);

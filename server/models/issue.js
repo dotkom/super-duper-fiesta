@@ -5,6 +5,8 @@ const canEdit = require('./meeting').canEdit;
 const getVotes = require('./vote').getVotes;
 const getQualifiedUsers = require('./user').getQualifiedUsers;
 
+const permissionLevel = require('./permissions');
+
 const Schema = mongoose.Schema;
 
 
@@ -41,7 +43,7 @@ function endQuestion(question, user) {
   return new Promise((resolve, reject) => {
     logger.debug('endquestion', { question });
     getActiveGenfors().then((genfors) => {
-      canEdit(2, user, genfors).then((result) => {
+      canEdit(permissionLevel.IS_MANAGER, user, genfors).then((result) => {
         logger.debug('security check returned', { result });
         if (result === true) {
           return Question.findByIdAndUpdate(question, { active: false })
