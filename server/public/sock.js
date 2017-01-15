@@ -15,9 +15,18 @@ socket.on('meeting', (data) => {
   document.getElementById('log').appendChild(node);
 
   console.log('emitting issue thingy');
-  socket.emit('issue', { action: 'open', title: 'Mitt spørsmål' });
+  const issue = {
+    action: 'open',
+    description: 'Mitt spørsmål',
+    secret: false,
+    showOnlyWinner: false,
+    countingBlankVotes: false,
+    voteDemand: null,
+  };
+  socket.emit('issue', issue);
   setTimeout(() => {
-    socket.emit('issue', { action: 'close', title: 'Mitt spørsmål' });
+    issue.action = 'close';
+    socket.emit('issue', issue);
   }, 10000);
 });
 
@@ -31,9 +40,9 @@ socket.on('private', (data) => {
 
 socket.on('issue', (data) => {
   console.log('issue', data);
-  let question = 'Ingen aktiv sak for øyeblikket.';
-  if (data && data.title && data.action !== 'close') {
-    question = data.title;
+  let issue = 'Ingen aktiv sak for øyeblikket.';
+  if (data && data.description && data.action !== 'close') {
+    issue = data.description;
   }
   document.getElementById('question').innerHTML = question;
 });
