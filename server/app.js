@@ -8,6 +8,8 @@ const routes = require('./routes/index');
 
 require('./channels/index').listen(server);
 
+require('./models/essentials');
+
 app.use('/public', express.static('public'));
 app.use('/', routes);
 
