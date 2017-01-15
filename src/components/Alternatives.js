@@ -15,11 +15,12 @@ const Alternatives = ({ alternatives, handleChange, selectedVote }) => (
 
 Alternatives.defaultProps = {
   selectedVote: null,
+  handleChange: undefined,
 };
 
 Alternatives.propTypes = {
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)).isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func,
   selectedVote: PropTypes.number,
 };
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AdminPanelAlternatives from '../components/VotingMenu';
+import AdminPanelAlternatives from '../components/AdminPanelAlternatives';
 
 const mapStateToProps = state => ({
   // TODO: Reuse selectors from VoteHandler.
