@@ -1,8 +1,8 @@
 const logger = require('../logging');
 
-const addQuestion = require('../helpers').addQuestion;
-const endQuestion = require('../helpers').endQuestion;
-const getUserById = require('../helpers').getUserById;
+const addQuestion = require('../models/issue').addQuestion;
+const endQuestion = require('../models/issue').endQuestion;
+const getUserById = require('../models/user').getUserById;
 
 const issue = (socket) => {
   socket.on('issue', (data) => {

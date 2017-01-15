@@ -1,6 +1,6 @@
 const logger = require('../logging');
 
-const getActiveGenfors = require('../helpers').getActiveGenfors;
+const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 
 const connection = (socket) => {
   // Some dummy code
