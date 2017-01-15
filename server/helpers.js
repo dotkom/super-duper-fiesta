@@ -12,15 +12,20 @@ function handleError(err) {
 
 // Useful functions
 function getActiveGenfors() {
-  return Genfors.findOne({ status: 'Open' }).exec();
+  return Genfors.findOne({ status: 'open' }).exec();
 }
 
-function canEdit(genfors, user, securityLevel, cb) {
-  return getActiveGenfors((active) => {
-    if (active === genfors === user.genfors && user.permissions > securityLevel) {
+function canEdit(securityLevel, user, genfors, cb) {
+  return getActiveGenfors().then((active) => {
+    if (active.id === genfors.id && genfors.id === user.genfors.toString()
+    && user.permissions >= securityLevel) {
+      logger.debug('cleared security check');
       cb();
     } else {
-      logger.error('Unable to end genfors that is not active');
+      logger.error('Failed security check');
+      logger.debug('permission', user.permissions >= 3);
+      logger.debug(active.id === genfors.id && genfors.id === user.genfors.toString()
+        && user.permissions >= securityLevel);
     }
   });
 }
@@ -61,13 +66,13 @@ function getClosedQuestions(genfors, cb) {
 
 // Update functions
 function endGenfors(genfors, user) {
-  return canEdit(genfors, user, () => {
+  return canEdit(3, user, genfors, () => {
     Genfors.update({ _id: genfors }, { status: 'Closed' });
   });
 }
 
 function endQuestion(question, user) {
-  return canEdit(question.genfors, user, () => {
+  return canEdit(2, user, question.genfors, () => {
     Genfors.update({ _id: question }, { active: false });
   });
 }
@@ -112,7 +117,7 @@ function addGenfors(title, date, passwordHash) {
   });
 }
 
-function addUser(name, onlinewebId, passwordHash) {
+function addUser(name, onlinewebId, passwordHash, securityLevel) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
       const user = new User({
@@ -120,7 +125,7 @@ function addUser(name, onlinewebId, passwordHash) {
         name,
         onlinewebId,
         notes: '',
-        security: 0,
+        permissions: securityLevel || 0,
       });
 
       const anonymousUser = new AnonymousUser({
