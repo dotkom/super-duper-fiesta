@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import ActiveIssue from '../containers/ActiveIssue';
-import AdminPanelAlternativesContainer from '../containers/AdminPanelAlternativesContainer';
 import Button from './Button';
 import Heading from './Heading';
 import '../css/AdminPanel.css';
@@ -38,8 +36,7 @@ class AdminPanel extends React.Component {
           <Button onClick={this.endGAM}>Avslutt</Button>
         </Heading>
         <div className="AdminPanel-components">
-          <ActiveIssue className="fefef" />
-          <AdminPanelAlternativesContainer />
+          {this.props.children}
         </div>
       </div>
     );
@@ -49,6 +46,7 @@ class AdminPanel extends React.Component {
 AdminPanel.propTypes = {
   registrationEnabled: PropTypes.bool.isRequired,
   toggleRegistration: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AdminPanel;
