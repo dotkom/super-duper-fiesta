@@ -1,6 +1,5 @@
 import React from 'react';
 import Alternatives from './Alternatives';
-import arrayShuffle from 'array-shuffle';
 import '../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
@@ -39,7 +38,7 @@ class VotingMenu extends React.Component {
     return (
       <div className="VotingMenu">
         <Alternatives
-          alternatives={arrayShuffle(this.props.alternatives)}
+          alternatives={this.props.alternatives}
           handleChange={this.handleChange}
         />
 

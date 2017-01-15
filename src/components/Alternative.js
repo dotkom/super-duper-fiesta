@@ -11,7 +11,7 @@ const Alternative = ({ id, text, ...other }) => (
         id={id}
         {...other}
       />
-      {text}
+      {id}
     </label>
   </div>
 );
