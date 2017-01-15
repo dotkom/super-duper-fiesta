@@ -14,13 +14,16 @@ h1, h2, h3, h4, h5 {
 }
 
 button {
-    font-family: inherit;
+  font-family: inherit;
 }
 
 .App-components {
-  padding: 0 2rem;
   max-width: 100rem;
   margin: 0 auto;
+}
+
+.ActiveIssue-components {
+  padding: 0 2rem;
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #323A7F;

@@ -10,13 +10,15 @@ const App = () => (
   <div className="App">
     <Heading />
     <div className="App-components">
-      <div className="ActiveIssue-Vote-wrapper">
-        <ActiveIssue />
-        <VoteHandler />
+      <div className="ActiveIssue-components">
+        <div className="ActiveIssue-Vote-wrapper">
+          <ActiveIssue />
+          <VoteHandler />
+        </div>
+        <LiveVoteCount />
       </div>
-      <LiveVoteCount />
+      <ConcludedIssueListContainer />
     </div>
-    <ConcludedIssueListContainer />
   </div>
   );
 
