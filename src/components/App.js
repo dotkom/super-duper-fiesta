@@ -9,7 +9,7 @@ import '../css/App.css';
 
 const App = () => (
   <div className="App">
-    <Heading title="Onlines generalforsamling 2017">
+    <Heading link="/" title="Onlines generalforsamling 2017">
       <Button>Logg out</Button>
     </Heading>
     <div className="App-components">

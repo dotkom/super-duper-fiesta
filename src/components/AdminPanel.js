@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Button from './Button';
 import Heading from './Heading';
 import '../css/AdminPanel.css';
@@ -30,9 +31,9 @@ class AdminPanel extends React.Component {
 
     return (
       <div className="AdminPanel">
-        <Heading title="Generalforsamling adminpanel">
+        <Heading link="/admin/" title="Generalforsamling adminpanel">
           <Button onClick={toggleRegistration}>{registrationText}</Button>
-          <Button onClick={this.userAdministration}>Brukeradmin</Button>
+          <Link to="/admin/users"><Button onClick={this.userAdministration}>Brukeradmin</Button></Link>
           <Button onClick={this.endGAM}>Avslutt</Button>
         </Heading>
         <div className="AdminPanel-components">

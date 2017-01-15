@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import '../css/Heading.css';
 
-const Heading = ({ title, children }) => (
+const Heading = ({ link, title, children }) => (
   <div className="Heading">
     <div className="Heading-content">
-      <h2 className="Heading-header">{title}</h2>
+      <Link to={link}><h2 className="Heading-header">{title}</h2></Link>
       <div className="Heading-components">
         {children}
       </div>
@@ -17,10 +18,11 @@ Heading.defaultProps = {
 };
 
 Heading.propTypes = {
+  link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node)
+    PropTypes.arrayOf(PropTypes.node),
   ]),
 };
 
