@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ActiveIssue from '../containers/ActiveIssue';
 import AdminPanelAlternativesContainer from '../containers/AdminPanelAlternativesContainer';
 import Button from './Button';
@@ -26,7 +26,7 @@ class AdminPanel extends React.Component {
   }
 
   render() {
-    const { registrationEnabled, toggleRegistration } = this.props;
+    const { registrationEnabled, toggleRegistration } = this.props;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
@@ -45,5 +45,10 @@ class AdminPanel extends React.Component {
     );
   }
 }
+
+AdminPanel.propTypes = {
+  registrationEnabled: PropTypes.bool.isRequired,
+  toggleRegistration: PropTypes.func.isRequired,
+};
 
 export default AdminPanel;
