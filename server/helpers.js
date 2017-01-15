@@ -159,10 +159,11 @@ function addQuestion(issueData, closeCurrentIssue) {
       .catch((err) => {
         logger.error('Something went wrong while getting active questions', { err });
       }).then((_issue) => {
-        if (_issue && !closeCurrentIssue) {
+        if (_issue && _issue.active && !closeCurrentIssue) {
           reject("There's already an active question");
-        } else if (_issue && closeCurrentIssue) {
-          logger.info("There's already an active isse. Closing it and proceeding", {
+          return null;
+        } else if (_issue && !_issue.active && closeCurrentIssue) {
+          logger.info("There's already an active issue. Closing it and proceeding", {
             issue: _issue.description,
             // user: user,
             closeCurrentIssue,
@@ -180,6 +181,7 @@ function addQuestion(issueData, closeCurrentIssue) {
 
           return new Question(issue).save().catch(reject).then(resolve);
         });
+        return null;
       });
     }).catch(reject);
   });
