@@ -67,8 +67,14 @@ class ConcludedIssue extends React.Component {
 }
 
 ConcludedIssue.propTypes = {
-  alternatives: PropTypes.arrayOf(PropTypes.object).isRequired,
-  votes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  alternatives: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.int,
+    text:PropTypes.string,
+  })).isRequired,
+  votes: PropTypes.arrayOf(PropTypes.shape({
+    hash: PropTypes.string,
+    id: PropTypes.int,
+  })).isRequired,
   majorityTreshold: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
 };
