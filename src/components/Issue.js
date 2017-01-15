@@ -1,5 +1,5 @@
 import React from 'react';
-import './Issue.css';
+import '../css/Issue.css';
 
 const Issue = ({ issue }) => (
   <div className="Issue">

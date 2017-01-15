@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './ConcludedIssue.css';
+import '../css/ConcludedIssue.css';
 
 
 class ConcludedIssue extends React.Component {

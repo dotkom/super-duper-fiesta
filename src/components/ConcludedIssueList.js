@@ -1,5 +1,5 @@
 import React from 'react';
-import ConcludedIssue from '../ConcludedIssue';
+import ConcludedIssue from './ConcludedIssue';
 
 export default ({ issues }) => (
   <div className="ConcludedIssueList">

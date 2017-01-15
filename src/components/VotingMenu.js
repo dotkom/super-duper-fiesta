@@ -1,6 +1,6 @@
 import React from 'react';
 import Alternatives from './Alternatives';
-import './VotingMenu.css';
+import '../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor() {
