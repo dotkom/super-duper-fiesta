@@ -8,8 +8,9 @@ const IssueForm = () => (
       <label className="IssueForm-textarea">
         <div className="IssueForm-label">Beskrivelse</div>
         <textarea />
-        <p>Beskrivelse av saken som skal stemmes over</p>
+        <p>Beskrivelse av saken</p>
       </label>
+      <div className="IssueForm-label">Innstillinger</div>
       <label className="IssueForm-checkbox">
         <input type="checkbox" />
         Hemmelig valg
@@ -37,7 +38,7 @@ const IssueForm = () => (
         </select>
       </label>
     </form>
-    <Button>Lagre</Button>
+    <Button>Lagre sak</Button>
   </div>
 );
 

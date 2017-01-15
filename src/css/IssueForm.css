@@ -4,11 +4,12 @@
 
 .IssueForm label {
   display: block;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .IssueForm-label {
   font-size: 1.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .IssueForm select, .IssueForm textarea {
@@ -16,8 +17,9 @@
   width: 100%;
 } 
 
-.IssueForm-checkbox {
+label.IssueForm-checkbox {
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .IssueForm-checkbox input {
