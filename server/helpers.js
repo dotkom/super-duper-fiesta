@@ -151,25 +151,44 @@ function addVoteDemands(title, percent) {
 }
 
 function addQuestion(description, options, secret,
-  showOnlyWinner, countingBlankVotes, voteDemand) {
-  getActiveGenfors().then((genfors) => {
-    if (!genfors) return handleError('No genfors active');
+  showOnlyWinner, countingBlankVotes, voteDemand, closeCurrentIssue) {
+  return new Promise((resolve, reject) => {
+    getActiveGenfors().then((genfors) => {
+      if (!genfors) reject('No genfors active');
 
-    getQualifiedUsers(genfors, secret).then((users) => {
-      const question = new Question({
-        genfors,
-        description,
-        options, // Format {description, id}
-        secret,
-        showOnlyWinner,
-        countingBlankVotes,
-        voteDemand,
-        qualifiedVoters: users.length,
+      getActiveQuestions(genfors)
+      .catch((err) => {
+        logger.error('Something went wrong while getting active questions', { err });
+      }).then((_issue) => {
+        if (_issue && !closeCurrentIssue) {
+          reject("There's already an active question");
+        } else if (_issue && closeCurrentIssue) {
+          logger.info("There's already an active isse. Closing it and proceeding", {
+            issue: _issue.description,
+            // user: user,
+            closeCurrentIssue,
+          });
+          endQuestion(_issue);
+        }
+        getQualifiedUsers(genfors, secret).then((users) => {
+          const issue = new Question({
+            genfors,
+            description,
+            active: true,
+            deleted: false,
+            options, // Format {description, id}
+            secret,
+            showOnlyWinner,
+            countingBlankVotes,
+            voteDemand,
+            qualifiedVoters: users.length,
+            currentVotes: 0,
+          });
+
+          return issue.save().catch(reject).then(resolve);
+        });
       });
-
-      question.save();
-    });
-    return null;
+    }).catch(reject);
   });
 }
 
