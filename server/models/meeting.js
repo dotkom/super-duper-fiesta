@@ -82,4 +82,5 @@ module.exports = {
   addGenfors,
   endGenfors,
   getActiveGenfors,
+  canEdit,
 };
