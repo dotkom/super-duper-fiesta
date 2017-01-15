@@ -7,6 +7,6 @@ module.exports.listen = (server) => {
   const io = socketio(server);
   io.on('connection', (socket) => {
     connection(socket);
-    socket.on('issue', issue);
+    issue(socket);
   });
 };
