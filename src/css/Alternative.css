@@ -9,16 +9,23 @@
 }
 
 .Alternative:hover {
-  background: #afb0c1;
+  background: #8d93c7;
+}
+
+.Alternative--selected {
+  background: #4d516f;
+}
+
+.Alternative--selected:hover {
+  background: #575c7d;
 }
 
 .Alternative label {
   cursor: pointer;
   flex-grow: 1;
-  padding: 1rem;
+  padding: 1rem 3rem;
 }
 
 .Alternative input {
-  cursor: pointer;
-  width: 2rem;
+  display: none;
 }
