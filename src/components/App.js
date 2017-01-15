@@ -5,7 +5,6 @@ import ActiveIssue from '../containers/ActiveIssue';
 import Button from './Button';
 import Heading from './Heading';
 import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
-import AdminPanelContainer from '../containers/AdminPanelContainer';
 import '../css/App.css';
 
 const App = () => (
@@ -23,7 +22,6 @@ const App = () => (
       </div>
       <ConcludedIssueListContainer />
     </div>
-    <AdminPanelContainer />
   </div>
   );
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router, Route, hashHistory } from 'react-router';
 import { createStore } from 'redux';
+import AdminPanelContainer from './containers/AdminPanelContainer';
 import App from './components/App';
 import votingApp from './reducers';
 
@@ -13,7 +15,11 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={hashHistory}>
+      <Route path="/" component={App} />
+      { /* We might want to split this up into two seperate apps */ }
+      <Route path="/admin" component={AdminPanelContainer} />
+    </Router>
   </Provider>,
 
   document.getElementById('app'),
