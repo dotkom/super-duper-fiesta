@@ -3,6 +3,20 @@ import classNames from 'classnames';
 import '../css/ConcludedIssue.css';
 
 
+// Maps over alternatives to see if any of them got majority vote
+function calculateMajority(alternatives, votes, majorityTreshold) {
+  let majority = false;
+  alternatives.map(function(alternative){
+    if (votes
+      .filter(vote => vote.alternative === alternative.id)
+      .length / votes.length >= majorityTreshold) {
+      majority = true
+    }
+  });
+  return majority;
+}
+
+
 class ConcludedIssue extends React.Component {
 
   constructor(props) {
@@ -10,23 +24,9 @@ class ConcludedIssue extends React.Component {
 
     this.state = {
       visibleAlternatives: false,
-      majority: this.calculateMajority(props.alternatives, props.votes, props.majorityTreshold),
+      majority: calculateMajority(props.alternatives, props.votes, props.majorityTreshold),
     }
     this.handleClick = this.handleClick.bind(this);
-  }
-
-
-  // Maps over alternatives to see if any of them got majority vote
-  calculateMajority(alternatives, votes, majorityTreshold) {
-    let majority = false;
-    alternatives.map(function(alternative){
-      if (votes
-        .filter(vote => vote.alternative === alternative.id)
-        .length / votes.length >= majorityTreshold) {
-        majority = true
-      }
-    });
-    return majority;
   }
 
 
