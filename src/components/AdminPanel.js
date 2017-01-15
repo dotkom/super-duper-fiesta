@@ -5,7 +5,7 @@ class AdminPanel extends React.Component {
     super();
 
     this.state = {
-      userRegistration: false,
+      openRegistration: false,
     };
 
     this.toggleRegistration = this.toggleRegistration.bind(this);
@@ -14,9 +14,7 @@ class AdminPanel extends React.Component {
   }
 
   toggleRegistration() {
-    this.setState({
-      openRegistration: !this.state.openRegistration,
-    });
+    this.props.toggleRegistration();
   }
 
   userAdministration() {
@@ -35,14 +33,13 @@ class AdminPanel extends React.Component {
       <div className="AdminPanel">
         <h2> Admin panel </h2>
         <div className="MeetingAdmin">
-          <button onChange={this.toggleRegistration}>{registrationOpen}</button>
-          <button onChange={this.userAdministration}>Brukeradministrasjon</button>
-          <button onChange={this.endGAM}>Avslutt generalforsamling</button>
-        </div>
-        <div className="CurrentIssue">
-
+          <button onClick={this.toggleRegistration}>{registrationOpen}</button>
+          <button onClick={this.userAdministration}>Brukeradministrasjon</button>
+          <button onClick={this.endGAM}>Avslutt generalforsamling</button>
         </div>
       </div>
     );
   }
 }
+
+export default AdminPanel;
