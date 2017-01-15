@@ -18,10 +18,19 @@ socket.on('meeting', (data) => {
   socket.emit('issue', { action: 'open', title: 'Mitt spørsmål' });
   setTimeout(() => {
     socket.emit('issue', { action: 'close', title: 'Mitt spørsmål' });
-  }, 10000)
+  }, 10000);
+});
+
+socket.on('public', (data) => {
+  console.log('public', data);
+});
+
+socket.on('private', (data) => {
+  console.log('priv', data);
 });
 
 socket.on('issue', (data) => {
+  console.log('issue', data);
   let question = 'Ingen aktiv sak for øyeblikket.';
   if (data && data.title && data.action !== 'close') {
     question = data.title;
