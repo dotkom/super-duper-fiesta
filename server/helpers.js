@@ -32,6 +32,66 @@ function getQualifiedUsers(genfors, secret) {
   return User.find({ genfors, can_vote: true });
 }
 
+
+// Get functions
+function getUsers(genfors, anonymous) {
+  if (anonymous) {
+    return AnonymousUser.find({ genfors, canVote: true }).exec();
+  }
+  return User.find({ genfors, canVote: true }).exec();
+}
+
+function getVotes(question, cb) {
+  if (!question.active || !question.secret) {
+    return Vote.find({ question }).exec().then(cb).catch(handleError);
+  }
+  return null;
+}
+
+function getQuestions(genfors, cb) {
+  return Question.find({ genfors }).exec().then(cb).catch(handleError);
+}
+function getActiveQuestions(genfors, cb) {
+  return Question.find({ genfors, active: true }).exec().then(cb).catch(handleError);
+}
+function getClosedQuestions(genfors, cb) {
+  return Question.find({ genfors, active: false }).exec().then(cb).catch(handleError);
+}
+
+
+// Update functions
+function endGenfors(genfors, user) {
+  return canEdit(genfors, user, () => {
+    Genfors.update({ _id: genfors }, { status: 'Closed' });
+  });
+}
+
+function endQuestion(question, user) {
+  return canEdit(question.genfors, user, () => {
+    Genfors.update({ _id: question }, { active: false });
+  });
+}
+
+function setNote(user, targetUser, note, cb) {
+  return canEdit(2, user, targetUser.genfors, () => {
+    User.update({ _id: user }).exec().then(cb).catch(handleError);
+  });
+}
+
+function setCanVote(user, targetUser, canVote, cb) {
+  return canEdit(2, user, targetUser.genfors, () => {
+    User.update({ _id: user }).exec().then(cb).catch(handleError);
+  });
+}
+
+function updateQuestionCounter(question) {
+  getVotes(question, (votes) => {
+    Question.update({ _id: question }, { currentVotes: votes.length })
+    .exec().then().catch(handleError);
+  });
+}
+
+
 // Add functions
 // TODO add security function
 function addGenfors(title, date, passwordHash) {
@@ -89,8 +149,8 @@ function addVoteDemands(title, percent) {
   voteDemand.save();
 }
 
-function addQuestion(description, options, secret, showOnlyWinner,
-  countingBlankVotes, voteDemand) {
+function addQuestion(description, options, secret,
+  showOnlyWinner, countingBlankVotes, voteDemand) {
   getActiveGenfors().then((genfors) => {
     if (!genfors) return handleError('No genfors active');
 
@@ -106,6 +166,7 @@ function addQuestion(description, options, secret, showOnlyWinner,
         countingBlankVotes,
         voteDemand,
         qualifiedVoters: users.length,
+        currentVotes: 0,
       });
 
       question.save();
@@ -125,53 +186,9 @@ function addVote(_question, user, option) {
     });
 
     vote.save();
+    updateQuestionCounter(question);
     return null;
   });
-}
-
-
-// Update functions
-function endGenfors(genfors, user) {
-  return canEdit(genfors, user, () => {
-    Genfors.update({ _id: genfors }, { status: 'Closed' });
-  });
-}
-
-function endQuestion(question, user) {
-  return canEdit(question.genfors, user, () => {
-    Genfors.update({ _id: question }, { active: false });
-  });
-}
-
-function setNote(user, targetUser, note, cb) {
-  return canEdit(2, user, targetUser.genfors, () => {
-    User.update({ _id: user }).exec().then(cb).catch(handleError);
-  });
-}
-
-function setCanVote(user, targetUser, canVote, cb) {
-  return canEdit(2, user, targetUser.genfors, () => {
-    User.update({ _id: user }).exec().then(cb).catch(handleError);
-  });
-}
-
-// Get functions
-function getUsers(genfors, anonymous) {
-  if (anonymous) {
-    return AnonymousUser.find({ genfors, canVote: true }).exec();
-  }
-  return User.find({ genfors, canVote: true }).exec();
-}
-
-function getVotes(question, cb) {
-  if (!question.active || !question.secret) {
-    return Vote.find({ question }).exec().then(cb).catch(handleError);
-  }
-  return null;
-}
-
-function getQuestions(genfors, cb) {
-  return Question.find({ genfors }).exec().then(cb).catch(handleError);
 }
 
 
@@ -184,9 +201,11 @@ module.exports = {
   addVoteDemands,
   endGenfors,
   endQuestion,
+  setNote,
+  setCanVote,
   getUsers,
   getVotes,
   getQuestions,
-  setNote,
-  setCanVote,
+  getActiveQuestions,
+  getClosedQuestions,
 };
