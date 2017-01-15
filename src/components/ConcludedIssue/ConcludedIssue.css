@@ -1,3 +1,24 @@
+.ConcludedIssue {
+  margin: 1rem;
+  background: #90ccb4;
+  padding-top: .5rem;
+  padding-left: 2rem;
+}
+
+.ConcludedIssue:hover {
+  background: #74b39a;
+}
+
+.ConcludedIssue-NotMajority {
+  border: 1px solid red;
+  background: #d69898;
+}
+
+.ConcludedIssue-NotMajority:hover {
+  border: 1px solid red;
+  background: #ca7979;
+}
+
 .winner {
   font-weight: bold;
 }
