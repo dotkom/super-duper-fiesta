@@ -22,12 +22,10 @@
 }
 
 .ConcludedIssue-NotMajority {
-  border: 1px solid red;
   background: #d69898;
 }
 
 .ConcludedIssue-NotMajority:hover {
-  border: 1px solid red;
   background: #ca7979;
 }
 
