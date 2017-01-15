@@ -32,7 +32,7 @@ class VotingMenu extends React.Component {
   }
 
   render() {
-    const buttonDisabled = !this.state.selectedVote ||
+    const buttonDisabled = this.state.selectedVote === undefined ||
       (this.props.votes.some(vote => vote.voter === this.props.voterKey));
 
     return (
