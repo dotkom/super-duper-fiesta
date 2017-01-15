@@ -18,7 +18,7 @@ const UserSchema = new Schema({
 });
 
 const AnonymousUserSchema = new Schema({
-  genfors: { type: Schema.Types.ObjectId, required: true },
+  genfors: { type: Schema.Types.ObjectId, required: false },
   passwordHash: { type: String, required: true },
 });
 

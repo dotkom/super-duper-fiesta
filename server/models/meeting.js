@@ -55,14 +55,15 @@ function canEdit(securityLevel, user, genfors, cb) {
 function endGenfors(genfors, user) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, genfors, () => {
-      Genfors.update({ _id: genfors }, { status: 'Closed' });
-      resolve();
+      Genfors.update({ _id: genfors }, { status: 'Closed' }).then(() => {
+        resolve();
+      });
     }).then(resolve).catch(reject);
   });
 }
 
 // TODO add security function
-function addGenfors(title, date, passwordHash, force) {
+function addGenfors(title, date, passwordHash, user, force) {
   // Only allow one at a time
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((meeting) => {
@@ -72,7 +73,7 @@ function addGenfors(title, date, passwordHash, force) {
         if (!force) {
           return reject(new Error('Meeting in progress, you need to close it or force new'));
         }
-        endGenfors(genfors, user)
+        endGenfors(meeting, user);
       }
       // Add a new genfors
       const genfors = new Genfors({
@@ -80,7 +81,9 @@ function addGenfors(title, date, passwordHash, force) {
         date,
         password: passwordHash,
       });
-      genfors.save();
+      genfors.save().then((newMeeting) => {
+        resolve(newMeeting);
+      });
       return null;
     });
   });

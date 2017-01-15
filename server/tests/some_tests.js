@@ -12,8 +12,12 @@ const Vote = require('../models/vote');
 logger.info('connected and starting tests');
 
 const go = () => {
-  Meeting.addGenfors('Wioioioiooo', new Date(), 'passhash').then((genfors) => {
-    logger.debug(genfors.title);
+  logger.debug('GO');
+  User.addUser('Super User', 'oidso', 'passapsaps', 3).then((object) => {
+    logger.debug('added user', { user: object.user.name, auser: object.anonymousUser.passwordHash });
+    Meeting.addGenfors('Wioioioiooo', new Date(), 'passhash', object.user).then((genfors) => {
+      logger.debug(genfors.title);
+    });
   });
 };
 
@@ -21,9 +25,11 @@ Meeting.getActiveGenfors().then((genfors) => {
   if (genfors) {
     logger.debug('Genfors is active, creating user to remove it', genfors.title);
     User.addUser('Delete Me', 'oid', 'hahahah', 3).then((object) => {
-      logger.debug('added user', { 'name': object.user.name });
+      logger.debug('added user', { name: object.user.name });
       Meeting.endGenfors(genfors, object.user).then(go);
     });
+  } else {
+    go();
   }
 });
 /*
