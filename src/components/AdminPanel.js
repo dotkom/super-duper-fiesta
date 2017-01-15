@@ -1,6 +1,9 @@
 import React from 'react';
 import ActiveIssue from '../containers/ActiveIssue';
 import AdminPanelAlternativesContainer from '../containers/AdminPanelAlternativesContainer';
+import Button from './Button';
+import Heading from './Heading';
+import '../css/AdminPanel.css';
 
 class AdminPanel extends React.Component {
   constructor() {
@@ -29,17 +32,18 @@ class AdminPanel extends React.Component {
 
   render() {
     const registrationOpen = this.state.registrationOpen ?
-      'Registreringen åpen' : 'Registrering lukket';
+      'Steng registrering' : 'Åpne registrering';
 
     return (
       <div className="AdminPanel">
-        <h2>Admin panel</h2>
-        <ActiveIssue className="fefef" />
-        <AdminPanelAlternativesContainer />
-        <div className="MeetingAdmin">
-          <button onClick={this.toggleRegistration}>{registrationOpen}</button>
-          <button onClick={this.userAdministration}>Brukeradministrasjon</button>
-          <button onClick={this.endGAM}>Avslutt generalforsamling</button>
+        <Heading title="Generalforsamling adminpanel">
+          <Button onClick={this.toggleRegistration}>{registrationOpen}</Button>
+          <Button onClick={this.userAdministration}>Brukeradmin</Button>
+          <Button onClick={this.endGAM}>Avslutt</Button>
+        </Heading>
+        <div className="AdminPanel-components">
+          <ActiveIssue className="fefef" />
+          <AdminPanelAlternativesContainer />
         </div>
       </div>
     );

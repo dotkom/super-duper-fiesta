@@ -22,8 +22,8 @@ const App = () => (
         <LiveVoteCount />
       </div>
       <ConcludedIssueListContainer />
-      <AdminPanelContainer />
     </div>
+    <AdminPanelContainer />
   </div>
   );
 
