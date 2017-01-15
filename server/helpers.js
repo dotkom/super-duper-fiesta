@@ -153,7 +153,7 @@ function addVoteDemands(title, percent) {
 function addQuestion(issueData, closeCurrentIssue) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
-      if (!genfors) reject('No genfors active');
+      if (!genfors) reject(new Error('No genfors active'));
 
       getActiveQuestions(genfors)
       .catch((err) => {
@@ -178,7 +178,7 @@ function addQuestion(issueData, closeCurrentIssue) {
             currentVotes: 0,
           });
 
-          return issue.save().catch(reject).then(resolve);
+          return new Question(issue).save().catch(reject).then(resolve);
         });
       });
     }).catch(reject);
