@@ -35,9 +35,9 @@ function getQualifiedUsers(genfors, secret) {
 
 function getUserById(userId, anonymous) {
   if (anonymous) {
-    return AnonymousUser.findOne({ _id: userId }).exec();
+    return AnonymousUser.findOne({ _id: userId });
   }
-  return User.findOne({ _id: userId }).exec();
+  return User.findOne({ _id: userId });
 }
 
 function getUsers(genfors, anonymous) {
