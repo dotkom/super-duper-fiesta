@@ -77,6 +77,9 @@ function getQuestions(genfors, cb) {
 function getActiveQuestions(genfors, cb) {
   return Question.find({ genfors, active: true }).exec().then(cb).catch(handleError);
 }
+function getActiveQuestion(genfors) {
+  return Question.findOne({ genfors, active: true });
+}
 function getClosedQuestions(genfors, cb) {
   return Question.find({ genfors, active: false }).exec().then(cb).catch(handleError);
 }
@@ -173,7 +176,7 @@ function addQuestion(issueData, closeCurrentIssue) {
     getActiveGenfors().then((genfors) => {
       if (!genfors) reject(new Error('No genfors active'));
 
-      getActiveQuestions(genfors)
+      getActiveQuestion(genfors)
       .catch((err) => {
         logger.error('Something went wrong while getting active questions', { err });
       }).then((_issue) => {
@@ -238,5 +241,6 @@ module.exports = {
   getVotes,
   getQuestions,
   getActiveQuestions,
+  getActiveQuestion,
   getClosedQuestions,
 };
