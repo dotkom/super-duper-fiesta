@@ -34,8 +34,8 @@ const issue = (socket) => {
           logger.error('closing issue failed', { err });
         }).then((d) => {
           logger.info('closed question', { question: d._id });
+          socket.broadcast.emit('issue', data);
         });
-        socket.broadcast.emit('issue', data);
         return null;
       }).catch((err) => {
         logger.error('getting user failed', { err });
