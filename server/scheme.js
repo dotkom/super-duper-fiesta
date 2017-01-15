@@ -22,10 +22,10 @@ const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: true },
   name: { type: String, required: true },
   onlinewebId: { type: String, required: true },
-  registerDate: { type: Date, required: true },
-  canVote: { type: Boolean, required: true },
+  registerDate: { type: Date, default: Date.now() },
+  canVote: { type: Boolean, default: false },
   notes: String,
-  permissions: Number,
+  permissions: { type: Number, default: 0 },
 });
 
 const AnonymousUserSchema = new Schema({
@@ -49,16 +49,17 @@ const VoteDemandSchema = new Schema({
 const QuestionSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: true },
   description: { type: String, required: true },
-  active: { type: Boolean, required: true },
-  deleted: { type: Boolean, required: true },
+  active: { type: Boolean, default: true },
+  deleted: { type: Boolean, default: false },
   options: [{
     description: { type: String, required: true },
     id: { type: Number, required: true } }],
-  secret: { type: Boolean, required: true },
-  showOnlyWinner: { type: Boolean, required: true },
-  countingBlankVotes: { type: Boolean, required: true },
+  secret: { type: Boolean, default: false },
+  showOnlyWinner: { type: Boolean, default: true },
+  countingBlankVotes: { type: Boolean, default: true },
   voteDemand: { type: Schema.Types.ObjectId, required: true },
   qualifiedVoters: Number,
+  currentVotes: { type: Number, default: 0 },
   result: Boolean,
 });
 
@@ -66,8 +67,8 @@ const QuestionSchema = new Schema({
 const GenforsSchema = new Schema({
   title: { type: String, required: true },
   date: { type: Date, required: true },
-  status: { type: String, required: true }, // Open/Closed/Whatever
-  pin: { type: Number, required: true },
+  status: { type: String, default: 'open' }, // Open/Closed/Whatever
+  pin: { type: Number, required: true, default: parseInt(Math.random() * 10000, 10) },
   password: { type: String, required: true },
 });
 

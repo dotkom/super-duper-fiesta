@@ -105,8 +105,6 @@ function addGenfors(title, date, passwordHash) {
     const genfors = new Genfors({
       title,
       date,
-      status: 'Open',
-      pin: parseInt(Math.random() * 10000, 10),
       password: passwordHash,
     });
     genfors.save();
@@ -121,8 +119,6 @@ function addUser(name, onlinewebId, passwordHash) {
         genfors,
         name,
         onlinewebId,
-        registerDate: new Date(),
-        canVote: false,
         notes: '',
         security: 0,
       });
@@ -158,15 +154,12 @@ function addQuestion(description, options, secret,
       const question = new Question({
         genfors,
         description,
-        active: true,
-        deleted: false,
         options, // Format {description, id}
         secret,
         showOnlyWinner,
         countingBlankVotes,
         voteDemand,
         qualifiedVoters: users.length,
-        currentVotes: 0,
       });
 
       question.save();
