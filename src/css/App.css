@@ -32,8 +32,3 @@ button {
 .ActiveIssue-Vote-wrapper {
   flex-grow: 2;
 }
-
-.hidden {
-  visibility: hidden;
-  height: 0;
-}

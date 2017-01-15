@@ -41,13 +41,15 @@ class ConcludedIssue extends React.Component {
 
 
   render() {
+    const alternativesClass = classNames('ConcludedIssue-alternatives', {
+      'ConcludedIssue-alternatives--hidden': !this.state.visibleAlternatives,
+    });
     return (
-      <button
-        className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}
-        onClick={this.handleClick}
-      >
-        <p>{this.props.text}</p>
-        <ul className={classNames({ hidden: !this.state.visibleAlternatives })}>
+      <div className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}>
+        <button className="ConcludedIssue-toggle" onClick={this.handleClick}>
+          {this.props.text}
+        </button>
+        <ul className={alternativesClass}>
           {this.props.alternatives.map(alternative => (
             <li
               key={alternative.id}
@@ -61,7 +63,7 @@ class ConcludedIssue extends React.Component {
             </li>
           ))}
         </ul>
-      </button>
+      </div>
     );
   }
 }
@@ -69,7 +71,7 @@ class ConcludedIssue extends React.Component {
 ConcludedIssue.propTypes = {
   alternatives: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.int,
-    text:PropTypes.string,
+    text: PropTypes.string,
   })).isRequired,
   votes: PropTypes.arrayOf(PropTypes.shape({
     hash: PropTypes.string,
