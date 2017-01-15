@@ -1,5 +1,6 @@
 import React from 'react';
 import Alternatives from './Alternatives';
+import Button from './Button';
 import '../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
@@ -42,13 +43,13 @@ class VotingMenu extends React.Component {
           handleChange={this.handleChange}
           selectedVote={this.state.selectedVote}
         />
-        <button
-          className="VotingMenu-submit"
+        <Button
+          size="lg"
           onClick={this.handleClick}
           disabled={buttonDisabled}
         >
           Submit vote
-        </button>
+        </Button>
       </div>
     );
   }

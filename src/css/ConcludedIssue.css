@@ -3,6 +3,11 @@
   background: #90ccb4;
   padding-top: .5rem;
   padding-left: 2rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
 }
 
 .ConcludedIssue:hover {
