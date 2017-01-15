@@ -48,7 +48,7 @@ function endQuestion(question, user) {
           .then(resolve).catch(reject);
         }
         return reject(new Error('permission denied'));
-      }).catch(reject).then(resolve);
+      }).catch(reject);
     }).catch(reject);
   });
 }
@@ -103,5 +103,6 @@ module.exports = {
   getActiveQuestion,
   getClosedQuestions,
   getQuestions,
+  endQuestion,
 //  closeCurrentIssue,
 };
