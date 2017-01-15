@@ -41,7 +41,7 @@ class ConcludedIssue extends React.Component {
   render() {
     console.log(this.state.visibleAlternatives)
     return (
-      <div className={classNames("ConcludedIssue", {'ConcludedIssue-NotMajority': this.state.majority})} onClick={this.handleClick}>
+      <div className={classNames("ConcludedIssue", {'ConcludedIssue-NotMajority': !this.state.majority})} onClick={this.handleClick}>
         <p>{this.props.text}</p>
         <ul className={classNames({"hidden": !this.state.visibleAlternatives})}>
           {this.props.alternatives.map(alternative => (
