@@ -20,8 +20,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} />
+
       { /* We might want to split this up into two seperate apps */ }
-      <Route path="/admin/" component={AdminPanelContainer}>
+      <Route path="admin" component={AdminPanelContainer}>
         <IndexRoute component={AdminHome} />
         <Route path="question" component={IssueForm} />
         <Route path="users" component={Users} />
