@@ -8,9 +8,9 @@ const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const connection = (socket) => {
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
-      socket.emit('meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
+      emit(socket, 'meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
-      socket.emit('meeting', meeting);
+      emit(socket, 'meeting', meeting);
       getActiveQuestion(meeting._id).then((issue) => {
         logger.debug('Current issue', { issue: issue.description });
         emit(socket, 'issue', issue, { action: issue.active ? 'open' : 'close' });

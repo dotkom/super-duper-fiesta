@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import IO from 'socket.io-client';
+import createSocketIoMiddleware from 'redux-socket.io';
 import AdminPanelContainer from './containers/AdminPanelContainer';
 import App from './components/App';
 import AdminHome from './components/AdminHome';
@@ -11,13 +13,15 @@ import Users from './components/Users';
 import votingApp from './reducers';
 import { connectToSocketIO } from './actions/socketio';
 
-const store = createStore(votingApp);
+const socket = IO.connect();
+
+const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
+
+const store = applyMiddleware(socketIoMiddleware)(createStore)(votingApp);
 
 store.subscribe(() => {
   console.log('Store updated:', store.getState());
 });
-
-store.dispatch(connectToSocketIO());
 
 ReactDOM.render(
   <Provider store={store}>
