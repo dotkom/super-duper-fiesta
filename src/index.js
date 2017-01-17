@@ -6,7 +6,7 @@ import { applyMiddleware, createStore } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import AdminPanelContainer from './containers/AdminPanelContainer';
-import App from './components/App';
+import AppContainer from './containers/AppContainer';
 import AdminHome from './components/AdminHome';
 import IssueForm from './components/IssueForm';
 import Users from './components/Users';
@@ -26,7 +26,7 @@ store.subscribe(() => {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App} />
+      <Route path="/" component={AppContainer} />
 
       { /* We might want to split this up into two seperate apps */ }
       <Route path="admin" component={AdminPanelContainer}>

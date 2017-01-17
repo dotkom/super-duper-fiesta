@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import LiveVoteCount from '../containers/LiveVoteCount';
 import VoteHandler from '../containers/VoteHandler';
 import ActiveIssue from '../containers/ActiveIssue';
@@ -7,9 +7,9 @@ import Heading from './Heading';
 import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
 import '../css/App.css';
 
-const App = () => (
+const App = props => (
   <div className="App">
-    <Heading link="/" title="Onlines generalforsamling 2017">
+    <Heading link="/" title={props.title}>
       <Button>Logg out</Button>
     </Heading>
     <div className="App-components">
@@ -24,5 +24,13 @@ const App = () => (
     </div>
   </div>
   );
+
+App.defaultProps = {
+  title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
+}
+
+App.propTypes = {
+  title: PropTypes.string,
+};
 
 export default App;
