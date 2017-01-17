@@ -20,7 +20,7 @@ function getActiveGenfors() {
   return Genfors.findOne({ status: 'open' }).exec();
 }
 
-function canEdit(securityLevel, user, genfors, cb) {
+function canEdit(securityLevel, user, genfors) {
   return new Promise((resolve, reject) => {
     logger.debug('checking permissions');
     getActiveGenfors().then((active) => {
@@ -38,7 +38,6 @@ function canEdit(securityLevel, user, genfors, cb) {
          && user.permissions >= securityLevel) {
         logger.debug('cleared security check');
         resolve(true);
-        cb();
       } else {
         logger.error('Failed security check', {
           userpermission: user.permission,
