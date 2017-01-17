@@ -9,12 +9,15 @@ import AdminHome from './components/AdminHome';
 import IssueForm from './components/IssueForm';
 import Users from './components/Users';
 import votingApp from './reducers';
+import { connectToSocketIO } from './actions/socketio';
 
 const store = createStore(votingApp);
 
 store.subscribe(() => {
   console.log('Store updated:', store.getState());
 });
+
+store.dispatch(connectToSocketIO());
 
 ReactDOM.render(
   <Provider store={store}>

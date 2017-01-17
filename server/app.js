@@ -10,7 +10,7 @@ require('./channels/index').listen(server);
 
 require('./models/essentials');
 
-app.use('/public', express.static('public'));
+app.use('/dist', express.static('../dist'));
 app.use('/', routes);
 
 const HOST = process.env.SDF_HOST || 'localhost';
