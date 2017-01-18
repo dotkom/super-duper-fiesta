@@ -1,4 +1,7 @@
 import React from 'react';
+import Alternatives from './Alternatives';
+import Button from './Button';
+import '../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor() {
@@ -14,7 +17,7 @@ class VotingMenu extends React.Component {
 
   handleChange(event) {
     this.setState({
-      selectedVote: event.currentTarget.value,
+      selectedVote: parseInt(event.currentTarget.value, 10),
     });
   }
 
@@ -23,35 +26,30 @@ class VotingMenu extends React.Component {
     if (this.props.voterKey) {
       this.props.handleVote(
         this.props.id,
-        parseInt(this.state.selectedVote, 10),
+        this.state.selectedVote,
         this.props.voterKey,
       );
     }
   }
 
   render() {
-    const buttonDisabled = !this.state.selectedVote ||
+    const buttonDisabled = this.state.selectedVote === undefined ||
       (this.props.votes.some(vote => vote.voter === this.props.voterKey));
 
     return (
       <div className="VotingMenu">
-        <div className="Alternatives">
-          {this.props.alternatives.map(alternative => (
-            <div className="Alternative" key={alternative.id}>
-              <input
-                type="radio"
-                name="vote"
-                value={alternative.id}
-                id={alternative.id}
-                onChange={this.handleChange}
-              />
-
-              <label htmlFor={alternative.id}>{alternative.text}</label>
-            </div>
-          ))}
-        </div>
-
-        <button onClick={this.handleClick} disabled={buttonDisabled}>Submit vote</button>
+        <Alternatives
+          alternatives={this.props.alternatives}
+          handleChange={this.handleChange}
+          selectedVote={this.state.selectedVote}
+        />
+        <Button
+          size="lg"
+          onClick={this.handleClick}
+          disabled={buttonDisabled}
+        >
+          Submit vote
+        </Button>
       </div>
     );
   }
@@ -59,20 +57,18 @@ class VotingMenu extends React.Component {
 
 VotingMenu.defaultProps = {
   voterKey: undefined,
+  alternatives: [],
+  _id: '',
 };
 
 VotingMenu.propTypes = {
-  alternatives: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number,
-    text: React.PropTypes.string,
-  })).isRequired,
-
+  alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
-  id: React.PropTypes.number.isRequired,
+  _id: React.PropTypes.string,
 
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
     alternative: React.PropTypes.number,
-    id: React.PropTypes.number,
+    _id: React.PropTypes.string,
   })).isRequired,
 
   voterKey: React.PropTypes.number,

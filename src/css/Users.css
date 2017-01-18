@@ -1,0 +1,42 @@
+.Users-info {
+  max-width: 70rem;
+}
+
+table.Users-list {
+  width: 100%;
+  max-width: 70rem;
+  border-collapse: collapse;
+}
+
+.Users-list th {
+  font-size: 1.6rem;
+  border-bottom: 1px solid #9597b1;
+  font-weight: normal;
+  padding: 0.5rem 0.5rem;
+}
+
+.Users-list td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #dbdce0;
+}
+
+.Users-list tr:nth-child(even) td {
+  background: #f9f9f9;
+}
+
+.Users-list--left {
+  text-align: left;
+}
+
+.Users-list--center {
+  text-align: center;
+}
+
+.Users-list--right {
+  text-align: right;
+}
+
+.Users-list--can-not-vote {
+  color: #b73b3b;
+  font-weight: bold;
+}

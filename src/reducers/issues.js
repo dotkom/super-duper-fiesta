@@ -1,12 +1,15 @@
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
-    case 'CREATE_ISSUE':
+    case 'OPEN_ISSUE': {
       return {
-        id: action.id,
-        text: action.text,
-        alternatives: action.alternatives,
+        id: action.data._id,
+        text: action.data.description,
+        alternatives: action.data.options,
         votes: [],
+        resolutionType: action.resolutionType,
+        voteDemand: action.data.voteDemand,
       };
+    }
 
     case 'SEND_VOTE':
       // If the vote has been cancelled before this vote was submitted, it needs
@@ -52,19 +55,58 @@ const issue = (state = {}, action, currentIssue) => {
 };
 
 const defaultIssues = [{
-  id: 0,
+  _id: 0,
   text: 'Trump',
   alternatives: [{
-    id: 0,
+    _id: 0,
     text: 'yes',
   }],
 
   votes: [],
+
+  voteDemand: 0.5,
+  isActive: false,
+}, {
+  _id: 1,
+  text: 'YO hello this is long text',
+  alternatives: [{
+    _id: 0,
+    text: 'yes',
+  }, {
+    _id: 1,
+    text: 'yes',
+  }, {
+    _id: 2,
+    text: 'yes',
+  }],
+
+  votes: [],
+
+  voteDemand: 0.5,
+  isActive: false,
+}, {
+  _id: 2,
+  text: 'Half-giant jinxes peg-leg gillywater broken glasses large black dog Great Hall. Nearly-Headless Nick now string them together, and answer me this, which creature would you be unwilling to kiss? Poltergeist sticking charm, troll umbrella stand flying cars golden locket Lily Potter. Pumpkin juice Trevor wave your wand out glass orbs, a Grim knitted hats. Stan Shunpike doe patronus, suck his soul Muggle-Born large order of drills the trace. Bred in captivity fell through the veil, quaffle blue flame ickle diddykins Aragog. Yer a wizard, Harry Doxycide the woes of Mrs. Weasley Goblet of Fire',
+  alternatives: [{
+    _id: 0,
+    text: 'Yes',
+  }, {
+    _id: 1,
+    text: 'No',
+  }, {
+    _id: 2,
+    text: 'I don\'t like voting',
+  }],
+
+  votes: [],
+
+  voteDemand: 0.5,
+  isActive: false,
 }];
 
-const issues = (state = defaultIssues, action) => {
+const issues = (state = [], action) => {
   switch (action.type) {
-    case 'CREATE_ISSUE':
+    case 'OPEN_ISSUE':
       return [
         ...state,
         issue(undefined, action),

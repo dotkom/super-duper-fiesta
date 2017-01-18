@@ -1,0 +1,38 @@
+.ConcludedIssue {
+  margin: 1rem;
+  background: #90ccb4;
+}
+
+.ConcludedIssue:hover {
+  background: #74b39a;
+}
+
+.ConcludedIssue-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 1rem 2rem;
+}
+
+.ConcludedIssue-toggle:focus {
+  outline: none;
+}
+
+.ConcludedIssue-NotMajority {
+  background: #d69898;
+}
+
+.ConcludedIssue-NotMajority:hover {
+  background: #ca7979;
+}
+
+.ConcludedIssue-alternatives--hidden {
+  display: none;
+}
+
+.winner {
+  font-weight: bold;
+}

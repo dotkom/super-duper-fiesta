@@ -1,9 +1,20 @@
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import arrayShuffle from 'array-shuffle';
 import VotingMenu from '../components/VotingMenu';
 import { sendVote } from '../actions/issues';
 
+const getAlternatives = state => (
+  state.issues.length ? state.issues[state.issues.length - 1].alternatives : []
+);
+
+const getShuffledAlternatives = createSelector(
+  [getAlternatives],
+  alternatives => arrayShuffle(alternatives),
+);
+
 const mapStateToProps = state => ({
-  alternatives: state.issues.length ? state.issues[state.issues.length - 1].alternatives : [],
+  alternatives: getShuffledAlternatives(state),
 
   votes: state.issues.length ? state.issues[state.issues.length - 1].votes : [],
 

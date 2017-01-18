@@ -16,6 +16,8 @@ module.exports = {
         ],
       },
     ],
+    // Doesn't allow nested input inside label
+    "jsx-a11y/label-has-for": [0],
     // Disabled until eslint-plugin-import gets proper support for webpack externals
     // https://github.com/benmosher/eslint-plugin-import/issues/479
     // https://github.com/benmosher/eslint-plugin-import/issues/605
