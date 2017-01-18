@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
+const AlternativeSchema = require('./alternative');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
 const getVotes = require('./vote').getVotes;
@@ -15,9 +16,7 @@ const QuestionSchema = new Schema({
   description: { type: String, required: true },
   active: { type: Boolean, default: true },
   deleted: { type: Boolean, default: false },
-  options: [{
-    description: { type: String, required: true },
-    id: { type: Number, required: true } }],
+  options: [AlternativeSchema],
   secret: { type: Boolean, default: false },
   showOnlyWinner: { type: Boolean, default: true },
   countingBlankVotes: { type: Boolean, default: true },
@@ -92,6 +91,7 @@ function addQuestion(issueData, closeCurrentIssue) {
             currentVotes: 0,
           });
 
+          // @ToDo: Create alternatives, map it to issue obj, then create issue.
           return new Question(issue).save().catch(reject).then(resolve);
         });
         return null;

@@ -11,7 +11,6 @@ import AdminHome from './components/AdminHome';
 import IssueForm from './components/IssueForm';
 import Users from './components/Users';
 import votingApp from './reducers';
-import { connectToSocketIO } from './actions/socketio';
 
 const socket = IO.connect();
 

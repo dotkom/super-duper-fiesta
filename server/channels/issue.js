@@ -7,14 +7,14 @@ const endQuestion = require('../models/issue').endQuestion;
 const getUserById = require('../models/user').getUserById;
 
 const issue = (socket) => {
-  socket.on('issue', (data) => {
+  socket.on('action', (data) => {
     const payload = data.data;
-    logger.debug('issue payload', { payload, action: data.action });
-    if (data.action === 'open') {
+    logger.debug('issue payload', { payload, action: data.type });
+    if (data.type === 'server/ADMIN_CREATE_ISSUE') {
       addQuestion(payload)
       .then((question) => {
         logger.debug('Added new question. Broadcasting ...', { question: question.description });
-        broadcast(socket, 'issue', question, { action: 'open' });
+        broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
         return null;
       }).catch((err) => {
         logger.error('Adding new question failed.', { err });

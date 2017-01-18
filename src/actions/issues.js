@@ -1,9 +1,9 @@
-export const createIssue = (id, text, alternatives, majorityTreshold) => ({
-  type: 'CREATE_ISSUE',
+export const createIssue = (id, text, alternatives, voteDemand) => ({
+  type: 'OPEN_ISSUE',
   id,
   text,
   alternatives,
-  majorityTreshold,
+  voteDemand,
 });
 
 export const sendVote = (id, alternative, voter) => ({

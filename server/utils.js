@@ -2,7 +2,7 @@ const mergePermanentAndMetadata = (perm, meta) => Object.assign(perm, meta);
 
 const broadcast = (socket, channel, payload, metadata) => {
   const obj = mergePermanentAndMetadata({
-    type: `server/${channel}`,
+    type: channel,
   }, metadata);
   obj.data = payload;
   socket.broadcast.emit('action', obj);
@@ -10,7 +10,7 @@ const broadcast = (socket, channel, payload, metadata) => {
 
 const emit = (socket, channel, payload, metadata) => {
   const obj = mergePermanentAndMetadata({
-    type: `server/${channel}`,
+    type: channel,
   }, metadata);
   obj.data = payload;
   socket.emit('action', obj);

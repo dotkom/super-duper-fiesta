@@ -1,4 +1,3 @@
-const broadcast = require('../utils').broadcast;
 const emit = require('../utils').emit;
 const logger = require('../logging');
 
@@ -8,12 +7,12 @@ const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const connection = (socket) => {
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
-      emit(socket, 'meeting', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
+      emit(socket, 'OPEN_MEETING', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
-      emit(socket, 'meeting', meeting);
+      emit(socket, 'OPEN_MEETING', meeting);
       getActiveQuestion(meeting._id).then((issue) => {
         logger.debug('Current issue', { issue: issue.description });
-        emit(socket, 'issue', issue, { action: issue.active ? 'open' : 'close' });
+        emit(socket, 'OPEN_ISSUE', issue);
       }).catch((err) => {
         logger.error('Getting currently active issue failed.', { err });
         emit(socket, 'issue', {}, {

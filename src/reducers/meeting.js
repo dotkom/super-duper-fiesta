@@ -1,6 +1,6 @@
 const meeting = (state = {}, action) => {
   switch (action.type) {
-    case 'server/meeting': {
+    case 'OPEN_MEETING': {
       return {
         title: action.data.title,
       };

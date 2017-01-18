@@ -58,16 +58,17 @@ class VotingMenu extends React.Component {
 VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
+  _id: '',
 };
 
 VotingMenu.propTypes = {
   alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
-  id: React.PropTypes.number.isRequired,
+  _id: React.PropTypes.string,
 
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
     alternative: React.PropTypes.number,
-    id: React.PropTypes.number,
+    _id: React.PropTypes.string,
   })).isRequired,
 
   voterKey: React.PropTypes.number,
