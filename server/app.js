@@ -4,7 +4,6 @@ const logger = require('./logging');
 const app = express();
 
 const server = require('http').Server(app);
-const routes = require('./routes/index');
 
 require('./channels/index').listen(server);
 
@@ -18,9 +17,14 @@ if (process.env.PRODUCTION) {
   const webpackDevMiddleware = require('./webpack-dev-middleware'); // eslint-disable-line global-require
   logger.info('Starting webpack hot-reloading client');
   app.use(webpackDevMiddleware);
+
+  logger.info('Starting chokidar, watching server for changes');
+  require('./chokidar.conf.js'); // eslint-disable-line global-require
 }
 
-app.use('/', routes);
+app.use((req, res, next) => {
+  require('./routes/index')(req, res, next); // eslint-disable-line global-require
+});
 
 const HOST = process.env.SDF_HOST || 'localhost';
 const PORT = process.env.SDF_PORT || 3000;
