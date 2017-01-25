@@ -6,8 +6,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
-    "lint": "eslint src/"
+    "dev": "node server/app.js",
+    "lint": "eslint client/src/ server/"
   },
   "dependencies": {
     "array-shuffle": "^1.0.1",
@@ -30,12 +30,18 @@
     "socket.io-client": "^1.7.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.6",
+    "socketio": "^1.0.0",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.8",
-    "babel-preset-react": "^6.16.0"
+    "babel-preset-react": "^6.16.0",
+    "chokidar": "^1.6.1",
+    "webpack-dev-middleware": "^1.9.0"
   }
 }

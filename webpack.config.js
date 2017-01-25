@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './client/src/index.js',
   devtool: 'source-map',
   output: {
     path: path.join(__dirname, 'dist'),
@@ -9,7 +9,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    root: path.resolve('./src'),
+    root: path.resolve('./client/src'),
   },
   module: {
     loaders: [
