@@ -9,6 +9,7 @@ import AdminPanelContainer from './containers/AdminPanelContainer';
 import AppContainer from './containers/AppContainer';
 import AdminHome from './components/AdminHome';
 import IssueForm from './components/IssueForm';
+import NotFound from './components/NotFound';
 import Users from './components/Users';
 import votingApp from './reducers';
 
@@ -33,6 +34,8 @@ ReactDOM.render(
         <Route path="question" component={IssueForm} />
         <Route path="users" component={Users} />
       </Route>
+
+      <Route path="*" component={NotFound} />
     </Router>
   </Provider>,
 
