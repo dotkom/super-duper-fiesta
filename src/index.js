@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { applyMiddleware, createStore } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
@@ -24,7 +24,7 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={AppContainer} />
 
       { /* We might want to split this up into two seperate apps */ }
