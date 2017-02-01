@@ -8,7 +8,7 @@ const DB_CONN_STR = DB_URL || `mongodb://localhost/${DB_NAME}`;
 
 // connecting to db
 
-console.log(`Connecting to mongodb using '${DB_CONN_STR}'`);
+logger.info(`Connecting to mongodb using '${DB_CONN_STR}'`);
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_CONN_STR);
 
