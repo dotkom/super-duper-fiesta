@@ -9,7 +9,9 @@ const User = ({ id, name, canVote, toggleCanVote }) => {
     <tr className={userClass}>
       <td className="Users-list--left">{name}</td>
       <td className="Users-list--right">1. september 1939</td>
-      <td><button onClick={() => toggleCanVote(id)}>toggle voting</button></td>
+      <td className="Users-list--right">
+        <button onClick={() => toggleCanVote(id)}>Toggle voting</button>
+      </td>
     </tr>
   );
 };

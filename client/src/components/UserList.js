@@ -8,6 +8,7 @@ const UserList = ({ users, toggleCanVote }) => (
       <tr>
         <th className="Users-list--left">Bruker</th>
         <th className="Users-list--right">Registrert</th>
+        <th className="Users-list--right">Toggle voting</th>
       </tr>
     </thead>
     <tbody>
