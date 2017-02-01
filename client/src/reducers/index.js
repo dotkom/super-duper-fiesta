@@ -5,6 +5,8 @@ import voterKey from './voterKey';
 import totalUsers from './totalUsers';
 import votingEnabled from './votingEnabled';
 import registrationEnabled from './adminButtons';
+import userFilter from './userFilter';
+import users from './users';
 
 const votingApp = combineReducers({
   issues,
@@ -13,6 +15,8 @@ const votingApp = combineReducers({
   totalUsers,
   votingEnabled,
   registrationEnabled,
+  userFilter,
+  users,
 });
 
 export default votingApp;
