@@ -101,6 +101,7 @@ function addQuestion(issueData, closeCurrentIssue) {
 }
 
 module.exports = {
+  addIssue: addQuestion,
   addQuestion,
   getActiveQuestion,
   getClosedQuestions,

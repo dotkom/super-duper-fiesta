@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import AdminPanel from '../components/AdminPanel';
-import { toggleRegistration } from '../actions/adminButtons';
-import { createIssue } from '../actions/issues';
+import { createIssue, toggleRegistration } from '../actions/adminButtons';
 
 const mapStateToProps = ({ registrationEnabled }) => ({
   registrationEnabled,
