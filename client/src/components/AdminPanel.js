@@ -54,7 +54,7 @@ class AdminPanel extends React.Component {
           <Button onClick={this.closeRegistrationDialog}>Avbryt</Button>
         </Dialog>
         <Heading link="/admin/" title="Generalforsamling adminpanel">
-          <Button onClick={this.props.createIssue}>Click</Button>
+          <Link className="Button" to="/admin/question">Ny sak</Link>
           <Button onClick={this.openRegistrationDialog}>{registrationText}</Button>
           <Link to="/admin/users"><Button onClick={this.userAdministration}>Brukeradmin</Button></Link>
           <Button onClick={this.endGAM}>Avslutt</Button>
