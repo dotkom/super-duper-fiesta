@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-const User = ({ name, canVote }) => {
+const User = ({ id, name, canVote, toggleCanVote }) => {
   const userClass = classNames({
     'Users-list--can-not-vote': !canVote,
   });
@@ -9,17 +9,18 @@ const User = ({ name, canVote }) => {
     <tr className={userClass}>
       <td className="Users-list--left">{name}</td>
       <td className="Users-list--right">1. september 1939</td>
+      <td className="Users-list--right">
+        <button onClick={() => toggleCanVote(id)}>Toggle voting</button>
+      </td>
     </tr>
   );
 };
 
-User.defaultProps = {
-  canVote: false,
-};
-
 User.propTypes = {
   name: PropTypes.string.isRequired,
-  canVote: PropTypes.bool,
+  canVote: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  toggleCanVote: PropTypes.func.isRequired,
 };
 
 export default User;
