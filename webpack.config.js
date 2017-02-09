@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./client/src/index.js'],
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
