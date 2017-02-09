@@ -1,7 +1,9 @@
 const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('../webpack.config.js');
 
-module.exports = webpackMiddleware(webpack(require('../webpack.config.js')), {
+const webpackDevOptions = {
   watchOptions: {
     aggregateTimeout: 300,
     poll: true,
@@ -15,4 +17,22 @@ module.exports = webpackMiddleware(webpack(require('../webpack.config.js')), {
     chunks: false,
     colors: true,
   },
-});
+};
+
+const enableHotReloading = (config) => {
+  config.plugins.push(
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin());
+
+  config.entry.unshift('webpack-hot-middleware/client');
+};
+
+const addWebpackMiddlewares = (app) => {
+  enableHotReloading(webpackConfig);
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleware(compiler, webpackDevOptions));
+  app.use(webpackHotMiddleware(compiler));
+};
+
+module.exports = addWebpackMiddlewares;

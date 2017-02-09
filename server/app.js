@@ -14,9 +14,9 @@ if (process.env.PRODUCTION) {
   logger.info(`Serving staticfiles from ${staticDir}`);
   app.use('/dist', express.static(staticDir));
 } else {
-  const webpackDevMiddleware = require('./webpack-dev-middleware'); // eslint-disable-line global-require
+  const addWebpackMiddlewares = require('./webpack-dev-middleware'); // eslint-disable-line global-require
   logger.info('Starting webpack hot-reloading client');
-  app.use(webpackDevMiddleware);
+  addWebpackMiddlewares(app);
 
   logger.info('Starting chokidar, watching server for changes');
   require('./chokidar.conf.js'); // eslint-disable-line global-require
