@@ -20,12 +20,21 @@ const webpackDevOptions = {
 };
 
 const enableHotReloading = (config) => {
+  // Enable HMR plugins
   config.plugins.push(
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin());
 
+  // Add webpack-hot-middleware to frontend
   config.entry.unshift('webpack-hot-middleware/client');
+
+  // Add React Hot Loader to js loader
+  config.module.loaders.forEach((loader) => {
+    if (loader.test.test('.js')) {
+      loader.loaders.unshift('react-hot-loader');
+    }
+  });
 };
 
 const addWebpackMiddlewares = (app) => {
