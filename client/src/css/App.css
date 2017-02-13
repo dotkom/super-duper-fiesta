@@ -19,11 +19,10 @@ button {
 
 .App-components {
   max-width: 100rem;
-  margin: 0 auto;
+  margin: 0 2rem;
 }
 
 .ActiveIssue-components {
-  padding: 0 2rem;
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #323A7F;
