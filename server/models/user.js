@@ -28,9 +28,9 @@ const AnonymousUser = mongoose.model('AnonymousUser', AnonymousUserSchema);
 
 function getQualifiedUsers(genfors, secret) {
   if (secret) {
-    return AnonymousUser.find({ genfors, permissions: permissionLevel.CAN_VOTE });
+    return AnonymousUser.find({ genfors, permissions: { $gt: permissionLevel.CAN_VOTE } });
   }
-  return User.find({ genfors, permissions: permissionLevel.CAN_VOTE });
+  return User.find({ genfors, permissions: { $gt: permissionLevel.CAN_VOTE } });
 }
 
 function getUserById(userId, anonymous) {
@@ -92,6 +92,18 @@ function setNote(user, targetUser, note) {
   });
 }
 
+function setGenfors(user, anonymousUser, genfors) {
+  return new Promise((resolve, reject) => {
+    canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
+      logger.debug('updating user');
+      User.findByIdAndUpdate(user, { genfors }).then(() => {
+        logger.debug('one done, one to go');
+        AnonymousUser.findByIdAndUpdate(anonymousUser, { genfors }).then(resolve).catch(reject);
+      }).catch(reject);
+    }).catch(reject);
+  });
+}
+
 function setCanVote(user, targetUser) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
@@ -108,4 +120,5 @@ module.exports = {
   getQualifiedUsers,
   setNote,
   setCanVote,
+  setGenfors,
 };

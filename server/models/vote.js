@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
-const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
+const permissionLevel = require('./permissions');
 
 const Schema = mongoose.Schema;
 
@@ -14,27 +14,51 @@ const VoteSchema = new Schema({
 const Vote = mongoose.model('Vote', VoteSchema);
 
 
-function getVotes(question, cb) {
+function getVotes(question) {
   if (!question.active || !question.secret) {
     return Vote.find({ question }).exec();
   }
   return null;
 }
 
-//TODO fix promise
-function addVote(_question, user, option) {
-  Question.findOne({ _id: _question }).then((err, question) => {
-    if (err || !question.active) return handleError(err || 'Not an active question');
+function haveIVoted(question, user, anonymousUser) {
+  return new Promise((resolve, reject) => {
+    Vote.find({ question, user }).exec().then((vote) => {
+      if (Object.keys(vote).length > 0) {
+        // It didn't fail so user has voted!
+        reject(); // !!!!!
+      } else {
+        Vote.find({ question, user: anonymousUser }).exec().then((_vote) => {
+          if (Object.keys(_vote).length > 0) {
+            // It didn't fail so user has voted!
+            reject(); // !!!!!
+          } else {
+            resolve();
+          }
+        }).catch();
+      }
+    }).catch();
+  }).catch();
+}
 
-    const vote = new Vote({
-      user,
-      question,
-      option,
-    });
-
-    vote.save();
-    updateQuestionCounter(question);
-    return null;
+function addVote(question, user, option, anonymousUser) {
+  return new Promise((resolve, reject) => {
+    if (!question.active) {
+      reject();
+      return;
+    }
+    canEdit(permissionLevel.CAN_VOTE, user, question.genfors).then(() => {
+      haveIVoted(question, user, anonymousUser).then(() => {
+        const vote = new Vote({
+          user,
+          question,
+          option,
+        });
+        vote.save().then(resolve).catch(reject);
+      }).catch(() => {
+        reject('Sorry, you have voted');
+      });
+    }).catch(reject);
   });
 }
 
