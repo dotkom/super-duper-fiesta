@@ -6,8 +6,10 @@
   "author": "",
   "license": "MIT",
   "scripts": {
+    "build": "webpack",
     "dev": "node server/app.js",
-    "lint": "eslint client/src/ server/"
+    "lint": "eslint client/src/ server/",
+    "start": "npm run dev"
   },
   "dependencies": {
     "array-shuffle": "^1.0.1",
