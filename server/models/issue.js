@@ -82,18 +82,17 @@ function addQuestion(issueData, closeCurrentIssue) {
           });
           endQuestion(_issue);
         }
+        // removed possible issues and proceeding to create a new one
         getQualifiedUsers(genfors, issueData.secret).then((users) => {
           const issue = Object.assign(issueData, {
-            genfors,
-            active: true,
-            deleted: false,
             qualifiedVoters: users.length,
             currentVotes: 0,
           });
+          logger.debug(Object.keys(issue));
 
           // @ToDo: Create alternatives, map it to issue obj, then create issue.
-          return new Question(issue).save().catch(reject).then(resolve);
-        });
+          return new Question(issue).save().then(resolve).catch(reject);
+        }).catch(reject);
         return null;
       });
     }).catch(reject);
