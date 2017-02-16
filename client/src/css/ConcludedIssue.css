@@ -11,12 +11,12 @@
   margin: 0;
   font-size: 1.2em;
   font-weight: normal;
-  background: rgba(255, 255, 255, 0.16);;
+  background: rgba(255, 255, 255, 0.08);
   padding: 1rem 2rem;
 }
 
 .ConcludedIssue--majority {
-  background: #12826c;
+  background: #127b67;
 }
 
 .ConcludedIssue-alternatives {
