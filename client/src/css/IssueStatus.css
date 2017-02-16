@@ -1,5 +1,5 @@
 .IssueStatus {
-  margin: 4rem 0 0 2rem;
+  flex-grow: 1;
   padding: 1rem 2rem;
   background-color: #f5f5f5;
 }
