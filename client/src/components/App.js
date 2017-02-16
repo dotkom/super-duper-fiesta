@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import LiveVoteCount from '../containers/LiveVoteCount';
+import IssueStatus from './IssueStatus';
 import VoteHandler from '../containers/VoteHandler';
 import ActiveIssue from '../containers/ActiveIssue';
 import Button from './Button';
@@ -18,7 +18,7 @@ const App = props => (
           <ActiveIssue />
           <VoteHandler />
         </div>
-        <LiveVoteCount />
+        <IssueStatus />
       </div>
       <ConcludedIssueListContainer />
     </div>
@@ -27,7 +27,7 @@ const App = props => (
 
 App.defaultProps = {
   title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
-}
+};
 
 App.propTypes = {
   title: PropTypes.string,
