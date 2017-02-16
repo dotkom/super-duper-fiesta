@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import '../css/VoteCounter.css';
 
-const VoteCounter = ({ userCount, voteCount }) => (
+const VoteCounter = ({ count, total, label }) => (
   <div className="VoteCounter">
     <div className="VoteCounter-label">
-      Stemmer ({voteCount}/{userCount})
+      { label } ({ count }/{ total })
     </div>
     <div className="VoteCounter-bar">
-      <div className="VoteCounter-bar-progress" style={{ width: `${(voteCount / userCount) * 100}%` }} />
+      <div className="VoteCounter-bar-progress" style={{ width: `${(count / total) * 100}%` }} />
     </div>
   </div>
 );
 
 VoteCounter.defaultProps = {
-  userCount: 0,
-  voteCount: 0,
+  total: 0,
+  count: 0,
 };
 
 VoteCounter.propTypes = {
-  userCount: React.PropTypes.number,
-  voteCount: React.PropTypes.number,
+  total: PropTypes.number,
+  count: PropTypes.number,
+  label: PropTypes.string.isRequired,
 };
 
 export default VoteCounter;
