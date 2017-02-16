@@ -22,35 +22,21 @@ class ConcludedIssue extends React.Component {
     super(props);
 
     this.state = {
-      visibleAlternatives: false,
       majority: ConcludedIssue.calculateMajority(
         props.alternatives,
         props.votes,
         props.voteDemand,
       ),
     };
-    this.handleClick = this.handleClick.bind(this);
   }
-
-
-  // CLicking the issue should show/hide the answers
-  handleClick() {
-    this.setState({
-      visibleAlternatives: !this.state.visibleAlternatives,
-    });
-  }
-
 
   render() {
-    const alternativesClass = classNames('ConcludedIssue-alternatives', {
-      'ConcludedIssue-alternatives--hidden': !this.state.visibleAlternatives,
-    });
     return (
       <div className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}>
-        <button className="ConcludedIssue-toggle" onClick={this.handleClick}>
+        <button className="ConcludedIssue-toggle">
           {this.props.text}
         </button>
-        <ul className={alternativesClass}>
+        <ul className="ConcludedIssue-alternatives">
           {this.props.alternatives.map(alternative => (
             <li
               key={alternative._id}
@@ -75,6 +61,7 @@ ConcludedIssue.propTypes = {
     text: PropTypes.string,
   })).isRequired,
   votes: PropTypes.arrayOf(PropTypes.shape({
+    alternative: PropTypes.number,
     hash: PropTypes.string,
     _id: PropTypes.string,
   })).isRequired,

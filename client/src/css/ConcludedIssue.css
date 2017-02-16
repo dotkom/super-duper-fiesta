@@ -1,19 +1,19 @@
 .ConcludedIssue {
-  margin: 1rem 0;
-  background: #90ccb4;
+  flex-grow: 1;
+  flex-basis: 20rem;
+  background: #12826c;
+  color: #ffffff;
+  margin: 1rem;
 }
 
-.ConcludedIssue:hover {
-  background: #74b39a;
-}
 
 .ConcludedIssue-toggle {
   display: block;
   width: 100%;
   text-align: left;
   border: none;
-  cursor: pointer;
-  background: transparent;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.16);;
   padding: 1rem 2rem;
 }
 
@@ -22,11 +22,11 @@
 }
 
 .ConcludedIssue-NotMajority {
-  background: #d69898;
+  background: #c0392b;
 }
 
-.ConcludedIssue-NotMajority:hover {
-  background: #ca7979;
+.ConcludedIssue-alternatives {
+  padding: 1rem 1rem 2rem 3rem;
 }
 
 .ConcludedIssue-alternatives--hidden {
