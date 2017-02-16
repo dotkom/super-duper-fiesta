@@ -1,8 +1,14 @@
 import React from 'react';
+import '../css/VoteCounter.css';
 
 const VoteCounter = ({ userCount, voteCount }) => (
   <div className="VoteCounter">
-    <p>Stemmer: <b>{voteCount}</b> av <b>{userCount}</b> </p>
+    <div className="VoteCounter-label">
+      Stemmer ({voteCount}/{userCount})
+    </div>
+    <div className="VoteCounter-bar">
+      <div className="VoteCounter-bar-progress" style={{ width: `${(voteCount / userCount) * 100}%` }} />
+    </div>
   </div>
 );
 
