@@ -1,28 +1,22 @@
 .ConcludedIssue {
   flex-grow: 1;
   flex-basis: 20rem;
-  background: #12826c;
+  background: #c0392b;
   color: #ffffff;
   margin: 1rem;
 }
 
 
-.ConcludedIssue-toggle {
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: none;
-  color: inherit;
+.ConcludedIssue-title {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: normal;
   background: rgba(255, 255, 255, 0.16);;
   padding: 1rem 2rem;
 }
 
-.ConcludedIssue-toggle:focus {
-  outline: none;
-}
-
-.ConcludedIssue-NotMajority {
-  background: #c0392b;
+.ConcludedIssue--majority {
+  background: #12826c;
 }
 
 .ConcludedIssue-alternatives {

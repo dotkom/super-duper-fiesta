@@ -32,10 +32,10 @@ class ConcludedIssue extends React.Component {
 
   render() {
     return (
-      <div className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}>
-        <button className="ConcludedIssue-toggle">
+      <div className={classNames('ConcludedIssue', { 'ConcludedIssue--majority': this.state.majority })}>
+        <h2 className="ConcludedIssue-title">
           {this.props.text}
-        </button>
+        </h2>
         <ul className="ConcludedIssue-alternatives">
           {this.props.alternatives.map(alternative => (
             <li
