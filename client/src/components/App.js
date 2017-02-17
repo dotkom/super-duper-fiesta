@@ -6,6 +6,7 @@ import Button from './Button';
 import Heading from './Heading';
 import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
 import '../css/App.css';
+import '../css/flaticon.css';
 
 const App = props => (
   <div className="App">
