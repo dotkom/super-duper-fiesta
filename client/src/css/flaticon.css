@@ -26,4 +26,21 @@
   font-family: Flaticon;
 }
 
-.flaticon-close:before { content: "\f100"; }
+.flaticon-bars:before { content: "\f100"; }
+.flaticon-check:before { content: "\f101"; }
+.flaticon-close:before { content: "\f102"; }
+.flaticon-cross:before { content: "\f103"; }
+.flaticon-edit:before { content: "\f104"; }
+.flaticon-exit:before { content: "\f105"; }
+.flaticon-flag:before { content: "\f106"; }
+.flaticon-interface:before { content: "\f107"; }
+.flaticon-lock:before { content: "\f108"; }
+.flaticon-plus:before { content: "\f109"; }
+.flaticon-refresh:before { content: "\f10a"; }
+.flaticon-relock:before { content: "\f10b"; }
+.flaticon-round-plus:before { content: "\f10c"; }
+.flaticon-round-refresh:before { content: "\f10d"; }
+.flaticon-square-plus:before { content: "\f10e"; }
+.flaticon-success:before { content: "\f10f"; }
+.flaticon-unlock:before { content: "\f110"; }
+.flaticon-users:before { content: "\f111"; }

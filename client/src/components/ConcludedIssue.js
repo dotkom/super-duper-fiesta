@@ -31,25 +31,38 @@ class ConcludedIssue extends React.Component {
   }
 
   render() {
+    const { majority } = this.state;
     return (
-      <div className={classNames('ConcludedIssue', { 'ConcludedIssue--majority': this.state.majority })}>
-        <h2 className="ConcludedIssue-title">
-          {this.props.text}
-        </h2>
-        <ul className="ConcludedIssue-alternatives">
-          {this.props.alternatives.map(alternative => (
-            <li
-              key={alternative._id}
-              className={classNames({
-                winner: this.props.votes.length && this.props.votes
-                  .filter(vote => vote.alternative === alternative._id)
-                  .length / this.props.votes.length >= this.props.voteDemand,
-              })}
-            >
-              {alternative.text}
-            </li>
-          ))}
-        </ul>
+      <div className={classNames('ConcludedIssue', { 'ConcludedIssue--majority': majority })}>
+        <div className="ConcludedIssue-top">
+          <h2 className="ConcludedIssue-title">
+            {this.props.text}
+          </h2>
+          <div
+            title={majority ? 'Flertall' : 'Ikke flertall'}
+            className={classNames('ConcludedIssue-status', {
+              'flaticon-success': majority,
+              'flaticon-close': !majority,
+            })}
+          />
+        </div>
+        <div className="ConcludedIssue-content">
+          <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
+          <ul className="ConcludedIssue-alternatives">
+            {this.props.alternatives.map(alternative => (
+              <li
+                key={alternative._id}
+                className={classNames({
+                  'ConcludedIssue-alternatives--winner': this.props.votes.length && this.props.votes
+                    .filter(vote => vote.alternative === alternative._id)
+                    .length / this.props.votes.length >= this.props.voteDemand,
+                })}
+              >
+                {alternative.text}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
