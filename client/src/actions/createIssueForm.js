@@ -25,6 +25,12 @@ export const addAlternative = text => ({
   text,
 });
 
+export const updateAlternativeText = (id, text) => ({
+  type: 'UPDATE_ALTERNATIVE_TEXT',
+  id,
+  text,
+});
+
 export const removeAlternative = id => ({
   type: 'REMOVE_ISSUE_ALTERNATIVE',
   id,

@@ -39,6 +39,16 @@ const issueAlternative = (state = {}, action) => {
         text: action.text,
       };
 
+    case 'UPDATE_ALTERNATIVE_TEXT':
+      if (state.id !== action.id) {
+        return state;
+      }
+
+      return {
+        ...state,
+        text: action.text,
+      };
+
     default:
       return state;
   }
@@ -54,6 +64,9 @@ export const createIssueAlternatives = (state = [], action) => {
 
     case 'REMOVE_ISSUE_ALTERNATIVE':
       return state.filter(issue => issue.id !== action.id);
+
+    case 'UPDATE_ALTERNATIVE_TEXT':
+      return state.map(issue => issueAlternative(issue, action));
 
     default:
       return state;

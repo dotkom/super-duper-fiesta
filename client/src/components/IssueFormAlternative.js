@@ -1,11 +1,23 @@
 import React, { PropTypes } from 'react';
+import Dialog from './Dialog';
+import Button from './Button';
 
 class IssueFormAlternative extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      showUpdateDialog: false,
+      dialogValue: '',
+      selectedAlternative: undefined,
+    };
+
     this.handleAddAlternative = this.handleAddAlternative.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.openUpdateDialog = this.openUpdateDialog.bind(this);
+    this.closeUpdateDialog = this.closeUpdateDialog.bind(this);
+    this.updateDialogValue = this.updateDialogValue.bind(this);
+    this.confirmUpdateDialog = this.confirmUpdateDialog.bind(this);
   }
 
   handleAddAlternative() {
@@ -18,6 +30,31 @@ class IssueFormAlternative extends React.Component {
     if (event.key === 'Enter') {
       this.handleAddAlternative();
     }
+  }
+
+  openUpdateDialog(id) {
+    this.setState({
+      showUpdateDialog: true,
+      dialogValue: this.props.alternatives[id].text,
+      selectedAlternative: id,
+    });
+  }
+
+  closeUpdateDialog() {
+    this.setState({
+      showUpdateDialog: false,
+    });
+  }
+
+  updateDialogValue(event) {
+    this.setState({
+      dialogValue: event.target.value,
+    });
+  }
+
+  confirmUpdateDialog() {
+    this.closeUpdateDialog();
+    this.props.updateAlternativeText(this.state.selectedAlternative, this.state.dialogValue);
   }
 
   render() {
@@ -38,11 +75,21 @@ class IssueFormAlternative extends React.Component {
               <button
                 onClick={() => removeAlternative(alternative.id)}
               >Fjern</button>
+              <button onClick={() => this.openUpdateDialog(alternative.id)}>Endre</button>
             </li>,
           )}
         </ul>
 
         <label className="IssueForm-radios">
+          <Dialog
+            visible={this.state.showUpdateDialog}
+            onClose={this.closeUpdateDialog}
+          >
+            <input type="text" onChange={this.updateDialogValue} value={this.state.dialogValue} />
+            <Button onClick={this.confirmUpdateDialog}>Bekreft</Button>
+            <Button onClick={this.closeUpdateDialog}>Avbryt</Button>
+          </Dialog>
+
           <input
             type="text"
             value={alternativeText}
@@ -60,6 +107,7 @@ class IssueFormAlternative extends React.Component {
 IssueFormAlternative.propTypes = {
   alternativeText: PropTypes.string.isRequired,
   alternativeUpdate: PropTypes.func.isRequired,
+  updateAlternativeText: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
   addAlternative: PropTypes.func.isRequired,
   removeAlternative: PropTypes.func.isRequired,

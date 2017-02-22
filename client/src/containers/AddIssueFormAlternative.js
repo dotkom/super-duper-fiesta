@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative } from '../actions/createIssueForm';
+import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative, updateAlternativeText } from '../actions/createIssueForm';
 import IssueFormAlternative from '../components/IssueFormAlternative';
 
 const mapStateToProps = state => ({
@@ -17,6 +17,10 @@ const mapDispatchToProps = dispatch => ({
   addAlternative: (text) => {
     dispatch(addAlternative(text));
     dispatch(clearAlternativeText());
+  },
+
+  updateAlternativeText: (id, text) => {
+    dispatch(updateAlternativeText(id, text));
   },
 
   removeAlternative: (id) => {
