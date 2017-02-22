@@ -84,6 +84,7 @@ class IssueFormAlternative extends React.Component {
           <Dialog
             visible={this.state.showUpdateDialog}
             onClose={this.closeUpdateDialog}
+            title="Endre alternativ"
           >
             <input type="text" onChange={this.updateDialogValue} value={this.state.dialogValue} />
             <Button onClick={this.confirmUpdateDialog}>Bekreft</Button>
