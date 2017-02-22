@@ -24,6 +24,13 @@ function canEdit(securityLevel, user, genfors) {
   return new Promise((resolve, reject) => {
     logger.debug('checking permissions');
     getActiveGenfors().then((active) => {
+      // If you are that super, just do it!
+      if (user.permissions >= permissionLevel.IS_SUPERUSER) {
+        logger.debug('Super user, go for it!');
+        resolve(true);
+        return;
+      }
+
       logger.silly('security check', {
         active: active.id,
         genfors: genfors.id,
@@ -34,7 +41,7 @@ function canEdit(securityLevel, user, genfors) {
       // Checking if current genfors == requested genfors == user genfors
       // But if user is superuser it is not nessecary
       if (active.id === genfors.id
-         && (genfors.id === user.genfors.toString() || user.permissions >= 3)
+         && (genfors.id === user.genfors.toString())
          && user.permissions >= securityLevel) {
         logger.debug('cleared security check');
         resolve(true);
@@ -53,10 +60,12 @@ function canEdit(securityLevel, user, genfors) {
 
 function endGenfors(genfors, user) {
   return new Promise((resolve, reject) => {
-    canEdit(permissionLevel.IS_MANAGER, user, genfors, () => {
-      Genfors.update({ _id: genfors }, { status: 'Closed' }).then(() => {
+    canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
+      logger.debug('Removing genfors');
+      Genfors.update({ _id: genfors.id }, { status: 'closed' }).then(() => {
+        logger.debug('Deleted genfors');
         resolve();
-      });
+      }).catch(reject);
     }).then(resolve).catch(reject);
   });
 }
@@ -72,7 +81,7 @@ function addGenfors(title, date, passwordHash, user, force) {
         if (!force) {
           return reject(new Error('Meeting in progress, you need to close it or force new'));
         }
-        endGenfors(meeting, user);
+        endGenfors(meeting, user).then(addGenfors(title, date, passwordHash, user, true));
       }
       // Add a new genfors
       const genfors = new Genfors({
