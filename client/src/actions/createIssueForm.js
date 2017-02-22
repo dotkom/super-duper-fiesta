@@ -36,7 +36,8 @@ export const removeAlternative = id => ({
   id,
 });
 
-export const toggleSetting = id => ({
-  type: 'TOGGLE_ISSUE_SETTING',
+export const updateSetting = (id, value) => ({
+  type: 'UPDATE_ISSUE_SETTING',
   id,
+  value,
 });

@@ -4,6 +4,7 @@ import '../css/IssueForm.css';
 import SelectResolutionTypeContainer from '../containers/SelectResolutionTypeContainer';
 import SelectQuestionTypeContainer from '../containers/SelectQuestionTypeContainer';
 import AddIssueFormAlternative from '../containers/AddIssueFormAlternative';
+import IssueFormSettings from '../containers/IssueFormSettings';
 
 const IssueForm = () => (
   <div className="IssueForm">
@@ -13,19 +14,9 @@ const IssueForm = () => (
       <p>Beskrivelse av saken</p>
     </label>
     <AddIssueFormAlternative />
+    <IssueFormSettings />
     <div className="IssueForm-label">Innstillinger</div>
-    <label className="IssueForm-checkbox">
-      <input type="checkbox" />
-      Hemmelig valg
-    </label>
-    <label className="IssueForm-checkbox">
-      <input type="checkbox" />
-      Vis kun vinner
-    </label>
-    <label className="IssueForm-checkbox">
-      <input type="checkbox" />
-      Tellende blanke stemmer
-    </label>
+    <IssueFormSettings />
     <label className="IssueForm-select">
       <div className="IssueForm-label">Flertallstype</div>
       <SelectResolutionTypeContainer />

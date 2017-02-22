@@ -75,8 +75,8 @@ export const createIssueAlternatives = (state = [], action) => {
 
 const issueSetting = (state = false, action) => {
   switch (action.type) {
-    case 'TOGGLE_ISSUE_SETTING':
-      return !state;
+    case 'UPDATE_ISSUE_SETTING':
+      return action.value;
 
     default:
       return state;
@@ -85,7 +85,7 @@ const issueSetting = (state = false, action) => {
 
 export const issueSettings = (state = {}, action) => {
   switch (action.type) {
-    case 'TOGGLE_ISSUE_SETTING':
+    case 'UPDATE_ISSUE_SETTING':
       return {
         ...state,
         [action.id]: issueSetting(state[action.id], action),
