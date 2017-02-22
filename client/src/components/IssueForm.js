@@ -14,7 +14,6 @@ const IssueForm = () => (
       <p>Beskrivelse av saken</p>
     </label>
     <AddIssueFormAlternative />
-    <IssueFormSettings />
     <div className="IssueForm-label">Innstillinger</div>
     <IssueFormSettings />
     <label className="IssueForm-select">
