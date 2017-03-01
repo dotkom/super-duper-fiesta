@@ -6,6 +6,11 @@ export const createIssue = (id, text, alternatives, voteDemand) => ({
   voteDemand,
 });
 
+export const closeIssue = data => ({
+  type: 'server/CLOSE_ISSUE',
+  data,
+});
+
 export const sendVote = (id, alternative, voter) => ({
   type: 'SEND_VOTE',
   id,

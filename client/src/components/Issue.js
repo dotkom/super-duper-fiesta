@@ -1,19 +1,19 @@
 import React from 'react';
 import '../css/Issue.css';
 
-const Issue = ({ issue }) => (
+const Issue = ({ text }) => (
   <div className="Issue">
     <h2 className="Issue-heading">Aktiv sak</h2>
-    <p>{issue}</p>
+    <p>{text}</p>
   </div>
 );
 
 Issue.defaultProps = {
-  issue: undefined,
+  text: '',
 };
 
 Issue.propTypes = {
-  issue: React.PropTypes.string,
+  text: React.PropTypes.string,
 };
 
 export default Issue;
