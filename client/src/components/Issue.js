@@ -3,7 +3,7 @@ import '../css/Issue.css';
 
 const Issue = ({ issue }) => (
   <div className="Issue">
-    <h3 className="Issue-heading">Aktiv sak</h3>
+    <h2 className="Issue-heading">Aktiv sak</h2>
     <p>{issue}</p>
   </div>
 );

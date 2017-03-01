@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
-import LiveVoteCount from '../containers/LiveVoteCount';
+import IssueStatus from './IssueStatus';
 import VoteHandler from '../containers/VoteHandler';
 import ActiveIssue from '../containers/ActiveIssue';
 import Button from './Button';
 import Heading from './Heading';
 import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
 import '../css/App.css';
+import '../css/flaticon.css';
 
 const App = props => (
   <div className="App">
@@ -18,7 +19,7 @@ const App = props => (
           <ActiveIssue />
           <VoteHandler />
         </div>
-        <LiveVoteCount />
+        <IssueStatus />
       </div>
       <ConcludedIssueListContainer />
     </div>
@@ -27,7 +28,7 @@ const App = props => (
 
 App.defaultProps = {
   title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
-}
+};
 
 App.propTypes = {
   title: PropTypes.string,

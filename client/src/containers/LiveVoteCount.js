@@ -1,5 +1,21 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import VoteCounter from '../components/VoteCounter';
+
+
+const LiveVoteCount = ({ voteCount, userCount }) => (
+  <div>
+    <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
+    <VoteCounter label="Alternativ 1" count={3} total={30} />
+    <VoteCounter label="Alternativ 2" count={18} total={30} />
+    <VoteCounter label="Alternativ 3" count={9} total={30} />
+  </div>
+);
+
+LiveVoteCount.propTypes = {
+  voteCount: VoteCounter.propTypes.count.isRequired,
+  userCount: VoteCounter.propTypes.total.isRequired,
+};
 
 const mapStateToProps = state => ({
   // The number of votes on the current issue.
@@ -10,4 +26,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-)(VoteCounter);
+)(LiveVoteCount);

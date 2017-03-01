@@ -23,6 +23,10 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader?sourceMap',
       },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
+        loader: 'url-loader?limit=10000',
+      },
     ],
   },
   plugins: [

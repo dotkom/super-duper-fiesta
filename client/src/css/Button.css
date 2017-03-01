@@ -15,7 +15,7 @@
 }
 
 .Button:disabled {
-  background: lightgray;
+  background: #71727d;
   color: white;
   cursor: not-allowed
 }

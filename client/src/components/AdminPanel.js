@@ -3,39 +3,59 @@ import { Link } from 'react-router';
 import Button from './Button';
 import Heading from './Heading';
 import '../css/AdminPanel.css';
-
-import createIssue from '../actions/adminButtons';
+import Dialog from './Dialog';
 
 class AdminPanel extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      showRegistrationDialog: false,
       openRegistration: false,
     };
 
-    this.userAdministration = this.userAdministration.bind(this);
     this.endGAM = this.endGAM.bind(this);
-  }
-
-  userAdministration() {
-    // This should take you to the user administration
+    this.closeRegistrationDialog = this.closeRegistrationDialog.bind(this);
+    this.openRegistrationDialog = this.openRegistrationDialog.bind(this);
+    this.confirmRegistrationDialog = this.confirmRegistrationDialog.bind(this);
   }
 
   endGAM() {
     // This should close the general annual meeting.
   }
 
+  openRegistrationDialog() {
+    this.setState({
+      showRegistrationDialog: true,
+    });
+  }
+
+  closeRegistrationDialog() {
+    this.setState({
+      showRegistrationDialog: false,
+    });
+  }
+
+  confirmRegistrationDialog() {
+    this.closeRegistrationDialog();
+    this.props.toggleRegistration();
+  }
+
   render() {
-    const { registrationEnabled, toggleRegistration } = this.props;
+    const { registrationEnabled } = this.props;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
     return (
       <div className="AdminPanel">
+        <Dialog visible={this.state.showRegistrationDialog} onClose={this.closeRegistrationDialog} title={registrationText}>
+          <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
+          <Button onClick={this.confirmRegistrationDialog}>Bekreft</Button>
+          <Button onClick={this.closeRegistrationDialog}>Avbryt</Button>
+        </Dialog>
         <Heading link="/admin/" title="Generalforsamling adminpanel">
           <Link className="Button" to="/admin/question">Ny sak</Link>
-          <Button onClick={toggleRegistration}>{registrationText}</Button>
+          <Button onClick={this.openRegistrationDialog}>{registrationText}</Button>
           <Link to="/admin/users"><Button onClick={this.userAdministration}>Brukeradmin</Button></Link>
           <Button onClick={this.endGAM}>Avslutt</Button>
         </Heading>
