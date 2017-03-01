@@ -22,48 +22,47 @@ class ConcludedIssue extends React.Component {
     super(props);
 
     this.state = {
-      visibleAlternatives: false,
       majority: ConcludedIssue.calculateMajority(
         props.alternatives,
         props.votes,
         props.voteDemand,
       ),
     };
-    this.handleClick = this.handleClick.bind(this);
   }
-
-
-  // CLicking the issue should show/hide the answers
-  handleClick() {
-    this.setState({
-      visibleAlternatives: !this.state.visibleAlternatives,
-    });
-  }
-
 
   render() {
-    const alternativesClass = classNames('ConcludedIssue-alternatives', {
-      'ConcludedIssue-alternatives--hidden': !this.state.visibleAlternatives,
-    });
+    const { majority } = this.state;
     return (
-      <div className={classNames('ConcludedIssue', { 'ConcludedIssue-NotMajority': !this.state.majority })}>
-        <button className="ConcludedIssue-toggle" onClick={this.handleClick}>
-          {this.props.text}
-        </button>
-        <ul className={alternativesClass}>
-          {this.props.alternatives.map(alternative => (
-            <li
-              key={alternative._id}
-              className={classNames({
-                winner: this.props.votes.length && this.props.votes
-                  .filter(vote => vote.alternative === alternative._id)
-                  .length / this.props.votes.length >= this.props.voteDemand,
-              })}
-            >
-              {alternative.text}
-            </li>
-          ))}
-        </ul>
+      <div className={classNames('ConcludedIssue', { 'ConcludedIssue--majority': majority })}>
+        <div className="ConcludedIssue-top">
+          <h2 className="ConcludedIssue-title">
+            {this.props.text}
+          </h2>
+          <div
+            title={majority ? 'Flertall' : 'Ikke flertall'}
+            className={classNames('ConcludedIssue-status', {
+              'flaticon-success': majority,
+              'flaticon-close': !majority,
+            })}
+          />
+        </div>
+        <div className="ConcludedIssue-content">
+          <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
+          <ul className="ConcludedIssue-alternatives">
+            {this.props.alternatives.map(alternative => (
+              <li
+                key={alternative._id}
+                className={classNames({
+                  'ConcludedIssue-alternatives--winner': this.props.votes.length && this.props.votes
+                    .filter(vote => vote.alternative === alternative._id)
+                    .length / this.props.votes.length >= this.props.voteDemand,
+                })}
+              >
+                {alternative.text}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -75,6 +74,7 @@ ConcludedIssue.propTypes = {
     text: PropTypes.string,
   })).isRequired,
   votes: PropTypes.arrayOf(PropTypes.shape({
+    alternative: PropTypes.number,
     hash: PropTypes.string,
     _id: PropTypes.string,
   })).isRequired,

@@ -1,5 +1,4 @@
 .Issue {
-  margin-top: 4rem;
   background: whitesmoke;
   padding: 2rem;
   border: 1px solid #f3f3f3;
@@ -11,7 +10,8 @@
 }
 
 .Issue-heading {
+  font-size: 1.2em;
   font-weight: normal;
   margin: 0;
-  color: #7b7979;
+  color: #717171;
 }

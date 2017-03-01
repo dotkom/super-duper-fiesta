@@ -20,15 +20,20 @@ button {
 .App-components {
   max-width: 100rem;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .ActiveIssue-components {
-  padding: 0 2rem;
   display: flex;
   flex-wrap: wrap;
-  border-bottom: 1px solid #323A7F;
+  margin: 0 -1rem;
+}
+
+.ActiveIssue-components > * {
+  margin: 4rem 1rem 0 1rem;
 }
 
 .ActiveIssue-Vote-wrapper {
-  flex-grow: 2;
+  flex-grow: 4;
+  flex-basis: 30rem;
 }

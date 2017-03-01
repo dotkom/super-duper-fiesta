@@ -1,43 +1,29 @@
 import React from 'react';
 import Button from './Button';
 import '../css/IssueForm.css';
+import SelectResolutionTypeContainer from '../containers/SelectResolutionTypeContainer';
+import SelectQuestionTypeContainer from '../containers/SelectQuestionTypeContainer';
+import AddIssueFormAlternative from '../containers/AddIssueFormAlternative';
+import IssueFormSettings from '../containers/IssueFormSettings';
 
 const IssueForm = () => (
   <div className="IssueForm">
-    <form>
-      <label className="IssueForm-textarea">
-        <div className="IssueForm-label">Beskrivelse</div>
-        <textarea />
-        <p>Beskrivelse av saken</p>
-      </label>
-      <div className="IssueForm-label">Innstillinger</div>
-      <label className="IssueForm-checkbox">
-        <input type="checkbox" />
-        Hemmelig valg
-      </label>
-      <label className="IssueForm-checkbox">
-        <input type="checkbox" />
-        Vis kun vinner
-      </label>
-      <label className="IssueForm-checkbox">
-        <input type="checkbox" />
-        Tellende blanke stemmer
-      </label>
-      <label className="IssueForm-select">
-        <div className="IssueForm-label">Flertallstype</div>
-        <select>
-          <option>Alminnelig flertall (1/2)</option>
-          <option>Kvalifisert flertall (2/3)</option>
-        </select>
-      </label>
-      <label className="IssueForm-select">
-        <div className="IssueForm-label">Spørsmålstype</div>
-        <select>
-          <option>Ja/Nei</option>
-          <option>Flervalg</option>
-        </select>
-      </label>
-    </form>
+    <label className="IssueForm-textarea">
+      <div className="IssueForm-label">Beskrivelse</div>
+      <textarea />
+      <p>Beskrivelse av saken</p>
+    </label>
+    <AddIssueFormAlternative />
+    <div className="IssueForm-label">Innstillinger</div>
+    <IssueFormSettings />
+    <label className="IssueForm-select">
+      <div className="IssueForm-label">Flertallstype</div>
+      <SelectResolutionTypeContainer />
+    </label>
+    <label className="IssueForm-select">
+      <div className="IssueForm-label">Spørsmålstype</div>
+      <SelectQuestionTypeContainer />
+    </label>
     <Button>Lagre sak</Button>
   </div>
 );

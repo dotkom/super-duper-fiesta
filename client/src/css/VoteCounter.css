@@ -1,0 +1,17 @@
+.VoteCounter {
+  margin: 1.5rem 0;
+  font-weight: bold;
+  color: #717171;
+}
+
+.VoteCounter-bar {
+  margin-top: 0.5rem;
+  background: #e0e2ef;
+  height: 1.5rem;
+  width: 100%;
+}
+
+.VoteCounter-bar-progress {
+  background: #6b71a5;
+  height: 100%;
+}
