@@ -1,11 +1,11 @@
 import React from 'react';
-import ActiveIssue from '../containers/ActiveIssue';
+import AdminIssueContainer from '../containers/AdminIssueContainer';
 import AdminPanelAlternativesContainer from '../containers/AdminPanelAlternativesContainer';
 
 
 const AdminHome = () => (
   <div>
-    <ActiveIssue className="fefef" />
+    <AdminIssueContainer className="fefef" />
     <AdminPanelAlternativesContainer />
   </div>
 );
