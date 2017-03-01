@@ -47,7 +47,7 @@ document.getElementById('btn-close').addEventListener('click', (e) => {
   console.log('emitting issue close thingy');
 
   if (activeIssue) {
-    emit('issue', activeIssue, { action: 'close' });
+    emit('issue', activeIssue, { type: 'close' });
   } else {
     console.error('no active question found');
   }
@@ -74,7 +74,7 @@ socket.on('issue', (data) => {
     addToLog('Q', issueDescription);
   }
 
-  if (data.action === 'close') {
+  if (data.type === 'close') {
     activeIssue = null;
     document.getElementById('issue').innerHTML = 'Ingen aktiv sak for øyeblikket.';
     return;
