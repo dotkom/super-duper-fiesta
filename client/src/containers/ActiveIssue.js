@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import Issue from '../components/Issue';
+import { getIssue } from '../selectors/issues';
 
 const mapStateToProps = state => ({
-  issue: state.issues.length ? // Issues may not be added yet.
-    state.issues[state.issues.length - 1].text :
-    undefined,
+  issue: getIssue(state),
 });
 
 export default connect(
