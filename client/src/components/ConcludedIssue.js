@@ -74,7 +74,7 @@ ConcludedIssue.propTypes = {
     text: PropTypes.string,
   })).isRequired,
   votes: PropTypes.arrayOf(PropTypes.shape({
-    alternative: PropTypes.number,
+    alternative: PropTypes.string,
     hash: PropTypes.string,
     _id: PropTypes.string,
   })).isRequired,

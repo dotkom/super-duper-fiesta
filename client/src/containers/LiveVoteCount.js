@@ -1,29 +1,35 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import VoteCounter from '../components/VoteCounter';
+import VoteStatus from '../components/VoteStatus';
+import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
 
+const mapStateToProps = (state) => {
+  const currentIssue = state.issues[state.issues.length - 1];
 
-const LiveVoteCount = ({ voteCount, userCount }) => (
-  <div>
-    <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
-    <VoteCounter label="Alternativ 1" count={3} total={30} />
-    <VoteCounter label="Alternativ 2" count={18} total={30} />
-    <VoteCounter label="Alternativ 3" count={9} total={30} />
-  </div>
-);
-
-LiveVoteCount.propTypes = {
-  voteCount: VoteCounter.propTypes.count.isRequired,
-  userCount: VoteCounter.propTypes.total.isRequired,
-};
-
-const mapStateToProps = state => ({
   // The number of votes on the current issue.
-  voteCount: state.issues.length ? state.issues[state.issues.length - 1].votes.length : 0,
+  const voteCount = currentIssue ? currentIssue.votes.length : 0;
+
   // The number of users eligible for voting on the current issue.
-  userCount: state.users.filter(u => u.canVote).length,
-});
+  const userCount = state.users.filter(u => u.canVote).length;
+
+  const votePercentages = {};
+
+  // Alternatives are shuffled as an attempt to prevent peeking over shoulders
+  // to figure out what another person has voted for. This scramble needs
+  // to be syncronized between LiveVoteCount and VoteHandler, so we take
+  // advantage of the memoizing provided by reselect. This keeps the
+  // scrambles in sync and avoids rescrambling unless the
+  // available alternatives are changed.
+  const alternatives = currentIssue && getShuffledAlternatives(state);
+
+  if (currentIssue) {
+    currentIssue.votes.forEach((issue) => {
+      votePercentages[issue.alternative] = (votePercentages[issue.alternative] || 0) + 1;
+    });
+  }
+
+  return { voteCount, userCount, alternatives, votePercentages };
+};
 
 export default connect(
   mapStateToProps,
-)(LiveVoteCount);
+)(VoteStatus);

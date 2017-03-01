@@ -21,7 +21,7 @@ Alternatives.defaultProps = {
 Alternatives.propTypes = {
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)).isRequired,
   handleChange: PropTypes.func,
-  selectedVote: PropTypes.number,
+  selectedVote: PropTypes.string,
 };
 
 export default Alternatives;

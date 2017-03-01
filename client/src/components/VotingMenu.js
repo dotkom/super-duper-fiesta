@@ -17,7 +17,7 @@ class VotingMenu extends React.Component {
 
   handleChange(event) {
     this.setState({
-      selectedVote: parseInt(event.currentTarget.value, 10),
+      selectedVote: event.currentTarget.value,
     });
   }
 
@@ -67,7 +67,7 @@ VotingMenu.propTypes = {
   _id: React.PropTypes.string,
 
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
-    alternative: React.PropTypes.number,
+    alternative: React.PropTypes.string,
     _id: React.PropTypes.string,
   })).isRequired,
 
