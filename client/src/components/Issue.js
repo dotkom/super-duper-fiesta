@@ -4,7 +4,7 @@ import '../css/Issue.css';
 const Issue = ({ issue }) => (
   <div className="Issue">
     <h3 className="Issue-heading">Aktiv sak</h3>
-    <p>{issue.text}</p>
+    <p>{issue}</p>
   </div>
 );
 

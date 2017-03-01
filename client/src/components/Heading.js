@@ -5,7 +5,7 @@ import '../css/Heading.css';
 const Heading = ({ link, title, children }) => (
   <div className="Heading">
     <div className="Heading-content">
-      <Link to={link}><h2 className="Heading-header">{title}</h2></Link>
+      <Link to={link}><h1 className="Heading-header">{title}</h1></Link>
       <div className="Heading-components">
         {children}
       </div>
