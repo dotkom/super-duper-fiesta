@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from './Button';
 import ActiveIssue from '../containers/ActiveIssue';
-import '../css/Issue.css';
 
 const IssueAdmin = ({ issue, closeIssue }) => (
   <div>
