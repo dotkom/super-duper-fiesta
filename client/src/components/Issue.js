@@ -3,8 +3,8 @@ import '../css/Issue.css';
 
 const Issue = ({ issue }) => (
   <div className="Issue">
-    <h3 className="Issue-heading">Aktiv sak</h3>
-    <p>{issue}</p>
+    <h2 className="Issue-heading">Aktiv sak</h2>
+    <p>{issue.text}</p>
   </div>
 );
 
