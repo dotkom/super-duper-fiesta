@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   votes: state.issues.length ? state.issues[state.issues.length - 1].votes : [],
 
   // The ID, or undefined, if there is no current issue.
-  id: state.issues.length && state.issues[state.issues.length - 1].id,
+  id: state.issues.length ? state.issues[state.issues.length - 1].id : '',
 
   voterKey: state.voterKey,
 });
