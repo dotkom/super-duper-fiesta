@@ -1,8 +1,2 @@
-export const toggleRegistration = () => ({
-  type: 'TOGGLE_REGISTRATION',
-});
-
-export const createIssue = data => ({
-  type: 'server/ADMIN_CREATE_ISSUE',
-  data,
-});
+export const ADMIN_CREATE_ISSUE = 'server/ADMIN_CREATE_ISSUE';
+export const TOGGLE_REGISTRATION = 'TOGGLE_REGISTRATION';

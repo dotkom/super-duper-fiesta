@@ -1,10 +1,2 @@
-export const toggleCanVote = id => ({
-  type: 'TOGGLE_CAN_VOTE',
-  id,
-});
-
-export const addUser = (id, name) => ({
-  type: 'ADD_USER',
-  id,
-  name,
-});
+export const ADD_USER = 'ADD_USER';
+export const TOGGLE_CAN_VOTE = 'TOGGLE_CAN_VOTE';

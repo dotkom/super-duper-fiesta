@@ -1,43 +1,8 @@
-export const setResolutionType = resolutionType => ({
-  type: 'SET_RESOLUTION_TYPE',
-  resolutionType,
-});
-
-export const setQuestionType = questionType => ({
-  type: 'SET_QUESTION_TYPE',
-  questionType,
-});
-
-export const setAlternativeText = text => ({
-  type: 'SET_ALTERNATIVE_TEXT',
-  text,
-});
-
-export const clearAlternativeText = () => ({
-  type: 'CLEAR_ALTERNATIVE_TEXT',
-});
-
-let alternativeCount = 0;
-
-export const addAlternative = text => ({
-  type: 'ADD_ISSUE_ALTERNATIVE',
-  id: alternativeCount++,
-  text,
-});
-
-export const updateAlternativeText = (id, text) => ({
-  type: 'UPDATE_ALTERNATIVE_TEXT',
-  id,
-  text,
-});
-
-export const removeAlternative = id => ({
-  type: 'REMOVE_ISSUE_ALTERNATIVE',
-  id,
-});
-
-export const updateSetting = (id, value) => ({
-  type: 'UPDATE_ISSUE_SETTING',
-  id,
-  value,
-});
+export const ADD_ISSUE_ALTERNATIVE = 'ADD_ISSUE_ALTERNATIVE';
+export const CLEAR_ALTERNATIVE_TEXT = 'CLEAR_ALTERNATIVE_TEXT';
+export const REMOVE_ISSUE_ALTERNATIVE = 'REMOVE_ISSUE_ALTERNATIVE';
+export const SET_ALTERNATIVE_TEXT = 'SET_ALTERNATIVE_TEXT';
+export const SET_QUESTION_TYPE = 'SET_QUESTION_TYPE';
+export const SET_RESOLUTION_TYPE = 'SET_RESOLUTION_TYPE';
+export const UPDATE_ALTERNATIVE_TEXT = 'UPDATE_ALTERNATIVE_TEXT';
+export const UPDATE_ISSUE_SETTING = 'UPDATE_ISSUE_SETTING';

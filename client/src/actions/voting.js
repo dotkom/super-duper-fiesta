@@ -1,7 +1,2 @@
-export const disableVoting = () => ({
-  type: 'DISABLE_VOTING',
-});
-
-export const enableVoting = () => ({
-  type: 'ENABLE_VOTING',
-});
+export const DISABLE_VOTING = 'DISABLE_VOTING';
+export const ENABLE_VOTING = 'ENABLE_VOTING';

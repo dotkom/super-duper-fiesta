@@ -1,4 +1,1 @@
-export default filter => ({
-  type: 'SET_USER_FILTER',
-  filter,
-});
+export const SET_USER_FILTER = 'SET_USER_FILTER';
