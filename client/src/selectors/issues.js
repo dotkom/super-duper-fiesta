@@ -1,5 +1,5 @@
 export const getIssue = state =>
    // There might not be any issues yet.
-  state.issues.length && state.issues[state.issues.length - 1];
+  state.issues.filter(issue => issue.active) ? state.issues.filter(issue => issue.active)[0] : {};
 
 export const getIssueText = state => getIssue(state) ? getIssue(state).text : 'Ingen aktiv sak for øyeblikket.';
