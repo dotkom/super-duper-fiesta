@@ -25,7 +25,7 @@ class VotingMenu extends React.Component {
     // Voting is only allowed when you have a key.
     if (this.props.voterKey) {
       this.props.handleVote(
-        this.props.id,
+        this.props.issueId,
         this.state.selectedVote,
         this.props.voterKey,
       );
@@ -58,13 +58,13 @@ class VotingMenu extends React.Component {
 VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
-  id: '',
+  issueId: '',
 };
 
 VotingMenu.propTypes = {
   alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
-  id: React.PropTypes.string,
+  issueId: React.PropTypes.string,
 
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
     alternative: React.PropTypes.string,

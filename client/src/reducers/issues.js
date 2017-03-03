@@ -22,13 +22,11 @@ const issue = (state = {}, action, currentIssue) => {
     case SEND_VOTE:
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
-      if (state.id !== currentIssue || state.id !== action.id) {
+      if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
 
-      return {
-        ...state,
-
+      return Object.assign({}, state, {
         votes: [
           ...state.votes,
 
@@ -37,16 +35,14 @@ const issue = (state = {}, action, currentIssue) => {
             voter: action.voter,
           },
         ],
-      };
+      });
 
     case RECEIVE_VOTE:
-      if (state.id !== currentIssue || state.id !== action.id) {
+      if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
 
-      return {
-        ...state,
-
+      return Object.assign({}, state, {
         votes: [
           ...state.votes,
 
@@ -55,7 +51,7 @@ const issue = (state = {}, action, currentIssue) => {
             voter: action.voter,
           },
         ],
-      };
+      });
 
     default:
       return state;
@@ -112,28 +108,22 @@ const defaultIssues = [{
   isActive: false,
 }];
 
-const issues = (state = [], action) => {
+const issues = (state = {}, action) => {
   switch (action.type) {
-    case CLOSE_ISSUE: {
-      const currentIssues = state.map((currentIssue) => {
-        if (currentIssue.id === action.data.issue) {
-          return Object.assign(currentIssue, { active: false });
-        }
-        return currentIssue;
+    case CLOSE_ISSUE:
+    case OPEN_ISSUE: {
+      const issueId = action.data._id; // eslint-disable-line no-underscore-dangle
+      return Object.assign({}, state, {
+        [issueId]: issue(undefined, action),
       });
-      return currentIssues;
     }
-    case OPEN_ISSUE:
-      return [
-        ...state,
-        issue(undefined, action),
-      ];
-
-    case SEND_VOTE:
-      return state.map(i => issue(i, action, state[state.length - 1].id));
-
     case RECEIVE_VOTE:
-      return state.map(i => issue(i, action, state[state.length - 1].id));
+    case SEND_VOTE: {
+      const { issueId } = action;
+      return Object.assign({}, state, {
+        [issueId]: issue(state[issueId], action, issueId),
+      });
+    }
 
     default:
       return state;
