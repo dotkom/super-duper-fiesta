@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import UserList from '../components/UserList';
-import { toggleCanVote } from '../actions/users';
+import { toggleCanVote } from '../actionCreators/users';
 
 const mapStateToProps = (state) => {
   // Use Fuse for fuzzy-search.

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SelectResolutionType from '../components/SelectResolutionType';
-import { setResolutionType } from '../actions/createIssueForm';
+import { setResolutionType } from '../actionCreators/createIssueForm';
 
 const mapStateToProps = state => ({
   resolutionType: state.resolutionType,

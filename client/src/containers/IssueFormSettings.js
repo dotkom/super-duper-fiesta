@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateSetting } from '../actions/createIssueForm.js';
+import { updateSetting } from '../actionCreators/createIssueForm.js';
 import IssueFormCheckboxes from '../components/IssueFormCheckboxes';
 
 const mapStateToProps = state => ({

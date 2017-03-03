@@ -1,6 +1,8 @@
+import { OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actions/issues';
+
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
-    case 'OPEN_ISSUE': {
+    case OPEN_ISSUE: {
       return {
         id: action.data._id, // eslint-disable-line no-underscore-dangle
         text: action.data.description,
@@ -16,7 +18,7 @@ const issue = (state = {}, action, currentIssue) => {
       };
     }
 
-    case 'SEND_VOTE':
+    case SEND_VOTE:
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
       if (state.id !== currentIssue || state.id !== action.id) {
@@ -36,7 +38,7 @@ const issue = (state = {}, action, currentIssue) => {
         ],
       };
 
-    case 'RECEIVE_VOTE':
+    case RECEIVE_VOTE:
       if (state.id !== currentIssue || state.id !== action.id) {
         return state;
       }
@@ -111,16 +113,16 @@ const defaultIssues = [{
 
 const issues = (state = [], action) => {
   switch (action.type) {
-    case 'OPEN_ISSUE':
+    case OPEN_ISSUE:
       return [
         ...state,
         issue(undefined, action),
       ];
 
-    case 'SEND_VOTE':
+    case SEND_VOTE:
       return state.map(i => issue(i, action, state[state.length - 1].id));
 
-    case 'RECEIVE_VOTE':
+    case RECEIVE_VOTE:
       return state.map(i => issue(i, action, state[state.length - 1].id));
 
     default:

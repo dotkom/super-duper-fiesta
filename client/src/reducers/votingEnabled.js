@@ -1,9 +1,11 @@
+import { DISABLE_VOTING, ENABLE_VOTING } from '../actions/voting';
+
 const votingEnabled = (state = false, action) => {
   switch (action.type) {
-    case 'ENABLE_VOTING':
+    case ENABLE_VOTING:
       return true;
 
-    case 'DISABLE_VOTING':
+    case DISABLE_VOTING:
       return false;
 
     default:

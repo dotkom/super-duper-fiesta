@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import VotingMenu from '../components/VotingMenu';
-import { sendVote } from '../actions/issues';
+import { sendVote } from '../actionCreators/issues';
 import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
 
 const mapStateToProps = state => ({
