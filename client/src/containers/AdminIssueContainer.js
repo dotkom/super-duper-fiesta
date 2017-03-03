@@ -7,9 +7,9 @@ const mapStateToProps = state => ({
   issue: getIssue(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  closeIssue: (issue) => {
-    dispatch(closeIssue({ data: issue }));
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  closeIssue: () => {
+    dispatch(closeIssue({ data: ownProps.issue }));
   },
 });
 

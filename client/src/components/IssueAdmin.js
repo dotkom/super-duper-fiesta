@@ -2,25 +2,14 @@ import React from 'react';
 import Button from './Button';
 import ActiveIssue from '../containers/ActiveIssue';
 
-const IssueAdmin = ({ issue, closeIssue }) => (
+const IssueAdmin = ({ closeIssue }) => (
   <div>
     <ActiveIssue />
-    <Button onClick={() => closeIssue(issue)}>Avslutt sak</Button>
+    <Button onClick={closeIssue}>Avslutt sak</Button>
   </div>
 );
 
-IssueAdmin.defaultProps = {
-  issue: {
-    _id: '-1',
-    text: 'Ingen aktiv sak.',
-  },
-};
-
 IssueAdmin.propTypes = {
-  issue: React.PropTypes.shape({
-    _id: React.PropTypes.string,
-    name: React.PropTypes.string,
-  }),
   closeIssue: React.PropTypes.func.isRequired,
 };
 
