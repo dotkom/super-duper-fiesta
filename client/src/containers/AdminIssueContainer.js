@@ -14,7 +14,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...ownProps,
     closeIssue: () => {
-      dispatch(closeIssue({ data: stateProps.issue }));
+      dispatch(closeIssue({ id: stateProps.issue.id }));
     },
   };
 };

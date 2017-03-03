@@ -33,18 +33,18 @@ const issue = (socket) => {
           });
           return null;
         }
-        logger.info('Closing issue.', { issue: payload._id, user: data.user });
+        logger.info('Closing issue.', { issue: payload.id, user: data.user });
         getUserById(data.user).then((user) => {
           logger.debug('Fetched user profile', { user: user.name });
-          logger.debug('endq', { t: typeof endQuestion, endQuestion })
-          endQuestion(payload._id, user)
+          logger.debug('endq', { t: typeof endQuestion, endQuestion });
+          endQuestion(payload.id, user)
           .catch((err) => {
             logger.error('closing issue failed', { err });
             emit(socket, 'issue', {}, {
               error: 'Closing issue failed',
             });
           }).then((d) => {
-            logger.info('closed question', { question: payload._id, response: d._id });
+            logger.info('closed question', { question: payload.id, response: d._id });
             broadcast(socket, 'issue', payload, { action: 'close' });
           });
         }).catch((err) => {
