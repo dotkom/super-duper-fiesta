@@ -8,11 +8,10 @@ const getUserById = require('../models/user').getUserById;
 
 const issue = (socket) => {
   socket.on('action', (data) => {
+    const payload = data.data;
     logger.debug('issue payload', { payload, action: data.type });
-    let payload;
     switch (data.type) {
       case 'server/ADMIN_CREATE_ISSUE':
-        payload = data.data;
         addQuestion(payload)
         .then((question) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
@@ -26,10 +25,9 @@ const issue = (socket) => {
           return null;
         });
         return null;
-        break
-      case 'close':
-        payload = data.data;
+      case 'server/CLOSE_ISSUE':
         if (!data.user) {
+          logger.debug('Someone tried to close an issue without passing user object.');
           emit(socket, 'issue', {}, {
             error: 'User id required to be able to close an ongoing issue.',
           });
@@ -58,8 +56,10 @@ const issue = (socket) => {
           return null;
         });
         return null;
-        break
-      }
+      default:
+        logger.warn('Hit default case for issue.');
+        break;
+    }
     return null;
   });
 };
