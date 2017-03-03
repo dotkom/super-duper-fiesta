@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import IssueAdmin from '../components/IssueAdmin';
-import { closeIssue } from '../actions/issues';
+import { closeIssue } from '../actionCreators/issues';
 import { getIssue } from '../selectors/issues';
 
 const mapStateToProps = state => ({

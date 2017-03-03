@@ -1,6 +1,8 @@
+import { ADD_USER, TOGGLE_CAN_VOTE } from '../actionTypes/users';
+
 const user = (state = {}, action) => {
   switch (action.type) {
-    case 'TOGGLE_CAN_VOTE':
+    case TOGGLE_CAN_VOTE:
       if (state.id !== action.id) {
         return state;
       }
@@ -10,7 +12,7 @@ const user = (state = {}, action) => {
         canVote: !state.canVote,
       };
 
-    case 'ADD_USER':
+    case ADD_USER:
       return {
         id: action.id,
         name: action.name,
@@ -38,10 +40,10 @@ const defaultUsers = [
 
 const users = (state = defaultUsers, action) => {
   switch (action.type) {
-    case 'TOGGLE_CAN_VOTE':
+    case TOGGLE_CAN_VOTE:
       return state.map(u => user(u, action));
 
-    case 'ADD_USER':
+    case ADD_USER:
       return [...state, user(undefined, action)];
 
     default:

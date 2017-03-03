@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative, updateAlternativeText } from '../actions/createIssueForm';
+import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative, updateAlternativeText } from '../actionCreators/createIssueForm';
 import IssueFormAlternative from '../components/IssueFormAlternative';
 
 const mapStateToProps = state => ({

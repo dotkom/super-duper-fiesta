@@ -1,0 +1,2 @@
+export const DISABLE_VOTING = 'DISABLE_VOTING';
+export const ENABLE_VOTING = 'ENABLE_VOTING';
