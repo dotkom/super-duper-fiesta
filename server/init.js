@@ -3,9 +3,12 @@
 const mongoose = require('mongoose');
 
 const addIssue = require('./models/issue').addIssue;
+const addUser = require('./models/user').addUser;
 const getActiveQuestion = require('./models/issue').getActiveQuestion;
 const addGenfors = require('./models/meeting').addGenfors;
 const getActiveGenfors = require('./models/meeting').getActiveGenfors;
+
+const permissionLevel = require('./models/permissions');
 
 require('./models/essentials');
 
@@ -45,6 +48,12 @@ const getIssue = genfors => new Promise((resolve, reject) => {
 
 // Wrapper function to ensure clean shutdown after getting or inserting issue
 const getOrInsertIssue = (genfors) => {
+  console.log('Adding admin user account.');
+  addUser('admin', 'admin', 'beautifulhash', permissionLevel.IS_SUPERUSER).then(() => {
+    console.log('Admin account created.');
+  }).catch((err) => {
+    console.error('Admin account creation failed.', err);
+  });
   getIssue(genfors).then(() => {
     tearDown();
   }).catch((err) => {

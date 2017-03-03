@@ -59,6 +59,15 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
       if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
         return reject(new Error('Ingen aktive generalforsamlinger'));
       }
+      getUserByUsername(name).then((user) => {
+        if (user && user.name === name) {
+          logger.error('User already exists with this username!');
+          reject('User already exists with this username!');
+        }
+      }).catch((error) => {
+        logger.error('Something went wrong when trying to find out if user exists already.', { error });
+        reject('Something went wrong when trying to find out if user exists already.');
+      });
       if (securityLevel >= permissionLevel.IS_SUPERUSER) {
         logger.info('Creating a user with high security clearance.', {
           name, onlinewebId, securityLevel,
