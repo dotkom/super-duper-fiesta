@@ -2,15 +2,15 @@ import React from 'react';
 import Button from './Button';
 import ActiveIssue from '../containers/ActiveIssue';
 
-const IssueAdmin = ({ closeIssue }) => (
+const IssueAdmin = ({ onEndClick }) => (
   <div>
     <ActiveIssue />
-    <Button onClick={closeIssue}>Avslutt sak</Button>
+    <Button onClick={onEndClick}>Avslutt sak</Button>
   </div>
 );
 
 IssueAdmin.propTypes = {
-  closeIssue: React.PropTypes.func.isRequired,
+  onEndClick: React.PropTypes.func.isRequired,
 };
 
 export default IssueAdmin;
