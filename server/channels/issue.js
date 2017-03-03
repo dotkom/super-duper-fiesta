@@ -27,7 +27,7 @@ const issue = (socket) => {
         return null;
       case 'server/CLOSE_ISSUE':
         if (!data.user) {
-          logger.debug('Someone tried to close an isse without passing user object.');
+          logger.debug('Someone tried to close an issue without passing user object.');
           emit(socket, 'issue', {}, {
             error: 'User id required to be able to close an ongoing issue.',
           });
