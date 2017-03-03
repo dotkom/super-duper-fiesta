@@ -1,25 +1,19 @@
 import React from 'react';
 import '../css/Issue.css';
 
-const Issue = ({ issue }) => (
+const Issue = ({ text }) => (
   <div className="Issue">
     <h2 className="Issue-heading">Aktiv sak</h2>
-    <p>{issue.text}</p>
+    <p>{text}</p>
   </div>
 );
 
 Issue.defaultProps = {
-  issue: {
-    _id: '-1',
-    text: 'Ingen aktiv sak.',
-  },
+  text: '',
 };
 
 Issue.propTypes = {
-  issue: React.PropTypes.shape({
-    _id: React.PropTypes.string,
-    text: React.PropTypes.string,
-  }),
+  text: React.PropTypes.string,
 };
 
 export default Issue;
