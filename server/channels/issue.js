@@ -44,10 +44,10 @@ module.exports = (socket) => {
             emit(socket, 'issue', {}, {
               error: 'Closing issue failed',
             });
-          }).then((d) => {
-            logger.info('closed issue', { issue: issue.id, response: d._id });
-            broadcast(socket, 'CLOSE_ISSUE', payload);
-            emit(socket, 'CLOSE_ISSUE', payload);
+          }).then((updatedIssue) => {
+            logger.info('closed issue', { issue: issue.id, response: updatedIssue._id });
+            broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
+            emit(socket, 'CLOSE_ISSUE', updatedIssue);
           });
         }).catch((err) => {
           logger.error('getting user failed', { err });
