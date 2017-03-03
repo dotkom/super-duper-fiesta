@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const addIssue = require('./models/issue').addIssue;
 const addUser = require('./models/user').addUser;
+const getUserByUsername = require('./models/user').getUserByUsername;
 const getActiveQuestion = require('./models/issue').getActiveQuestion;
 const addGenfors = require('./models/meeting').addGenfors;
 const getActiveGenfors = require('./models/meeting').getActiveGenfors;
@@ -48,11 +49,21 @@ const getIssue = genfors => new Promise((resolve, reject) => {
 
 // Wrapper function to ensure clean shutdown after getting or inserting issue
 const getOrInsertIssue = (genfors) => {
-  console.log('Adding admin user account.');
-  addUser('admin', 'admin', 'beautifulhash', permissionLevel.IS_SUPERUSER).then(() => {
-    console.log('Admin account created.');
-  }).catch((err) => {
-    console.error('Admin account creation failed.', err);
+  // Try to find a user with this username already.
+  getUserByUsername('admin').then((user) => {
+    if (!user || (user && user.name !== 'admin')) {
+      // No admin user found, add one.
+      console.log('Adding admin user account.');
+      addUser('admin', 'admin', 'beautifulhash', permissionLevel.IS_SUPERUSER).then(() => {
+        console.log('Admin account created.');
+      }).catch((err) => {
+        console.error('Admin account creation failed.', err);
+      });
+    } else {
+      console.log('Admin account already exists.');
+    }
+  }).catch((error) => {
+    console.error('Something went wrong when trying to find out if user exists already.', { error });
   });
   getIssue(genfors).then(() => {
     tearDown();
