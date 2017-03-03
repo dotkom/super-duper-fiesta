@@ -8,11 +8,10 @@ const getUserById = require('../models/user').getUserById;
 
 const issue = (socket) => {
   socket.on('action', (data) => {
+    const payload = data.data;
     logger.debug('issue payload', { payload, action: data.type });
-    let payload;
     switch (data.type) {
       case 'server/ADMIN_CREATE_ISSUE':
-        payload = data.data;
         addQuestion(payload)
         .then((question) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
@@ -26,27 +25,26 @@ const issue = (socket) => {
           return null;
         });
         return null;
-        break
-      case 'close':
-        payload = data.data;
+      case 'server/CLOSE_ISSUE':
         if (!data.user) {
+          logger.debug('Someone tried to close an issue without passing user object.');
           emit(socket, 'issue', {}, {
             error: 'User id required to be able to close an ongoing issue.',
           });
           return null;
         }
-        logger.info('Closing issue.', { issue: payload._id, user: data.user });
+        logger.info('Closing issue.', { issue: payload.id, user: data.user });
         getUserById(data.user).then((user) => {
           logger.debug('Fetched user profile', { user: user.name });
-          logger.debug('endq', { t: typeof endQuestion, endQuestion })
-          endQuestion(payload._id, user)
+          logger.debug('endq', { t: typeof endQuestion, endQuestion });
+          endQuestion(payload.id, user)
           .catch((err) => {
             logger.error('closing issue failed', { err });
             emit(socket, 'issue', {}, {
               error: 'Closing issue failed',
             });
           }).then((d) => {
-            logger.info('closed question', { question: payload._id, response: d._id });
+            logger.info('closed question', { question: payload.id, response: d._id });
             broadcast(socket, 'issue', payload, { action: 'close' });
           });
         }).catch((err) => {
@@ -58,8 +56,10 @@ const issue = (socket) => {
           return null;
         });
         return null;
-        break
-      }
+      default:
+        logger.warn('Hit default case for issue.');
+        break;
+    }
     return null;
   });
 };
