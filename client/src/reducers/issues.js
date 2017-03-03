@@ -2,17 +2,10 @@ import { CLOSE_ISSUE, OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
-    case CLOSE_ISSUE: {
-      return {
-        id: '',
-        text: 'Det er ingen aktiv sak for øyeblikket.',
-        alternatives: [],
-        votes: [],
-      };
-    }
     case OPEN_ISSUE: {
       return {
         id: action.data._id, // eslint-disable-line no-underscore-dangle
+        active: action.data.active,
         text: action.data.description,
         alternatives: action.data.options.map((originalAlternative) => {
           const alternative = Object.assign({}, originalAlternative);
@@ -121,11 +114,15 @@ const defaultIssues = [{
 
 const issues = (state = [], action) => {
   switch (action.type) {
-    case CLOSE_ISSUE:
-      return [
-        ...state,
-        issue(undefined, action),
-      ];
+    case CLOSE_ISSUE: {
+      const currentIssues = state.map((currentIssue) => {
+        if (currentIssue.id === action.data.issue) {
+          return Object.assign(currentIssue, { active: false });
+        }
+        return currentIssue;
+      });
+      return currentIssues;
+    }
     case OPEN_ISSUE:
       return [
         ...state,
