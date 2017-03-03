@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import VotingMenu from '../components/VotingMenu';
 import { sendVote } from '../actionCreators/issues';
 import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
+import { getIssueId, getIssueKey } from '../selectors/issues';
 
 const mapStateToProps = state => ({
   // Alternatives are shuffled as an attempt to prevent peeking over shoulders
@@ -12,10 +13,10 @@ const mapStateToProps = state => ({
   // available alternatives are changed.
   alternatives: getShuffledAlternatives(state),
 
-  votes: state.issues.length ? state.issues[state.issues.length - 1].votes : [],
+  votes: getIssueKey(state, 'votes', []),
 
   // The ID, or undefined, if there is no current issue.
-  id: state.issues.length ? state.issues[state.issues.length - 1].id : '',
+  issueId: getIssueId(state),
 
   voterKey: state.voterKey,
 });

@@ -3,14 +3,14 @@ import ConcludedIssue from './ConcludedIssue';
 
 const ConcludedIssueList = ({ issues }) => (
   <div className="ConcludedIssueList">
-    {issues.map(issue => (
-      <ConcludedIssue key={issue.id} {...issue} />
+    {Object.keys(issues).map(issue => (
+      <ConcludedIssue key={issues[issue].id} {...issues[issue]} />
     ))}
   </div>
 );
 
 ConcludedIssueList.propTypes = {
-  issues: PropTypes.arrayOf(PropTypes.shape(ConcludedIssue.propTypes)).isRequired,
+  issues: PropTypes.shape({}).isRequired,
 };
 
 export default ConcludedIssueList;

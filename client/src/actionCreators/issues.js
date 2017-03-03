@@ -13,9 +13,9 @@ export const closeIssue = data => ({
   data,
 });
 
-export const sendVote = (id, alternative, voter) => ({
+export const sendVote = (issueId, alternative, voter) => ({
   type: SEND_VOTE,
-  id,
+  issueId,
   alternative,
   voter,
 });
