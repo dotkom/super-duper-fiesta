@@ -10,7 +10,7 @@ class ConcludedIssue extends React.Component {
     const numTotalVotes = votes.length > 0 ? votes.length : 1;
     alternatives.forEach((alternative) => {
       if (votes
-        .filter(vote => vote.alternative === alternative._id)
+        .filter(vote => vote.alternative === alternative.id)
         .length / numTotalVotes >= voteDemand) {
         majority = true;
       }
@@ -51,10 +51,10 @@ class ConcludedIssue extends React.Component {
           <ul className="ConcludedIssue-alternatives">
             {this.props.alternatives.map(alternative => (
               <li
-                key={alternative._id}
+                key={alternative.id}
                 className={classNames({
                   'ConcludedIssue-alternatives--winner': this.props.votes.length && this.props.votes
-                    .filter(vote => vote.alternative === alternative._id)
+                    .filter(vote => vote.alternative === alternative.id)
                     .length / this.props.votes.length >= this.props.voteDemand,
                 })}
               >
@@ -70,13 +70,13 @@ class ConcludedIssue extends React.Component {
 
 ConcludedIssue.propTypes = {
   alternatives: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string,
+    id: PropTypes.string,
     text: PropTypes.string,
   })).isRequired,
   votes: PropTypes.arrayOf(PropTypes.shape({
     alternative: PropTypes.string,
     hash: PropTypes.string,
-    _id: PropTypes.string,
+    id: PropTypes.string,
   })).isRequired,
   voteDemand: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,

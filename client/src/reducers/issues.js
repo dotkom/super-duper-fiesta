@@ -2,9 +2,14 @@ const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
     case 'OPEN_ISSUE': {
       return {
-        id: action.data._id,
+        id: action.data._id, // eslint-disable-line no-underscore-dangle
         text: action.data.description,
-        alternatives: action.data.options,
+        alternatives: action.data.options.map((originalAlternative) => {
+          const alternative = Object.assign({}, originalAlternative);
+          // Proxy `_id` as `id`.
+          alternative.id = alternative._id; // eslint-disable-line no-underscore-dangle
+          return alternative;
+        }),
         votes: [],
         resolutionType: action.resolutionType,
         voteDemand: action.data.voteDemand,
