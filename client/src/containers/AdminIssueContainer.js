@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  closeIssue: () => {
+  onEndClick: () => {
     dispatch(closeIssue({ data: ownProps.issue }));
   },
 });
