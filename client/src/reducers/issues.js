@@ -1,7 +1,15 @@
-import { OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
+    case CLOSE_ISSUE: {
+      return {
+        id: '',
+        text: 'Det er ingen aktiv sak for øyeblikket.',
+        alternatives: [],
+        votes: [],
+      };
+    }
     case OPEN_ISSUE: {
       return {
         id: action.data._id, // eslint-disable-line no-underscore-dangle
@@ -113,6 +121,11 @@ const defaultIssues = [{
 
 const issues = (state = [], action) => {
   switch (action.type) {
+    case CLOSE_ISSUE:
+      return [
+        ...state,
+        issue(undefined, action),
+      ];
     case OPEN_ISSUE:
       return [
         ...state,

@@ -4,9 +4,9 @@ const logger = require('../logging');
 
 const addQuestion = require('../models/issue').addQuestion;
 const endQuestion = require('../models/issue').endQuestion;
-const getUserById = require('../models/user').getUserById;
+const getUserByUsername = require('../models/user').getUserByUsername;
 
-const issue = (socket) => {
+module.exports = (socket) => {
   socket.on('action', (data) => {
     const payload = data.data;
     logger.debug('issue payload', { payload, action: data.type });
@@ -25,27 +25,29 @@ const issue = (socket) => {
           return null;
         });
         return null;
-      case 'server/CLOSE_ISSUE':
-        if (!data.user) {
-          logger.debug('Someone tried to close an issue without passing user object.');
+      case 'server/ADMIN_CLOSE_ISSUE': {
+        const adminUser = payload.user;
+        const issue = payload.issue;
+        if (!adminUser) {
+          logger.debug('Someone tried to close an issue without passing user object.', { issue });
           emit(socket, 'issue', {}, {
             error: 'User id required to be able to close an ongoing issue.',
           });
           return null;
         }
-        logger.info('Closing issue.', { issue: payload.id, user: data.user });
-        getUserById(data.user).then((user) => {
-          logger.debug('Fetched user profile', { user: user.name });
-          logger.debug('endq', { t: typeof endQuestion, endQuestion });
-          endQuestion(payload.id, user)
+        logger.info('Closing issue.', { issue, adminUser });
+        getUserByUsername(adminUser).then((user) => {
+          logger.debug('Fetched user profile', { username: user.name, permissions: user.permissions });
+          endQuestion(issue, user)
           .catch((err) => {
             logger.error('closing issue failed', { err });
             emit(socket, 'issue', {}, {
               error: 'Closing issue failed',
             });
           }).then((d) => {
-            logger.info('closed question', { question: payload.id, response: d._id });
-            broadcast(socket, 'issue', payload, { action: 'close' });
+            logger.info('closed issue', { issue: issue.id, response: d._id });
+            broadcast(socket, 'CLOSE_ISSUE', payload);
+            emit(socket, 'CLOSE_ISSUE', payload);
           });
         }).catch((err) => {
           logger.error('getting user failed', { err });
@@ -56,6 +58,7 @@ const issue = (socket) => {
           return null;
         });
         return null;
+      }
       default:
         logger.warn('Hit default case for issue.');
         break;
@@ -63,5 +66,3 @@ const issue = (socket) => {
     return null;
   });
 };
-
-module.exports = issue;

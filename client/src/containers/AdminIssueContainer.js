@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import IssueAdmin from '../components/IssueAdmin';
-import { closeIssue } from '../actionCreators/issues';
+import { adminCloseIssue } from '../actionCreators/adminButtons';
 import { getIssue } from '../selectors/issues';
 
 const mapStateToProps = state => ({
@@ -14,7 +14,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...ownProps,
     closeIssue: () => {
-      dispatch(closeIssue({ id: stateProps.issue.id }));
+      dispatch(adminCloseIssue({ issue: stateProps.issue.id, user: 'admin' }));
     },
   };
 };

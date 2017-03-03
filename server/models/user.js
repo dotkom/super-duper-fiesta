@@ -40,6 +40,10 @@ function getUserById(userId, anonymous) {
   return User.findOne({ _id: userId });
 }
 
+function getUserByUsername(username) {
+  return User.findOne({ name: username });
+}
+
 function getUsers(genfors, anonymous) {
   if (anonymous) {
     return AnonymousUser.find({ genfors });
@@ -117,6 +121,7 @@ module.exports = {
   addUser,
   getUsers,
   getUserById,
+  getUserByUsername,
   getQualifiedUsers,
   setNote,
   setCanVote,
