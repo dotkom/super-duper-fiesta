@@ -6,7 +6,7 @@ import { ADD_ISSUE_ALTERNATIVE,
   SET_RESOLUTION_TYPE,
   UPDATE_ALTERNATIVE_TEXT,
   UPDATE_ISSUE_SETTING,
-} from '../actions/createIssueForm';
+} from '../actionTypes/createIssueForm';
 
 export const setResolutionType = resolutionType => ({
   type: SET_RESOLUTION_TYPE,

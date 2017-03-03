@@ -1,4 +1,4 @@
-import { ADD_USER, TOGGLE_CAN_VOTE } from '../actions/users';
+import { ADD_USER, TOGGLE_CAN_VOTE } from '../actionTypes/users';
 
 const user = (state = {}, action) => {
   switch (action.type) {

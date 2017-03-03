@@ -1,4 +1,4 @@
-import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE } from '../actions/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE } from '../actionTypes/issues';
 
 export const createIssue = (id, text, alternatives, voteDemand) => ({
   type: OPEN_ISSUE,

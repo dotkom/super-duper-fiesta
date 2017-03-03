@@ -1,4 +1,4 @@
-import { UPDATE_VOTER_KEY } from '../actions/voterKey';
+import { UPDATE_VOTER_KEY } from '../actionTypes/voterKey';
 
 const voterKey = (state = 1, action) => {
   switch (action.type) {

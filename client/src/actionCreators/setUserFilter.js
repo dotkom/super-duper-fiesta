@@ -1,4 +1,4 @@
-import { SET_USER_FILTER } from '../actions/setUserFilter';
+import { SET_USER_FILTER } from '../actionTypes/setUserFilter';
 
 export default filter => ({
   type: SET_USER_FILTER,

@@ -1,4 +1,4 @@
-import { SET_USER_FILTER } from '../actions/setUserFilter';
+import { SET_USER_FILTER } from '../actionTypes/setUserFilter';
 
 const userFilter = (state = '', action) => {
   switch (action.type) {

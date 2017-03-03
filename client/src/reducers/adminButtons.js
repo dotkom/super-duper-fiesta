@@ -1,4 +1,4 @@
-import { TOGGLE_REGISTRATION } from '../actions/adminButtons';
+import { TOGGLE_REGISTRATION } from '../actionTypes/adminButtons';
 
 const registrationEnabled = (state = false, action) => {
   switch (action.type) {

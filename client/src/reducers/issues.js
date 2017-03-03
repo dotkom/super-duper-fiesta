@@ -1,4 +1,4 @@
-import { OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actions/issues';
+import { OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {

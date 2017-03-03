@@ -1,4 +1,4 @@
-import { DISABLE_VOTING, ENABLE_VOTING } from '../actions/voting';
+import { DISABLE_VOTING, ENABLE_VOTING } from '../actionTypes/voting';
 
 export const disableVoting = () => ({
   type: DISABLE_VOTING,
