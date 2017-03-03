@@ -6,7 +6,7 @@ const Alternatives = ({ alternatives, handleChange, selectedVote }) => (
   <div className="Alternatives">
     {alternatives.map(alternative => (
       <Alternative
-        key={alternative._id} {...alternative}
+        key={alternative.id} {...alternative}
         onClick={handleChange} selected={alternative.id === selectedVote}
       />
     ))}

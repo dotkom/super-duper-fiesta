@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import '../css/Alternative.css';
 
-const Alternative = ({ _id: id, text, selected, ...other }) => {
+const Alternative = ({ id, text, selected }) => {
   const alternativeClass = classNames('Alternative', {
     'Alternative--selected': selected,
   });
@@ -14,7 +14,6 @@ const Alternative = ({ _id: id, text, selected, ...other }) => {
           name="vote"
           value={id}
           id={id}
-          {...other}
         />
         {text}
       </label>
@@ -27,7 +26,7 @@ Alternative.defaultProps = {
 };
 
 Alternative.propTypes = {
-  _id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   selected: PropTypes.bool,
 };

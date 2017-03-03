@@ -68,7 +68,7 @@ VotingMenu.propTypes = {
 
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
     alternative: React.PropTypes.string,
-    _id: React.PropTypes.string,
+    id: React.PropTypes.string,
   })).isRequired,
 
   voterKey: React.PropTypes.number,
