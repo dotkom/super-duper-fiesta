@@ -44,7 +44,7 @@ class ConcludedIssue extends React.Component {
               'flaticon-warning': !majority,
             })}
           >
-          {majority ? 'Flertall' : 'Ikke flertall'}
+          {majority ? 'Vedtatt' : 'Avvist'}
           </div>
         </div>
         <div className="ConcludedIssue-content">
