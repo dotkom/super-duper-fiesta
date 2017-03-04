@@ -9,7 +9,7 @@ const Issue = ({ text }) => (
 );
 
 Issue.defaultProps = {
-  text: '',
+  text: 'Ingen aktiv sak for øyeblikket.',
 };
 
 Issue.propTypes = {

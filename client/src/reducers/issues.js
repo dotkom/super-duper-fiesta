@@ -1,4 +1,4 @@
-import { OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
@@ -110,6 +110,7 @@ const defaultIssues = [{
 
 const issues = (state = {}, action) => {
   switch (action.type) {
+    case CLOSE_ISSUE:
     case OPEN_ISSUE: {
       const issueId = action.data._id; // eslint-disable-line no-underscore-dangle
       return Object.assign({}, state, {

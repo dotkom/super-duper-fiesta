@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: false },
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   onlinewebId: { type: String, required: true },
   registerDate: { type: Date, default: Date.now() },
   canVote: { type: Boolean, default: false },
@@ -38,6 +38,10 @@ function getUserById(userId, anonymous) {
     return AnonymousUser.findOne({ _id: userId });
   }
   return User.findOne({ _id: userId });
+}
+
+function getUserByUsername(username) {
+  return User.findOne({ name: username });
 }
 
 function getUsers(genfors, anonymous) {
@@ -117,6 +121,7 @@ module.exports = {
   addUser,
   getUsers,
   getUserById,
+  getUserByUsername,
   getQualifiedUsers,
   setNote,
   setCanVote,
