@@ -11,7 +11,6 @@
 
 .Button:hover {
   background: #6d7194;
-  cursor: pointer;
 }
 
 .Button:disabled {

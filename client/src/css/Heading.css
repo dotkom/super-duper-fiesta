@@ -17,6 +17,10 @@
   text-decoration: none;
 }
 
+.Heading-content button {
+  cursor: pointer;
+}
+
 .Heading-header {
   color: #63699D;
   font-size: 3.4rem;
