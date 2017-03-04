@@ -24,7 +24,14 @@
 
 .ConcludedIssue-status {
   margin-left: auto;
-  font-size: 2.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 0.8em;
+}
+
+.ConcludedIssue-status:before {
+  font-size: 2em;
+  text-align: center;
 }
 
 .ConcludedIssue--majority .ConcludedIssue-top {
