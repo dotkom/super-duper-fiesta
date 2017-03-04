@@ -1,9 +1,14 @@
 import { createSelector } from 'reselect';
 import arrayShuffle from 'array-shuffle';
+import { getIssue } from './issues';
 
-const getAlternatives = state => (
-  state.issues.length ? state.issues[state.issues.length - 1].alternatives : []
-);
+const getAlternatives = (state) => {
+  const issue = getIssue(state);
+  if (issue && issue.alternatives && issue.alternatives.length) {
+    return issue.alternatives;
+  }
+  return [];
+};
 
 export default createSelector(
   [getAlternatives],

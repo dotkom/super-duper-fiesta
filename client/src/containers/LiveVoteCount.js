@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import VoteStatus from '../components/VoteStatus';
 import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
+import { getIssue } from '../selectors/issues';
 
 const mapStateToProps = (state) => {
-  const currentIssue = state.issues[state.issues.length - 1];
+  const currentIssue = getIssue(state);
 
   // The number of votes on the current issue.
-  const voteCount = currentIssue ? currentIssue.votes.length : 0;
+  const voteCount = currentIssue && currentIssue.votes ? currentIssue.votes.length : 0;
 
   // The number of users eligible for voting on the current issue.
   const userCount = state.users.filter(u => u.canVote).length;
@@ -21,7 +22,7 @@ const mapStateToProps = (state) => {
   // available alternatives are changed.
   const alternatives = currentIssue && getShuffledAlternatives(state);
 
-  if (currentIssue) {
+  if (currentIssue && currentIssue.votes) {
     currentIssue.votes.forEach((issue) => {
       votePercentages[issue.alternative] = (votePercentages[issue.alternative] || 0) + 1;
     });
