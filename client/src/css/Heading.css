@@ -26,6 +26,10 @@
   font-size: 3.4rem;
 }
 
+.Heading-header:hover {
+  color: #8186b3;
+}
+
 .Heading-components {
   text-align: right;
 }
