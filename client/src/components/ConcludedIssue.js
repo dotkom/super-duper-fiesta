@@ -39,12 +39,13 @@ class ConcludedIssue extends React.Component {
             {this.props.text}
           </h2>
           <div
-            title={majority ? 'Flertall' : 'Ikke flertall'}
             className={classNames('ConcludedIssue-status', {
               'flaticon-success': majority,
-              'flaticon-close': !majority,
+              'flaticon-warning': !majority,
             })}
-          />
+          >
+          {majority ? 'Vedtatt' : 'Avvist'}
+          </div>
         </div>
         <div className="ConcludedIssue-content">
           <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
