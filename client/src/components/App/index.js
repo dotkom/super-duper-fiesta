@@ -5,7 +5,7 @@ import { VotingMenuContainer } from './VotingMenu';
 import { IssueContainer } from '../Issue';
 import Button from '../Button';
 import Heading from '../Heading';
-import { ConcludedIssueContainer } from '../ConcludedIssueList';
+import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import '../../css/App.css';
 import '../../css/flaticon.css';
 
@@ -22,7 +22,7 @@ const App = props => (
         </div>
         <IssueStatus />
       </div>
-      <ConcludedIssueContainer />
+      <ConcludedIssueListContainer />
     </div>
   </div>
   );

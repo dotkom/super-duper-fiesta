@@ -20,6 +20,6 @@ const mapStateToProps = state => ({
   issues: state.votingEnabled ? state.issues.slice(0, -1) : state.issues,
 });
 
-export const ConcludedIssueContainer = connect(
+export const ConcludedIssueListContainer = connect(
   mapStateToProps,
 )(ConcludedIssueList);
