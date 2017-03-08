@@ -40,10 +40,10 @@ function getClosedQuestions(genfors) {
 
 function endQuestion(question, user) {
   return new Promise((resolve, reject) => {
-    logger.debug('endquestion', { question });
+//    logger.debug('endquestion', { question });
     getActiveGenfors().then((genfors) => {
       canEdit(permissionLevel.IS_MANAGER, user, genfors).then((result) => {
-        logger.debug('security check returned', { result });
+//        logger.debug('security check returned', { result });
         if (result === true) {
           return Question.findByIdAndUpdate(question, { active: false })
           .then(resolve).catch(reject);
@@ -54,11 +54,13 @@ function endQuestion(question, user) {
   });
 }
 
-// TODO Fix
+
 function updateQuestionCounter(question) {
-  getVotes(question, (votes) => {
-    Question.update({ _id: question }, { currentVotes: votes.length })
-    .exec();
+  return new Promise((resolve, reject) => {
+    getVotes(question, (votes) => {
+      Question.update({ _id: question }, { currentVotes: votes.length })
+      .exec().then(resolve).catch(reject);
+    });
   });
 }
 
@@ -101,9 +103,9 @@ function addQuestion(issueData, closeCurrentIssue) {
 
 module.exports = {
   addIssue: addQuestion,
-  addQuestion,
   getActiveQuestion,
   getClosedQuestions,
   getQuestions,
-  endQuestion,
+  endIssue: endQuestion,
+  updateQuestionCounter,
 };

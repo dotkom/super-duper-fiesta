@@ -19,7 +19,7 @@ const go = () => {
       logger.debug(genfors.title);
       User.setGenfors(object.user, object.anonymousUser, genfors).then(() => {
         logger.debug('updated user');
-        Issue.addQuestion({
+        Issue.addIssue({
           genfors,
           description: 'Dette er et spørsmål',
           options: [{ text: 'Whatever' }, { text: 'Nah' }],
@@ -27,13 +27,10 @@ const go = () => {
         }).then((issue) => {
           logger.debug('Issue done', issue.description);
           Vote.addVote(issue, object.user, 0).then((vote) => {
-            logger.debug('vote: ', { option: vote.option, user: vote.user, issue: vote.question });
-            Vote.addVote(issue, object.user, 1).then((vote) => {
-              logger.debug('vote: ', { option: vote.option, user: vote.user, issue: vote.question });
-              Vote.addVote(issue, object.user, 2).then((vote) => {
-                logger.debug('vote: ', { option: vote.option, user: vote.user, issue: vote.question });
-              }).catch(logger.debug('outch Add Vote 3'));
-            }).catch(logger.debug('outch Add Vote 2'));
+            logger.debug('vote: done');
+            Issue.endIssue(issue, object.user).then(() => {
+              logger.debug('Ended issue');
+            }).catch(logger.debug('outch Logout'));
           }).catch(logger.debug('outch Add Vote'));
         }).catch(logger.debug('outch Issue'));
       }).catch(logger.debug('outch Set genfors'));
