@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import IconText from './IconText';
 import '../css/ConcludedIssue.css';
 
 
@@ -38,14 +39,10 @@ class ConcludedIssue extends React.Component {
           <h2 className="ConcludedIssue-title">
             {this.props.text}
           </h2>
-          <div
-            className={classNames('ConcludedIssue-status', {
-              'flaticon-success': majority,
-              'flaticon-warning': !majority,
-            })}
-          >
-          {majority ? 'Vedtatt' : 'Avvist'}
-          </div>
+          <IconText
+            text={majority ? 'Vedtatt' : 'Avvist'}
+            iconClass={majority ? 'flaticon-success' : 'flaticon-warning'}
+          />
         </div>
         <div className="ConcludedIssue-content">
           <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
