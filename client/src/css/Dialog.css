@@ -43,12 +43,11 @@
 .Dialog-close {
   margin-left: auto;
   color: whitesmoke;
-  cursor: pointer;
   font-size: 4rem;
 }
 
 .Dialog-close:hover {
-  color: #2b2b2b;
+  color: #484d79;
 }
 
 .Dialog-content {

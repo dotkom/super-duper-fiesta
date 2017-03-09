@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
+import '../css/VoteStatus.css';
 
 const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => (
-  <div>
+  <div className="VoteStatus">
     <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
 
     {alternatives && alternatives.map((alternative, i) =>

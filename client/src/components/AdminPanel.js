@@ -50,13 +50,13 @@ class AdminPanel extends React.Component {
       <div className="AdminPanel">
         <Dialog visible={this.state.showRegistrationDialog} onClose={this.closeRegistrationDialog} title={registrationText}>
           <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
-          <Button onClick={this.confirmRegistrationDialog}>Bekreft</Button>
-          <Button onClick={this.closeRegistrationDialog}>Avbryt</Button>
+          <Button background onClick={this.confirmRegistrationDialog}>Bekreft</Button>
+          <Button background onClick={this.closeRegistrationDialog}>Avbryt</Button>
         </Dialog>
         <Heading link="/admin/" title="Generalforsamling adminpanel">
-          <Link className="Button" to="/admin/question">Ny sak</Link>
+          <Link to="/admin/question"><Button>Ny sak</Button></Link>
           <Button onClick={this.openRegistrationDialog}>{registrationText}</Button>
-          <Link to="/admin/users"><Button onClick={this.userAdministration}>Brukeradmin</Button></Link>
+          <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
           <Button onClick={this.endGAM}>Avslutt</Button>
         </Heading>
         <div className="AdminPanel-components">

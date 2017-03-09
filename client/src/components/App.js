@@ -11,7 +11,7 @@ import '../css/flaticon.css';
 const App = props => (
   <div className="App">
     <Heading link="/" title={props.title}>
-      <Button>Logg out</Button>
+      <Button>Logg ut</Button>
     </Heading>
     <div className="App-components">
       <div className="ActiveIssue-components">

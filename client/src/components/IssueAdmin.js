@@ -5,7 +5,7 @@ import ActiveIssue from '../containers/ActiveIssue';
 const IssueAdmin = ({ closeIssue }) => (
   <div>
     <ActiveIssue />
-    <Button onClick={closeIssue}>Avslutt sak</Button>
+    <Button background onClick={closeIssue}>Avslutt sak</Button>
   </div>
 );
 

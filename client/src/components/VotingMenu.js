@@ -44,6 +44,7 @@ class VotingMenu extends React.Component {
           selectedVote={this.state.selectedVote}
         />
         <Button
+          background
           size="lg"
           onClick={this.handleClick}
           disabled={buttonDisabled}

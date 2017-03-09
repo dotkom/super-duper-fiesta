@@ -24,7 +24,7 @@ const IssueForm = () => (
       <div className="IssueForm-label">Spørsmålstype</div>
       <SelectQuestionTypeContainer />
     </label>
-    <Button>Lagre sak</Button>
+    <Button background>Lagre sak</Button>
   </div>
 );
 
