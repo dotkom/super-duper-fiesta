@@ -15,6 +15,7 @@ module.exports = (socket) => {
         addQuestion(payload)
         .then((question) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
+          emit(socket, 'OPEN_ISSUE', question, { action: 'open' });
           broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
           return null;
         }).catch((err) => {

@@ -66,6 +66,7 @@ function updateQuestionCounter(question) {
 
 function addQuestion(issueData, closeCurrentIssue) {
   return new Promise((resolve, reject) => {
+    logger.debug('Creating issue', issueData);
     getActiveGenfors().then((genfors) => {
       if (!genfors) reject(new Error('No genfors active'));
 
@@ -87,6 +88,7 @@ function addQuestion(issueData, closeCurrentIssue) {
         // removed possible issues and proceeding to create a new one
         getQualifiedUsers(genfors, issueData.secret).then((users) => {
           const issue = Object.assign(issueData, {
+            genfors,
             qualifiedVoters: users.length,
             currentVotes: 0,
           });
