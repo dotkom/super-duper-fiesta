@@ -9,9 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createIssue: (description, alternatives, voteDemand, showOnlyWinner, secretElection) => {
-    console.log('Adding issue', description);
-    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner, secretElection));
+  createIssue: (description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes) => {
+    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes));
   },
 });
 

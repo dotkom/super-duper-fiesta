@@ -10,14 +10,15 @@ export const adminCloseIssue = data => ({
 });
 
 export const createIssue = (description, alternatives, voteDemand,
-  showOnlyWinner, secretElection) => ({
+  showOnlyWinner, secretVoting, countBlankVotes) => ({
     type: ADMIN_CREATE_ISSUE,
     data: {
       description,
       options: alternatives,
       voteDemand,
       showOnlyWinner,
-      secret: secretElection,
+      secret: secretVoting,
+      countingBlankVotes: countBlankVotes,
     },
   }
 );
