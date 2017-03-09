@@ -18,11 +18,17 @@ class IssueForm extends React.Component {
     this.state = {
       issueDescription: '',
       alternatives: YES_NO_ANSWERS,
+      secretVoting: false,
+      showOnlyWinner: false,
+      countBlankVotes: false,
     };
 
     this.handleAddAlternative = this.handleAddAlternative.bind(this);
     this.handleCreateIssue = this.handleCreateIssue.bind(this);
     this.updateIssueDescription = this.updateIssueDescription.bind(this);
+    this.handleUpdateCountBlankVotes = this.handleUpdateCountBlankVotes.bind(this);
+    this.handleUpdateSecretVoting = this.handleUpdateSecretVoting.bind(this);
+    this.handleUpdateShowOnlyWinner = this.handleUpdateShowOnlyWinner.bind(this);
   }
 
   handleAddAlternative(alternativeText) {
@@ -33,13 +39,27 @@ class IssueForm extends React.Component {
 
   handleCreateIssue() {
     const { createIssue } = this.props;
-    createIssue(this.state.issueDescription, this.state.alternatives,
-      1, false, false, // @ToDo: Get from state.
+    const { issueDescription, alternatives, countBlankVotes, secretVoting, showOnlyWinner } = this.state;
+    createIssue(issueDescription, alternatives,
+      1, // @ToDo: Get from state.
+      showOnlyWinner, secretVoting, countBlankVotes,
     );
   }
 
   updateIssueDescription(e) {
     this.setState({ issueDescription: e.target.value });
+  }
+
+  handleUpdateCountBlankVotes(countBlankVotes) {
+    this.setState({ countBlankVotes });
+  }
+
+  handleUpdateSecretVoting(secretVoting) {
+    this.setState({ secretVoting });
+  }
+
+  handleUpdateShowOnlyWinner(showOnlyWinner) {
+    this.setState({ showOnlyWinner });
   }
 
   render() {
@@ -60,7 +80,14 @@ class IssueForm extends React.Component {
           handleAddAlternative={this.handleAddAlternative}
         />
         <div className="IssueForm-label">Innstillinger</div>
-        <IssueFormSettings />
+        <IssueFormSettings
+          handleUpdateCountBlankVotes={this.handleUpdateCountBlankVotes}
+          handleUpdateSecretVoting={this.handleUpdateSecretVoting}
+          handleUpdateShowOnlyWinner={this.handleUpdateShowOnlyWinner}
+          countBlankVotes={this.state.countBlankVotes}
+          secretVoting={this.state.secretVoting}
+          showOnlyWinner={this.state.showOnlyWinner}
+        />
         <label className="IssueForm-select">
           <div className="IssueForm-label">Flertallstype</div>
           <SelectResolutionTypeContainer />
