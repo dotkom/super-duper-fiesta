@@ -63,7 +63,7 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const showActiveIssueWarning = this.props.issue;
+    const showActiveIssueWarning = this.props.issue && this.props.issue.text;
     const issueReadyToCreate = !showActiveIssueWarning && this.state.issueDescription && this.state.issueDescription.length;
     return (
       <div className="IssueForm">
