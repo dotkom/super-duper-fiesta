@@ -8,7 +8,7 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import AdminPanelContainer from './containers/AdminPanelContainer';
 import AppContainer from './containers/AppContainer';
 import AdminHome from './components/AdminHome';
-import IssueForm from './components/IssueForm';
+import IssueFormContainer from './containers/IssueFormContainer';
 import NotFound from './components/NotFound';
 import Users from './components/Users';
 import votingApp from './reducers';
@@ -31,7 +31,7 @@ ReactDOM.render(
       { /* We might want to split this up into two seperate apps */ }
       <Route path="admin" component={AdminPanelContainer}>
         <IndexRoute component={AdminHome} />
-        <Route path="question" component={IssueForm} />
+        <Route path="question" component={IssueFormContainer} />
         <Route path="users" component={Users} />
       </Route>
 

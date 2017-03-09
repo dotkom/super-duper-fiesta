@@ -1,7 +1,7 @@
 import { ADMIN_CREATE_ISSUE, ADMIN_CLOSE_ISSUE, TOGGLE_REGISTRATION } from '../actionTypes/adminButtons';
 
 export const toggleRegistration = () => ({
-  type: ADMIN_CREATE_ISSUE,
+  type: TOGGLE_REGISTRATION,
 });
 
 export const adminCloseIssue = data => ({
@@ -9,7 +9,15 @@ export const adminCloseIssue = data => ({
   data,
 });
 
-export const createIssue = data => ({
-  type: TOGGLE_REGISTRATION,
-  data,
-});
+export const createIssue = (description, alternatives, voteDemand,
+  showOnlyWinner, secretElection) => ({
+    type: ADMIN_CREATE_ISSUE,
+    data: {
+      description,
+      options: alternatives,
+      voteDemand,
+      showOnlyWinner,
+      secret: secretElection,
+    },
+  }
+);
