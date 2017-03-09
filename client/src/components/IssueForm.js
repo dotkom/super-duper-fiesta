@@ -63,9 +63,14 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const issueReadyToCreate = this.state.issueDescription && this.state.issueDescription.length;
+    const showActiveIssueWarning = this.props.issue;
+    const issueReadyToCreate = !showActiveIssueWarning && this.state.issueDescription && this.state.issueDescription.length;
     return (
       <div className="IssueForm">
+        <p
+          className="IssueForm--ActiveIssueWarning"
+          hidden={!showActiveIssueWarning}
+        >Det er allerede en aktiv sak!</p>
         <label className="IssueForm-textarea">
           <div className="IssueForm-label">Beskrivelse</div>
           <textarea
