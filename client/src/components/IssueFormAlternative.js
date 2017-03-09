@@ -21,9 +21,7 @@ class IssueFormAlternative extends React.Component {
   }
 
   handleAddAlternative() {
-    if (this.props.alternativeText) {
-      this.props.addAlternative(this.props.alternativeText);
-    }
+    this.props.handleAddAlternative(this.props.alternativeText);
   }
 
   handleKeyPress(event) {
@@ -69,8 +67,8 @@ class IssueFormAlternative extends React.Component {
     return display && (
       <div className="IssueFormAlternative">
         <ul>
-          {alternatives.map(alternative =>
-            <li key={alternative.id}>
+          {this.props.alternatives.map(alternative =>
+            <li key={alternative.text}>
               {alternative.text}
               <button
                 onClick={() => removeAlternative(alternative.id)}
@@ -110,10 +108,9 @@ IssueFormAlternative.propTypes = {
   alternativeUpdate: PropTypes.func.isRequired,
   updateAlternativeText: PropTypes.func.isRequired,
   display: PropTypes.bool.isRequired,
-  addAlternative: PropTypes.func.isRequired,
+  handleAddAlternative: PropTypes.func.isRequired,
   removeAlternative: PropTypes.func.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
   })).isRequired,
 };

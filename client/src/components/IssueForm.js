@@ -6,23 +6,35 @@ import SelectQuestionTypeContainer from '../containers/SelectQuestionTypeContain
 import AddIssueFormAlternative from '../containers/AddIssueFormAlternative';
 import IssueFormSettings from '../containers/IssueFormSettings';
 
+const YES_NO_ANSWERS = [
+  { text: 'Ja' },
+  { text: 'Nei' },
+];
+
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       issueDescription: '',
+      alternatives: YES_NO_ANSWERS,
     };
 
+    this.handleAddAlternative = this.handleAddAlternative.bind(this);
     this.handleCreateIssue = this.handleCreateIssue.bind(this);
     this.updateIssueDescription = this.updateIssueDescription.bind(this);
   }
 
+  handleAddAlternative(alternativeText) {
+    const { alternatives } = this.state;
+    alternatives.push({ text: alternativeText });
+    this.setState({ alternatives });
+  }
+
   handleCreateIssue() {
     const { createIssue } = this.props;
-    createIssue(this.state.issueDescription,
-      [{ text: 'alternative1' }, { text: 'alternative2' }, { text: 'alternative 3' }],
-      1, false, false, // @ToDo: Get these from state.
+    createIssue(this.state.issueDescription, this.state.alternatives,
+      1, false, false, // @ToDo: Get from state.
     );
   }
 
@@ -43,7 +55,10 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        <AddIssueFormAlternative />
+        <AddIssueFormAlternative
+          alternatives={this.state.alternatives}
+          handleAddAlternative={this.handleAddAlternative}
+        />
         <div className="IssueForm-label">Innstillinger</div>
         <IssueFormSettings />
         <label className="IssueForm-select">
