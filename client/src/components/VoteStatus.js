@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
-import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
+import { getShuffledAlternatives } from '../selectors/alternatives';
 import { getIssue } from '../selectors/issues';
 import '../css/VoteStatus.css';
 
