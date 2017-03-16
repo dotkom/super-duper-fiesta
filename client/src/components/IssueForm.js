@@ -63,13 +63,8 @@ class IssueForm extends React.Component {
 
   handleCreateIssue() {
     const { createIssue } = this.props;
-
-    const { issueDescription, alternatives, countBlankVotes, secretVoting, showOnlyWinner } =
-      this.state;
-
-    createIssue(issueDescription, alternatives,
-      1, // @ToDo: Get from state.
-      showOnlyWinner, secretVoting, countBlankVotes,
+    const { issueDescription, alternatives, countBlankVotes, secretVoting, showOnlyWinner, voteDemand } = this.state;
+    createIssue(issueDescription, alternatives, voteDemand, showOnlyWinner, secretVoting, countBlankVotes,
     );
   }
 
