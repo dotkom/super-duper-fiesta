@@ -10,9 +10,11 @@ class IssueFormAlternative extends React.Component {
       showUpdateDialog: false,
       dialogValue: '',
       selectedAlternative: undefined,
+      alternativeText: '',
     };
 
     this.handleAddAlternative = this.handleAddAlternative.bind(this);
+    this.handleAlternativeUpdate = this.handleAlternativeUpdate.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.openUpdateDialog = this.openUpdateDialog.bind(this);
     this.closeUpdateDialog = this.closeUpdateDialog.bind(this);
@@ -22,6 +24,12 @@ class IssueFormAlternative extends React.Component {
 
   handleAddAlternative() {
     this.props.handleAddAlternative(this.props.alternativeText);
+  }
+
+  handleAlternativeUpdate(event) {
+    this.setState({
+      alternativeText: event.target.value,
+    });
   }
 
   handleKeyPress(event) {
@@ -52,28 +60,26 @@ class IssueFormAlternative extends React.Component {
 
   confirmUpdateDialog() {
     this.closeUpdateDialog();
-    this.props.updateAlternativeText(this.state.selectedAlternative, this.state.dialogValue);
+    this.props.handleUpdateAlternativeText(this.state.selectedAlternative, this.state.dialogValue);
   }
 
   render() {
     const {
-      display,
       alternativeText,
-      alternativeUpdate,
       alternatives,
-      removeAlternative,
+      handleRemoveAlternative,
     } = this.props;
 
-    return display && (
+    return (
       <div className="IssueFormAlternative">
         <ul>
-          {this.props.alternatives.map(alternative =>
-            <li key={alternative.text}>
-              {alternative.text}
+          {Object.keys(alternatives).map(id =>
+            <li key={alternatives[id].text}>
+              {alternatives[id].text}
               <button
-                onClick={() => removeAlternative(alternative.id)}
+                onClick={() => handleRemoveAlternative(id)}
               >Fjern</button>
-              <button onClick={() => this.openUpdateDialog(alternative.id)}>Endre</button>
+              <button onClick={() => this.openUpdateDialog(id)}>Endre</button>
             </li>,
           )}
         </ul>
@@ -92,7 +98,7 @@ class IssueFormAlternative extends React.Component {
           <input
             type="text"
             value={alternativeText}
-            onChange={e => alternativeUpdate(e.target.value)}
+            onChange={e => this.handleAlternativeUpdate(e.target.value)}
             onKeyPress={this.handleKeyPress}
           />
 
@@ -103,13 +109,15 @@ class IssueFormAlternative extends React.Component {
   }
 }
 
+IssueFormAlternative.defaultProps = {
+  alternativeText: undefined,
+};
+
 IssueFormAlternative.propTypes = {
-  alternativeText: PropTypes.string.isRequired,
-  alternativeUpdate: PropTypes.func.isRequired,
-  updateAlternativeText: PropTypes.func.isRequired,
-  display: PropTypes.bool.isRequired,
+  alternativeText: PropTypes.string,
+  handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
-  removeAlternative: PropTypes.func.isRequired,
+  handleRemoveAlternative: PropTypes.func.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
   })).isRequired,

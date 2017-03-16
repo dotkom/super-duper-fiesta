@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const IssueFormCheckboxes = ({
   countBlankVotes, secretVoting, showOnlyWinner,
-  handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner
+  handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner,
 }) => (
   <div className="IssueFormCheckboxes">
     <label className="IssueForm-checkbox">
@@ -35,8 +35,12 @@ const IssueFormCheckboxes = ({
 );
 
 IssueFormCheckboxes.propTypes = {
-  updateSetting: PropTypes.func.isRequired,
-  values: PropTypes.objectOf(PropTypes.bool).isRequired,
+  handleUpdateCountBlankVotes: PropTypes.func.isRequired,
+  countBlankVotes: PropTypes.bool.isRequired,
+  secretVoting: PropTypes.bool.isRequired,
+  showOnlyWinner: PropTypes.bool.isRequired,
+  handleUpdateSecretVoting: PropTypes.func.isRequired,
+  handleUpdateShowOnlyWinner: PropTypes.func.isRequired,
 };
 
 export default IssueFormCheckboxes;
