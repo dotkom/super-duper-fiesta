@@ -38,7 +38,7 @@ class IssueForm extends React.Component {
 
   handleAddAlternative(alternativeText) {
     this.handleUpdateAlternativeText(
-      alternativeId++,
+      alternativeId += 1,
       alternativeText,
     );
   }
@@ -59,10 +59,7 @@ class IssueForm extends React.Component {
   }
 
   handleCreateIssue() {
-    const { createIssue } = this.props;
-    const { issueDescription, alternatives, countBlankVotes, secretVoting, showOnlyWinner, voteDemand } = this.state;
-    createIssue(issueDescription, alternatives, voteDemand, showOnlyWinner, secretVoting, countBlankVotes,
-    );
+    this.props.createIssue(...this.state);
   }
 
   updateIssueDescription(e) {
@@ -87,7 +84,11 @@ class IssueForm extends React.Component {
 
   render() {
     const showActiveIssueWarning = this.props.issue && this.props.issue.text;
-    const issueReadyToCreate = !showActiveIssueWarning && this.state.issueDescription && this.state.issueDescription.length;
+
+    const issueReadyToCreate = !showActiveIssueWarning
+      && this.state.issueDescription
+      && this.state.issueDescription.length;
+
     return (
       <div className="IssueForm">
         <p
@@ -141,6 +142,9 @@ IssueForm.defaultProps = {
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
+  issue: React.PropTypes.shape({
+    text: React.PropTypes.string,
+  }).isRequired,
 };
 
 export default IssueForm;
