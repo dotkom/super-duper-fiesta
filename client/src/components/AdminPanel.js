@@ -14,10 +14,6 @@ class AdminPanel extends React.Component {
       openRegistration: false,
     };
 
-    this.endGAM = this.endGAM.bind(this);
-    this.closeRegistrationDialog = this.closeRegistrationDialog.bind(this);
-    this.openRegistrationDialog = this.openRegistrationDialog.bind(this);
-    this.confirmRegistrationDialog = this.confirmRegistrationDialog.bind(this);
   }
 
   endGAM() {
@@ -48,16 +44,16 @@ class AdminPanel extends React.Component {
 
     return (
       <div className="AdminPanel">
-        <Dialog visible={this.state.showRegistrationDialog} onClose={this.closeRegistrationDialog} title={registrationText}>
+        <Dialog visible={this.state.showRegistrationDialog} onClose={(...a) => this.closeRegistrationDialog(...a)} title={registrationText}>
           <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
-          <Button background onClick={this.confirmRegistrationDialog}>Bekreft</Button>
-          <Button background onClick={this.closeRegistrationDialog}>Avbryt</Button>
+          <Button background onClick={(...a) => this.confirmRegistrationDialog(...a)}>Bekreft</Button>
+          <Button background onClick={(...a) => this.closeRegistrationDialog(...a)}>Avbryt</Button>
         </Dialog>
         <Heading link="/admin/" title="Generalforsamling adminpanel">
           <Link to="/admin/question"><Button>Ny sak</Button></Link>
-          <Button onClick={this.openRegistrationDialog}>{registrationText}</Button>
+          <Button onClick={(...a) => this.openRegistrationDialog(...a)}>{registrationText}</Button>
           <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
-          <Button onClick={this.endGAM}>Avslutt</Button>
+          <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
         </Heading>
         <div className="AdminPanel-components">
           {this.props.children}

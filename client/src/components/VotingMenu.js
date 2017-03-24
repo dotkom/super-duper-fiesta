@@ -10,9 +10,6 @@ class VotingMenu extends React.Component {
     this.state = {
       selectedVote: undefined,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -40,13 +37,13 @@ class VotingMenu extends React.Component {
       <div className="VotingMenu">
         <Alternatives
           alternatives={this.props.alternatives}
-          handleChange={this.handleChange}
+          handleChange={(...a) => this.handleChange(...a)}
           selectedVote={this.state.selectedVote}
         />
         <Button
           background
           size="lg"
-          onClick={this.handleClick}
+          onClick={() => this.handleClick(...a)}
           disabled={buttonDisabled}
         >
           Submit vote

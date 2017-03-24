@@ -12,12 +12,6 @@ class IssueFormAlternative extends React.Component {
       selectedAlternative: undefined,
     };
 
-    this.handleAddAlternative = this.handleAddAlternative.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.openUpdateDialog = this.openUpdateDialog.bind(this);
-    this.closeUpdateDialog = this.closeUpdateDialog.bind(this);
-    this.updateDialogValue = this.updateDialogValue.bind(this);
-    this.confirmUpdateDialog = this.confirmUpdateDialog.bind(this);
   }
 
   handleAddAlternative() {
@@ -71,32 +65,32 @@ class IssueFormAlternative extends React.Component {
             <li key={alternative.text}>
               {alternative.text}
               <button
-                onClick={() => removeAlternative(alternative.id)}
+                onClick={(...a) => removeAlternative(alternative.id)}
               >Fjern</button>
-              <button onClick={() => this.openUpdateDialog(alternative.id)}>Endre</button>
+              <button onClick={(...a) => this.openUpdateDialog(alternative.id)}>Endre</button>
             </li>,
           )}
         </ul>
 
         <label className="IssueForm-radios">
           <Dialog
-            visible={this.state.showUpdateDialog}
-            onClose={this.closeUpdateDialog}
+            visible={(...a) => this.state.showUpdateDialog(...a)}
+            onClose={(...a) => this.closeUpdateDialog(...a)}
             title="Endre alternativ"
           >
-            <input type="text" onChange={this.updateDialogValue} value={this.state.dialogValue} />
-            <Button onClick={this.confirmUpdateDialog}>Bekreft</Button>
-            <Button onClick={this.closeUpdateDialog}>Avbryt</Button>
+            <input type="text" onChange={(...a) => this.updateDialogValue(...a)} value={this.state.dialogValue} />
+            <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
+            <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
           </Dialog>
 
           <input
             type="text"
             value={alternativeText}
             onChange={e => alternativeUpdate(e.target.value)}
-            onKeyPress={this.handleKeyPress}
+            onKeyPress={(...a) => this.handleKeyPress(...a)}
           />
 
-          <button onClick={this.handleAddAlternative}>Add</button>
+          <button onClick={(...a) => this.handleAddAlternative(...a)}>Add</button>
         </label>
       </div>
     );
