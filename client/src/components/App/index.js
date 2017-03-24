@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import IssueStatus from '../IssueStatus';
-import VoteHandler from '../../containers/VoteHandler';
-import ActiveIssue from '../../containers/ActiveIssue';
+import { VotingMenuContainer } from './VotingMenu';
+import { IssueContainer } from '../Issue';
 import Button from '../Button';
 import Heading from '../Heading';
-import ConcludedIssueListContainer from '../../containers/ConcludedIssueListContainer';
+import { ConcludedIssueContainer } from '../ConcludedIssueList';
 import '../../css/App.css';
 import '../../css/flaticon.css';
 
@@ -16,12 +17,12 @@ const App = props => (
     <div className="App-components">
       <div className="ActiveIssue-components">
         <div className="ActiveIssue-Vote-wrapper">
-          <ActiveIssue />
-          <VoteHandler />
+          <IssueContainer />
+          <VotingMenuContainer />
         </div>
         <IssueStatus />
       </div>
-      <ConcludedIssueListContainer />
+      <ConcludedIssueContainer />
     </div>
   </div>
   );
@@ -34,4 +35,11 @@ App.propTypes = {
   title: PropTypes.string,
 };
 
+const mapStateToProps = state => ({
+  title: state.meeting.title,
+});
+
 export default App;
+export const AppContainer = connect(
+  mapStateToProps,
+)(App);

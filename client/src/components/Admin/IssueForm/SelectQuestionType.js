@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { setQuestionType } from '../../../actionCreators/createIssueForm';
 
 const SelectQuestionType = ({ questionType, handleQuestionTypeChange }) => (
   <select
@@ -15,4 +17,18 @@ SelectQuestionType.propTypes = {
   questionType: PropTypes.number.isRequired,
 };
 
+const mapStateToProps = state => ({
+  questionType: state.questionType,
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleQuestionTypeChange: (resolutionType) => {
+    dispatch(setQuestionType(resolutionType));
+  },
+});
+
 export default SelectQuestionType;
+export const SelectQuestionTypeContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SelectQuestionType);

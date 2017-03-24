@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AdminPanelAlternatives from '../components/Alternatives';
+import Alternatives from '../Alternatives';
 
 const mapStateToProps = state => ({
   // TODO: Reuse selectors from VoteHandler.
@@ -8,4 +8,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-)(AdminPanelAlternatives);
+)(Alternatives);

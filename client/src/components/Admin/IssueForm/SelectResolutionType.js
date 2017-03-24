@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { setResolutionType } from '../../../actionCreators/createIssueForm';
+
 
 const SelectResolutionType = ({ resolutionType, handleResolutionTypeChange }) => (
   <select
@@ -15,4 +18,19 @@ SelectResolutionType.propTypes = {
   resolutionType: PropTypes.number.isRequired,
 };
 
+const mapStateToProps = state => ({
+  resolutionType: state.resolutionType,
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleResolutionTypeChange: (resolutionType) => {
+    dispatch(setResolutionType(resolutionType));
+  },
+});
+
+
 export default SelectResolutionType;
+export const SelectResolutionTypeContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SelectResolutionType);

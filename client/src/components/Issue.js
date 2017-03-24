@@ -18,12 +18,12 @@ Issue.propTypes = {
   text: React.PropTypes.string,
 };
 
+
 const mapStateToProps = state => ({
   text: getIssueText(state),
 });
 
-export const Container = connect(
+export default Issue;
+export const IssueContainer = connect(
   mapStateToProps,
 )(Issue);
-
-export default Issue;

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Button from '../Button';
-import Heading from '../Heading';
-import '../../css/AdminPanel.css';
 import Dialog from '../Dialog';
+import Heading from '../Heading';
+import { toggleRegistration } from '../../actionCreators/adminButtons';
+import '../../css/AdminPanel.css';
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -73,4 +75,19 @@ AdminPanel.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+const mapStateToProps = ({ registrationEnabled }) => ({
+  registrationEnabled,
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggleRegistration: () => {
+    dispatch(toggleRegistration());
+  },
+});
+
+
 export default AdminPanel;
+export const AdminPanelContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AdminPanel);

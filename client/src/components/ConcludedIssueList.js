@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import '../css/ConcludedIssueList.css';
 
@@ -15,3 +16,10 @@ ConcludedIssueList.propTypes = {
 };
 
 export default ConcludedIssueList;
+const mapStateToProps = state => ({
+  issues: state.votingEnabled ? state.issues.slice(0, -1) : state.issues,
+});
+
+export const ConcludedIssueContainer = connect(
+  mapStateToProps,
+)(ConcludedIssueList);

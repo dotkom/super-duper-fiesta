@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative, updateAlternativeText } from '../../../actionCreators/createIssueForm';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
 
-class IssueFormAlternative extends React.Component {
+class Alternative extends React.Component {
   constructor() {
     super();
 
@@ -103,7 +105,7 @@ class IssueFormAlternative extends React.Component {
   }
 }
 
-IssueFormAlternative.propTypes = {
+Alternative.propTypes = {
   alternativeText: PropTypes.string.isRequired,
   alternativeUpdate: PropTypes.func.isRequired,
   updateAlternativeText: PropTypes.func.isRequired,
@@ -115,4 +117,33 @@ IssueFormAlternative.propTypes = {
   })).isRequired,
 };
 
-export default IssueFormAlternative;
+const mapStateToProps = state => ({
+  alternativeText: state.issueFormAlternativeText,
+  // Display the component if the question type is set to multiple choice.
+  display: state.questionType === 1,
+});
+
+const mapDispatchToProps = dispatch => ({
+  alternativeUpdate: (text) => {
+    dispatch(setAlternativeText(text));
+  },
+
+  addAlternative: (text) => {
+    dispatch(addAlternative(text));
+    dispatch(clearAlternativeText());
+  },
+
+  updateAlternativeText: (id, text) => {
+    dispatch(updateAlternativeText(id, text));
+  },
+
+  removeAlternative: (id) => {
+    dispatch(removeAlternative(id));
+  },
+});
+
+export default Alternative;
+export const AlternativeContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Alternative);
