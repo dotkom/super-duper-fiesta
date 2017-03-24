@@ -7,10 +7,10 @@ import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import AdminPanelContainer from './containers/AdminPanelContainer';
 import AppContainer from './containers/AppContainer';
-import AdminHome from './components/AdminHome';
+import AdminHome from './components/Admin/Home';
 import IssueFormContainer from './containers/IssueFormContainer';
 import NotFound from './components/NotFound';
-import Users from './components/Users';
+import Users from './components/Admin/Users';
 import votingApp from './reducers';
 
 const socket = IO.connect();

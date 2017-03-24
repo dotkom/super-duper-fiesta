@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Button from './Button';
-import Heading from './Heading';
-import '../css/AdminPanel.css';
-import Dialog from './Dialog';
+import Button from '../Button';
+import Heading from '../Heading';
+import '../../css/AdminPanel.css';
+import Dialog from '../Dialog';
 
 class AdminPanel extends React.Component {
   constructor(props) {

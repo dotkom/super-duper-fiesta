@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Dialog from './Dialog';
-import Button from './Button';
+import Dialog from '../../Dialog';
+import Button from '../../Button';
 
 class IssueFormAlternative extends React.Component {
   constructor() {

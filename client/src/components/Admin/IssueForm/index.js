@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from './Button';
-import '../css/IssueForm.css';
-import SelectResolutionTypeContainer from '../containers/SelectResolutionTypeContainer';
-import SelectQuestionTypeContainer from '../containers/SelectQuestionTypeContainer';
-import AddIssueFormAlternative from '../containers/AddIssueFormAlternative';
-import IssueFormSettings from '../containers/IssueFormSettings';
+import Button from '../../Button';
+import '../../../css/IssueForm.css';
+import SelectResolutionTypeContainer from '../../../containers/SelectResolutionTypeContainer';
+import SelectQuestionTypeContainer from '../../../containers/SelectQuestionTypeContainer';
+import AddIssueFormAlternative from '../../../containers/AddIssueFormAlternative';
+import IssueFormSettings from '../../../containers/IssueFormSettings';
 
 const YES_NO_ANSWERS = [
   { text: 'Ja' },

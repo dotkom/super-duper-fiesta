@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import UserFilter from '../components/UserFilter';
+import UserFilter from '../components/Admin/Users/Filter';
 import setUserFilter from '../actionCreators/setUserFilter';
 
 const mapStateToProps = state => ({

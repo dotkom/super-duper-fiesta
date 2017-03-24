@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './Button';
-import ActiveIssue from '../containers/ActiveIssue';
+import Button from '../Button';
+import ActiveIssue from '../../containers/ActiveIssue';
 
 const IssueAdmin = ({ closeIssue, issue }) => (
   <div>

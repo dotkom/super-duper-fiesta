@@ -1,6 +1,6 @@
 import React from 'react';
-import UserListContainer from '../containers/UserListContainer';
-import UserFilterContainer from '../containers/UserFilterContainer';
+import UserListContainer from '../../../containers/UserListContainer';
+import UserFilterContainer from '../../../containers/UserFilterContainer';
 
 const Users = () => (
   <div className="Users">

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SelectQuestionType from '../components/SelectQuestionType';
+import SelectQuestionType from '../components/Admin/IssueForm/SelectQuestionType';
 import { setQuestionType } from '../actionCreators/createIssueForm';
 
 const mapStateToProps = state => ({

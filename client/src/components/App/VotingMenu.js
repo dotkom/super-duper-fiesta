@@ -1,7 +1,7 @@
 import React from 'react';
-import Alternatives from './Alternatives';
-import Button from './Button';
-import '../css/VotingMenu.css';
+import Alternatives from '../Alternatives';
+import Button from '../Button';
+import '../../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor() {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import User from './User';
-import '../css/Users.css';
+import '../../../css/Users.css';
 
 const UserList = ({ users, toggleCanVote }) => (
   <table className="Users-list">

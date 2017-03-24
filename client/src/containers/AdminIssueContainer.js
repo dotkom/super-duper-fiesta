@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import IssueAdmin from '../components/IssueAdmin';
+import IssueAdmin from '../components/Admin/IssueAdmin';
 import { adminCloseIssue } from '../actionCreators/adminButtons';
 import { getIssue } from '../selectors/issues';
 

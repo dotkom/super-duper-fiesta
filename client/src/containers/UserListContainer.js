@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
-import UserList from '../components/UserList';
+import UserList from '../components/Admin/Users/List';
 import { toggleCanVote } from '../actionCreators/users';
 
 const mapStateToProps = (state) => {

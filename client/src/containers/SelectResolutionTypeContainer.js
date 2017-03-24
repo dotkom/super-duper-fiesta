@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SelectResolutionType from '../components/SelectResolutionType';
+import SelectResolutionType from '../components/Admin/IssueForm/SelectResolutionType';
 import { setResolutionType } from '../actionCreators/createIssueForm';
 
 const mapStateToProps = state => ({

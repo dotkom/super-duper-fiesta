@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import IssueStatus from './IssueStatus';
-import VoteHandler from '../containers/VoteHandler';
-import ActiveIssue from '../containers/ActiveIssue';
-import Button from './Button';
-import Heading from './Heading';
-import ConcludedIssueListContainer from '../containers/ConcludedIssueListContainer';
-import '../css/App.css';
-import '../css/flaticon.css';
+import IssueStatus from '../IssueStatus';
+import VoteHandler from '../../containers/VoteHandler';
+import ActiveIssue from '../../containers/ActiveIssue';
+import Button from '../Button';
+import Heading from '../Heading';
+import ConcludedIssueListContainer from '../../containers/ConcludedIssueListContainer';
+import '../../css/App.css';
+import '../../css/flaticon.css';
 
 const App = props => (
   <div className="App">

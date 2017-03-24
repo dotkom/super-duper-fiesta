@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import VotingMenu from '../components/VotingMenu';
+import VotingMenu from '../components/App/VotingMenu';
 import { sendVote } from '../actionCreators/issues';
 import getShuffledAlternatives from '../selectors/getShuffledAlternatives';
 import { getIssueId, getIssueKey } from '../selectors/issues';
