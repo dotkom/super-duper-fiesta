@@ -2,8 +2,8 @@ const broadcast = require('../utils').broadcast;
 const emit = require('../utils').emit;
 const logger = require('../logging');
 
-const addQuestion = require('../models/issue').addQuestion;
-const endQuestion = require('../models/issue').endQuestion;
+const addIssue = require('../models/issue').addIssue;
+const endIssue = require('../models/issue').endIssue;
 const getUserByUsername = require('../models/user').getUserByUsername;
 
 module.exports = (socket) => {
@@ -12,9 +12,10 @@ module.exports = (socket) => {
     logger.debug('issue payload', { payload, action: data.type });
     switch (data.type) {
       case 'server/ADMIN_CREATE_ISSUE':
-        addQuestion(payload)
+        addIssue(payload)
         .then((question) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
+          emit(socket, 'OPEN_ISSUE', question, { action: 'open' });
           broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
           return null;
         }).catch((err) => {
@@ -38,7 +39,7 @@ module.exports = (socket) => {
         logger.info('Closing issue.', { issue, adminUser });
         getUserByUsername(adminUser).then((user) => {
           logger.debug('Fetched user profile', { username: user.name, permissions: user.permissions });
-          endQuestion(issue, user)
+          endIssue(issue, user)
           .catch((err) => {
             logger.error('closing issue failed', { err });
             emit(socket, 'issue', {}, {
@@ -50,6 +51,7 @@ module.exports = (socket) => {
             emit(socket, 'CLOSE_ISSUE', updatedIssue);
           });
         }).catch((err) => {
+          console.log('getting user failed', err)
           logger.error('getting user failed', { err });
           emit(socket, 'issue', {}, {
             error: 'Something went wrong. Please try again. If the issue persists,' +

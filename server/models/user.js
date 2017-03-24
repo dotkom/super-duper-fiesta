@@ -80,10 +80,14 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
 
       Promise.all([user.save(), anonymousUser.save()])
         .then((p) => {
+          logger.debug('Created user', user.name);
           resolve({ user: p[0], anonymousUser: p[1] });
-        }).catch(reject);
+        }).catch((err) => {
+          logger.error('Failed to create user', user.name);
+          reject(err);
+        });
       return null;
-    });
+    }).catch(reject);
   });
 }
 

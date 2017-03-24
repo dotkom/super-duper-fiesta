@@ -68,7 +68,6 @@ class AdminPanel extends React.Component {
 }
 
 AdminPanel.propTypes = {
-  createIssue: PropTypes.func.isRequired,
   registrationEnabled: PropTypes.bool.isRequired,
   toggleRegistration: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,

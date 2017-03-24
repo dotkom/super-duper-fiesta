@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const IssueFormCheckboxes = ({ values, updateSetting }) => (
+const IssueFormCheckboxes = ({
+  countBlankVotes, secretVoting, showOnlyWinner,
+  handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner
+}) => (
   <div className="IssueFormCheckboxes">
     <label className="IssueForm-checkbox">
       <input
         type="checkbox"
-        onChange={e => updateSetting(0, e.target.checked)}
-        value={values[0]}
+        onChange={e => handleUpdateSecretVoting(e.target.checked)}
+        checked={secretVoting}
       />
       Hemmelig valg
     </label>
@@ -14,8 +17,8 @@ const IssueFormCheckboxes = ({ values, updateSetting }) => (
     <label className="IssueForm-checkbox">
       <input
         type="checkbox"
-        onChange={e => updateSetting(1, e.target.checked)}
-        value={values[1]}
+        onChange={e => handleUpdateShowOnlyWinner(e.target.checked)}
+        checked={showOnlyWinner}
       />
       Vis kun vinner
     </label>
@@ -23,8 +26,8 @@ const IssueFormCheckboxes = ({ values, updateSetting }) => (
     <label className="IssueForm-checkbox">
       <input
         type="checkbox"
-        onChange={e => updateSetting(2, e.target.checked)}
-        value={values[2]}
+        onChange={e => handleUpdateCountBlankVotes(e.target.checked)}
+        checked={countBlankVotes}
       />
       Tellende blanke stemmer
     </label>

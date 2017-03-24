@@ -6,7 +6,6 @@ const mapStateToProps = state => ({
   alternativeText: state.issueFormAlternativeText,
   // Display the component if the question type is set to multiple choice.
   display: state.questionType === 1,
-  alternatives: state.createIssueAlternatives,
 });
 
 const mapDispatchToProps = dispatch => ({
