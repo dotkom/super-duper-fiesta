@@ -19,5 +19,6 @@ module.exports = (app) => {
   });
   app.use(passport.initialize());
   app.use(passport.session());
-  app.get('/login', passport.authenticate('oauth2', {"successReturnToOrRedirect": "/"}));
+  app.get('/login', passport.authenticate('oauth2', {successReturnToOrRedirect: '/'}));
+  app.get('/auth', passport.authenticate('oauth2', {callback: true}));
 };
