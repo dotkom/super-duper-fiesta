@@ -5,9 +5,14 @@ const app = express();
 
 const server = require('http').Server(app);
 
+
 require('./channels/index').listen(server);
 
 require('./models/essentials');
+
+let auth = require('./auth');
+
+auth(app);
 
 if (process.env.PRODUCTION) {
   const staticDir = './dist';
@@ -22,9 +27,9 @@ if (process.env.PRODUCTION) {
   require('./chokidar.conf.js'); // eslint-disable-line global-require
 }
 
-app.use((req, res, next) => {
-  require('./routes/index')(req, res, next); // eslint-disable-line global-require
-});
+/*app.use((req, res, next) => {
+//  require('./routes/index')(req, res, next); // eslint-disable-line global-require
+});*/
 
 const HOST = process.env.SDF_HOST || 'localhost';
 const PORT = process.env.SDF_PORT || 3000;

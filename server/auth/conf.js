@@ -6,7 +6,6 @@ const OW4OAUTH2_SETUP = {
   callbackURL: process.env.SDF_OAUTH2_CALLBACK_URL || '',
 };
 
-
 module.exports = {
   ids: OW4OAUTH2_SETUP,
 };

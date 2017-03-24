@@ -1,8 +1,9 @@
 const passport = require('passport');
 const getUserByUsername = require('../models/user').getUserByUsername;
 
+require('./providers/ow4.js');
 
-module.exports = () => {
+module.exports = (app) => {
   passport.serializeUser((user, done) => {
     console.log('Serializing user', user);
     done(null, user.id);
@@ -16,4 +17,7 @@ module.exports = () => {
       console.log('Error deserializing user', err);
     });
   });
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.get('/login', passport.authenticate('oauth2  ', {"successReturnToOrRedirect": "/"}));
 };
