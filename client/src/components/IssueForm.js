@@ -59,7 +59,14 @@ class IssueForm extends React.Component {
   }
 
   handleCreateIssue() {
-    this.props.createIssue(...this.state);
+    this.props.createIssue(
+      this.state.issueDescription,
+      this.state.alternatives,
+      this.state.voteDemand,
+      this.state.showOnlyWinner,
+      this.state.secretVoting,
+      this.state.countBlankVotes,
+    );
   }
 
   updateIssueDescription(e) {
