@@ -1,14 +1,13 @@
 pipeline:
   test:
-    image: sdf-prod
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
+    image: node:boron
     environment:
       SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
     when:
       event: pull_request
     commands:
+      - npm install --depth=0 --quiet
+      - ./node_modules/.bin/webpack
       - npm run lint
 
 services:
