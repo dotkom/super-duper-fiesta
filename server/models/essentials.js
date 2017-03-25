@@ -16,3 +16,5 @@ const db = mongoose.connection;
 db.on('error', (err) => {
   logger.error('Could not connect to database.', { err });
 });
+
+module.exports = () => mongoose.connection;
