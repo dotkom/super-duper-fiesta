@@ -1,11 +1,11 @@
 # Super Duper Fiesta
 Electronic voting system for the annual general meeting (AGM), or "generalforsamlingen/genfors" of _Linjeforeningen Online_
 
-## WIP Screenshots
-
-![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
-
 ## How to contribute
+
+### Looking for something to do?
+
+Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/4).
 
 ### Dependencies
 
@@ -39,3 +39,8 @@ emit(socket, 'OPEN_ISSUE', { description: "Issue number 1" });
 ```
 
 This will be emitted on the `action` channel and be passed on to the reducers in the front end.
+
+
+## WIP Screenshots
+
+![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
