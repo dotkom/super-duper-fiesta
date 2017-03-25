@@ -1,0 +1,18 @@
+pipeline:
+  test:
+    image: sdf-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    environment:
+      SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
+    when:
+      event: pull_request
+    commands:
+      - npm run lint
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

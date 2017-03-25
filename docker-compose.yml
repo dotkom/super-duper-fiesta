@@ -8,7 +8,6 @@ services:
       - /data/db
     ports:
       - "27017:27017"
-    command: --smallfiles --rest --auth
 
 
   node:
@@ -28,6 +27,5 @@ services:
       SDF_DATABASE_URL: mongodb://mongo:27017/sdf
     volumes:
       - .:/srv/app/
-      - /arv/app/node_modules
     tty: true
     stdin_open: true
