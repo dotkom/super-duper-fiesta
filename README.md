@@ -15,11 +15,18 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 ### Instructions
 
 - Start by cloning the repository, then running `npm install` from the root directory.
+- Bootstrap the database by running `node server/init.js`.
+- Run `npm start`.
+
+#### Other requirements
+
+- All code is to be linted according to the specification listed in `.eslintrc`.
+
+
+### Architecture
+
 - The project uses React.JS for the frontend code, with redux mixed in for state management.
 - The backend is an ExpressJS web server which exposes WebSockets in addition to a simple API. WebSockets is the primary source of communication in this project.
-- The backend expects MongoDB to be running.
-- All code is to be linted according to the specification listed in `.eslintrc`.
-- Run `server/init.js` to bootstrap up a simple database.
 
 ## Communication between backend and frontend
 
