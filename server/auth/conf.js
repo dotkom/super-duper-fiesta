@@ -1,6 +1,8 @@
+const OW4_OAUTH2_PROVIDER_BACKEND = process.env.SDF_OAUTH2_PROVIDER_BACKEND || '';
+
 const OW4OAUTH2_SETUP = {
-  authorizationURL: process.env.SDF_OAUTH2_AUTHORIZATION_URL || '',
-  tokenURL: process.env.SDF_OAUTH2_TOKEN_URL || '',
+  authorizationURL: OW4_OAUTH2_PROVIDER_BACKEND + process.env.SDF_OAUTH2_AUTHORIZATION_URL || '',
+  tokenURL: OW4_OAUTH2_PROVIDER_BACKEND + process.env.SDF_OAUTH2_TOKEN_URL || '',
   clientID: process.env.SDF_OAUTH2_CLIENT_ID || '',
   clientSecret: process.env.SDF_OAUTH2_CLIENT_SECRET || '',
   callbackURL: process.env.SDF_OAUTH2_CALLBACK_URL || '',
