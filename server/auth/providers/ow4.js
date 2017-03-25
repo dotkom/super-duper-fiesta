@@ -13,9 +13,13 @@ passport.use(new OAuth2Strategy(
     callbackURL: OW4AuthConfig.callbackURL,
   },
   (accessToken, refreshToken, profile, cb) => {
-    console.log(`Getting user by name for ${profile}`);
-    getUserByUsername(profile.username).then(cb).catch((err) => {
+    const adminUsername = 'admin'; // @ToDo: Get username from OW4 Users API endpoint
+    getUserByUsername(adminUsername).then((user) => {
+      console.log('shit worked l0l');
+      cb(null, user, null);
+    }).catch((err) => {
       console.log('Something went wrong when getting user:', err);
+      cb(err, null, null);
     });
     // User.findOrCreate({ exampleId: profile.id }, function (err, user) {
     //  return cb(err, user);
