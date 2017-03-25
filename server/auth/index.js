@@ -22,6 +22,8 @@ module.exports = (app) => {
   app.use(passport.session());
   app.get('/login', passport.authenticate('oauth2', { successReturnToOrRedirect: '/' }));
   app.get('/auth', passport.authenticate('oauth2', { callback: true }), (req, res) => {
+    const authCode = req.query.code;
+    console.log('Authcode:', authCode);
     res.redirect('/');
   });
 };
