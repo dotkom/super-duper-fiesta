@@ -11,8 +11,10 @@ const mapStateToProps = state => ({
 // https://github.com/reactjs/react-redux/issues/237#issuecomment-168817739
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
+
   return {
     ...ownProps,
+    ...stateProps,
     closeIssue: () => {
       dispatch(adminCloseIssue({ issue: stateProps.issue.id, user: 'admin' }));
     },
