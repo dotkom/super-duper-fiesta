@@ -2,13 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../Button';
 import { IssueContainer } from '../Issue';
+import IconText from '../IconText';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssue } from '../../selectors/issues';
 
 const IssueAdmin = ({ closeIssue, issue }) => (
   <div>
     <IssueContainer />
-    <Button background onClick={closeIssue} hidden={!issue}>Avslutt sak</Button>
+    <Button>
+      <IconText text="Rediger" iconClass="flaticon-edit" />
+    </Button>
+    <Button>
+      <IconText text="Resett" iconClass="flaticon-refresh" />
+    </Button>
+    <Button onClick={closeIssue} hidden={!issue}>
+      <IconText text="Avslutt" iconClass="flaticon-lock" />
+    </Button>
+    <Button>
+      <IconText text="Slett" iconClass="flaticon-cross" />
+    </Button>
   </div>
 );
 
