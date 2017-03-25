@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: false },
   name: { type: String, required: true, unique: true },
-  onlinewebId: { type: String, required: true },
+  onlinewebId: { type: String, required: true, unique: true },
   registerDate: { type: Date, default: Date.now() },
   canVote: { type: Boolean, default: false },
   notes: String,
@@ -41,7 +41,7 @@ function getUserById(userId, anonymous) {
 }
 
 function getUserByUsername(username) {
-  return User.findOne({ name: username });
+  return User.findOne({ onlinewebId: username });
 }
 
 function getUsers(genfors, anonymous) {
@@ -70,7 +70,6 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
         onlinewebId,
         notes: '',
         permissions: securityLevel || 0,
-        // @ToDo: Make sure to update this^ to IS_LOGGED_IN when logging users in
       });
 
       const anonymousUser = new AnonymousUser({
@@ -89,6 +88,11 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
       return null;
     }).catch(reject);
   });
+}
+
+
+function updateUserById(id, updatedFields) {
+  return User.findByIdAndUpdate(id, updatedFields);
 }
 
 
@@ -130,4 +134,5 @@ module.exports = {
   setNote,
   setCanVote,
   setGenfors,
+  updateUserById,
 };

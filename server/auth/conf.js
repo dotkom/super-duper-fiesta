@@ -12,6 +12,6 @@ module.exports = {
   ids: OW4OAUTH2_SETUP,
   api: {
     backend: process.env.SDF_OAUTH2_RESOURCE_BACKEND,
-    user_endpoint: process.env.SDF_OW4_USERS_API_ENDPOINT,
+    userEndpoint: process.env.SDF_OW4_USERS_API_ENDPOINT,
   },
 };
