@@ -1,10 +1,13 @@
 import React from 'react';
-import Button from './Button';
-import '../css/IssueForm.css';
-import SelectResolutionTypeContainer from '../containers/SelectResolutionTypeContainer';
-import SelectQuestionTypeContainer from '../containers/SelectQuestionTypeContainer';
-import AddIssueFormAlternative from '../containers/AddIssueFormAlternative';
-import IssueFormSettings from '../containers/IssueFormSettings';
+import { connect } from 'react-redux';
+import Button from '../../Button';
+import '../../../css/IssueForm.css';
+import { createIssue } from '../../../actionCreators/adminButtons';
+import { getIssue } from '../../../selectors/issues';
+import { SelectResolutionTypeContainer } from './SelectResolutionType';
+import { SelectQuestionTypeContainer } from './SelectQuestionType';
+import { AlternativeContainer } from './Alternative';
+import IssueFormSettings from './Settings';
 
 const YES_NO_ANSWERS = [
   { text: 'Ja' },
@@ -80,7 +83,7 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        <AddIssueFormAlternative
+        <AlternativeContainer
           alternatives={this.state.alternatives}
           handleAddAlternative={this.handleAddAlternative}
         />
@@ -119,4 +122,19 @@ IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
 };
 
+const mapStateToProps = state => ({
+  issue: getIssue(state),
+  issueDescription: state.issueDescription ? state.issueDescription : '',
+});
+
+const mapDispatchToProps = dispatch => ({
+  createIssue: (description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes) => {
+    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes));
+  },
+});
+
 export default IssueForm;
+export const IssueFormContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(IssueForm);
