@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import IssueStatus from '../IssueStatus';
 import { VotingMenuContainer } from './VotingMenu';
-import { IssueContainer } from '../Issue';
+import { IssueContainer } from './Issue';
 import Button from '../Button';
 import Heading from '../Heading';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';

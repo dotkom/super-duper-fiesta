@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getIssueText } from '../selectors/issues';
-import '../css/Issue.css';
+import { getIssueText } from '../../selectors/issues';
+import '../../css/Issue.css';
 
 const Issue = ({ text }) => (
   <div className="Issue">
