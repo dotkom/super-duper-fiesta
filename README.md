@@ -50,6 +50,17 @@ This will be emitted on the `action` channel and be passed on to the reducers in
 
 ## Configuration
 
+### ExpressJS
+
+| Key | Description | Example | Default |
+| --- | ---         | ---     | ---     |
+| `PRODUCTION` | Run the app in production mode | `true` | `''` |
+| `SDF_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
+| `SDF_PORT` | Port to run the app on | `3000` | `3000` |
+| `SDF_SCHEME` | HTTP Scheme to run the app on | `http` | `http` |
+| `SDF_DATABASE_URL` | Connection string for MongoDB (including database name) | `mongodb://localhost/` | `mongodb://localhost/sdf` |
+| `SDF_DATABASE_NAME` | Name of MongoDB database | `sdf` | `sdf` |
+
 ### OAuth2
 
 Authentication and authorization happens using OAuth2 and SSO.
@@ -77,3 +88,4 @@ _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, rem
 ## WIP Screenshots
 
 ![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
+
