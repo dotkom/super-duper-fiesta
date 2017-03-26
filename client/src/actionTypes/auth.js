@@ -1,0 +1,2 @@
+export const AUTH_SIGNED_IN = 'AUTH_SIGNED_IN';
+export const AUTH_SIGNED_OUT = 'AUTH_SIGNED_OUT';

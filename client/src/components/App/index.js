@@ -12,7 +12,8 @@ import '../../css/flaticon.css';
 const App = props => (
   <div className="App">
     <Heading link="/" title={props.title}>
-      <Button>Logg ut</Button>
+      <span>{props.fullName}</span>
+      <Button>Logg {props.loggedIn ? 'ut' : 'inn'}</Button>
     </Heading>
     <div className="App-components">
       <div className="ActiveIssue-components">
@@ -28,14 +29,20 @@ const App = props => (
   );
 
 App.defaultProps = {
+  fullName: '',
+  loggedIn: false,
   title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
 };
 
 App.propTypes = {
+  fullName: PropTypes.string,
+  loggedIn: PropTypes.bool,
   title: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
+  fullName: state.auth.fullName,
+  loggedIn: state.auth.loggedIn,
   title: state.meeting.title,
 });
 

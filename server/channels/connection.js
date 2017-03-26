@@ -14,6 +14,17 @@ const emitNoActiveIssue = (socket) => {
 };
 
 const connection = (socket) => {
+  const loggedIn = socket.request.user.logged_in;
+  if (loggedIn) {
+    const user = socket.request.user;
+    emit(socket, 'AUTH_SIGNED_IN', {
+      username: user.onlinewebId,
+      full_name: user.name,
+      logged_in: user.logged_in,
+    });
+  } else {
+    emit(socket, 'AUTH_SIGNED_OUT', {});
+  }
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
       emit(socket, 'OPEN_MEETING', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
