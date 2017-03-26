@@ -32,7 +32,7 @@ function getQuestions(genfors) {
   return Question.find({ genfors }).exec();
 }
 function getActiveQuestion(genfors) {
-  return Question.findOne({ genfors, active: true }).exec();
+  return Question.findOne({ genfors, active: true });
 }
 function getClosedQuestions(genfors) {
   return Question.find({ genfors, active: false }).exec();
@@ -40,10 +40,9 @@ function getClosedQuestions(genfors) {
 
 function endQuestion(question, user) {
   return new Promise((resolve, reject) => {
-//    logger.debug('endquestion', { question });
+    logger.debug('Closing issue', { issue: question });
     getActiveGenfors().then((genfors) => {
       canEdit(permissionLevel.IS_MANAGER, user, genfors).then((result) => {
-//        logger.debug('security check returned', { result });
         if (result === true) {
           return Question.findByIdAndUpdate(question, { active: false })
           .then(resolve).catch(reject);
@@ -72,13 +71,13 @@ function addQuestion(issueData, closeCurrentIssue) {
 
       getActiveQuestion(genfors)
       .catch((err) => {
-        logger.error('Something went wrong while getting active questions', { err });
+        logger.error('Something went wrong while getting active questions', err);
       }).then((_issue) => {
         if (_issue && _issue.active && !closeCurrentIssue) {
           reject("There's already an active question");
           return null;
         } else if (_issue && !_issue.active && closeCurrentIssue) {
-          logger.info("There's already an active issue. Closing it and proceeding", {
+          logger.warn("There's already an active issue. Closing it and proceeding", {
             issue: _issue.description,
             // user: user,
             closeCurrentIssue,
@@ -92,7 +91,7 @@ function addQuestion(issueData, closeCurrentIssue) {
             qualifiedVoters: users.length,
             currentVotes: 0,
           });
-          logger.debug(Object.keys(issue));
+          logger.debug('Created issue', { issue });
 
           // @ToDo: Create alternatives, map it to issue obj, then create issue.
           return new Question(issue).save().then(resolve).catch(reject);

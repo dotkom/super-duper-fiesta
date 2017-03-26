@@ -82,7 +82,7 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
           logger.debug('Created user', user.name);
           resolve({ user: p[0], anonymousUser: p[1] });
         }).catch((err) => {
-          logger.error('Failed to create user', user.name);
+          logger.error('Failed to create user', err);
           reject(err);
         });
       return null;
@@ -107,9 +107,9 @@ function setNote(user, targetUser, note) {
 function setGenfors(user, anonymousUser, genfors) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
-      logger.debug('updating user');
+      logger.debug('Setting genfors on User', { user });
       User.findByIdAndUpdate(user, { genfors }).then(() => {
-        logger.debug('one done, one to go');
+        logger.debug('Setting genfors on AnonymousUser', { anonymousUser });
         AnonymousUser.findByIdAndUpdate(anonymousUser, { genfors }).then(resolve).catch(reject);
       }).catch(reject);
     }).catch(reject);

@@ -45,7 +45,8 @@ app.use((req, res, next) => {
 
 const HOST = process.env.SDF_HOST || 'localhost';
 const PORT = process.env.SDF_PORT || 3000;
+const SCHEME = process.env.SDF_SCHEME || 'http';
 
 server.listen(PORT, HOST, () => {
-  logger.info('Running super-duper-fiesta on %s:%s', HOST, PORT);
+  logger.info(`Running super-duper-fiesta on ${SCHEME}://${HOST}:${PORT}`);
 });
