@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: false },
   name: { type: String, required: true, unique: true },
-  onlinewebId: { type: String, required: true },
+  onlinewebId: { type: String, required: true, unique: true },
   registerDate: { type: Date, default: Date.now() },
   canVote: { type: Boolean, default: false },
   notes: String,
@@ -41,7 +41,7 @@ function getUserById(userId, anonymous) {
 }
 
 function getUserByUsername(username) {
-  return User.findOne({ name: username });
+  return User.findOne({ onlinewebId: username });
 }
 
 function getUsers(genfors, anonymous) {
@@ -70,7 +70,6 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
         onlinewebId,
         notes: '',
         permissions: securityLevel || 0,
-        // @ToDo: Make sure to update this^ to IS_LOGGED_IN when logging users in
       });
 
       const anonymousUser = new AnonymousUser({
@@ -83,12 +82,17 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
           logger.debug('Created user', user.name);
           resolve({ user: p[0], anonymousUser: p[1] });
         }).catch((err) => {
-          logger.error('Failed to create user', user.name);
+          logger.error('Failed to create user', err);
           reject(err);
         });
       return null;
     }).catch(reject);
   });
+}
+
+
+function updateUserById(id, updatedFields) {
+  return User.findByIdAndUpdate(id, updatedFields);
 }
 
 
@@ -103,9 +107,9 @@ function setNote(user, targetUser, note) {
 function setGenfors(user, anonymousUser, genfors) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
-      logger.debug('updating user');
+      logger.debug('Setting genfors on User', { user });
       User.findByIdAndUpdate(user, { genfors }).then(() => {
-        logger.debug('one done, one to go');
+        logger.debug('Setting genfors on AnonymousUser', { anonymousUser });
         AnonymousUser.findByIdAndUpdate(anonymousUser, { genfors }).then(resolve).catch(reject);
       }).catch(reject);
     }).catch(reject);
@@ -130,4 +134,5 @@ module.exports = {
   setNote,
   setCanVote,
   setGenfors,
+  updateUserById,
 };

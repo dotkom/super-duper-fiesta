@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import auth from './auth';
 import issues from './issues';
 import meeting from './meeting';
 import voterKey from './voterKey';
@@ -16,6 +17,7 @@ import {
 } from './createIssueForm';
 
 const votingApp = combineReducers({
+  auth,
   issues,
   meeting,
   voterKey,
