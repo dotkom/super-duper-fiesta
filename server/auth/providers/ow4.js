@@ -66,6 +66,7 @@ passport.use(new OAuth2Strategy(
     clientID: OW4AuthConfig.clientID,
     clientSecret: OW4AuthConfig.clientSecret,
     callbackURL: OW4AuthConfig.callbackURL,
+    scope: OW4AuthConfig.scope,
   },
   (accessToken, refreshToken, profile, cb) => {
     getClientInformation(accessToken, cb);

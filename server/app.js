@@ -27,10 +27,12 @@ const server = require('http').Server(app);
 require('./channels/index').listen(server, mongooseConnection);
 
 if (process.env.PRODUCTION) {
+  // Register dist path for static files in prod
   const staticDir = './dist';
   logger.info(`Serving staticfiles from ${staticDir}`);
   app.use('/dist', express.static(staticDir));
 } else {
+  // Run webpack-dev-server
   const addWebpackMiddlewares = require('./webpack-dev-middleware'); // eslint-disable-line global-require
   logger.info('Starting webpack hot-reloading client');
   addWebpackMiddlewares(app);
