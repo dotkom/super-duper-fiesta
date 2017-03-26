@@ -1,4 +1,5 @@
 const cookieParser = require('cookie-parser');
+const logger = require('../logging');
 const socketio = require('socket.io');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -8,14 +9,14 @@ const connection = require('./connection');
 const issue = require('./issue');
 
 const authorizeSuccess = (data, accept) => {
-  console.log('Authorized socket connection');
+  logger.silly('Authorized socket connection');
   accept();
 };
 
 const authorizeFailure = (data, message, error, accept) => {
-  console.log(`Authorization failed for socket connection: ${message}`);
+  logger.silly(`Authorization failed for socket connection: ${message}`);
   if (error) {
-    console.log('Error occured!');
+    logger.error(`Error occured: ${message}`, error);
     accept(new Error(message));
   }
 };

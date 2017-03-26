@@ -1,21 +1,23 @@
+const logger = require('../logging');
 const passport = require('passport');
+
 const getUserById = require('../models/user').getUserById;
 
 require('./providers/ow4.js');
 
 module.exports = (app) => {
   passport.serializeUser((user, done) => {
-    console.log('Serializing user', user);
+    logger.silly('Serializing user', { user });
     done(null, user._id); // eslint-disable-line no-underscore-dangle
   });
 
   passport.deserializeUser((id, done) => {
-    console.log(`Deserializing user by id ${id}`);
+    logger.silly('Deserializing user', { userId: id });
     getUserById(id).then((user) => {
-      console.log('Deserialized user', user.name);
+      logger.silly('Deserialized user', { username: user.onlinewebId, fullName: user.name });
       done(null, user);
     }).catch((err) => {
-      console.log('Error deserializing user', err);
+      logger.error('Error deserializing user', err);
     });
   });
   app.use(passport.initialize());

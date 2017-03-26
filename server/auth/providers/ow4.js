@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const logger = require('../../logging');
 const passport = require('passport');
 const OAuth2Strategy = require('passport-oauth2');
 
@@ -27,17 +28,18 @@ const getClientInformation = (accessToken, cb) => {
     getUserByUsername(username).then((user) => {
       if (user === null) {
         // Create user if not exists
-        console.log('User does not exist -- creating');
+        logger.debug('User does not exist -- creating', { username });
         addUser(fullName, username, '12345678', permissionLevel).then((newUsers) => {
           const newUser = newUsers.user; // We get user and anonUser objects, but only need user
-          console.log(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`);
+          logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`,
+            { username, fullName: newUser.name, genfors: newUser.genfors });
           cb(null, newUser, null);
         }).catch((createUserErr) => {
-          console.log('Creating user failed:', createUserErr);
+          logger.error('Creating user failed:', createUserErr);
           cb(createUserErr, null, null);
         });
       } else {
-        console.log('Fetched existing user, updating.');
+        logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });
         // Update if user exists
         updateUserById(user._id, { // eslint-disable-line no-underscore-dangle
           name: fullName,
@@ -46,16 +48,16 @@ const getClientInformation = (accessToken, cb) => {
         }).then((updatedUser) => {
           cb(null, updatedUser, null);
         }).catch((err) => {
-          console.log('Something went wrong when updating user.', err);
+          logger.error('Something went wrong when updating user.', err);
           cb(err, null, null);
         });
       }
     }).catch((err) => {
-      console.log('Updating user failed. Try again.');
+      logger.error('Updating user failed. Try again.', { username });
       cb(err, null, null);
     });
   }).catch((err) => {
-    console.log('Fetching user from resource failed', err);
+    logger.error('Fetching user from resource failed', err);
   });
 };
 
