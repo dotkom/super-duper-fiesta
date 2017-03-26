@@ -48,6 +48,32 @@ emit(socket, 'OPEN_ISSUE', { description: "Issue number 1" });
 This will be emitted on the `action` channel and be passed on to the reducers in the front end.
 
 
+## Configuration
+
+### OAuth2
+
+Authentication and authorization happens using OAuth2 and SSO.
+
+Make sure to have access to the OAuth2 client ID and secret for the app, or create your own.
+
+To configure the app to use the OAuth2 provider, set the following values using environment variables (`export KEY=VALUE`).
+
+| Key | Description | Example | Default |
+| --- | ---         | ---     | ---     |
+| `SDF_OAUTH2_RESOURCE_BACKEND` | Resource backend (API) | `http://127.0.0.1:8000` | `''` |
+| `SDF_OW4_USERS_API_ENDPOINT` | Endpoint for the users resource | `/sso/user/` |  `/sso/user/` |
+| `SDF_OAUTH2_PROVIDER_BACKEND` | OAuth2 Provider backend | `http://127.0.0.1:8000` | `''` |
+| `SDF_OAUTH2_AUTHORIZATION_URL` | URL to redirect user to for OAuth2 authorization | `/sso/o/authorize/` | `/sso/o/authorize/` |
+| `SDF_OAUTH2_TOKEN_URL` | URL to fetch OAuth2 token | `/sso/o/token/` | `/sso/o/token/` |
+| `SDF_OAUTH2_CLIENT_ID` | Client ID for app | `client id` | `''` |
+| `SDF_OAUTH2_CLIENT_SECRET` | Client secret for app | `client secret` | `''` |
+| `SDF_OAUTH2_CALLBACK_URL` | Callback URL to the app | `http://127.0.0.1:3000/auth` | `''` |
+
+(Tip: Use a tool like "autoenv" to automatically set environment variables upon entering a project directory.)
+
+_If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
+
+
 ## WIP Screenshots
 
 ![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
