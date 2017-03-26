@@ -10,7 +10,7 @@ const AdminHome = () => (
     <div className="ActiveIssue-components">
       <div className="ActiveIssue-Vote-wrapper">
         <IssueContainer />
-        <Alternatives />
+        <Alternatives disabled />
       </div>
       <IssueStatus />
     </div>

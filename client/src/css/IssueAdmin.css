@@ -4,17 +4,16 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  color: #717171;
 }
 
 .IssueAdmin-heading {
   margin: 3rem 0 0 0;
-  color: #717171;
 }
 
 .IssueAdmin-title {
   font-size: 1.3em;
   font-weight: normal;
-  color: #717171;
 }
 
 .IssueAdmin-actions {
