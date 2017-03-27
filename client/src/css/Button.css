@@ -4,11 +4,15 @@
   font-size: 1.1em;
   border: 1px solid transparent;
   background: transparent;
-  color: #8186b3;
+  color: #636bb2;
 }
 
 .Button:hover {
-  color: #32355a;
+  color: #141523;
+}
+
+.Button:focus {
+  outline: 0;
 }
 
 .Button--background {

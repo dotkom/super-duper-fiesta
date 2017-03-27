@@ -9,3 +9,7 @@
   font-size: 2em;
   text-align: center;
 }
+
+.Button:hover .IconText:before {
+  transform: scale(1.1);
+}
