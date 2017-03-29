@@ -43,7 +43,7 @@ class VotingMenu extends React.Component {
         <Button
           background
           size="lg"
-          onClick={() => this.handleClick(...a)}
+          onClick={() => this.handleClick()}
           disabled={buttonDisabled}
         >
           Submit vote

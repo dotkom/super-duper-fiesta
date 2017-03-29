@@ -65,9 +65,9 @@ class IssueFormAlternative extends React.Component {
             <li key={alternative.text}>
               {alternative.text}
               <button
-                onClick={(...a) => removeAlternative(alternative.id)}
+                onClick={() => removeAlternative(alternative.id)}
               >Fjern</button>
-              <button onClick={(...a) => this.openUpdateDialog(alternative.id)}>Endre</button>
+              <button onClick={() => this.openUpdateDialog(alternative.id)}>Endre</button>
             </li>,
           )}
         </ul>
