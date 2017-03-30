@@ -70,7 +70,7 @@ class IssueForm extends React.Component {
           <textarea
             onChange={() => this.updateIssueDescription()}
             placeholder="Skriv inn saken her."
-            value={() => this.state.issueDescription()}
+            value={this.state.issueDescription}
           />
           <p>Beskrivelse av saken</p>
         </label>
