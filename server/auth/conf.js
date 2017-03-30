@@ -1,8 +1,10 @@
+const logger = require('../logging');
+
 const OW4_OAUTH2_PROVIDER_BACKEND = process.env.SDF_OAUTH2_PROVIDER_BACKEND || '';
 
 const OW4OAUTH2_SETUP = {
-  authorizationURL: OW4_OAUTH2_PROVIDER_BACKEND + process.env.SDF_OAUTH2_AUTHORIZATION_URL || '/sso/o/authorize/',
-  tokenURL: OW4_OAUTH2_PROVIDER_BACKEND + process.env.SDF_OAUTH2_TOKEN_URL || '/sso/o/token/',
+  authorizationURL: OW4_OAUTH2_PROVIDER_BACKEND + (process.env.SDF_OAUTH2_AUTHORIZATION_URL || '/sso/o/authorize/'),
+  tokenURL: OW4_OAUTH2_PROVIDER_BACKEND + (process.env.SDF_OAUTH2_TOKEN_URL || '/sso/o/token/'),
   clientID: process.env.SDF_OAUTH2_CLIENT_ID || 'default_key',
   clientSecret: process.env.SDF_OAUTH2_CLIENT_SECRET || '',
   callbackURL: process.env.SDF_OAUTH2_CALLBACK_URL || 'http://127.0.0.1:3000/auth',
@@ -15,6 +17,8 @@ const OW4OAUTH2_SETUP = {
     'authentication.onlineuser.nickname.read',
     'authentication.onlineuser.rfid.read'].join(' '),
 };
+
+logger.info('Running OAuth2 with the following settings.', OW4OAUTH2_SETUP);
 
 module.exports = {
   ids: OW4OAUTH2_SETUP,
