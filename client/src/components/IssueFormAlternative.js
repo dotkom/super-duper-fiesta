@@ -74,7 +74,7 @@ class IssueFormAlternative extends React.Component {
 
         <label className="IssueForm-radios">
           <Dialog
-            visible={(...a) => this.state.showUpdateDialog(...a)}
+            visible={this.state.showUpdateDialog}
             onClose={(...a) => this.closeUpdateDialog(...a)}
             title="Endre alternativ"
           >
