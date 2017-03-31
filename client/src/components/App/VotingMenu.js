@@ -2,17 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { getIssueId, getIssueKey } from '../../selectors/issues';
+import { getIssue, getIssueId } from '../../selectors/issues';
+import { getOwnVote } from '../../selectors/voting';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
 import '../../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      selectedVote: undefined,
+      selectedVote: this.props.votedState.alternative,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +40,7 @@ class VotingMenu extends React.Component {
   render() {
     const isLoggedIn = this.props.loggedIn;
     const hasSelectedVote = this.state.selectedVote !== undefined;
-    const hasVoted = this.props.votedState;
+    const hasVoted = this.props.votedState.alternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
 
     return (
@@ -57,6 +58,19 @@ class VotingMenu extends React.Component {
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
+        {hasVoted ?
+          <Button
+            background
+            size="lg"
+            onClick={() => this.setState({
+              selectedVote: this.state.selectedVote === this.props.votedState.alternative ?
+                undefined : this.props.votedState.alternative,
+            })}
+          >
+            {this.state.selectedVote === this.props.votedState.alternative ?
+              'Skjul min stemme' : 'Vis min stemme'}
+          </Button> : ''
+        }
       </div>
     );
   }
@@ -66,6 +80,10 @@ VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
   issueId: '',
+  votedState: {
+    alternative: undefined,
+    voter: undefined,
+  },
 };
 
 VotingMenu.propTypes = {
@@ -74,11 +92,10 @@ VotingMenu.propTypes = {
   issueId: React.PropTypes.string,
   loggedIn: React.PropTypes.bool.isRequired,
 
-  votedState: React.PropTypes.bool.isRequired,
-  votes: React.PropTypes.arrayOf(React.PropTypes.shape({
+  votedState: React.PropTypes.shape({
     alternative: React.PropTypes.string,
-    id: React.PropTypes.string,
-  })).isRequired,
+    voter: React.PropTypes.string,
+  }),
   voterKey: React.PropTypes.number,
 };
 
@@ -91,12 +108,10 @@ const mapStateToProps = state => ({
   // available alternatives are changed.
   alternatives: getShuffledAlternatives(state),
 
-  votes: getIssueKey(state, 'votes', []),
-
   // The ID, or undefined, if there is no current issue.
   issueId: getIssueId(state),
 
-  votedState: state.votedState,
+  votedState: getOwnVote(state, state.auth.id),
   voterKey: state.voterKey,
 });
 

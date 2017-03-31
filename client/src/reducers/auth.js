@@ -7,11 +7,13 @@ const signIn = (state = {}, action) => {
         username: action.data.username,
         fullName: action.data.full_name,
         loggedIn: action.data.logged_in,
+        id: action.data.id,
       };
     }
 
     case AUTH_SIGNED_OUT: {
       return {
+        id: '',
         username: '',
         fullName: '',
         loggedIn: false,

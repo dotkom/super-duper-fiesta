@@ -3,7 +3,6 @@ import auth from './auth';
 import issues from './issues';
 import meeting from './meeting';
 import voterKey from './voterKey';
-import votedState from './votedState';
 import votingEnabled from './votingEnabled';
 import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
@@ -26,7 +25,6 @@ const votingApp = combineReducers({
   registrationEnabled,
   userFilter,
   users,
-  votedState,
 
   resolutionType,
   questionType,

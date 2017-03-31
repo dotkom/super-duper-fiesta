@@ -15,45 +15,49 @@ const issue = (state = {}, action, currentIssue) => {
           return alternative;
         }),
         qualifiedVoters: action.data.qualifiedVoters,
-        votes: [],
+        votes: {},
         resolutionType: action.resolutionType,
         voteDemand: action.data.voteDemand,
       };
     }
 
-    case SEND_VOTE:
+    case SEND_VOTE: {
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
       if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
+      const voter = action.voter;
 
       return Object.assign({}, state, {
-        votes: [
+        votes: {
           ...state.votes,
 
-          {
+          [voter]: {
             alternative: action.alternative,
-            voter: action.voter,
+            voter,
           },
-        ],
+        },
       });
+    }
 
-    case RECEIVE_VOTE:
+    case RECEIVE_VOTE: {
       if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
+      const voter = action.voter;
 
       return Object.assign({}, state, {
-        votes: [
+        votes: {
           ...state.votes,
 
-          {
+          [voter]: {
             alternative: action.alternative,
-            voter: action.voter,
+            voter,
           },
-        ],
+        },
       });
+    }
 
     default:
       return state;
