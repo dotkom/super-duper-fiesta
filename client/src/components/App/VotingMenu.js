@@ -27,7 +27,7 @@ class VotingMenu extends React.Component {
 
   handleClick() {
     // Voting is only allowed when you have a key.
-    if (this.props.voterKey) {
+    if (this.props.loggedIn) {
       this.props.handleVote(
         this.props.issueId,
         this.state.selectedVote,
@@ -37,9 +37,10 @@ class VotingMenu extends React.Component {
   }
 
   render() {
+    const isLoggedIn = this.props.loggedIn;
     const hasSelectedVote = this.state.selectedVote !== undefined;
     const hasVoted = this.props.votedState;
-    const buttonDisabled = !hasSelectedVote || hasVoted;
+    const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
 
     return (
       <div className="VotingMenu">
@@ -71,6 +72,7 @@ VotingMenu.propTypes = {
   alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
+  loggedIn: React.PropTypes.bool.isRequired,
 
   votedState: React.PropTypes.bool.isRequired,
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -99,7 +101,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleVote: (id, alternative, voter) => {
+  handleVote: (id, alternative) => {
     dispatch(submitRegularVote(id, alternative));
   },
 });
