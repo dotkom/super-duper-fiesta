@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { getIssueId, getIssueKey } from '../../selectors/issues';
+import { getIssueId } from '../../selectors/issues';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
 import '../../css/VotingMenu.css';
@@ -75,10 +75,6 @@ VotingMenu.propTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
 
   votedState: React.PropTypes.bool.isRequired,
-  votes: React.PropTypes.arrayOf(React.PropTypes.shape({
-    alternative: React.PropTypes.string,
-    id: React.PropTypes.string,
-  })).isRequired,
   voterKey: React.PropTypes.number,
 };
 
@@ -90,8 +86,6 @@ const mapStateToProps = state => ({
   // scrambles in sync and avoids rescrambling unless the
   // available alternatives are changed.
   alternatives: getShuffledAlternatives(state),
-
-  votes: getIssueKey(state, 'votes', []),
 
   // The ID, or undefined, if there is no current issue.
   issueId: getIssueId(state),
