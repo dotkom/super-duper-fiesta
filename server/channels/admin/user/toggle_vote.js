@@ -15,15 +15,16 @@ module.exports = (socket) => {
           adminUser: adminUser.name,
           userId,
           currentCanVote: canVote,
+          expectedCanVote: !canVote,
         });
-        updateUserById(userId, { canVote: !canVote })
+        updateUserById(userId, { canVote: !canVote }, { new: true })
         .then((user) => {
           logger.debug('Updated canVote for user.', {
             adminUser: adminUser.name,
             userId,
             userName: user.onlinewebId,
             userFullName: user.name,
-            currentCanVote: user.canVote,
+            canVote: user.canVote,
           });
           emit(socket, 'TOGGLE_CAN_VOTE', user);
           broadcast(socket, 'TOGGLE_CAN_VOTE', user);
