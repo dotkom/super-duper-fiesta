@@ -1,40 +1,50 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
-import { toggleCanVote } from '../../../actionCreators/users';
+import { requestUserList, toggleCanVote } from '../../../actionCreators/users';
 import User from './User';
 import '../../../css/Users.css';
 
-const UserList = ({ users, toggleCanVote }) => (
-  <table className="Users-list">
-    <thead>
-      <tr>
-        <th className="Users-list--left">Bruker</th>
-        <th className="Users-list--right">Registrert</th>
-        <th className="Users-list--right">Toggle voting</th>
-      </tr>
-    </thead>
-    <tbody>
-      {users.map(user =>
-        <User
-          name={user.name}
-          canVote={user.canVote}
-          key={user.id}
-          toggleCanVote={toggleCanVote}
-          id={user.id}
-        />,
-      )}
-    </tbody>
-  </table>
-);
+class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.requestUserList();
+  }
+  render() {
+    const { users, toggleCanVote } = this.props;
+    return (
+      <table className="Users-list">
+        <thead>
+          <tr>
+            <th className="Users-list--left">Bruker</th>
+            <th className="Users-list--right">Registrert</th>
+            <th className="Users-list--right">Toggle voting</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user =>
+            <User
+              name={user.name}
+              canVote={user.canVote}
+              key={user.id}
+              registered={user.registered}
+              toggleCanVote={toggleCanVote}
+              id={user.id}
+            />,
+          )}
+        </tbody>
+      </table>
+    );
+  }
+}
 
 UserList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     canVote: PropTypes.bool.isRequired,
   })).isRequired,
-
+  requestUserList: PropTypes.func.isRequired,
   toggleCanVote: PropTypes.func.isRequired,
 };
 
@@ -58,6 +68,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   toggleCanVote: (id) => {
     dispatch(toggleCanVote(id));
+  },
+  requestUserList: () => {
+    dispatch(requestUserList());
   },
 });
 

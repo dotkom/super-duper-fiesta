@@ -1,4 +1,4 @@
-import { ADD_USER, TOGGLE_CAN_VOTE } from '../actionTypes/users';
+import { ADD_USER, TOGGLE_CAN_VOTE, RECEIVE_USER_LIST } from '../actionTypes/users';
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -14,9 +14,10 @@ const user = (state = {}, action) => {
 
     case ADD_USER:
       return {
-        id: action.id,
-        name: action.name,
-        canVote: false,
+        id: action.user._id, // eslint-disable-line no-underscore-dangle
+        name: action.user.name,
+        canVote: action.user.canVote,
+        registered: action.user.registerDate,
       };
 
     default:
@@ -24,27 +25,13 @@ const user = (state = {}, action) => {
   }
 };
 
-const defaultUsers = [
-  {
-    id: 0,
-    canVote: true,
-    name: 'Torjus Iveland',
-  },
-
-  {
-    id: 1,
-    canVote: false,
-    name: 'Håkon Solbjørg',
-  },
-];
-
-const users = (state = defaultUsers, action) => {
+const users = (state = [], action) => {
   switch (action.type) {
     case TOGGLE_CAN_VOTE:
       return state.map(u => user(u, action));
 
-    case ADD_USER:
-      return [...state, user(undefined, action)];
+    case RECEIVE_USER_LIST: // Expecting that receiving a user list contains all users.
+      return action.data.map(u => user(undefined, { type: ADD_USER, user: u }));
 
     default:
       return state;
