@@ -3,6 +3,8 @@ const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
+const getVotes = require('../models/vote').getVotes;
+const haveIVoted = require('../models/vote').haveIVoted;
 
 const emitNoActiveIssue = (socket) => {
   logger.debug('No active issue.');
@@ -36,6 +38,25 @@ const connection = (socket) => {
         } else {
           logger.debug('Current issue', { issue: issue.description });
           emit(socket, 'OPEN_ISSUE', issue);
+
+          // Issue is active, let's emit already given votes.
+          getVotes(issue)
+          .then((votes) => {
+            votes.forEach((vote) => {
+              emit(socket, 'ADD_VOTE', vote);
+            });
+          })
+          .catch((err) => {
+            logger.error('Fetching stored votes failed for issue', err, { issue });
+          });
+
+          // Emit voted state if user has voted.
+          haveIVoted(issue, socket.request.user)
+          .then((voted) => {
+            emit(socket, 'VOTED_STATE', { voted });
+          }).catch((err) => {
+            logger.error('Something went wrong when checking for vote status', err);
+          });
         }
       }).catch((err) => {
         logger.error('Getting currently active issue failed.', err);

@@ -37,8 +37,9 @@ class VotingMenu extends React.Component {
   }
 
   render() {
-    const buttonDisabled = this.state.selectedVote === undefined ||
-      (this.props.votes.some(vote => vote.voter === this.props.voterKey));
+    const hasSelectedVote = this.state.selectedVote !== undefined;
+    const hasVoted = this.props.votedState;
+    const buttonDisabled = !hasSelectedVote || hasVoted;
 
     return (
       <div className="VotingMenu">
@@ -53,7 +54,7 @@ class VotingMenu extends React.Component {
           onClick={this.handleClick}
           disabled={buttonDisabled}
         >
-          Submit vote
+          {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
       </div>
     );
@@ -71,11 +72,11 @@ VotingMenu.propTypes = {
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
 
+  votedState: React.PropTypes.bool.isRequired,
   votes: React.PropTypes.arrayOf(React.PropTypes.shape({
     alternative: React.PropTypes.string,
     id: React.PropTypes.string,
   })).isRequired,
-
   voterKey: React.PropTypes.number,
 };
 
@@ -93,6 +94,7 @@ const mapStateToProps = state => ({
   // The ID, or undefined, if there is no current issue.
   issueId: getIssueId(state),
 
+  votedState: state.votedState,
   voterKey: state.voterKey,
 });
 

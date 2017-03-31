@@ -27,19 +27,19 @@ function haveIVoted(question, user, anonymousUser) {
     Vote.find({ question, user }).exec().then((vote) => {
       if (Object.keys(vote).length > 0) {
         // It didn't fail so user has voted!
-        reject(); // !!!!!
+        resolve(true); // !!!!!
       } else {
         Vote.find({ question, user: anonymousUser }).exec().then((_vote) => {
           if (Object.keys(_vote).length > 0) {
             // It didn't fail so user has voted!
-            reject(); // !!!!!
+            resolve(true); // !!!!!
           } else {
-            resolve();
+            resolve(false);
           }
-        }).catch();
+        }).catch(reject);
       }
-    }).catch();
-  }).catch();
+    }).catch(reject);
+  });
 }
 
 function addVote(issueId, user, option, anonymousUser) {
@@ -86,4 +86,5 @@ function addVote(issueId, user, option, anonymousUser) {
 module.exports = {
   addVote,
   getVotes,
+  haveIVoted,
 };
