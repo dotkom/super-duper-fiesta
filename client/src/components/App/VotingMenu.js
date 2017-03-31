@@ -58,6 +58,19 @@ class VotingMenu extends React.Component {
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
+        {hasVoted ?
+          <Button
+            background
+            size="lg"
+            onClick={() => this.setState({
+              selectedVote: this.state.selectedVote === this.props.votedState.alternative ?
+                undefined : this.props.votedState.alternative,
+            })}
+          >
+            {this.state.selectedVote === this.props.votedState.alternative ?
+              'Skjul min stemme' : 'Vis min stemme'}
+          </Button> : ''
+        }
       </div>
     );
   }
