@@ -2,8 +2,8 @@ import { ADD_USER, TOGGLE_CAN_VOTE, RECEIVE_USER_LIST } from '../actionTypes/use
 
 const user = (state = {}, action) => {
   switch (action.type) {
-    case TOGGLE_CAN_VOTE:
-      if (state.id !== action.id) {
+    case TOGGLE_CAN_VOTE: {
+      if (state.id !== action.data._id) { // eslint-disable-line no-underscore-dangle
         return state;
       }
 
@@ -11,6 +11,7 @@ const user = (state = {}, action) => {
         ...state,
         canVote: !state.canVote,
       };
+    }
 
     case ADD_USER:
       return {

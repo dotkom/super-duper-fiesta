@@ -1,8 +1,14 @@
-import { ADD_USER, FETCHING_USER_LIST_STATE, REQUEST_USER_LIST, RECEIVE_USER_LIST,
+import { ADD_USER, ADMIN_TOGGLE_CAN_VOTE, REQUEST_USER_LIST, RECEIVE_USER_LIST,
    TOGGLE_CAN_VOTE } from '../actionTypes/users';
 
-export const toggleCanVote = id => ({
+export const toggleCanVote = user => ({
   type: TOGGLE_CAN_VOTE,
+  user,
+});
+
+export const adminToggleCanVote = (id, canVote) => ({
+  type: ADMIN_TOGGLE_CAN_VOTE,
+  canVote,
   id,
 });
 

@@ -10,9 +10,13 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
   return (
     <tr className={userClass}>
       <td className="Users-list--left">{name}</td>
-      <td className="Users-list--right">{registeredDate.toLocaleString()} ({registeredDate.fromNow()})</td>
       <td className="Users-list--right">
-        <button onClick={() => toggleCanVote(id)}>Toggle voting</button>
+        {registeredDate.toLocaleString()} ({registeredDate.fromNow()})
+      </td>
+      <td className="Users-list--right">
+        <button onClick={() => toggleCanVote(id, canVote)}>
+          {canVote ? 'Fjern stemmerett' : 'Gi stemmerett'}
+        </button>
       </td>
     </tr>
   );

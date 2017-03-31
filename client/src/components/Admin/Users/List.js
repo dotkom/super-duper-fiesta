@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
-import { requestUserList, toggleCanVote } from '../../../actionCreators/users';
+import { requestUserList, adminToggleCanVote } from '../../../actionCreators/users';
 import User from './User';
 import '../../../css/Users.css';
 
@@ -18,7 +18,7 @@ class UserList extends React.Component {
           <tr>
             <th className="Users-list--left">Bruker</th>
             <th className="Users-list--right">Registrert</th>
-            <th className="Users-list--right">Toggle voting</th>
+            <th className="Users-list--right">Stemmeberettigelse</th>
           </tr>
         </thead>
         <tbody>
@@ -66,8 +66,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  toggleCanVote: (id) => {
-    dispatch(toggleCanVote(id));
+  toggleCanVote: (id, canVote) => {
+    dispatch(adminToggleCanVote(id, canVote));
   },
   requestUserList: () => {
     dispatch(requestUserList());
