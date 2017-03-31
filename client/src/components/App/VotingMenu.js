@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendVote } from '../../actionCreators/issues';
-import getShuffledAlternatives from '../../selectors/getShuffledAlternatives';
+import { getShuffledAlternatives } from '../../selectors/alternatives';
 import { getIssueId, getIssueKey } from '../../selectors/issues';
 import Alternatives from '../Alternatives';
 import Button from '../Button';

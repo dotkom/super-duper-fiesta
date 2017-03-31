@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import arrayShuffle from 'array-shuffle';
 import { getIssue } from './issues';
 
-const getAlternatives = (state) => {
+export const getAlternatives = (state) => {
   const issue = getIssue(state);
   if (issue && issue.alternatives && issue.alternatives.length) {
     return issue.alternatives;
@@ -10,7 +10,7 @@ const getAlternatives = (state) => {
   return [];
 };
 
-export default createSelector(
+export const getShuffledAlternatives = createSelector(
   [getAlternatives],
   alternatives => arrayShuffle(alternatives),
 );

@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import IssueStatus from '../IssueStatus';
 import { VotingMenuContainer } from './VotingMenu';
-import { IssueContainer } from '../Issue';
+import { IssueContainer } from './Issue';
+import Button from '../Button';
 import Heading from '../Heading';
-import { ConcludedIssueContainer } from '../ConcludedIssueList';
+import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import '../../css/App.css';
 import '../../css/Button.css';
 import '../../css/flaticon.css';
@@ -13,8 +14,8 @@ const App = props => (
   <div className="App">
     <Heading link="/" title={props.title}>
       <span>{props.fullName}</span>
-      <a className="Button" href={props.loggedIn ? '/logout' : '/login'}>
-        Logg {props.loggedIn ? 'ut' : 'inn'}
+      <a href={props.loggedIn ? '/logout' : '/login'}>
+        <Button>Logg {props.loggedIn ? 'ut' : 'inn'}</Button>
       </a>
     </Heading>
     <div className="App-components">
@@ -25,7 +26,7 @@ const App = props => (
         </div>
         <IssueStatus />
       </div>
-      <ConcludedIssueContainer />
+      <ConcludedIssueListContainer />
     </div>
   </div>
   );
