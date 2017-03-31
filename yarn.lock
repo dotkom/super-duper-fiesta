@@ -2805,6 +2805,10 @@ minimist@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 mongodb-core@2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-2.1.7.tgz#6a27909b98142ef2508d924c274969008954fa29"
