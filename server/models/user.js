@@ -91,8 +91,8 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
 }
 
 
-function updateUserById(id, updatedFields) {
-  return User.findByIdAndUpdate(id, updatedFields);
+function updateUserById(id, updatedFields, opts) {
+  return User.findByIdAndUpdate(id, updatedFields, opts);
 }
 
 

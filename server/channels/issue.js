@@ -17,15 +17,13 @@ module.exports = (socket) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
           emit(socket, 'OPEN_ISSUE', question, { action: 'open' });
           broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
-          return null;
         }).catch((err) => {
           logger.error('Adding new question failed.', err);
           emit(socket, 'issue', {}, {
             error: 'Adding new question failed',
           });
-          return null;
         });
-        return null;
+        break;
       case 'server/ADMIN_CLOSE_ISSUE': {
         const adminUser = payload.user;
         const issue = payload.issue;
@@ -34,7 +32,7 @@ module.exports = (socket) => {
           emit(socket, 'issue', {}, {
             error: 'User id required to be able to close an ongoing issue.',
           });
-          return null;
+          break;
         }
         logger.info('Closing issue.', { issue, adminUser });
         getUserByUsername(adminUser).then((user) => {
@@ -56,14 +54,11 @@ module.exports = (socket) => {
             error: 'Something went wrong. Please try again. If the issue persists,' +
             'try logging in and out again',
           });
-          return null;
         });
-        return null;
+        break;
       }
       default:
-        logger.warn('Hit default case for issue.');
         break;
     }
-    return null;
   });
 };

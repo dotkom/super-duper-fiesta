@@ -29,6 +29,7 @@
     "file-loader": "^0.10.0",
     "fuse.js": "^2.6.1",
     "html-webpack-plugin": "^2.28.0",
+    "moment": "^2.18.1",
     "mongoose": "^4.7.6",
     "node-fetch": "^1.6.3",
     "passport": "^0.3.2",
