@@ -22,7 +22,7 @@ const App = props => (
       <div className="ActiveIssue-components">
         <div className="ActiveIssue-Vote-wrapper">
           <IssueContainer />
-          <VotingMenuContainer />
+          <VotingMenuContainer loggedIn={props.loggedIn} />
         </div>
         <IssueStatus />
       </div>

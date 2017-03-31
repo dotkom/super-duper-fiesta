@@ -9,6 +9,7 @@ const connection = require('./connection');
 const issue = require('./issue');
 const userlist = require('./admin/user/userlist');
 const toggleCanVote = require('./admin/user/toggle_vote');
+const vote = require('./vote');
 
 const authorizeSuccess = (data, accept) => {
   logger.silly('Authorized socket connection');
@@ -39,5 +40,6 @@ module.exports.listen = (server, mongooseConnection) => {
     issue(socket);
     userlist(socket);
     toggleCanVote(socket);
+    vote(socket);
   });
 };

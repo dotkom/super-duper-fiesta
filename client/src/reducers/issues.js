@@ -1,4 +1,5 @@
-import { CLOSE_ISSUE, OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE } from '../actionTypes/issues';
+import { RECEIVE_VOTE } from '../actionTypes/voting';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
@@ -13,45 +14,50 @@ const issue = (state = {}, action, currentIssue) => {
           alternative.id = alternative._id; // eslint-disable-line no-underscore-dangle
           return alternative;
         }),
-        votes: [],
+        qualifiedVoters: action.data.qualifiedVoters,
+        votes: {},
         resolutionType: action.resolutionType,
         voteDemand: action.data.voteDemand,
       };
     }
 
-    case SEND_VOTE:
+    case SEND_VOTE: {
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
       if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
+      const voter = action.voter;
 
       return Object.assign({}, state, {
-        votes: [
+        votes: {
           ...state.votes,
 
-          {
+          [voter]: {
             alternative: action.alternative,
-            voter: action.voter,
+            voter,
           },
-        ],
+        },
       });
+    }
 
-    case RECEIVE_VOTE:
+    case RECEIVE_VOTE: {
       if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
+      const voter = action.voter;
 
       return Object.assign({}, state, {
-        votes: [
+        votes: {
           ...state.votes,
 
-          {
+          [voter]: {
             alternative: action.alternative,
-            voter: action.voter,
+            voter,
           },
-        ],
+        },
       });
+    }
 
     default:
       return state;
@@ -119,9 +125,15 @@ const issues = (state = {}, action) => {
     }
     case RECEIVE_VOTE:
     case SEND_VOTE: {
-      const { issueId } = action;
+      const issueId = action.data.question;
+      const updatedAction = {
+        type: action.type,
+        issueId,
+        alternative: action.data.option,
+        voter: action.data.user,
+      };
       return Object.assign({}, state, {
-        [issueId]: issue(state[issueId], action, issueId),
+        [issueId]: issue(state[issueId], updatedAction, issueId),
       });
     }
 

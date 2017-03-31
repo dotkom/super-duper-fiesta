@@ -24,11 +24,12 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
 
 VoteStatus.defaultProps = {
   alternatives: undefined,
+  userCount: 0,
 };
 
 VoteStatus.propTypes = {
   voteCount: VoteCounter.propTypes.count.isRequired,
-  userCount: VoteCounter.propTypes.total.isRequired,
+  userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
   votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
 };
@@ -37,10 +38,10 @@ const mapStateToProps = (state) => {
   const currentIssue = getIssue(state);
 
   // The number of votes on the current issue.
-  const voteCount = currentIssue && currentIssue.votes ? currentIssue.votes.length : 0;
+  const voteCount = currentIssue && currentIssue.votes ? Object.keys(currentIssue.votes).length : 0;
 
   // The number of users eligible for voting on the current issue.
-  const userCount = state.users.filter(u => u.canVote).length;
+  const userCount = currentIssue ? currentIssue.qualifiedVoters : 0;
 
   const votePercentages = {};
 
@@ -53,7 +54,8 @@ const mapStateToProps = (state) => {
   const alternatives = currentIssue && getShuffledAlternatives(state);
 
   if (currentIssue && currentIssue.votes) {
-    currentIssue.votes.forEach((issue) => {
+    Object.keys(currentIssue.votes).forEach((key) => {
+      const issue = currentIssue.votes[key];
       votePercentages[issue.alternative] = (votePercentages[issue.alternative] || 0) + 1;
     });
   }

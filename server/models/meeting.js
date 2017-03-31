@@ -15,12 +15,15 @@ const GenforsSchema = new Schema({
 });
 const Genfors = mongoose.model('Genfors', GenforsSchema);
 
+const getGenfors = id => (
+  Genfors.findOne({ _id: id })
+);
 
 function getActiveGenfors() {
   return Genfors.findOne({ status: 'open' }).exec();
 }
 
-function canEdit(securityLevel, user, genfors) {
+function canEdit(securityLevel, user, genforsId) {
   return new Promise((resolve, reject) => {
     logger.silly('Checking permissions');
     getActiveGenfors().then((active) => {
@@ -30,30 +33,36 @@ function canEdit(securityLevel, user, genfors) {
         resolve(true);
         return;
       }
-
-      logger.silly('security check', {
-        active: active.id,
-        genfors: genfors.id,
-        usergenfors: user.genfors.toString(),
-        userperms: user.permissions,
-        securityLevel,
-      });
-      // Checking if current genfors == requested genfors == user genfors
-      // But if user is superuser it is not nessecary
-      if (active.id === genfors.id
-         && (genfors.id === user.genfors.toString())
-         && user.permissions >= securityLevel) {
-        logger.silly('Cleared security check');
-        resolve(true);
-      } else {
-        logger.warn('Failed security check', {
-          userpermission: user.permission,
-          clearance: securityLevel,
+      getGenfors(genforsId)
+      .then((genfors) => {
+        logger.silly('security check', {
+          active: active.id,
+          genfors: genfors.id,
+          usergenfors: user.genfors.toString(),
+          userperms: user.permissions,
+          securityLevel,
         });
-        reject(new Error('User does not have the required permissions.'));
-      }
+        // Checking if current genfors == requested genfors == user genfors
+        // But if user is superuser it is not nessecary
+        if ((active.id === genfors.id)
+          && (genfors.id === user.genfors.toString())
+          && (user.permissions >= securityLevel)) {
+          logger.silly('Cleared security check');
+          resolve(true);
+        } else {
+          logger.warn('Failed security check', {
+            userpermission: user.permissions,
+            clearance: securityLevel,
+          });
+          reject(new Error('User does not have the required permissions.'));
+        }
+      }).catch((err) => {
+        logger.error('Unable to fetch specific genfors', err);
+        reject(err);
+      });
     }).catch((err) => {
       logger.error('Unable to fetch genfors', err);
+      reject(err);
     });
   });
 }

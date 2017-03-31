@@ -3,7 +3,7 @@ const logger = require('../logging');
 const AlternativeSchema = require('./alternative');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
-const getVotes = require('./vote').getVotes;
+// const getVotes = require('./vote').getVotes;
 const getQualifiedUsers = require('./user').getQualifiedUsers;
 
 const permissionLevel = require('./permissions');
@@ -31,6 +31,9 @@ const Question = mongoose.model('Question', QuestionSchema);
 function getQuestions(genfors) {
   return Question.find({ genfors }).exec();
 }
+const getIssueById = id => (
+  Question.findOne({ _id: id })
+);
 function getActiveQuestion(genfors) {
   return Question.findOne({ genfors, active: true });
 }
@@ -54,6 +57,7 @@ function endQuestion(question, user) {
 }
 
 
+/* Commented out since it causes circular dependency.
 function updateQuestionCounter(question) {
   return new Promise((resolve, reject) => {
     getVotes(question, (votes) => {
@@ -61,7 +65,7 @@ function updateQuestionCounter(question) {
       .exec().then(resolve).catch(reject);
     });
   });
-}
+} */
 
 function addQuestion(issueData, closeCurrentIssue) {
   return new Promise((resolve, reject) => {
@@ -106,7 +110,8 @@ module.exports = {
   addIssue: addQuestion,
   getActiveQuestion,
   getClosedQuestions,
+  getIssueById,
   getQuestions,
   endIssue: endQuestion,
-  updateQuestionCounter,
+  // updateQuestionCounter,
 };
