@@ -22,7 +22,7 @@ function getActiveGenfors() {
 
 function canEdit(securityLevel, user, genfors) {
   return new Promise((resolve, reject) => {
-    logger.debug('checking permissions');
+    logger.silly('Checking permissions');
     getActiveGenfors().then((active) => {
       // If you are that super, just do it!
       if (user.permissions >= permissionLevel.IS_SUPERUSER) {
@@ -43,10 +43,10 @@ function canEdit(securityLevel, user, genfors) {
       if (active.id === genfors.id
          && (genfors.id === user.genfors.toString())
          && user.permissions >= securityLevel) {
-        logger.debug('cleared security check');
+        logger.silly('Cleared security check');
         resolve(true);
       } else {
-        logger.error('Failed security check', {
+        logger.warn('Failed security check', {
           userpermission: user.permission,
           clearance: securityLevel,
         });
@@ -61,9 +61,9 @@ function canEdit(securityLevel, user, genfors) {
 function endGenfors(genfors, user) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
-      logger.debug('Removing genfors');
+      logger.info('Closing genfors');
       Genfors.update({ _id: genfors.id }, { status: 'closed' }).then(() => {
-        logger.debug('Deleted genfors');
+        logger.info('Closed genfors');
         resolve();
       }).catch(reject);
     }).then(resolve).catch(reject);

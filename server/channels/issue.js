@@ -19,7 +19,7 @@ module.exports = (socket) => {
           broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
           return null;
         }).catch((err) => {
-          logger.error('Adding new question failed.', { err });
+          logger.error('Adding new question failed.', err);
           emit(socket, 'issue', {}, {
             error: 'Adding new question failed',
           });
@@ -41,18 +41,17 @@ module.exports = (socket) => {
           logger.debug('Fetched user profile', { username: user.name, permissions: user.permissions });
           endIssue(issue, user)
           .catch((err) => {
-            logger.error('closing issue failed', { err });
+            logger.error('closing issue failed', err);
             emit(socket, 'issue', {}, {
               error: 'Closing issue failed',
             });
           }).then((updatedIssue) => {
-            logger.info('closed issue', { issue: issue.id, response: updatedIssue._id });
+            logger.info('closed issue', { issue: issue.id, response: updatedIssue._id }); // eslint-disable-line no-underscore-dangle
             broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
             emit(socket, 'CLOSE_ISSUE', updatedIssue);
           });
         }).catch((err) => {
-          console.log('getting user failed', err)
-          logger.error('getting user failed', { err });
+          logger.error('Getting user failed', err);
           emit(socket, 'issue', {}, {
             error: 'Something went wrong. Please try again. If the issue persists,' +
             'try logging in and out again',
