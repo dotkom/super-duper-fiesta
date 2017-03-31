@@ -24,11 +24,12 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
 
 VoteStatus.defaultProps = {
   alternatives: undefined,
+  userCount: 0,
 };
 
 VoteStatus.propTypes = {
   voteCount: VoteCounter.propTypes.count.isRequired,
-  userCount: VoteCounter.propTypes.total.isRequired,
+  userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
   votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
 };
@@ -40,7 +41,7 @@ const mapStateToProps = (state) => {
   const voteCount = currentIssue && currentIssue.votes ? currentIssue.votes.length : 0;
 
   // The number of users eligible for voting on the current issue.
-  const userCount = state.users.filter(u => u.canVote).length;
+  const userCount = currentIssue ? currentIssue.qualifiedVoters : 0;
 
   const votePercentages = {};
 

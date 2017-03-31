@@ -14,6 +14,7 @@ const issue = (state = {}, action, currentIssue) => {
           alternative.id = alternative._id; // eslint-disable-line no-underscore-dangle
           return alternative;
         }),
+        qualifiedVoters: action.data.qualifiedVoters,
         votes: [],
         resolutionType: action.resolutionType,
         voteDemand: action.data.voteDemand,
@@ -125,6 +126,7 @@ const issues = (state = {}, action) => {
         type: action.type,
         issueId,
         alternative: action.data.option,
+        voter: action.data.user,
       };
       return Object.assign({}, state, {
         [issueId]: issue(state[issueId], updatedAction, issueId),
