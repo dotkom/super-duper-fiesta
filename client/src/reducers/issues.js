@@ -1,4 +1,5 @@
-import { CLOSE_ISSUE, OPEN_ISSUE, RECEIVE_VOTE, SEND_VOTE } from '../actionTypes/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE } from '../actionTypes/issues';
+import { RECEIVE_VOTE } from '../actionTypes/voting';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
@@ -119,9 +120,14 @@ const issues = (state = {}, action) => {
     }
     case RECEIVE_VOTE:
     case SEND_VOTE: {
-      const { issueId } = action;
+      const issueId = action.data.question;
+      const updatedAction = {
+        type: action.type,
+        issueId,
+        alternative: action.data.option,
+      };
       return Object.assign({}, state, {
-        [issueId]: issue(state[issueId], action, issueId),
+        [issueId]: issue(state[issueId], updatedAction, issueId),
       });
     }
 
