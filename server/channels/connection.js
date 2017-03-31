@@ -23,6 +23,7 @@ const connection = (socket) => {
       username: user.onlinewebId,
       full_name: user.name,
       logged_in: user.logged_in,
+      id: user._id, // eslint-disable-line no-underscore-dangle
     });
   } else {
     emit(socket, 'AUTH_SIGNED_OUT', {});
