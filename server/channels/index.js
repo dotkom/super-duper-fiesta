@@ -7,8 +7,12 @@ const passportSocketIo = require('passport.socketio');
 
 const connection = require('./connection');
 const issue = require('./issue');
+<<<<<<< HEAD
 const userlist = require('./admin/user/userlist');
 const toggleCanVote = require('./admin/user/toggle_vote');
+=======
+const vote = require('./vote');
+>>>>>>> Initial hooking up voting to backend
 
 const authorizeSuccess = (data, accept) => {
   logger.silly('Authorized socket connection');
@@ -39,5 +43,6 @@ module.exports.listen = (server, mongooseConnection) => {
     issue(socket);
     userlist(socket);
     toggleCanVote(socket);
+    vote(socket);
   });
 };

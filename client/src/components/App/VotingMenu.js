@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendVote } from '../../actionCreators/issues';
+import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
 import { getIssueId, getIssueKey } from '../../selectors/issues';
 import Alternatives from '../Alternatives';
@@ -98,7 +98,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleVote: (id, alternative, voter) => {
-    dispatch(sendVote(id, alternative, voter));
+    dispatch(submitRegularVote(id, alternative));
   },
 });
 
