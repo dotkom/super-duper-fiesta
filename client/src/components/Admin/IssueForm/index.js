@@ -6,6 +6,7 @@ import { getIssue } from '../../../selectors/issues';
 import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
+import SelectQuestionType from './SelectQuestionType';
 import '../../../css/IssueForm.css';
 
 const YES_NO_ANSWERS = {
@@ -26,6 +27,7 @@ class IssueForm extends React.Component {
       showOnlyWinner: false,
       countBlankVotes: false,
       voteDemand: 1 / 2,
+      questionType: 'MULTIPLE_CHOICE',
     };
 
     this.handleAddAlternative = this.handleAddAlternative.bind(this);
@@ -37,6 +39,7 @@ class IssueForm extends React.Component {
     this.handleUpdateSecretVoting = this.handleUpdateSecretVoting.bind(this);
     this.handleUpdateShowOnlyWinner = this.handleUpdateShowOnlyWinner.bind(this);
     this.handleResolutionTypeChange = this.handleResolutionTypeChange.bind(this);
+    this.handleQuestionTypeChange = this.handleQuestionTypeChange.bind(this);
   }
 
   handleAddAlternative(alternativeText) {
@@ -92,13 +95,17 @@ class IssueForm extends React.Component {
     this.setState({ voteDemand });
   }
 
+  handleQuestionTypeChange(questionType) {
+    this.setState({ questionType });
+  }
+
   render() {
     const showActiveIssueWarning = this.props.issue && this.props.issue.text;
 
     const issueReadyToCreate = !showActiveIssueWarning
       && this.state.issueDescription
       && this.state.issueDescription.length;
-
+    console.log(this.state.questionType !== 'MULTIPLE_CHOICE');
     return (
       <div className="IssueForm">
         <p
@@ -114,12 +121,14 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        <Alternative
+        {this.state.questionType === 'MULTIPLE_CHOICE'
+        && <Alternative
           alternatives={this.state.alternatives}
           handleAddAlternative={this.handleAddAlternative}
           handleUpdateAlternativeText={this.handleUpdateAlternativeText}
           handleRemoveAlternative={this.handleRemoveAlternative}
         />
+        }
         <div className="IssueForm-label">Innstillinger</div>
         <Checkboxes
           handleUpdateCountBlankVotes={this.handleUpdateCountBlankVotes}
@@ -134,6 +143,13 @@ class IssueForm extends React.Component {
           <SelectResolutionType
             handleResolutionTypeChange={this.handleResolutionTypeChange}
             resolutionType={this.state.voteDemand}
+          />
+        </label>
+        <label className="IssueForm-select">
+          <div className="IssueForm-label">Spørsmålstype</div>
+          <SelectQuestionType
+            questionType={this.state.questionType}
+            handleQuestionTypeChange={this.handleQuestionTypeChange}
           />
         </label>
         <Button

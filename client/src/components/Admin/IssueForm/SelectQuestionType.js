@@ -2,17 +2,17 @@ import React, { PropTypes } from 'react';
 
 const SelectQuestionType = ({ questionType, handleQuestionTypeChange }) => (
   <select
-    onChange={e => handleQuestionTypeChange(parseInt(e.target.value, 10))}
+    onChange={e => handleQuestionTypeChange(e.target.value)}
     value={questionType}
   >
-    <option value={0}>Ja/Nei</option>
-    <option value={1}>Flervalg</option>
+    <option value="YES_NO">Ja/Nei</option>
+    <option value="MULTIPLE_CHOICE">Flervalg</option>
   </select>
 );
 
 SelectQuestionType.propTypes = {
   handleQuestionTypeChange: PropTypes.func.isRequired,
-  questionType: PropTypes.number.isRequired,
+  questionType: PropTypes.string.isRequired,
 };
 
 export default SelectQuestionType;
