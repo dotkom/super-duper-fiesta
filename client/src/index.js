@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,6 +13,8 @@ import { IssueFormContainer } from './components/Admin/IssueForm';
 import NotFound from './components/NotFound';
 import Users from './components/Admin/Users';
 import votingApp from './reducers';
+
+moment.locale('nb');
 
 const socket = IO.connect();
 
