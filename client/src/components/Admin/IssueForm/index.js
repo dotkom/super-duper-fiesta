@@ -112,9 +112,9 @@ class IssueForm extends React.Component {
         {this.state.questionType === 'MULTIPLE_CHOICE'
         && <Alternative
           alternatives={this.state.alternatives}
-          handleAddAlternative={this.handleAddAlternative}
-          handleUpdateAlternativeText={this.handleUpdateAlternativeText}
-          handleRemoveAlternative={this.handleRemoveAlternative}
+          handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
+          handleUpdateAlternativeText={(...a) => this.handleUpdateAlternativeText(...a)}
+          handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
         />
         }
         <div className="IssueForm-label">Innstillinger</div>
