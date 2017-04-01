@@ -14,12 +14,6 @@ class Alternative extends React.Component {
       selectedAlternative: undefined,
     };
 
-    this.handleAddAlternative = this.handleAddAlternative.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.openUpdateDialog = this.openUpdateDialog.bind(this);
-    this.closeUpdateDialog = this.closeUpdateDialog.bind(this);
-    this.updateDialogValue = this.updateDialogValue.bind(this);
-    this.confirmUpdateDialog = this.confirmUpdateDialog.bind(this);
   }
 
   handleAddAlternative() {
@@ -83,22 +77,22 @@ class Alternative extends React.Component {
         <label className="IssueForm-radios">
           <Dialog
             visible={this.state.showUpdateDialog}
-            onClose={this.closeUpdateDialog}
+            onClose={(...a) => this.closeUpdateDialog(...a)}
             title="Endre alternativ"
           >
-            <input type="text" onChange={this.updateDialogValue} value={this.state.dialogValue} />
-            <Button onClick={this.confirmUpdateDialog}>Bekreft</Button>
-            <Button onClick={this.closeUpdateDialog}>Avbryt</Button>
+            <input type="text" onChange={(...a) => this.updateDialogValue(...a)} value={this.state.dialogValue} />
+            <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
+            <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
           </Dialog>
 
           <input
             type="text"
             value={alternativeText}
             onChange={e => alternativeUpdate(e.target.value)}
-            onKeyPress={this.handleKeyPress}
+            onKeyPress={(...a) => this.handleKeyPress(...a)}
           />
 
-          <button onClick={this.handleAddAlternative}>Add</button>
+          <button onClick={(...a) => this.handleAddAlternative(...a)}>Add</button>
         </label>
       </div>
     );

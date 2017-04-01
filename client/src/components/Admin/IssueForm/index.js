@@ -26,12 +26,6 @@ class IssueForm extends React.Component {
       countBlankVotes: false,
     };
 
-    this.handleAddAlternative = this.handleAddAlternative.bind(this);
-    this.handleCreateIssue = this.handleCreateIssue.bind(this);
-    this.updateIssueDescription = this.updateIssueDescription.bind(this);
-    this.handleUpdateCountBlankVotes = this.handleUpdateCountBlankVotes.bind(this);
-    this.handleUpdateSecretVoting = this.handleUpdateSecretVoting.bind(this);
-    this.handleUpdateShowOnlyWinner = this.handleUpdateShowOnlyWinner.bind(this);
   }
 
   handleAddAlternative(alternativeText) {
@@ -77,7 +71,7 @@ class IssueForm extends React.Component {
         <label className="IssueForm-textarea">
           <div className="IssueForm-label">Beskrivelse</div>
           <textarea
-            onChange={this.updateIssueDescription}
+            onChange={(...a) => this.updateIssueDescription(...a)}
             placeholder="Skriv inn saken her."
             value={this.state.issueDescription}
           />
@@ -89,12 +83,12 @@ class IssueForm extends React.Component {
         />
         <div className="IssueForm-label">Innstillinger</div>
         <IssueFormSettings
-          handleUpdateCountBlankVotes={this.handleUpdateCountBlankVotes}
-          handleUpdateSecretVoting={this.handleUpdateSecretVoting}
-          handleUpdateShowOnlyWinner={this.handleUpdateShowOnlyWinner}
-          countBlankVotes={this.state.countBlankVotes}
-          secretVoting={this.state.secretVoting}
-          showOnlyWinner={this.state.showOnlyWinner}
+          handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
+          handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
+          handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
+          countBlankVotes={(...a) => this.state.countBlankVotes(...a)}
+          secretVoting={(...a) => this.state.secretVoting(...a)}
+          showOnlyWinner={(...a) => this.state.showOnlyWinner(...a)}
         />
         <label className="IssueForm-select">
           <div className="IssueForm-label">Flertallstype</div>
