@@ -31,8 +31,17 @@ const Issue = ({ closeIssue, issue }) => (
   </div>
 );
 
+Issue.defaultProps = {
+  issue: {
+    text: 'Det er ingen aktiv sak for øyeblikket.',
+  },
+};
+
 Issue.propTypes = {
   closeIssue: React.PropTypes.func.isRequired,
+  issue: React.PropTypes.shape({
+    text: React.PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
@@ -47,7 +56,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     ...stateProps,
     closeIssue: () => {
-      dispatch(adminCloseIssue({ issue: stateProps.issue.id, user: 'admin' }));
+      dispatch(adminCloseIssue({ issue: stateProps.issue.id }));
     },
   };
 };
