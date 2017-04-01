@@ -1,6 +1,6 @@
 export const getIssue = (state) => {
   if (!state || (state && !Object.keys(state.issues).length)) {
-    return {};
+    return;
   }
   // Gets the current active issue after iterating over all issues and finding the one with "active == true"
   return state.issues[Object.keys(state.issues)

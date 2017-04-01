@@ -25,35 +25,19 @@ module.exports = (socket) => {
         });
         break;
       case 'server/ADMIN_CLOSE_ISSUE': {
-        const adminUser = payload.user;
+        const user = socket.request.user;
         const issue = payload.issue;
-        if (!adminUser) {
-          logger.debug('Someone tried to close an issue without passing user object.', { issue });
+        logger.info('Closing issue.', { issue: issue.id, user: user.name });
+        endIssue(issue, user)
+        .catch((err) => {
+          logger.error('closing issue failed', err);
           emit(socket, 'issue', {}, {
-            error: 'User id required to be able to close an ongoing issue.',
+            error: 'Closing issue failed',
           });
-          break;
-        }
-        logger.info('Closing issue.', { issue, adminUser });
-        getUserByUsername(adminUser).then((user) => {
-          logger.debug('Fetched user profile', { username: user.name, permissions: user.permissions });
-          endIssue(issue, user)
-          .catch((err) => {
-            logger.error('closing issue failed', err);
-            emit(socket, 'issue', {}, {
-              error: 'Closing issue failed',
-            });
-          }).then((updatedIssue) => {
-            logger.info('closed issue', { issue: issue.id, response: updatedIssue._id }); // eslint-disable-line no-underscore-dangle
-            broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
-            emit(socket, 'CLOSE_ISSUE', updatedIssue);
-          });
-        }).catch((err) => {
-          logger.error('Getting user failed', err);
-          emit(socket, 'issue', {}, {
-            error: 'Something went wrong. Please try again. If the issue persists,' +
-            'try logging in and out again',
-          });
+        }).then((updatedIssue) => {
+          logger.info('closed issue', { issue: issue.id, response: updatedIssue._id }); // eslint-disable-line no-underscore-dangle
+          broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
+          emit(socket, 'CLOSE_ISSUE', updatedIssue);
         });
         break;
       }
