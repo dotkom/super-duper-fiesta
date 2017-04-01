@@ -50,7 +50,8 @@ function endQuestion(question, user) {
           return Question.findByIdAndUpdate(question, { active: false })
           .then(resolve).catch(reject);
         }
-        return reject(new Error('permission denied'));
+        reject(new Error('permission denied'));
+        return null;
       }).catch(reject);
     }).catch(reject);
   });

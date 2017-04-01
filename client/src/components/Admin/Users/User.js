@@ -11,7 +11,7 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
     <tr className={userClass}>
       <td className="Users-list--left">{name}</td>
       <td className="Users-list--right">
-        {registeredDate.toLocaleString()} ({registeredDate.fromNow()})
+        {registeredDate.format('LLL')} ({registeredDate.fromNow()})
       </td>
       <td className="Users-list--right">
         <button onClick={() => toggleCanVote(id, canVote)}>

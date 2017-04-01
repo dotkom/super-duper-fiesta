@@ -29,17 +29,6 @@ class IssueForm extends React.Component {
       voteDemand: 1 / 2,
       questionType: 'MULTIPLE_CHOICE',
     };
-
-    this.handleAddAlternative = this.handleAddAlternative.bind(this);
-    this.handleUpdateAlternativeText = this.handleUpdateAlternativeText.bind(this);
-    this.handleRemoveAlternative = this.handleRemoveAlternative.bind(this);
-    this.handleCreateIssue = this.handleCreateIssue.bind(this);
-    this.updateIssueDescription = this.updateIssueDescription.bind(this);
-    this.handleUpdateCountBlankVotes = this.handleUpdateCountBlankVotes.bind(this);
-    this.handleUpdateSecretVoting = this.handleUpdateSecretVoting.bind(this);
-    this.handleUpdateShowOnlyWinner = this.handleUpdateShowOnlyWinner.bind(this);
-    this.handleResolutionTypeChange = this.handleResolutionTypeChange.bind(this);
-    this.handleQuestionTypeChange = this.handleQuestionTypeChange.bind(this);
   }
 
   handleAddAlternative(alternativeText) {
@@ -105,7 +94,6 @@ class IssueForm extends React.Component {
     const issueReadyToCreate = !showActiveIssueWarning
       && this.state.issueDescription
       && this.state.issueDescription.length;
-    console.log(this.state.questionType !== 'MULTIPLE_CHOICE');
     return (
       <div className="IssueForm">
         <p
@@ -115,7 +103,7 @@ class IssueForm extends React.Component {
         <label className="IssueForm-textarea">
           <div className="IssueForm-label">Beskrivelse</div>
           <textarea
-            onChange={this.updateIssueDescription}
+            onChange={(...a) => this.updateIssueDescription(...a)}
             placeholder="Skriv inn saken her."
             value={this.state.issueDescription}
           />
@@ -131,9 +119,9 @@ class IssueForm extends React.Component {
         }
         <div className="IssueForm-label">Innstillinger</div>
         <Checkboxes
-          handleUpdateCountBlankVotes={this.handleUpdateCountBlankVotes}
-          handleUpdateSecretVoting={this.handleUpdateSecretVoting}
-          handleUpdateShowOnlyWinner={this.handleUpdateShowOnlyWinner}
+          handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
+          handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
+          handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
           countBlankVotes={this.state.countBlankVotes}
           secretVoting={this.state.secretVoting}
           showOnlyWinner={this.state.showOnlyWinner}
@@ -141,7 +129,7 @@ class IssueForm extends React.Component {
         <label className="IssueForm-select">
           <div className="IssueForm-label">Flertallstype</div>
           <SelectResolutionType
-            handleResolutionTypeChange={this.handleResolutionTypeChange}
+            handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
             resolutionType={this.state.voteDemand}
           />
         </label>
@@ -149,7 +137,7 @@ class IssueForm extends React.Component {
           <div className="IssueForm-label">Spørsmålstype</div>
           <SelectQuestionType
             questionType={this.state.questionType}
-            handleQuestionTypeChange={this.handleQuestionTypeChange}
+            handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
           />
         </label>
         <Button
