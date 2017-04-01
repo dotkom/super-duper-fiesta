@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Dialog from './Dialog';
-import Button from './Button';
+import Dialog from '../../Dialog';
+import Button from '../../Button';
 
-class IssueFormAlternative extends React.Component {
+class Alternative extends React.Component {
   constructor() {
     super();
 
@@ -23,7 +23,7 @@ class IssueFormAlternative extends React.Component {
   }
 
   handleAddAlternative() {
-    this.props.handleAddAlternative(this.props.alternativeText);
+    this.props.handleAddAlternative(this.state.alternativeText);
   }
 
   handleAlternativeUpdate(event) {
@@ -41,7 +41,7 @@ class IssueFormAlternative extends React.Component {
   openUpdateDialog(id) {
     this.setState({
       showUpdateDialog: true,
-      dialogValue: this.props.alternatives[id].text,
+      dialogValue: this.props.alternatives[id],
       selectedAlternative: id,
     });
   }
@@ -74,8 +74,8 @@ class IssueFormAlternative extends React.Component {
       <div className="IssueFormAlternative">
         <ul>
           {Object.keys(alternatives).map(id =>
-            <li key={alternatives[id].text}>
-              {alternatives[id].text}
+            <li key={alternatives[id]}>
+              {alternatives[id]}
               <button
                 onClick={() => handleRemoveAlternative(id)}
               >Fjern</button>
@@ -98,7 +98,7 @@ class IssueFormAlternative extends React.Component {
           <input
             type="text"
             value={alternativeText}
-            onChange={e => this.handleAlternativeUpdate(e.target.value)}
+            onChange={e => this.handleAlternativeUpdate(e)}
             onKeyPress={this.handleKeyPress}
           />
 
@@ -109,11 +109,11 @@ class IssueFormAlternative extends React.Component {
   }
 }
 
-IssueFormAlternative.defaultProps = {
+Alternative.defaultProps = {
   alternativeText: undefined,
 };
 
-IssueFormAlternative.propTypes = {
+Alternative.propTypes = {
   alternativeText: PropTypes.string,
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
@@ -123,4 +123,4 @@ IssueFormAlternative.propTypes = {
   })).isRequired,
 };
 
-export default IssueFormAlternative;
+export default Alternative;

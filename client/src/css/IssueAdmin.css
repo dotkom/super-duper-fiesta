@@ -1,0 +1,30 @@
+.IssueAdmin {
+  background: #f5f5f5;
+  padding: 0rem 2rem 2rem 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  color: #717171;
+}
+
+.IssueAdmin-heading {
+  margin: 3rem 0 0 0;
+}
+
+.IssueAdmin-title {
+  font-size: 1.3em;
+  font-weight: normal;
+}
+
+.IssueAdmin-actions {
+  margin-left: auto;
+  align-self: center;
+}
+
+.IssueAdmin-text {
+  flex: 1 100%;
+}
+
+.IssueAdmin-pin {
+  flex: 1 100%;
+}

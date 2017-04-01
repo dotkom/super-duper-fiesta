@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
-const IssueFormCheckboxes = ({
+
+const Checkboxes = ({
   countBlankVotes, secretVoting, showOnlyWinner,
   handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner,
 }) => (
@@ -34,7 +35,7 @@ const IssueFormCheckboxes = ({
   </div>
 );
 
-IssueFormCheckboxes.propTypes = {
+Checkboxes.propTypes = {
   handleUpdateCountBlankVotes: PropTypes.func.isRequired,
   countBlankVotes: PropTypes.bool.isRequired,
   secretVoting: PropTypes.bool.isRequired,
@@ -43,4 +44,4 @@ IssueFormCheckboxes.propTypes = {
   handleUpdateShowOnlyWinner: PropTypes.func.isRequired,
 };
 
-export default IssueFormCheckboxes;
+export default Checkboxes;

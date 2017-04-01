@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+
 const SelectResolutionType = ({ resolutionType, handleResolutionTypeChange }) => (
   <select
     onChange={e => handleResolutionTypeChange(parseFloat(e.target.value, 10))}

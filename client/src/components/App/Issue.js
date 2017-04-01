@@ -1,5 +1,7 @@
 import React from 'react';
-import '../css/Issue.css';
+import { connect } from 'react-redux';
+import { getIssueText } from '../../selectors/issues';
+import '../../css/Issue.css';
 
 const Issue = ({ text }) => (
   <div className="Issue">
@@ -16,4 +18,12 @@ Issue.propTypes = {
   text: React.PropTypes.string,
 };
 
+
+const mapStateToProps = state => ({
+  text: getIssueText(state),
+});
+
 export default Issue;
+export const IssueContainer = connect(
+  mapStateToProps,
+)(Issue);

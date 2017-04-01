@@ -1,14 +1,17 @@
 import React from 'react';
-import Button from './Button';
-import '../css/IssueForm.css';
-import IssueFormAlternative from './IssueFormAlternative';
-import IssueFormCheckboxes from './IssueFormCheckboxes';
+import { connect } from 'react-redux';
+import Button from '../../Button';
+import { createIssue } from '../../../actionCreators/adminButtons';
+import { getIssue } from '../../../selectors/issues';
+import Alternative from './Alternative';
+import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
+import '../../../css/IssueForm.css';
 
-const YES_NO_ANSWERS = [
-  { text: 'Ja' },
-  { text: 'Nei' },
-];
+const YES_NO_ANSWERS = {
+  0: 'Ja',
+  1: 'Nei',
+};
 
 let alternativeId = 0;
 
@@ -37,18 +40,18 @@ class IssueForm extends React.Component {
   }
 
   handleAddAlternative(alternativeText) {
+    alternativeId += 1;
     this.handleUpdateAlternativeText(
-      alternativeId += 1,
+      alternativeId,
       alternativeText,
     );
   }
 
   handleUpdateAlternativeText(id, text) {
     this.setState({
-      alternatives: {
-        ...this.state.alternatives,
+      alternatives: Object.assign({}, this.state.alternatives, {
         [id]: text,
-      },
+      }),
     });
   }
 
@@ -111,14 +114,14 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        <IssueFormAlternative
+        <Alternative
           alternatives={this.state.alternatives}
           handleAddAlternative={this.handleAddAlternative}
           handleUpdateAlternativeText={this.handleUpdateAlternativeText}
           handleRemoveAlternative={this.handleRemoveAlternative}
         />
         <div className="IssueForm-label">Innstillinger</div>
-        <IssueFormCheckboxes
+        <Checkboxes
           handleUpdateCountBlankVotes={this.handleUpdateCountBlankVotes}
           handleUpdateSecretVoting={this.handleUpdateSecretVoting}
           handleUpdateShowOnlyWinner={this.handleUpdateShowOnlyWinner}
@@ -154,4 +157,19 @@ IssueForm.propTypes = {
   }).isRequired,
 };
 
+const mapStateToProps = state => ({
+  issue: getIssue(state),
+  issueDescription: state.issueDescription ? state.issueDescription : '',
+});
+
+const mapDispatchToProps = dispatch => ({
+  createIssue: (description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes) => {
+    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes));
+  },
+});
+
 export default IssueForm;
+export const IssueFormContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(IssueForm);

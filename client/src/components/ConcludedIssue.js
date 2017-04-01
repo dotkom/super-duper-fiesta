@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import IconText from './IconText';
 import '../css/ConcludedIssue.css';
 
 
@@ -9,7 +10,8 @@ class ConcludedIssue extends React.Component {
     let majority = false;
     const numTotalVotes = votes.length > 0 ? votes.length : 1;
     alternatives.forEach((alternative) => {
-      if (votes
+      if (Object.keys(votes)
+        .map(key => votes[key])
         .filter(vote => vote.alternative === alternative.id)
         .length / numTotalVotes >= voteDemand) {
         majority = true;
@@ -38,14 +40,10 @@ class ConcludedIssue extends React.Component {
           <h2 className="ConcludedIssue-title">
             {this.props.text}
           </h2>
-          <div
-            className={classNames('ConcludedIssue-status', {
-              'flaticon-success': majority,
-              'flaticon-warning': !majority,
-            })}
-          >
-          {majority ? 'Vedtatt' : 'Avvist'}
-          </div>
+          <IconText
+            text={majority ? 'Vedtatt' : 'Avvist'}
+            iconClass={majority ? 'flaticon-success' : 'flaticon-warning'}
+          />
         </div>
         <div className="ConcludedIssue-content">
           <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
@@ -54,9 +52,11 @@ class ConcludedIssue extends React.Component {
               <li
                 key={alternative.id}
                 className={classNames({
-                  'ConcludedIssue-alternatives--winner': this.props.votes.length && this.props.votes
+                  'ConcludedIssue-alternatives--winner': Object.keys(this.props.votes).length
+                  && Object.keys(this.props.votes)
+                    .map(key => this.props.votes[key])
                     .filter(vote => vote.alternative === alternative.id)
-                    .length / this.props.votes.length >= this.props.voteDemand,
+                    .length / Object.keys(this.props.votes).length >= this.props.voteDemand,
                 })}
               >
                 {alternative.text}
@@ -74,11 +74,10 @@ ConcludedIssue.propTypes = {
     id: PropTypes.string,
     text: PropTypes.string,
   })).isRequired,
-  votes: PropTypes.arrayOf(PropTypes.shape({
+  votes: PropTypes.shape({
     alternative: PropTypes.string,
-    hash: PropTypes.string,
-    id: PropTypes.string,
-  })).isRequired,
+    voter: PropTypes.string,
+  }).isRequired,
   voteDemand: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
 };

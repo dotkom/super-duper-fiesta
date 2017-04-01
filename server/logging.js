@@ -1,9 +1,18 @@
 const winston = require('winston');
+const winstonError = require('winston-error');
 
-const logger = new (winston.Logger)({
+const consoleLogger = new (winston.Logger)({
   transports: [
-    new (winston.transports.Console)({ level: 'debug', timestamp: true }),
+    new (winston.transports.Console)({
+      level: 'debug',
+      exitOnError: false,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      timestamp: true,
+    }),
   ],
 });
 
-module.exports = logger;
+winstonError(consoleLogger);
+
+module.exports = consoleLogger;

@@ -47,6 +47,15 @@ const getIssue = genfors => new Promise((resolve, reject) => {
   });
 });
 
+const createIssue = (genfors) => {
+  getIssue(genfors).then(() => {
+    tearDown();
+  }).catch((err) => {
+    console.error('Something went wrong', err);
+    tearDown();
+  });
+};
+
 // Wrapper function to ensure clean shutdown after getting or inserting issue
 const getOrInsertIssue = (genfors) => {
   // Try to find a user with this username already.
@@ -56,20 +65,16 @@ const getOrInsertIssue = (genfors) => {
       console.log('Adding admin user account.');
       addUser('admin', 'admin', 'beautifulhash', permissionLevel.IS_SUPERUSER).then(() => {
         console.log('Admin account created.');
+        createIssue(genfors);
       }).catch((err) => {
         console.error('Admin account creation failed.', err);
       });
     } else {
       console.log('Admin account already exists.');
+      createIssue(genfors);
     }
   }).catch((error) => {
     console.error('Something went wrong when trying to find out if user exists already.', { error });
-  });
-  getIssue(genfors).then(() => {
-    tearDown();
-  }).catch((err) => {
-    console.error('Something went wrong', err);
-    tearDown();
   });
 };
 

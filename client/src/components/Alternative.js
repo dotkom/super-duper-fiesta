@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import '../css/Alternative.css';
 
-const Alternative = ({ id, text, selected, onClick }) => {
+const Alternative = ({ disabled, id, text, selected, onClick }) => {
   const alternativeClass = classNames('Alternative', {
     'Alternative--selected': selected,
+    'Alternative--disabled': disabled,
   });
   return (
     <div className={alternativeClass} key={id}>
@@ -25,9 +26,11 @@ const Alternative = ({ id, text, selected, onClick }) => {
 Alternative.defaultProps = {
   onClick: undefined,
   selected: false,
+  disabled: false,
 };
 
 Alternative.propTypes = {
+  disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
