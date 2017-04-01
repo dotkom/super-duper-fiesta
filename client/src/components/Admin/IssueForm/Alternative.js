@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { setAlternativeText, addAlternative, clearAlternativeText, removeAlternative, updateAlternativeText } from '../../../actionCreators/createIssueForm';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
 
@@ -12,12 +10,18 @@ class Alternative extends React.Component {
       showUpdateDialog: false,
       dialogValue: '',
       selectedAlternative: undefined,
+      alternativeText: '',
     };
-
   }
 
   handleAddAlternative() {
-    this.props.handleAddAlternative(this.props.alternativeText);
+    this.props.handleAddAlternative(this.state.alternativeText);
+  }
+
+  handleAlternativeUpdate(event) {
+    this.setState({
+      alternativeText: event.target.value,
+    });
   }
 
   handleKeyPress(event) {
@@ -29,7 +33,7 @@ class Alternative extends React.Component {
   openUpdateDialog(id) {
     this.setState({
       showUpdateDialog: true,
-      dialogValue: this.props.alternatives[id].text,
+      dialogValue: this.props.alternatives[id],
       selectedAlternative: id,
     });
   }
@@ -48,28 +52,26 @@ class Alternative extends React.Component {
 
   confirmUpdateDialog() {
     this.closeUpdateDialog();
-    this.props.updateAlternativeText(this.state.selectedAlternative, this.state.dialogValue);
+    this.props.handleUpdateAlternativeText(this.state.selectedAlternative, this.state.dialogValue);
   }
 
   render() {
     const {
-      display,
       alternativeText,
-      alternativeUpdate,
       alternatives,
-      removeAlternative,
+      handleRemoveAlternative,
     } = this.props;
 
-    return display && (
+    return (
       <div className="IssueFormAlternative">
         <ul>
-          {this.props.alternatives.map(alternative =>
-            <li key={alternative.text}>
-              {alternative.text}
+          {Object.keys(alternatives).map(id =>
+            <li key={alternatives[id]}>
+              {alternatives[id]}
               <button
-                onClick={() => removeAlternative(alternative.id)}
+                onClick={() => handleRemoveAlternative(id)}
               >Fjern</button>
-              <button onClick={() => this.openUpdateDialog(alternative.id)}>Endre</button>
+              <button onClick={() => this.openUpdateDialog(id)}>Endre</button>
             </li>,
           )}
         </ul>
@@ -80,7 +82,10 @@ class Alternative extends React.Component {
             onClose={(...a) => this.closeUpdateDialog(...a)}
             title="Endre alternativ"
           >
-            <input type="text" onChange={(...a) => this.updateDialogValue(...a)} value={this.state.dialogValue} />
+            <input
+              type="text" value={this.state.dialogValue}
+              onChange={(...a) => this.updateDialogValue(...a)}
+            />
             <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
             <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
           </Dialog>
@@ -88,8 +93,8 @@ class Alternative extends React.Component {
           <input
             type="text"
             value={alternativeText}
-            onChange={e => alternativeUpdate(e.target.value)}
-            onKeyPress={(...a) => this.handleKeyPress(...a)}
+            onChange={e => this.handleAlternativeUpdate(e)}
+            onKeyPress={e => this.handleKeyPress(e)}
           />
 
           <button onClick={(...a) => this.handleAddAlternative(...a)}>Add</button>
@@ -99,45 +104,18 @@ class Alternative extends React.Component {
   }
 }
 
+Alternative.defaultProps = {
+  alternativeText: undefined,
+};
+
 Alternative.propTypes = {
-  alternativeText: PropTypes.string.isRequired,
-  alternativeUpdate: PropTypes.func.isRequired,
-  updateAlternativeText: PropTypes.func.isRequired,
-  display: PropTypes.bool.isRequired,
+  alternativeText: PropTypes.string,
+  handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
-  removeAlternative: PropTypes.func.isRequired,
+  handleRemoveAlternative: PropTypes.func.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
   })).isRequired,
 };
 
-const mapStateToProps = state => ({
-  alternativeText: state.issueFormAlternativeText,
-  // Display the component if the question type is set to multiple choice.
-  display: state.questionType === 1,
-});
-
-const mapDispatchToProps = dispatch => ({
-  alternativeUpdate: (text) => {
-    dispatch(setAlternativeText(text));
-  },
-
-  addAlternative: (text) => {
-    dispatch(addAlternative(text));
-    dispatch(clearAlternativeText());
-  },
-
-  updateAlternativeText: (id, text) => {
-    dispatch(updateAlternativeText(id, text));
-  },
-
-  removeAlternative: (id) => {
-    dispatch(removeAlternative(id));
-  },
-});
-
 export default Alternative;
-export const AlternativeContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Alternative);

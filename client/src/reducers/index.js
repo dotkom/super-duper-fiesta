@@ -8,14 +8,6 @@ import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
 import users from './users';
 
-import {
-  resolutionType,
-  questionType,
-  issueFormAlternativeText,
-  createIssueAlternatives,
-  issueSettings,
-} from './createIssueForm';
-
 const votingApp = combineReducers({
   auth,
   issues,
@@ -25,12 +17,6 @@ const votingApp = combineReducers({
   registrationEnabled,
   userFilter,
   users,
-
-  resolutionType,
-  questionType,
-  issueFormAlternativeText,
-  createIssueAlternatives,
-  issueSettings,
 });
 
 export default votingApp;

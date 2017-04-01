@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { updateSetting } from '../../../actionCreators/createIssueForm.js';
 
 
 const Checkboxes = ({
   countBlankVotes, secretVoting, showOnlyWinner,
-  handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner
+  handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner,
 }) => (
   <div className="IssueFormCheckboxes">
     <label className="IssueForm-checkbox">
@@ -38,23 +36,12 @@ const Checkboxes = ({
 );
 
 Checkboxes.propTypes = {
-  updateSetting: PropTypes.func.isRequired,
-  values: PropTypes.objectOf(PropTypes.bool).isRequired,
+  handleUpdateCountBlankVotes: PropTypes.func.isRequired,
+  countBlankVotes: PropTypes.bool.isRequired,
+  secretVoting: PropTypes.bool.isRequired,
+  showOnlyWinner: PropTypes.bool.isRequired,
+  handleUpdateSecretVoting: PropTypes.func.isRequired,
+  handleUpdateShowOnlyWinner: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps,
-  values: state.issueSettings,
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateSetting: (id, value) => {
-    dispatch(updateSetting(id, value));
-  },
-});
-
 export default Checkboxes;
-export const CheckboxesContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Checkboxes);

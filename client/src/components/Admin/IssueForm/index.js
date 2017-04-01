@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../Button';
-import '../../../css/IssueForm.css';
 import { createIssue } from '../../../actionCreators/adminButtons';
 import { getIssue } from '../../../selectors/issues';
-import { SelectResolutionTypeContainer } from './SelectResolutionType';
-import { SelectQuestionTypeContainer } from './SelectQuestionType';
-import { AlternativeContainer } from './Alternative';
-import IssueFormSettings from './Settings';
+import Alternative from './Alternative';
+import Checkboxes from './Checkboxes';
+import SelectResolutionType from './SelectResolutionType';
+import SelectQuestionType from './SelectQuestionType';
+import '../../../css/IssueForm.css';
 
-const YES_NO_ANSWERS = [
-  { text: 'Ja' },
-  { text: 'Nei' },
-];
+const YES_NO_ANSWERS = {
+  0: 'Ja',
+  1: 'Nei',
+};
+
+let alternativeId = 0;
 
 class IssueForm extends React.Component {
   constructor(props) {
@@ -24,22 +26,41 @@ class IssueForm extends React.Component {
       secretVoting: false,
       showOnlyWinner: false,
       countBlankVotes: false,
+      voteDemand: 1 / 2,
+      questionType: 'MULTIPLE_CHOICE',
     };
-
   }
 
   handleAddAlternative(alternativeText) {
+    alternativeId += 1;
+    this.handleUpdateAlternativeText(
+      alternativeId,
+      alternativeText,
+    );
+  }
+
+  handleUpdateAlternativeText(id, text) {
+    this.setState({
+      alternatives: Object.assign({}, this.state.alternatives, {
+        [id]: text,
+      }),
+    });
+  }
+
+  handleRemoveAlternative(id) {
     const { alternatives } = this.state;
-    alternatives.push({ text: alternativeText });
+    delete alternatives[id];
     this.setState({ alternatives });
   }
 
   handleCreateIssue() {
-    const { createIssue } = this.props;
-    const { issueDescription, alternatives, countBlankVotes, secretVoting, showOnlyWinner } = this.state;
-    createIssue(issueDescription, alternatives,
-      1, // @ToDo: Get from state.
-      showOnlyWinner, secretVoting, countBlankVotes,
+    this.props.createIssue(
+      this.state.issueDescription,
+      this.state.alternatives,
+      this.state.voteDemand,
+      this.state.showOnlyWinner,
+      this.state.secretVoting,
+      this.state.countBlankVotes,
     );
   }
 
@@ -59,9 +80,20 @@ class IssueForm extends React.Component {
     this.setState({ showOnlyWinner });
   }
 
+  handleResolutionTypeChange(voteDemand) {
+    this.setState({ voteDemand });
+  }
+
+  handleQuestionTypeChange(questionType) {
+    this.setState({ questionType });
+  }
+
   render() {
     const showActiveIssueWarning = this.props.issue && this.props.issue.text;
-    const issueReadyToCreate = !showActiveIssueWarning && this.state.issueDescription && this.state.issueDescription.length;
+
+    const issueReadyToCreate = !showActiveIssueWarning
+      && this.state.issueDescription
+      && this.state.issueDescription.length;
     return (
       <div className="IssueForm">
         <p
@@ -77,26 +109,36 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        <AlternativeContainer
+        {this.state.questionType === 'MULTIPLE_CHOICE'
+        && <Alternative
           alternatives={this.state.alternatives}
           handleAddAlternative={this.handleAddAlternative}
+          handleUpdateAlternativeText={this.handleUpdateAlternativeText}
+          handleRemoveAlternative={this.handleRemoveAlternative}
         />
+        }
         <div className="IssueForm-label">Innstillinger</div>
-        <IssueFormSettings
+        <Checkboxes
           handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
           handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
           handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
-          countBlankVotes={(...a) => this.state.countBlankVotes(...a)}
-          secretVoting={(...a) => this.state.secretVoting(...a)}
-          showOnlyWinner={(...a) => this.state.showOnlyWinner(...a)}
+          countBlankVotes={this.state.countBlankVotes}
+          secretVoting={this.state.secretVoting}
+          showOnlyWinner={this.state.showOnlyWinner}
         />
         <label className="IssueForm-select">
           <div className="IssueForm-label">Flertallstype</div>
-          <SelectResolutionTypeContainer />
+          <SelectResolutionType
+            handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
+            resolutionType={this.state.voteDemand}
+          />
         </label>
         <label className="IssueForm-select">
           <div className="IssueForm-label">Spørsmålstype</div>
-          <SelectQuestionTypeContainer />
+          <SelectQuestionType
+            questionType={this.state.questionType}
+            handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
+          />
         </label>
         <Button
           background
@@ -114,6 +156,9 @@ IssueForm.defaultProps = {
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
+  issue: React.PropTypes.shape({
+    text: React.PropTypes.string,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
