@@ -66,7 +66,7 @@ class Alternative extends React.Component {
       <div className="IssueFormAlternative">
         <ul>
           {Object.keys(alternatives).map(id =>
-            <li key={alternatives[id]}>
+            <li key={id}>
               {alternatives[id]}
               <button
                 onClick={() => handleRemoveAlternative(id)}
