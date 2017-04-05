@@ -15,7 +15,7 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
         label={`Alternativ ${i + 1}`}
         count={votePercentages[alternative.id]}
         key={alternative.id}
-        total={userCount}
+        total={voteCount}
       />,
     )}
 
