@@ -8,7 +8,7 @@ pipeline:
     commands:
       - npm install --depth=0 --quiet
       - ./node_modules/.bin/webpack
-      - npm run lint
+      - ./node_modules/.bin/eslint client/src/ server/
 
 services:
   mongo:
