@@ -4,7 +4,7 @@ import '../css/VoteCounter.css';
 const VoteCounter = ({ count, total, label }) => (
   <div className="VoteCounter">
     <div className="VoteCounter-label">
-      { label } ({ count } / { total })
+      { label } <span className="VoteCounter-count">({ count } / { total })</span>
     </div>
     <div className="VoteCounter-bar">
       <div className="VoteCounter-bar-progress" style={{ width: `${(count / total) * 100}%` }} />
