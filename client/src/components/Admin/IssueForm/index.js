@@ -9,10 +9,10 @@ import SelectResolutionType from './SelectResolutionType';
 import SelectQuestionType from './SelectQuestionType';
 import '../../../css/IssueForm.css';
 
-const YES_NO_ANSWERS = [
-  'Ja',
-  'Nei',
-];
+const YES_NO_ANSWERS = {
+  0: 'Ja',
+  1: 'Nei',
+};
 
 let alternativeId = 0;
 
