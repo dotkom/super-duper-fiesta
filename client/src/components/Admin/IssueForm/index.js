@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../Button';
 import { createIssue } from '../../../actionCreators/adminButtons';
-import { getIssue } from '../../../selectors/issues';
+import { activeIssueExists } from '../../../selectors/issues';
 import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
 import SelectQuestionType from './SelectQuestionType';
 import '../../../css/IssueForm.css';
 
-const YES_NO_ANSWERS = {
-  0: 'Ja',
-  1: 'Nei',
-};
+const YES_NO_ANSWERS = [
+  'Ja',
+  'Nei',
+];
 
 let alternativeId = 0;
 
@@ -89,11 +89,12 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const showActiveIssueWarning = this.props.issue && this.props.issue.text;
+    const showActiveIssueWarning = this.props.activeIssue;
 
     const issueReadyToCreate = !showActiveIssueWarning
       && this.state.issueDescription
       && this.state.issueDescription.length;
+
     return (
       <div className="IssueForm">
         <p
@@ -142,7 +143,7 @@ class IssueForm extends React.Component {
         </label>
         <Button
           background
-          onClick={this.handleCreateIssue}
+          onClick={() => this.handleCreateIssue()}
           disabled={!issueReadyToCreate}
         >Lagre sak</Button>
       </div>
@@ -156,13 +157,11 @@ IssueForm.defaultProps = {
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
-  issue: React.PropTypes.shape({
-    text: React.PropTypes.string,
-  }).isRequired,
+  activeIssue: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  issue: getIssue(state),
+  activeIssue: activeIssueExists(state),
   issueDescription: state.issueDescription ? state.issueDescription : '',
 });
 
@@ -173,6 +172,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default IssueForm;
+
 export const IssueFormContainer = connect(
     mapStateToProps,
     mapDispatchToProps,

@@ -113,9 +113,7 @@ Alternative.propTypes = {
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
-  alternatives: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-  })).isRequired,
+  alternatives: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Alternative;

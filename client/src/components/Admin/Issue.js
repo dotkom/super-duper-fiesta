@@ -4,10 +4,10 @@ import Button from '../Button';
 import IconText from '../IconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
-import { getIssue } from '../../selectors/issues';
+import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
 import '../../css/IssueAdmin.css';
 
-const Issue = ({ closeIssue, issue }) => (
+const Issue = ({ closeIssue, allowClosing, issueText }) => (
   <div className="IssueAdmin">
     <div className="IssueAdmin-heading">
       <Pin code="DEADBEEF" />
@@ -20,31 +20,26 @@ const Issue = ({ closeIssue, issue }) => (
       <Button>
         <IconText text="Resett" iconClass="flaticon-refresh" />
       </Button>
-      <Button onClick={closeIssue} hidden={!issue}>
+      <Button onClick={closeIssue} hidden={!allowClosing}>
         <IconText text="Avslutt" iconClass="flaticon-lock" />
       </Button>
       <Button>
         <IconText text="Slett" iconClass="flaticon-cross" />
       </Button>
     </div>
-    <p className="IssueAdmin-text">{issue.text}</p>
+    <p className="IssueAdmin-text">{issueText}</p>
   </div>
 );
 
-Issue.defaultProps = {
-  issue: {
-    text: 'Det er ingen aktiv sak for øyeblikket.',
-  },
-};
-
 Issue.propTypes = {
   closeIssue: React.PropTypes.func.isRequired,
-  issue: React.PropTypes.shape({
-    text: React.PropTypes.string.isRequired,
-  }),
+  allowClosing: React.PropTypes.bool.isRequired,
+  issueText: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
+  allowClosing: activeIssueExists(state),
+  issueText: getIssueText(state),
   issue: getIssue(state),
 });
 
