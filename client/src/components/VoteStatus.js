@@ -12,7 +12,7 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
 
     {alternatives && alternatives.map((alternative, i) =>
       <VoteCounter
-        label={`Alternativ ${i + 1}`}
+        label={alternative.text}
         count={votePercentages[alternative.id]}
         key={alternative.id}
         total={voteCount}
