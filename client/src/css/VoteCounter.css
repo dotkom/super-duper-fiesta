@@ -15,3 +15,15 @@
   background: #6b71a5;
   height: 100%;
 }
+
+.VoteCounter-label {
+  display: flex;
+}
+
+.VoteCounter-count {
+  margin-left: auto;
+  min-width: 5rem;
+  flex-basis: auto;
+  text-align: right;
+  align-self: flex-end;
+}
