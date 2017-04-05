@@ -1,3 +1,7 @@
 .Alternatives {
   margin-top: 2rem;
 }
+
+.Alternatives:empty {
+  display: none;
+}
