@@ -47,6 +47,10 @@ label.IssueForm-checkbox {
   color: gray;
 }
 
+.IssueFormAlternative ul:empty {
+  display: none;
+}
+
 .IssueForm--ActiveIssueWarning {
   background: #d15555;
   border-radius: 5px;
