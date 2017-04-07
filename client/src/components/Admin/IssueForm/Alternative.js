@@ -64,6 +64,7 @@ class Alternative extends React.Component {
 
     return (
       <div className="IssueFormAlternative">
+        <div className="IssueForm-label">Alternativer</div>
         <ul>
           {Object.keys(alternatives).map(id =>
             <li key={id}>
@@ -76,29 +77,27 @@ class Alternative extends React.Component {
           )}
         </ul>
 
-        <label className="IssueForm-radios">
-          <Dialog
-            visible={this.state.showUpdateDialog}
-            onClose={(...a) => this.closeUpdateDialog(...a)}
-            title="Endre alternativ"
-          >
-            <input
-              type="text" value={this.state.dialogValue}
-              onChange={(...a) => this.updateDialogValue(...a)}
-            />
-            <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
-            <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
-          </Dialog>
-
+        <Dialog
+          visible={this.state.showUpdateDialog}
+          onClose={(...a) => this.closeUpdateDialog(...a)}
+          title="Endre alternativ"
+        >
           <input
-            type="text"
-            value={alternativeText}
-            onChange={e => this.handleAlternativeUpdate(e)}
-            onKeyPress={e => this.handleKeyPress(e)}
+            type="text" value={this.state.dialogValue}
+            onChange={(...a) => this.updateDialogValue(...a)}
           />
+          <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
+          <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
+        </Dialog>
 
-          <button onClick={(...a) => this.handleAddAlternative(...a)}>Add</button>
-        </label>
+        <input
+          type="text"
+          value={alternativeText}
+          onChange={e => this.handleAlternativeUpdate(e)}
+          onKeyPress={e => this.handleKeyPress(e)}
+        />
+
+        <button onClick={(...a) => this.handleAddAlternative(...a)}>Legg til alternativ</button>
       </div>
     );
   }

@@ -6,6 +6,7 @@ const Checkboxes = ({
   handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner,
 }) => (
   <div className="IssueFormCheckboxes">
+    <div className="IssueForm-label">Innstillinger</div>
     <label className="IssueForm-checkbox">
       <input
         type="checkbox"
