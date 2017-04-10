@@ -33,7 +33,7 @@ class Alternative extends React.Component {
   openUpdateDialog(id) {
     this.setState({
       showUpdateDialog: true,
-      dialogValue: this.props.alternatives[id],
+      dialogValue: this.props.alternatives[id].text,
       selectedAlternative: id,
     });
   }
@@ -67,7 +67,7 @@ class Alternative extends React.Component {
         <ul>
           {Object.keys(alternatives).map(id =>
             <li key={id}>
-              {alternatives[id]}
+              {alternatives[id].text}
               <button
                 onClick={() => handleRemoveAlternative(id)}
               >Fjern</button>

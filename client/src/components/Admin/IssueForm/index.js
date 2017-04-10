@@ -9,10 +9,18 @@ import SelectResolutionType from './SelectResolutionType';
 import SelectQuestionType from './SelectQuestionType';
 import '../../../css/IssueForm.css';
 
-const YES_NO_ANSWERS = {
-  0: 'Ja',
-  1: 'Nei',
-};
+const MULTIPLE_CHOICE = 'MULTIPLE_CHOICE';
+
+const YES_NO_ANSWERS = [
+  {
+    id: 0,
+    text: 'Ja',
+  },
+  {
+    id: 1,
+    text: 'Nei',
+  },
+];
 
 let alternativeId = 0;
 
@@ -22,41 +30,60 @@ class IssueForm extends React.Component {
 
     this.state = {
       issueDescription: '',
-      alternatives: YES_NO_ANSWERS,
+      alternatives: [],
       secretVoting: false,
       showOnlyWinner: false,
       countBlankVotes: false,
       voteDemand: 1 / 2,
-      questionType: 'MULTIPLE_CHOICE',
+      questionType: MULTIPLE_CHOICE,
     };
   }
 
-  handleAddAlternative(alternativeText) {
+  handleAddAlternative(text) {
+    this.handleUpdateAlternativeText(alternativeId, text);
     alternativeId += 1;
-    this.handleUpdateAlternativeText(
-      alternativeId,
-      alternativeText,
-    );
   }
 
   handleUpdateAlternativeText(id, text) {
+    const { alternatives } = this.state;
     this.setState({
-      alternatives: Object.assign({}, this.state.alternatives, {
-        [id]: text,
+      alternatives: Object.assign({}, alternatives, {
+        [id]: {
+          text,
+          id,
+        },
       }),
     });
   }
 
   handleRemoveAlternative(id) {
     const { alternatives } = this.state;
-    delete alternatives[id];
-    this.setState({ alternatives });
+    this.setState({
+      alternatives: Object.keys(alternatives).reduce((result, key) => {
+        const newResult = result;
+        if (key !== String(id)) {
+          newResult[key] = alternatives[key];
+        }
+        return newResult;
+      }, {}),
+    });
   }
 
   handleCreateIssue() {
+    const { alternatives, questionType } = this.state;
+
+    let issueAlternatives;
+    if (questionType === MULTIPLE_CHOICE) {
+      issueAlternatives = Object.keys(alternatives).map(id => ({
+        text: alternatives[id].text,
+      }));
+    } else {
+      issueAlternatives = YES_NO_ANSWERS;
+    }
+
     this.props.createIssue(
       this.state.issueDescription,
-      this.state.alternatives,
+      issueAlternatives,
       this.state.voteDemand,
       this.state.showOnlyWinner,
       this.state.secretVoting,
@@ -94,7 +121,6 @@ class IssueForm extends React.Component {
     const issueReadyToCreate = !showActiveIssueWarning
       && this.state.issueDescription
       && this.state.issueDescription.length;
-
     return (
       <div className="IssueForm">
         <p
@@ -110,7 +136,7 @@ class IssueForm extends React.Component {
           />
           <p>Beskrivelse av saken</p>
         </label>
-        {this.state.questionType === 'MULTIPLE_CHOICE'
+        {this.state.questionType === MULTIPLE_CHOICE
         && <Alternative
           alternatives={this.state.alternatives}
           handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
