@@ -2,7 +2,7 @@
   margin: 1rem 0 0 0;
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid transparent;
+  border: 0.0625rem solid transparent;
   background: transparent;
   color: #636bb2;
 }
@@ -19,9 +19,9 @@
   font-size: 1rem;
   color: #ffffff;
   background: #595C7F;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0px -2px 0px 0px rgba(0, 0, 0, 0.25) inset,
-              0px 0px 1px 0px rgba(0, 0, 0, 0.25);
+  border: 0.0625rem solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -0.125rem 0 0 rgba(0, 0, 0, 0.25) inset,
+              0 0 0.0625rem 0 rgba(0, 0, 0, 0.25);
 }
 
 .Button--background:hover {

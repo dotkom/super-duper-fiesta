@@ -1,7 +1,7 @@
 .Issue {
   background: whitesmoke;
   padding: 1rem;
-  border: 1px solid #f3f3f3;
+  border: 0.0625rem solid #f3f3f3;
   flex-grow: 2;
 }
 

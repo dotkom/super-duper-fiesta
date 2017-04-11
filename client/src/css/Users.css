@@ -10,14 +10,14 @@ table.Users-list {
 
 .Users-list th {
   font-size: 1rem;
-  border-bottom: 1px solid #9597b1;
+  border-bottom: 0.0625rem solid #9597b1;
   font-weight: normal;
   padding: 0.25rem 0.25rem;
 }
 
 .Users-list td {
   padding: 0.5rem 0.25rem;
-  border-bottom: 1px solid #dbdce0;
+  border-bottom: 0.0625rem solid #dbdce0;
 }
 
 .Users-list tr:nth-child(even) td {

@@ -24,7 +24,7 @@
   max-width: 80%;
   position: absolute;
   background: white;
-  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
 .Dialog-top {
