@@ -19,14 +19,16 @@
 
 .Heading-content button {
   cursor: pointer;
+  margin: 0;
 }
 
 .Heading-header {
   color: #63699D;
   font-size: 2rem;
+  margin: 1rem 0;
 }
 
-.Heading-header:hover {
+.Heading-content a:hover .Heading-header {
   color: #8186b3;
 }
 
@@ -34,8 +36,8 @@
   text-align: right;
 }
 
-.Heading-components > .Button:last-child {
-  margin-right: -1rem;
+.Heading-components > .Button:last-child, .Heading-components > a:last-child {
+  margin-right: -0.5rem;
 }
 
 .Heading-logout {
