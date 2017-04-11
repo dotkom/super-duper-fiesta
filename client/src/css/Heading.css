@@ -4,9 +4,9 @@
 }
 
 .Heading-content {
-  padding: 0 2rem;
+  padding: 0 1rem;
   margin: 0 auto;
-  max-width: 100rem;
+  max-width: 64rem;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -23,7 +23,7 @@
 
 .Heading-header {
   color: #63699D;
-  font-size: 3.4rem;
+  font-size: 2rem;
 }
 
 .Heading-header:hover {
@@ -43,7 +43,7 @@
   color: #F7F7F7;
   padding: 15px;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .Heading-logout:hover {

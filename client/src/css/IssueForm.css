@@ -1,5 +1,5 @@
 .IssueForm {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .IssueForm label {
@@ -7,40 +7,40 @@
 }
 
 .IssueForm-label {
-  font-size: 1.6rem;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  margin-top: 1rem;
 }
 
 .IssueForm select, .IssueForm textarea {
   display: block;
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-family: inherit;
 } 
 
 label.IssueForm-checkbox {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .IssueForm-checkbox input {
-  margin-right: 0.8rem;
+  margin-right: 0.5rem;
 }
 
 .IssueForm select {
   border: 1px solid #d0d0d0;
   background: #f5f5f5;
-  padding: 0.8rem;
-  max-width: 50rem;
+  padding: 0.5rem;
+  max-width: 32rem;
 }
 
 .IssueForm textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  height: 20rem;
+  height: 10rem;
   resize: vertical;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .IssueForm label p {

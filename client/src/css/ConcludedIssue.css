@@ -3,21 +3,21 @@
   flex-basis: 25rem;
   background: #f5f5f5;
   color: #565656;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 
 .ConcludedIssue-top {
   background: #c5493c;
   color: #ffffff;
-  padding: 1rem 3rem;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .ConcludedIssue-title {
-  font-size: 1.2em;
+  font-size: 1rem;
   font-weight: normal;
   margin: 0;
 }
@@ -27,11 +27,11 @@
 }
 
 .ConcludedIssue-content {
-  padding: 1rem 1rem 2rem 3rem;
+  padding: 0.5rem 0.5rem 1rem 2rem;
 }
 
 .ConcludedIssue-alternatives {
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .ConcludedIssue-alternatives--winner {

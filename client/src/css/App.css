@@ -1,11 +1,7 @@
-html {
-  font-size: 62.5%;
-}
-
 body {
   background: #ffffff;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1rem;
   margin: 0;
 }
 
@@ -18,9 +14,9 @@ button {
 }
 
 .App-components {
-  max-width: 100rem;
+  max-width: 64rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .ActiveIssue-components {
@@ -30,10 +26,10 @@ button {
 }
 
 .ActiveIssue-components > * {
-  margin: 4rem 1rem 0 1rem;
+  margin: 2rem 0.5rem 0 0.5rem;
 }
 
 .ActiveIssue-Vote-wrapper {
   flex-grow: 4;
-  flex-basis: 30rem;
+  flex-basis: 20rem;
 }

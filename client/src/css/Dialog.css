@@ -29,13 +29,13 @@
 
 .Dialog-top {
   background: #6b71a5;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
 }
 
 .Dialog-title {
   align-self: center;
-  font-size: 1.5em;
+  font-size: 1rem;
   font-weight: bold;
   color: white;
 }
@@ -43,7 +43,7 @@
 .Dialog-close {
   margin-left: auto;
   color: whitesmoke;
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .Dialog-close:hover {
@@ -51,5 +51,5 @@
 }
 
 .Dialog-content {
-  padding: 3rem;
+  padding: 2rem;
 }

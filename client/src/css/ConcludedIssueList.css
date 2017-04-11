@@ -3,5 +3,5 @@
     flex-wrap: wrap;
     justify-content: space-between;
     /* -1rem left and right to counter margin on children */
-    margin: 4rem -1rem 0 -1rem;
+    margin: 2rem -0.5rem 0 -0.5rem;
 }
