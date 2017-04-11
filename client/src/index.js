@@ -6,6 +6,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { applyMiddleware, createStore } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
+import logger from 'redux-logger';
 import { AdminPanelContainer } from './components/Admin/AdminPanel';
 import { AppContainer } from './components/App/';
 import AdminHome from './components/Admin/Home';
@@ -20,11 +21,7 @@ const socket = IO.connect();
 
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
-const store = applyMiddleware(socketIoMiddleware)(createStore)(votingApp);
-
-store.subscribe(() => {
-  console.log('Store updated:', store.getState());
-});
+const store = applyMiddleware(socketIoMiddleware, logger)(createStore)(votingApp);
 
 ReactDOM.render(
   <Provider store={store}>
