@@ -1,5 +1,5 @@
 .VoteCounter {
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   font-weight: bold;
   color: #717171;
 }
@@ -7,7 +7,7 @@
 .VoteCounter-bar {
   margin-top: 0.25rem;
   background: #e0e2ef;
-  height: 1.5rem;
+  height: 1rem;
   width: 100%;
 }
 
