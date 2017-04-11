@@ -1,6 +1,6 @@
 .Heading {
   box-shadow: 0 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.1);
-  background: #f5f5f5;
+  background: #F5F5F5;
 }
 
 .Heading-content {
@@ -29,7 +29,7 @@
 }
 
 .Heading-content a:hover .Heading-header {
-  color: #8186b3;
+  color: #8186B3;
 }
 
 .Heading-components {

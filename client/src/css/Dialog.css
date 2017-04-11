@@ -28,24 +28,24 @@
 }
 
 .Dialog-top {
-  background: #6b71a5;
+  background: #6B71A5;
   display: flex;
 }
 
 .Dialog-title {
   margin: 0;
   align-self: center;
-  color: white;
+  color: #FFF;
 }
 
 .Dialog-close {
   margin-left: auto;
-  color: whitesmoke;
+  color: #F5F5F5;
   font-size: 2rem;
 }
 
 .Dialog-close:hover {
-  color: #484d79;
+  color: #484D79;
 }
 
 .Dialog-top, .Dialog-content {

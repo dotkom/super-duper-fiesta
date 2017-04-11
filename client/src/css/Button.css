@@ -2,7 +2,7 @@
   margin: 1rem 0 0 0;
   border: 0.0625rem solid transparent;
   background: transparent;
-  color: #636bb2;
+  color: #636BB2;
 }
 
 .Button:hover {
@@ -14,7 +14,7 @@
 }
 
 .Button--background {
-  color: #ffffff;
+  color: #FFF;
   background: #595C7F;
   border: 0.0625rem solid rgba(0, 0, 0, 0.04);
   box-shadow: 0 -0.125rem 0 0 rgba(0, 0, 0, 0.25) inset,
@@ -22,12 +22,12 @@
 }
 
 .Button--background:hover {
-  color: #ffffff;
-  background: #6d7194;
+  color: #FFF;
+  background: #6D7194;
 }
 
 .Button:disabled {
-  background: #71727d;
+  background: #71727D;
   color: white;
   cursor: not-allowed
 }
