@@ -14,9 +14,10 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
         {registeredDate.format('LLL')} ({registeredDate.fromNow()})
       </td>
       <td className="Users-list--right">
-        <button onClick={() => toggleCanVote(id, canVote)}>
-          {canVote ? 'Fjern stemmerett' : 'Gi stemmerett'}
-        </button>
+        <input
+          type="checkbox"
+          onChange={() => toggleCanVote(id, canVote)}
+        />
       </td>
     </tr>
   );

@@ -1,10 +1,19 @@
+.Users {
+  margin-top: 2rem;
+}
+
 .Users-info {
-  max-width: 40rem;
+  max-width: 50rem;
+}
+
+.UserFilter {
+  margin-top: 2rem;
 }
 
 table.Users-list {
   width: 100%;
-  max-width: 40rem;
+  max-width: 50rem;
+  margin-top: 1rem;
   border-collapse: collapse;
 }
 
