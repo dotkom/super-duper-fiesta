@@ -57,9 +57,9 @@ class AdminPanel extends React.Component {
           <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
           <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
         </Heading>
-        <div className="AdminPanel-components">
+        <main className="AdminPanel-components">
           {this.props.children}
-        </div>
+        </main>
       </div>
     );
   }

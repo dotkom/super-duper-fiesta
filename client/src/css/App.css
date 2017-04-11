@@ -4,14 +4,14 @@ body {
   margin: 0;
 }
 
-button, select, textarea {
-  font-family: inherit;
-}
-
-.App-components {
+main {
   max-width: 64rem;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+button, select, textarea {
+  font-family: inherit;
 }
 
 .ActiveIssue-components {
