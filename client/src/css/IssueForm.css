@@ -7,7 +7,6 @@
 }
 
 .IssueForm-label {
-  font-size: 1rem;
   margin-bottom: 0.25rem;
   margin-top: 1rem;
 }
@@ -16,7 +15,6 @@
   display: block;
   width: 100%;
   font-size: 1rem;
-  font-family: inherit;
 } 
 
 label.IssueForm-checkbox {

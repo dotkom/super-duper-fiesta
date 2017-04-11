@@ -5,13 +5,7 @@
   flex-grow: 2;
 }
 
-.Issue p {
-  font-size: 1rem;
-}
-
 .Issue-heading {
-  font-size: 1rem;
-  font-weight: normal;
   margin: 0;
   color: #717171;
 }

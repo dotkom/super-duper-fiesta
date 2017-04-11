@@ -4,9 +4,9 @@ import '../css/IssueStatus.css';
 
 const IssueStatus = () => (
   <div className="IssueStatus">
-    <h2 className="IssueStatus-title">
+    <p className="IssueStatus-title">
       Foreløpig status
-    </h2>
+    </p>
     <VoteStatusContainer />
   </div>
 );

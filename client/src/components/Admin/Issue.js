@@ -11,7 +11,7 @@ const Issue = ({ closeIssue, issue }) => (
   <div className="IssueAdmin">
     <div className="IssueAdmin-heading">
       <Pin code="DEADBEEF" />
-      <h2 className="IssueAdmin-title">Aktiv sak</h2>
+      <p className="IssueAdmin-title">Aktiv sak</p>
     </div>
     <div className="IssueAdmin-actions">
       <Button>

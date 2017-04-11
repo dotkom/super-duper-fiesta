@@ -11,7 +11,7 @@ const Dialog = ({ visible, title, onClose, children }) => {
       <div onClick={onClose} className="Dialog-backdrop" />
       <div className="Dialog-dialog">
         <div className="Dialog-top">
-          <div className="Dialog-title">{title}</div>
+          <h2 className="Dialog-title">{title}</h2>
           <div onClick={onClose} className="Dialog-close flaticon-close" />
         </div>
         <div className="Dialog-content">

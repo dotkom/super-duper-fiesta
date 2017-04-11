@@ -1,7 +1,5 @@
 .Button {
   margin: 1rem 0 0 0;
-  padding: 0.5rem;
-  font-size: 1rem;
   border: 0.0625rem solid transparent;
   background: transparent;
   color: #636bb2;
@@ -16,7 +14,6 @@
 }
 
 .Button--background {
-  font-size: 1rem;
   color: #ffffff;
   background: #595C7F;
   border: 0.0625rem solid rgba(0, 0, 0, 0.04);
@@ -40,9 +37,16 @@
   font-size: 0.5rem;
 }
 
+.Button--size-md {
+  padding: 0.5rem;
+}
+
+.Button--size-md, .Button--size-lg {
+  font-size: 1rem;
+}
+
 .Button--size-lg {
   padding: 1rem;
-  font-size: 1rem;
 }
 
 .Button--background + .Button--background {

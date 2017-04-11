@@ -5,7 +5,7 @@ import '../../css/Issue.css';
 
 const Issue = ({ text }) => (
   <div className="Issue">
-    <h2 className="Issue-heading">Aktiv sak</h2>
+    <p className="Issue-heading">Aktiv sak</p>
     <p>{text}</p>
   </div>
 );
