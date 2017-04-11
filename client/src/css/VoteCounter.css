@@ -9,10 +9,12 @@
   background: #e0e2ef;
   height: 1.5rem;
   width: 100%;
+  box-shadow: inset 0px -1px 1px 0px #cfd1e0;
 }
 
 .VoteCounter-bar-progress {
   background: #6b71a5;
+  box-shadow: inset 0px -1px 1px 0px #272b4c;
   height: 100%;
 }
 
