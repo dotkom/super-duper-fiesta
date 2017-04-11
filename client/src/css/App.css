@@ -17,11 +17,11 @@ button, select, textarea {
 .ActiveIssue-components {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -1rem;
+  margin: 2rem -0.5rem 0;
 }
 
 .ActiveIssue-components > * {
-  margin: 2rem 0.5rem 0 0.5rem;
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 .ActiveIssue-Vote-wrapper {

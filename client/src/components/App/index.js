@@ -18,7 +18,7 @@ const App = props => (
         <Button>Logg {props.loggedIn ? 'ut' : 'inn'}</Button>
       </a>
     </Heading>
-    <main className="App-components">
+    <main>
       <div className="ActiveIssue-components">
         <div className="ActiveIssue-Vote-wrapper">
           <IssueContainer />
