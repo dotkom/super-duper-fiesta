@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
+import { submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { getIssue, getIssueId } from '../../selectors/issues';
+import { getIssueId } from '../../selectors/issues';
 import { getOwnVote } from '../../selectors/voting';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
