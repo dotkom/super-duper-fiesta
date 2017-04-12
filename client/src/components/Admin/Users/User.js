@@ -17,6 +17,7 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
         <input
           type="checkbox"
           onChange={() => toggleCanVote(id, canVote)}
+          checked={canVote}
         />
       </td>
     </tr>
