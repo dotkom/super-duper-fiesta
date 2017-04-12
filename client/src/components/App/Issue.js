@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getIssueText } from '../../selectors/issues';
+import Card from '../Card';
 import '../../css/Issue.css';
 
 const Issue = ({ text }) => (
-  <div className="Issue">
-    <p className="Issue-heading">Aktiv sak</p>
+  <Card
+    classes="Issue"
+    subtitle="Aktiv sak"
+  >
     <p>{text}</p>
-  </div>
+  </Card>
 );
 
 Issue.defaultProps = {

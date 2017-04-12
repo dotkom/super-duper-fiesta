@@ -1,11 +1,4 @@
 .Issue {
-  background: whitesmoke;
-  padding: 1rem;
   border: 0.0625rem solid #F3F3F3;
   flex-grow: 2;
-}
-
-.Issue-heading {
-  margin: 0;
-  color: #555;
 }
