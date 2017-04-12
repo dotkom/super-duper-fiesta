@@ -5,6 +5,9 @@
   flex-flow: row wrap;
   justify-content: space-between;
   color: #717171;
+
+  border: 1px solid;
+  border-color: rgba(187, 187, 187, 0.1) rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
 }
 
 .IssueAdmin-heading {

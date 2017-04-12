@@ -1,8 +1,10 @@
 .Issue {
   background: whitesmoke;
   padding: 2rem;
-  border: 1px solid #f3f3f3;
   flex-grow: 2;
+
+  border: 1px solid;
+  border-color: rgba(187, 187, 187, 0.1) rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
 }
 
 .Issue p {

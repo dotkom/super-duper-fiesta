@@ -14,6 +14,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid;
+  border-color: rgba(187, 187, 187, 0.1) rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
 }
 
 .ConcludedIssue-title {
@@ -28,6 +30,8 @@
 
 .ConcludedIssue-content {
   padding: 1rem 1rem 2rem 3rem;
+  border: 1px solid;
+  border-color: transparent rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
 }
 
 .ConcludedIssue-alternatives {
