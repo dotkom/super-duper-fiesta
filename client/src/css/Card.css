@@ -19,6 +19,7 @@
 
 .Card-content {
   padding: 1rem;
+  color: #555;
   background-color: #F5F5F5;
 }
 
@@ -26,5 +27,4 @@
   margin: 0;
   font-weight: normal;
   font-size: 1.25rem;
-  color: #555;
 }
