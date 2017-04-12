@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
+import IconText from '../../IconText';
 
 class Alternative extends React.Component {
   constructor() {
@@ -65,18 +66,6 @@ class Alternative extends React.Component {
     return (
       <div className="IssueFormAlternative">
         <h4 className="IssueForm-label">Alternativer</h4>
-        <ul>
-          {Object.keys(alternatives).map(id =>
-            <li key={id}>
-              {alternatives[id]}
-              <button
-                onClick={() => handleRemoveAlternative(id)}
-              >Fjern</button>
-              <button onClick={() => this.openUpdateDialog(id)}>Endre</button>
-            </li>,
-          )}
-        </ul>
-
         <Dialog
           visible={this.state.showUpdateDialog}
           onClose={(...a) => this.closeUpdateDialog(...a)}
@@ -86,18 +75,35 @@ class Alternative extends React.Component {
             type="text" value={this.state.dialogValue}
             onChange={(...a) => this.updateDialogValue(...a)}
           />
-          <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
-          <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
+          <Button background onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
+          <Button background onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
         </Dialog>
-
-        <input
-          type="text"
-          value={alternativeText}
-          onChange={e => this.handleAlternativeUpdate(e)}
-          onKeyPress={e => this.handleKeyPress(e)}
-        />
-
-        <button onClick={(...a) => this.handleAddAlternative(...a)}>Legg til alternativ</button>
+        <div className="IssueFormAlternative-content">
+          <ul>
+            {Object.keys(alternatives).map(id =>
+              <li key={id}>
+                <p>{alternatives[id]}</p>
+                <Button onClick={() => this.openUpdateDialog(id)}>
+                  <div className="flaticon-edit" />
+                </Button>
+                <Button onClick={() => handleRemoveAlternative(id)}>
+                  <div className="flaticon-cross" />
+                </Button>
+              </li>,
+            )}
+          </ul>
+          <div className="IssueFormAlternative-add">
+            <input
+              type="text"
+              value={alternativeText}
+              onChange={e => this.handleAlternativeUpdate(e)}
+              onKeyPress={e => this.handleKeyPress(e)}
+            />
+            <Button onClick={(...a) => this.handleAddAlternative(...a)}>
+              <div className="flaticon-plus" />
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }

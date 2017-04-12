@@ -44,12 +44,61 @@ label.IssueForm-checkbox {
   color: gray;
 }
 
-.IssueFormAlternative ul:empty {
-  display: none;
-}
-
 .IssueForm--ActiveIssueWarning {
   background-color: #D15555;
   padding: 1rem 0.125rem 1rem 1rem;
   color: #FEE;
+}
+
+.IssueFormAlternative-content {
+  background-color: #F5F5F5;
+  max-width: 32rem;
+  padding: 0.5rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.IssueFormAlternative ul:empty {
+  display: none;
+}
+
+.IssueFormAlternative ul {
+  margin: 0 0 0.5rem;
+  padding-left: 0;
+}
+
+.IssueFormAlternative li {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+}
+
+.IssueFormAlternative li:not(:first-child) {
+  border-top: 1px solid #BBB;
+}
+
+.IssueFormAlternative li p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.IssueFormAlternative-content .Button {
+  margin: 0 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.IssueFormAlternative .Dialog input[type="text"] {
+  display: block;
+}
+
+.IssueFormAlternative-add {
+  display: flex;
+  justify-items: center;
+}
+
+.IssueFormAlternative-add input {
+  flex-grow: 1;
+  font-size: 1rem;
+  padding: 0.5rem;
 }
