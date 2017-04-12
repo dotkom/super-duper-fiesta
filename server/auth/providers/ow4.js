@@ -12,54 +12,48 @@ const updateUserById = require('../../models/user').updateUserById;
 const permissions = require('../../models/permissions');
 
 
-const getClientInformation = (accessToken, cb) => {
+async function getClientInformation(accessToken) {
   const OW4UserEndpoint = OW4API.backend + OW4API.userEndpoint;
-  fetch(OW4UserEndpoint, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  }).then(_ => _.json()).then((body) => {
-    const username = body.username;
-    const fullName = `${body.first_name} ${body.last_name}`;
-    const permissionLevel = body.member ? permissions.CAN_VOTE : permissions.IS_LOGGED_IN;
-
-    // Create user if not
-    getUserByUsername(username).then((user) => {
-      if (user === null) {
-        // Create user if not exists
-        logger.debug('User does not exist -- creating', { username });
-        addUser(fullName, username, '12345678', permissionLevel).then((newUsers) => {
-          const newUser = newUsers.user; // We get user and anonUser objects, but only need user
-          logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`,
-            { username, fullName: newUser.name, genfors: newUser.genfors });
-          cb(null, newUser, null);
-        }).catch((createUserErr) => {
-          logger.error('Creating user failed:', createUserErr);
-          cb(createUserErr, null, null);
-        });
-      } else {
-        logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });
-        // Update if user exists
-        updateUserById(user._id, { // eslint-disable-line no-underscore-dangle
-          name: fullName,
-          onlinewebId: username,
-          permissions: permissionLevel,
-        }).then((updatedUser) => {
-          cb(null, updatedUser, null);
-        }).catch((err) => {
-          logger.error('Something went wrong when updating user.', err);
-          cb(err, null, null);
-        });
-      }
-    }).catch((err) => {
-      logger.error('Updating user failed. Try again.', { username });
-      cb(err, null, null);
-    });
-  }).catch((err) => {
+  let body;
+  try {
+    body = await fetch(OW4UserEndpoint, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).then(_ => _.json());
+  } catch (err) {
     logger.error('Fetching user from resource failed', err);
-  });
-};
+    throw err;
+  }
+  const username = body.username;
+  const fullName = `${body.first_name} ${body.last_name}`;
+  const permissionLevel = body.member ? permissions.CAN_VOTE : permissions.IS_LOGGED_IN;
+
+  // Create user if not
+  try {
+    const user = await getUserByUsername(username);
+    if (user === null) {
+      // Create user if not exists
+      logger.debug('User does not exist -- creating', { username });
+      const newUser = await addUser(fullName, username, permissionLevel);
+      logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`,
+        { username, fullName: newUser.name, genfors: newUser.genfors });
+      return newUser;
+    }
+    logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });
+    // Update if user exists
+    const updatedUser = await updateUserById(user._id, { // eslint-disable-line no-underscore-dangle
+      name: fullName,
+      onlinewebId: username,
+      permissions: permissionLevel,
+    });
+    return updatedUser;
+  } catch (err) {
+    logger.error('Updating user failed.', { username, err });
+    throw err;
+  }
+}
 
 passport.use(new OAuth2Strategy(
   {
@@ -71,7 +65,10 @@ passport.use(new OAuth2Strategy(
     scope: OW4AuthConfig.scope,
   },
   (accessToken, refreshToken, profile, cb) => {
-    getClientInformation(accessToken, cb);
-  }) // eslint-disable-line comma-dangle
-);
-
+    getClientInformation(accessToken).then((user) => {
+      cb(null, user, null);
+    }).catch((err) => {
+      cb(err, null, null);
+    });
+  }
+));
