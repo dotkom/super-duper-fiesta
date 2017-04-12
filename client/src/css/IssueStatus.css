@@ -1,11 +1,3 @@
 .IssueStatus {
   flex-grow: 1;
-  padding: 1rem;
-  background-color: #F5F5F5;
-}
-
-.IssueStatus-title {
-  margin: 0;
-  font-weight: normal;
-  color: #555;
 }
