@@ -1,6 +1,6 @@
 .Heading {
   box-shadow: 0 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.1);
-  background: #F5F5F5;
+  background-color: #F5F5F5;
 }
 
 .Heading-content {
@@ -41,12 +41,12 @@
 }
 
 .Heading-logout {
-  background: #323A7F;
+  background-color: #323A7F;
   color: #F7F7F7;
   padding: 1rem;
   text-decoration: none;
 }
 
 .Heading-logout:hover {
-  background: #515CCC;
+  background-color: #515CCC;
 }

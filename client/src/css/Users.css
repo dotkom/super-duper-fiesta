@@ -29,7 +29,7 @@ table.Users-list {
 }
 
 .Users-list tr:nth-child(even) td {
-  background: #F9F9F9;
+  background-color: #F9F9F9;
 }
 
 .Users-list--left {

@@ -6,13 +6,13 @@
 
 .VoteCounter-bar {
   margin-top: 0.25rem;
-  background: #E0E2EF;
+  background-color: #E0E2EF;
   height: 1rem;
   width: 100%;
 }
 
 .VoteCounter-bar-progress {
-  background: #6B71A5;
+  background-color: #6B71A5;
   height: 100%;
 }
 

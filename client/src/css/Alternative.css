@@ -1,6 +1,6 @@
 .Alternative {
   margin: 0.5rem 0;
-  background: #6B71A5;
+  background-color: #6B71A5;
   color: #FFF;
   display: flex;
   box-shadow: 0 -0.125rem 0 0 rgba(0, 0, 0, 0.25) inset,
@@ -12,25 +12,25 @@
 }
 
 .Alternative:hover {
-  background: #8D93C7;
+  background-color: #8D93C7;
 }
 
 .Alternative--selected {
-  background: #4D516F;
+  background-color: #4D516F;
 }
 
 .Alternative--selected:hover {
-  background: #575C7D;
+  background-color: #575C7D;
 }
 
 .Alternative--disabled {
   box-shadow: none;
-  background: #F5F5F5;
+  background-color: #F5F5F5;
   color: #555;
 }
 
 .Alternative--disabled:hover {
-  background: #F5F5F5;
+  background-color: #F5F5F5;
 }
 
 .Alternative label {

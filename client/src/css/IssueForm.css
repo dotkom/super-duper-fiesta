@@ -27,7 +27,7 @@ label.IssueForm-checkbox {
 
 .IssueForm select {
   border: 0.0625rem solid #D0D0D0;
-  background: #F5F5F5;
+  background-color: #F5F5F5;
   padding: 0.5rem;
   max-width: 32rem;
 }
@@ -50,7 +50,7 @@ label.IssueForm-checkbox {
 }
 
 .IssueForm--ActiveIssueWarning {
-  background: #D15555;
+  background-color: #D15555;
   padding: 1rem 0.125rem 1rem 1rem;
   color: #FEE;
 }

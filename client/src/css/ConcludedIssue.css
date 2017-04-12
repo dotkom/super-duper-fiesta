@@ -10,11 +10,11 @@
 }
 
 .ConcludedIssue--minority .Card-header {
-  background: #C5493C;
+  background-color: #C5493C;
 }
 
 .ConcludedIssue--majority .Card-header {
-  background: #258573;
+  background-color: #258573;
 }
 
 .ConcludedIssue-alternatives {

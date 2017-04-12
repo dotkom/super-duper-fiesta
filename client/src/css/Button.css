@@ -1,7 +1,7 @@
 .Button {
   margin: 1rem 0 0 0;
   border: 0.0625rem solid transparent;
-  background: transparent;
+  background-color: transparent;
   color: #636BB2;
 }
 
@@ -15,7 +15,7 @@
 
 .Button--background {
   color: #FFF;
-  background: #595C7F;
+  background-color: #595C7F;
   border: 0.0625rem solid rgba(0, 0, 0, 0.04);
   box-shadow: 0 -0.125rem 0 0 rgba(0, 0, 0, 0.25) inset,
               0 0 0.0625rem 0 rgba(0, 0, 0, 0.25);
@@ -23,11 +23,11 @@
 
 .Button--background:hover {
   color: #FFF;
-  background: #6D7194;
+  background-color: #6D7194;
 }
 
 .Button:disabled {
-  background: #71727D;
+  background-color: #71727D;
   color: white;
   cursor: not-allowed
 }
