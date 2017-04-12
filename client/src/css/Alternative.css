@@ -38,7 +38,7 @@
   padding: 1rem;
 }
 
-.Alternative:hover label {
+.Alternative:not(.Alternative--disabled):hover label {
   cursor: pointer;
 }
 
