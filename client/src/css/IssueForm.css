@@ -88,6 +88,10 @@ label.IssueForm-checkbox {
   font-size: 1.5rem;
 }
 
+.IssueFormAlternative-content .Button:hover div {
+  transform: scale(1.25);
+}
+
 .IssueFormAlternative .Dialog input[type="text"] {
   display: block;
 }

@@ -38,6 +38,10 @@
   padding: 1rem;
 }
 
+.Alternative:hover label {
+  cursor: pointer;
+}
+
 .Alternative input {
   display: none;
 }
