@@ -4,11 +4,6 @@
   margin: 0.5rem;
 }
 
-.ConcludedIssue-title {
-  font-weight: normal;
-  margin: 0;
-}
-
 .ConcludedIssue--minority .Card-header {
   background-color: #C5493C;
 }

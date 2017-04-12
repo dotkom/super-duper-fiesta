@@ -64,7 +64,7 @@ class Alternative extends React.Component {
 
     return (
       <div className="IssueFormAlternative">
-        <div className="IssueForm-label">Alternativer</div>
+        <h4 className="IssueForm-label">Alternativer</h4>
         <ul>
           {Object.keys(alternatives).map(id =>
             <li key={id}>

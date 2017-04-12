@@ -14,6 +14,10 @@ button, select, textarea {
   font-family: inherit;
 }
 
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+
 p {
   margin-bottom: 0;
 }

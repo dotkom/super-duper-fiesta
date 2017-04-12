@@ -101,7 +101,7 @@ class IssueForm extends React.Component {
           hidden={!showActiveIssueWarning}
         >Det er allerede en aktiv sak!</p>
         <label className="IssueForm-textarea">
-          <div className="IssueForm-label">Beskrivelse av saken</div>
+          <h4 className="IssueForm-label">Beskrivelse av saken</h4>
           <textarea
             onChange={(...a) => this.updateIssueDescription(...a)}
             placeholder="Skriv inn saken her."
@@ -109,7 +109,7 @@ class IssueForm extends React.Component {
           />
         </label>
         <label className="IssueForm-select">
-          <div className="IssueForm-label">Spørsmålstype</div>
+          <h4 className="IssueForm-label">Spørsmålstype</h4>
           <SelectQuestionType
             questionType={this.state.questionType}
             handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
@@ -132,7 +132,7 @@ class IssueForm extends React.Component {
           showOnlyWinner={this.state.showOnlyWinner}
         />
         <label className="IssueForm-select">
-          <div className="IssueForm-label">Flertallstype</div>
+          <h4 className="IssueForm-label">Flertallstype</h4>
           <SelectResolutionType
             handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
             resolutionType={this.state.voteDemand}

@@ -34,6 +34,7 @@
 
 .Heading-components {
   text-align: right;
+  color: #555;
 }
 
 .Heading-components > .Button:last-child, .Heading-components > a:last-child {
