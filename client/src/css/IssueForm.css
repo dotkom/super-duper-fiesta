@@ -13,7 +13,6 @@
 .IssueForm select, .IssueForm textarea {
   display: block;
   width: 100%;
-  font-size: 1rem;
 } 
 
 label.IssueForm-checkbox {
@@ -27,7 +26,6 @@ label.IssueForm-checkbox {
 .IssueForm select {
   border: 0.0625rem solid #D0D0D0;
   background-color: #F5F5F5;
-  padding: 0.5rem;
   max-width: 32rem;
 }
 
@@ -37,7 +35,6 @@ label.IssueForm-checkbox {
   box-sizing: border-box;
   height: 10rem;
   resize: vertical;
-  padding: 0.5rem;
 }
 
 .IssueForm label p {
@@ -103,6 +100,4 @@ label.IssueForm-checkbox {
 
 .IssueFormAlternative-add input {
   flex-grow: 1;
-  font-size: 1rem;
-  padding: 0.5rem;
 }
