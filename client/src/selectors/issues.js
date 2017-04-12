@@ -1,17 +1,18 @@
-export const getIssue = (state) => {
-  if (!state || (state && !Object.keys(state.issues).length)) {
-    return;
-  }
-  // Gets the current active issue after iterating over all issues and finding the one with "active == true"
-  return state.issues[Object.keys(state.issues)
-    .filter(issueId => state.issues[issueId].active)[0]];
-};
+export const activeIssueExists = state => (
+  state.issues && Object.keys(state.issues).some(id => state.issues[id].active)
+);
+
+export const getIssue = state => (
+  state.issues[Object.keys(state.issues).find(issueId => state.issues[issueId].active)]
+);
 
 const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
   const issue = getIssue(state);
+
   if (issue && issue[key] !== undefined) {
     return issue[key];
   }
+
   return defaultValue;
 };
 
