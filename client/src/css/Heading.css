@@ -8,7 +8,7 @@
   margin: 0 auto;
   max-width: 64rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
 }

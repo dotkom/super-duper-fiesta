@@ -3,6 +3,7 @@
   border: 0.0625rem solid transparent;
   background-color: transparent;
   color: #636BB2;
+  white-space: nowrap;
 }
 
 .Button:hover {
