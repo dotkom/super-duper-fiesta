@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../Button';
+import Card from '../Card';
 import IconText from '../IconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
@@ -8,8 +9,10 @@ import { getIssue } from '../../selectors/issues';
 import '../../css/IssueAdmin.css';
 
 const Issue = ({ closeIssue, issue }) => (
-  <div className="IssueAdmin">
-    <div className="IssueAdmin-heading">
+  <Card
+    classes="IssueAdmin"
+  >
+    <div>
       <Pin code="DEADBEEF" />
       <p className="IssueAdmin-title">Aktiv sak</p>
     </div>
@@ -28,7 +31,7 @@ const Issue = ({ closeIssue, issue }) => (
       </Button>
     </div>
     <p className="IssueAdmin-text">{issue.text}</p>
-  </div>
+  </Card>
 );
 
 Issue.defaultProps = {
