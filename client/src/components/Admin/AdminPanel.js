@@ -5,7 +5,6 @@ import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { toggleRegistration } from '../../actionCreators/adminButtons';
-import '../../css/AdminPanel.css';
 
 class AdminPanel extends React.Component {
   constructor(props) {

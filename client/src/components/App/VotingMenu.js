@@ -6,7 +6,6 @@ import { getIssue, getIssueId } from '../../selectors/issues';
 import { getOwnVote } from '../../selectors/voting';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
-import '../../css/VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor(props) {
