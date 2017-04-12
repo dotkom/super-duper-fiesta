@@ -6,12 +6,16 @@ body {
 
 main {
   max-width: 64rem;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   padding: 0 1rem;
 }
 
 button, select, textarea {
   font-family: inherit;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 .ActiveIssue-components {

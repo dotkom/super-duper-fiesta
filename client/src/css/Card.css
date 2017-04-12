@@ -10,7 +10,6 @@
 .Card-header h2 {
   margin: 0;
   font-weight: normal;
-  font-size: 1.5rem;
 }
 
 .Card-header + .Card-content {
@@ -26,5 +25,4 @@
 .Card-subtitle {
   margin: 0;
   font-weight: normal;
-  font-size: 1.25rem;
 }
