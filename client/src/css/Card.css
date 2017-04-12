@@ -1,10 +1,7 @@
-.Card {
-  margin-top: 2rem;
-}
-
 .Card-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
   background-color: #6B71A5;
   color: #FFF;
@@ -23,11 +20,11 @@
 .Card-content {
   padding: 1rem;
   background-color: #F5F5F5;
-  color: #555;
 }
 
 .Card-subtitle {
   margin: 0;
   font-weight: normal;
   font-size: 1.25rem;
+  color: #555;
 }

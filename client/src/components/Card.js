@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import '../css/Card.css';
 
-const Card = ({ title, corner, subtitle, children }) => {
+const Card = ({ classes, title, corner, subtitle, children }) => {
   const titleTag = title || corner ? (
     <div className="Card-header">
       <h2>{title}</h2>
@@ -9,7 +10,7 @@ const Card = ({ title, corner, subtitle, children }) => {
     </div>
   ) : null;
   return (
-    <div className="Card">
+    <div className={classNames('Card', classes)}>
       {titleTag}
       <div className="Card-content">
         {subtitle ? <h3 className="Card-subtitle">{subtitle}</h3> : null}
@@ -20,15 +21,17 @@ const Card = ({ title, corner, subtitle, children }) => {
 };
 
 Card.defaultProps = {
+  classes: '',
   title: '',
   subtitle: '',
   corner: '',
 };
 
 Card.propTypes = {
+  classes: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  corner: PropTypes.element,
+  corner: PropTypes.node,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
