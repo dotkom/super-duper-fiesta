@@ -1,8 +1,8 @@
 .Button {
   margin: 1rem 0 0 0;
   border: 1px solid transparent;
-  background-color: transparent;
-  color: #636BB2;
+  background: transparent;
+  color: #636bb2;
   white-space: nowrap;
 }
 
@@ -16,20 +16,20 @@
 }
 
 .Button--background {
-  color: #FFF;
-  background-color: #595C7F;
+  color: #fff;
+  background: #595c7f;
   border: 1px solid rgba(0, 0, 0, 0.04);
   box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.25) inset,
               0 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .Button--background:hover {
-  color: #FFF;
-  background-color: #6D7194;
+  color: #fff;
+  background: #6d7194;
 }
 
 .Button:disabled {
-  background-color: #71727D;
+  background: #71727d;
   opacity: 0.5;
   color: white;
   cursor: not-allowed

@@ -1,7 +1,7 @@
 .ConcludedIssueList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /* -1rem left and right to counter margin on children */
-    margin: 2rem -0.5rem 0 -0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* -1rem left and right to counter margin on children */
+  margin: 2rem -0.5rem 0 -0.5rem;
 }
