@@ -19,9 +19,7 @@ const App = props => (
     </Heading>
     <main>
       <div className="ActiveIssue-components">
-        <div className="ActiveIssue-Vote-wrapper">
-          <IssueContainer />
-        </div>
+        <IssueContainer />
         <IssueStatus />
       </div>
       <ConcludedIssueListContainer />
