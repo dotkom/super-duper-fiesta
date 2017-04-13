@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import SHA256 from 'crypto-js/sha256';
+import Cookies from 'js-cookie';
 import { register } from '../../actionCreators/auth';
 import Button from '../Button';
 import '../../css/Setup.css';
@@ -54,7 +56,10 @@ class Setup extends Component {
     e.preventDefault();
     if (this.validate() === null) {
       const { pin, privateCode } = this.state;
-      this.props.register(pin, privateCode);
+      const { username } = this.props;
+      const passwordHash = SHA256(privateCode + username).toString();
+      this.props.register(pin, passwordHash);
+      Cookies.set('passwordHash', passwordHash);
     }
   }
 
@@ -108,12 +113,17 @@ class Setup extends Component {
 
 Setup.propTypes = {
   register: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default Setup;
+
+const mapStateToProps = ({ auth }) => ({
+  username: auth.username,
+});
 const mapDispatchToProps = dispatch => ({
   register: (...a) => {
     dispatch(register(...a));
   },
 });
-export const SetupContainer = connect(null, mapDispatchToProps)(Setup);
+export const SetupContainer = connect(mapStateToProps, mapDispatchToProps)(Setup);
