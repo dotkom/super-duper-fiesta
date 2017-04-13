@@ -10,9 +10,14 @@ const addUser = require('../../models/user').addUser;
 const getUserByUsername = require('../../models/user').getUserByUsername;
 const updateUserById = require('../../models/user').updateUserById;
 const permissions = require('../../models/permissions');
+const { getActiveGenfors } = require('../../models/meeting');
 
 
 async function getClientInformation(accessToken) {
+  const genfors = await getActiveGenfors();
+  if (!genfors) {
+    throw new Error('No active genfors');
+  }
   const OW4UserEndpoint = OW4API.backend + OW4API.userEndpoint;
   let body;
   try {
@@ -30,9 +35,8 @@ async function getClientInformation(accessToken) {
   const fullName = `${body.first_name} ${body.last_name}`;
   const permissionLevel = body.member ? permissions.CAN_VOTE : permissions.IS_LOGGED_IN;
 
-  // Create user if not
   try {
-    const user = await getUserByUsername(username);
+    const user = await getUserByUsername(username, genfors);
     if (user === null) {
       // Create user if not exists
       logger.debug('User does not exist -- creating', { username });

@@ -40,8 +40,12 @@ function getUserById(userId, anonymous) {
   return User.findOne({ _id: userId });
 }
 
-function getUserByUsername(username) {
-  return User.findOne({ onlinewebId: username });
+function getUserByUsername(username, genfors) {
+  return User.findOne({ onlinewebId: username, genfors });
+}
+
+function getAnonymousUser(passwordHash, genfors) {
+  return AnonymousUser.findOne({ passwordHash, genfors });
 }
 
 function getUsers(genfors, anonymous) {
