@@ -29,6 +29,7 @@ const enableHotReloading = (config) => {
 
   // Add webpack-hot-middleware to frontend
   config.entry.unshift('webpack-hot-middleware/client');
+  config.entry.unshift('react-hot-loader/patch');
 };
 
 const addWebpackMiddlewares = (app) => {
