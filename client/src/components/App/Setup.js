@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { register } from '../../actionCreators/auth';
 import Button from '../Button';
 import '../../css/Setup.css';
 
@@ -31,25 +33,36 @@ class Setup extends Component {
     });
   }
 
-  matchingPrivateCodes() {
-    const { privateCode, repeatPrivateCode } = this.state;
+  validate() {
+    const { pin, privateCode, repeatPrivateCode } = this.state;
     if (privateCode === '') {
       return '';
     }
-    if (privateCode.length <= 8) {
+    if (privateCode.length < 8) {
       return 'Den personlige koden er for kort (minimum 8 tegn)';
     }
     if (privateCode !== repeatPrivateCode) {
       return 'Personlige koder stemmer ikke overens';
     }
+    if (pin === '') {
+      return 'Pinkode kan ikke være tom';
+    }
     return null;
+  }
+
+  submit(e) {
+    e.preventDefault();
+    if (this.validate() === null) {
+      const { pin, privateCode } = this.state;
+      this.props.register(pin, privateCode);
+    }
   }
 
   render() {
     const { privateCode, repeatPrivateCode, pin } = this.state;
-    const matchingPrivateCodesMessage = this.matchingPrivateCodes();
+    const errorMessage = this.validate();
     return (
-      <form className="Setup">
+      <form className="Setup" onSubmit={(e) => this.submit(e)}>
         <h2 className="Setup-title">Generalforsamling registrering</h2>
         <label>
           <div className="Setup-label-text">Pin kode</div>
@@ -80,12 +93,12 @@ class Setup extends Component {
             onChange={e => this.changeRepeatPrivateCode(e)}
           />
         </label>
-        { matchingPrivateCodesMessage &&
+        { errorMessage &&
           <p className="Setup-warning">
-            {matchingPrivateCodesMessage}
+            {errorMessage}
           </p>
         }
-        <Button background disabled={matchingPrivateCodesMessage !== null}>
+        <Button background disabled={errorMessage !== null}>
           Fullfør registrering
         </Button>
       </form>
@@ -93,4 +106,14 @@ class Setup extends Component {
   }
 }
 
+Setup.propTypes = {
+  register: PropTypes.func.isRequired,
+};
+
 export default Setup;
+const mapDispatchToProps = dispatch => ({
+  register: (...a) => {
+    dispatch(register(...a));
+  },
+});
+export const SetupContainer = connect(null, mapDispatchToProps)(Setup);
