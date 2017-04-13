@@ -18,14 +18,14 @@ table.Users-list {
 }
 
 .Users-list th {
-  border-bottom: 0.0625rem solid #9597B1;
+  border-bottom: 1px solid #9597B1;
   font-weight: normal;
   padding: 0.25rem 0.25rem;
 }
 
 .Users-list td {
   padding: 0.5rem 0.25rem;
-  border-bottom: 0.0625rem solid #DBDCE0;
+  border-bottom: 1px solid #DBDCE0;
 }
 
 .Users-list tr:nth-child(even) td {

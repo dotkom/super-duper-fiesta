@@ -24,14 +24,12 @@ label.IssueForm-checkbox {
 }
 
 .IssueForm select {
-  border: 0.0625rem solid #D0D0D0;
+  border: 1px solid #D0D0D0;
   background-color: #F5F5F5;
   max-width: 32rem;
 }
 
 .IssueForm textarea {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   height: 10rem;
   resize: vertical;
@@ -43,7 +41,7 @@ label.IssueForm-checkbox {
 
 .IssueForm--ActiveIssueWarning {
   background-color: #D15555;
-  padding: 1rem 0.125rem 1rem 1rem;
+  padding: 1rem;
   color: #FEE;
 }
 
@@ -51,8 +49,6 @@ label.IssueForm-checkbox {
   background-color: #F5F5F5;
   max-width: 32rem;
   padding: 0.5rem;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 

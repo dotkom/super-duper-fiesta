@@ -6,6 +6,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { applyMiddleware, createStore } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
+import 'normalize.css';
 import { AdminPanelContainer } from './components/Admin/AdminPanel';
 import { AppContainer } from './components/App/';
 import AdminHome from './components/Admin/Home';

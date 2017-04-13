@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import 'normalize.css';
 import IssueStatus from '../IssueStatus';
 import { IssueContainer } from './Issue';
 import Button from '../Button';
