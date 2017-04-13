@@ -1,0 +1,27 @@
+.Error {
+  background: #ca3939;
+  padding: 0.5rem 1rem;
+  color: #fee;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Error-message {
+  padding: 1rem 0;
+}
+
+.Error-corner {
+  padding: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+}
+
+.Error-corner:hover {
+  transform: scale(1.1);
+}
+
+.Error-corner:focus {
+  outline: 0;
+}

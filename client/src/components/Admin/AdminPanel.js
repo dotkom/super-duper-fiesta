@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
+import { ErrorContainer } from '../Error';
 import { toggleRegistration } from '../../actionCreators/adminButtons';
 
 class AdminPanel extends React.Component {
@@ -57,6 +58,7 @@ class AdminPanel extends React.Component {
           <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
         </Heading>
         <main>
+          <ErrorContainer />
           {this.props.children}
         </main>
       </div>

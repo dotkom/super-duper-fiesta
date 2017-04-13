@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Button from '../Button';
 import Heading from '../Heading';
+import { ErrorContainer } from '../Error';
 import '../../css/App.css';
 import '../../css/Button.css';
 import '../../css/flaticon.css';
@@ -15,6 +16,7 @@ const App = props => (
       </a>
     </Heading>
     <main>
+      <ErrorContainer />
       {props.children}
     </main>
   </div>
