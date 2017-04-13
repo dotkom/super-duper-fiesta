@@ -1,19 +1,9 @@
 .Issue {
-  background: whitesmoke;
-  padding: 2rem;
-  flex-grow: 2;
-
-  border: 1px solid;
-  border-color: rgba(187, 187, 187, 0.1) rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
+  flex-grow: 4;
+  display: flex;
+  flex-basis: 20rem;
 }
 
-.Issue p {
-  font-size: 2rem;
-}
-
-.Issue-heading {
-  font-size: 1.2em;
-  font-weight: normal;
-  margin: 0;
-  color: #717171;
+.Issue .Card-content {
+  flex-grow: 1;
 }

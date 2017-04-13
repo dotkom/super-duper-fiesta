@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import IconText from './IconText';
+import Card from './Card';
 import '../css/ConcludedIssue.css';
 
 
@@ -35,36 +36,34 @@ class ConcludedIssue extends React.Component {
   render() {
     const { majority } = this.state;
     return (
-      <div className={classNames('ConcludedIssue', { 'ConcludedIssue--majority': majority })}>
-        <div className="ConcludedIssue-top">
-          <h2 className="ConcludedIssue-title">
-            {this.props.text}
-          </h2>
+      <Card
+        classes={classNames('ConcludedIssue', { 'ConcludedIssue--majority': majority, 'ConcludedIssue--minority': !majority })}
+        title={this.props.text}
+        corner={
           <IconText
             text={majority ? 'Vedtatt' : 'Avvist'}
             iconClass={majority ? 'flaticon-success' : 'flaticon-warning'}
           />
-        </div>
-        <div className="ConcludedIssue-content">
-          <p><b>Flertallskrav</b>: Alminnelig (1/2)</p>
-          <ul className="ConcludedIssue-alternatives">
-            {this.props.alternatives.map(alternative => (
-              <li
-                key={alternative.id}
-                className={classNames({
-                  'ConcludedIssue-alternatives--winner': Object.keys(this.props.votes).length
-                  && Object.keys(this.props.votes)
-                    .map(key => this.props.votes[key])
-                    .filter(vote => vote.alternative === alternative.id)
-                    .length / Object.keys(this.props.votes).length >= this.props.voteDemand,
-                })}
-              >
-                {alternative.text}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+        }
+        subtitle="Flertallskrav: Alminnelig (1/2)"
+      >
+        <ul className="ConcludedIssue-alternatives">
+          {this.props.alternatives.map(alternative => (
+            <li
+              key={alternative.id}
+              className={classNames({
+                'ConcludedIssue-alternatives--winner': Object.keys(this.props.votes).length
+                && Object.keys(this.props.votes)
+                  .map(key => this.props.votes[key])
+                  .filter(vote => vote.alternative === alternative.id)
+                  .length / Object.keys(this.props.votes).length >= this.props.voteDemand,
+              })}
+            >
+              {alternative.text}
+            </li>
+          ))}
+        </ul>
+      </Card>
     );
   }
 }

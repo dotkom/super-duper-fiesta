@@ -128,13 +128,19 @@ class IssueForm extends React.Component {
           hidden={!showActiveIssueWarning}
         >Det er allerede en aktiv sak!</p>
         <label className="IssueForm-textarea">
-          <div className="IssueForm-label">Beskrivelse</div>
+          <h2 className="IssueForm-label">Beskrivelse av saken</h2>
           <textarea
             onChange={(...a) => this.updateIssueDescription(...a)}
             placeholder="Skriv inn saken her."
             value={this.state.issueDescription}
           />
-          <p>Beskrivelse av saken</p>
+        </label>
+        <label className="IssueForm-select">
+          <h2 className="IssueForm-label">Spørsmålstype</h2>
+          <SelectQuestionType
+            questionType={this.state.questionType}
+            handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
+          />
         </label>
         {this.state.questionType === MULTIPLE_CHOICE
         && <Alternative
@@ -144,7 +150,6 @@ class IssueForm extends React.Component {
           handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
         />
         }
-        <div className="IssueForm-label">Innstillinger</div>
         <Checkboxes
           handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
           handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
@@ -154,17 +159,10 @@ class IssueForm extends React.Component {
           showOnlyWinner={this.state.showOnlyWinner}
         />
         <label className="IssueForm-select">
-          <div className="IssueForm-label">Flertallstype</div>
+          <h2 className="IssueForm-label">Flertallstype</h2>
           <SelectResolutionType
             handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
             resolutionType={this.state.voteDemand}
-          />
-        </label>
-        <label className="IssueForm-select">
-          <div className="IssueForm-label">Spørsmålstype</div>
-          <SelectQuestionType
-            questionType={this.state.questionType}
-            handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
           />
         </label>
         <Button

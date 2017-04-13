@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../Button';
+import Card from '../Card';
 import IconText from '../IconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
@@ -8,10 +9,10 @@ import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issue
 import '../../css/IssueAdmin.css';
 
 const Issue = ({ closeIssue, allowClosing, issueText }) => (
-  <div className="IssueAdmin">
-    <div className="IssueAdmin-heading">
+  <Card classes="IssueAdmin">
+    <div>
       <Pin code="DEADBEEF" />
-      <h2 className="IssueAdmin-title">Aktiv sak</h2>
+      <p className="IssueAdmin-title">Aktiv sak</p>
     </div>
     <div className="IssueAdmin-actions">
       <Button>
@@ -28,7 +29,7 @@ const Issue = ({ closeIssue, allowClosing, issueText }) => (
       </Button>
     </div>
     <p className="IssueAdmin-text">{issueText}</p>
-  </div>
+  </Card>
 );
 
 Issue.propTypes = {

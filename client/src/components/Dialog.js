@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import Card from './Card';
 import '../css/Dialog.css';
 
 const Dialog = ({ visible, title, onClose, children }) => {
@@ -9,15 +10,15 @@ const Dialog = ({ visible, title, onClose, children }) => {
   return (
     <div className={dialogClass}>
       <div onClick={onClose} className="Dialog-backdrop" />
-      <div className="Dialog-dialog">
-        <div className="Dialog-top">
-          <div className="Dialog-title">{title}</div>
+      <Card
+        classes="Dialog-dialog"
+        title={title}
+        corner={
           <div onClick={onClose} className="Dialog-close flaticon-close" />
-        </div>
-        <div className="Dialog-content">
-          {children}
-        </div>
-      </div>
+        }
+      >
+        {children}
+      </Card>
     </div>
   );
 };
