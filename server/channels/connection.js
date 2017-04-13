@@ -28,6 +28,10 @@ const connection = (socket) => {
   } else {
     emit(socket, 'AUTH_SIGNED_OUT', {});
   }
+  const completedRegistration = socket.request.user.completedRegistration;
+  if (completedRegistration) {
+    emit(socket, 'AUTH_REGISTERED', {});
+  }
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
       emit(socket, 'OPEN_MEETING', { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
