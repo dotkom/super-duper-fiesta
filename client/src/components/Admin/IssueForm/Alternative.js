@@ -65,7 +65,7 @@ class Alternative extends React.Component {
 
     return (
       <div className="IssueFormAlternative">
-        <h4 className="IssueForm-label">Alternativer</h4>
+        <h2 className="IssueForm-label">Alternativer</h2>
         <Dialog
           visible={this.state.showUpdateDialog}
           onClose={(...a) => this.closeUpdateDialog(...a)}

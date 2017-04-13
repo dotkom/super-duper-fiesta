@@ -7,7 +7,8 @@
 }
 
 .IssueForm-label {
-  margin-bottom: 0.5rem;
+  margin: 1rem 0 0.5rem;
+  font-size: 1.25rem;
 }
 
 .IssueForm select, .IssueForm textarea {
@@ -40,7 +41,7 @@ label.IssueForm-checkbox {
 }
 
 .IssueForm--ActiveIssueWarning {
-  background: #d15555;
+  background: #ca3939;
   padding: 1rem;
   color: #fee;
 }

@@ -8,7 +8,6 @@
 
 .Button:hover {
   color: #141523;
-  cursor: pointer;
 }
 
 .Button:focus {
@@ -29,8 +28,7 @@
 }
 
 .Button:disabled {
-  background: #71727d;
-  opacity: 0.5;
+  background: #747586;
   color: white;
   cursor: not-allowed
 }
