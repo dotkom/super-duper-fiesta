@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
+const SHA256 = require('crypto-js/sha256');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
 
 const permissionLevel = require('./permissions');
+
+function hashWithSalt(password, salt) {
+  return SHA256(password + salt).toString();
+}
 
 const Schema = mongoose.Schema;
 
@@ -45,8 +50,11 @@ function getUserByUsername(username, genfors) {
   return User.findOne({ onlinewebId: username, genfors });
 }
 
-function getAnonymousUser(passwordHash, genfors) {
-  return AnonymousUser.findOne({ passwordHash, genfors });
+function getAnonymousUser(passwordHash, username, genfors) {
+  return AnonymousUser.findOne({
+    passwordHash: hashWithSalt(passwordHash, username),
+    genfors,
+  });
 }
 
 function getUsers(genfors, anonymous) {
@@ -98,13 +106,13 @@ async function addAnonymousUser(username, passwordHash) {
   if (user.completedRegistration) {
     throw new Error('User is already registered');
   }
-  const existingUser = await getAnonymousUser(passwordHash, genfors);
+  const existingUser = await getAnonymousUser(passwordHash, username, genfors);
   if (existingUser) {
     throw new Error('Anonymous user aleady exists');
   }
   const anonymousUser = new AnonymousUser({
     genfors,
-    passwordHash,
+    passwordHash: hashWithSalt(passwordHash, username),
   });
   await anonymousUser.save();
   // eslint-disable-next-line no-underscore-dangle
