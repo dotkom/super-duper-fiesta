@@ -34,7 +34,7 @@ class Alternative extends React.Component {
   openUpdateDialog(id) {
     this.setState({
       showUpdateDialog: true,
-      dialogValue: this.props.alternatives[id],
+      dialogValue: this.props.alternatives[id].text,
       selectedAlternative: id,
     });
   }
@@ -82,7 +82,7 @@ class Alternative extends React.Component {
           <ul>
             {Object.keys(alternatives).map(id =>
               <li key={id}>
-                <p>{alternatives[id]}</p>
+                <p>{alternatives[id].text}</p>
                 <Button onClick={() => this.openUpdateDialog(id)}>
                   <div className="flaticon-edit" />
                 </Button>
@@ -118,9 +118,7 @@ Alternative.propTypes = {
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
-  alternatives: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-  })).isRequired,
+  alternatives: PropTypes.objectOf(React.PropTypes.string).isRequired,
 };
 
 export default Alternative;
