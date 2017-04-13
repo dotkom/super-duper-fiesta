@@ -3,14 +3,14 @@ import { Link } from 'react-router';
 import '../css/Heading.css';
 
 const Heading = ({ link, title, children }) => (
-  <div className="Heading">
+  <header className="Heading">
     <div className="Heading-content">
       <Link to={link}><h1 className="Heading-header">{title}</h1></Link>
-      <div className="Heading-components">
+      <nav className="Heading-components">
         {children}
-      </div>
+      </nav>
     </div>
-  </div>
+  </header>
 );
 
 Heading.defaultProps = {

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import IssueStatus from '../IssueStatus';
-import { VotingMenuContainer } from './VotingMenu';
 import { IssueContainer } from './Issue';
 import Button from '../Button';
 import Heading from '../Heading';
@@ -18,16 +17,13 @@ const App = props => (
         <Button>Logg {props.loggedIn ? 'ut' : 'inn'}</Button>
       </a>
     </Heading>
-    <div className="App-components">
+    <main>
       <div className="ActiveIssue-components">
-        <div className="ActiveIssue-Vote-wrapper">
-          <IssueContainer />
-          <VotingMenuContainer loggedIn={props.loggedIn} />
-        </div>
+        <IssueContainer />
         <IssueStatus />
       </div>
       <ConcludedIssueListContainer />
-    </div>
+    </main>
   </div>
   );
 

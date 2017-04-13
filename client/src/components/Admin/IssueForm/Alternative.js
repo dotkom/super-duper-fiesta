@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
+import IconText from '../../IconText';
 
 class Alternative extends React.Component {
   constructor() {
@@ -33,7 +34,7 @@ class Alternative extends React.Component {
   openUpdateDialog(id) {
     this.setState({
       showUpdateDialog: true,
-      dialogValue: this.props.alternatives[id],
+      dialogValue: this.props.alternatives[id].text,
       selectedAlternative: id,
     });
   }
@@ -64,41 +65,45 @@ class Alternative extends React.Component {
 
     return (
       <div className="IssueFormAlternative">
-        <ul>
-          {Object.keys(alternatives).map(id =>
-            <li key={id}>
-              {alternatives[id]}
-              <button
-                onClick={() => handleRemoveAlternative(id)}
-              >Fjern</button>
-              <button onClick={() => this.openUpdateDialog(id)}>Endre</button>
-            </li>,
-          )}
-        </ul>
-
-        <label className="IssueForm-radios">
-          <Dialog
-            visible={this.state.showUpdateDialog}
-            onClose={(...a) => this.closeUpdateDialog(...a)}
-            title="Endre alternativ"
-          >
-            <input
-              type="text" value={this.state.dialogValue}
-              onChange={(...a) => this.updateDialogValue(...a)}
-            />
-            <Button onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
-            <Button onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
-          </Dialog>
-
+        <h2 className="IssueForm-label">Alternativer</h2>
+        <Dialog
+          visible={this.state.showUpdateDialog}
+          onClose={(...a) => this.closeUpdateDialog(...a)}
+          title="Endre alternativ"
+        >
           <input
-            type="text"
-            value={alternativeText}
-            onChange={e => this.handleAlternativeUpdate(e)}
-            onKeyPress={e => this.handleKeyPress(e)}
+            type="text" value={this.state.dialogValue}
+            onChange={(...a) => this.updateDialogValue(...a)}
           />
-
-          <button onClick={(...a) => this.handleAddAlternative(...a)}>Add</button>
-        </label>
+          <Button background onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
+          <Button background onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
+        </Dialog>
+        <div className="IssueFormAlternative-content">
+          <ul>
+            {Object.keys(alternatives).map(id =>
+              <li key={id}>
+                <p>{alternatives[id].text}</p>
+                <Button onClick={() => this.openUpdateDialog(id)}>
+                  <div className="flaticon-edit" />
+                </Button>
+                <Button onClick={() => handleRemoveAlternative(id)}>
+                  <div className="flaticon-cross" />
+                </Button>
+              </li>,
+            )}
+          </ul>
+          <div className="IssueFormAlternative-add">
+            <input
+              type="text"
+              value={alternativeText}
+              onChange={e => this.handleAlternativeUpdate(e)}
+              onKeyPress={e => this.handleKeyPress(e)}
+            />
+            <Button onClick={(...a) => this.handleAddAlternative(...a)}>
+              <div className="flaticon-plus" />
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -113,9 +118,7 @@ Alternative.propTypes = {
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
-  alternatives: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-  })).isRequired,
+  alternatives: PropTypes.objectOf(React.PropTypes.string).isRequired,
 };
 
 export default Alternative;

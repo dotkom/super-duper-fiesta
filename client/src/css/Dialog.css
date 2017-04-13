@@ -23,33 +23,13 @@
   min-width: 25rem;
   max-width: 80%;
   position: absolute;
-  background: white;
-  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.15);
-}
-
-.Dialog-top {
-  background: #6b71a5;
-  padding: 2rem;
-  display: flex;
-}
-
-.Dialog-title {
-  align-self: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: white;
+  box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
 .Dialog-close {
-  margin-left: auto;
-  color: whitesmoke;
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .Dialog-close:hover {
   color: #484d79;
-}
-
-.Dialog-content {
-  padding: 3rem;
 }

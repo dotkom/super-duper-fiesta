@@ -1,40 +1,39 @@
 .IssueForm {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .IssueForm label {
   display: block;
-  margin-top: 2rem;
 }
 
 .IssueForm-label {
-  font-size: 1.6rem;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0 0.5rem;
+  font-size: 1.25rem;
 }
 
 .IssueForm select, .IssueForm textarea {
   display: block;
   width: 100%;
-} 
+}
 
 label.IssueForm-checkbox {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .IssueForm-checkbox input {
-  margin-right: 0.8rem;
+  margin-right: 0.5rem;
 }
 
 .IssueForm select {
   border: 1px solid #d0d0d0;
   background: #f5f5f5;
-  font-size: 1.6rem;
-  padding: 0.8rem;
-  max-width: 50rem;
+  max-width: 32rem;
 }
 
 .IssueForm textarea {
-  height: 20rem;
+  box-sizing: border-box;
+  height: 10rem;
+  resize: vertical;
 }
 
 .IssueForm label p {
@@ -42,8 +41,62 @@ label.IssueForm-checkbox {
 }
 
 .IssueForm--ActiveIssueWarning {
-  background: #d15555;
-  border-radius: 5px;
-  padding: 10px 2px 10px 10px;
-  color: #FFEEEE;
+  background: #ca3939;
+  padding: 1rem;
+  color: #fee;
+}
+
+.IssueFormAlternative-content {
+  background: #f5f5f5;
+  max-width: 32rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-color: rgba(187, 187, 187, 0.1) rgba(88, 88, 88, 0.1) rgba(0, 0, 0, 0.1);
+}
+
+.IssueFormAlternative ul:empty {
+  display: none;
+}
+
+.IssueFormAlternative ul {
+  margin: 0 0 0.5rem;
+  padding-left: 0;
+}
+
+.IssueFormAlternative li {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+}
+
+.IssueFormAlternative li:not(:first-child) {
+  border-top: 1px solid #bbb;
+}
+
+.IssueFormAlternative li p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.IssueFormAlternative-content .Button {
+  margin: 0 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.IssueFormAlternative-content .Button:hover div {
+  transform: scale(1.25);
+}
+
+.IssueFormAlternative .Dialog input[type="text"] {
+  display: block;
+}
+
+.IssueFormAlternative-add {
+  display: flex;
+  justify-items: center;
+}
+
+.IssueFormAlternative-add input {
+  flex-grow: 1;
 }

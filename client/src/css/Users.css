@@ -1,22 +1,30 @@
+.Users {
+  margin-top: 2rem;
+}
+
 .Users-info {
-  max-width: 70rem;
+  max-width: 50rem;
+}
+
+.UserFilter {
+  margin-top: 2rem;
 }
 
 table.Users-list {
   width: 100%;
-  max-width: 70rem;
+  max-width: 50rem;
+  margin-top: 1rem;
   border-collapse: collapse;
 }
 
 .Users-list th {
-  font-size: 1.6rem;
   border-bottom: 1px solid #9597b1;
   font-weight: normal;
-  padding: 0.5rem 0.5rem;
+  padding: 0.25rem 0.25rem;
 }
 
 .Users-list td {
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.25rem;
   border-bottom: 1px solid #dbdce0;
 }
 

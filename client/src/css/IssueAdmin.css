@@ -1,19 +1,7 @@
-.IssueAdmin {
-  background: #f5f5f5;
-  padding: 0rem 2rem 2rem 2rem;
+.IssueAdmin .Card-content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  color: #717171;
-}
-
-.IssueAdmin-heading {
-  margin: 3rem 0 0 0;
-}
-
-.IssueAdmin-title {
-  font-size: 1.3em;
-  font-weight: normal;
 }
 
 .IssueAdmin-actions {
@@ -21,8 +9,13 @@
   align-self: center;
 }
 
+.IssueAdmin-actions button {
+  margin: 0;
+}
+
 .IssueAdmin-text {
   flex: 1 100%;
+  margin: 1rem 0 0;
 }
 
 .IssueAdmin-pin {

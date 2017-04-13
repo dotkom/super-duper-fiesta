@@ -1,14 +1,12 @@
 import React from 'react';
 import { VoteStatusContainer } from './VoteStatus';
+import Card from './Card';
 import '../css/IssueStatus.css';
 
 const IssueStatus = () => (
-  <div className="IssueStatus">
-    <h2 className="IssueStatus-title">
-      Foreløpig status
-    </h2>
+  <Card classes="IssueStatus" subtitle="Foreløpig status">
     <VoteStatusContainer />
-  </div>
+  </Card>
 );
 
 export default IssueStatus;

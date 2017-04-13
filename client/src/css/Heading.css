@@ -1,14 +1,14 @@
 .Heading {
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.11);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   background: #f5f5f5;
 }
 
 .Heading-content {
-  padding: 0 2rem;
+  padding: 1rem;
   margin: 0 auto;
-  max-width: 100rem;
+  max-width: 64rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -19,29 +19,35 @@
 
 .Heading-content button {
   cursor: pointer;
+  margin: 0;
 }
 
 .Heading-header {
-  color: #63699D;
-  font-size: 3.4rem;
+  color: #63699d;
+  font-size: 2rem;
+  margin: 0;
 }
 
-.Heading-header:hover {
+.Heading-content a:hover .Heading-header {
   color: #8186b3;
 }
 
 .Heading-components {
   text-align: right;
+  color: #555;
+}
+
+.Heading-components > .Button:last-child, .Heading-components > a:last-child {
+  margin-right: -0.5rem;
 }
 
 .Heading-logout {
-  background: #323A7F;
-  color: #F7F7F7;
-  padding: 15px;
+  background: #323a7f;
+  color: #f7f7f7;
+  padding: 1rem;
   text-decoration: none;
-  font-size: 2rem;
 }
 
 .Heading-logout:hover {
-  background: #515CCC;
+  background: #515ccc;
 }

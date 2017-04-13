@@ -1,39 +1,40 @@
-html {
-  font-size: 62.5%;
-}
-
 body {
-  background: #ffffff;
+  background: #fff;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.4rem;
   margin: 0;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Roboto', sans-serif;
+main {
+  max-width: 64rem;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
 }
 
-button {
+button, select, textarea, input[type="text"] {
   font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
 }
 
-.App-components {
-  max-width: 100rem;
-  margin: 0 auto;
-  padding: 0 2rem;
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 .ActiveIssue-components {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -1rem;
+  margin: 2rem -0.5rem 0;
 }
 
 .ActiveIssue-components > * {
-  margin: 4rem 1rem 0 1rem;
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 .ActiveIssue-Vote-wrapper {
   flex-grow: 4;
-  flex-basis: 30rem;
+  flex-basis: 20rem;
 }

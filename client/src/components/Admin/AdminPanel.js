@@ -5,7 +5,6 @@ import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { toggleRegistration } from '../../actionCreators/adminButtons';
-import '../../css/AdminPanel.css';
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -57,9 +56,9 @@ class AdminPanel extends React.Component {
           <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
           <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
         </Heading>
-        <div className="AdminPanel-components">
+        <main>
           {this.props.children}
-        </div>
+        </main>
       </div>
     );
   }
