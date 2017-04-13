@@ -29,7 +29,7 @@ class Setup extends Component {
 
   changePin(e) {
     this.setState({
-      pin: e.target.value,
+      pin: Number(e.target.value),
     });
   }
 
@@ -67,7 +67,7 @@ class Setup extends Component {
         <label>
           <div className="Setup-label-text">Pin kode</div>
           <input
-            type="text"
+            type="number"
             value={pin}
             onChange={e => this.changePin(e)}
           />
