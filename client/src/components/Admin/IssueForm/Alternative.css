@@ -56,3 +56,15 @@
 .title {
   composes: title from './index.css';
 }
+
+.addIcon {
+  composes: icon plus from 'css/flaticon.css';
+}
+
+.edit {
+  composes: icon edit from 'css/flaticon.css';
+}
+
+.remove {
+  composes: icon cross from 'css/flaticon.css';
+}

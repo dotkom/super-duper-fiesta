@@ -46,7 +46,7 @@ class ConcludedIssue extends React.Component {
         corner={
           <IconText
             text={majority ? 'Vedtatt' : 'Avvist'}
-            iconClass={majority ? 'flaticon-success' : 'flaticon-warning'}
+            iconClass={majority ? css.majorityIcon : css.minorityIcon}
           />
         }
         subtitle="Flertallskrav: Alminnelig (1/2)"

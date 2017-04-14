@@ -16,16 +16,16 @@ const Issue = ({ closeIssue, allowClosing, issueText }) => (
     </div>
     <div className={css.actions}>
       <Button>
-        <IconText text="Rediger" iconClass="flaticon-edit" />
+        <IconText text="Rediger" iconClass={css.edit} />
       </Button>
       <Button>
-        <IconText text="Resett" iconClass="flaticon-refresh" />
+        <IconText text="Resett" iconClass={css.reset} />
       </Button>
       <Button onClick={closeIssue} hidden={!allowClosing}>
-        <IconText text="Avslutt" iconClass="flaticon-lock" />
+        <IconText text="Avslutt" iconClass={css.end} />
       </Button>
       <Button>
-        <IconText text="Slett" iconClass="flaticon-cross" />
+        <IconText text="Slett" iconClass={css.delete} />
       </Button>
     </div>
     <p className="IssueAdmin-text">{issueText}</p>

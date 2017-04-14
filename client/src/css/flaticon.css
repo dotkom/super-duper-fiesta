@@ -21,26 +21,25 @@
   }
 }
 
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+.icon:before {
   font-family: Flaticon;
 }
 
-.flaticon-refresh:before { content: "\f100"; }
-.flaticon-unlock:before { content: "\f101"; }
-.flaticon-cross:before { content: "\f102"; }
-.flaticon-plus:before { content: "\f103"; }
-.flaticon-success:before { content: "\f104"; }
-.flaticon-close:before { content: "\f105"; }
-.flaticon-round-plus:before { content: "\f106"; }
-.flaticon-bars:before { content: "\f107"; }
-.flaticon-square-plus:before { content: "\f108"; }
-.flaticon-lock:before { content: "\f109"; }
-.flaticon-users:before { content: "\f10a"; }
-.flaticon-relock:before { content: "\f10b"; }
-.flaticon-exit:before { content: "\f10c"; }
-.flaticon-edit:before { content: "\f10d"; }
-.flaticon-flag:before { content: "\f10e"; }
-.flaticon-interface:before { content: "\f10f"; }
-.flaticon-warning:before { content: "\f110"; }
-.flaticon-check:before { content: "\f111"; }
+.refresh:before { content: "\f100"; }
+.unlock:before { content: "\f101"; }
+.cross:before { content: "\f102"; }
+.plus:before { content: "\f103"; }
+.success:before { content: "\f104"; }
+.close:before { content: "\f105"; }
+.round-plus:before { content: "\f106"; }
+.bars:before { content: "\f107"; }
+.square-plus:before { content: "\f108"; }
+.lock:before { content: "\f109"; }
+.users:before { content: "\f10a"; }
+.relock:before { content: "\f10b"; }
+.exit:before { content: "\f10c"; }
+.edit:before { content: "\f10d"; }
+.flag:before { content: "\f10e"; }
+.interface:before { content: "\f10f"; }
+.warning:before { content: "\f110"; }
+.check:before { content: "\f111"; }

@@ -84,10 +84,10 @@ class Alternative extends React.Component {
               <li key={id}>
                 <p>{alternatives[id].text}</p>
                 <Button onClick={() => this.openUpdateDialog(id)}>
-                  <div className="flaticon-edit" />
+                  <div className={css.edit} />
                 </Button>
                 <Button onClick={() => handleRemoveAlternative(id)}>
-                  <div className="flaticon-cross" />
+                  <div className={css.remove} />
                 </Button>
               </li>,
             )}
@@ -100,7 +100,7 @@ class Alternative extends React.Component {
               onKeyPress={e => this.handleKeyPress(e)}
             />
             <Button onClick={(...a) => this.handleAddAlternative(...a)}>
-              <div className="flaticon-plus" />
+              <div className={css.addIcon} />
             </Button>
           </div>
         </div>

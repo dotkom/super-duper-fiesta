@@ -21,3 +21,19 @@
 .pin {
   flex: 1 100%;
 }
+
+.edit {
+  composes: icon edit from 'css/flaticon.css';
+}
+
+.reset {
+  composes: icon refresh from 'css/flaticon.css';
+}
+
+.end {
+  composes: icon lock from 'css/flaticon.css';
+}
+
+.delete {
+  composes: icon cross from 'css/flaticon.css';
+}

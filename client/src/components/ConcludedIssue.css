@@ -19,3 +19,11 @@
 .alternativesWinner {
   font-weight: bold;
 }
+
+.majorityIcon {
+  composes: icon success from 'css/flaticon.css';
+}
+
+.minorityIcon {
+  composes: icon warning from 'css/flaticon.css';
+}

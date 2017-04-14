@@ -4,8 +4,6 @@ import Button from '../Button';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 
-import '../../css/flaticon.css';
-
 const App = props => (
   <div className="App">
     <Heading link="/" title={props.title}>

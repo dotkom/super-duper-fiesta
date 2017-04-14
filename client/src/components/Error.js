@@ -12,7 +12,7 @@ const Error = ({ dismiss, message }) => {
       <span className={css.message}>{message}</span>
       { dismiss &&
         <button className={css.corner} onClick={dismiss}>
-          <div className="flaticon-close" />
+          <div className={css.close} />
         </button>
       }
     </div>

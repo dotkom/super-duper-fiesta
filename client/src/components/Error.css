@@ -25,3 +25,7 @@
 .corner:focus {
   outline: 0;
 }
+
+.close {
+  composes: icon close from 'css/flaticon.css';
+}
