@@ -10,22 +10,46 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    root: path.resolve('./client/src'),
+    modules: [
+      path.resolve('./client/src'),
+      'node_modules',
+    ],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?sourceMap',
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
-        loader: 'url-loader?limit=10000',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
       },
     ],
   },
@@ -33,5 +57,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'client/index.html',
     }),
-  ]
+  ],
 };
