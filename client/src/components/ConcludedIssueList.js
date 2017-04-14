@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
-import css from '../css/ConcludedIssueList.css';
+import css from './ConcludedIssueList.css';
 
 const ConcludedIssueList = ({ issues }) => (
   <div className={css.concludedIssueList}>

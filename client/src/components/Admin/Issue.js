@@ -6,7 +6,7 @@ import IconText from '../IconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
-import css from '../../css/IssueAdmin.css';
+import css from './Issue.css';
 
 const Issue = ({ closeIssue, allowClosing, issueText }) => (
   <Card classes={css.issue}>

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '../css/IconText.css';
+import css from './IconText.css';
 
 
 const IconText = ({ text, iconClass }) => (
-  <div className={classNames('IconText', iconClass)}>
+  <div className={classNames(css.iconText, iconClass)}>
     {text}
   </div>
 );

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import IconText from './IconText';
 import Card from './Card';
-import css from '../css/ConcludedIssue.css';
+import css from './ConcludedIssue.css';
 
 
 class ConcludedIssue extends React.Component {

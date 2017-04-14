@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Alternative from './Alternative';
-import css from '../css/Alternatives.css';
+import css from './Alternatives.css';
 
 const Alternatives = ({ disabled, alternatives, handleChange, selectedVote }) => (
   <div className={css.lternatives}>

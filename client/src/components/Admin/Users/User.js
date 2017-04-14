@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
-import css from './css/User.css';
+import css from './User.css';
 
 const User = ({ id, name, registered, canVote, toggleCanVote }) => {
   const userClass = classNames({

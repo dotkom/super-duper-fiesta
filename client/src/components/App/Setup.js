@@ -4,7 +4,7 @@ import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
 import { register } from '../../actionCreators/auth';
 import Button from '../Button';
-import css from '../../css/Setup.css';
+import css from './Setup.css';
 
 class Setup extends Component {
   constructor(props) {

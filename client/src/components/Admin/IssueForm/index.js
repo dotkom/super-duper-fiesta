@@ -7,7 +7,7 @@ import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
 import SelectQuestionType from './SelectQuestionType';
-import css from './css/IssueForm.css';
+import css from './index.css';
 
 const MULTIPLE_CHOICE = 'MULTIPLE_CHOICE';
 

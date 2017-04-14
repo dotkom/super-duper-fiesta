@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Button from '../Button';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
-import '../../css/App.css';
-import '../../css/Button.css';
+
 import '../../css/flaticon.css';
 
 const App = props => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserListContainer } from './List';
 import { UserFilterContainer } from './Filter';
-import css from './css/Users.css';
+import css from './index.css';
 
 const Users = () => (
   <div className={css.users}>

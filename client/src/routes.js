@@ -9,6 +9,7 @@ import AdminHome from './components/Admin/Home';
 import { IssueFormContainer } from './components/Admin/IssueForm';
 import Users from './components/Admin/Users';
 import NotFound from './components/NotFound';
+import './css/base.css';
 
 const Routes = ({ store, browserHistory }) => (
   <Provider store={store}>

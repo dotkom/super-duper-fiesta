@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { dismissError } from '../actionCreators/error';
-import css from '../css/Error.css';
+import css from './Error.css';
 
 const Error = ({ dismiss, message }) => {
   if (!message) {

@@ -7,5 +7,5 @@ label.checkbox {
 }
 
 .title {
-  composes: title from './IssueForm.css';
+  composes: title from './index.css';
 }

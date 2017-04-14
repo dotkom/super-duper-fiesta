@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import css from '../css/VoteCounter.css';
+import css from './VoteCounter.css';
 
 const VoteCounter = ({ count, total, label }) => (
   <div className={css.counter}>

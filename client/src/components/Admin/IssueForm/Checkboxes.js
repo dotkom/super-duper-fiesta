@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import css from './css/Checkboxes.css';
+import css from './Checkboxes.css';
 
 
 const Checkboxes = ({

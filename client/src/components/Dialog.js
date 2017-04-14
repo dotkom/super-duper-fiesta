@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Card from './Card';
-import css from '../css/Dialog.css';
+import css from './Dialog.css';
 
 const Dialog = ({ visible, title, onClose, children }) => {
   const dialogClass = classNames(css.component, {

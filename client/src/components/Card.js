@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import css from '../css/Card.css';
+import css from './Card.css';
 
 const Card = ({ classes, title, corner, subtitle, children }) => {
   const titleTag = title || corner ? (

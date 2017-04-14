@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
-import css from './css/Alternative.css';
+import css from './Alternative.css';
 
 class Alternative extends React.Component {
   constructor() {

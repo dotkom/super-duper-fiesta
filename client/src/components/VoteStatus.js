@@ -4,7 +4,7 @@ import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
 import { getShuffledAlternatives } from '../selectors/alternatives';
 import { getIssue } from '../selectors/issues';
-import css from '../css/VoteStatus.css';
+import css from './VoteStatus.css';
 
 const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => (
   <div className={css.status}>

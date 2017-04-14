@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { requestUserList, adminToggleCanVote } from '../../../actionCreators/users';
 import User from './User';
-import css from './css/List.css';
+import css from './List.css';
 
 class UserList extends React.Component {
   constructor(props) {
