@@ -5,6 +5,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
+const auth = require('./auth');
 const connection = require('./connection');
 const issue = require('./issue');
 const userlist = require('./admin/user/userlist');
@@ -36,6 +37,7 @@ module.exports.listen = (server, mongooseConnection) => {
   }));
   io.on('connection', (socket) => {
     connection(socket);
+    auth(socket);
     // Admin
     issue(socket);
     userlist(socket);

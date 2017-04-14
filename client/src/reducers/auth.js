@@ -1,23 +1,32 @@
-import { AUTH_SIGNED_IN, AUTH_SIGNED_OUT } from '../actionTypes/auth';
+import { AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED } from '../actionTypes/auth';
 
-const signIn = (state = {}, action) => {
+const defaultState = {
+  id: '',
+  username: '',
+  fullName: '',
+  loggedIn: false,
+  registered: false,
+};
+
+const auth = (state = defaultState, action) => {
   switch (action.type) {
     case AUTH_SIGNED_IN: {
-      return {
+      return Object.assign({}, state, {
         username: action.data.username,
         fullName: action.data.full_name,
         loggedIn: action.data.logged_in,
         id: action.data.id,
-      };
+      });
     }
 
     case AUTH_SIGNED_OUT: {
-      return {
-        id: '',
-        username: '',
-        fullName: '',
-        loggedIn: false,
-      };
+      return defaultState;
+    }
+
+    case AUTH_REGISTERED: {
+      return Object.assign({}, state, {
+        registered: true,
+      });
     }
 
     default:
@@ -25,4 +34,4 @@ const signIn = (state = {}, action) => {
   }
 };
 
-export default signIn;
+export default auth;

@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
+const SHA256 = require('crypto-js/sha256');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
 
 const permissionLevel = require('./permissions');
+
+function hashWithSalt(password, salt) {
+  return SHA256(password + salt).toString();
+}
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +20,7 @@ const UserSchema = new Schema({
   canVote: { type: Boolean, default: false },
   notes: String,
   permissions: { type: Number, default: 0 },
+  completedRegistration: { type: Boolean, default: false },
 });
 
 const AnonymousUserSchema = new Schema({
@@ -40,8 +46,15 @@ function getUserById(userId, anonymous) {
   return User.findOne({ _id: userId });
 }
 
-function getUserByUsername(username) {
-  return User.findOne({ onlinewebId: username });
+function getUserByUsername(username, genfors) {
+  return User.findOne({ onlinewebId: username, genfors });
+}
+
+function getAnonymousUser(passwordHash, username, genfors) {
+  return AnonymousUser.findOne({
+    passwordHash: hashWithSalt(passwordHash, username),
+    genfors,
+  });
 }
 
 function getUsers(genfors, anonymous) {
@@ -51,8 +64,11 @@ function getUsers(genfors, anonymous) {
   return User.find({ genfors });
 }
 
+function updateUserById(id, updatedFields, opts) {
+  return User.findByIdAndUpdate(id, updatedFields, opts);
+}
 
-function addUser(name, onlinewebId, passwordHash, securityLevel) {
+function addUser(name, onlinewebId, securityLevel) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
       // @TODO make sure to connect all users to genfors
@@ -72,29 +88,36 @@ function addUser(name, onlinewebId, passwordHash, securityLevel) {
         permissions: securityLevel || 0,
       });
 
-      const anonymousUser = new AnonymousUser({
-        genfors,
-        passwordHash,
+      user.save().then((createdUser) => {
+        logger.debug('Created user', user.name);
+        resolve(createdUser);
+      }).catch((err) => {
+        logger.error('Failed to create user', err);
+        reject(err);
       });
-
-      Promise.all([user.save(), anonymousUser.save()])
-        .then((p) => {
-          logger.debug('Created user', user.name);
-          resolve({ user: p[0], anonymousUser: p[1] });
-        }).catch((err) => {
-          logger.error('Failed to create user', err);
-          reject(err);
-        });
       return null;
     }).catch(reject);
   });
 }
 
-
-function updateUserById(id, updatedFields, opts) {
-  return User.findByIdAndUpdate(id, updatedFields, opts);
+async function addAnonymousUser(username, passwordHash) {
+  const genfors = await getActiveGenfors();
+  const user = await getUserByUsername(username, genfors);
+  if (user.completedRegistration) {
+    throw new Error('User is already registered');
+  }
+  const existingUser = await getAnonymousUser(passwordHash, username, genfors);
+  if (existingUser) {
+    throw new Error('Anonymous user aleady exists');
+  }
+  const anonymousUser = new AnonymousUser({
+    genfors,
+    passwordHash: hashWithSalt(passwordHash, username),
+  });
+  await anonymousUser.save();
+  // eslint-disable-next-line no-underscore-dangle
+  await updateUserById(user._id, { completedRegistration: true });
 }
-
 
 function setNote(user, targetUser, note) {
   return new Promise((resolve, reject) => {
@@ -127,6 +150,7 @@ function setCanVote(user, targetUser) {
 
 module.exports = {
   addUser,
+  addAnonymousUser,
   getUsers,
   getUserById,
   getUserByUsername,

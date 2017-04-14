@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import IssueStatus from '../IssueStatus';
-import { IssueContainer } from './Issue';
 import Button from '../Button';
 import Heading from '../Heading';
-import { ConcludedIssueListContainer } from '../ConcludedIssueList';
+import { ErrorContainer } from '../Error';
 import '../../css/App.css';
 import '../../css/Button.css';
 import '../../css/flaticon.css';
@@ -18,11 +16,8 @@ const App = props => (
       </a>
     </Heading>
     <main>
-      <div className="ActiveIssue-components">
-        <IssueContainer />
-        <IssueStatus />
-      </div>
-      <ConcludedIssueListContainer />
+      <ErrorContainer />
+      {props.children}
     </main>
   </div>
   );
@@ -37,6 +32,7 @@ App.propTypes = {
   fullName: PropTypes.string,
   loggedIn: PropTypes.bool,
   title: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 const mapStateToProps = state => ({

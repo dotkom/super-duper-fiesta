@@ -106,10 +106,15 @@ function addGenfors(title, date, passwordHash, user, force) {
   });
 }
 
+async function validatePin(pin) {
+  const genfors = await getActiveGenfors();
+  return genfors.pin === pin;
+}
 
 module.exports = {
   addGenfors,
   endGenfors,
   getActiveGenfors,
   canEdit,
+  validatePin,
 };

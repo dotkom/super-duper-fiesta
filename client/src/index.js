@@ -8,12 +8,14 @@ import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
 import 'normalize.css';
-import { AdminPanelContainer } from './components/Admin/AdminPanel';
 import { AppContainer } from './components/App/';
+import AppHome from './components/App/Home';
+import { SetupContainer } from './components/App/Setup';
+import { AdminPanelContainer } from './components/Admin/AdminPanel';
 import AdminHome from './components/Admin/Home';
 import { IssueFormContainer } from './components/Admin/IssueForm';
-import NotFound from './components/NotFound';
 import Users from './components/Admin/Users';
+import NotFound from './components/NotFound';
 import votingApp from './reducers';
 
 moment.locale('nb');
@@ -27,7 +29,10 @@ const store = applyMiddleware(socketIoMiddleware, logger)(createStore)(votingApp
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={AppContainer} />
+      <Route path="/" component={AppContainer}>
+        <IndexRoute component={AppHome} />
+        <Route path="register" component={SetupContainer} />
+      </Route>
 
       { /* We might want to split this up into two seperate apps */ }
       <Route path="admin" component={AdminPanelContainer}>
