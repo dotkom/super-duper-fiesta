@@ -72,6 +72,7 @@ class Alternative extends React.Component {
           title="Endre alternativ"
         >
           <input
+            className={css.dialogInput}
             type="text" value={this.state.dialogValue}
             onChange={(...a) => this.updateDialogValue(...a)}
           />

@@ -31,16 +31,13 @@
   margin: 0;
 }
 
-.content .Button {
+/* TODO: Find a better solution than overriding style for all buttons */
+.content button {
   margin: 0 0 0 0.5rem;
   font-size: 1.5rem;
 }
 
-.content .Button:hover div {
-  transform: scale(1.25);
-}
-
-.alternative .Dialog input[type="text"] {
+.dialogInput {
   display: block;
 }
 
@@ -67,4 +64,8 @@
 
 .remove {
   composes: icon cross from 'css/flaticon.css';
+}
+
+.addIcon:hover, .edit:hover, .remove:hover {
+  transform: scale(1.25);
 }
