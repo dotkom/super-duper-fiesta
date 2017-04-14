@@ -10,25 +10,27 @@ import css from './Issue.css';
 
 const Issue = ({ closeIssue, allowClosing, issueText }) => (
   <Card classes={css.issue}>
-    <div>
-      <Pin code="DEADBEEF" />
-      <p className={css.title}>Aktiv sak</p>
+    <div className={css.content}>
+      <div>
+        <Pin code="DEADBEEF" />
+        <p className={css.title}>Aktiv sak</p>
+      </div>
+      <div className={css.actions}>
+        <Button>
+          <IconText text="Rediger" iconClass={css.edit} />
+        </Button>
+        <Button>
+          <IconText text="Resett" iconClass={css.reset} />
+        </Button>
+        <Button onClick={closeIssue} hidden={!allowClosing}>
+          <IconText text="Avslutt" iconClass={css.end} />
+        </Button>
+        <Button>
+          <IconText text="Slett" iconClass={css.delete} />
+        </Button>
+      </div>
+      <p className="IssueAdmin-text">{issueText}</p>
     </div>
-    <div className={css.actions}>
-      <Button>
-        <IconText text="Rediger" iconClass={css.edit} />
-      </Button>
-      <Button>
-        <IconText text="Resett" iconClass={css.reset} />
-      </Button>
-      <Button onClick={closeIssue} hidden={!allowClosing}>
-        <IconText text="Avslutt" iconClass={css.end} />
-      </Button>
-      <Button>
-        <IconText text="Slett" iconClass={css.delete} />
-      </Button>
-    </div>
-    <p className="IssueAdmin-text">{issueText}</p>
   </Card>
 );
 

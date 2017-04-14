@@ -1,4 +1,4 @@
-.issue .Card-content {
+.content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
