@@ -3,6 +3,7 @@ import { RECEIVE_VOTE } from '../actionTypes/voting';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
+    case CLOSE_ISSUE:
     case OPEN_ISSUE: {
       return {
         id: action.data._id, // eslint-disable-line no-underscore-dangle

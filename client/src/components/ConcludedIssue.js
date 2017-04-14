@@ -69,17 +69,24 @@ class ConcludedIssue extends React.Component {
   }
 }
 
+ConcludedIssue.defaultProps = {
+  alternatives: [],
+  votes: {},
+  voteDemand: 0,
+  text: 'noCase',
+};
+
 ConcludedIssue.propTypes = {
   alternatives: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    text: PropTypes.string,
-  })).isRequired,
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  })),
   votes: PropTypes.shape({
-    alternative: PropTypes.string,
-    voter: PropTypes.string,
-  }).isRequired,
-  voteDemand: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
+    alternative: PropTypes.string.isRequired,
+    voter: PropTypes.string.isRequired,
+  }),
+  voteDemand: PropTypes.number,
+  text: PropTypes.string,
 };
 
 
