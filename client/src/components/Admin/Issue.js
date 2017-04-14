@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '../Button';
 import Card from '../Card';
-import IconText from '../IconText';
+import ButtonIconText from '../ButtonIconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
@@ -16,18 +15,13 @@ const Issue = ({ closeIssue, allowClosing, issueText }) => (
         <p className={css.title}>Aktiv sak</p>
       </div>
       <div className={css.actions}>
-        <Button>
-          <IconText text="Rediger" iconClass={css.edit} />
-        </Button>
-        <Button>
-          <IconText text="Resett" iconClass={css.reset} />
-        </Button>
-        <Button onClick={closeIssue} hidden={!allowClosing}>
-          <IconText text="Avslutt" iconClass={css.end} />
-        </Button>
-        <Button>
-          <IconText text="Slett" iconClass={css.delete} />
-        </Button>
+        <ButtonIconText text="Rediger" iconClass={css.edit} />
+        <ButtonIconText text="Resett" iconClass={css.reset} />
+        <ButtonIconText
+          onClick={closeIssue} hidden={!allowClosing}
+          text="Avslutt" iconClass={css.end}
+        />
+        <ButtonIconText text="Slett" iconClass={css.delete} />
       </div>
       <p className="IssueAdmin-text">{issueText}</p>
     </div>

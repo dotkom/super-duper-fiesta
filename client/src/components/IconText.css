@@ -9,7 +9,6 @@
   text-align: center;
 }
 
-/* TODO */
-.Button:hover .iconText:before {
+.iconText.hovering:before {
   transform: scale(1.1);
 }
