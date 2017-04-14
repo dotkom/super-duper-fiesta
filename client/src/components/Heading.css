@@ -37,7 +37,7 @@
   color: #555;
 }
 
-.components > .Button:last-child, .components > a:last-child {
+.components > button:last-child, .components > a:last-child {
   margin-right: -0.5rem;
 }
 
