@@ -68,7 +68,7 @@ class Setup extends Component {
     const errorMessage = this.validate();
     return (
       <form className="Setup" onSubmit={(e) => this.submit(e)}>
-        <h2 className="Setup-title">Generalforsamling registrering</h2>
+        <h2 className="Setup-title">Registrering for generalforsamling</h2>
         <label>
           <div className="Setup-label-text">Pin kode</div>
           <input
