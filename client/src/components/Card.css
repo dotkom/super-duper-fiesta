@@ -8,8 +8,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #6b71a5;
   color: #fff;
+}
+
+.blue {
+  background: #6b71a5;
+}
+
+.red {
+  background: #c5493c;
+}
+
+.green {
+  background: #258573;
 }
 
 .header h2 {

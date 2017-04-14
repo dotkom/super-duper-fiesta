@@ -37,11 +37,8 @@ class ConcludedIssue extends React.Component {
     const { majority } = this.state;
     return (
       <Card
-        classes={classNames(css.concludedIssue,
-          {
-            [css.majority]: majority,
-            [css.minority]: !majority,
-          })}
+        classes={css.concludedIssue}
+        headerColor={majority ? 'green' : 'red'}
         title={this.props.text}
         corner={
           <IconText

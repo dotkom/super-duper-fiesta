@@ -4,14 +4,6 @@
   margin: 0.5rem;
 }
 
-.minority .Card-header {
-  background: #c5493c;
-}
-
-.majority .Card-header {
-  background: #258573;
-}
-
 .alternatives {
   padding-left: 1rem;
 }
