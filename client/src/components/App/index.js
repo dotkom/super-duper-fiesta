@@ -5,7 +5,7 @@ import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 
 const App = props => (
-  <div className="App">
+  <div>
     <Heading link="/" title={props.title}>
       <span>{props.fullName}</span>
       <a href={props.loggedIn ? '/logout' : '/login'}>

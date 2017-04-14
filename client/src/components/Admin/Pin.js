@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Pin = ({ code }) => (
-  <div className="Pin">
+  <div>
     <b>Gjeldende PIN kode</b>: {code}
   </div>
 );
