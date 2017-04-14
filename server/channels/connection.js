@@ -43,6 +43,7 @@ const connection = (socket) => {
         } else {
           logger.debug('Current issue', { issue: issue.description });
           emit(socket, 'OPEN_ISSUE', issue);
+          emit(socket, 'ENABLE_VOTING');
 
           // Issue is active, let's emit already given votes.
           getVotes(issue)
