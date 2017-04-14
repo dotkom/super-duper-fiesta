@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
-import IconText from '../../IconText';
+import css from './css/Alternative.css';
 
 class Alternative extends React.Component {
   constructor() {
@@ -64,8 +64,8 @@ class Alternative extends React.Component {
     } = this.props;
 
     return (
-      <div className="IssueFormAlternative">
-        <h2 className="IssueForm-label">Alternativer</h2>
+      <div className={css.alternative}>
+        <h2 className={css.title}>Alternativer</h2>
         <Dialog
           visible={this.state.showUpdateDialog}
           onClose={(...a) => this.closeUpdateDialog(...a)}
@@ -78,7 +78,7 @@ class Alternative extends React.Component {
           <Button background onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
           <Button background onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
         </Dialog>
-        <div className="IssueFormAlternative-content">
+        <div className={css.content}>
           <ul>
             {Object.keys(alternatives).map(id =>
               <li key={id}>
@@ -92,7 +92,7 @@ class Alternative extends React.Component {
               </li>,
             )}
           </ul>
-          <div className="IssueFormAlternative-add">
+          <div className={css.add}>
             <input
               type="text"
               value={alternativeText}

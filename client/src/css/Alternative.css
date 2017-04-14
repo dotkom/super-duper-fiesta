@@ -1,4 +1,4 @@
-.Alternative {
+.alternative {
   margin: 0.5rem 0;
   background: #6b71a5;
   color: #fff;
@@ -7,37 +7,37 @@
               0 2px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-.Alternative:last-of-type {
+.alternative:last-of-type {
   margin-bottom: 0;
 }
 
-.Alternative:hover {
+.alternative:hover {
   background: #8d93c7;
 }
 
-.Alternative--selected {
+.selected {
   background: #4d516f;
 }
 
-.Alternative--selected:hover {
+.selected:hover {
   background: #575c7d;
 }
 
-.Alternative--disabled {
+.disabled {
   box-shadow: none;
   background: #f5f5f5;
   color: #555;
 }
 
-.Alternative--disabled:hover {
+.disabled:hover {
   background: #f5f5f5;
 }
 
-.Alternative label {
+.alternative label {
   flex-grow: 1;
   padding: 1rem;
 }
 
-.Alternative input {
+.alternative input {
   display: none;
 }

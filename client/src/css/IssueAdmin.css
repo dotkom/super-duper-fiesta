@@ -1,23 +1,23 @@
-.IssueAdmin .Card-content {
+.issue .Card-content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 
-.IssueAdmin-actions {
+.actions {
   margin-left: auto;
   align-self: center;
 }
 
-.IssueAdmin-actions button {
+.actions button {
   margin: 0;
 }
 
-.IssueAdmin-text {
+.text {
   flex: 1 100%;
   margin: 1rem 0 0;
 }
 
-.IssueAdmin-pin {
+.pin {
   flex: 1 100%;
 }

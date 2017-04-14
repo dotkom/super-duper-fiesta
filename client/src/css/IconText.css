@@ -1,14 +1,15 @@
-.IconText {
+.iconText {
   margin-left: auto;
   display: inline-flex;
   flex-direction: column;
 }
 
-.IconText:before {
+.iconText:before {
   font-size: 2rem;
   text-align: center;
 }
 
-.Button:hover .IconText:before {
+/* TODO */
+.Button:hover .iconText:before {
   transform: scale(1.1);
 }

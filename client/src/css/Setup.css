@@ -1,4 +1,4 @@
-.Setup {
+.setup {
   margin: 4rem auto;
   max-width: 40rem;
   background: #f5f5f5;
@@ -7,26 +7,26 @@
   border-color: #f1f1f1 #eaeaea #dadada;
 }
 
-.Setup-title {
+.title {
   color: #717171;
   font-size: 1.6em;
   font-weight: normal;
 }
 
-.Setup-label-text {
+.text {
   font-size: 1.2em;
   margin: 2rem 0 0.5em 0;
 }
 
-.Setup label:first-child .Setup-label-text {
+.setup label:first-child .text {
   margin-top: 0.5rem;
 }
 
-.Setup-label-help {
+.help {
   color: #6d6d6d;
 }
 
-.Setup input {
+.setup input {
   box-sizing: border-box;
   width: 100%;
   font-size: 1.1em;
@@ -34,10 +34,6 @@
   border: 1px solid #d2d2d2;
 }
 
-.Setup .Button {
-  display: block;
-}
-
-.Setup-warning {
+.warning {
   color: #9c0707;
 }

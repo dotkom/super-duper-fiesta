@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
+import css from './css/Checkboxes.css';
 
 
 const Checkboxes = ({
   countBlankVotes, secretVoting, showOnlyWinner,
   handleUpdateCountBlankVotes, handleUpdateSecretVoting, handleUpdateShowOnlyWinner,
 }) => (
-  <div className="IssueFormCheckboxes">
-    <h2 className="IssueForm-label">Innstillinger</h2>
-    <label className="IssueForm-checkbox">
+  <div>
+    <h2 className={css.title}>Innstillinger</h2>
+    <label className={css.checkbox}>
       <input
         type="checkbox"
         onChange={e => handleUpdateSecretVoting(e.target.checked)}
@@ -16,7 +17,7 @@ const Checkboxes = ({
       Hemmelig valg
     </label>
 
-    <label className="IssueForm-checkbox">
+    <label className={css.checkbox}>
       <input
         type="checkbox"
         onChange={e => handleUpdateShowOnlyWinner(e.target.checked)}
@@ -25,7 +26,7 @@ const Checkboxes = ({
       Vis kun vinner
     </label>
 
-    <label className="IssueForm-checkbox">
+    <label className={css.checkbox}>
       <input
         type="checkbox"
         onChange={e => handleUpdateCountBlankVotes(e.target.checked)}

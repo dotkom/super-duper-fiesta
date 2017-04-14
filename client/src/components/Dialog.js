@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Card from './Card';
-import '../css/Dialog.css';
+import css from '../css/Dialog.css';
 
 const Dialog = ({ visible, title, onClose, children }) => {
-  const dialogClass = classNames('Dialog', {
-    'Dialog--visible': visible,
+  const dialogClass = classNames(css.component, {
+    [css.visible]: visible,
   });
   return (
     <div className={dialogClass}>
-      <div onClick={onClose} className="Dialog-backdrop" />
+      <div onClick={onClose} className={css.backdrop} />
       <Card
-        classes="Dialog-dialog"
+        classes={css.dialog}
         title={title}
         corner={
-          <div onClick={onClose} className="Dialog-close flaticon-close" />
+          <div onClick={onClose} className={css.close} />
         }
       >
         {children}

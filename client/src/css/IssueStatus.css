@@ -1,8 +1,8 @@
-.IssueStatus {
+.status {
   flex-grow: 1;
   display: flex;
 }
 
-.IssueStatus .Card-content {
+.status .Card-content {
   flex-grow: 1;
 }

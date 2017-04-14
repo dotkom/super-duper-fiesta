@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import Alternative from './Alternative';
-import '../css/Alternatives.css';
+import css from '../css/Alternatives.css';
 
 const Alternatives = ({ disabled, alternatives, handleChange, selectedVote }) => (
-  <div className="Alternatives">
+  <div className={css.lternatives}>
     {alternatives.map(alternative => (
       <Alternative
         disabled={disabled}

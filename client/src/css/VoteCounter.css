@@ -1,8 +1,8 @@
-.VoteCounter {
+.counter {
   margin: 1rem 0 0;
 }
 
-.VoteCounter-bar {
+.bar {
   margin-top: 0.25rem;
   background: #e0e2ef;
   height: 1rem;
@@ -10,17 +10,17 @@
   box-shadow: inset 0 -1px 1px 0 #cfd1e0;
 }
 
-.VoteCounter-bar-progress {
+.progress {
   background: #6b71a5;
   box-shadow: inset 0 -1px 1px 0 #272b4c;
   height: 100%;
 }
 
-.VoteCounter-label {
+.label {
   display: flex;
 }
 
-.VoteCounter-count {
+.count {
   margin-left: auto;
   min-width: 3rem;
   flex-basis: auto;

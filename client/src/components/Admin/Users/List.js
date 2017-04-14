@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { requestUserList, adminToggleCanVote } from '../../../actionCreators/users';
 import User from './User';
-import '../../../css/Users.css';
+import css from './css/List.css';
 
 class UserList extends React.Component {
   constructor(props) {
@@ -13,12 +13,12 @@ class UserList extends React.Component {
   render() {
     const { users, toggleCanVote } = this.props;
     return (
-      <table className="Users-list">
+      <table className={css.list}>
         <thead>
           <tr>
-            <th className="Users-list--left">Bruker</th>
-            <th className="Users-list--right">Registrert</th>
-            <th className="Users-list--right">Stemmeberettigelse</th>
+            <th className={css.left}>Bruker</th>
+            <th className={css.right}>Registrert</th>
+            <th className={css.right}>Stemmeberettigelse</th>
           </tr>
         </thead>
         <tbody>

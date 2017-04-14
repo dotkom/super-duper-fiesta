@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import IconText from './IconText';
 import Card from './Card';
-import '../css/ConcludedIssue.css';
+import css from '../css/ConcludedIssue.css';
 
 
 class ConcludedIssue extends React.Component {
@@ -37,7 +37,11 @@ class ConcludedIssue extends React.Component {
     const { majority } = this.state;
     return (
       <Card
-        classes={classNames('ConcludedIssue', { 'ConcludedIssue--majority': majority, 'ConcludedIssue--minority': !majority })}
+        classes={classNames(css.concludedIssue,
+          {
+            [css.majority]: majority,
+            [css.minority]: !majority,
+          })}
         title={this.props.text}
         corner={
           <IconText
@@ -47,12 +51,12 @@ class ConcludedIssue extends React.Component {
         }
         subtitle="Flertallskrav: Alminnelig (1/2)"
       >
-        <ul className="ConcludedIssue-alternatives">
+        <ul className={css.alternatives}>
           {this.props.alternatives.map(alternative => (
             <li
               key={alternative.id}
               className={classNames({
-                'ConcludedIssue-alternatives--winner': Object.keys(this.props.votes).length
+                [css.alternativesWinner]: Object.keys(this.props.votes).length
                 && Object.keys(this.props.votes)
                   .map(key => this.props.votes[key])
                   .filter(vote => vote.alternative === alternative.id)

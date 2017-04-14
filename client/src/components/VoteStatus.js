@@ -4,10 +4,10 @@ import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
 import { getShuffledAlternatives } from '../selectors/alternatives';
 import { getIssue } from '../selectors/issues';
-import '../css/VoteStatus.css';
+import css from '../css/VoteStatus.css';
 
 const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => (
-  <div className="VoteStatus">
+  <div className={css.status}>
     <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
 
     {alternatives && alternatives.map((alternative, i) =>

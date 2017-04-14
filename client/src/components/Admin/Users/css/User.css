@@ -1,0 +1,12 @@
+.canNotVote {
+  color: #b73b3b;
+  font-weight: bold;
+}
+
+.left {
+  composes: left from './List.css';
+}
+
+.right {
+  composes: right from './List.css';
+}

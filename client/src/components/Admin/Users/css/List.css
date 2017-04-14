@@ -1,50 +1,33 @@
-.Users {
-  margin-top: 2rem;
-}
-
-.Users-info {
-  max-width: 50rem;
-}
-
-.UserFilter {
-  margin-top: 2rem;
-}
-
-table.Users-list {
+table.list {
   width: 100%;
   max-width: 50rem;
   margin-top: 1rem;
   border-collapse: collapse;
 }
 
-.Users-list th {
+.list th {
   border-bottom: 1px solid #9597b1;
   font-weight: normal;
   padding: 0.25rem 0.25rem;
 }
 
-.Users-list td {
+.list td {
   padding: 0.5rem 0.25rem;
   border-bottom: 1px solid #dbdce0;
 }
 
-.Users-list tr:nth-child(even) td {
+.list tr:nth-child(even) td {
   background: #f9f9f9;
 }
 
-.Users-list--left {
+.left {
   text-align: left;
 }
 
-.Users-list--center {
+.center {
   text-align: center;
 }
 
-.Users-list--right {
+.right {
   text-align: right;
-}
-
-.Users-list--can-not-vote {
-  color: #b73b3b;
-  font-weight: bold;
 }

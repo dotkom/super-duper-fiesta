@@ -4,7 +4,7 @@ import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
 import { register } from '../../actionCreators/auth';
 import Button from '../Button';
-import '../../css/Setup.css';
+import css from '../../css/Setup.css';
 
 class Setup extends Component {
   constructor(props) {
@@ -67,31 +67,31 @@ class Setup extends Component {
     const { privateCode, repeatPrivateCode, pin } = this.state;
     const errorMessage = this.validate();
     return (
-      <form className="Setup" onSubmit={(e) => this.submit(e)}>
-        <h2 className="Setup-title">Registrering for generalforsamling</h2>
+      <form className={css.setup} onSubmit={(e) => this.submit(e)}>
+        <h2 className={css.title}>Registrering for generalforsamling</h2>
         <label>
-          <div className="Setup-label-text">Pin kode</div>
+          <div className={css.text}>Pin kode</div>
           <input
             type="number"
             value={pin}
             onChange={e => this.changePin(e)}
           />
-          <div className="Setup-label-help">Kode oppgitt under generalforsamling</div>
+          <div className={css.help}>Kode oppgitt under generalforsamling</div>
         </label>
         <label>
-          <div className="Setup-label-text">Personlig kode</div>
+          <div className={css.text}>Personlig kode</div>
           <input
             type="password"
             value={privateCode}
             onChange={e => this.changePrivateCode(e)}
           />
-          <div className="Setup-label-help">
+          <div className={css.help}>
             Personlig kode brukes for å lage en unik hash som brukes til hemmelige valg.
             Denne lagres ikke og det er derfor ytterst viktig at du ikke glemmer den.
           </div>
         </label>
         <label>
-          <div className="Setup-label-text">Gjenta personlig kode</div>
+          <div className={css.text}>Gjenta personlig kode</div>
           <input
             type="password"
             value={repeatPrivateCode}
@@ -99,13 +99,15 @@ class Setup extends Component {
           />
         </label>
         { errorMessage &&
-          <p className="Setup-warning">
+          <p className={css.warning}>
             {errorMessage}
           </p>
         }
-        <Button background disabled={errorMessage !== null}>
-          Fullfør registrering
-        </Button>
+        <div>
+          <Button background disabled={errorMessage !== null}>
+            Fullfør registrering
+          </Button>
+        </div>
       </form>
     );
   }

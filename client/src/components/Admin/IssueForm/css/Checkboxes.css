@@ -1,0 +1,11 @@
+label.checkbox {
+  margin-top: 0.5rem;
+}
+
+.checkbox input {
+  margin-right: 0.5rem;
+}
+
+.title {
+  composes: title from './IssueForm.css';
+}

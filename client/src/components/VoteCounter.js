@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
-import '../css/VoteCounter.css';
+import css from '../css/VoteCounter.css';
 
 const VoteCounter = ({ count, total, label }) => (
-  <div className="VoteCounter">
-    <div className="VoteCounter-label">
-      { label } <span className="VoteCounter-count">({ count } / { total })</span>
+  <div className={css.counter}>
+    <div className={css.label}>
+      { label } <span className={css.count}>({ count } / { total })</span>
     </div>
-    <div className="VoteCounter-bar">
-      <div className="VoteCounter-bar-progress" style={{ width: `${(count / total) * 100}%` }} />
+    <div className={css.bar}>
+      <div className={css.progress} style={{ width: `${(count / total) * 100}%` }} />
     </div>
   </div>
 );

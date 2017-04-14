@@ -6,15 +6,15 @@ import IconText from '../IconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
-import '../../css/IssueAdmin.css';
+import css from '../../css/IssueAdmin.css';
 
 const Issue = ({ closeIssue, allowClosing, issueText }) => (
-  <Card classes="IssueAdmin">
+  <Card classes={css.issue}>
     <div>
       <Pin code="DEADBEEF" />
-      <p className="IssueAdmin-title">Aktiv sak</p>
+      <p className={css.title}>Aktiv sak</p>
     </div>
-    <div className="IssueAdmin-actions">
+    <div className={css.actions}>
       <Button>
         <IconText text="Rediger" iconClass="flaticon-edit" />
       </Button>

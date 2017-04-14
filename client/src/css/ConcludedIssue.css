@@ -1,21 +1,21 @@
-.ConcludedIssue {
+.concludedIssue {
   flex-grow: 1;
   flex-basis: 25rem;
   margin: 0.5rem;
 }
 
-.ConcludedIssue--minority .Card-header {
+.minority .Card-header {
   background: #c5493c;
 }
 
-.ConcludedIssue--majority .Card-header {
+.majority .Card-header {
   background: #258573;
 }
 
-.ConcludedIssue-alternatives {
+.alternatives {
   padding-left: 1rem;
 }
 
-.ConcludedIssue-alternatives--winner {
+.alternativesWinner {
   font-weight: bold;
 }
