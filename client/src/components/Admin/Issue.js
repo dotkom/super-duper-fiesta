@@ -23,8 +23,8 @@ const Issue = ({ closeIssue, allowClosing, issueText }) => (
         />
         <ButtonIconText text="Slett" iconClass={css.delete} />
       </div>
-      <p>{issueText}</p>
     </div>
+    <p>{issueText}</p>
   </Card>
 );
 
