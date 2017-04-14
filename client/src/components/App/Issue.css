@@ -3,7 +3,3 @@
   display: flex;
   flex-basis: 20rem;
 }
-
-.issue .Card-content {
-  flex-grow: 1;
-}

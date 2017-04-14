@@ -2,7 +2,3 @@
   flex-grow: 1;
   display: flex;
 }
-
-.status .Card-content {
-  flex-grow: 1;
-}
