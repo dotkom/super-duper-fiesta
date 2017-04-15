@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./client/src/index.js'],
-  devtool: 'eval-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
@@ -24,22 +23,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-          },
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
           },
         ],
       },
