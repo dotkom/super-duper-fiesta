@@ -12,18 +12,25 @@ module.exports = merge.smart(config, {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          {
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
             loader: 'css-loader',
             options: {
               sourceMap: true,
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
             },
           },
-        ],
+        }),
       },
     ],
   },
   plugins: [
+    new ExtractTextPlugin({
+      ignoreOrder: true,
+      filename: '[name]-[hash].css',
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
     }),
@@ -35,7 +42,6 @@ module.exports = merge.smart(config, {
       },
       comments: false,
     }),
-    new ExtractTextPlugin('[name]-[hash].css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
