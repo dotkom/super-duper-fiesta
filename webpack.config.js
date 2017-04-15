@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   resolve: {
     modules: [
@@ -58,6 +59,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'client/index.html',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: (module) => (
+        module.context && module.context.indexOf('node_modules') !== -1
+      ),
     }),
   ],
 };
