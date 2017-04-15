@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Dialog from '../../Dialog';
 import Button from '../../Button';
-import IconText from '../../IconText';
+import css from './Alternative.css';
 
 class Alternative extends React.Component {
   constructor() {
@@ -64,35 +64,36 @@ class Alternative extends React.Component {
     } = this.props;
 
     return (
-      <div className="IssueFormAlternative">
-        <h2 className="IssueForm-label">Alternativer</h2>
+      <div className={css.alternative}>
+        <h2 className={css.title}>Alternativer</h2>
         <Dialog
           visible={this.state.showUpdateDialog}
           onClose={(...a) => this.closeUpdateDialog(...a)}
           title="Endre alternativ"
         >
           <input
+            className={css.dialogInput}
             type="text" value={this.state.dialogValue}
             onChange={(...a) => this.updateDialogValue(...a)}
           />
           <Button background onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
           <Button background onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
         </Dialog>
-        <div className="IssueFormAlternative-content">
+        <div className={css.content}>
           <ul>
             {Object.keys(alternatives).map(id =>
               <li key={id}>
                 <p>{alternatives[id].text}</p>
                 <Button onClick={() => this.openUpdateDialog(id)}>
-                  <div className="flaticon-edit" />
+                  <div className={css.edit} />
                 </Button>
                 <Button onClick={() => handleRemoveAlternative(id)}>
-                  <div className="flaticon-cross" />
+                  <div className={css.remove} />
                 </Button>
               </li>,
             )}
           </ul>
-          <div className="IssueFormAlternative-add">
+          <div className={css.add}>
             <input
               type="text"
               value={alternativeText}
@@ -100,7 +101,7 @@ class Alternative extends React.Component {
               onKeyPress={e => this.handleKeyPress(e)}
             />
             <Button onClick={(...a) => this.handleAddAlternative(...a)}>
-              <div className="flaticon-plus" />
+              <div className={css.addIcon} />
             </Button>
           </div>
         </div>

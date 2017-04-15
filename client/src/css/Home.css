@@ -1,0 +1,14 @@
+.components {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem -0.5rem 0;
+}
+
+.components > * {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.voteWrapper {
+  flex-grow: 4;
+  flex-basis: 20rem;
+}

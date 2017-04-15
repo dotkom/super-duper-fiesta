@@ -7,7 +7,7 @@ import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
 import SelectQuestionType from './SelectQuestionType';
-import '../../../css/IssueForm.css';
+import css from './index.css';
 
 const MULTIPLE_CHOICE = 'MULTIPLE_CHOICE';
 
@@ -122,21 +122,21 @@ class IssueForm extends React.Component {
       && this.state.issueDescription
       && this.state.issueDescription.length;
     return (
-      <div className="IssueForm">
+      <div className={css.form}>
         <p
-          className="IssueForm--ActiveIssueWarning"
+          className={css.warning}
           hidden={!showActiveIssueWarning}
         >Det er allerede en aktiv sak!</p>
-        <label className="IssueForm-textarea">
-          <h2 className="IssueForm-label">Beskrivelse av saken</h2>
+        <label className={css.textarea}>
+          <h2 className={css.title}>Beskrivelse av saken</h2>
           <textarea
             onChange={(...a) => this.updateIssueDescription(...a)}
             placeholder="Skriv inn saken her."
             value={this.state.issueDescription}
           />
         </label>
-        <label className="IssueForm-select">
-          <h2 className="IssueForm-label">Spørsmålstype</h2>
+        <label>
+          <h2 className={css.title}>Spørsmålstype</h2>
           <SelectQuestionType
             questionType={this.state.questionType}
             handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
@@ -158,8 +158,8 @@ class IssueForm extends React.Component {
           secretVoting={this.state.secretVoting}
           showOnlyWinner={this.state.showOnlyWinner}
         />
-        <label className="IssueForm-select">
-          <h2 className="IssueForm-label">Flertallstype</h2>
+        <label>
+          <h2 className={css.title}>Flertallstype</h2>
           <SelectResolutionType
             handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
             resolutionType={this.state.voteDemand}

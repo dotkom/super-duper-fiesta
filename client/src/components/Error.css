@@ -1,4 +1,4 @@
-.Error {
+.error {
   background: #ca3939;
   padding: 0.5rem 1rem;
   color: #fee;
@@ -6,11 +6,11 @@
   justify-content: space-between;
 }
 
-.Error-message {
+.message {
   padding: 1rem 0;
 }
 
-.Error-corner {
+.corner {
   padding: 0;
   background: none;
   border: none;
@@ -18,10 +18,14 @@
   font-size: 2rem;
 }
 
-.Error-corner:hover {
+.corner:hover {
   transform: scale(1.1);
 }
 
-.Error-corner:focus {
+.corner:focus {
   outline: 0;
+}
+
+.close {
+  composes: icon close from 'css/flaticon.css';
 }

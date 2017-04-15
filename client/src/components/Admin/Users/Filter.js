@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import setUserFilter from '../../../actionCreators/setUserFilter';
+import css from './Filter.css';
 
 const UserFilter = ({ filter, onChange }) => (
-  <div className="UserFilter">
+  <div className={css.filter}>
     <label>
       Filtrer brukere: <input
         type="text"

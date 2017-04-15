@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getIssueText } from '../../selectors/issues';
 import Card from '../Card';
-import '../../css/Issue.css';
+import css from './Issue.css';
 
 const Issue = ({ text }) => (
   <Card
-    classes="Issue"
+    classes={css.issue}
     subtitle="Aktiv sak"
   >
     <p>{text}</p>

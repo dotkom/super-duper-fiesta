@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '../css/Button.css';
+import css from './Button.css';
 
 const Button = ({ size, children, background, ...other }) => {
   const buttonClass = classNames({
-    'Button': true,
-    [`Button--size-${size}`]: size,
-    'Button--background': background,
+    [css.button]: true,
+    [css[`size-${size}`]]: size,
+    [css.background]: background,
   });
   return (
     <button className={buttonClass} {...other}>{children}</button>

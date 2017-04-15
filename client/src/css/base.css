@@ -10,7 +10,7 @@ main {
   padding: 0 1rem;
 }
 
-button, select, textarea, input[type="text"] {
+button, select, textarea, input {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.5rem;
@@ -22,19 +22,4 @@ h1, h2, h3, h4 {
 
 p {
   margin-bottom: 0;
-}
-
-.ActiveIssue-components {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 2rem -0.5rem 0;
-}
-
-.ActiveIssue-components > * {
-  margin: 0 0.5rem 0 0.5rem;
-}
-
-.ActiveIssue-Vote-wrapper {
-  flex-grow: 4;
-  flex-basis: 20rem;
 }

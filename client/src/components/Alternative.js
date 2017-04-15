@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '../css/Alternative.css';
+import css from './Alternative.css';
 
 const Alternative = ({ disabled, id, text, selected, onClick }) => {
-  const alternativeClass = classNames('Alternative', {
-    'Alternative--selected': selected,
-    'Alternative--disabled': disabled,
+  const alternativeClass = classNames(css.alternative, {
+    [css.selected]: selected,
+    [css.disabled]: disabled,
   });
   return (
     <div className={alternativeClass} key={id}>

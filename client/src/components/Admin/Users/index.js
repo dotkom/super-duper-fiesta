@@ -1,10 +1,11 @@
 import React from 'react';
 import { UserListContainer } from './List';
 import { UserFilterContainer } from './Filter';
+import css from './index.css';
 
 const Users = () => (
-  <div className="Users">
-    <div className="Users-info">
+  <div className={css.users}>
+    <div className={css.info}>
       <p>Denne oversikten viser alle brukere som er registrert som møtt
        på generalforsamlingen. I tillegg vises deres status som deltaker,
        nærmere bestemt om de har stemmerett eller ikke.

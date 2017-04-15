@@ -1,0 +1,28 @@
+.setup {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem;
+}
+
+.text {
+  font-size: 1.2rem;
+  margin: 2rem 0 0.5em 0;
+}
+
+.setup label:first-child .text {
+  margin-top: 0.5rem;
+}
+
+.help {
+  color: #6d6d6d;
+}
+
+.setup input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d2d2d2;
+}
+
+.warning {
+  color: #9c0707;
+}

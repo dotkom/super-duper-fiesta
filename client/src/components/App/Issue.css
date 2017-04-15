@@ -1,9 +1,5 @@
-.Issue {
+.issue {
   flex-grow: 4;
   display: flex;
   flex-basis: 20rem;
-}
-
-.Issue .Card-content {
-  flex-grow: 1;
 }

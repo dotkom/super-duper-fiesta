@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import '../css/Heading.css';
+import css from './Heading.css';
 
 const Heading = ({ link, title, children }) => (
-  <header className="Heading">
-    <div className="Heading-content">
-      <Link to={link}><h1 className="Heading-header">{title}</h1></Link>
-      <nav className="Heading-components">
+  <header className={css.heading}>
+    <div className={css.content}>
+      <Link to={link}><h1 className={css.header}>{title}</h1></Link>
+      <nav className={css.components}>
         {children}
       </nav>
     </div>

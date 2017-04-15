@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
-import '../css/ConcludedIssueList.css';
+import css from './ConcludedIssueList.css';
 
 const ConcludedIssueList = ({ issues }) => (
-  <div className="ConcludedIssueList">
+  <div className={css.concludedIssueList}>
     {Object.keys(issues).map(issue => (
       <ConcludedIssue key={issues[issue].id} {...issues[issue]} />
     ))}

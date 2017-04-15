@@ -1,4 +1,4 @@
-.Button {
+.button {
   margin: 1rem 0 0 0;
   border: 1px solid transparent;
   background: transparent;
@@ -6,15 +6,15 @@
   white-space: nowrap;
 }
 
-.Button:hover {
+.button:hover {
   color: #141523;
 }
 
-.Button:focus {
+.button:focus {
   outline: 0;
 }
 
-.Button--background {
+.background {
   color: #fff;
   background: #595c7f;
   border: 1px solid rgba(0, 0, 0, 0.04);
@@ -22,34 +22,34 @@
               0 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
-.Button--background:hover {
+.background:hover {
   color: #fff;
   background: #6d7194;
 }
 
-.Button:disabled {
+.button:disabled {
   background: #747586;
   color: white;
   cursor: not-allowed
 }
 
-.Button--size-sm {
+.size-sm {
   padding: 0.25rem;
   font-size: 0.5rem;
 }
 
-.Button--size-md {
+.size-md {
   padding: 0.5rem;
 }
 
-.Button--size-md, .Button--size-lg {
+.size-md, .size-lg {
   font-size: 1rem;
 }
 
-.Button--size-lg {
+.size-lg {
   padding: 1rem;
 }
 
-.Button--background + .Button--background {
+.background + .background {
   margin-left: 0.5rem;
 }

@@ -1,19 +1,19 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '../css/Card.css';
+import css from './Card.css';
 
-const Card = ({ classes, title, corner, subtitle, children }) => {
+const Card = ({ classes, headerColor, title, corner, subtitle, children }) => {
   const titleTag = title || corner ? (
-    <div className="Card-header">
+    <div className={classNames(css.header, css[headerColor])}>
       <h2>{title}</h2>
-      {corner ? <div className="Card-corner">{corner}</div> : null}
+      {corner ? <div className={css.corner}>{corner}</div> : null}
     </div>
   ) : null;
   return (
-    <div className={classNames('Card', classes)}>
+    <div className={classNames(css.card, classes)}>
       {titleTag}
-      <div className="Card-content">
-        {subtitle ? <h3 className="Card-subtitle">{subtitle}</h3> : null}
+      <div className={css.content}>
+        {subtitle ? <h3 className={css.subtitle}>{subtitle}</h3> : null}
         {children}
       </div>
     </div>
@@ -25,6 +25,7 @@ Card.defaultProps = {
   title: '',
   subtitle: '',
   corner: '',
+  headerColor: 'blue',
 };
 
 Card.propTypes = {
@@ -36,6 +37,7 @@ Card.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  headerColor: PropTypes.string,
 };
 
 export default Card;

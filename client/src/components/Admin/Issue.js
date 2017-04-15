@@ -1,34 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '../Button';
 import Card from '../Card';
-import IconText from '../IconText';
+import ButtonIconText from '../ButtonIconText';
 import Pin from './Pin';
 import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
-import '../../css/IssueAdmin.css';
+import css from './Issue.css';
 
 const Issue = ({ closeIssue, allowClosing, issueText }) => (
-  <Card classes="IssueAdmin">
-    <div>
-      <Pin code="DEADBEEF" />
-      <p className="IssueAdmin-title">Aktiv sak</p>
+  <Card classes={css.issue}>
+    <div className={css.content}>
+      <div>
+        <Pin code="DEADBEEF" />
+        <p className={css.title}>Aktiv sak</p>
+      </div>
+      <div className={css.actions}>
+        <ButtonIconText text="Rediger" iconClass={css.edit} />
+        <ButtonIconText text="Resett" iconClass={css.reset} />
+        <ButtonIconText
+          onClick={closeIssue} hidden={!allowClosing}
+          text="Avslutt" iconClass={css.end}
+        />
+        <ButtonIconText text="Slett" iconClass={css.delete} />
+      </div>
     </div>
-    <div className="IssueAdmin-actions">
-      <Button>
-        <IconText text="Rediger" iconClass="flaticon-edit" />
-      </Button>
-      <Button>
-        <IconText text="Resett" iconClass="flaticon-refresh" />
-      </Button>
-      <Button onClick={closeIssue} hidden={!allowClosing}>
-        <IconText text="Avslutt" iconClass="flaticon-lock" />
-      </Button>
-      <Button>
-        <IconText text="Slett" iconClass="flaticon-cross" />
-      </Button>
-    </div>
-    <p className="IssueAdmin-text">{issueText}</p>
+    <p>{issueText}</p>
   </Card>
 );
 
