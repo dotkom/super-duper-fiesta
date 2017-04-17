@@ -1,13 +1,13 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./client/src/index.js'],
-  devtool: 'eval-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   resolve: {
     modules: [
@@ -27,22 +27,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
-          },
-        ],
-      },
-      {
         test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
         use: [
           {
@@ -58,6 +42,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'client/index.html',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => (
+        module.context && module.context.indexOf('node_modules') !== -1
+      ),
     }),
   ],
 };
