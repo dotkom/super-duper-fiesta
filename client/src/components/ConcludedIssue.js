@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import IconText from './IconText';
 import Card from './Card';
+import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../actionTypes/voting';
 import css from './ConcludedIssue.css';
-
 
 class ConcludedIssue extends React.Component {
   // Maps over alternatives to see if any of them got majority vote
@@ -45,6 +45,7 @@ class ConcludedIssue extends React.Component {
 
   render() {
     const { majority } = this.state;
+    const { voteDemand } = this.props;
     return (
       <Card
         classes={css.concludedIssue}
@@ -56,7 +57,7 @@ class ConcludedIssue extends React.Component {
             iconClass={majority ? css.majorityIcon : css.minorityIcon}
           />
         }
-        subtitle="Flertallskrav: Alminnelig (1/2)"
+        subtitle={`Flertallskrav: ${getResolutionTypeDisplay(voteDemand).name} (${getResolutionTypeDisplay(voteDemand).voteDemandText})`}
       >
         <ul className={css.alternatives}>
           {this.props.alternatives.map(alternative => (
@@ -67,7 +68,7 @@ class ConcludedIssue extends React.Component {
                 && Object.keys(this.props.votes)
                   .map(key => this.props.votes[key])
                   .filter(vote => vote.alternative === alternative.id)
-                  .length / Object.keys(this.props.votes).length >= this.props.voteDemand,
+                  .length / Object.keys(this.props.votes).length >= voteDemand,
               })}
             >
               {alternative.text}
@@ -82,7 +83,7 @@ class ConcludedIssue extends React.Component {
 ConcludedIssue.defaultProps = {
   alternatives: [],
   votes: {},
-  voteDemand: 0,
+  voteDemand: RESOLUTION_TYPES.regular.voteDemand,
   text: 'Denne saken har ingen tittel.',
 };
 
@@ -95,7 +96,8 @@ ConcludedIssue.propTypes = {
     alternative: PropTypes.string.isRequired,
     voter: PropTypes.string.isRequired,
   }),
-  voteDemand: PropTypes.number,
+  voteDemand: PropTypes.oneOfType(
+    [PropTypes.number, PropTypes.string]), // Kept for backwards compatibility. 'oldResolutionTypes'
   text: PropTypes.string,
 };
 

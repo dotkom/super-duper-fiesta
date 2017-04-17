@@ -1,13 +1,18 @@
 import React, { PropTypes } from 'react';
+import { RESOLUTION_TYPES } from '../../../actionTypes/voting';
 
 
 const SelectResolutionType = ({ resolutionType, handleResolutionTypeChange }) => (
   <select
-    onChange={e => handleResolutionTypeChange(parseFloat(e.target.value, 10))}
+    onChange={e => handleResolutionTypeChange(e.target.value)}
     value={resolutionType}
   >
-    <option value={1 / 2}>Alminnelig flertall (1/2)</option>
-    <option value={2 / 3}>Kvalifisert flertall (2/3)</option>
+    <option value={RESOLUTION_TYPES.regular.key}>
+      {RESOLUTION_TYPES.regular.name} ({RESOLUTION_TYPES.regular.voteDemandText})
+    </option>
+    <option value={RESOLUTION_TYPES.qualified.key}>
+      {RESOLUTION_TYPES.qualified.name} ({RESOLUTION_TYPES.qualified.voteDemandText})
+    </option>
   </select>
 );
 
