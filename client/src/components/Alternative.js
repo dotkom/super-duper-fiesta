@@ -11,6 +11,7 @@ const Alternative = ({ disabled, id, text, selected, onClick }) => {
     <div className={alternativeClass} key={id}>
       <label>
         <input
+          disabled={disabled}
           type="radio"
           name="vote"
           value={id}

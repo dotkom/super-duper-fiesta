@@ -37,13 +37,14 @@ class VotingMenu extends React.Component {
   render() {
     const isLoggedIn = this.props.loggedIn;
     const hasSelectedVote = this.state.selectedVote !== undefined;
-    const hasVoted = this.props.votedState.alternative;
+    const hasVoted = !!this.props.votedState.alternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
 
     return (
       <div>
         <Alternatives
           alternatives={this.props.alternatives}
+          disabled={hasVoted}
           handleChange={(...a) => this.handleChange(...a)}
           selectedVote={this.state.selectedVote}
         />
