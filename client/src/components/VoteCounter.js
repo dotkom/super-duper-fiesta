@@ -7,7 +7,7 @@ const VoteCounter = ({ count, total, label }) => (
       { label } <span className={css.count}>({ count } / { total })</span>
     </div>
     <div className={css.bar}>
-      <div className={css.progress} style={{ width: `${(count / total) * 100}%` }} />
+      <div className={css.progress} style={{ width: total ? `${(count / total) * 100}%` : '0%' }} />
     </div>
   </div>
 );
