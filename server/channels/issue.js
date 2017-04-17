@@ -4,7 +4,6 @@ const logger = require('../logging');
 
 const addIssue = require('../models/issue').addIssue;
 const endIssue = require('../models/issue').endIssue;
-const getUserByUsername = require('../models/user').getUserByUsername;
 
 module.exports = (socket) => {
   socket.on('action', (data) => {
@@ -17,6 +16,7 @@ module.exports = (socket) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
           emit(socket, 'OPEN_ISSUE', question, { action: 'open' });
           broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
+          broadcast(socket, 'ENABLE_VOTING');
         }).catch((err) => {
           logger.error('Adding new question failed.', err);
           emit(socket, 'issue', {}, {
@@ -36,6 +36,7 @@ module.exports = (socket) => {
           });
         }).then((updatedIssue) => {
           logger.info('closed issue', { issue: issue.id, response: updatedIssue._id }); // eslint-disable-line no-underscore-dangle
+          broadcast(socket, 'DISABLE_VOTING');
           broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
           emit(socket, 'CLOSE_ISSUE', updatedIssue);
         });

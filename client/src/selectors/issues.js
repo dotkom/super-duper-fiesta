@@ -16,6 +16,16 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
   return defaultValue;
 };
 
+export const getConcludedIssues = state => (
+  state.issues && Object.keys(state.issues)
+    .filter(issue => !state.issues[issue].active)
+    .map(issue => state.issues[issue])
+    .reduce((a, b) => ({
+      ...a,
+      [b.id]: b,
+    }), {})
+);
+
 export const getIssueText = state => getKeyForIssueObjIfExists(state, 'text', 'Ingen aktiv sak for øyeblikket.');
 export const getIssueId = state => getKeyForIssueObjIfExists(state, 'id', '');
 export const getIssueKey = (state, key, defaultValue) => getKeyForIssueObjIfExists(state, key, defaultValue);
