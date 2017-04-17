@@ -9,7 +9,7 @@ class ConcludedIssue extends React.Component {
   // Maps over alternatives to see if any of them got majority vote
   static calculateMajority(alternatives, votes, voteDemand) {
     let majority = false;
-    const numTotalVotes = votes.length > 0 ? votes.length : 1;
+    const numTotalVotes = Object.keys(votes).length;
     alternatives.forEach((alternative) => {
       if (Object.keys(votes)
         .map(key => votes[key])
@@ -31,6 +31,16 @@ class ConcludedIssue extends React.Component {
         props.voteDemand,
       ),
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      majority: ConcludedIssue.calculateMajority(
+        nextProps.alternatives,
+        nextProps.votes,
+        nextProps.voteDemand,
+      ),
+    });
   }
 
   render() {
@@ -73,7 +83,7 @@ ConcludedIssue.defaultProps = {
   alternatives: [],
   votes: {},
   voteDemand: 0,
-  text: 'noCase',
+  text: 'Denne saken har ingen tittel.',
 };
 
 ConcludedIssue.propTypes = {

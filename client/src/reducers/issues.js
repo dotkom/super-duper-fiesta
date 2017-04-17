@@ -43,9 +43,6 @@ const issue = (state = {}, action, currentIssue) => {
     }
 
     case RECEIVE_VOTE: {
-      if (state.id !== currentIssue || state.id !== action.issueId) {
-        return state;
-      }
       const voter = action.voter;
 
       return Object.assign({}, state, {
