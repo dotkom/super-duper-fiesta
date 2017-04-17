@@ -18,6 +18,16 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 - Bootstrap the database by running `node server/init.js`.
 - Run `npm start`.
 
+### Instructions (production)
+
+- `npm install`
+- `npm run build:prod`
+- Make sure the relevant environment variables are set
+  - `NODE_EN=production`
+  - `PRODUCTION=true`
+  - Any other required variables, see the [configuration section](#configuration)
+- `npm start` (or `node server/app.js`)
+
 #### Other requirements
 
 - All code is to be linted according to the specification listed in `.eslintrc`.
@@ -50,11 +60,35 @@ This will be emitted on the `action` channel and be passed on to the reducers in
 
 ## Configuration
 
-### ExpressJS
+Most of the configuration of this app is done using environment variables.
+
+(Tip: Use a tool like "autoenv" to automatically set environment variables upon entering a project directory.)
+
+Linux, MacOS:
+
+Current terminal:  
+- `export VARIABLE_NAME=VARIABLE_VALUE`
+
+To persist the changes, look into a tool like "autoenv" as mentioned earlier, or set them in `~/.profile` (not recommended...).
+
+Windows: 
+
+Current terminal:  
+- `set VARIABLE_NAME=VARIABLE_VALUE`
+
+Current user (permanent):  
+- `setx VARIABLE_NAME VARIABLE_VALUE`
+
+### General
 
 | Key | Description | Example | Default |
 | --- | ---         | ---     | ---     |
 | `PRODUCTION` | Run the app in production mode | `true` | `''` |
+
+### ExpressJS
+
+| Key | Description | Example | Default |
+| --- | ---         | ---     | ---     |
 | `SDF_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
 | `SDF_PORT` | Port to run the app on | `3000` | `3000` |
 | `SDF_SCHEME` | HTTP Scheme to run the app on | `http` | `http` |
@@ -80,7 +114,6 @@ To configure the app to use the OAuth2 provider, set the following values using 
 | `SDF_OAUTH2_CLIENT_SECRET` | Client secret for app | `client secret` | `''` |
 | `SDF_OAUTH2_CALLBACK_URL` | Callback URL to the app | `http://127.0.0.1:3000/auth` | `''` |
 
-(Tip: Use a tool like "autoenv" to automatically set environment variables upon entering a project directory.)
 
 _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
