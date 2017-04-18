@@ -5,6 +5,7 @@ const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const getQuestions = require('../models/issue').getQuestions;
 const getVotes = require('../models/vote').getVotes;
+const generatePublicVote = require('../models/vote').generatePublicVote;
 const haveIVoted = require('../models/vote').haveIVoted;
 
 const emitNoActiveIssue = (socket) => {
@@ -49,8 +50,8 @@ const connection = (socket) => {
           // Issue is active, let's emit already given votes.
           getVotes(issue)
           .then((votes) => {
-            votes.forEach((vote) => {
-              emit(socket, 'ADD_VOTE', vote);
+            votes.forEach(async (vote) => {
+              emit(socket, 'ADD_VOTE', await generatePublicVote(issue, vote));
             });
           })
           .catch((err) => {

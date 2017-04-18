@@ -15,11 +15,11 @@ export const submitRegularVote = (issue, alternative) => ({
   alternative,
 });
 
-export const submitAnonymousVote = (issue, alternative, voterKey) => ({
+export const submitAnonymousVote = (issue, alternative, passwordHash) => ({
   type: SUBMIT_ANONYMOUS_VOTE,
   issue,
   alternative,
-  voterKey,
+  passwordHash,
 });
 
 export const receiveVote = vote => ({

@@ -18,6 +18,7 @@ const issue = (state = {}, action, currentIssue) => {
         qualifiedVoters: action.data.qualifiedVoters,
         votes: {},
         resolutionType: action.resolutionType,
+        secret: action.data.secret,
         voteDemand: action.data.voteDemand,
       };
     }

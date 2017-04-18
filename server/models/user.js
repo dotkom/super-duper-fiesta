@@ -155,6 +155,7 @@ function setCanVote(user, targetUser) {
 module.exports = {
   addUser,
   addAnonymousUser,
+  getAnonymousUser,
   getUsers,
   getUserById,
   getUserByUsername,

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitRegularVote } from '../../actionCreators/voting';
+import Cookies from 'js-cookie';
+import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { getIssueId } from '../../selectors/issues';
+import { getIssue, getIssueId } from '../../selectors/issues';
 import { getOwnVote } from '../../selectors/voting';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
@@ -14,7 +15,6 @@ class VotingMenu extends React.Component {
     this.state = {
       selectedVote: this.props.votedState.alternative,
     };
-
   }
 
   handleChange(event) {
@@ -108,21 +108,29 @@ const mapStateToProps = state => ({
 
   // The ID, or undefined, if there is no current issue.
   issueId: getIssueId(state),
+  issue: getIssue(state),
 
   votedState: getOwnVote(state, state.auth.id),
   voterKey: state.voterKey,
   loggedIn: state.auth.loggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleVote: (id, alternative) => {
-    dispatch(submitRegularVote(id, alternative));
-  },
-});
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+  return {
+    ...ownProps,
+    ...stateProps,
+    handleVote: (issue, alternative) => {
+      dispatch(stateProps.issue.secret ?
+        submitAnonymousVote(issue, alternative, Cookies.get('passwordHash')) : submitRegularVote(issue, alternative));
+    },
+  };
+};
 
 
 export default VotingMenu;
 export const VotingMenuContainer = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
+  mergeProps,
 )(VotingMenu);
