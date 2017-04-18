@@ -26,7 +26,7 @@ const go = () => {
           voteDemand: (3 / 4),
         }).then((issue) => {
           logger.debug('Issue done', issue.description);
-          Vote.addVote(issue, object.user, 0).then((vote) => {
+          Vote.addVote(issue, object.user, 0).then(() => {
             logger.debug('vote: done');
             Issue.endIssue(issue, object.user).then(() => {
               logger.debug('Ended issue');

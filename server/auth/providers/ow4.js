@@ -74,5 +74,5 @@ passport.use(new OAuth2Strategy(
     }).catch((err) => {
       cb(err, null, null);
     });
-  }
+  } // eslint-disable-line comma-dangle
 ));
