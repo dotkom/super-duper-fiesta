@@ -54,6 +54,7 @@ const addWebpackMiddlewares = (app) => {
       res.set('Content-Type', 'text/html');
       res.send(result);
       res.end();
+      return null;
     });
   });
 };
