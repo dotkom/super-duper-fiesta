@@ -57,4 +57,4 @@ export const getResolutionTypeDisplay = (voteDemand) => {
         voteDemandText: '0',
       };
   }
-}
+};

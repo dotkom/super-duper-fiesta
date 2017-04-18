@@ -69,7 +69,7 @@ class Setup extends Component {
     const errorMessage = this.validate();
     return (
       <Card classes={css.setup} title="Registrering for generalforsamling">
-        <form onSubmit={(e) => this.submit(e)}>
+        <form onSubmit={e => this.submit(e)}>
           <label>
             <div className={css.text}>Pin kode</div>
             <input
