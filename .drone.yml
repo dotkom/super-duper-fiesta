@@ -7,8 +7,8 @@ pipeline:
       event: pull_request
     commands:
       - npm install --depth=0 --quiet
-      - ./node_modules/.bin/webpack
-      - ./node_modules/.bin/eslint client/src/ server/
+      - npm run build:prod
+      - npm run lint
 
 services:
   mongo:
