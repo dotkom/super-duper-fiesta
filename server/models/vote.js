@@ -16,10 +16,7 @@ const Vote = mongoose.model('Vote', VoteSchema);
 
 
 function getVotes(question) {
-  if (!question.active || !question.secret) {
-    return Vote.find({ question }).exec();
-  }
-  return null;
+  return Vote.find({ question });
 }
 
 function haveIVoted(question, user, anonymousUser) {
@@ -46,9 +43,9 @@ function addVote(issueId, user, option, anonymousUser) {
   return new Promise((resolve, reject) => {
     getIssueById(issueId)
     .then((issue) => {
-      logger.debug('Storing vote.', { issueId, user: user.onlinewebId, anonymousUser });
+      logger.debug('Storing vote.', { issueId, user: user.onlinewebId, anonymous: !!anonymousUser });
       if (!issue.active) {
-        logger.warn('Tried to vote on inactive issue!', { issueId, user: user.onlinewebId, anonymousUser });
+        logger.warn('Tried to vote on inactive issue!', { issueId, user: user.onlinewebId });
         reject();
         return;
       }
@@ -56,7 +53,8 @@ function addVote(issueId, user, option, anonymousUser) {
       canEdit(permissionLevel.CAN_VOTE, user, issue.genfors).then(() => {
         haveIVoted(issueId, user, anonymousUser).then(() => {
           const vote = new Vote({
-            user: user._id, // eslint-disable-line no-underscore-dangle
+            // eslint-disable-next-line no-underscore-dangle
+            user: anonymousUser || user._id, // anonymousUser if provided, otherwise regular User.
             question: issueId,
             option,
           });
@@ -83,8 +81,26 @@ function addVote(issueId, user, option, anonymousUser) {
   });
 }
 
+const getPublicVote = (vote, secret, showOnlyWinner) => ({
+  _id: vote._id, // eslint-disable-line no-underscore-dangle
+  question: vote.question,
+  user: (showOnlyWinner || secret) ? {} : vote.user,
+  option: showOnlyWinner ? {} : vote.option,
+});
+
+const generatePublicVote = async (id, vote) => {
+  let issue;
+  if (typeof id === 'string') {
+    issue = await getIssueById(id);
+  } else issue = id;
+
+  return getPublicVote(vote, issue.secret, issue.showOnlyWinner);
+};
+
 module.exports = {
   addVote,
+  generatePublicVote,
+  getPublicVote,
   getVotes,
   haveIVoted,
 };
