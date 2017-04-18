@@ -10,7 +10,7 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
   <div className={css.status}>
     <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
 
-    {alternatives && alternatives.map((alternative, i) =>
+    {alternatives && alternatives.map(alternative =>
       <VoteCounter
         label={alternative.text}
         count={votePercentages[alternative.id]}

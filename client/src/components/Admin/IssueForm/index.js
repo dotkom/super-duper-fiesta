@@ -191,8 +191,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createIssue: (description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes) => {
-    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner, secretElection, countBlankVotes));
+  createIssue: (description, alternatives, voteDemand, showOnlyWinner,
+    secretElection, countBlankVotes) => {
+    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner,
+      secretElection, countBlankVotes));
   },
 });
 

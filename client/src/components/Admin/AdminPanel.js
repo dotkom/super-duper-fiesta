@@ -15,11 +15,6 @@ class AdminPanel extends React.Component {
       showRegistrationDialog: false,
       openRegistration: false,
     };
-
-  }
-
-  endGAM() {
-    // This should close the general annual meeting.
   }
 
   openRegistrationDialog() {
@@ -46,10 +41,20 @@ class AdminPanel extends React.Component {
 
     return (
       <div>
-        <Dialog visible={this.state.showRegistrationDialog} onClose={(...a) => this.closeRegistrationDialog(...a)} title={registrationText}>
+        <Dialog
+          visible={this.state.showRegistrationDialog}
+          onClose={(...a) => this.closeRegistrationDialog(...a)}
+          title={registrationText}
+        >
           <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
-          <Button background onClick={(...a) => this.confirmRegistrationDialog(...a)}>Bekreft</Button>
-          <Button background onClick={(...a) => this.closeRegistrationDialog(...a)}>Avbryt</Button>
+          <Button
+            background
+            onClick={(...a) => this.confirmRegistrationDialog(...a)}
+          >Bekreft</Button>
+          <Button
+            background
+            onClick={(...a) => this.closeRegistrationDialog(...a)}
+          >Avbryt</Button>
         </Dialog>
         <Heading link="/admin/" title="Generalforsamling adminpanel">
           <Link to="/admin/question"><Button>Ny sak</Button></Link>

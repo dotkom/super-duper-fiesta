@@ -9,12 +9,18 @@ const Dialog = ({ visible, title, onClose, children }) => {
   });
   return (
     <div className={dialogClass}>
-      <div onClick={onClose} className={css.backdrop} />
+      <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+        onClick={onClose}
+        className={css.backdrop}
+      />
       <Card
         classes={css.dialog}
         title={title}
         corner={
-          <div onClick={onClose} className={css.close} />
+          <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+            onClick={onClose}
+            className={css.close}
+          />
         }
       >
         {children}
@@ -34,6 +40,7 @@ Dialog.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Dialog;
