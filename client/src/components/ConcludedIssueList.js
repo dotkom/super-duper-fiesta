@@ -13,7 +13,7 @@ const ConcludedIssueList = ({ issues }) => (
 );
 
 ConcludedIssueList.propTypes = {
-  issues: PropTypes.shape({}).isRequired,
+  issues: PropTypes.shape(ConcludedIssue.propTypes).isRequired,
 };
 
 export default ConcludedIssueList;

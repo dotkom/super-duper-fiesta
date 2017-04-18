@@ -3,6 +3,7 @@ const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
+const getQuestions = require('../models/issue').getQuestions;
 const getVotes = require('../models/vote').getVotes;
 const haveIVoted = require('../models/vote').haveIVoted;
 
@@ -67,6 +68,23 @@ const connection = (socket) => {
       }).catch((err) => {
         logger.error('Getting currently active issue failed.', err);
         emitNoActiveIssue(socket);
+      });
+      // Fill backlog of old issues too
+      getQuestions(meeting).then((issues) => {
+        issues.forEach((issue) => {
+          emit(socket, 'CLOSE_ISSUE', issue);
+          // Get votes for backlogged issues
+          getVotes(issue).then((votes) => {
+            votes.forEach((vote) => {
+              emit(socket, 'ADD_VOTE', vote);
+            });
+          }).catch((err) => {
+            // eslint-disable-next-line no-underscore-dangle
+            logger.error('Getting votes for issue failed', err, { issueId: issue._id });
+          });
+        });
+      }).catch((err) => {
+        logger.error('Getting issue backlog failed', err);
       });
     }
   }).catch((err) => {

@@ -3,6 +3,7 @@ import { RECEIVE_VOTE } from '../actionTypes/voting';
 
 const issue = (state = {}, action, currentIssue) => {
   switch (action.type) {
+    case CLOSE_ISSUE:
     case OPEN_ISSUE: {
       return {
         id: action.data._id, // eslint-disable-line no-underscore-dangle
@@ -42,9 +43,6 @@ const issue = (state = {}, action, currentIssue) => {
     }
 
     case RECEIVE_VOTE: {
-      if (state.id !== currentIssue || state.id !== action.issueId) {
-        return state;
-      }
       const voter = action.voter;
 
       return Object.assign({}, state, {
