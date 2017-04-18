@@ -1,0 +1,18 @@
+
+FROM node:boron
+
+ENV APP_DIR=/srv/app
+ENV PRODUCTION=true
+
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+RUN ./node_modules/.bin/webpack
+
+EXPOSE 3000
+
+CMD ["npm","run","prod"]

@@ -10,7 +10,8 @@
     "build:prod": "webpack --config webpack.config.production.js",
     "dev": "node server/app.js",
     "lint": "eslint client/src/ server/",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "prod": "node server/app.js"
   },
   "dependencies": {
     "array-shuffle": "^1.0.1",

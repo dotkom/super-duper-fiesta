@@ -1,0 +1,9 @@
+
+FROM node:boron
+
+ENV APP_DIR=/srv/app
+
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
+
+EXPOSE 3000

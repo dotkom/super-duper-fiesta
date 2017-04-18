@@ -26,6 +26,9 @@ export const getConcludedIssues = state => (
     }), {})
 );
 
-export const getIssueText = state => getKeyForIssueObjIfExists(state, 'text', 'Ingen aktiv sak for øyeblikket.');
-export const getIssueId = state => getKeyForIssueObjIfExists(state, 'id', '');
-export const getIssueKey = (state, key, defaultValue) => getKeyForIssueObjIfExists(state, key, defaultValue);
+export const getIssueText = state =>
+  getKeyForIssueObjIfExists(state, 'text', 'Ingen aktiv sak for øyeblikket.');
+export const getIssueId = state =>
+  getKeyForIssueObjIfExists(state, 'id', '');
+export const getIssueKey = (state, key, defaultValue) =>
+  getKeyForIssueObjIfExists(state, key, defaultValue);

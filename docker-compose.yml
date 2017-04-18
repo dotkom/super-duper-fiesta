@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  mongo:  
+    image: mongo:latest
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
+
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: super-duper-fiesta
+    depends_on:
+      - mongo
+    command: npm start
+    links:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      SDF_HOST: 0.0.0.0
+      SDF_DATABASE_URL: mongodb://mongo:27017/sdf
+    volumes:
+      - .:/srv/app/
+    tty: true
+    stdin_open: true

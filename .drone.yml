@@ -1,0 +1,37 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    when:
+      event: pull_request
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
+  test:
+    image: node:boron
+    environment:
+      SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
+    when:
+      event: pull_request
+    commands:
+      - npm install --depth=0 --quiet
+      - npm run build:prod
+      - npm run lint
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    when:
+      event: pull_request
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

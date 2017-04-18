@@ -1,4 +1,5 @@
 /* This is used to bootstrap a database for this project */
+/* eslint no-console: 0 */
 
 const mongoose = require('mongoose');
 

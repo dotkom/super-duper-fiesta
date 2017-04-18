@@ -63,56 +63,6 @@ const issue = (state = {}, action, currentIssue) => {
   }
 };
 
-const defaultIssues = [{
-  _id: 0,
-  text: 'Trump',
-  alternatives: [{
-    _id: 0,
-    text: 'yes',
-  }],
-
-  votes: [],
-
-  voteDemand: 0.5,
-  isActive: false,
-}, {
-  _id: 1,
-  text: 'YO hello this is long text',
-  alternatives: [{
-    _id: 0,
-    text: 'yes',
-  }, {
-    _id: 1,
-    text: 'yes',
-  }, {
-    _id: 2,
-    text: 'yes',
-  }],
-
-  votes: [],
-
-  voteDemand: 0.5,
-  isActive: false,
-}, {
-  _id: 2,
-  text: 'Half-giant jinxes peg-leg gillywater broken glasses large black dog Great Hall. Nearly-Headless Nick now string them together, and answer me this, which creature would you be unwilling to kiss? Poltergeist sticking charm, troll umbrella stand flying cars golden locket Lily Potter. Pumpkin juice Trevor wave your wand out glass orbs, a Grim knitted hats. Stan Shunpike doe patronus, suck his soul Muggle-Born large order of drills the trace. Bred in captivity fell through the veil, quaffle blue flame ickle diddykins Aragog. Yer a wizard, Harry Doxycide the woes of Mrs. Weasley Goblet of Fire',
-  alternatives: [{
-    _id: 0,
-    text: 'Yes',
-  }, {
-    _id: 1,
-    text: 'No',
-  }, {
-    _id: 2,
-    text: 'I don\'t like voting',
-  }],
-
-  votes: [],
-
-  voteDemand: 0.5,
-  isActive: false,
-}];
-
 const issues = (state = {}, action) => {
   switch (action.type) {
     case CLOSE_ISSUE:
