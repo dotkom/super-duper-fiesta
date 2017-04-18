@@ -20,7 +20,7 @@ const QuestionSchema = new Schema({
   secret: { type: Boolean, default: false },
   showOnlyWinner: { type: Boolean, default: true },
   countingBlankVotes: { type: Boolean, default: true },
-  voteDemand: { type: Number, required: true },
+  voteDemand: { type: String, required: true }, // Either "regular" or "qualified".
   qualifiedVoters: Number,
   currentVotes: { type: Number, default: 0 },
   result: Boolean,

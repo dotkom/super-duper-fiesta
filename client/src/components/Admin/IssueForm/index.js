@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../Button';
 import { createIssue } from '../../../actionCreators/adminButtons';
+import { RESOLUTION_TYPES } from '../../../actionTypes/voting';
 import { activeIssueExists } from '../../../selectors/issues';
 import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
@@ -34,7 +35,7 @@ class IssueForm extends React.Component {
       secretVoting: false,
       showOnlyWinner: false,
       countBlankVotes: false,
-      voteDemand: 1 / 2,
+      voteDemand: RESOLUTION_TYPES.regular.key,
       questionType: MULTIPLE_CHOICE,
     };
   }
