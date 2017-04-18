@@ -1,4 +1,14 @@
 pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    when:
+      event: pull_request
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
   test:
     image: node:boron
     environment:
@@ -9,6 +19,16 @@ pipeline:
       - npm install --depth=0 --quiet
       - npm run build:prod
       - npm run lint
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    when:
+      event: pull_request
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
 
 services:
   mongo:
