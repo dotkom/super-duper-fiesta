@@ -5,18 +5,25 @@ const logger = require('../logging');
 const addIssue = require('../models/issue').addIssue;
 const endIssue = require('../models/issue').endIssue;
 
+const {
+  ADMIN_CLOSE_ISSUE,
+  ADMIN_CREATE_ISSUE,
+} = require('../../common/actionTypes/adminButtons');
+const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
+const { DISABLE_VOTING, ENABLE_VOTING } = require('../../common/actionTypes/voting');
+
 module.exports = (socket) => {
   socket.on('action', (data) => {
     const payload = data.data;
     logger.debug('issue payload', { payload, action: data.type });
     switch (data.type) {
-      case 'server/ADMIN_CREATE_ISSUE':
+      case ADMIN_CREATE_ISSUE:
         addIssue(payload)
         .then((question) => {
           logger.debug('Added new question. Broadcasting ...', { question: question.description });
-          emit(socket, 'OPEN_ISSUE', question, { action: 'open' });
-          broadcast(socket, 'OPEN_ISSUE', question, { action: 'open' });
-          broadcast(socket, 'ENABLE_VOTING');
+          emit(socket, OPEN_ISSUE, question, { action: 'open' });
+          broadcast(socket, OPEN_ISSUE, question, { action: 'open' });
+          broadcast(socket, ENABLE_VOTING);
         }).catch((err) => {
           logger.error('Adding new question failed.', err);
           emit(socket, 'issue', {}, {
@@ -24,7 +31,7 @@ module.exports = (socket) => {
           });
         });
         break;
-      case 'server/ADMIN_CLOSE_ISSUE': {
+      case ADMIN_CLOSE_ISSUE: {
         const user = socket.request.user;
         const issue = payload.issue;
         logger.info('Closing issue.', {
@@ -44,9 +51,9 @@ module.exports = (socket) => {
             issue: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
             response: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
           });
-          broadcast(socket, 'DISABLE_VOTING');
-          broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
-          emit(socket, 'CLOSE_ISSUE', updatedIssue);
+          broadcast(socket, DISABLE_VOTING);
+          broadcast(socket, CLOSE_ISSUE, updatedIssue);
+          emit(socket, CLOSE_ISSUE, updatedIssue);
         });
         break;
       }
