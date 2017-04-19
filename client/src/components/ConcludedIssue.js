@@ -92,10 +92,10 @@ ConcludedIssue.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   })),
-  votes: PropTypes.shape({
+  votes: PropTypes.objectOf(PropTypes.shape({
     alternative: PropTypes.string.isRequired,
     voter: PropTypes.string.isRequired,
-  }),
+  })),
   voteDemand: PropTypes.oneOfType(
     [PropTypes.number, PropTypes.string]), // Kept for backwards compatibility. 'oldResolutionTypes'
   text: PropTypes.string,
