@@ -64,7 +64,7 @@ const getOrInsertIssue = (genfors) => {
     if (!user || (user && user.name !== 'admin')) {
       // No admin user found, add one.
       console.log('Adding admin user account.');
-      addUser('admin', 'admin', 'beautifulhash', permissionLevel.IS_SUPERUSER).then(() => {
+      addUser('admin', 'admin', permissionLevel.IS_SUPERUSER).then(() => {
         console.log('Admin account created.');
         createIssue(genfors);
       }).catch((err) => {
