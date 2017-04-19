@@ -54,7 +54,11 @@ ConcludedIssue.propTypes = {
     _id: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired,
   })).isRequired,
-  votes: React.PropTypes.objectOf(React.PropTypes.string),
+  votes: React.PropTypes.objectOf(React.PropTypes.shape({
+    id: React.PropTypes.string.isRequired,
+    alternative: React.PropTypes.string,
+    voter: React.PropTypes.string,
+  })),
 };
 
 
