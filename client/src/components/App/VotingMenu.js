@@ -13,7 +13,7 @@ class VotingMenu extends React.Component {
     super(props);
 
     this.state = {
-      selectedVote: this.props.votedState.alternative,
+      selectedVote: this.props.selectedAlternative,
     };
   }
 
@@ -37,7 +37,7 @@ class VotingMenu extends React.Component {
   render() {
     const isLoggedIn = this.props.loggedIn;
     const hasSelectedVote = this.state.selectedVote !== undefined;
-    const hasVoted = !!this.props.votedState.alternative;
+    const hasVoted = !!this.props.selectedAlternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
 
     return (
@@ -61,11 +61,11 @@ class VotingMenu extends React.Component {
             background
             size="lg"
             onClick={() => this.setState({
-              selectedVote: this.state.selectedVote === this.props.votedState.alternative ?
-                undefined : this.props.votedState.alternative,
+              selectedVote: this.state.selectedVote === this.props.selectedAlternative ?
+                undefined : this.props.selectedAlternative,
             })}
           >
-            {this.state.selectedVote === this.props.votedState.alternative ?
+            {this.state.selectedVote === this.props.selectedAlternative ?
               'Skjul min stemme' : 'Vis min stemme'}
           </Button> : ''
         }
@@ -78,10 +78,7 @@ VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
   issueId: '',
-  votedState: {
-    alternative: undefined,
-    voter: undefined,
-  },
+  selectedAlternative: null,
 };
 
 VotingMenu.propTypes = {
@@ -89,11 +86,7 @@ VotingMenu.propTypes = {
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
   loggedIn: React.PropTypes.bool.isRequired,
-
-  votedState: React.PropTypes.shape({
-    alternative: React.PropTypes.string,
-    voter: React.PropTypes.string,
-  }),
+  selectedAlternative: React.PropTypes.string,
   voterKey: React.PropTypes.number,
 };
 
@@ -110,7 +103,9 @@ const mapStateToProps = state => ({
   issueId: getIssueId(state),
   issue: getIssue(state),
 
-  votedState: getOwnVote(state, state.auth.id),
+  selectedAlternative: getOwnVote(state, state.auth.id)
+    && getOwnVote(state, state.auth.id).alternative,
+
   voterKey: state.voterKey,
   loggedIn: state.auth.loggedIn,
 });
