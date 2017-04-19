@@ -1,3 +1,9 @@
+.issue {
+  flex-grow: 4;
+  display: flex;
+  flex-basis: 20rem;
+}
+
 .content {
   display: flex;
   flex-flow: row wrap;
