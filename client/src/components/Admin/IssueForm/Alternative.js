@@ -119,7 +119,10 @@ Alternative.propTypes = {
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
-  alternatives: PropTypes.objectOf(React.PropTypes.string).isRequired,
+  alternatives: PropTypes.objectOf(PropTypes.shape({
+    text: PropTypes.string,
+    id: PropTypes.number,
+  })).isRequired,
 };
 
 export default Alternative;

@@ -48,16 +48,16 @@ ConcludedIssue.propTypes = {
   voteDemand: PropTypes.oneOfType(
     [PropTypes.number, PropTypes.string]), // Kept for backwards compatibility. 'oldResolutionTypes'
   majority: PropTypes.bool.isRequired,
-  text: React.PropTypes.string.isRequired,
-  alternatives: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.string.isRequired,
-    _id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  alternatives: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
   })).isRequired,
-  votes: React.PropTypes.objectOf(React.PropTypes.shape({
-    id: React.PropTypes.string.isRequired,
-    alternative: React.PropTypes.string,
-    voter: React.PropTypes.string,
+  votes: PropTypes.objectOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    alternative: PropTypes.string,
+    voter: PropTypes.string,
   })),
 };
 

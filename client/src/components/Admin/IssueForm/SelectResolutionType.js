@@ -18,7 +18,7 @@ const SelectResolutionType = ({ resolutionType, handleResolutionTypeChange }) =>
 
 SelectResolutionType.propTypes = {
   handleResolutionTypeChange: PropTypes.func.isRequired,
-  resolutionType: PropTypes.number.isRequired,
+  resolutionType: PropTypes.string.isRequired,
 };
 
 export default SelectResolutionType;

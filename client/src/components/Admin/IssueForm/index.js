@@ -31,7 +31,7 @@ class IssueForm extends React.Component {
 
     this.state = {
       issueDescription: '',
-      alternatives: [],
+      alternatives: {},
       secretVoting: false,
       showOnlyWinner: false,
       countBlankVotes: false,

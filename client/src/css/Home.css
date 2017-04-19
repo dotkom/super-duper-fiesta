@@ -9,6 +9,8 @@
 }
 
 .voteWrapper {
+  display: flex;
   flex-grow: 4;
   flex-basis: 20rem;
+  flex-direction: column;
 }

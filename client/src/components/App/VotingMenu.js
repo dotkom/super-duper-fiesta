@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { getIssue, getIssueId } from '../../selectors/issues';
+import { activeIssueExists, getIssue, getIssueId } from '../../selectors/issues';
 import { getOwnVote } from '../../selectors/voting';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
@@ -36,9 +36,11 @@ class VotingMenu extends React.Component {
 
   render() {
     const isLoggedIn = this.props.loggedIn;
+    const hasActiveIssue = this.props.issueIsActive;
     const hasSelectedVote = this.state.selectedVote !== undefined;
     const hasVoted = !!this.props.selectedAlternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
+    const buttonHidden = !hasActiveIssue;
 
     return (
       <div>
@@ -53,6 +55,7 @@ class VotingMenu extends React.Component {
           size="lg"
           onClick={() => this.handleClick()}
           disabled={buttonDisabled}
+          hidden={buttonHidden}
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
@@ -85,6 +88,7 @@ VotingMenu.propTypes = {
   alternatives: Alternatives.propTypes.alternatives,
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
+  issueIsActive: React.PropTypes.bool.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   selectedAlternative: React.PropTypes.string,
   voterKey: React.PropTypes.number,
@@ -108,6 +112,8 @@ const mapStateToProps = state => ({
 
   voterKey: state.voterKey,
   loggedIn: state.auth.loggedIn,
+
+  issueIsActive: activeIssueExists(state),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
