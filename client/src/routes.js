@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
 import { AppContainer } from './components/App/';
-import AppHome from './components/App/Home';
+import { HomeContainer as AppHomeContainer } from './components/App/Home';
 import { SetupContainer } from './components/App/Setup';
 import { AdminPanelContainer } from './components/Admin/AdminPanel';
 import AdminHome from './components/Admin/Home';
@@ -15,7 +15,7 @@ const Routes = ({ store, browserHistory }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-        <IndexRoute component={AppHome} />
+        <IndexRoute component={AppHomeContainer} />
         <Route path="register" component={SetupContainer} />
       </Route>
 
