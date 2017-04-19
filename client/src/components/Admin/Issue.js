@@ -7,22 +7,20 @@ import { adminCloseIssue } from '../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
 import css from './Issue.css';
 
-const Issue = ({ closeIssue, allowClosing, issueText }) => (
+const Issue = ({ closeIssue, issueIsActive, issueText }) => (
   <Card classes={css.issue}>
     <div className={css.content}>
       <div>
         <Pin code="DEADBEEF" />
         <p className={css.title}>Aktiv sak</p>
       </div>
-      <div className={css.actions}>
+      {issueIsActive && <div className={css.actions}>
         <ButtonIconText text="Rediger" iconClass={css.edit} />
         <ButtonIconText text="Resett" iconClass={css.reset} />
-        <ButtonIconText
-          onClick={closeIssue} hidden={!allowClosing}
-          text="Avslutt" iconClass={css.end}
-        />
+        <ButtonIconText text="Avslutt" iconClass={css.end} onClick={closeIssue} />
         <ButtonIconText text="Slett" iconClass={css.delete} />
       </div>
+      }
     </div>
     <p>{issueText}</p>
   </Card>
@@ -30,12 +28,12 @@ const Issue = ({ closeIssue, allowClosing, issueText }) => (
 
 Issue.propTypes = {
   closeIssue: React.PropTypes.func.isRequired,
-  allowClosing: React.PropTypes.bool.isRequired,
+  issueIsActive: React.PropTypes.bool.isRequired,
   issueText: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  allowClosing: activeIssueExists(state),
+  issueIsActive: activeIssueExists(state),
   issueText: getIssueText(state),
   issue: getIssue(state),
 });
