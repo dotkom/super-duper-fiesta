@@ -1,11 +1,4 @@
-export const DISABLE_VOTING = 'DISABLE_VOTING';
-export const ENABLE_VOTING = 'ENABLE_VOTING';
-export const RECEIVE_VOTE = 'ADD_VOTE';
-export const SUBMIT_ANONYMOUS_VOTE = 'server/SUBMIT_ANONYMOUS_VOTE';
-export const SUBMIT_REGULAR_VOTE = 'server/SUBMIT_REGULAR_VOTE';
-export const VOTING_STATE = 'VOTED_STATE';
-
-export const RESOLUTION_TYPES = {
+const RESOLUTION_TYPES = {
   regular: {
     key: 'regular',
     name: 'Alminnelig flertall',
@@ -34,7 +27,7 @@ export const RESOLUTION_TYPES = {
   },
 };
 
-export const getResolutionTypeDisplay = (voteDemand) => {
+const getResolutionTypeDisplay = (voteDemand) => {
   switch (voteDemand) {
     case RESOLUTION_TYPES.regular.key:
       return RESOLUTION_TYPES.regular;
@@ -57,4 +50,15 @@ export const getResolutionTypeDisplay = (voteDemand) => {
         voteDemandText: '0',
       };
   }
+};
+
+module.exports = {
+  DISABLE_VOTING: 'DISABLE_VOTING',
+  ENABLE_VOTING: 'ENABLE_VOTING',
+  RECEIVE_VOTE: 'ADD_VOTE',
+  SUBMIT_ANONYMOUS_VOTE: 'server/SUBMIT_ANONYMOUS_VOTE',
+  SUBMIT_REGULAR_VOTE: 'server/SUBMIT_REGULAR_VOTE',
+  VOTING_STATE: 'VOTED_STATE',
+  RESOLUTION_TYPES,
+  getResolutionTypeDisplay,
 };

@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export const ERROR_DISMISS = 'ERROR_DISMISS';
+module.exports = {
+  ERROR_DISMISS: 'ERROR_DISMISS',
+};
