@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../Button';
 import { createIssue } from '../../../actionCreators/adminButtons';
-import { RESOLUTION_TYPES } from '../../../actionTypes/voting';
+import { RESOLUTION_TYPES } from '../../../../../common/actionTypes/voting';
 import { activeIssueExists } from '../../../selectors/issues';
 import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';

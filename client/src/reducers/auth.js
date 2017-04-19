@@ -1,4 +1,4 @@
-import { AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED } from '../actionTypes/auth';
+import { AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED } from '../../../common/actionTypes/auth';
 
 const defaultState = {
   id: '',

@@ -1,4 +1,4 @@
-import { AUTH_SIGNED_OUT, AUTH_REGISTER } from '../actionTypes/auth';
+import { AUTH_SIGNED_OUT, AUTH_REGISTER } from '../../../common/actionTypes/auth';
 
 export const register = (pin, passwordHash) => ({
   type: AUTH_REGISTER,
