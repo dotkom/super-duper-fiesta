@@ -47,7 +47,7 @@ function endQuestion(question, user) {
     getActiveGenfors().then((genfors) => {
       canEdit(permissionLevel.IS_MANAGER, user, genfors).then((result) => {
         if (result === true) {
-          return Question.findByIdAndUpdate(question, { active: false })
+          return Question.findByIdAndUpdate(question, { active: false }, { new: true })
           .then(resolve).catch(reject);
         }
         reject(new Error('permission denied'));
