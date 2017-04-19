@@ -7,7 +7,7 @@ import { getConcludedIssues } from '../selectors/issues';
 // Maps over alternatives to see if any of them got majority vote
 const calculateMajority = (alternatives, votes, voteDemand) => {
   const numTotalVotes = Object.keys(votes).length;
-  return alternatives.any(alternative => Object.keys(votes)
+  return alternatives.some(alternative => Object.keys(votes)
     .map(key => votes[key])
     .filter(vote => vote.alternative === alternative.id)
     .length / numTotalVotes >= voteDemand,
@@ -31,10 +31,13 @@ const ConcludedIssueList = ({ issues }) => (
 );
 
 ConcludedIssueList.propTypes = {
-  issues: PropTypes.shape(ConcludedIssue.propTypes).isRequired,
+  issues: PropTypes.shape({
+    votes: React.PropTypes.objectOf(React.PropTypes.string),
+  }).isRequired,
 };
 
 export default ConcludedIssueList;
+
 const mapStateToProps = state => ({
   issues: state.votingEnabled ?
     getConcludedIssues(state) : state.issues,
