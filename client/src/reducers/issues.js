@@ -51,6 +51,7 @@ const issue = (state = {}, action, currentIssue) => {
           ...state.votes,
 
           [voter]: {
+            id: action.issueId,
             alternative: action.alternative,
             voter,
           },
