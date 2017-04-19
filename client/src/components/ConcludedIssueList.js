@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
+import Button from './Button';
 
 // Maps over alternatives to see if any of them got majority vote
 const calculateMajority = (alternatives, votes, voteDemand) => {
@@ -14,21 +15,51 @@ const calculateMajority = (alternatives, votes, voteDemand) => {
   );
 };
 
-const ConcludedIssueList = ({ issues }) => (
-  <div className={css.concludedIssueList}>
-    {Object.keys(issues).map(issue => (
-      <ConcludedIssue
-        key={issues[issue].id}
-        majority={calculateMajority(
-          issues[issue].alternatives,
-          issues[issue].votes,
-          issues[issue].voteDemand,
-        )}
-        {...issues[issue]}
-      />
-    ))}
-  </div>
-);
+class ConcludedIssueList extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      visible: false,
+    };
+  }
+
+  toggleVisibility() {
+    this.setState(prevState => ({
+      visible: !prevState.visible,
+    }));
+  }
+
+  render() {
+    const issues = this.props.issues;
+
+    return (
+      <div className={css.concludedIssueList}>
+        <Button
+          background
+          size="lg"
+          onClick={() => this.toggleVisibility()}
+        >
+          Vis avgjorte saker
+        </Button>
+
+        <div>
+          {this.state.visible && Object.keys(issues).map(issue => (
+            <ConcludedIssue
+              key={issues[issue].id}
+              majority={calculateMajority(
+                issues[issue].alternatives,
+                issues[issue].votes,
+                issues[issue].voteDemand,
+              )}
+              {...issues[issue]}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 ConcludedIssueList.propTypes = {
   issues: PropTypes.shape({
