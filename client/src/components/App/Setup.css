@@ -9,6 +9,10 @@
   margin: 2rem 0 0.5em 0;
 }
 
+.setup:not(:first-child) {
+  margin-top: 1rem;
+}
+
 .setup label:first-child .text {
   margin-top: 0.5rem;
 }
