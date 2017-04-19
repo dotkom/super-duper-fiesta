@@ -16,7 +16,10 @@ class Alternative extends React.Component {
   }
 
   handleAddAlternative() {
-    this.props.handleAddAlternative(this.state.alternativeText);
+    if (this.state.alternativeText.length > 0) {
+      this.props.handleAddAlternative(this.state.alternativeText);
+      this.setState({ alternativeText: '' });
+    }
   }
 
   handleAlternativeUpdate(event) {

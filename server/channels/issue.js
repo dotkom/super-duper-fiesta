@@ -27,7 +27,11 @@ module.exports = (socket) => {
       case 'server/ADMIN_CLOSE_ISSUE': {
         const user = socket.request.user;
         const issue = payload.issue;
-        logger.info('Closing issue.', { issue: issue.id, user: user.name });
+        logger.info('Closing issue.', {
+          description: issue.description,
+          issue: issue._id.toString(), // eslint-disable-line no-underscore-dangle
+          user: user.name,
+        });
         endIssue(issue, user)
         .catch((err) => {
           logger.error('closing issue failed', err);
@@ -35,7 +39,11 @@ module.exports = (socket) => {
             error: 'Closing issue failed',
           });
         }).then((updatedIssue) => {
-          logger.info('closed issue', { issue: issue.id, response: updatedIssue._id }); // eslint-disable-line no-underscore-dangle
+          logger.info('Closed issue.', {
+            description: updatedIssue.description,
+            issue: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
+            response: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
+          });
           broadcast(socket, 'DISABLE_VOTING');
           broadcast(socket, 'CLOSE_ISSUE', updatedIssue);
           emit(socket, 'CLOSE_ISSUE', updatedIssue);
