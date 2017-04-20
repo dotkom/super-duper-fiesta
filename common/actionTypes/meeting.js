@@ -1,3 +1,3 @@
 module.exports = {
-  OPEN_MEEETING: 'OPEN_MEETING',
+  OPEN_MEETING: 'OPEN_MEETING',
 };

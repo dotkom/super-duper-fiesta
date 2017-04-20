@@ -9,7 +9,7 @@ const generatePublicVote = require('../models/vote').generatePublicVote;
 const haveIVoted = require('../models/vote').haveIVoted;
 
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
-const { OPEN_MEEETING } = require('../../common/actionTypes/meeting');
+const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const {
   AUTH_REGISTERED,
   AUTH_SIGNED_IN,
@@ -49,9 +49,9 @@ const connection = (socket) => {
   }
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
-      emit(socket, OPEN_MEEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
+      emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
-      emit(socket, OPEN_MEEETING, meeting);
+      emit(socket, OPEN_MEETING, meeting);
       getActiveQuestion(meeting._id).then((issue) => { // eslint-disable-line no-underscore-dangle
         if (issue === null) {
           emitNoActiveIssue(socket);
