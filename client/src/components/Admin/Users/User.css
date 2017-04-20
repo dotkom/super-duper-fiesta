@@ -10,3 +10,37 @@
 .right {
   composes: right from './List.css';
 }
+
+.action {
+  display: inline;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #CCC;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.action:last-child {
+  margin-left: 0.5rem;
+}
+
+.action:focus {
+  outline: none;
+}
+
+.success {
+  composes: icon success from 'css/flaticon.css';
+}
+
+.close {
+  composes: icon close from 'css/flaticon.css';
+}
+
+.toggle.success {
+  color: #258573;
+}
+
+.toggle.close {
+  color: #c5493c;
+}
