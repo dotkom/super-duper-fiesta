@@ -9,7 +9,7 @@ const user = (state = {}, action) => {
 
       return {
         ...state,
-        canVote: !state.canVote,
+        canVote: action.data.canVote,
       };
     }
 

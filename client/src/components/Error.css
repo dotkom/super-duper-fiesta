@@ -1,8 +1,8 @@
 .error {
+  display: flex;
   background: #ca3939;
   padding: 0.5rem 1rem;
   color: #fee;
-  display: flex;
   justify-content: space-between;
 }
 

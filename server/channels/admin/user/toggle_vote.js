@@ -17,7 +17,7 @@ module.exports = (socket) => {
           currentCanVote: canVote,
           expectedCanVote: !canVote,
         });
-        updateUserById(userId, { canVote: !canVote }, { new: true })
+        updateUserById(userId, { canVote }, { new: true })
         .then((user) => {
           logger.debug('Updated canVote for user.', {
             adminUser: adminUser.name,

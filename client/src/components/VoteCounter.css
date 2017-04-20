@@ -23,7 +23,6 @@
 .count {
   margin-left: auto;
   min-width: 3rem;
-  flex-basis: auto;
   text-align: right;
   align-self: flex-end;
 }
