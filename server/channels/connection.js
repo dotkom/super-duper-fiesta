@@ -8,6 +8,7 @@ const getVotes = require('../models/vote').getVotes;
 const generatePublicVote = require('../models/vote').generatePublicVote;
 const haveIVoted = require('../models/vote').haveIVoted;
 
+const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEEETING } = require('../../common/actionTypes/meeting');
 const {
@@ -30,7 +31,11 @@ const emitNoActiveIssue = (socket) => {
   });
 };
 
+// eslint-disable-next-line global-require
+const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
+
 const connection = (socket) => {
+  emit(socket, VERSION, { version: APP_VERSION });
   const loggedIn = socket.request.user.logged_in;
   if (loggedIn) {
     const user = socket.request.user;
