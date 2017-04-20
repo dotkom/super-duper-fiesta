@@ -30,6 +30,7 @@
 .close {
   font-size: 2rem;
   composes: icon close from 'css/flaticon.css';
+  padding-left: 1rem;
 }
 
 .close:hover {
