@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import IconText from './IconText';
 import Card from './Card';
-import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../actionTypes/voting';
+import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import css from './ConcludedIssue.css';
 
 const ConcludedIssue = ({ majority, voteDemand, text, alternatives, votes }) => (

@@ -1,4 +1,4 @@
-import { ADMIN_CREATE_ISSUE, ADMIN_CLOSE_ISSUE, TOGGLE_REGISTRATION } from '../actionTypes/adminButtons';
+import { ADMIN_CREATE_ISSUE, ADMIN_CLOSE_ISSUE, TOGGLE_REGISTRATION } from '../../../common/actionTypes/adminButtons';
 
 export const toggleRegistration = () => ({
   type: TOGGLE_REGISTRATION,

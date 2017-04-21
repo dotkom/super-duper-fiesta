@@ -3,11 +3,12 @@ const { validatePin } = require('../models/meeting');
 const { addAnonymousUser } = require('../models/user');
 const logger = require('../logging');
 
+const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
 
 module.exports = (socket) => {
   async function action(data) {
     switch (data.type) {
-      case 'server/AUTH_REGISTER': {
+      case AUTH_REGISTER: {
         const { pin, passwordHash } = data;
         const username = socket.request.user.onlinewebId;
         if (!await validatePin(pin)) {
@@ -23,7 +24,7 @@ module.exports = (socket) => {
           break;
         }
         logger.silly('Successfully registered', { username });
-        emit(socket, 'AUTH_REGISTERED', {});
+        emit(socket, AUTH_REGISTERED, {});
         break;
       }
       default:

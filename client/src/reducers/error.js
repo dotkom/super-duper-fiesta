@@ -1,4 +1,4 @@
-import { ERROR_DISMISS } from '../actionTypes/error';
+import { ERROR_DISMISS } from '../../../common/actionTypes/error';
 
 const errorReducer = (state = null, action) => {
   const { type, error, data } = action;
