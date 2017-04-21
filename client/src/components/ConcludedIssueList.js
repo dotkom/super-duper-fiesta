@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Fuse from 'fuse.js';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
@@ -20,6 +21,7 @@ class ConcludedIssueList extends React.Component {
     super();
 
     this.state = {
+      filter: '',
       visible: false,
     };
   }
@@ -31,8 +33,16 @@ class ConcludedIssueList extends React.Component {
   }
 
   render() {
-    const issues = this.props.issues;
     const { visible } = this.state;
+    // Issues is obj, need to make list and parse back to obj afterwards.
+    const issues = this.state.filter.length ? new Fuse(this.props.issues, {
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ['text'],
+    }).search(this.state.filter) : this.props.issues;
 
     return (
       <div>
@@ -43,6 +53,13 @@ class ConcludedIssueList extends React.Component {
         >
           {visible ? 'Skjul' : 'Vis'} konkluderte saker
         </Button>
+        {visible && <span
+          className={css.filter}
+          value={this.state.filter}
+          onChange={e => this.setState({ filter: e.target.value })}
+        >
+          <input placeholder="Filtrer saker" />
+        </span>}
         <div className={css.concludedIssueList}>
           {this.state.visible && Object.keys(issues).map(issue => (
             <ConcludedIssue
