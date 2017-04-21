@@ -8,6 +8,14 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
     [css.canNotVote]: !canVote,
   });
   const registeredDate = moment(registered);
+  const successToggle = classNames(
+    css.success,
+    { [css.toggle]: canVote },
+  );
+  const closeToggle = classNames(
+    css.close,
+    { [css.toggle]: !canVote },
+  );
   return (
     <tr className={userClass}>
       <td className={css.left}>{name}</td>
@@ -15,11 +23,12 @@ const User = ({ id, name, registered, canVote, toggleCanVote }) => {
         {registeredDate.format('LLL')} ({registeredDate.fromNow()})
       </td>
       <td className={css.right}>
-        <input
-          type="checkbox"
-          onChange={() => toggleCanVote(id, canVote)}
-          checked={canVote}
-        />
+        <button className={css.action} onClick={() => toggleCanVote(id, true)}>
+          <div className={successToggle} />
+        </button>
+        <button className={css.action} onClick={() => toggleCanVote(id, false)}>
+          <div className={closeToggle} />
+        </button>
       </td>
     </tr>
   );

@@ -4,13 +4,13 @@
 }
 
 .content {
-  padding: 1rem;
-  margin: 0 auto;
-  max-width: 64rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 64rem;
 }
 
 .content a {

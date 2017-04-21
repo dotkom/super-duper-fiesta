@@ -1,6 +1,5 @@
 .concludedIssue {
-  flex-grow: 1;
-  flex-basis: 25rem;
+  flex: 1 25rem;
   margin: 0.5rem;
 }
 
