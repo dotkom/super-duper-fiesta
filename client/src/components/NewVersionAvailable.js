@@ -5,6 +5,7 @@ import css from './NewVersionAvailable.css';
 const NewVersionAvailable = ({ newVersionAvailable }) => (
   <Dialog
     onClose={() => { window.location.href = '.'; }}
+    hideCloseSymbol
     title="En ny versjon av applikasjonen er tilgjengelig"
     visible={newVersionAvailable}
   >
