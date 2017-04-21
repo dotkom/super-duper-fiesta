@@ -40,7 +40,7 @@ class ConcludedIssueList extends React.Component {
           size="lg"
           onClick={() => this.toggleVisibility()}
         >
-          Vis avgjorte saker
+          Vis konkluderte saker
         </Button>
         <div className={css.concludedIssueList}>
           {this.state.visible && Object.keys(issues).map(issue => (
