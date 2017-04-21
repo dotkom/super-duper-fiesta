@@ -34,7 +34,7 @@ class ConcludedIssueList extends React.Component {
     const issues = this.props.issues;
 
     return (
-      <div className={css.concludedIssueList}>
+      <div>
         <Button
           background
           size="lg"
@@ -42,8 +42,7 @@ class ConcludedIssueList extends React.Component {
         >
           Vis avgjorte saker
         </Button>
-
-        <div>
+        <div className={css.concludedIssueList}>
           {this.state.visible && Object.keys(issues).map(issue => (
             <ConcludedIssue
               key={issues[issue].id}
