@@ -39,13 +39,10 @@ const connection = (socket) => {
       full_name: user.name,
       logged_in: user.logged_in,
       id: user._id, // eslint-disable-line no-underscore-dangle
+      completedRegistration: user.completedRegistration,
     });
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
-  }
-  const completedRegistration = socket.request.user.completedRegistration;
-  if (completedRegistration) {
-    emit(socket, AUTH_REGISTERED, {});
   }
   getActiveGenfors().then((meeting) => {
     if (!meeting) {
