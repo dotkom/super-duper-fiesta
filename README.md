@@ -20,6 +20,29 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 
 ### Instructions (production)
 
+#### Docker
+
+This is an example of a docker command to run super-duper-fiesta in production.
+
+`docker build -f Dockerfile.prod -t sdf_prod .`
+
+```
+docker run \
+  -p 3000:3000 \
+  -e SDF_OAUTH2_RESOURCE_BACKEND \
+  -e SDF_OAUTH2_PROVIDER_BACKEND \
+  -e SDF_OAUTH2_CLIENT_ID \
+  -e SDF_OAUTH2_CLIENT_SECRET \
+  -e SDF_OAUTH2_CALLBACK_URL \
+  -e SDF_DATABASE_URL=mongodb://path_to_db/sdf \
+  -e SDF_HOST=0.0.0.0 \
+  --name sdf_prod \
+  --rm \
+  sdf_prod
+```
+
+#### Other
+
 - `npm install`
 - `npm run build:prod`
 - Make sure the relevant environment variables are set

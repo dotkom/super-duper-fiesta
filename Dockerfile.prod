@@ -1,5 +1,5 @@
 
-FROM node:boron
+FROM node:7.9-alpine
 
 ENV APP_DIR=/srv/app
 ENV PRODUCTION=true
@@ -7,11 +7,13 @@ ENV PRODUCTION=true
 RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 
+RUN apk --no-cache --update add git
+
 COPY package.json .
 RUN npm install
 
 COPY . .
-RUN ./node_modules/.bin/webpack
+RUN npm run build:prod
 
 EXPOSE 3000
 
