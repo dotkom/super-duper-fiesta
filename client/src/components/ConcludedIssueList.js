@@ -36,13 +36,13 @@ class ConcludedIssueList extends React.Component {
 
     return (
       <div>
-        <Button
+        {Object.keys(issues).length > 0 && <Button
           background
           size="lg"
           onClick={() => this.toggleVisibility()}
         >
           {visible ? 'Skjul' : 'Vis'} konkluderte saker
-        </Button>
+        </Button>}
         <div className={css.concludedIssueList}>
           {this.state.visible && Object.keys(issues).map(issue => (
             <ConcludedIssue
