@@ -11,7 +11,6 @@ const haveIVoted = require('../models/vote').haveIVoted;
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const {
-  AUTH_REGISTERED,
   AUTH_SIGNED_IN,
   AUTH_SIGNED_OUT,
 } = require('../../common/actionTypes/auth');
