@@ -41,6 +41,17 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  deploy:
+    image: plugins/ssh
+    host: nansen.online.ntnu.no
+    port: 22
+    user: root
+    when:
+      branch: master
+      event: push
+    script:
+      - /bin/systemd restart super-duper-fiesta.service
+
 services:
   mongo:
     image: mongo:latest
