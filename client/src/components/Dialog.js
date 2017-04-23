@@ -7,6 +7,11 @@ const Dialog = ({ visible, title, onClose, children, hideCloseSymbol }) => {
   const dialogClass = classNames(css.component, {
     [css.visible]: visible,
   });
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+  const corner = !hideCloseSymbol && <div
+    onClick={onClose}
+    className={css.close}
+  />;
   return (
     <div className={dialogClass}>
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -16,13 +21,7 @@ const Dialog = ({ visible, title, onClose, children, hideCloseSymbol }) => {
       <Card
         classes={css.dialog}
         title={title}
-        corner={
-          <div // eslint-disable-line jsx-a11y/no-static-element-interactions
-            onClick={onClose}
-            className={css.close}
-            hidden={hideCloseSymbol}
-          />
-        }
+        corner={corner}
       >
         {children}
       </Card>
