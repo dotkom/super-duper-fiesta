@@ -1,3 +1,7 @@
 .reloadPageLink {
   text-decoration: none;
 }
+
+.reloadPageText {
+  padding-bottom: inherit;
+}

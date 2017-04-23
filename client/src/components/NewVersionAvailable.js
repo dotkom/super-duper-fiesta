@@ -8,7 +8,7 @@ const NewVersionAvailable = ({ newVersionAvailable }) => (
     title="En ny versjon av applikasjonen er tilgjengelig"
     visible={newVersionAvailable}
   >
-    <p>
+    <p className={css.reloadPageText}>
       <a href="." className={css.reloadPageLink}>
         Klikk her for å laste inn siden på nytt.
       </a>
