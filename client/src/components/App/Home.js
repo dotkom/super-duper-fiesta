@@ -10,7 +10,7 @@ import css from '../../css/Home.css';
 
 const Home = ({ issueExists, registered }) => (
   <div>
-    { !registered && <Redirect to="/register" />}
+    { registered === false && <Redirect to="/register" />}
     <div className={css.components}>
       <div className={css.voteWrapper}>
         <IssueContainer />

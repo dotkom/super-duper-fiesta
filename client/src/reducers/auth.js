@@ -4,8 +4,6 @@ const defaultState = {
   id: '',
   username: '',
   fullName: '',
-  loggedIn: false,
-  registered: false,
 };
 
 const auth = (state = defaultState, action) => {
