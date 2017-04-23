@@ -1,39 +1,28 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { AppContainer } from './components/App/';
-import { HomeContainer as AppHomeContainer } from './components/App/Home';
-import { SetupContainer } from './components/App/Setup';
 import { AdminPanelContainer } from './components/Admin/AdminPanel';
-import AdminHome from './components/Admin/Home';
-import { IssueFormContainer } from './components/Admin/IssueForm';
-import Users from './components/Admin/Users';
-import NotFound from './components/NotFound';
 import './css/base.css';
 
-const Routes = ({ store, browserHistory }) => (
+const Routes = ({ store }) => (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={AppContainer}>
-        <IndexRoute component={AppHomeContainer} />
-        <Route path="register" component={SetupContainer} />
-      </Route>
-
-      { /* We might want to split this up into two seperate apps */ }
-      <Route path="admin" component={AdminPanelContainer}>
-        <IndexRoute component={AdminHome} />
-        <Route path="question" component={IssueFormContainer} />
-        <Route path="users" component={Users} />
-      </Route>
-
-      <Route path="*" component={NotFound} />
+    <Router>
+      <Switch>
+        { /* We might want to split this up into two seperate apps */ }
+        <Route path="/admin" component={AdminPanelContainer} />
+        <Route path="/" component={AppContainer} />
+      </Switch>
     </Router>
   </Provider>
 );
 
 Routes.propTypes = {
   store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  browserHistory: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Routes;

@@ -1,8 +1,13 @@
 import React, { PropTypes } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { HomeContainer as AppHomeContainer } from './Home';
+import { SetupContainer } from './Setup';
 import Button from '../Button';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
+import NotFound from '../NotFound';
+
 
 const App = props => (
   <div>
@@ -14,7 +19,11 @@ const App = props => (
     </Heading>
     <main>
       <ErrorContainer />
-      {props.children}
+      <Switch>
+        <Route exact path={`${props.match.path}register`} component={SetupContainer} />
+        <Route exact path={props.match.path} component={AppHomeContainer} />
+        <Route component={NotFound} />
+      </Switch>
     </main>
   </div>
   );
@@ -23,13 +32,16 @@ App.defaultProps = {
   fullName: '',
   loggedIn: false,
   title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
+  match: null,
 };
 
 App.propTypes = {
   fullName: PropTypes.string,
   loggedIn: PropTypes.bool,
   title: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  match: PropTypes.objectOf(PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = state => ({
