@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import version from './version';
 import auth from './auth';
 import issues from './issues';
 import meeting from './meeting';
@@ -18,6 +19,7 @@ const votingApp = combineReducers({
   registrationEnabled,
   userFilter,
   users,
+  version,
   error,
 });
 
