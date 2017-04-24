@@ -13,6 +13,12 @@ import css from './index.css';
 
 const MULTIPLE_CHOICE = 'MULTIPLE_CHOICE';
 
+const DEFAULT_ALTERNATIVES = [
+  {
+    text: 'Blank',
+  },
+];
+
 const YES_NO_ANSWERS = [
   {
     id: 0,
@@ -83,6 +89,8 @@ class IssueForm extends React.Component {
     } else {
       issueAlternatives = YES_NO_ANSWERS;
     }
+
+    DEFAULT_ALTERNATIVES.forEach(alternative => issueAlternatives.push(alternative));
 
     this.props.createIssue(
       this.state.issueDescription,
