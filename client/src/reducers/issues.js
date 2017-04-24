@@ -1,4 +1,4 @@
-import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE } from '../../../common/actionTypes/issues';
+import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from '../../../common/actionTypes/issues';
 import { RECEIVE_VOTE } from '../../../common/actionTypes/voting';
 
 const issue = (state = {}, action, currentIssue) => {
@@ -72,6 +72,18 @@ const issues = (state = {}, action) => {
       return Object.assign({}, state, {
         [issueId]: issue(undefined, action),
       });
+    }
+    case DELETED_ISSUE: {
+      const deletedIssueId = action.data._id; // eslint-disable-line no-underscore-dangle
+      return Object.keys(state).reduce((result, issueId) => {
+        if (issueId !== deletedIssueId) {
+          return {
+            ...result,
+            [issueId]: state[issueId],
+          };
+        }
+        return result;
+      }, {});
     }
     case RECEIVE_VOTE:
     case SEND_VOTE: {

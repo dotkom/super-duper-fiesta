@@ -15,7 +15,7 @@ const QuestionSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: true },
   description: { type: String, required: true },
   active: { type: Boolean, default: true },
-  deleted: { type: Boolean, default: false },
+  deleted: { type: Boolean, required: true, default: false },
   options: [AlternativeSchema],
   secret: { type: Boolean, default: false },
   showOnlyWinner: { type: Boolean, default: true },
@@ -29,16 +29,16 @@ const Question = mongoose.model('Question', QuestionSchema);
 
 
 function getQuestions(genfors) {
-  return Question.find({ genfors }).exec();
+  return Question.find({ genfors, deleted: false }).exec();
 }
 const getIssueById = id => (
   Question.findOne({ _id: id })
 );
 function getActiveQuestion(genfors) {
-  return Question.findOne({ genfors, active: true });
+  return Question.findOne({ genfors, active: true, deleted: false });
 }
 function getClosedQuestions(genfors) {
-  return Question.find({ genfors, active: false }).exec();
+  return Question.find({ genfors, active: false, deleted: false }).exec();
 }
 
 function endQuestion(question, user) {
@@ -107,6 +107,15 @@ function addQuestion(issueData, closeCurrentIssue) {
   });
 }
 
+async function deleteIssue(issue, user) {
+  const genfors = await getActiveGenfors();
+  const userCanEdit = await canEdit(permissionLevel.IS_MANAGER, user, genfors);
+  if (userCanEdit) {
+    return Question.findByIdAndUpdate(issue, { active: false, deleted: true }, { new: true });
+  }
+  return null;
+}
+
 module.exports = {
   addIssue: addQuestion,
   getActiveQuestion,
@@ -115,4 +124,5 @@ module.exports = {
   getQuestions,
   endIssue: endQuestion,
   // updateQuestionCounter,
+  deleteIssue,
 };
