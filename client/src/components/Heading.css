@@ -17,6 +17,10 @@
   text-decoration: none;
 }
 
+.content a, .content button {
+  display: inline-block;
+}
+
 .content button {
   cursor: pointer;
   margin: 0;
