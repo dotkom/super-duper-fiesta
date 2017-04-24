@@ -87,7 +87,7 @@ class IssueForm extends React.Component {
         text: alternatives[id].text,
       }));
     } else {
-      issueAlternatives = YES_NO_ANSWERS;
+      issueAlternatives = YES_NO_ANSWERS.slice();
     }
 
     DEFAULT_ALTERNATIVES.forEach(alternative => issueAlternatives.push(alternative));
