@@ -143,5 +143,20 @@ _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, rem
 
 ## WIP Screenshots
 
-![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
+### Front page, no active issue
 
+![https://i.imgur.com/hzqz3KN.png](https://i.imgur.com/hzqz3KN.png)
+
+
+### Front page, active issue
+
+![https://i.imgur.com/ZnwjXwR.png](https://i.imgur.com/ZnwjXwR.png)
+
+### Admin page, overview
+
+![https://i.imgur.com/6D5XOXd.png](https://i.imgur.com/6D5XOXd.png)
+
+
+### Admin page, user administration
+
+![https://i.imgur.com/x4bgoJT.png](https://i.imgur.com/x4bgoJT.png)
