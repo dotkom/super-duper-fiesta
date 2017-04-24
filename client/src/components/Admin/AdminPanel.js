@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import AdminHome from './Home';
 import { IssueFormContainer } from './IssueForm';
 import Users from './Users';
@@ -39,12 +39,15 @@ class AdminPanel extends React.Component {
   }
 
   render() {
-    const { match, registrationEnabled } = this.props;
+    const { match, registrationEnabled, userPermissions } = this.props;
+    const permissionDenied = !userPermissions || userPermissions < 10;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
     return (
       <div>
+        {permissionDenied &&
+          <Redirect to="/" />}
         <Dialog
           visible={this.state.showRegistrationDialog}
           onClose={(...a) => this.closeRegistrationDialog(...a)}
@@ -86,10 +89,12 @@ AdminPanel.propTypes = {
   match: PropTypes.objectOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
   })).isRequired,
+  userPermissions: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ registrationEnabled }) => ({
+const mapStateToProps = ({ registrationEnabled, userPermissions }) => ({
   registrationEnabled,
+  userPermissions,
 });
 
 const mapDispatchToProps = dispatch => ({
