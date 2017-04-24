@@ -50,7 +50,7 @@ pipeline:
       branch: master
       event: push
     script:
-      - /bin/systemd restart super-duper-fiesta.service
+      - /bin/systemctl restart super-duper-fiesta.service
 
 services:
   mongo:
