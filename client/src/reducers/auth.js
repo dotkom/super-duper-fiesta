@@ -4,6 +4,7 @@ const defaultState = {
   id: '',
   username: '',
   fullName: '',
+  permissions: 0,
 };
 
 const auth = (state = defaultState, action) => {
@@ -16,6 +17,7 @@ const auth = (state = defaultState, action) => {
         loggedIn: action.data.logged_in,
         registered: action.data.completedRegistration,
         id: action.data.id,
+        permissions: action.data.permissions,
       };
     }
 

@@ -44,6 +44,7 @@ const connection = (socket) => {
       logged_in: user.logged_in,
       id: user._id, // eslint-disable-line no-underscore-dangle
       completedRegistration: user.completedRegistration,
+      permissions: user.permissions,
     });
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
