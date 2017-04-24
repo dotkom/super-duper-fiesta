@@ -130,10 +130,9 @@ class IssueForm extends React.Component {
       && this.state.issueDescription.length;
     return (
       <div className={css.form}>
-        <p
+        {showActiveIssueWarning && <p
           className={css.warning}
-          hidden={!showActiveIssueWarning}
-        >Det er allerede en aktiv sak!</p>
+        >Det er allerede en aktiv sak!</p>}
         {redirectToAdminHome &&
           <Redirect to="/admin" />}
         <label className={css.textarea}>
