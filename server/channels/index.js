@@ -50,6 +50,7 @@ module.exports.listen = (server, mongooseConnection) => {
       issue(socket);
       userlist(socket);
       toggleCanVote(socket);
+      meeting(socket);
     }
   });
 };
