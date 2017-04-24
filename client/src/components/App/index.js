@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HomeContainer as AppHomeContainer } from './Home';
 import { SetupContainer } from './Setup';
@@ -42,9 +42,9 @@ class App extends React.Component {
             <Button>Logg {loggedIn ? 'ut' : 'inn'}</Button>
           </a>
           {userIsManager &&
-            <a href="/admin">
-              Tellekorps
-            </a>}
+            <Link to="/admin">
+              <Button>Tellekorps</Button>
+            </Link>}
         </Heading>
         <main>
           <NewVersionAvailable newVersionAvailable={newVersionAvailable} />
