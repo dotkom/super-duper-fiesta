@@ -36,7 +36,7 @@ Issue.propTypes = {
   issueIsActive: React.PropTypes.bool.isRequired,
   issueText: React.PropTypes.string.isRequired,
   pin: React.PropTypes.number,
-  registrationOpen: React.PropTypes.boolean,
+  registrationOpen: React.PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
