@@ -18,7 +18,8 @@ module.exports = (socket) => {
     switch (data.type) {
       case SUBMIT_REGULAR_VOTE:
         logger.debug('Received vote', { userFullName: socket.request.user.name });
-        addVote(data.issue, socket.request.user, data.alternative)
+        // eslint-disable-next-line no-underscore-dangle
+        addVote(data.issue, socket.request.user, data.alternative, socket.request.user._id)
         .then(async (vote) => {
           logger.debug('Stored new vote. Broadcasting ...');
           emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
@@ -35,7 +36,8 @@ module.exports = (socket) => {
         const genfors = await getActiveGenfors();
         const anonymousUser = await getAnonymousUser(data.passwordHash,
           socket.request.user.onlinewebId, genfors);
-        addVote(data.issue, socket.request.user, data.alternative, anonymousUser)
+        // eslint-disable-next-line no-underscore-dangle
+        addVote(data.issue, socket.request.user, data.alternative, anonymousUser._id)
         .then(async (vote) => {
           logger.debug('Stored new anonymous vote. Broadcasting ...');
           emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
@@ -43,7 +45,7 @@ module.exports = (socket) => {
         }).catch((err) => {
           logger.error('Storing new anonymous vote failed.', err);
           emit(socket, SEND_VOTE, {}, {
-            error: 'Storing vote failed.',
+            error: err.message,
           });
         });
         break;

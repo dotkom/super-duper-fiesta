@@ -23,35 +23,21 @@ const issue = (state = {}, action, currentIssue) => {
       };
     }
 
+    case RECEIVE_VOTE:
     case SEND_VOTE: {
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
       if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
+      const voteId = action.id;
       const voter = action.voter;
 
       return Object.assign({}, state, {
         votes: {
           ...state.votes,
 
-          [voter]: {
-            alternative: action.alternative,
-            voter,
-          },
-        },
-      });
-    }
-
-    case RECEIVE_VOTE: {
-      const voter = action.voter;
-
-      return Object.assign({}, state, {
-        votes: {
-          ...state.votes,
-
-          [voter]: {
-            id: action.issueId,
+          [voteId]: {
             alternative: action.alternative,
             voter,
           },
@@ -93,6 +79,7 @@ const issues = (state = {}, action) => {
         issueId,
         alternative: action.data.option,
         voter: action.data.user,
+        id: action.data._id, // eslint-disable-line no-underscore-dangle
       };
       return Object.assign({}, state, {
         [issueId]: issue(state[issueId], updatedAction, issueId),
