@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import AdminHome from './Home';
 import { IssueFormContainer } from './IssueForm';
 import Users from './Users';
@@ -41,44 +41,48 @@ class AdminPanel extends React.Component {
 
   render() {
     const { match, registrationEnabled, userPermissions } = this.props;
-    const permissionDenied = !userPermissions || userPermissions < IS_MANAGER;
+    const permissionDenied = userPermissions < IS_MANAGER;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
     return (
       <div>
-        {permissionDenied &&
-          <Redirect to="/" />}
-        <Dialog
-          visible={this.state.showRegistrationDialog}
-          onClose={(...a) => this.closeRegistrationDialog(...a)}
-          title={registrationText}
-        >
-          <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
-          <Button
-            background
-            onClick={(...a) => this.confirmRegistrationDialog(...a)}
-          >Bekreft</Button>
-          <Button
-            background
-            onClick={(...a) => this.closeRegistrationDialog(...a)}
-          >Avbryt</Button>
-        </Dialog>
-        <Heading link="/admin/" title="Generalforsamling adminpanel">
-          <Link to="/admin/question"><Button>Ny sak</Button></Link>
-          <Button onClick={(...a) => this.openRegistrationDialog(...a)}>{registrationText}</Button>
-          <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
-          <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
-        </Heading>
-        <main>
-          <ErrorContainer />
-          <Switch>
-            <Route exact path={`${match.path}/question`} component={IssueFormContainer} />
-            <Route exact path={`${match.path}/users`} component={Users} />
-            <Route exact path={match.path} component={AdminHome} />
-            <Route component={NotFound} />
-          </Switch>
-        </main>
+        {permissionDenied ?
+          <Route component={NotFound} /> :
+          <div>
+            <Dialog
+              visible={this.state.showRegistrationDialog}
+              onClose={(...a) => this.closeRegistrationDialog(...a)}
+              title={registrationText}
+            >
+              <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
+              <Button
+                background
+                onClick={(...a) => this.confirmRegistrationDialog(...a)}
+              >Bekreft</Button>
+              <Button
+                background
+                onClick={(...a) => this.closeRegistrationDialog(...a)}
+              >Avbryt</Button>
+            </Dialog>
+            <Heading link="/admin/" title="Generalforsamling adminpanel">
+              <Link to="/admin/question"><Button>Ny sak</Button></Link>
+              <Button
+                onClick={(...a) => this.openRegistrationDialog(...a)}
+              >{registrationText}</Button>
+              <Link to="/admin/users"><Button>Brukeradmin</Button></Link>
+              <Button onClick={(...a) => this.endGAM(...a)}>Avslutt</Button>
+            </Heading>
+            <main>
+              <ErrorContainer />
+              <Switch>
+                <Route exact path={`${match.path}/question`} component={IssueFormContainer} />
+                <Route exact path={`${match.path}/users`} component={Users} />
+                <Route exact path={match.path} component={AdminHome} />
+                <Route component={NotFound} />
+              </Switch>
+            </main>
+          </div>}
       </div>
     );
   }
@@ -93,9 +97,9 @@ AdminPanel.propTypes = {
   userPermissions: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ registrationEnabled, userPermissions }) => ({
-  registrationEnabled,
-  userPermissions,
+const mapStateToProps = state => ({
+  registrationEnabled: state.registrationEnabled,
+  userPermissions: state.auth.permissions,
 });
 
 const mapDispatchToProps = dispatch => ({

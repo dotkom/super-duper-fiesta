@@ -7,6 +7,7 @@ import Button from '../Button';
 import Heading from '../Heading';
 import NewVersionAvailable from '../NewVersionAvailable';
 import { ErrorContainer } from '../Error';
+import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 
 class App extends React.Component {
@@ -30,8 +31,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { fullName, loggedIn, title, match } = this.props;
+    const { fullName, loggedIn, title, match, userPermissions } = this.props;
     const { newVersionAvailable } = this.state;
+    const userIsManager = userPermissions >= IS_MANAGER;
     return (
       <div>
         <Heading link="/" title={title}>
@@ -39,6 +41,10 @@ class App extends React.Component {
           <a href={loggedIn ? '/logout' : '/login'}>
             <Button>Logg {loggedIn ? 'ut' : 'inn'}</Button>
           </a>
+          {userIsManager &&
+            <a href="/admin">
+              Tellekorps
+            </a>}
         </Heading>
         <main>
           <NewVersionAvailable newVersionAvailable={newVersionAvailable} />
@@ -69,6 +75,7 @@ App.propTypes = {
   match: PropTypes.objectOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
   })).isRequired,
+  userPermissions: PropTypes.number.isRequired,
   version: PropTypes.string,
 };
 
@@ -76,6 +83,7 @@ const mapStateToProps = state => ({
   fullName: state.auth.fullName,
   loggedIn: state.auth.loggedIn,
   title: state.meeting.title,
+  userPermissions: state.auth.permissions,
   version: state.version,
 });
 
