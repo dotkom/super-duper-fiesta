@@ -1,5 +1,5 @@
 const { emit } = require('../utils');
-const { validatePin } = require('../models/meeting');
+const { getActiveGenfors, validatePin } = require('../models/meeting');
 const { addAnonymousUser, validatePasswordHash } = require('../models/user');
 const logger = require('../logging');
 
@@ -11,6 +11,11 @@ module.exports = (socket) => {
       case AUTH_REGISTER: {
         const { pin, passwordHash } = data;
         const username = socket.request.user.onlinewebId;
+        const genfors = await getActiveGenfors();
+        if (!genfors.registrationOpen) {
+          emit(socket, 'AUTH_ERROR', { error: 'Registreringen er ikke åpen.' });
+          break;
+        }
         if (!await validatePin(pin)) {
           logger.silly('User failed pin code', { username, pin });
           emit(socket, 'AUTH_ERROR', { error: 'Feil pinkode' });
