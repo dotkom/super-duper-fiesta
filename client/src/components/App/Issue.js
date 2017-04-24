@@ -10,6 +10,7 @@ const Issue = ({ text }) => (
     subtitle="Aktiv sak"
   >
     <p>{text}</p>
+    {text === Issue.defaultProps.text && <div className={css.loader} />}
   </Card>
 );
 

@@ -20,6 +20,29 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 
 ### Instructions (production)
 
+#### Docker
+
+This is an example of a docker command to run super-duper-fiesta in production.
+
+`docker build -f Dockerfile.prod -t sdf_prod .`
+
+```
+docker run \
+  -p 3000:3000 \
+  -e SDF_OAUTH2_RESOURCE_BACKEND \
+  -e SDF_OAUTH2_PROVIDER_BACKEND \
+  -e SDF_OAUTH2_CLIENT_ID \
+  -e SDF_OAUTH2_CLIENT_SECRET \
+  -e SDF_OAUTH2_CALLBACK_URL \
+  -e SDF_DATABASE_URL=mongodb://path_to_db/sdf \
+  -e SDF_HOST=0.0.0.0 \
+  --name sdf_prod \
+  --rm \
+  sdf_prod
+```
+
+#### Other
+
 - `npm install`
 - `npm run build:prod`
 - Make sure the relevant environment variables are set
@@ -120,5 +143,20 @@ _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, rem
 
 ## WIP Screenshots
 
-![https://i.imgur.com/KhoXBZ8.png](https://i.imgur.com/KhoXBZ8.png)
+### Front page, no active issue
 
+![https://i.imgur.com/hzqz3KN.png](https://i.imgur.com/hzqz3KN.png)
+
+
+### Front page, active issue
+
+![https://i.imgur.com/ZnwjXwR.png](https://i.imgur.com/ZnwjXwR.png)
+
+### Admin page, overview
+
+![https://i.imgur.com/6D5XOXd.png](https://i.imgur.com/6D5XOXd.png)
+
+
+### Admin page, user administration
+
+![https://i.imgur.com/x4bgoJT.png](https://i.imgur.com/x4bgoJT.png)

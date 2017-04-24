@@ -36,7 +36,7 @@ module.exports = (socket) => {
         const issue = payload.issue;
         logger.info('Closing issue.', {
           description: issue.description,
-          issue: issue._id.toString(), // eslint-disable-line no-underscore-dangle
+          issue: issue.toString(), // eslint-disable-line no-underscore-dangle
           user: user.name,
         });
         endIssue(issue, user)

@@ -8,6 +8,15 @@ pipeline:
       - ./node_modules
     volumes:
       - /tmp/cache:/cache
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    when:
+      event: pull_request
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
 
   test:
     image: node:boron
@@ -19,16 +28,30 @@ pipeline:
       - npm install --depth=0 --quiet
       - npm run build:prod
       - npm run lint
-
-  rebuild-cache:
-    image: drillster/drone-volume-cache
+  
+  build:
+    image: docker
     when:
-      event: pull_request
-    rebuild: true
-    mount:
-      - ./node_modules
+      branch: master
+      event: push
+    commands:
+      - docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD registry.online.ntnu.no
+      - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod .
+      - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
     volumes:
-      - /tmp/cache:/cache
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  deploy:
+    image: plugins/ssh
+    host: nansen.online.ntnu.no
+    port: 22
+    user: root
+    when:
+      branch: master
+      event: push
+    script:
+      - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
+      - /bin/systemctl restart super-duper-fiesta.service
 
 services:
   mongo:
