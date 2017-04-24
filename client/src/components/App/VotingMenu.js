@@ -38,7 +38,7 @@ class VotingMenu extends React.Component {
     const isLoggedIn = this.props.loggedIn;
     const hasActiveIssue = this.props.issueIsActive;
     const hasSelectedVote = !!this.state.selectedVote;
-    const hasVoted = !!this.props.selectedAlternative;
+    const hasVoted = !!this.props.selectedAlternative || this.props.voted;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
     const buttonHidden = !hasActiveIssue;
 
@@ -59,7 +59,7 @@ class VotingMenu extends React.Component {
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
-        {hasVoted ?
+        {hasVoted && this.props.selectedAlternative ?
           <Button
             background
             size="lg"
@@ -83,6 +83,7 @@ VotingMenu.defaultProps = {
   issueId: '',
   loggedIn: undefined,
   selectedAlternative: null,
+  voted: false,
 };
 
 VotingMenu.propTypes = {
@@ -93,6 +94,7 @@ VotingMenu.propTypes = {
   loggedIn: React.PropTypes.bool,
   selectedAlternative: React.PropTypes.string,
   voterKey: React.PropTypes.number,
+  voted: React.PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
@@ -115,6 +117,7 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn,
 
   issueIsActive: activeIssueExists(state),
+  voted: state.voting.voted,
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
