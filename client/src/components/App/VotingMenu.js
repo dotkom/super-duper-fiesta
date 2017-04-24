@@ -37,7 +37,7 @@ class VotingMenu extends React.Component {
   render() {
     const isLoggedIn = this.props.loggedIn;
     const hasActiveIssue = this.props.issueIsActive;
-    const hasSelectedVote = this.state.selectedVote !== undefined;
+    const hasSelectedVote = !!this.state.selectedVote;
     const hasVoted = !!this.props.selectedAlternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
     const buttonHidden = !hasActiveIssue;
