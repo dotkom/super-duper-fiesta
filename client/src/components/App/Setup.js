@@ -79,9 +79,9 @@ class Setup extends Component {
           hideCloseSymbol
           onClose={() => { window.location.href = '/'; }}
           title={'En feil har oppstått'}
+          subtitle={'Du er allerede registrert'}
           visible={registered}
         >
-          <h3>Du er allerede registrert</h3>
           <p className={css.dialog}>
             Du vil nå bli videresent til forsiden.
             Dersom det ikke skjer automatisk, <a href="/">trykk her</a>.
