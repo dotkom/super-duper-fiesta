@@ -7,7 +7,7 @@ const getQuestions = require('../models/issue').getQuestions;
 const getVotes = require('../models/vote').getVotes;
 const generatePublicVote = require('../models/vote').generatePublicVote;
 const haveIVoted = require('../models/vote').haveIVoted;
-const { validatePasswordHash } = require('../models/user');
+const { getAnonymousUser, validatePasswordHash } = require('../models/user');
 
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
@@ -67,7 +67,8 @@ const connection = async (socket) => {
       emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
       emit(socket, OPEN_MEETING, meeting);
-      getActiveQuestion(meeting._id).then((issue) => { // eslint-disable-line no-underscore-dangle
+      // eslint-disable-next-line no-underscore-dangle
+      getActiveQuestion(meeting._id).then(async (issue) => {
         if (issue === null) {
           emitNoActiveIssue(socket);
         } else {
@@ -87,12 +88,16 @@ const connection = async (socket) => {
           });
 
           // Emit voted state if user has voted.
-          haveIVoted(issue, socket.request.user)
-          .then((voted) => {
-            emit(socket, VOTING_STATE, { voted });
-          }).catch((err) => {
-            logger.error('Something went wrong when checking for vote status', err);
-          });
+          let voter;
+          if (issue.secret) {
+            voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
+              socket.request.user.onlinewebId, meeting);
+          } else {
+            voter = socket.request.user;
+          }
+          // eslint-disable-next-line no-underscore-dangle
+          const votedState = await haveIVoted(issue, voter._id);
+          if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
         }
       }).catch((err) => {
         logger.error('Getting currently active issue failed.', err);

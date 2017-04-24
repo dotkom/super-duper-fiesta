@@ -11,6 +11,7 @@ const {
   RECEIVE_VOTE: SEND_VOTE,
   SUBMIT_ANONYMOUS_VOTE,
   SUBMIT_REGULAR_VOTE,
+  VOTING_STATE,
 } = require('../../common/actionTypes/voting');
 
 module.exports = (socket) => {
@@ -24,6 +25,7 @@ module.exports = (socket) => {
           logger.debug('Stored new vote. Broadcasting ...');
           emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
           broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+          emit(socket, VOTING_STATE, { voted: true });
         }).catch((err) => {
           logger.error('Storing new vote failed.', err);
           emit(socket, SEND_VOTE, {}, {
@@ -42,6 +44,7 @@ module.exports = (socket) => {
           logger.debug('Stored new anonymous vote. Broadcasting ...');
           emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
           broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+          emit(socket, VOTING_STATE, { voted: true });
         }).catch((err) => {
           logger.error('Storing new anonymous vote failed.', err);
           emit(socket, SEND_VOTE, {}, {
