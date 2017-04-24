@@ -33,7 +33,7 @@ const AnonymousUser = mongoose.model('AnonymousUser', AnonymousUserSchema);
 
 
 function getQualifiedUsers(genfors) {
-  return User.find({ genfors, canVote: true, permissions: { $gt: permissionLevel.CAN_VOTE } });
+  return User.find({ genfors, canVote: true, permissions: { $gte: permissionLevel.CAN_VOTE } });
 }
 
 function getUserById(userId, anonymous) {
