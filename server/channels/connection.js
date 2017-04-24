@@ -12,7 +12,6 @@ const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const {
-  AUTH_REGISTERED,
   AUTH_SIGNED_IN,
   AUTH_SIGNED_OUT,
 } = require('../../common/actionTypes/auth');
@@ -44,13 +43,10 @@ const connection = (socket) => {
       full_name: user.name,
       logged_in: user.logged_in,
       id: user._id, // eslint-disable-line no-underscore-dangle
+      completedRegistration: user.completedRegistration,
     });
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
-  }
-  const completedRegistration = socket.request.user.completedRegistration;
-  if (completedRegistration) {
-    emit(socket, AUTH_REGISTERED, {});
   }
   getActiveGenfors().then((meeting) => {
     if (!meeting) {

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
 import { register } from '../../actionCreators/auth';
@@ -66,7 +67,12 @@ class Setup extends Component {
 
   render() {
     const { privateCode, repeatPrivateCode, pin } = this.state;
+    const { registered } = this.props;
     const errorMessage = this.validate();
+    // Redirect to home if already registered
+    if (registered) {
+      return <Redirect to="/" />;
+    }
     return (
       <Card classes={css.setup} title="Registrering for generalforsamling">
         <form onSubmit={e => this.submit(e)}>
@@ -118,12 +124,14 @@ class Setup extends Component {
 Setup.propTypes = {
   register: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
+  registered: PropTypes.bool.isRequired,
 };
 
 export default Setup;
 
 const mapStateToProps = ({ auth }) => ({
   username: auth.username,
+  registered: auth.registered,
 });
 const mapDispatchToProps = dispatch => ({
   register: (...a) => {

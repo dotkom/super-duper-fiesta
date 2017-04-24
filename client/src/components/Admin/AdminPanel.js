@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, Route, Switch } from 'react-router-dom';
+import AdminHome from './Home';
+import { IssueFormContainer } from './IssueForm';
+import Users from './Users';
 import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 import { toggleRegistration } from '../../actionCreators/adminButtons';
+import NotFound from '../NotFound';
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -35,7 +39,7 @@ class AdminPanel extends React.Component {
   }
 
   render() {
-    const { registrationEnabled } = this.props;
+    const { match, registrationEnabled } = this.props;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 
@@ -64,7 +68,12 @@ class AdminPanel extends React.Component {
         </Heading>
         <main>
           <ErrorContainer />
-          {this.props.children}
+          <Switch>
+            <Route exact path={`${match.path}/question`} component={IssueFormContainer} />
+            <Route exact path={`${match.path}/users`} component={Users} />
+            <Route exact path={match.path} component={AdminHome} />
+            <Route component={NotFound} />
+          </Switch>
         </main>
       </div>
     );
@@ -74,7 +83,9 @@ class AdminPanel extends React.Component {
 AdminPanel.propTypes = {
   registrationEnabled: PropTypes.bool.isRequired,
   toggleRegistration: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  match: PropTypes.objectOf(PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = ({ registrationEnabled }) => ({

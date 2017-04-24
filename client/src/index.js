@@ -2,7 +2,6 @@ import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotAppContainer } from 'react-hot-loader';
-import { browserHistory } from 'react-router';
 import { applyMiddleware, createStore } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
@@ -22,7 +21,7 @@ const store = applyMiddleware(socketIoMiddleware, logger)(createStore)(votingApp
 const render = (RootRoute) => {
   ReactDOM.render(
     <HotAppContainer>
-      <RootRoute store={store} browserHistory={browserHistory} />
+      <RootRoute store={store} />
     </HotAppContainer>,
     document.getElementById('app'),
   );
