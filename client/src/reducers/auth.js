@@ -32,7 +32,7 @@ const auth = (state = defaultState, action) => {
     case AUTH_REGISTERED: {
       return {
         ...state,
-        registered: true,
+        registered: action.data.registered,
       };
     }
 

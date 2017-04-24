@@ -1561,6 +1561,10 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
+cookie@^0.1.2:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.1.5.tgz#6ab9948a4b1ae21952cd2588530a4722d4044d7c"
+
 core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
@@ -4729,6 +4733,12 @@ socket.io-client@1.7.2, socket.io-client@^1.7.2:
     parseuri "0.0.5"
     socket.io-parser "2.3.1"
     to-array "0.1.4"
+
+socket.io-cookie@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/socket.io-cookie/-/socket.io-cookie-0.0.1.tgz#c740936cc0a73ddcaeeb5d97fed26c36c174b100"
+  dependencies:
+    cookie "^0.1.2"
 
 socket.io-parser@2.3.1:
   version "2.3.1"

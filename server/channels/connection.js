@@ -7,6 +7,7 @@ const getQuestions = require('../models/issue').getQuestions;
 const getVotes = require('../models/vote').getVotes;
 const generatePublicVote = require('../models/vote').generatePublicVote;
 const haveIVoted = require('../models/vote').haveIVoted;
+const { validatePasswordHash } = require('../models/user');
 
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
@@ -14,6 +15,7 @@ const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const {
   AUTH_SIGNED_IN,
   AUTH_SIGNED_OUT,
+  AUTH_REGISTERED,
 } = require('../../common/actionTypes/auth');
 const {
   RECEIVE_VOTE: SEND_VOTE,
@@ -33,7 +35,7 @@ const emitNoActiveIssue = (socket) => {
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
-const connection = (socket) => {
+const connection = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
   const loggedIn = socket.request.user.logged_in;
   if (loggedIn) {
@@ -43,9 +45,20 @@ const connection = (socket) => {
       full_name: user.name,
       logged_in: user.logged_in,
       id: user._id, // eslint-disable-line no-underscore-dangle
-      completedRegistration: user.completedRegistration,
       permissions: user.permissions,
     });
+    let validPasswordHash = false;
+    try {
+      const { passwordHash } = socket.request.headers.cookie;
+      validPasswordHash = await validatePasswordHash(user, passwordHash);
+    } catch (err) {
+      logger.error('Failed to validate passwordHash', user, err);
+    }
+    if (user.completedRegistration && validPasswordHash) {
+      emit(socket, AUTH_REGISTERED, { registered: true });
+    } else {
+      emit(socket, AUTH_REGISTERED, { registered: false });
+    }
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
   }

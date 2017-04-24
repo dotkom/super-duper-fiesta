@@ -123,6 +123,13 @@ async function addAnonymousUser(username, passwordHash) {
   await updateUserById(user._id, { completedRegistration: true });
 }
 
+async function validatePasswordHash(user, passwordHash) {
+  const genfors = await getActiveGenfors();
+  logger.silly('Checking password hash for user', user, genfors, passwordHash);
+  const existingUser = await getAnonymousUser(passwordHash, user.onlinewebId, genfors);
+  return existingUser !== null;
+}
+
 function setNote(user, targetUser, note) {
   return new Promise((resolve, reject) => {
     canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
@@ -164,4 +171,5 @@ module.exports = {
   setCanVote,
   setGenfors,
   updateUserById,
+  validatePasswordHash,
 };
