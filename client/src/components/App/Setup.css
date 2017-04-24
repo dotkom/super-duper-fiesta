@@ -30,3 +30,7 @@
 .warning {
   color: #9c0707;
 }
+
+.dialog {
+  padding-bottom: inherit;
+}
