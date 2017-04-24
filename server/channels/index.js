@@ -6,6 +6,7 @@ const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
 const auth = require('./auth');
+const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const issue = require('./issue');
 const userlist = require('./admin/user/userlist');
@@ -38,10 +39,16 @@ module.exports.listen = (server, mongooseConnection) => {
   io.on('connection', (socket) => {
     connection(socket);
     auth(socket);
-    // Admin
-    issue(socket);
-    userlist(socket);
-    toggleCanVote(socket);
     vote(socket);
+
+    // Admin
+    if (socket.request.user.permissions >= permissions.IS_MANAGER) {
+      const user = socket.request.user;
+      logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
+        'authorized for admin sockets.');
+      issue(socket);
+      userlist(socket);
+      toggleCanVote(socket);
+    }
   });
 };

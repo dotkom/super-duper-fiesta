@@ -4,7 +4,7 @@ const SHA256 = require('crypto-js/sha256');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
 
-const permissionLevel = require('./permissions');
+const permissionLevel = require('../../common/auth/permissions');
 
 function hashWithSalt(password, salt) {
   return SHA256(password + salt).toString();

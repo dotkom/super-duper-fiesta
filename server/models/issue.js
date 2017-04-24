@@ -6,7 +6,7 @@ const canEdit = require('./meeting').canEdit;
 // const getVotes = require('./vote').getVotes;
 const getQualifiedUsers = require('./user').getQualifiedUsers;
 
-const permissionLevel = require('./permissions');
+const permissionLevel = require('../../common/auth/permissions');
 
 const Schema = mongoose.Schema;
 
