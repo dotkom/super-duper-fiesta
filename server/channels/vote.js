@@ -5,7 +5,7 @@ const logger = require('../logging');
 const addVote = require('../models/vote').addVote;
 const generatePublicVote = require('../models/vote').generatePublicVote;
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
-const getAnonymousUser = require('../models/user').getAnonymousUser;
+const { getAnonymousUser, isRegistered } = require('../models/user');
 
 const {
   RECEIVE_VOTE: SEND_VOTE,
@@ -13,11 +13,27 @@ const {
   SUBMIT_REGULAR_VOTE,
 } = require('../../common/actionTypes/voting');
 
+const checkRegistered = async (socket) => {
+  const { user } = socket.request;
+  const { passwordHash } = socket.request.headers.cookie;
+  const registered = await isRegistered(user, passwordHash);
+  if (!registered) {
+    emit(socket, SEND_VOTE, {}, {
+      error: 'Du er ikke registert',
+    });
+    return false;
+  }
+  return true;
+};
+
 module.exports = (socket) => {
   socket.on('action', async (data) => {
     switch (data.type) {
       case SUBMIT_REGULAR_VOTE:
         logger.debug('Received vote', { userFullName: socket.request.user.name });
+        if (!await checkRegistered(socket)) {
+          break;
+        }
         // eslint-disable-next-line no-underscore-dangle
         addVote(data.issue, socket.request.user, data.alternative, socket.request.user._id)
         .then(async (vote) => {
@@ -33,6 +49,9 @@ module.exports = (socket) => {
         break;
       case SUBMIT_ANONYMOUS_VOTE: {
         logger.debug('Received anonymous vote');
+        if (!await checkRegistered(socket)) {
+          break;
+        }
         const genfors = await getActiveGenfors();
         const anonymousUser = await getAnonymousUser(data.passwordHash,
           socket.request.user.onlinewebId, genfors);
