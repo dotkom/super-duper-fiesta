@@ -52,6 +52,7 @@
     "reselect": "^2.5.4",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
+    "socket.io-cookie": "^0.0.1",
     "socketio": "^1.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
