@@ -39,6 +39,8 @@ module.exports.listen = (server, mongooseConnection) => {
   io.on('connection', (socket) => {
     connection(socket);
     auth(socket);
+    vote(socket);
+
     // Admin
     if (socket.request.user.permissions >= permissions.IS_MANAGER) {
       const user = socket.request.user;
@@ -47,7 +49,6 @@ module.exports.listen = (server, mongooseConnection) => {
       issue(socket);
       userlist(socket);
       toggleCanVote(socket);
-      vote(socket);
     }
   });
 };
