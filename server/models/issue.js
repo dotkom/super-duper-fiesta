@@ -3,7 +3,6 @@ const logger = require('../logging');
 const AlternativeSchema = require('./alternative');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
 const canEdit = require('./meeting').canEdit;
-// const getVotes = require('./vote').getVotes;
 const getQualifiedUsers = require('./user').getQualifiedUsers;
 
 const permissionLevel = require('../../common/auth/permissions');
@@ -57,17 +56,6 @@ function endQuestion(question, user) {
   });
 }
 
-
-/* Commented out since it causes circular dependency.
-function updateQuestionCounter(question) {
-  return new Promise((resolve, reject) => {
-    getVotes(question, (votes) => {
-      Question.update({ _id: question }, { currentVotes: votes.length })
-      .exec().then(resolve).catch(reject);
-    });
-  });
-} */
-
 function addQuestion(issueData, closeCurrentIssue) {
   return new Promise((resolve, reject) => {
     logger.debug('Creating issue', issueData);
@@ -90,7 +78,7 @@ function addQuestion(issueData, closeCurrentIssue) {
           endQuestion(_issue);
         }
         // removed possible issues and proceeding to create a new one
-        getQualifiedUsers(genfors, issueData.secret).then((users) => {
+        getQualifiedUsers(genfors).then((users) => {
           const issue = Object.assign(issueData, {
             genfors,
             qualifiedVoters: users.length,
