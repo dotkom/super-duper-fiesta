@@ -9,9 +9,9 @@ const Schema = mongoose.Schema;
 const GenforsSchema = new Schema({
   title: { type: String, required: true },
   date: { type: Date, required: true },
+  registrationOpen: { type: Boolean, required: true, default: false },
   status: { type: String, default: 'open' }, // Open/Closed/Whatever
   pin: { type: Number, required: true, default: parseInt(Math.random() * 10000, 10) },
-  password: { type: String, required: true },
 });
 const Genfors = mongoose.model('Genfors', GenforsSchema);
 
@@ -80,7 +80,7 @@ function endGenfors(genfors, user) {
 }
 
 // TODO add security function
-function addGenfors(title, date, passwordHash, user, force) {
+function addGenfors(title, date, user, force) {
   // Only allow one at a time
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((meeting) => {
@@ -90,13 +90,12 @@ function addGenfors(title, date, passwordHash, user, force) {
         if (!force) {
           return reject(new Error('Meeting in progress, you need to close it or force new'));
         }
-        endGenfors(meeting, user).then(addGenfors(title, date, passwordHash, user, true));
+        endGenfors(meeting, user).then(addGenfors(title, date, user, true));
       }
       // Add a new genfors
       const genfors = new Genfors({
         title,
         date,
-        password: passwordHash,
       });
       genfors.save().then((newMeeting) => {
         resolve(newMeeting);
@@ -111,10 +110,21 @@ async function validatePin(pin) {
   return genfors.pin === pin;
 }
 
+async function toggleRegistrationStatus(genfors, currentStatus) {
+  // If currentStatus is passed to func, set it to the opposite
+  // If currentStatus is not passed to func, set it to the opposite of meeting.registrationOpen
+  const registrationOpen = currentStatus !== undefined ? !currentStatus : genfors.registrationOpen;
+
+  // eslint-disable-next-line no-underscore-dangle
+  return Genfors.findOneAndUpdate(genfors._id,
+  { registrationOpen }, { new: true });
+}
+
 module.exports = {
   addGenfors,
   endGenfors,
   getActiveGenfors,
   canEdit,
   validatePin,
+  toggleRegistrationStatus,
 };
