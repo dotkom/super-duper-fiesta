@@ -8,7 +8,9 @@ export const getOwnVoteForIssue = (issue, userId) => {
   if (issue.votes && !Object.keys(issue.votes).length) return null;
 
   // Return the vote if it exists.
-  return issue.votes[userId];
+  const vote = Object.keys(issue.votes).find(voteId =>
+    issue.votes[voteId].voter === userId);
+  return issue.votes[vote];
 };
 
 export const getOwnVote = (state, userId) => (
