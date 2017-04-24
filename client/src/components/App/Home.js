@@ -22,9 +22,13 @@ const Home = ({ issueExists, registered }) => (
   </div>
 );
 
+Home.defaultProps = {
+  registered: undefined,
+};
+
 Home.propTypes = {
   issueExists: PropTypes.bool.isRequired,
-  registered: PropTypes.bool.isRequired,
+  registered: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

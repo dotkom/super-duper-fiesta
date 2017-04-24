@@ -81,6 +81,7 @@ VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
   issueId: '',
+  loggedIn: undefined,
   selectedAlternative: null,
 };
 
@@ -89,7 +90,7 @@ VotingMenu.propTypes = {
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
   issueIsActive: React.PropTypes.bool.isRequired,
-  loggedIn: React.PropTypes.bool.isRequired,
+  loggedIn: React.PropTypes.bool,
   selectedAlternative: React.PropTypes.string,
   voterKey: React.PropTypes.number,
 };
