@@ -8,7 +8,7 @@ import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
-import { toggleRegistration } from '../../actionCreators/adminButtons';
+import { toggleRegistration } from '../../actionCreators/meeting';
 import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 
@@ -36,13 +36,13 @@ class AdminPanel extends React.Component {
 
   confirmRegistrationDialog() {
     this.closeRegistrationDialog();
-    this.props.toggleRegistration();
+    this.props.toggleRegistration(this.props.registrationOpen);
   }
 
   render() {
-    const { match, registrationEnabled, userPermissions } = this.props;
+    const { match, registrationOpen, userPermissions } = this.props;
     const permissionDenied = userPermissions < IS_MANAGER;
-    const registrationText = registrationEnabled ?
+    const registrationText = registrationOpen ?
       'Steng registrering' : 'Åpne registrering';
 
     return (
@@ -89,7 +89,7 @@ class AdminPanel extends React.Component {
 }
 
 AdminPanel.propTypes = {
-  registrationEnabled: PropTypes.bool.isRequired,
+  registrationOpen: PropTypes.bool.isRequired,
   toggleRegistration: PropTypes.func.isRequired,
   match: PropTypes.objectOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
@@ -98,13 +98,13 @@ AdminPanel.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  registrationEnabled: state.registrationEnabled,
+  registrationOpen: state.meeting.registrationOpen,
   userPermissions: state.auth.permissions,
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleRegistration: () => {
-    dispatch(toggleRegistration());
+  toggleRegistration: (registrationOpen) => {
+    dispatch(toggleRegistration(registrationOpen));
   },
 });
 

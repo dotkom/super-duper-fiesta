@@ -9,6 +9,7 @@ const auth = require('./auth');
 const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const issue = require('./issue');
+const meeting = require('./admin/meeting');
 const userlist = require('./admin/user/userlist');
 const toggleCanVote = require('./admin/user/toggle_vote');
 const vote = require('./vote');

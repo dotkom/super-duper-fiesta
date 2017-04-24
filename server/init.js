@@ -87,7 +87,7 @@ getActiveGenfors().then((genfors) => {
   } else {
     console.log('No active genfors. Inserting...');
     addGenfors('Onlines Generalforsamling 1970',
-               new Date('1970-01-01T00:00:00.000Z'), 'my beautiful password hash')
+               new Date('1970-01-01T00:00:00.000Z'))
       .then((insertedGenfors) => {
         getOrInsertIssue(insertedGenfors);
       }).catch((err) => {
