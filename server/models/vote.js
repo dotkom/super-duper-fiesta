@@ -19,24 +19,9 @@ function getVotes(question) {
   return Vote.find({ question });
 }
 
-function haveIVoted(question, user, anonymousUser) {
-  return new Promise((resolve, reject) => {
-    Vote.find({ question, user }).exec().then((vote) => {
-      if (Object.keys(vote).length > 0) {
-        // It didn't fail so user has voted!
-        resolve(true); // !!!!!
-      } else {
-        Vote.find({ question, user: anonymousUser }).exec().then((_vote) => {
-          if (Object.keys(_vote).length > 0) {
-            // It didn't fail so user has voted!
-            resolve(true); // !!!!!
-          } else {
-            resolve(false);
-          }
-        }).catch(reject);
-      }
-    }).catch(reject);
-  });
+async function haveIVoted(issue, user) {
+  const votes = await Vote.find({ question: issue, user });
+  return votes.length > 0;
 }
 
 function addVote(issueId, user, option, anonymousUser) {
