@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Button from '../../Button';
 import { createIssue } from '../../../actionCreators/adminButtons';
 import { RESOLUTION_TYPES } from '../../../../../common/actionTypes/voting';
@@ -37,6 +38,7 @@ class IssueForm extends React.Component {
       countBlankVotes: false,
       voteDemand: RESOLUTION_TYPES.regular.key,
       questionType: MULTIPLE_CHOICE,
+      redirectToAdminHome: false,
     };
   }
 
@@ -90,6 +92,9 @@ class IssueForm extends React.Component {
       this.state.secretVoting,
       this.state.countBlankVotes,
     );
+
+    // Redirect to admin home after creating issue.
+    this.setState({ redirectToAdminHome: true });
   }
 
   updateIssueDescription(e) {
@@ -118,6 +123,7 @@ class IssueForm extends React.Component {
 
   render() {
     const showActiveIssueWarning = this.props.activeIssue;
+    const { redirectToAdminHome } = this.state;
 
     const issueReadyToCreate = !showActiveIssueWarning
       && this.state.issueDescription
@@ -128,6 +134,8 @@ class IssueForm extends React.Component {
           className={css.warning}
           hidden={!showActiveIssueWarning}
         >Det er allerede en aktiv sak!</p>
+        {redirectToAdminHome &&
+          <Redirect to="/admin" />}
         <label className={css.textarea}>
           <h2 className={css.title}>Beskrivelse av saken</h2>
           <textarea
