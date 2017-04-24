@@ -9,7 +9,7 @@ const OW4API = require('../conf.js').api;
 const addUser = require('../../models/user').addUser;
 const getUserByUsername = require('../../models/user').getUserByUsername;
 const updateUserById = require('../../models/user').updateUserById;
-const permissions = require('../../models/permissions');
+const permissions = require('../../../common/auth/permissions');
 const { getActiveGenfors } = require('../../models/meeting');
 
 

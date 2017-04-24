@@ -10,7 +10,7 @@ const getActiveQuestion = require('./models/issue').getActiveQuestion;
 const addGenfors = require('./models/meeting').addGenfors;
 const getActiveGenfors = require('./models/meeting').getActiveGenfors;
 
-const permissionLevel = require('./models/permissions');
+const permissionLevel = require('../common/auth/permissions');
 
 require('./models/essentials');
 

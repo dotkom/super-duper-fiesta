@@ -9,6 +9,7 @@ import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 import { toggleRegistration } from '../../actionCreators/adminButtons';
+import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 
 class AdminPanel extends React.Component {
@@ -40,7 +41,7 @@ class AdminPanel extends React.Component {
 
   render() {
     const { match, registrationEnabled, userPermissions } = this.props;
-    const permissionDenied = !userPermissions || userPermissions < 10;
+    const permissionDenied = !userPermissions || userPermissions < IS_MANAGER;
     const registrationText = registrationEnabled ?
       'Steng registrering' : 'Åpne registrering';
 

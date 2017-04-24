@@ -6,7 +6,7 @@ const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
 const auth = require('./auth');
-const permissions = require('../models/permissions');
+const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const issue = require('./issue');
 const userlist = require('./admin/user/userlist');

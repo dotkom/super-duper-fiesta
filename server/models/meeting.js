@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
 
-const permissionLevel = require('./permissions');
+const permissionLevel = require('../../common/auth/permissions');
 
 const Schema = mongoose.Schema;
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
 const canEdit = require('./meeting').canEdit;
-const permissionLevel = require('./permissions');
+const permissionLevel = require('../../common/auth/permissions');
 const getIssueById = require('./issue').getIssueById;
 
 const Schema = mongoose.Schema;
