@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
 import { register } from '../../actionCreators/auth';
 import Button from '../Button';
-import Dialog from '../Dialog';
 import Card from '../Card';
 import css from './Setup.css';
 
@@ -71,22 +71,10 @@ class Setup extends Component {
     const errorMessage = this.validate();
     // Redirect to home if already registered
     if (registered) {
-      setTimeout(() => { window.location.href = '/'; }, 5000);
+      return <Redirect to="/" />;
     }
     return (
       <Card classes={css.setup} title="Registrering for generalforsamling">
-        <Dialog
-          hideCloseSymbol
-          onClose={() => { window.location.href = '/'; }}
-          title={'En feil har oppstått'}
-          subtitle={'Du er allerede registrert'}
-          visible={registered}
-        >
-          <p className={css.dialog}>
-            Du vil nå bli videresent til forsiden.
-            Dersom det ikke skjer automatisk, <a href="/">trykk her</a>.
-          </p>
-        </Dialog>
         <form onSubmit={e => this.submit(e)}>
           <label>
             <div className={css.text}>Pin kode</div>
