@@ -7,7 +7,7 @@ import { RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import Button from './Button';
 
 // Maps over alternatives to see if any of them got majority vote
-const calculateMajority = (issue) => {
+const calculateWinner = (issue) => {
   const { alternatives, votes } = issue;
   const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
   const numTotalVotes = Object.keys(votes).length;
@@ -28,13 +28,18 @@ const calculateMajority = (issue) => {
   }
 
   // Check if any alternative meets the vote demand
-  return alternativeVoteCounts.some((alternativeVoteCount, idx) => {
+  const winnerVoteCount = alternativeVoteCounts.find((alternativeVoteCount, idx) => {
     // Skip blank vote
     if (idx === blankIdx) {
       return false;
     }
     return alternativeVoteCount / countingTotalVotes > voteDemand;
   });
+  if (winnerVoteCount === undefined) {
+    return null;
+  }
+  // Find alternative id
+  return alternatives[alternativeVoteCounts.indexOf(winnerVoteCount)].id;
 };
 
 class ConcludedIssueList extends React.Component {
@@ -66,13 +71,16 @@ class ConcludedIssueList extends React.Component {
           {visible ? 'Skjul' : 'Vis'} konkluderte saker
         </Button>}
         <div className={css.concludedIssueList}>
-          {this.state.visible && Object.keys(issues).map(issue => (
-            <ConcludedIssue
+          {this.state.visible && Object.keys(issues).map((issue) => {
+            const winner = calculateWinner(issues[issue]);
+            const majority = winner !== null;
+            return (<ConcludedIssue
               key={issues[issue].id}
-              majority={calculateMajority(issues[issue])}
+              majority={majority}
+              winner={winner}
               {...issues[issue]}
-            />
-          ))}
+            />);
+          })}
         </div>
       </div>
     );
