@@ -30,6 +30,7 @@
   color: #63699d;
   font-size: 2rem;
   margin: 0;
+  transition: all 0.3s;
 }
 
 .content a:hover .header {

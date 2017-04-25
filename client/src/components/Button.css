@@ -4,6 +4,7 @@
   background: transparent;
   color: #636bb2;
   white-space: nowrap;
+  transition: all 0.4s;
 }
 
 .button:hover {
