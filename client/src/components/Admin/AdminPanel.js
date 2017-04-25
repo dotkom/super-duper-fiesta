@@ -54,8 +54,8 @@ class AdminPanel extends React.Component {
               visible={this.state.showRegistrationDialog}
               onClose={(...a) => this.closeRegistrationDialog(...a)}
               title={registrationText}
+              subtitle={`Bekreft ${registrationOpen ? 'lukking' : 'åpning'} av registrering.`}
             >
-              <p>Er du sikker? *Skriv noe mer fornuftig her*</p>
               <Button
                 background
                 onClick={(...a) => this.confirmRegistrationDialog(...a)}

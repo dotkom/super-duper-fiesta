@@ -117,7 +117,7 @@ async function toggleRegistrationStatus(genfors, currentStatus) {
 
   // eslint-disable-next-line no-underscore-dangle
   return Genfors.findOneAndUpdate(genfors._id,
-  { registrationOpen }, { new: true });
+  { registrationOpen, pin: parseInt(Math.random() * 10000, 10) }, { new: true });
 }
 
 module.exports = {
