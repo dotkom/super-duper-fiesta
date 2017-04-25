@@ -23,11 +23,13 @@ const ConcludedIssue = ({ majority, voteDemand, text, alternatives, votes }) => 
         <li
           key={alternative.id}
           className={classNames({
-            [css.alternativesWinner]: Object.keys(votes).length
-            && Object.keys(votes)
-              .map(key => votes[key])
-              .filter(vote => vote.alternative === alternative.id)
-              .length / Object.keys(votes).length >= voteDemand,
+            [css.alternativesWinner]:
+              majority
+              && Object.keys(votes).length
+              && Object.keys(votes)
+                .map(key => votes[key])
+                .filter(vote => vote.alternative === alternative.id)
+                .length / Object.keys(votes).length > RESOLUTION_TYPES[voteDemand].voteDemand,
           })}
         >
           {alternative.text}
