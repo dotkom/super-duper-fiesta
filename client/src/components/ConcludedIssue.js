@@ -5,7 +5,7 @@ import Card from './Card';
 import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import css from './ConcludedIssue.css';
 
-const ConcludedIssue = ({ majority, voteDemand, text, alternatives, votes }) => (
+const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives, votes }) => (
   <Card
     classes={css.concludedIssue}
     headerColor={majority ? 'green' : 'red'}
@@ -26,10 +26,7 @@ const ConcludedIssue = ({ majority, voteDemand, text, alternatives, votes }) => 
             [css.alternativesWinner]:
               majority
               && Object.keys(votes).length
-              && Object.keys(votes)
-                .map(key => votes[key])
-                .filter(vote => vote.alternative === alternative.id)
-                .length / Object.keys(votes).length > RESOLUTION_TYPES[voteDemand].voteDemand,
+              && alternative.id === winner,
           })}
         >
           {alternative.text}
@@ -44,6 +41,7 @@ ConcludedIssue.defaultProps = {
   votes: {},
   voteDemand: RESOLUTION_TYPES.regular.voteDemand,
   text: 'Denne saken har ingen tittel.',
+  winner: null,
 };
 
 ConcludedIssue.propTypes = {
@@ -61,6 +59,7 @@ ConcludedIssue.propTypes = {
     alternative: PropTypes.string,
     voter: PropTypes.string,
   })),
+  winner: PropTypes.string,
 };
 
 
