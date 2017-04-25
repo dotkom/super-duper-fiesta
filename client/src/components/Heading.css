@@ -42,10 +42,6 @@
   color: #555;
 }
 
-.components > button:last-child, .components > a:last-child {
-  margin-right: -0.5rem;
-}
-
 .logout {
   background: #323a7f;
   color: #f7f7f7;
