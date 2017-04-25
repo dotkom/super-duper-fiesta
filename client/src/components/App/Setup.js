@@ -111,7 +111,7 @@ class Setup extends Component {
             </p>
           }
           <div>
-            <Button background disabled={errorMessage !== null}>
+            <Button background size="lg" disabled={errorMessage !== null}>
               Fullfør registrering
             </Button>
           </div>

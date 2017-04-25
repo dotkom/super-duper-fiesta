@@ -184,6 +184,7 @@ class IssueForm extends React.Component {
         <Button
           background
           onClick={() => this.handleCreateIssue()}
+          size="lg"
           disabled={!issueReadyToCreate}
         >Lagre sak</Button>
       </div>
