@@ -67,8 +67,7 @@ function addVote(issueId, user, option, voter) {
 const getPublicVote = (vote, secret, showOnlyWinner) => ({
   _id: vote._id, // eslint-disable-line no-underscore-dangle
   question: vote.question,
-  // eslint-disable-next-line no-underscore-dangle
-  user: (showOnlyWinner || secret) ? '' : vote.user._id,
+  user: (showOnlyWinner || secret) ? '' : vote.user,
   option: showOnlyWinner ? '' : vote.option,
 });
 
