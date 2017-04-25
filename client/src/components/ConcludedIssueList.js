@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
+import { RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import Button from './Button';
 
 // Maps over alternatives to see if any of them got majority vote
 const calculateMajority = (issue) => {
-  const { alternatives, votes, voteDemand } = issue;
+  const { alternatives, votes } = issue;
+  const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
   const numTotalVotes = Object.keys(votes).length;
   const voteObjects = Object.keys(votes).map(key => votes[key]);
 
