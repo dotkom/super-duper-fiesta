@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
     userCount,
     alternatives,
     votePercentages,
-    showOnlyWinner: currentIssue.showOnlyWinner,
+    showOnlyWinner: currentIssue && currentIssue.showOnlyWinner,
   };
 };
 
