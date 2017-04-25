@@ -59,7 +59,7 @@ class VotingMenu extends React.Component {
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
-        {(hasVoted && this.props.selectedAlternative) ?
+        {(hasVoted && this.state.selectedVote) ?
           <Button
             background
             size="lg"
@@ -68,7 +68,7 @@ class VotingMenu extends React.Component {
                 undefined : this.props.selectedAlternative,
             })}
           >
-            {this.state.selectedVote === this.props.selectedAlternative ?
+            {(hasVoted || (this.state.selectedVote === this.props.selectedAlternative)) ?
               'Skjul min stemme' : 'Vis min stemme'}
           </Button> : ''
         }
