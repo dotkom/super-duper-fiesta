@@ -21,6 +21,7 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         secret: action.data.secret,
         voteDemand: action.data.voteDemand,
         countingBlankVotes: action.data.countingBlankVotes,
+        showOnlyWinner: action.data.showOnlyWinner,
       };
     }
 

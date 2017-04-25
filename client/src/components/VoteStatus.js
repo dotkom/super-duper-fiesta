@@ -6,11 +6,11 @@ import { getShuffledAlternatives } from '../selectors/alternatives';
 import { getIssue } from '../selectors/issues';
 import css from './VoteStatus.css';
 
-const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => (
+const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages, showOnlyWinner }) => (
   <div className={css.status}>
     <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
 
-    {alternatives && alternatives.map(alternative =>
+    {!showOnlyWinner && alternatives && alternatives.map(alternative =>
       <VoteCounter
         label={alternative.text}
         count={votePercentages[alternative.id]}
@@ -25,12 +25,14 @@ const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages }) => 
 VoteStatus.defaultProps = {
   alternatives: undefined,
   userCount: 0,
+  showOnlyWinner: false,
 };
 
 VoteStatus.propTypes = {
   voteCount: VoteCounter.propTypes.count.isRequired,
   userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
+  showOnlyWinner: PropTypes.bool,
   votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
@@ -60,7 +62,13 @@ const mapStateToProps = (state) => {
     });
   }
 
-  return { voteCount, userCount, alternatives, votePercentages };
+  return {
+    voteCount,
+    userCount,
+    alternatives,
+    votePercentages,
+    showOnlyWinner: currentIssue.showOnlyWinner,
+  };
 };
 
 export default VoteStatus;
