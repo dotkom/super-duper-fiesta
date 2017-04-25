@@ -109,8 +109,8 @@ const connection = async (socket) => {
           emit(socket, CLOSE_ISSUE, issue);
           // Get votes for backlogged issues
           getVotes(issue).then((votes) => {
-            votes.forEach((vote) => {
-              emit(socket, SEND_VOTE, vote);
+            votes.forEach(async (vote) => {
+              emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
             });
           }).catch((err) => {
             // eslint-disable-next-line no-underscore-dangle

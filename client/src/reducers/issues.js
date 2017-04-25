@@ -27,7 +27,7 @@ const issue = (state = {}, action, currentIssue) => {
     case SEND_VOTE: {
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
-      if (state.id !== currentIssue || state.id !== action.issueId) {
+      if (action.type === SEND_VOTE && (state.id !== currentIssue || state.id !== action.issueId)) {
         return state;
       }
       const voteId = action.id;
@@ -39,6 +39,7 @@ const issue = (state = {}, action, currentIssue) => {
 
           [voteId]: {
             alternative: action.alternative,
+            id: voteId,
             voter,
           },
         },
