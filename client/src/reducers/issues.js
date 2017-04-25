@@ -1,11 +1,12 @@
 import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from '../../../common/actionTypes/issues';
 import { RECEIVE_VOTE } from '../../../common/actionTypes/voting';
 
-const issue = (state = {}, action, currentIssue) => {
+const issue = (state = { votes: {} }, action, currentIssue) => {
   switch (action.type) {
     case CLOSE_ISSUE:
     case OPEN_ISSUE: {
       return {
+        ...state,
         id: action.data._id, // eslint-disable-line no-underscore-dangle
         active: action.data.active,
         text: action.data.description,
@@ -16,10 +17,10 @@ const issue = (state = {}, action, currentIssue) => {
           return alternative;
         }),
         qualifiedVoters: action.data.qualifiedVoters,
-        votes: {},
         resolutionType: action.resolutionType,
         secret: action.data.secret,
         voteDemand: action.data.voteDemand,
+        countingBlankVotes: action.data.countingBlankVotes,
       };
     }
 
@@ -57,7 +58,7 @@ const issues = (state = {}, action) => {
     case OPEN_ISSUE: {
       const issueId = action.data._id; // eslint-disable-line no-underscore-dangle
       return Object.assign({}, state, {
-        [issueId]: issue(undefined, action),
+        [issueId]: issue(state[issueId], action),
       });
     }
     case DELETED_ISSUE: {
