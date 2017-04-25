@@ -9,6 +9,7 @@ import NewVersionAvailable from '../NewVersionAvailable';
 import { ErrorContainer } from '../Error';
 import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
+import css from './index.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class App extends React.Component {
     return (
       <div>
         <Heading link="/" title={title}>
-          <span>{fullName}</span>
+          <span className={css.name}>{fullName}</span>
           <a href={loggedIn ? '/logout' : '/login'}>
             <Button>Logg {loggedIn ? 'ut' : 'inn'}</Button>
           </a>

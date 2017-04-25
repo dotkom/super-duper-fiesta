@@ -30,6 +30,7 @@
 
 .close {
   font-size: 2rem;
+  transition: all 0.2s;
   composes: icon close from 'css/flaticon.css';
   margin-left: 1rem;
 }
