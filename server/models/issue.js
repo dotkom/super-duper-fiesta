@@ -13,6 +13,7 @@ const Schema = mongoose.Schema;
 const QuestionSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: true },
   description: { type: String, required: true },
+  date: { type: Date, required: true, default: new Date() },
   active: { type: Boolean, default: true },
   deleted: { type: Boolean, required: true, default: false },
   options: [AlternativeSchema],
