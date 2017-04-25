@@ -16,6 +16,7 @@ const meeting = (state = {}, action) => {
     case TOGGLED_REGISTRATION_STATE:
       return {
         ...state,
+        pin: action.data.pin,
         registrationOpen: action.data.registrationOpen,
       };
     default: {
