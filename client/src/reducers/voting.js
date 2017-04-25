@@ -1,3 +1,4 @@
+import { OPEN_ISSUE } from '../../../common/actionTypes/issues';
 import { VOTING_STATE } from '../../../common/actionTypes/voting';
 
 const votedState = (state = false, action) => {
@@ -5,6 +6,10 @@ const votedState = (state = false, action) => {
     case VOTING_STATE:
       return {
         voted: action.data.voted,
+      };
+    case OPEN_ISSUE:
+      return {
+        voted: false,
       };
 
     default:
