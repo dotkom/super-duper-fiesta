@@ -19,11 +19,11 @@ const calculateMajority = (issue) => {
   ));
 
   let countingTotalVotes = numTotalVotes;
-  const { countBlankVotes } = issue;
+  const { countingBlankVotes } = issue;
   const blankAlternative = alternatives.find(alternative => alternative.text === 'Blank');
   const blankIdx = alternatives.indexOf(blankAlternative);
   // Subtract blank votes if they don't count
-  if (!countBlankVotes) {
+  if (!countingBlankVotes) {
     countingTotalVotes -= alternativeVoteCounts[blankIdx];
   }
 
