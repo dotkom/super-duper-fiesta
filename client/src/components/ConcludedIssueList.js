@@ -20,17 +20,21 @@ const calculateMajority = (issue) => {
 
   let countingTotalVotes = numTotalVotes;
   const { countBlankVotes } = issue;
+  const blankAlternative = alternatives.find(alternative => alternative.text === 'Blank');
+  const blankIdx = alternatives.indexOf(blankAlternative);
   // Subtract blank votes if they don't count
   if (!countBlankVotes) {
-    const blankAlternative = alternatives.find(alternative => alternative.text === 'Blank');
-    const idx = alternatives.indexOf(blankAlternative);
-    countingTotalVotes -= alternativeVoteCounts[idx];
+    countingTotalVotes -= alternativeVoteCounts[blankIdx];
   }
 
   // Check if any alternative meets the vote demand
-  return alternativeVoteCounts.some(alternativeVoteCount => (
-    alternativeVoteCount / countingTotalVotes > voteDemand
-  ));
+  return alternativeVoteCounts.some((alternativeVoteCount, idx) => {
+    // Skip blank vote
+    if (idx === blankIdx) {
+      return false;
+    }
+    return alternativeVoteCount / countingTotalVotes > voteDemand;
+  });
 };
 
 class ConcludedIssueList extends React.Component {
