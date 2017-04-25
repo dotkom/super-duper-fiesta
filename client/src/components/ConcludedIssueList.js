@@ -6,12 +6,16 @@ import { getConcludedIssues } from '../selectors/issues';
 import Button from './Button';
 
 // Maps over alternatives to see if any of them got majority vote
-const calculateMajority = (alternatives, votes, voteDemand) => {
+const calculateMajority = (issue) => {
+  const { alternatives, votes, voteDemand } = issue;
   const numTotalVotes = Object.keys(votes).length;
-  return alternatives.some(alternative => Object.keys(votes)
-    .map(key => votes[key])
-    .filter(vote => vote.alternative === alternative.id)
-    .length / numTotalVotes >= voteDemand,
+  const voteObjects = Object.keys(votes).map(key => votes[key]);
+  return alternatives.some(
+    (alternative) => {
+      const votesForAlternative = voteObjects
+        .filter(vote => vote.alternative === alternative.id).length;
+      return votesForAlternative / numTotalVotes > voteDemand;
+    },
   );
 };
 
@@ -47,11 +51,7 @@ class ConcludedIssueList extends React.Component {
           {this.state.visible && Object.keys(issues).map(issue => (
             <ConcludedIssue
               key={issues[issue].id}
-              majority={calculateMajority(
-                issues[issue].alternatives,
-                issues[issue].votes,
-                issues[issue].voteDemand,
-              )}
+              majority={calculateMajority(issues[issue])}
               {...issues[issue]}
             />
           ))}
