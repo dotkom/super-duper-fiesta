@@ -30,6 +30,7 @@
     "express": "^4.14.0",
     "express-session": "^1.15.1",
     "extract-text-webpack-plugin": "^2.1.0",
+    "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^0.10.0",
     "fuse.js": "^2.6.1",
     "html-webpack-plugin": "^2.28.0",

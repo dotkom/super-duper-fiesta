@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   entry: ['./client/src/index.js'],
@@ -43,6 +44,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'client/index.html',
     }),
+    new FaviconsWebpackPlugin('./client/favicon.png'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: module => (
