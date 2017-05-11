@@ -34,7 +34,7 @@ const getIssue = genfors => new Promise((resolve, reject) => {
           { text: 'World' },
           { text: 'FeelsBadMan' },
         ],
-        voteDemand: 0.5,
+        voteDemand: 'regular',
         qualifiedUsers: 3,
       }).then((insertedIssue) => {
         console.log(`Inserting issue successful => ${insertedIssue.description}`);
