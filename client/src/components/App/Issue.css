@@ -3,62 +3,52 @@
   flex-grow: 4;
 }
 
-/* https://projects.lukehaas.me/css-loaders/ */
-.loader,
-.loader:before,
-.loader:after {
-  border-radius: 50%;
-  width: 2.5em;
-  height: 2.5em;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation: load7 1.8s infinite ease-in-out;
-  animation: load7 1.8s infinite ease-in-out;
-}
 .loader {
-  color: #63699d;
-  font-size: 10px;
-  margin: 0rem auto 3rem;
-  position: relative;
-  text-indent: -9999em;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+  margin: 2rem auto;
+  width: 2rem;
+  height: 2rem;
+  transform: rotate(-45deg);
 }
-.loader:before,
-.loader:after {
-  content: '';
+/* http://cssload.net/en/horizontal-bars/2 */
+
+.loaderPart {
+  border-radius: 100%;
   position: absolute;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  animation: cssload-part-anim 0.92s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.loaderFirst {
+  background: rgb(99,105,157);
+  right: 0;
+  bottom: 0;
+  animation:
+    cssload-part-anim 0.92s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate-reverse,
+    swap-z-index 0.92s steps(2) -0.46s infinite alternate;
+}
+
+.loaderSecond {
+  background: rgb(113,147,214);
+  left: 0;
   top: 0;
 }
-.loader:before {
-  left: -3.5em;
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-.loader:after {
-  left: 3.5em;
-}
-@-webkit-keyframes load7 {
-  0%,
-  80%,
+
+@keyframes cssload-part-anim {
+  0% {
+    transform: translate3d(-1rem, -1rem, 0);
+  }
   100% {
-    box-shadow: 0 2.5em 0 -1.3em;
-  }
-  40% {
-    box-shadow: 0 2.5em 0 0;
-  }
-}
-@keyframes load7 {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 2.5em 0 -1.3em;
-  }
-  40% {
-    box-shadow: 0 2.5em 0 0;
+    transform: translate3d(1rem, 1rem, 0);
   }
 }
 
+@keyframes swap-z-index {
+  from {
+    z-index: auto;
+  }
+  to {
+    z-index: 10;
+  }
+}

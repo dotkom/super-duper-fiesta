@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { getIssueText } from '../../selectors/issues';
@@ -12,7 +13,13 @@ const Issue = ({ text }) => (
       subtitle="Aktiv sak"
     >
       <p>{text}</p>
-      {text === Issue.defaultProps.text && <div className={css.loader} />}
+      {text === Issue.defaultProps.text && (
+        <div className={css.loader}>
+          <div className={classNames(css.loaderPart, css.loaderFirst)} />
+          <div className={classNames(css.loaderPart, css.loaderSecond)} />
+          <div className={css.loaderBlend} />
+        </div>
+      )}
     </Card>
   </DocumentTitle>
 );
