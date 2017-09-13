@@ -26,7 +26,7 @@ module.exports = merge.smart(config, {
   devServer: {
     proxy: [
       {
-        context: ['/socket.io/', '/login', '/auth'],
+        context: ['/socket.io/', '/login', '/auth', '/logout'],
         target: 'http://localhost:3000',
       },
     ],
