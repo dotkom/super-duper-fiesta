@@ -1,6 +1,9 @@
 const merge = require('webpack-merge');
 const config = require('./webpack.config');
 
+const host = process.env.SDF_HOST || 'localhost';
+const port = process.env.SDF_PORT || '3000';
+
 module.exports = merge.smart(config, {
   devtool: 'eval-source-map',
   module: {
@@ -27,7 +30,7 @@ module.exports = merge.smart(config, {
     proxy: [
       {
         context: ['/socket.io/', '/login', '/auth', '/logout'],
-        target: 'http://localhost:3000',
+        target: `http://${host}:${port}`,
       },
     ],
     historyApiFallback: {

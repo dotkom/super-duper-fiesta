@@ -1,9 +1,12 @@
-
-FROM node:boron
+FROM node:7.9-alpine
 
 ENV APP_DIR=/srv/app
 
 RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 
-EXPOSE 3000
+RUN apk add --no-cache --update git
+
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
