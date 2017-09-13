@@ -16,7 +16,8 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 
 - Start by cloning the repository, then running `npm install` from the root directory.
 - Bootstrap the database by running `node server/init.js`.
-- Run `npm start`.
+- Run backend with `npm start`.
+- Run frontend with `npm build:dev`
 
 ### Instructions (production)
 
