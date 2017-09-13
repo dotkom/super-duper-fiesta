@@ -4,6 +4,9 @@ const config = require('./webpack.config');
 const host = process.env.SDF_HOST || 'localhost';
 const port = process.env.SDF_PORT || '3000';
 
+const backendHost = process.env.SDF_BACKEND_HOST || 'backend';
+const backendPort = process.env.SDF_BACKEND_PORT || '3000';
+
 module.exports = merge.smart(config, {
   devtool: 'eval-source-map',
   module: {
@@ -30,7 +33,7 @@ module.exports = merge.smart(config, {
     proxy: [
       {
         context: ['/socket.io/', '/login', '/auth', '/logout'],
-        target: `http://${host}:${port}`,
+        target: `http://${backendHost}:${backendPort}`,
       },
     ],
     historyApiFallback: {
