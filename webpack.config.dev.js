@@ -23,4 +23,15 @@ module.exports = merge.smart(config, {
       },
     ],
   },
+  devServer: {
+    proxy: [
+      {
+        context: ['/socket.io/', '/login', '/auth'],
+        target: 'http://localhost:3000',
+      },
+    ],
+    historyApiFallback: {
+      index: '/',
+    },
+  },
 });
