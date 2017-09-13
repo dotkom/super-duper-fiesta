@@ -22,8 +22,17 @@ services:
     ports:
       - "3000:3000"
     environment:
-      SDF_HOST: 0.0.0.0
-      SDF_DATABASE_URL: mongodb://mongo:27017/sdf
+      - SDF_HOST=0.0.0.0
+      - SDF_DATABASE_URL=mongodb://mongo:27017/sdf
+      - SDF_OAUTH2_RESOURCE_BACKEND
+      - SDF_OW4_USERS_API_ENDPOINT
+      - SDF_OAUTH2_PROVIDER_BACKEND
+      - SDF_OAUTH2_AUTHORIZATION_URL
+      - SDF_OAUTH2_TOKEN_URL
+      - SDF_OAUTH2_CLIENT_ID
+      - SDF_OAUTH2_CLIENT_SECRET
+      - SDF_OAUTH2_CALLBACK_URL
+      - SDF_GENFORS_ADMIN_PASSWORD
     volumes:
       - .:/srv/app/
     tty: true

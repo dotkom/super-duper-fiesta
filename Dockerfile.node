@@ -10,3 +10,6 @@ RUN apk add --no-cache --update git
 COPY package.json .
 COPY yarn.lock .
 RUN yarn
+
+EXPOSE 3000
+
