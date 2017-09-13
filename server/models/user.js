@@ -156,6 +156,15 @@ function setCanVote(user, targetUser) {
   });
 }
 
+const setUserPermissions = (id, requestedPermissions) => {
+  const permissions = requestedPermissions || permissionLevel.IS_MANAGER;
+  return new Promise((resolve, reject) => {
+    User.findByIdAndUpdate(id, { permissions }, { new: true })
+      .then(resolve)
+      .catch(reject);
+  });
+};
+
 module.exports = {
   addUser,
   addAnonymousUser,
@@ -168,6 +177,7 @@ module.exports = {
   setNote,
   setCanVote,
   setGenfors,
+  setUserPermissions,
   updateUserById,
   validatePasswordHash,
 };
