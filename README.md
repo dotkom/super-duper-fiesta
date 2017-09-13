@@ -136,7 +136,7 @@ To configure the app to use the OAuth2 provider, set the following values using 
 | `SDF_OAUTH2_TOKEN_URL` | URL to fetch OAuth2 token | `/sso/o/token/` | `/sso/o/token/` |
 | `SDF_OAUTH2_CLIENT_ID` | Client ID for app | `client id` | `''` |
 | `SDF_OAUTH2_CLIENT_SECRET` | Client secret for app | `client secret` | `''` |
-| `SDF_OAUTH2_CALLBACK_URL` | Callback URL to the app | `http://127.0.0.1:3000/auth` | `''` |
+| `SDF_OAUTH2_CALLBACK_URL` | Callback URL to the app | `http://127.0.0.1:8080/auth` | `''` |
 
 
 _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
