@@ -7,7 +7,7 @@ module.exports = {
   entry: ['./client/src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: '[name].js',
   },
   resolve: {

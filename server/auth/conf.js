@@ -7,7 +7,7 @@ const OW4OAUTH2_SETUP = {
   tokenURL: OW4_OAUTH2_PROVIDER_BACKEND + (process.env.SDF_OAUTH2_TOKEN_URL || '/sso/o/token/'),
   clientID: process.env.SDF_OAUTH2_CLIENT_ID || 'default_key',
   clientSecret: process.env.SDF_OAUTH2_CLIENT_SECRET || '',
-  callbackURL: process.env.SDF_OAUTH2_CALLBACK_URL || 'http://127.0.0.1:3000/auth',
+  callbackURL: process.env.SDF_OAUTH2_CALLBACK_URL || 'http://127.0.0.1:8080/auth',
   scope: ['authentication.onlineuser.username.read',
     'authentication.onlineuser.first_name.read',
     'authentication.onlineuser.last_name.read',

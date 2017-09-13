@@ -8,9 +8,10 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack --config webpack.config.production.js",
-    "dev": "node server/app.js",
+    "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
+    "backend": "node server/app.js",
     "lint": "eslint client/src/ server/",
-    "start": "npm run dev",
+    "start": "npm run backend",
     "prod": "node server/app.js"
   },
   "dependencies": {
