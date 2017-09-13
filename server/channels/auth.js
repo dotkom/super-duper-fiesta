@@ -1,9 +1,14 @@
 const { emit } = require('../utils');
 const { getActiveGenfors, validatePin } = require('../models/meeting');
-const { addAnonymousUser, validatePasswordHash } = require('../models/user');
+const { addAnonymousUser, setUserPermissions, validatePasswordHash } = require('../models/user');
 const logger = require('../logging');
 
-const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
+const {
+  ADMIN_LOGIN,
+  AUTH_REGISTER,
+  AUTH_REGISTERED,
+  AUTH_SIGNED_IN } = require('../../common/actionTypes/auth');
+const permissionLevel = require('../../common/auth/permissions');
 
 module.exports = (socket) => {
   async function action(data) {
@@ -46,6 +51,28 @@ module.exports = (socket) => {
         }
         logger.silly('Successfully registered', { username });
         emit(socket, AUTH_REGISTERED, { registered: true });
+        break;
+      }
+      case ADMIN_LOGIN: {
+        const { password } = data;
+        if (process.env.SDF_GENFORS_ADMIN_PASSWORD !== undefined &&
+            process.env.SDF_GENFORS_ADMIN_PASSWORD.length > 0 &&
+            password === process.env.SDF_GENFORS_ADMIN_PASSWORD) {
+          logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
+          // eslint-disable-next-line no-underscore-dangle
+          const updatedUser = await setUserPermissions(socket.request.user._id,
+            permissionLevel.IS_MANAGER);
+          emit(socket, AUTH_SIGNED_IN, {
+            username: updatedUser.username,
+            full_name: updatedUser.name,
+            logged_in: updatedUser.logged_in,
+            id: updatedUser._id, // eslint-disable-line no-underscore-dangle
+            permissions: updatedUser.permissions,
+          });
+        } else {
+          logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
+          emit(socket, 'AUTH_ERROR', { error: 'Ugyldig administratorpassord.' });
+        }
         break;
       }
       default:
