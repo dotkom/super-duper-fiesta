@@ -6,26 +6,53 @@ services:
     image: mongo:latest
     volumes:
       - /data/db
-    ports:
-      - "27017:27017"
 
-
-  node:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile.node
-    container_name: super-duper-fiesta
+    container_name: fiestabackend
     depends_on:
       - mongo
-    command: npm start
+    command: npm run backend
     links:
       - mongo
     ports:
       - "3000:3000"
     environment:
-      SDF_HOST: 0.0.0.0
-      SDF_DATABASE_URL: mongodb://mongo:27017/sdf
+      - SDF_HOST=0.0.0.0
+      - SDF_DATABASE_URL=mongodb://mongo:27017/sdf
+      - SDF_OAUTH2_RESOURCE_BACKEND
+      - SDF_OW4_USERS_API_ENDPOINT
+      - SDF_OAUTH2_PROVIDER_BACKEND
+      - SDF_OAUTH2_AUTHORIZATION_URL
+      - SDF_OAUTH2_TOKEN_URL
+      - SDF_OAUTH2_CLIENT_ID
+      - SDF_OAUTH2_CLIENT_SECRET
+      - SDF_OAUTH2_CALLBACK_URL
+      - SDF_GENFORS_ADMIN_PASSWORD
     volumes:
+      - .:/srv/app/
+    tty: true
+    stdin_open: true
+
+  frontend: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: frontend-fiesta
+    depends_on:
+      - mongo
+    command: npm run frontend
+    links:
+      - mongo
+    ports: 
+      - "8080:8080"
+    environment: 
+      SDF_HOST: 0.0.0.0
+      SDF_PORT: "8080"
+      SDF_DATABASE_URL: mongo:27017/sdf
+    volumes: 
       - .:/srv/app/
     tty: true
     stdin_open: true
