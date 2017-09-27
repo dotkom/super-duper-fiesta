@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
+import DocumentTitle from 'react-document-title';
+
 import { register } from '../../actionCreators/auth';
 import Button from '../Button';
 import Card from '../Card';
@@ -74,49 +76,51 @@ class Setup extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <Card classes={css.setup} title="Registrering for generalforsamling">
-        <form onSubmit={e => this.submit(e)}>
-          <label>
-            <div className={css.text}>Pin kode</div>
-            <input
-              type="number"
-              value={pin}
-              onChange={e => this.changePin(e)}
-            />
-            <div className={css.help}>Kode oppgitt under generalforsamling</div>
-          </label>
-          <label>
-            <div className={css.text}>Personlig kode</div>
-            <input
-              type="password"
-              value={privateCode}
-              onChange={e => this.changePrivateCode(e)}
-            />
-            <div className={css.help}>
-              Personlig kode brukes for å lage en unik hash som brukes til hemmelige valg.
-              Denne lagres ikke og det er derfor ytterst viktig at du ikke glemmer den.
+      <DocumentTitle title="Registrering for generalforsamling">
+        <Card classes={css.setup} title="Registrering for generalforsamling">
+          <form onSubmit={e => this.submit(e)}>
+            <label>
+              <div className={css.text}>Pin kode</div>
+              <input
+                type="number"
+                value={pin}
+                onChange={e => this.changePin(e)}
+              />
+              <div className={css.help}>Kode oppgitt under generalforsamling</div>
+            </label>
+            <label>
+              <div className={css.text}>Personlig kode</div>
+              <input
+                type="password"
+                value={privateCode}
+                onChange={e => this.changePrivateCode(e)}
+              />
+              <div className={css.help}>
+                Personlig kode brukes for å lage en unik hash som brukes til hemmelige valg.
+                Denne lagres ikke og det er derfor ytterst viktig at du ikke glemmer den.
+              </div>
+            </label>
+            <label>
+              <div className={css.text}>Gjenta personlig kode</div>
+              <input
+                type="password"
+                value={repeatPrivateCode}
+                onChange={e => this.changeRepeatPrivateCode(e)}
+              />
+            </label>
+            { errorMessage &&
+              <p className={css.warning}>
+                {errorMessage}
+              </p>
+            }
+            <div>
+              <Button background size="lg" disabled={errorMessage !== null}>
+                Fullfør registrering
+              </Button>
             </div>
-          </label>
-          <label>
-            <div className={css.text}>Gjenta personlig kode</div>
-            <input
-              type="password"
-              value={repeatPrivateCode}
-              onChange={e => this.changeRepeatPrivateCode(e)}
-            />
-          </label>
-          { errorMessage &&
-            <p className={css.warning}>
-              {errorMessage}
-            </p>
-          }
-          <div>
-            <Button background size="lg" disabled={errorMessage !== null}>
-              Fullfør registrering
-            </Button>
-          </div>
-        </form>
-      </Card>
+          </form>
+        </Card>
+      </DocumentTitle>
     );
   }
 }

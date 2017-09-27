@@ -25,7 +25,7 @@ pipeline:
     when:
       event: pull_request
     commands:
-      - npm install --depth=0 --quiet
+      - yarn
       - npm run build:prod
       - npm run lint
   

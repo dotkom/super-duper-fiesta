@@ -8,9 +8,10 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack --config webpack.config.production.js",
-    "dev": "node server/app.js",
+    "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
+    "backend": "node server/app.js",
     "lint": "eslint client/src/ server/",
-    "start": "npm run dev",
+    "start": "npm run backend",
     "prod": "node server/app.js"
   },
   "dependencies": {
@@ -42,7 +43,10 @@
     "passport": "^0.3.2",
     "passport-oauth2": "^1.4.0",
     "passport.socketio": "^3.7.0",
+    "raven": "^2.1.2",
+    "raven-js": "^3.17.0",
     "react": "^15.4.2",
+    "react-document-title": "^2.0.3",
     "react-dom": "^15.4.2",
     "react-hot-loader": "next",
     "react-redux": "^5.0.2",

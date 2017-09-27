@@ -7,7 +7,7 @@ module.exports = {
   entry: ['./client/src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: '[name].js',
   },
   resolve: {
@@ -45,6 +45,10 @@ module.exports = {
       template: 'client/index.html',
     }),
     new FaviconsWebpackPlugin('./client/favicon.png'),
+    new webpack.EnvironmentPlugin({
+      SDF_SENTRY_DSN_BACKEND: '',
+      SDF_SENTRY_DSN_FRONTEND: '',
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: module => (
