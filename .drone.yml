@@ -1,18 +1,10 @@
 pipeline:
   restore-cache:
     image: drillster/drone-volume-cache
+    pull: true
     when:
       event: pull_request
     restore: true
-    mount:
-      - ./node_modules
-    volumes:
-      - /tmp/cache:/cache
-  rebuild-cache:
-    image: drillster/drone-volume-cache
-    when:
-      event: pull_request
-    rebuild: true
     mount:
       - ./node_modules
     volumes:
@@ -28,7 +20,18 @@ pipeline:
       - yarn
       - npm run build:prod
       - npm run lint
-  
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    pull: true
+    when:
+      event: pull_request
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
   build:
     image: docker
     secrets: [registry_username, registry_password]
