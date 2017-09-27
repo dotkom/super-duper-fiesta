@@ -31,6 +31,7 @@ services:
       - SDF_OAUTH2_CLIENT_SECRET
       - SDF_OAUTH2_CALLBACK_URL
       - SDF_GENFORS_ADMIN_PASSWORD
+      - SDF_SENTRY_DSN_BACKEND
     volumes:
       - .:/srv/app/
     tty: true
@@ -49,9 +50,10 @@ services:
     ports: 
       - "8080:8080"
     environment: 
-      SDF_HOST: 0.0.0.0
-      SDF_PORT: "8080"
-      SDF_DATABASE_URL: mongo:27017/sdf
+      - SDF_HOST=0.0.0.0
+      - SDF_PORT=8080
+      - SDF_DATABASE_URL=mongo:27017/sdf
+      - SDF_SENTRY_DSN_FRONTEND
     volumes: 
       - .:/srv/app/
     tty: true
