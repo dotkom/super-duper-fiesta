@@ -10,7 +10,7 @@ export const signOut = () => ({
   type: AUTH_SIGNED_OUT,
 });
 
-export const adminLogin = (password) => ({
+export const adminLogin = password => ({
   type: ADMIN_LOGIN,
   password,
-})
+});

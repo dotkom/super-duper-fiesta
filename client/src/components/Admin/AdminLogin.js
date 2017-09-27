@@ -61,5 +61,9 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+AdminLogin.propTypes = {
+  login: React.PropTypes.func.isRequired,
+};
+
 export default AdminLogin;
 export const AdminLoginContainer = connect(null, mapDispatchToProps)(AdminLogin);
