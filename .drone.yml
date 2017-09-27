@@ -31,6 +31,7 @@ pipeline:
   
   build:
     image: docker
+    secrets: [registry_username, registry_password]
     when:
       branch: master
       event: push
