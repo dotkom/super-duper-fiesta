@@ -71,7 +71,7 @@ class App extends React.Component {
 App.defaultProps = {
   fullName: '',
   loggedIn: false,
-  title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
+  title: 'Onlines Generalforsamling',
   match: null,
   version: '',
 };
