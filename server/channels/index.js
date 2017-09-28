@@ -13,7 +13,7 @@ const issue = require('./issue');
 const meeting = require('./admin/meeting');
 const userlist = require('./admin/user/userlist');
 const toggleCanVote = require('./admin/user/toggle_vote');
-const vote = require('./vote');
+const { listener: voteListener } = require('./vote');
 
 const authorizeSuccess = (data, accept) => {
   logger.silly('Authorized socket connection');
@@ -28,8 +28,7 @@ const authorizeFailure = (data, message, error, accept) => {
   }
 };
 
-module.exports.listen = (server, mongooseConnection) => {
-  const io = socketio(server);
+const applyMiddlewares = (io, mongooseConnection) => {
   io.use(passportSocketIo.authorize({
     cookieParser,
     key: 'connect.sid',
@@ -39,10 +38,15 @@ module.exports.listen = (server, mongooseConnection) => {
     fail: authorizeFailure,
   }));
   io.use(cookieParserIO);
+};
+
+const listen = (server, mongooseConnection) => {
+  const io = socketio(server);
+  applyMiddlewares(io, mongooseConnection);
   io.on('connection', (socket) => {
     connection(socket);
     auth(socket);
-    vote(socket);
+    voteListener(socket);
 
     // Admin
     if (socket.request.user.permissions >= permissions.IS_MANAGER) {
@@ -55,4 +59,9 @@ module.exports.listen = (server, mongooseConnection) => {
       meeting(socket);
     }
   });
+};
+
+module.exports = {
+  applyMiddlewares,
+  listen,
 };
