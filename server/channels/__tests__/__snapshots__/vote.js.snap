@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`submitRegularVote does something 1`] = `
+exports[`submitRegularVote emits vote 1`] = `
 Array [
   Array [
     Object {

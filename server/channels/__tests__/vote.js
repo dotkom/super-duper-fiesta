@@ -1,28 +1,19 @@
 jest.mock('../../models/user');
-jest.mock('../../models/vote', () => ({
-  haveIVoted: async () => false,
-  createVote: () => ({
-    save: async () => jest.fn(),
-  }),
-}));
-jest.mock('../../models/issue', () => ({
-  getIssueById: async issueId => ({
-    _id: issueId,
-    active: true,
-    genfors: '1',
-  }),
-}));
-jest.mock('../../models/meeting', () => ({
-  getActiveGenfors: async () => ({
-    id: '1',
-  }),
-  getGenfors: async id => ({
-    id,
-  }),
-}));
+jest.mock('../../models/vote');
+jest.mock('../../models/issue');
+jest.mock('../../models/meeting');
 jest.mock('../../utils');
 const { submitRegularVote } = require('../vote');
-const { broadcast, emit } = require('../../utils');
+const { emit } = require('../../utils');
+const { haveIVoted, createVote } = require('../../models/vote');
+const { getIssueById } = require('../../models/issue');
+const { getActiveGenfors, getGenfors } = require('../../models/meeting');
+
+const generateIssue = (issueId = 1) => ({
+  _id: issueId,
+  active: true,
+  genfors: '1',
+});
 
 const generateSocket = user => ({
   request: {
@@ -48,13 +39,26 @@ const generateData = () => ({
   alternative: 1,
 });
 
+
+getIssueById.mockImplementation(async () => generateIssue());
+haveIVoted.mockImplementation(async () => false);
+createVote.mockImplementation(() => ({
+  save: async () => jest.fn(),
+}));
+getActiveGenfors.mockImplementation(async () => ({
+  id: '1',
+}));
+getGenfors.mockImplementation(async id => ({
+  id,
+}));
+
 describe('submitRegularVote', () => {
   it('returns error when not registered', async () => {
     await submitRegularVote(generateSocket(), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
   });
-  it('does something', async () => {
+  it('emits vote', async () => {
     await submitRegularVote(generateSocket({ completedRegistration: true }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
