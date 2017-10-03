@@ -28,6 +28,37 @@ Array [
       "user": undefined,
     },
   ],
+]
+`;
+
+exports[`submitRegularVote emits vote 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "ADD_VOTE",
+    Object {
+      "_id": undefined,
+      "option": undefined,
+      "question": undefined,
+      "user": undefined,
+    },
+  ],
   Array [
     Object {
       "request": Object {
@@ -54,7 +85,9 @@ Array [
 ]
 `;
 
-exports[`submitRegularVote returns error when not registered 1`] = `
+exports[`submitRegularVote returns error when not registered 1`] = `Array []`;
+
+exports[`submitRegularVote returns error when not registered 2`] = `
 Array [
   Array [
     Object {
