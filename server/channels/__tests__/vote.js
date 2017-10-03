@@ -3,11 +3,12 @@ jest.mock('../../models/vote');
 jest.mock('../../models/issue');
 jest.mock('../../models/meeting');
 jest.mock('../../utils');
-const { submitRegularVote } = require('../vote');
+const { submitRegularVote, submitAnonymousVote } = require('../vote');
 const { emit, broadcast } = require('../../utils');
 const { haveIVoted, createVote } = require('../../models/vote');
 const { getIssueById } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
+const { getAnonymousUser } = require('../../models/user');
 
 const generateIssue = (issueId = 1) => ({
   _id: issueId,
@@ -51,21 +52,89 @@ getActiveGenfors.mockImplementation(async () => ({
 getGenfors.mockImplementation(async id => ({
   id,
 }));
-
-const expectMocksToMatchSnapshot = () => {
-  expect(broadcast.mock.calls).toMatchSnapshot();
-  expect(emit.mock.calls).toMatchSnapshot();
-};
+getAnonymousUser.mockImplementation(async (passwordHash, onlinewebId, genfors) => ({
+  _id: 1,
+}));
 
 describe('submitRegularVote', () => {
-  it('returns error when not registered', async () => {
+  it('emits error when not registered', async () => {
     await submitRegularVote(generateSocket(), generateData());
 
-    expectMocksToMatchSnapshot();
+    expect(emit.mock.calls).toMatchSnapshot();
   });
+
+  it('broadcasts nothing when not registered', async () => {
+    await submitRegularVote(generateSocket(), generateData());
+
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
   it('emits vote', async () => {
     await submitRegularVote(generateSocket({ completedRegistration: true }), generateData());
 
-    expectMocksToMatchSnapshot();
+    expect(emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('broadcasts vote', async () => {
+    await submitRegularVote(generateSocket({ completedRegistration: true }), generateData());
+
+    expect(broadcast.mock.calls).toMatchSnapshot();
+  });
+
+  it('emits error with insufficient permissions', async () => {
+    await submitRegularVote(generateSocket(
+      { completedRegistration: true, permissions: 0 },
+    ), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('broadcasts nothing when voting with insufficient permissions', async () => {
+    await submitRegularVote(generateSocket(
+      { completedRegistration: true, permissions: 0 },
+    ), generateData());
+
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+});
+
+describe('submitAnonymousVote', () => {
+  it('emits error when not registered', async () => {
+    await submitAnonymousVote(generateSocket(
+
+    ), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('broadcasts nothing when not registered', async () => {
+    await submitAnonymousVote(generateSocket(
+
+    ), generateData());
+
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits error with insufficient permissions', async () => {
+    await submitAnonymousVote(generateSocket(
+      { completedRegistration: true, permissions: 0 },
+    ), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('broadcasts nothing when insufficient permissions', async () => {
+    await submitAnonymousVote(generateSocket(
+      { completedRegistration: true, permissions: 0 },
+    ), generateData());
+
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+
+  it('emits vote', async () => {
+    await submitAnonymousVote(generateSocket({ completedRegistration: true }), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
   });
 });
