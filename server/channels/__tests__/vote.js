@@ -9,37 +9,7 @@ const { haveIVoted, createVote } = require('../../models/vote');
 const { getIssueById } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
-
-const generateIssue = (issueId = 1) => ({
-  _id: issueId,
-  active: true,
-  genfors: '1',
-});
-
-const generateSocket = user => ({
-  request: {
-    user: {
-      _id: '123',
-      onlinewebId: '123',
-      name: 'Namy',
-      completedRegistration: false,
-      permissions: 5,
-      genfors: '1',
-      ...user,
-    },
-    headers: {
-      cookie: {
-        passwordHash: 'hashy',
-      },
-    },
-  },
-});
-
-const generateData = () => ({
-  issue: 1,
-  alternative: 1,
-});
-
+const { generateIssue, generateSocket } = require('../../utils/generateTestData');
 
 getIssueById.mockImplementation(async () => generateIssue());
 haveIVoted.mockImplementation(async () => false);
@@ -55,6 +25,12 @@ getGenfors.mockImplementation(async id => ({
 getAnonymousUser.mockImplementation(async (passwordHash, onlinewebId, genfors) => ({
   _id: 1,
 }));
+
+const generateData = () => ({
+  issue: 1,
+  alternative: 1,
+});
+
 
 describe('submitRegularVote', () => {
   it('emits error when not registered', async () => {
