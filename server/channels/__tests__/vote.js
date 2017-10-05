@@ -22,7 +22,7 @@ getActiveGenfors.mockImplementation(async () => ({
 getGenfors.mockImplementation(async id => ({
   id,
 }));
-getAnonymousUser.mockImplementation(async (passwordHash, onlinewebId, genfors) => ({
+getAnonymousUser.mockImplementation(async () => ({
   _id: 1,
 }));
 
