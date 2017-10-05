@@ -4,16 +4,18 @@ const generateIssue = (issueId = 1) => ({
   genfors: '1',
 });
 
+const generateUser = data => (Object.assign({
+  _id: '123',
+  onlinewebId: '123',
+  name: 'Namy',
+  completedRegistration: false,
+  permissions: 5,
+  genfors: '1',
+}, data));
+
 const generateSocket = (user = {}, cookie = {}) => ({
   request: {
-    user: Object.assign({
-      _id: '123',
-      onlinewebId: '123',
-      name: 'Namy',
-      completedRegistration: false,
-      permissions: 5,
-      genfors: '1',
-    }, user),
+    user: generateUser(user),
     headers: {
       cookie: Object.assign({
         passwordHash: 'hashy',
@@ -38,4 +40,5 @@ module.exports = {
   generateSocket,
   generateGenfors,
   generateAnonymousUser,
+  generateUser,
 };
