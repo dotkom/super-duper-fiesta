@@ -9,7 +9,7 @@ const passportSocketIo = require('passport.socketio');
 const auth = require('./auth');
 const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
-const issue = require('./issue');
+const { listener: issueListener } = require('./issue');
 const meeting = require('./admin/meeting');
 const userlist = require('./admin/user/userlist');
 const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
@@ -53,7 +53,7 @@ const listen = (server, mongooseConnection) => {
       const user = socket.request.user;
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');
-      issue(socket);
+      issueListener(socket);
       userlist(socket);
       toggleCanVoteListener(socket);
       meeting(socket);
