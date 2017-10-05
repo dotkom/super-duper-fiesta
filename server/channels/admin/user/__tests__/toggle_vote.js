@@ -19,6 +19,6 @@ describe('toggleCanVote', () => {
     await toggleCanVote(generateSocket(), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(broadcast.mock.calls).toMatchSnapshot();
   });
 });
