@@ -58,8 +58,9 @@ const submitAnonymousVote = async (socket, data) => {
   const anonymousUser = await getAnonymousUser(data.passwordHash,
   socket.request.user.onlinewebId, genfors);
   try {
-    // eslint-disable-next-line no-underscore-dangle
-    const vote = await addVote(data.issue, socket.request.user, data.alternative, anonymousUser._id)
+    const vote = await addVote(data.issue, socket.request.user,
+      // eslint-disable-next-line no-underscore-dangle
+      data.alternative, anonymousUser._id);
     logger.debug('Stored new anonymous vote. Broadcasting ...');
     emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
