@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toggleCanVote emits toggled can vote action on success 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": false,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "TOGGLE_CAN_VOTE",
+    Object {
+      "_id": "123",
+      "canVote": false,
+      "completedRegistration": false,
+      "genfors": "1",
+      "id": undefined,
+      "name": "Namy",
+      "onlinewebId": "123",
+      "permissions": 5,
+    },
+  ],
+]
+`;
