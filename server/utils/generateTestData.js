@@ -1,8 +1,9 @@
-const generateIssue = (issueId = 1) => ({
-  _id: issueId,
+const generateIssue = data => (Object.assign({
+  _id: 1,
   active: true,
   genfors: '1',
-});
+  description: 'Description goes here',
+}, data));
 
 const generateSocket = (user = {}, cookie = {}) => ({
   request: {
