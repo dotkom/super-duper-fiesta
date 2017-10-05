@@ -10,7 +10,7 @@ const auth = require('./auth');
 const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const { listener: issueListener } = require('./issue');
-const meeting = require('./admin/meeting');
+const { listener: meetingListener } = require('./admin/meeting');
 const userlist = require('./admin/user/userlist');
 const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
 const { listener: voteListener } = require('./vote');
@@ -56,7 +56,7 @@ const listen = (server, mongooseConnection) => {
       issueListener(socket);
       userlist(socket);
       toggleCanVoteListener(socket);
-      meeting(socket);
+      meetingListener(socket);
     }
   });
 };
