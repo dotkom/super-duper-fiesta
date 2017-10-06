@@ -23,7 +23,7 @@ const generateData = data => (Object.assign({
 
 describe('register', () => {
   it('emits registration status', async () => {
-    await register(generateSocket(), generateData());
+    await register(generateSocket({ completedRegistration: false }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
@@ -31,7 +31,7 @@ describe('register', () => {
 
   it('emits error when registration is closed', async () => {
     getActiveGenfors.mockImplementation(async () => generateGenfors({ registrationOpen: false }));
-    await register(generateSocket(), generateData());
+    await register(generateSocket({ completedRegistration: false }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
@@ -39,7 +39,7 @@ describe('register', () => {
 
   it('emits error when pin code is wrong', async () => {
     getActiveGenfors.mockImplementation(async () => generateGenfors({ pin: 5453577654 }));
-    await register(generateSocket(), generateData());
+    await register(generateSocket({ completedRegistration: false }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
@@ -95,7 +95,7 @@ describe('register', () => {
       },
     );
     await register(
-      generateSocket(),
+      generateSocket({ completedRegistration: false }),
       generateData(),
     );
 

@@ -34,13 +34,13 @@ const generateData = () => ({
 
 describe('submitRegularVote', () => {
   it('emits error when not registered', async () => {
-    await submitRegularVote(generateSocket(), generateData());
+    await submitRegularVote(generateSocket({ completedRegistration: false }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
   });
 
   it('broadcasts nothing when not registered', async () => {
-    await submitRegularVote(generateSocket(), generateData());
+    await submitRegularVote(generateSocket({ completedRegistration: false }), generateData());
 
     expect(broadcast.mock.calls).toEqual([]);
   });
@@ -77,7 +77,7 @@ describe('submitRegularVote', () => {
 describe('submitAnonymousVote', () => {
   it('emits error when not registered', async () => {
     await submitAnonymousVote(generateSocket(
-
+      { completedRegistration: false },
     ), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
@@ -85,7 +85,7 @@ describe('submitAnonymousVote', () => {
 
   it('broadcasts nothing when not registered', async () => {
     await submitAnonymousVote(generateSocket(
-
+      { completedRegistration: false },
     ), generateData());
 
     expect(broadcast.mock.calls).toEqual([]);

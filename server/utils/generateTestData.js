@@ -9,9 +9,10 @@ const generateUser = data => (Object.assign({
   _id: '123',
   onlinewebId: '123',
   name: 'Namy',
-  completedRegistration: false,
+  completedRegistration: true,
   permissions: 5,
   genfors: '1',
+  logged_in: true,
 }, data));
 
 const generateSocket = (user = {}, cookie = {}) => ({

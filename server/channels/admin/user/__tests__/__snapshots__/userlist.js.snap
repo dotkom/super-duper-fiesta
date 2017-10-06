@@ -14,8 +14,9 @@ Array [
         },
         "user": Object {
           "_id": "123",
-          "completedRegistration": false,
+          "completedRegistration": true,
           "genfors": "1",
+          "logged_in": true,
           "name": "Namy",
           "onlinewebId": "123",
           "permissions": 5,
@@ -43,8 +44,9 @@ Array [
         },
         "user": Object {
           "_id": "123",
-          "completedRegistration": false,
+          "completedRegistration": true,
           "genfors": "1",
+          "logged_in": true,
           "name": "Namy",
           "onlinewebId": "123",
           "permissions": 5,
@@ -55,16 +57,18 @@ Array [
     Array [
       Object {
         "_id": 1,
-        "completedRegistration": false,
+        "completedRegistration": true,
         "genfors": 1,
+        "logged_in": true,
         "name": "Namy",
         "onlinewebId": "123",
         "permissions": 5,
       },
       Object {
         "_id": 2,
-        "completedRegistration": false,
+        "completedRegistration": true,
         "genfors": 1,
+        "logged_in": true,
         "name": "Namy",
         "onlinewebId": "123",
         "permissions": 5,
