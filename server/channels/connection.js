@@ -5,9 +5,10 @@ const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const getQuestions = require('../models/issue').getQuestions;
 const getVotes = require('../models/vote').getVotes;
-const generatePublicVote = require('../models/vote').generatePublicVote;
+const { generatePublicVote } = require('../managers/vote');
 const haveIVoted = require('../models/vote').haveIVoted;
-const { getAnonymousUser, validatePasswordHash } = require('../models/user');
+const { getAnonymousUser } = require('../models/user');
+const { validatePasswordHash } = require('../managers/user');
 
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
@@ -62,13 +63,13 @@ const connection = async (socket) => {
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
   }
-  getActiveGenfors().then((meeting) => {
+  await getActiveGenfors().then(async (meeting) => {
     if (!meeting) {
       emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
     } else {
       emit(socket, OPEN_MEETING, meeting);
       // eslint-disable-next-line no-underscore-dangle
-      getActiveQuestion(meeting._id).then(async (issue) => {
+      await getActiveQuestion(meeting._id).then(async (issue) => {
         if (issue === null) {
           emitNoActiveIssue(socket);
         } else {
@@ -77,7 +78,7 @@ const connection = async (socket) => {
           emit(socket, ENABLE_VOTING);
 
           // Issue is active, let's emit already given votes.
-          getVotes(issue)
+          await getVotes(issue)
           .then((votes) => {
             votes.forEach(async (vote) => {
               emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
@@ -104,11 +105,11 @@ const connection = async (socket) => {
         emitNoActiveIssue(socket);
       });
       // Fill backlog of old issues too
-      getQuestions(meeting).then((issues) => {
-        issues.forEach((issue) => {
+      await getQuestions(meeting).then((issues) => {
+        issues.forEach(async (issue) => {
           emit(socket, CLOSE_ISSUE, issue);
           // Get votes for backlogged issues
-          getVotes(issue).then((votes) => {
+          await getVotes(issue).then((votes) => {
             votes.forEach(async (vote) => {
               emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
             });

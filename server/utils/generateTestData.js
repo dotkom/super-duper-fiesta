@@ -37,10 +37,18 @@ const generateAnonymousUser = data => (Object.assign({
   genfors: 1,
 }, data));
 
+const generateVote = data => (Object.assign({
+  _id: 0,
+  issue: 1,
+  user: 1,
+  option: 3,
+}, data));
+
 module.exports = {
   generateIssue,
   generateSocket,
   generateGenfors,
   generateAnonymousUser,
   generateUser,
+  generateVote,
 };
