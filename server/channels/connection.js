@@ -65,72 +65,84 @@ const emitUserData = async (socket) => {
   }
 };
 
+const emitActiveQuestion = async (socket, meeting) => {
+  try {
+    // eslint-disable-next-line no-underscore-dangle
+    const issue = await getActiveQuestion(meeting._id);
+    if (issue === null) {
+      emitNoActiveIssue(socket);
+      return;
+    }
+    logger.debug('Current issue', { issue: issue.description });
+    emit(socket, OPEN_ISSUE, issue);
+    emit(socket, ENABLE_VOTING);
+
+    // Issue is active, let's emit already given votes.
+    try {
+      const votes = await getVotes(issue);
+      votes.forEach(async (vote) => {
+        emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
+      });
+    } catch (err) {
+      logger.error('Fetching stored votes failed for issue', err, { issue });
+    }
+
+    // Emit voted state if user has voted.
+    let voter;
+    if (issue.secret) {
+      voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
+        socket.request.user.onlinewebId, meeting);
+    } else {
+      voter = socket.request.user;
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    const votedState = await haveIVoted(issue, voter._id);
+    if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
+  } catch (err) {
+    logger.error('Getting currently active issue failed.', err);
+    emitNoActiveIssue(socket);
+  }
+};
+
+const emitIssueBacklog = async (socket, meeting) => {
+  try {
+    const issues = await getQuestions(meeting);
+    issues.forEach(async (issue) => {
+      emit(socket, CLOSE_ISSUE, issue);
+      // Get votes for backlogged issues
+      try {
+        const votes = await getVotes(issue);
+        votes.forEach(async (vote) => {
+          emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
+        });
+      } catch (err) {
+        // eslint-disable-next-line no-underscore-dangle
+        logger.error('Getting votes for issue failed', err, { issueId: issue._id });
+      }
+    });
+  } catch (err) {
+    logger.error('Getting issue backlog failed', err);
+  }
+};
+
 const emitGenforsData = async (socket) => {
-  await getActiveGenfors().then(async (meeting) => {
+  try {
+    const meeting = await getActiveGenfors();
     if (!meeting) {
       emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
-    } else {
-      emit(socket, OPEN_MEETING, meeting);
-      // eslint-disable-next-line no-underscore-dangle
-      await getActiveQuestion(meeting._id).then(async (issue) => {
-        if (issue === null) {
-          emitNoActiveIssue(socket);
-        } else {
-          logger.debug('Current issue', { issue: issue.description });
-          emit(socket, OPEN_ISSUE, issue);
-          emit(socket, ENABLE_VOTING);
-
-          // Issue is active, let's emit already given votes.
-          await getVotes(issue)
-          .then((votes) => {
-            votes.forEach(async (vote) => {
-              emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-            });
-          })
-          .catch((err) => {
-            logger.error('Fetching stored votes failed for issue', err, { issue });
-          });
-
-          // Emit voted state if user has voted.
-          let voter;
-          if (issue.secret) {
-            voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
-              socket.request.user.onlinewebId, meeting);
-          } else {
-            voter = socket.request.user;
-          }
-          // eslint-disable-next-line no-underscore-dangle
-          const votedState = await haveIVoted(issue, voter._id);
-          if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
-        }
-      }).catch((err) => {
-        logger.error('Getting currently active issue failed.', err);
-        emitNoActiveIssue(socket);
-      });
-      // Fill backlog of old issues too
-      await getQuestions(meeting).then((issues) => {
-        issues.forEach(async (issue) => {
-          emit(socket, CLOSE_ISSUE, issue);
-          // Get votes for backlogged issues
-          await getVotes(issue).then((votes) => {
-            votes.forEach(async (vote) => {
-              emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-            });
-          }).catch((err) => {
-            // eslint-disable-next-line no-underscore-dangle
-            logger.error('Getting votes for issue failed', err, { issueId: issue._id });
-          });
-        });
-      }).catch((err) => {
-        logger.error('Getting issue backlog failed', err);
-      });
+      return;
     }
-  }).catch((err) => {
+    emit(socket, OPEN_MEETING, meeting);
+    await emitActiveQuestion(socket, meeting);
+
+    // Fill backlog of old issues too
+    await emitIssueBacklog(socket, meeting);
+  } catch (err) {
     logger.error('Something went wrong when fetching active genfors.', err);
     emit(socket, 'issue', {}, {
       error: 'Noe gikk galt. Vennligst prøv igjen.',
     });
-  });
+  }
 };
 
 const connection = async (socket) => {
