@@ -11,7 +11,7 @@ execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
-const { getVotes } = require('../../models/vote');
+const { getVotes, haveIVoted } = require('../../models/vote');
 const { getActiveQuestion, getQuestions } = require('../../models/issue');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote } = require('../../utils/generateTestData');
 
@@ -38,9 +38,107 @@ describe('connection', () => {
       generateVote({ question: issueId, _id: 3 }),
       generateVote({ question: issueId, _id: 4 }),
     ]);
+    haveIVoted.mockImplementation(async () => false);
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when signed in and no active genfors', async () => {
+    getActiveGenfors.mockImplementation(async () => null);
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when not signed in and no active genfors', async () => {
+    getActiveGenfors.mockImplementation(async () => null);
+    await connection(generateSocket({ logged_in: false, completedRegistration: false }));
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when user has not completed registration and no genfors is active', async () => {
+    getActiveGenfors.mockImplementation(async () => null);
+    await connection(generateSocket({ completedRegistration: false }));
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when validation of password hash returns false', async () => {
+    getAnonymousUser.mockImplementation(async () => null);
+    await connection(generateSocket({ completedRegistration: true }));
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when validation of password hash returns throws error', async () => {
+    getAnonymousUser.mockImplementation(async () => { throw new Error('Failed'); });
+    getActiveGenfors.mockImplementation(async () => null);
+    await connection(generateSocket({ completedRegistration: false }));
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when there is no active question', async () => {
+    getActiveQuestion.mockImplementation(async () => null);
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when retrieving votes fails', async () => {
+    getVotes.mockImplementation(async () => { throw new Error('Failed'); });
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when active question is secret', async () => {
+    getActiveQuestion.mockImplementation(async () => generateIssue({ secret: true }));
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when user has already voted', async () => {
+    haveIVoted.mockImplementation(async () => true);
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when retrieving active question fails', async () => {
+    getActiveQuestion.mockImplementation(async () => { throw new Error('Failed'); });
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when retrieving questions fails', async () => {
+    getQuestions.mockImplementation(async () => { throw new Error('Failed'); });
+    await connection(generateSocket());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits correct actions when retrieving active genfors fails', async () => {
+    getActiveGenfors.mockImplementation(async () => { throw new Error('Failed'); });
     await connection(generateSocket());
 
     expect(emit.mock.calls).toMatchSnapshot();
