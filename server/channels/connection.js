@@ -36,7 +36,7 @@ const emitNoActiveIssue = (socket) => {
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
-const connection = async (socket) => {
+const emitUserData = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
   const loggedIn = socket.request.user.logged_in;
   if (loggedIn) {
@@ -63,6 +63,9 @@ const connection = async (socket) => {
   } else {
     emit(socket, AUTH_SIGNED_OUT, {});
   }
+};
+
+const emitGenforsData = async (socket) => {
   await getActiveGenfors().then(async (meeting) => {
     if (!meeting) {
       emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
@@ -128,6 +131,11 @@ const connection = async (socket) => {
       error: 'Noe gikk galt. Vennligst prøv igjen.',
     });
   });
+};
+
+const connection = async (socket) => {
+  await emitUserData(socket);
+  await emitGenforsData(socket);
 };
 
 module.exports = connection;
