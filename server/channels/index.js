@@ -11,7 +11,7 @@ const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const { listener: issueListener } = require('./issue');
 const { listener: meetingListener } = require('./admin/meeting');
-const userlist = require('./admin/user/userlist');
+const { listener: userListListener } = require('./admin/user/userlist');
 const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
 const { listener: voteListener } = require('./vote');
 
@@ -54,7 +54,7 @@ const listen = (server, mongooseConnection) => {
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');
       issueListener(socket);
-      userlist(socket);
+      userListListener(socket);
       toggleCanVoteListener(socket);
       meetingListener(socket);
     }
