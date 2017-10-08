@@ -10,20 +10,40 @@ pipeline:
     volumes:
       - /tmp/cache:/cache
 
+  setup:
+    image: node:boron
+    when:
+      event: pull_request
+    commands:
+      - yarn
+  
+  build:
+    image: node:boron
+    group: testing
+    when:
+      event: pull_request
+    commands:
+      - npm run build:prod
+
   test:
     image: node:boron
+    group: testing
     secrets: [codecov_token]
     environment:
       SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
     when:
       event: pull_request
     commands:
-      - yarn
-      - npm run build:prod
-      - npm run lint
       - yarn test
-      - yarn add codecov --silent --global
       - yarn codecov
+  
+  lint:
+    image: node:boron
+    group: testing
+    when:
+      event: pull_request
+    commands:
+      - npm run lint
 
   rebuild-cache:
     image: drillster/drone-volume-cache
@@ -36,7 +56,7 @@ pipeline:
     volumes:
       - /tmp/cache:/cache
   
-  build:
+  release:
     image: docker
     secrets: [registry_username, registry_password]
     when:
