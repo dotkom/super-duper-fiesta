@@ -39,7 +39,7 @@ pipeline:
       branch: master
       event: push
     commands:
-      - docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD registry.online.ntnu.no
+      - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
       - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod .
       - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
     volumes:
