@@ -1,7 +1,7 @@
 const { emit } = require('../utils');
 const { getActiveGenfors } = require('../models/meeting');
 const { validatePin } = require('../managers/meeting');
-const { addAnonymousUser } = require('../models/user');
+const { addAnonymousUser } = require('../managers/user');
 const { validatePasswordHash } = require('../managers/user');
 const logger = require('../logging');
 

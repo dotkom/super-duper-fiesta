@@ -3,11 +3,11 @@
 
 const mongoose = require('mongoose');
 
-const addIssue = require('./models/issue').addIssue;
-const addUser = require('./models/user').addUser;
+const addIssue = require('./managers/issue').addIssue;
+const addUser = require('./managers/user').addUser;
 const getUserByUsername = require('./models/user').getUserByUsername;
 const getActiveQuestion = require('./models/issue').getActiveQuestion;
-const addGenfors = require('./models/meeting').addGenfors;
+const addGenfors = require('./managers/meeting').addGenfors;
 const getActiveGenfors = require('./models/meeting').getActiveGenfors;
 
 const permissionLevel = require('../common/auth/permissions');
