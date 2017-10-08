@@ -23,7 +23,7 @@ pipeline:
       - npm run lint
       - yarn test
       - yarn add codecov --silent --global
-      - codecov
+      - yarn codecov
 
   rebuild-cache:
     image: drillster/drone-volume-cache

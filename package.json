@@ -8,6 +8,8 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack --config webpack.config.production.js",
+    "codecov": "codecov",
+    "coverage": "codecov",
     "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
     "backend": "node server/app.js",
     "lint": "eslint client/src/ server/",
@@ -21,6 +23,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
     "babel-preset-es2015": "^6.18.0",
     "classnames": "^2.2.5",
+    "codecov": "^2.3.0",
     "connect-mongo": "^1.3.2",
     "cookie-parser": "^1.4.3",
     "crypto-js": "^3.1.9-1",
