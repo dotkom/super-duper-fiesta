@@ -1,18 +1,10 @@
 pipeline:
   restore-cache:
     image: drillster/drone-volume-cache
+    pull: true
     when:
       event: pull_request
     restore: true
-    mount:
-      - ./node_modules
-    volumes:
-      - /tmp/cache:/cache
-  rebuild-cache:
-    image: drillster/drone-volume-cache
-    when:
-      event: pull_request
-    rebuild: true
     mount:
       - ./node_modules
     volumes:
@@ -25,27 +17,43 @@ pipeline:
     when:
       event: pull_request
     commands:
-      - npm install --depth=0 --quiet
+      - yarn
       - npm run build:prod
       - npm run lint
-  
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    pull: true
+    when:
+      event: pull_request
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
   build:
     image: docker
+    secrets: [registry_username, registry_password]
     when:
       branch: master
       event: push
     commands:
-      - docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD registry.online.ntnu.no
+      - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
       - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod .
       - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
   deploy:
-    image: plugins/ssh
+    image: appleboy/drone-ssh
+    pull: true
+    secrets: [ssh_key]
     host: nansen.online.ntnu.no
     port: 22
-    user: root
+    username: root
+    key: ${SSH_KEY}
+    command_timeout: 600
     when:
       branch: master
       event: push

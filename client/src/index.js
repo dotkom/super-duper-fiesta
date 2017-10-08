@@ -7,10 +7,20 @@ import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
 import 'normalize.css';
+import Raven from 'raven-js';
+
 import votingApp from './reducers';
 import Routes from './routes';
 
 moment.locale('nb');
+
+Raven
+    .config(process.env.SDF_SENTRY_DSN_FRONTEND, {
+      tags: {
+        app: 'frontend',
+      },
+    })
+    .install();
 
 const socket = IO.connect();
 
