@@ -1,13 +1,25 @@
 jest.mock('../../models/issue');
+jest.mock('../../models/meeting');
+jest.mock('../../models/user');
 jest.mock('../../utils');
 const { createIssue, closeIssue, adminDeleteIssue } = require('../issue');
-const { addIssue, endIssue, deleteIssue } = require('../../models/issue');
+const { addIssue, endIssue, deleteIssue, getActiveQuestion } = require('../../models/issue');
+const { getActiveGenfors, getGenfors } = require('../../models/meeting');
+const { getQualifiedUsers } = require('../../models/user');
 const { emit, broadcast } = require('../../utils');
-const { generateSocket, generateIssue } = require('../../utils/generateTestData');
+const { generateSocket, generateIssue, generateGenfors, generateUser } = require('../../utils/generateTestData');
 
 beforeEach(() => {
   addIssue.mockImplementation(async () => generateIssue());
+  getActiveQuestion.mockImplementation(async () => null);
   endIssue.mockImplementation(async () => generateIssue());
+  getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '1' }));
+  getGenfors.mockImplementation(async () => generateGenfors({ id: '1' }));
+  getQualifiedUsers.mockImplementation(async () => [
+    generateUser({ id: '2' }),
+    generateUser({ id: '3' }),
+    generateUser({ id: '4' }),
+  ]);
 });
 
 describe('createIssue', () => {
@@ -35,7 +47,7 @@ describe('closeIssue', () => {
 
   it('emits close issue action and disables voting', async () => {
     endIssue.mockImplementation(async () => generateIssue({ active: false }));
-    await closeIssue(generateSocket(), generateData());
+    await closeIssue(generateSocket({ permissions: 10 }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toMatchSnapshot();
@@ -57,7 +69,7 @@ describe('adminDeleteIssue', () => {
   it('emits delete issue on success', async () => {
     deleteIssue.mockImplementation(async () => generateIssue({ active: false, deleted: true }));
 
-    await adminDeleteIssue(generateSocket(), generateData());
+    await adminDeleteIssue(generateSocket({ permissions: 10 }), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toMatchSnapshot();
