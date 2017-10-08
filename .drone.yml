@@ -12,6 +12,7 @@ pipeline:
 
   test:
     image: node:boron
+    secrets: [codecov_token]
     environment:
       SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
     when:
@@ -20,6 +21,9 @@ pipeline:
       - yarn
       - npm run build:prod
       - npm run lint
+      - yarn test
+      - yarn add codecov --silent --global
+      - codecov
 
   rebuild-cache:
     image: drillster/drone-volume-cache
@@ -31,7 +35,7 @@ pipeline:
       - ./node_modules
     volumes:
       - /tmp/cache:/cache
-
+  
   build:
     image: docker
     secrets: [registry_username, registry_password]
