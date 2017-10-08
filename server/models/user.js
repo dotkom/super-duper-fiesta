@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const logger = require('../logging');
 const getActiveGenfors = require('./meeting').getActiveGenfors;
-const canEdit = require('./meeting').canEdit;
 const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');
