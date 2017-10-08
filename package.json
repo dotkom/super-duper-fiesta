@@ -67,7 +67,7 @@
     "webpack-dev-server": "^2.4.2",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0",
-    "winston": "^2.3.1",
+    "winston": "^2.4.0",
     "winston-error": "^1.0.1"
   },
   "devDependencies": {
