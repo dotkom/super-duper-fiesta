@@ -6,9 +6,9 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
-const auth = require('./auth');
 const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
+const { listener: authListener } = require('./auth');
 const { listener: issueListener } = require('./issue');
 const { listener: meetingListener } = require('./admin/meeting');
 const { listener: userListListener } = require('./admin/user/userlist');
@@ -45,7 +45,7 @@ const listen = (server, mongooseConnection) => {
   applyMiddlewares(io, mongooseConnection);
   io.on('connection', (socket) => {
     connection(socket);
-    auth(socket);
+    authListener(socket);
     voteListener(socket);
 
     // Admin
