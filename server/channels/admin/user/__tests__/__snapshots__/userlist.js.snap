@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`requestUserList emits error when no active genfors was found 1`] = `Array []`;
+
+exports[`requestUserList emits error when retrieving users fails 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "USER_LIST",
+    Array [],
+    Object {
+      "error": "Could not fetch user list.",
+    },
+  ],
+]
+`;
+
+exports[`requestUserList emits user list action on success 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "USER_LIST",
+    Array [
+      Object {
+        "_id": 1,
+        "completedRegistration": true,
+        "genfors": 1,
+        "logged_in": true,
+        "name": "Namy",
+        "onlinewebId": "123",
+        "permissions": 5,
+      },
+      Object {
+        "_id": 2,
+        "completedRegistration": true,
+        "genfors": 1,
+        "logged_in": true,
+        "name": "Namy",
+        "onlinewebId": "123",
+        "permissions": 5,
+      },
+    ],
+  ],
+]
+`;

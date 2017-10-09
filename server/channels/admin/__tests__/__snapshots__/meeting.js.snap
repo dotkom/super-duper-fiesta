@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toggleRegistration emits a toggle action that closes registration 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "TOGGLED_REGISTRATION_STATE",
+    Object {
+      "id": 1,
+      "pin": 3141592653,
+      "registrationOpen": false,
+    },
+  ],
+]
+`;
+
+exports[`toggleRegistration emits a toggle action that opens registration 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "TOGGLED_REGISTRATION_STATE",
+    Object {
+      "id": 1,
+      "pin": 3141592653,
+      "registrationOpen": true,
+    },
+  ],
+]
+`;

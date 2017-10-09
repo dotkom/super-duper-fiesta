@@ -1,0 +1,380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`adminDeleteIssue emits delete issue on success 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DELETED_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+]
+`;
+
+exports[`adminDeleteIssue emits delete issue on success 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DISABLE_VOTING",
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DELETED_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits close issue action and disables voting 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits close issue action and disables voting 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DISABLE_VOTING",
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": 1,
+      "active": false,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits error when it fails 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "issue",
+    Object {},
+    Object {
+      "error": "Closing issue failed",
+    },
+  ],
+]
+`;
+
+exports[`createIssue emits OPEN_ISSUE action creates issue 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "OPEN_ISSUE",
+    Object {
+      "_id": 1,
+      "active": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+    Object {
+      "action": "open",
+    },
+  ],
+]
+`;
+
+exports[`createIssue emits OPEN_ISSUE action creates issue 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "OPEN_ISSUE",
+    Object {
+      "_id": 1,
+      "active": true,
+      "description": "Description goes here",
+      "genfors": "1",
+    },
+    Object {
+      "action": "open",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "ENABLE_VOTING",
+  ],
+]
+`;
+
+exports[`createIssue emits an error when it fails 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "issue",
+    Object {},
+    Object {
+      "error": "Adding new question failed",
+    },
+  ],
+]
+`;

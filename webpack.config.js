@@ -4,7 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
-  entry: ['./client/src/index.js'],
+  entry: [
+    process.env.NODE_ENV !== 'production' && 'react-hot-loader/patch',
+    './client/src/index.js',
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',

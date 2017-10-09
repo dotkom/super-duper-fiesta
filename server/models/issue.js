@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
-const logger = require('../logging');
 const AlternativeSchema = require('./alternative');
-const getActiveGenfors = require('./meeting').getActiveGenfors;
-const canEdit = require('./meeting').canEdit;
-const getQualifiedUsers = require('./user').getQualifiedUsers;
-
-const permissionLevel = require('../../common/auth/permissions');
 
 const Schema = mongoose.Schema;
 
@@ -27,6 +21,9 @@ const QuestionSchema = new Schema({
 });
 const Question = mongoose.model('Question', QuestionSchema);
 
+function addIssue(issue) {
+  return new Question(issue).save();
+}
 
 function getQuestions(genfors) {
   return Question.find({ genfors, deleted: false }).exec();
@@ -41,77 +38,21 @@ function getClosedQuestions(genfors) {
   return Question.find({ genfors, active: false, deleted: false }).exec();
 }
 
-function endQuestion(question, user) {
-  return new Promise((resolve, reject) => {
-    logger.debug('Closing issue', { issue: question });
-    getActiveGenfors().then((genfors) => {
-      canEdit(permissionLevel.IS_MANAGER, user, genfors).then((result) => {
-        if (result === true) {
-          return Question.findByIdAndUpdate(question, { active: false }, { new: true })
-          .then(resolve).catch(reject);
-        }
-        reject(new Error('permission denied'));
-        return null;
-      }).catch(reject);
-    }).catch(reject);
-  });
+function endIssue(issue) {
+  return Question.findByIdAndUpdate(issue, { active: false }, { new: true });
 }
 
-function addQuestion(issueData, closeCurrentIssue) {
-  return new Promise((resolve, reject) => {
-    logger.debug('Creating issue', issueData);
-    getActiveGenfors().then((genfors) => {
-      if (!genfors) reject(new Error('No genfors active'));
-
-      getActiveQuestion(genfors)
-      .catch((err) => {
-        logger.error('Something went wrong while getting active questions', err);
-      }).then((_issue) => {
-        if (_issue && _issue.active && !closeCurrentIssue) {
-          reject("There's already an active question");
-          return null;
-        } else if (_issue && !_issue.active && closeCurrentIssue) {
-          logger.warn("There's already an active issue. Closing it and proceeding", {
-            issue: _issue.description,
-            // user: user,
-            closeCurrentIssue,
-          });
-          endQuestion(_issue);
-        }
-        // removed possible issues and proceeding to create a new one
-        getQualifiedUsers(genfors).then((users) => {
-          const issue = Object.assign(issueData, {
-            genfors,
-            qualifiedVoters: users.length,
-            currentVotes: 0,
-          });
-          logger.debug('Created issue', { issue });
-
-          // @ToDo: Create alternatives, map it to issue obj, then create issue.
-          return new Question(issue).save().then(resolve).catch(reject);
-        }).catch(reject);
-        return null;
-      });
-    }).catch(reject);
-  });
-}
-
-async function deleteIssue(issue, user) {
-  const genfors = await getActiveGenfors();
-  const userCanEdit = await canEdit(permissionLevel.IS_MANAGER, user, genfors);
-  if (userCanEdit) {
-    return Question.findByIdAndUpdate(issue, { active: false, deleted: true }, { new: true });
-  }
-  return null;
+function deleteIssue(issue) {
+  return Question.findByIdAndUpdate(issue, { active: false, deleted: true }, { new: true });
 }
 
 module.exports = {
-  addIssue: addQuestion,
+  addIssue,
   getActiveQuestion,
   getClosedQuestions,
   getIssueById,
   getQuestions,
-  endIssue: endQuestion,
+  endIssue,
   // updateQuestionCounter,
   deleteIssue,
 };

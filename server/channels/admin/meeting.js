@@ -1,26 +1,34 @@
 const emit = require('../../utils').emit;
 const logger = require('../../logging');
 
-const getActiveGenfors = require('../../models/meeting').getActiveGenfors;
-const toggleRegistrationStatus = require('../../models/meeting').toggleRegistrationStatus;
+const { getActiveGenfors, toggleRegistrationStatus } = require('../../models/meeting');
 
 const {
   TOGGLE_REGISTRATION_STATE,
   TOGGLED_REGISTRATION_STATE } = require('../../../common/actionTypes/meeting');
 
-module.exports = (socket) => {
+const toggleRegistration = async (socket, data) => {
+  logger.debug('Toggling meeting registration status', data);
+  const genfors = await getActiveGenfors();
+  const updatedMeeting = await toggleRegistrationStatus(genfors,
+    data.registrationOpen);
+  emit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
+};
+
+const listener = (socket) => {
   socket.on('action', async (data) => {
     switch (data.type) {
       case TOGGLE_REGISTRATION_STATE: {
-        logger.debug('Toggling meeting registration status', data);
-        const genfors = await getActiveGenfors();
-        const updatedMeeting = await toggleRegistrationStatus(genfors,
-          data.registrationOpen);
-        emit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
+        toggleRegistration(socket, data);
         break;
       }
       default:
         break;
     }
   });
+};
+
+module.exports = {
+  listener,
+  toggleRegistration,
 };

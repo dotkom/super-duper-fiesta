@@ -1,11 +1,10 @@
-const broadcast = require('../utils').broadcast;
-const emit = require('../utils').emit;
+const { broadcast, emit } = require('../utils');
 const logger = require('../logging');
 
-const addVote = require('../models/vote').addVote;
-const generatePublicVote = require('../models/vote').generatePublicVote;
-const getActiveGenfors = require('../models/meeting').getActiveGenfors;
-const { getAnonymousUser, isRegistered } = require('../models/user');
+const { addVote, generatePublicVote } = require('../managers/vote');
+const { getActiveGenfors } = require('../models/meeting');
+const { getAnonymousUser } = require('../models/user');
+const { isRegistered } = require('../managers/user');
 
 const {
   RECEIVE_VOTE: SEND_VOTE,
@@ -27,53 +26,71 @@ const checkRegistered = async (socket) => {
   return true;
 };
 
-module.exports = (socket) => {
+const submitRegularVote = async (socket, data) => {
+  logger.debug('Received vote', { userFullName: socket.request.user.name });
+  if (!await checkRegistered(socket)) {
+    return;
+  }
+  try {
+    const vote = await addVote(
+      data.issue, socket.request.user,
+      // eslint-disable-next-line no-underscore-dangle
+      data.alternative, socket.request.user._id,
+    );
+    logger.debug('Stored new vote. Broadcasting ...');
+    emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+    broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+    emit(socket, VOTING_STATE, { voted: true });
+  } catch (err) {
+    logger.error('Storing new vote failed.', err);
+    emit(socket, SEND_VOTE, {}, {
+      error: 'Storing vote failed.',
+    });
+  }
+};
+
+const submitAnonymousVote = async (socket, data) => {
+  logger.debug('Received anonymous vote');
+  if (!await checkRegistered(socket)) {
+    return;
+  }
+  const genfors = await getActiveGenfors();
+  const anonymousUser = await getAnonymousUser(data.passwordHash,
+  socket.request.user.onlinewebId, genfors);
+  try {
+    const vote = await addVote(data.issue, socket.request.user,
+      // eslint-disable-next-line no-underscore-dangle
+      data.alternative, anonymousUser._id);
+    logger.debug('Stored new anonymous vote. Broadcasting ...');
+    emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+    broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
+    emit(socket, VOTING_STATE, { voted: true });
+  } catch (err) {
+    logger.error('Storing new anonymous vote failed.', err);
+    emit(socket, SEND_VOTE, {}, {
+      error: err.message,
+    });
+  }
+};
+
+const listener = (socket) => {
   socket.on('action', async (data) => {
     switch (data.type) {
       case SUBMIT_REGULAR_VOTE:
-        logger.debug('Received vote', { userFullName: socket.request.user.name });
-        if (!await checkRegistered(socket)) {
-          break;
-        }
-        // eslint-disable-next-line no-underscore-dangle
-        addVote(data.issue, socket.request.user, data.alternative, socket.request.user._id)
-        .then(async (vote) => {
-          logger.debug('Stored new vote. Broadcasting ...');
-          emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-          broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-          emit(socket, VOTING_STATE, { voted: true });
-        }).catch((err) => {
-          logger.error('Storing new vote failed.', err);
-          emit(socket, SEND_VOTE, {}, {
-            error: 'Storing vote failed.',
-          });
-        });
+        submitRegularVote(socket, data);
         break;
       case SUBMIT_ANONYMOUS_VOTE: {
-        logger.debug('Received anonymous vote');
-        if (!await checkRegistered(socket)) {
-          break;
-        }
-        const genfors = await getActiveGenfors();
-        const anonymousUser = await getAnonymousUser(data.passwordHash,
-          socket.request.user.onlinewebId, genfors);
-        // eslint-disable-next-line no-underscore-dangle
-        addVote(data.issue, socket.request.user, data.alternative, anonymousUser._id)
-        .then(async (vote) => {
-          logger.debug('Stored new anonymous vote. Broadcasting ...');
-          emit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-          broadcast(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-          emit(socket, VOTING_STATE, { voted: true });
-        }).catch((err) => {
-          logger.error('Storing new anonymous vote failed.', err);
-          emit(socket, SEND_VOTE, {}, {
-            error: err.message,
-          });
-        });
+        submitAnonymousVote(socket, data);
         break;
       }
       default:
         break;
     }
   });
+};
+
+module.exports = {
+  listener,
+  submitAnonymousVote,
+  submitRegularVote,
 };

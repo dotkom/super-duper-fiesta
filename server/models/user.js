@@ -1,14 +1,7 @@
 const mongoose = require('mongoose');
-const logger = require('../logging');
-const SHA256 = require('crypto-js/sha256');
-const getActiveGenfors = require('./meeting').getActiveGenfors;
-const canEdit = require('./meeting').canEdit;
+const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');
-
-function hashWithSalt(password, salt) {
-  return SHA256(password + salt).toString();
-}
 
 const Schema = mongoose.Schema;
 
@@ -65,105 +58,13 @@ function updateUserById(id, updatedFields, opts) {
   return User.findByIdAndUpdate(id, updatedFields, opts);
 }
 
-function addUser(name, onlinewebId, securityLevel) {
-  return new Promise((resolve, reject) => {
-    getActiveGenfors().then((genfors) => {
-      // @TODO make sure to connect all users to genfors
-      if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
-        return reject(new Error('Ingen aktive generalforsamlinger'));
-      }
-      if (securityLevel >= permissionLevel.IS_SUPERUSER) {
-        logger.info('Creating a user with high security clearance.', {
-          name, onlinewebId, securityLevel,
-        });
-      }
-      const user = new User({
-        genfors,
-        name,
-        onlinewebId,
-        notes: '',
-        permissions: securityLevel || 0,
-      });
-
-      user.save().then((createdUser) => {
-        logger.debug('Created user', user.name);
-        resolve(createdUser);
-      }).catch((err) => {
-        logger.error('Failed to create user', err);
-        reject(err);
-      });
-      return null;
-    }).catch(reject);
-  });
+function addUser(user) {
+  new User(user).save();
 }
 
-async function addAnonymousUser(username, passwordHash) {
-  const genfors = await getActiveGenfors();
-  const user = await getUserByUsername(username, genfors);
-  if (user.completedRegistration) {
-    throw new Error('User is already registered');
-  }
-  const existingUser = await getAnonymousUser(passwordHash, username, genfors);
-  if (existingUser) {
-    throw new Error('Anonymous user aleady exists');
-  }
-  const anonymousUser = new AnonymousUser({
-    genfors,
-    passwordHash: hashWithSalt(passwordHash, username),
-  });
-  await anonymousUser.save();
-  // eslint-disable-next-line no-underscore-dangle
-  await updateUserById(user._id, { completedRegistration: true });
+async function addAnonymousUser(anonymousUser) {
+  return new AnonymousUser(anonymousUser).save();
 }
-
-async function validatePasswordHash(user, passwordHash) {
-  const genfors = await getActiveGenfors();
-  logger.silly('Checking password hash for user', user, genfors, passwordHash);
-  const existingUser = await getAnonymousUser(passwordHash, user.onlinewebId, genfors);
-  return existingUser !== null;
-}
-
-async function isRegistered(user, passwordHash) {
-  return user.completedRegistration && validatePasswordHash(user, passwordHash);
-}
-
-function setNote(user, targetUser, note) {
-  return new Promise((resolve, reject) => {
-    canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
-      User.findByIdAndUpdate(user, { note }).then(resolve).catch(reject);
-    });
-  });
-}
-
-function setGenfors(user, anonymousUser, genfors) {
-  return new Promise((resolve, reject) => {
-    canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
-      logger.debug('Setting genfors on User', { user });
-      User.findByIdAndUpdate(user, { genfors }).then(() => {
-        logger.debug('Setting genfors on AnonymousUser', { anonymousUser });
-        AnonymousUser.findByIdAndUpdate(anonymousUser, { genfors }).then(resolve).catch(reject);
-      }).catch(reject);
-    }).catch(reject);
-  });
-}
-
-function setCanVote(user, targetUser) {
-  return new Promise((resolve, reject) => {
-    canEdit(permissionLevel.IS_MANAGER, user, targetUser.genfors, () => {
-      User.findByIdAndUpdate(user, { permissions: permissionLevel.CAN_VOTE })
-      .then(resolve).catch(reject);
-    });
-  });
-}
-
-const setUserPermissions = (id, requestedPermissions) => {
-  const permissions = requestedPermissions || permissionLevel.IS_MANAGER;
-  return new Promise((resolve, reject) => {
-    User.findByIdAndUpdate(id, { permissions }, { new: true })
-      .then(resolve)
-      .catch(reject);
-  });
-};
 
 module.exports = {
   addUser,
@@ -173,11 +74,5 @@ module.exports = {
   getUserById,
   getUserByUsername,
   getQualifiedUsers,
-  isRegistered,
-  setNote,
-  setCanVote,
-  setGenfors,
-  setUserPermissions,
   updateUserById,
-  validatePasswordHash,
 };

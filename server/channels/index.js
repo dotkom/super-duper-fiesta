@@ -6,14 +6,14 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
-const auth = require('./auth');
 const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
-const issue = require('./issue');
-const meeting = require('./admin/meeting');
-const userlist = require('./admin/user/userlist');
-const toggleCanVote = require('./admin/user/toggle_vote');
-const vote = require('./vote');
+const { listener: authListener } = require('./auth');
+const { listener: issueListener } = require('./issue');
+const { listener: meetingListener } = require('./admin/meeting');
+const { listener: userListListener } = require('./admin/user/userlist');
+const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
+const { listener: voteListener } = require('./vote');
 
 const authorizeSuccess = (data, accept) => {
   logger.silly('Authorized socket connection');
@@ -28,8 +28,7 @@ const authorizeFailure = (data, message, error, accept) => {
   }
 };
 
-module.exports.listen = (server, mongooseConnection) => {
-  const io = socketio(server);
+const applyMiddlewares = (io, mongooseConnection) => {
   io.use(passportSocketIo.authorize({
     cookieParser,
     key: 'connect.sid',
@@ -39,20 +38,30 @@ module.exports.listen = (server, mongooseConnection) => {
     fail: authorizeFailure,
   }));
   io.use(cookieParserIO);
+};
+
+const listen = (server, mongooseConnection) => {
+  const io = socketio(server);
+  applyMiddlewares(io, mongooseConnection);
   io.on('connection', (socket) => {
     connection(socket);
-    auth(socket);
-    vote(socket);
+    authListener(socket);
+    voteListener(socket);
 
     // Admin
     if (socket.request.user.permissions >= permissions.IS_MANAGER) {
       const user = socket.request.user;
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');
-      issue(socket);
-      userlist(socket);
-      toggleCanVote(socket);
-      meeting(socket);
+      issueListener(socket);
+      userListListener(socket);
+      toggleCanVoteListener(socket);
+      meetingListener(socket);
     }
   });
+};
+
+module.exports = {
+  applyMiddlewares,
+  listen,
 };
