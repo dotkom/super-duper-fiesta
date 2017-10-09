@@ -3,83 +3,60 @@ const { createGenfors, getGenfors, getActiveGenfors, closeGenfors } = require('.
 
 const permissionLevel = require('../../common/auth/permissions');
 
-function canEdit(securityLevel, user, genforsId) {
-  return new Promise((resolve, reject) => {
-    logger.silly('Checking permissions');
-    getActiveGenfors().then((active) => {
-      // If you are that super, just do it!
-      if (user.permissions >= permissionLevel.IS_SUPERUSER) {
-        logger.debug('Super user, go for it!');
-        resolve(true);
-        return;
-      }
-      getGenfors(genforsId)
-      .then((genfors) => {
-        logger.silly('security check', {
-          active: active.id,
-          genfors: genfors.id,
-          usergenfors: user.genfors.toString(),
-          userperms: user.permissions,
-          securityLevel,
-        });
-        // Checking if current genfors == requested genfors == user genfors
-        // But if user is superuser it is not nessecary
-        if ((active.id === genfors.id)
-          && (genfors.id === user.genfors.toString())
-          && (user.permissions >= securityLevel)) {
-          logger.silly('Cleared security check');
-          resolve(true);
-        } else {
-          logger.warn('Failed security check', {
-            userpermission: user.permissions,
-            clearance: securityLevel,
-          });
-          reject(new Error('User does not have the required permissions.'));
-        }
-      }).catch((err) => {
-        logger.error('Unable to fetch specific genfors', err);
-        reject(err);
-      });
-    }).catch((err) => {
-      logger.error('Unable to fetch genfors', err);
-      reject(err);
-    });
+async function canEdit(securityLevel, user, genforsId) {
+  logger.silly('Checking permissions');
+  const active = await getActiveGenfors();
+  // If you are that super, just do it!
+  if (user.permissions >= permissionLevel.IS_SUPERUSER) {
+    logger.debug('Super user, go for it!');
+    return true;
+  }
+  const genfors = await getGenfors(genforsId);
+  logger.silly('security check', {
+    active: active.id,
+    genfors: genfors.id,
+    usergenfors: user.genfors.toString(),
+    userperms: user.permissions,
+    securityLevel,
   });
+  // Checking if current genfors == requested genfors == user genfors
+  // But if user is superuser it is not nessecary
+  if ((active.id === genfors.id)
+    && (genfors.id === user.genfors.toString())
+    && (user.permissions >= securityLevel)) {
+    logger.silly('Cleared security check');
+    return true;
+  }
+  logger.warn('Failed security check', {
+    userpermission: user.permissions,
+    clearance: securityLevel,
+  });
+  throw new Error('User does not have the required permissions.');
 }
 
 
-function endGenfors(genfors, user) {
-  return new Promise((resolve, reject) => {
-    canEdit(permissionLevel.IS_MANAGER, user, genfors).then(() => {
-      logger.info('Closing genfors');
-      closeGenfors(genfors.id).then(() => {
-        logger.info('Closed genfors');
-        resolve();
-      }).catch(reject);
-    }).then(resolve).catch(reject);
-  });
+async function endGenfors(genfors, user) {
+  if (await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
+    logger.info('Closing genfors');
+    await closeGenfors(genfors.id);
+    logger.info('Closed genfors');
+  }
 }
 
 
 // TODO add security function
-function addGenfors(title, date, user, force) {
+async function addGenfors(title, date, user, force) {
   // Only allow one at a time
-  return new Promise((resolve, reject) => {
-    getActiveGenfors().then((meeting) => {
-      // @TODO Prompt user for confirmations and disable active genfors
+  const meeting = await getActiveGenfors();
+  // @TODO Prompt user for confirmations and disable active genfors
 
-      if (meeting) {
-        if (!force) {
-          return reject(new Error('Meeting in progress, you need to close it or force new'));
-        }
-        endGenfors(meeting, user).then(addGenfors(title, date, user, true));
-      }
-      createGenfors(title, date).then((newMeeting) => {
-        resolve(newMeeting);
-      });
-      return null;
-    });
-  });
+  if (meeting) {
+    if (!force) {
+      throw new Error('Meeting in progress, you need to close it or force new');
+    }
+    await endGenfors(meeting, user);
+  }
+  return createGenfors(title, date);
 }
 
 

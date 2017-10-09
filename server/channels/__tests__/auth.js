@@ -4,8 +4,8 @@ jest.mock('../../models/user');
 const { emit, broadcast } = require('../../utils');
 const { register } = require('../auth');
 const { getActiveGenfors } = require('../../models/meeting');
-const { getAnonymousUser, addAnonymousUser } = require('../../models/user');
-const { generateGenfors, generateSocket, generateAnonymousUser } = require('../../utils/generateTestData');
+const { getAnonymousUser, addAnonymousUser, getUserByUsername } = require('../../models/user');
+const { generateGenfors, generateSocket, generateAnonymousUser, generateUser } = require('../../utils/generateTestData');
 
 beforeEach(() => {
   getActiveGenfors.mockImplementation(async () => generateGenfors({ pin: 1234567890 }));
@@ -13,6 +13,8 @@ beforeEach(() => {
   addAnonymousUser.mockImplementation(
     async () => {},
   );
+  getUserByUsername.mockImplementation(async (username, genfors) =>
+    generateUser({ username, genfors, completedRegistration: false }));
 });
 
 const generateData = data => (Object.assign({

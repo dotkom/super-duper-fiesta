@@ -6,7 +6,7 @@ const OAuth2Strategy = require('passport-oauth2');
 const OW4AuthConfig = require('../conf.js').ids;
 const OW4API = require('../conf.js').api;
 
-const addUser = require('../../models/user').addUser;
+const addUser = require('../../managers/user').addUser;
 const getUserByUsername = require('../../models/user').getUserByUsername;
 const updateUserById = require('../../models/user').updateUserById;
 const permissions = require('../../../common/auth/permissions');

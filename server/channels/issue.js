@@ -1,7 +1,7 @@
 const { broadcast, emit } = require('../utils');
 const logger = require('../logging');
 
-const { addIssue, endIssue, deleteIssue } = require('../models/issue');
+const { addIssue, endIssue, deleteIssue } = require('../managers/issue');
 
 const {
   ADMIN_CLOSE_ISSUE,
