@@ -7,8 +7,8 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: false },
-  name: { type: String, required: true, unique: true },
-  onlinewebId: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  onlinewebId: { type: String, required: true },
   registerDate: { type: Date, default: Date.now() },
   canVote: { type: Boolean, default: false },
   notes: String,
@@ -59,7 +59,7 @@ function updateUserById(id, updatedFields, opts) {
 }
 
 function addUser(user) {
-  new User(user).save();
+  return new User(user).save();
 }
 
 async function addAnonymousUser(anonymousUser) {

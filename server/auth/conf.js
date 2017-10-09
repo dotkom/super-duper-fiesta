@@ -13,6 +13,8 @@ const OW4OAUTH2_SETUP = {
     'authentication.onlineuser.last_name.read',
     'authentication.onlineuser.email.read',
     'authentication.onlineuser.is_member.read',
+    'authentication.onlineuser.is_staff.read',
+    'authentication.onlineuser.is_superuser.read',
     'authentication.onlineuser.field_of_study.read',
     'authentication.onlineuser.nickname.read',
     'authentication.onlineuser.rfid.read'].join(' '),

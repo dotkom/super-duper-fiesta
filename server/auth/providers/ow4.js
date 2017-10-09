@@ -13,11 +13,19 @@ const permissions = require('../../../common/auth/permissions');
 const { getActiveGenfors } = require('../../models/meeting');
 
 
+function getPermissionLevel(body) {
+  if (body.superuser) {
+    return permissions.IS_SUPERUSER;
+  } else if (body.staff) {
+    return permissions.IS_MANAGER;
+  } else if (body.member) {
+    return permissions.CAN_VOTE;
+  }
+  return permissions.IS_LOGGED_IN;
+}
+
 async function getClientInformation(accessToken) {
   const genfors = await getActiveGenfors();
-  if (!genfors) {
-    throw new Error('No active genfors');
-  }
   const OW4UserEndpoint = OW4API.backend + OW4API.userEndpoint;
   let body;
   try {
@@ -33,9 +41,17 @@ async function getClientInformation(accessToken) {
   }
   const username = body.username;
   const fullName = `${body.first_name} ${body.last_name}`;
-  const permissionLevel = body.member ? permissions.CAN_VOTE : permissions.IS_LOGGED_IN;
+  const permissionLevel = getPermissionLevel(body);
 
   try {
+    if (!genfors && permissionLevel < permissionLevel.IS_SUPERUSER) {
+      throw new Error('No active genfors');
+    } else if (!genfors && permissionLevel >= permissionLevel.IS_SUPERUSER) {
+      // No genfors and is superuser, probably want to create genfors.
+      logger.info('No active genfors and admin registered. Probably want to create meeting.');
+      return await addUser(fullName, username, permissionLevel);
+    }
+
     const user = await getUserByUsername(username, genfors);
     if (user === null) {
       // Create user if not exists
