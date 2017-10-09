@@ -1,6 +1,6 @@
 const model = require('../models/issue');
 const logger = require('../logging');
-const { getQualifiedUsers } = require('../models/user');
+const { getQualifiedUsers } = require('../models/user');
 const { getActiveGenfors } = require('../models/meeting');
 const { canEdit } = require('./meeting');
 
@@ -21,16 +21,16 @@ async function addIssue(issueData, closeCurrentIssue) {
   logger.debug('Creating issue', issueData);
   const genfors = await getActiveGenfors();
   if (!genfors) throw new Error('No genfors active');
-  const _issue = model.getActiveQuestion(genfors);
-  if (_issue && _issue.active && !closeCurrentIssue) {
+  const activeIssue = model.getActiveQuestion(genfors);
+  if (activeIssue && activeIssue.active && !closeCurrentIssue) {
     throw new Error("There's already an active question");
-  } else if (_issue && !_issue.active && closeCurrentIssue) {
+  } else if (activeIssue && !activeIssue.active && closeCurrentIssue) {
     logger.warn("There's already an active issue. Closing it and proceeding", {
-      issue: _issue.description,
+      issue: activeIssue.description,
       // user: user,
       closeCurrentIssue,
     });
-    await model.endIssue(_issue);
+    await model.endIssue(activeIssue);
   }
   // removed possible issues and proceeding to create a new one
   const users = getQualifiedUsers(genfors);

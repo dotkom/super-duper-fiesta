@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const logger = require('../logging');
-const getActiveGenfors = require('./meeting').getActiveGenfors;
 const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');
@@ -64,11 +62,8 @@ function addUser(user) {
   new User(user).save();
 }
 
-async function addAnonymousUser(username, passwordHash) {
-  return new AnonymousUser({
-    genfors,
-    passwordHash: hashWithSalt(passwordHash, username),
-  }).save();
+async function addAnonymousUser(anonymousUser) {
+  return new AnonymousUser(anonymousUser).save();
 }
 
 module.exports = {

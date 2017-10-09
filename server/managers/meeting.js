@@ -26,13 +26,12 @@ async function canEdit(securityLevel, user, genforsId) {
     && (user.permissions >= securityLevel)) {
     logger.silly('Cleared security check');
     return true;
-  } else {
-    logger.warn('Failed security check', {
-      userpermission: user.permissions,
-      clearance: securityLevel,
-    });
-    throw new Error('User does not have the required permissions.');
   }
+  logger.warn('Failed security check', {
+    userpermission: user.permissions,
+    clearance: securityLevel,
+  });
+  throw new Error('User does not have the required permissions.');
 }
 
 

@@ -3,6 +3,8 @@ const model = require('../models/user');
 const { getActiveGenfors } = require('../models/meeting');
 const { hashWithSalt } = require('../utils/crypto');
 
+const permissionLevel = require('../../common/auth/permissions');
+
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
   logger.silly('Checking password hash for user', user, genfors, passwordHash);
@@ -56,7 +58,7 @@ async function addAnonymousUser(username, passwordHash) {
   if (existingUser) {
     throw new Error('Anonymous user aleady exists');
   }
-  await model.addAnonymousUser(genfors, {
+  await model.addAnonymousUser({
     genfors,
     passwordHash: hashWithSalt(passwordHash, username),
   });
