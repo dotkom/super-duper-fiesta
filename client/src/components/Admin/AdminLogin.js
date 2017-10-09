@@ -11,8 +11,9 @@ import Heading from '../Heading';
 class AdminLogin extends React.Component {
   constructor(props) {
     super(props);
+    const date = new Date();
     this.state = {
-      date: '',
+      date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
       password: '',
       title: '',
     };
@@ -45,7 +46,8 @@ class AdminLogin extends React.Component {
               ? <p>Vennligst logg inn for å få tilgang til denne funksjonaliteten.</p>
               : <p>Vennligst opprett en generalforsamling</p>}
             <form action="">
-              <div>
+              {!this.props.meetingExists &&
+              (<div>
                 <input
                   type="text"
                   placeholder="Tittel"
@@ -58,6 +60,7 @@ class AdminLogin extends React.Component {
                   onChange={e => this.setState({ date: new Date(e.target.value) })}
                 />
               </div>
+              )}
               <input
                 type="password"
                 placeholder="Administratorpassord"
