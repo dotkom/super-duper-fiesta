@@ -145,3 +145,12 @@ describe('connection', () => {
     expect(broadcast.mock.calls).toEqual([]);
   });
 });
+
+describe('connection when no meeting', () => {
+  it('warns about no active meeting', async () => {
+    await connection(generateSocket({ genfors: null }));
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toEqual([]);
+  });
+});

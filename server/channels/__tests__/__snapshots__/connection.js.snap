@@ -5642,3 +5642,133 @@ Array [
   ],
 ]
 `;
+
+exports[`connection when no meeting warns about no active meeting 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": null,
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "VERSION",
+    Object {
+      "version": "fake_git_hash",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": null,
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "AUTH_SIGNED_IN",
+    Object {
+      "full_name": "Namy",
+      "id": "123",
+      "logged_in": true,
+      "permissions": 5,
+      "username": "123",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": null,
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "AUTH_ERROR",
+    Object {
+      "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": null,
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "AUTH_REGISTERED",
+    Object {
+      "registered": false,
+    },
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": null,
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "issue",
+    Object {},
+    Object {
+      "error": "Noe gikk galt. Vennligst prøv igjen.",
+    },
+  ],
+]
+`;
