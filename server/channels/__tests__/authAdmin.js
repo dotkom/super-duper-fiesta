@@ -7,10 +7,12 @@ const { createGenfors: createGenforsListener } = require('../auth');
 
 const generateData = data => Object.assign({}, data);
 
+beforeEach(() => {
+  process.env.SDF_GENFORS_ADMIN_PASSWORD = 'correct';
+});
+
 describe('admin', () => {
   it('returns invalid admin password if incorrect', async () => {
-    process.env.SDF_GENFORS_ADMIN_PASSWORD = 'correct';
-
     await createGenforsListener(generateSocket(), generateData());
 
     expect(emit.mock.calls).toMatchSnapshot();
@@ -19,7 +21,6 @@ describe('admin', () => {
 
   it('creates a new meeting if admin password is correct', async () => {
     createGenfors.mockImplementation(async () => generateGenfors());
-    process.env.SDF_GENFORS_ADMIN_PASSWORD = 'correct';
 
     await createGenforsListener(generateSocket(), generateData({ password: 'correct' }));
 
