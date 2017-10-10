@@ -15,8 +15,6 @@ describe('admin', () => {
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
-
-    process.env.SDF_GENFORS_ADMIN_PASSWORD = '';
   });
 
   it('creates a new meeting if admin password is correct', async () => {
@@ -27,7 +25,9 @@ describe('admin', () => {
 
     expect(emit.mock.calls).toEqual([]);
     expect(broadcast.mock.calls).toEqual([]);
-
-    process.env.SDF_GENFORS_ADMIN_PASSWORD = '';
   });
+});
+
+afterEach(() => {
+  process.env.SDF_GENFORS_ADMIN_PASSWORD = '';
 });
