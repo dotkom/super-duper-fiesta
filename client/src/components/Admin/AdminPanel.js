@@ -48,7 +48,7 @@ class AdminPanel extends React.Component {
 
     return (
       <div>
-        {permissionDenied ?
+        {permissionDenied || !this.props.meetingExists ?
           <Route component={AdminLoginContainer} /> :
           <div>
             <Dialog
@@ -95,10 +95,15 @@ AdminPanel.propTypes = {
   match: PropTypes.objectOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
   })).isRequired,
+  meetingExists: PropTypes.bool.isRequired,
   userPermissions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
+  meetingExists: state.meeting &&
+                 state.meeting.title &&
+                 state.meeting.title !== '' &&
+                 state.meeting.title.length > 0,
   registrationOpen: state.meeting.registrationOpen,
   userPermissions: state.auth.permissions,
 });

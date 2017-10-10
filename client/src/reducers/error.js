@@ -1,16 +1,15 @@
-import { ERROR_DISMISS } from '../../../common/actionTypes/error';
+import { AUTH_ERROR, ERROR_DISMISS } from '../../../common/actionTypes/error';
 
 const errorReducer = (state = null, action) => {
-  const { type, error, data } = action;
-  if (type === ERROR_DISMISS) {
-    return null;
-  } else if (error) {
-    return error;
-  } else if (data && data.error) {
-    return data.error;
-  }
+  const { type, data } = action;
 
-  return state;
+  switch (type) {
+    case ERROR_DISMISS: return null;
+    case AUTH_ERROR: {
+      return data.error;
+    }
+    default: return state;
+  }
 };
 
 export default errorReducer;

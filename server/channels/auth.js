@@ -1,12 +1,20 @@
 const { emit } = require('../utils');
 const { getActiveGenfors } = require('../models/meeting');
-const { validatePin } = require('../managers/meeting');
+const { addGenfors, validatePin } = require('../managers/meeting');
 const { addAnonymousUser } = require('../managers/user');
 const { setUserPermissions } = require('../managers/user');
 const { validatePasswordHash } = require('../managers/user');
 const logger = require('../logging');
 
+
+function verifyAdminPassword(password) {
+  return process.env.SDF_GENFORS_ADMIN_PASSWORD !== undefined &&
+         process.env.SDF_GENFORS_ADMIN_PASSWORD.length > 0 &&
+         process.env.SDF_GENFORS_ADMIN_PASSWORD === password;
+}
+
 const {
+  ADMIN_CREATE_GENFORS,
   ADMIN_LOGIN,
   AUTH_REGISTER,
   AUTH_REGISTERED,
@@ -54,6 +62,17 @@ const register = async (socket, data) => {
   emit(socket, AUTH_REGISTERED, { registered: true });
 };
 
+const createGenfors = async (socket, data) => {
+  const { password, title, date } = data;
+  if (verifyAdminPassword(password)) {
+    await addGenfors(title, date);
+    logger.info('Created genfors by administrative request.', { title });
+  } else {
+    logger.warn('Someone tried to authenticate as administrator.', { title });
+    emit(socket, 'AUTH_ERROR', { error: 'Ugyldig administratorpassord.' });
+  }
+};
+
 const listener = (socket) => {
   async function action(data) {
     switch (data.type) {
@@ -61,11 +80,13 @@ const listener = (socket) => {
         register(socket, data);
         break;
       }
+      case ADMIN_CREATE_GENFORS: {
+        createGenfors(socket, data);
+        break;
+      }
       case ADMIN_LOGIN: {
         const { password } = data;
-        if (process.env.SDF_GENFORS_ADMIN_PASSWORD !== undefined &&
-            process.env.SDF_GENFORS_ADMIN_PASSWORD.length > 0 &&
-            password === process.env.SDF_GENFORS_ADMIN_PASSWORD) {
+        if (verifyAdminPassword(password)) {
           logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
           // eslint-disable-next-line no-underscore-dangle
           const updatedUser = await setUserPermissions(socket.request.user._id,

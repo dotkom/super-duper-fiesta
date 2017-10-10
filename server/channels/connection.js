@@ -48,6 +48,11 @@ const emitUserData = async (socket) => {
       id: user._id, // eslint-disable-line no-underscore-dangle
       permissions: user.permissions,
     });
+
+    if (!user.genfors) {
+      emit(socket, 'AUTH_ERROR', { error: 'Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.' });
+    }
+
     let validPasswordHash = false;
     try {
       const { passwordHash } = socket.request.headers.cookie;
