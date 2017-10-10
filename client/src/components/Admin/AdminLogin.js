@@ -11,9 +11,8 @@ import Heading from '../Heading';
 class AdminLogin extends React.Component {
   constructor(props) {
     super(props);
-    const date = new Date();
     this.state = {
-      date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      date: new Date(),
       password: '',
       title: '',
     };
