@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`admin returns invalid admin password if incorrect 1`] = `
+exports[`admin login returns invalid admin password if incorrect 1`] = `
 Array [
   Array [
     Object {

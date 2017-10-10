@@ -11,7 +11,7 @@ beforeEach(() => {
   process.env.SDF_GENFORS_ADMIN_PASSWORD = 'correct';
 });
 
-describe('admin', () => {
+describe('admin creates genfors', () => {
   it('returns invalid admin password if incorrect', async () => {
     await createGenforsListener(generateSocket(), generateData());
 
