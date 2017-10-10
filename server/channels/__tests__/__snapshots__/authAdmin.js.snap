@@ -1,5 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`admin creates genfors returns invalid admin password if incorrect 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      },
+    },
+    "AUTH_ERROR",
+    Object {
+      "error": "Ugyldig administratorpassord.",
+    },
+  ],
+]
+`;
+
+exports[`admin login emits sign in with manager permissions if auth successful 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 0,
+        },
+      },
+    },
+    "AUTH_SIGNED_IN",
+    Object {
+      "full_name": "Namy",
+      "id": "123",
+      "logged_in": true,
+      "permissions": 10,
+      "username": undefined,
+    },
+  ],
+]
+`;
+
 exports[`admin login returns invalid admin password if incorrect 1`] = `
 Array [
   Array [

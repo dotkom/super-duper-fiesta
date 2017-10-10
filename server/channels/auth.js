@@ -62,6 +62,26 @@ const register = async (socket, data) => {
   emit(socket, AUTH_REGISTERED, { registered: true });
 };
 
+const adminLogin = async (socket, data) => {
+  const { password } = data;
+  if (verifyAdminPassword(password)) {
+    logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
+    // eslint-disable-next-line no-underscore-dangle
+    const updatedUser = await setUserPermissions(socket.request.user._id,
+      permissionLevel.IS_MANAGER);
+    emit(socket, AUTH_SIGNED_IN, {
+      username: updatedUser.username,
+      full_name: updatedUser.name,
+      logged_in: updatedUser.logged_in,
+      id: updatedUser._id, // eslint-disable-line no-underscore-dangle
+      permissions: updatedUser.permissions,
+    });
+  } else {
+    logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
+    emit(socket, 'AUTH_ERROR', { error: 'Ugyldig administratorpassord.' });
+  }
+};
+
 const createGenfors = async (socket, data) => {
   const { password, title, date } = data;
   if (verifyAdminPassword(password)) {
@@ -85,23 +105,7 @@ const listener = (socket) => {
         break;
       }
       case ADMIN_LOGIN: {
-        const { password } = data;
-        if (verifyAdminPassword(password)) {
-          logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
-          // eslint-disable-next-line no-underscore-dangle
-          const updatedUser = await setUserPermissions(socket.request.user._id,
-            permissionLevel.IS_MANAGER);
-          emit(socket, AUTH_SIGNED_IN, {
-            username: updatedUser.username,
-            full_name: updatedUser.name,
-            logged_in: updatedUser.logged_in,
-            id: updatedUser._id, // eslint-disable-line no-underscore-dangle
-            permissions: updatedUser.permissions,
-          });
-        } else {
-          logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
-          emit(socket, 'AUTH_ERROR', { error: 'Ugyldig administratorpassord.' });
-        }
+        adminLogin(socket, data);
         break;
       }
       default:
@@ -112,6 +116,7 @@ const listener = (socket) => {
 };
 
 module.exports = {
+  adminLogin,
   createGenfors,
   listener,
   register,
