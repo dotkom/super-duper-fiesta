@@ -112,6 +112,7 @@ const listener = (socket) => {
 };
 
 module.exports = {
+  createGenfors,
   listener,
   register,
 };
