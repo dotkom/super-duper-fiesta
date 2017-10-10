@@ -5,10 +5,13 @@ const { createGenfors } = require('../../models/meeting');
 const { generateGenfors, generateSocket } = require('../../utils/generateTestData');
 const { createGenfors: createGenforsListener } = require('../auth');
 
+
+const MOCK_PW = 'correct';
+
 const generateData = data => Object.assign({}, data);
 
 beforeEach(() => {
-  process.env.SDF_GENFORS_ADMIN_PASSWORD = 'correct';
+  process.env.SDF_GENFORS_ADMIN_PASSWORD = MOCK_PW;
 });
 
 describe('admin creates genfors', () => {
@@ -22,7 +25,7 @@ describe('admin creates genfors', () => {
   it('creates a new meeting if admin password is correct', async () => {
     createGenfors.mockImplementation(async () => generateGenfors());
 
-    await createGenforsListener(generateSocket(), generateData({ password: 'correct' }));
+    await createGenforsListener(generateSocket(), generateData({ password: MOCK_PW }));
 
     expect(emit.mock.calls).toEqual([]);
     expect(broadcast.mock.calls).toEqual([]);
