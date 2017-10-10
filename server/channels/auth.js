@@ -6,7 +6,7 @@ const { validatePasswordHash } = require('../managers/user');
 const logger = require('../logging');
 
 const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
-const { AUTH_ERROR } = require('../../../common/actionTypes/error');
+const { AUTH_ERROR } = require('../../common/actionTypes/error');
 
 const register = async (socket, data) => {
   const { pin, passwordHash } = data;
