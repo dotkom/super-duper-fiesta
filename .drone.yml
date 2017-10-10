@@ -85,8 +85,3 @@ pipeline:
       - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
       - /bin/systemctl restart super-duper-fiesta.service
 
-services:
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
