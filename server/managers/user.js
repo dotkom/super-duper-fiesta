@@ -71,11 +71,7 @@ async function addAnonymousUser(username, passwordHash) {
 
 async function setUserPermissions(id, requestedPermissions) {
   const permissions = requestedPermissions || permissionLevel.IS_MANAGER;
-  return new Promise((resolve, reject) => {
-    model.updateUserById(id, { permissions }, { new: true })
-      .then(resolve)
-      .catch(reject);
-  });
+  return model.updateUserById(id, { permissions }, { new: true });
 }
 
 module.exports = {
