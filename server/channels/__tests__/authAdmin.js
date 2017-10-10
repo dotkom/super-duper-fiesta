@@ -5,7 +5,7 @@ const { emit, broadcast } = require('../../utils');
 const { createGenfors } = require('../../models/meeting');
 const { updateUserById } = require('../../models/user');
 const { generateGenfors, generateSocket, generateUser } = require('../../utils/generateTestData');
-const { adminLogin, createGenfors: createGenforsListener } = require('../auth');
+const { adminLogin, createGenfors: createGenforsListener } = require('../admin/authAdmin');
 
 
 const MOCK_PW = 'correct';

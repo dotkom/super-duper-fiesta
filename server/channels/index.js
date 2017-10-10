@@ -10,6 +10,7 @@ const permissions = require('../../common/auth/permissions');
 const connection = require('./connection');
 const { listener: authListener } = require('./auth');
 const { listener: issueListener } = require('./issue');
+const { listener: adminAuthListener } = require('./admin/authAdmin');
 const { listener: meetingListener } = require('./admin/meeting');
 const { listener: userListListener } = require('./admin/user/userlist');
 const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
@@ -47,6 +48,9 @@ const listen = (server, mongooseConnection) => {
     connection(socket);
     authListener(socket);
     voteListener(socket);
+
+    // Listeners used to login as admin
+    adminAuthListener(socket);
 
     // Admin
     if (socket.request.user.permissions >= permissions.IS_MANAGER) {
