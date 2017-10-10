@@ -44,9 +44,9 @@ async function getClientInformation(accessToken) {
   const permissionLevel = getPermissionLevel(body);
 
   try {
-    if (!genfors && permissionLevel < permissionLevel.IS_SUPERUSER) {
+    if (!genfors && permissionLevel < permissions.IS_SUPERUSER) {
       throw new Error('No active genfors');
-    } else if (!genfors && permissionLevel >= permissionLevel.IS_SUPERUSER) {
+    } else if (!genfors && permissionLevel >= permissions.IS_SUPERUSER) {
       // No genfors and is superuser, probably want to create genfors.
       logger.info('No active genfors and admin registered. Probably want to create meeting.');
       return await addUser(fullName, username, permissionLevel);
