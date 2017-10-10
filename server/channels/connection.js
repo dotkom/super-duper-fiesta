@@ -10,6 +10,7 @@ const haveIVoted = require('../models/vote').haveIVoted;
 const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
 
+const { AUTH_ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
@@ -50,7 +51,7 @@ const emitUserData = async (socket) => {
     });
 
     if (!user.genfors) {
-      emit(socket, 'AUTH_ERROR', { error: 'Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.' });
+      emit(socket, AUTH_ERROR, { error: 'Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.' });
     }
 
     let validPasswordHash = false;
