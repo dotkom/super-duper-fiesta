@@ -16,8 +16,6 @@ const { getActiveGenfors } = require('../../models/meeting');
 function getPermissionLevel(body) {
   if (body.superuser) {
     return permissions.IS_SUPERUSER;
-  } else if (body.staff) {
-    return permissions.IS_MANAGER;
   } else if (body.member) {
     return permissions.CAN_VOTE;
   }
