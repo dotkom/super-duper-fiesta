@@ -11,6 +11,7 @@ import { ErrorContainer } from '../Error';
 import { toggleRegistration } from '../../actionCreators/meeting';
 import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
+import { AdminLoginContainer } from './AdminLogin';
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -47,8 +48,8 @@ class AdminPanel extends React.Component {
 
     return (
       <div>
-        {permissionDenied ?
-          <Route component={NotFound} /> :
+        {permissionDenied || !this.props.meetingExists ?
+          <Route component={AdminLoginContainer} /> :
           <div>
             <Dialog
               visible={this.state.showRegistrationDialog}
@@ -94,10 +95,15 @@ AdminPanel.propTypes = {
   match: PropTypes.objectOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
   })).isRequired,
+  meetingExists: PropTypes.bool.isRequired,
   userPermissions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
+  meetingExists: state.meeting &&
+                 state.meeting.title &&
+                 state.meeting.title !== '' &&
+                 state.meeting.title.length > 0,
   registrationOpen: state.meeting.registrationOpen,
   userPermissions: state.auth.permissions,
 });

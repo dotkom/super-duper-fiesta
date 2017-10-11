@@ -21,6 +21,9 @@ async function isRegistered(user, passwordHash) {
 function addUser(name, onlinewebId, securityLevel) {
   return new Promise((resolve, reject) => {
     getActiveGenfors().then((genfors) => {
+      if (!genfors) {
+        logger.warn(`No active genfors when creating user '${name}' ('${onlinewebId}')`);
+      }
       // @TODO make sure to connect all users to genfors
       if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
         return reject(new Error('Ingen aktive generalforsamlinger'));
@@ -66,9 +69,15 @@ async function addAnonymousUser(username, passwordHash) {
   await model.updateUserById(user._id, { completedRegistration: true });
 }
 
+async function setUserPermissions(id, requestedPermissions) {
+  const permissions = requestedPermissions || permissionLevel.IS_MANAGER;
+  return model.updateUserById(id, { permissions }, { new: true });
+}
+
 module.exports = {
   validatePasswordHash,
   isRegistered,
   addUser,
   addAnonymousUser,
+  setUserPermissions,
 };
