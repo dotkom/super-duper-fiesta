@@ -1,7 +1,7 @@
 # Super Duper Fiesta
 Electronic voting system for the annual general meeting (AGM), or "generalforsamlingen/genfors" of _Linjeforeningen Online_
 
-## How to contribute
+## How to be a dick
 
 ### Looking for something to do?
 
