@@ -1,3 +1,13 @@
 .name {
     margin-right: 0.5rem;
 }
+
+a {
+    text-decoration: none;
+}
+
+.loginRequired {
+    padding-top: 2rem;
+    text-align: center;
+    text-decoration: none;
+}

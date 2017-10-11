@@ -50,11 +50,18 @@ class App extends React.Component {
         <main>
           <NewVersionAvailable newVersionAvailable={newVersionAvailable} />
           <ErrorContainer />
-          <Switch>
-            <Route exact path={`${match.path}register`} component={SetupContainer} />
-            <Route exact path={match.path} component={AppHomeContainer} />
-            <Route component={NotFound} />
-          </Switch>
+          { loggedIn ?
+            <Switch>
+              <Route exact path={`${match.path}register`} component={SetupContainer} />
+              <Route exact path={match.path} component={AppHomeContainer} />
+              <Route component={NotFound} />
+            </Switch>
+            : <Link to="/login">
+              <h2 className={css.loginRequired}>
+                Vennligst logg inn for å få tilgang til generalforsamlingen
+              </h2>
+            </Link>
+          }
         </main>
       </div>
     );
@@ -64,7 +71,7 @@ class App extends React.Component {
 App.defaultProps = {
   fullName: '',
   loggedIn: false,
-  title: 'Super Duper Fiesta : Ingen aktiv generalforsamling',
+  title: 'Onlines Generalforsamling',
   match: null,
   version: '',
 };
