@@ -33,20 +33,32 @@ const YES_NO_ANSWERS = [
 
 let alternativeId = 0;
 
+const blankIssue = {
+  issueDescription: '',
+  alternatives: {},
+  secretVoting: false,
+  showOnlyWinner: false,
+  countBlankVotes: false,
+  voteDemand: RESOLUTION_TYPES.regular.key,
+  questionType: MULTIPLE_CHOICE,
+};
+
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      issueDescription: '',
-      alternatives: {},
-      secretVoting: false,
-      showOnlyWinner: false,
-      countBlankVotes: false,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      questionType: MULTIPLE_CHOICE,
+    const issue = props.issue || {};
+
+    this.state = Object.assign(blankIssue, {
+      issueDescription: issue.text || '',
+      alternatives: issue.alternatives || {},
+      secretVoting: issue.secret || false,
+      showOnlyWinner: issue.showOnlyWinner || false,
+      countBlankVotes: issue.countingBlankVotes || false,
+      voteDemand: issue.voteDemand || RESOLUTION_TYPES.regular.key,
+      questionType: MULTIPLE_CHOICE, // @ToDo: This is not stored in state.
       redirectToAdminHome: false,
-    };
+    });
   }
 
   handleAddAlternative(text) {
@@ -197,15 +209,27 @@ class IssueForm extends React.Component {
 
 IssueForm.defaultProps = {
   createIssue: undefined,
+  issue: {},
 };
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
+  issue: React.PropTypes.objectOf(React.PropTypes.shape({
+    active: React.PropTypes.bool.isRequired,
+    alternatives: React.PropTypes.arrayOf(
+      React.PropTypes.objectOf({
+        text: React.PropTypes.string.isRequired,
+      })),
+    secret: React.PropTypes.bool.isRequired,
+    showOnlyWinner: React.PropTypes.bool.isRequired,
+    voteDemand: React.PropTypes.string.isRequired,
+  })),
   activeIssue: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   activeIssue: activeIssueExists(state),
+  issue: getIssue(state),
   issueDescription: state.issueDescription ? state.issueDescription : '',
 });
 
