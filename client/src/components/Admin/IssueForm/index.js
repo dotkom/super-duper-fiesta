@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Button from '../../Button';
-import { createIssue } from '../../../actionCreators/adminButtons';
+import { adminDeleteIssue, createIssue } from '../../../actionCreators/adminButtons';
 import { RESOLUTION_TYPES } from '../../../../../common/actionTypes/voting';
-import { activeIssueExists } from '../../../selectors/issues';
+import { activeIssueExists, getIssue } from '../../../selectors/issues';
 import Alternative from './Alternative';
 import Checkboxes from './Checkboxes';
 import SelectResolutionType from './SelectResolutionType';
@@ -58,6 +58,7 @@ class IssueForm extends React.Component {
       voteDemand: issue.voteDemand || RESOLUTION_TYPES.regular.key,
       questionType: MULTIPLE_CHOICE, // @ToDo: This is not stored in state.
       redirectToAdminHome: false,
+      editingIssue: issue.text && issue.text.length > 0,
     });
   }
 
@@ -118,6 +119,11 @@ class IssueForm extends React.Component {
     this.setState({ redirectToAdminHome: true });
   }
 
+  handleUpdateIssue() {
+    this.props.deleteIssue();
+    this.handleCreateIssue();
+  }
+
   updateIssueDescription(e) {
     this.setState({ issueDescription: e.target.value });
   }
@@ -142,6 +148,17 @@ class IssueForm extends React.Component {
     this.setState({ questionType });
   }
 
+  toggleUpdateExistingIssue() {
+    this.setState({
+      issueDescription: this.props.issue.text,
+      editingIssue: true,
+    });
+  }
+
+  toggleCreateNewIssue() {
+    this.setState(Object.assign(blankIssue, { editingIssue: false }));
+  }
+
   render() {
     const showActiveIssueWarning = this.props.activeIssue;
     const { redirectToAdminHome } = this.state;
@@ -157,6 +174,21 @@ class IssueForm extends React.Component {
           >Det er allerede en aktiv sak!</p>}
           {redirectToAdminHome &&
             <Redirect to="/admin" />}
+          {this.props.activeIssue &&
+            <div>
+              <Button
+                background
+                disabled={this.state.editingIssue}
+                size="lg"
+                onClick={() => this.toggleUpdateExistingIssue()}
+              >Oppdater{this.state.editingIssue && 'er'} aktiv sak</Button>
+              <Button
+                background
+                disabled={!this.state.editingIssue}
+                size="lg"
+                onClick={() => this.toggleCreateNewIssue()}
+              >Opprett{!this.state.editingIssue && 'er'} ny sak</Button>
+            </div>}
           <label className={css.textarea}>
             <h2 className={css.title}>Beskrivelse av saken</h2>
             <textarea
@@ -195,12 +227,18 @@ class IssueForm extends React.Component {
               resolutionType={this.state.voteDemand}
             />
           </label>
-          <Button
-            background
-            onClick={() => this.handleCreateIssue()}
-            size="lg"
-            disabled={!issueReadyToCreate}
-          >Lagre sak</Button>
+          {this.state.editingIssue ?
+            <Button
+              background
+              onClick={() => this.handleUpdateIssue()}
+              size="lg"
+            >Oppdater aktiv sak</Button> :
+            <Button
+              background
+              onClick={() => this.handleCreateIssue()}
+              disabled={!issueReadyToCreate}
+              size="lg"
+            >Opprett ny sak</Button>}
         </div>
       </DocumentTitle>
     );
@@ -214,6 +252,7 @@ IssueForm.defaultProps = {
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
+  deleteIssue: React.PropTypes.func.isRequired,
   issue: React.PropTypes.objectOf(React.PropTypes.shape({
     active: React.PropTypes.bool.isRequired,
     alternatives: React.PropTypes.arrayOf(
@@ -233,17 +272,26 @@ const mapStateToProps = state => ({
   issueDescription: state.issueDescription ? state.issueDescription : '',
 });
 
-const mapDispatchToProps = dispatch => ({
-  createIssue: (description, alternatives, voteDemand, showOnlyWinner,
-    secretElection, countBlankVotes) => {
-    dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner,
-      secretElection, countBlankVotes));
-  },
-});
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+  return {
+    ...ownProps,
+    ...stateProps,
+    deleteIssue: () => {
+      dispatch(adminDeleteIssue({ issue: stateProps.issue.id }));
+    },
+    createIssue: (description, alternatives, voteDemand, showOnlyWinner,
+      secretElection, countBlankVotes) => {
+      dispatch(createIssue(description, alternatives, voteDemand, showOnlyWinner,
+        secretElection, countBlankVotes));
+    },
+  };
+};
 
 export default IssueForm;
 
 export const IssueFormContainer = connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
+    mergeProps,
 )(IssueForm);
