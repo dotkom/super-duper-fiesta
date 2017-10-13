@@ -43,22 +43,29 @@ const blankIssue = {
   questionType: MULTIPLE_CHOICE,
 };
 
+function getIssueContents(issue) {
+  return Object.assign(blankIssue, {
+    issueDescription: issue.text || '',
+    alternatives: issue.alternatives || {},
+    secretVoting: issue.secret || false,
+    showOnlyWinner: issue.showOnlyWinner || false,
+    countBlankVotes: issue.countingBlankVotes || false,
+    voteDemand: issue.voteDemand || RESOLUTION_TYPES.regular.key,
+    questionType: MULTIPLE_CHOICE, // @ToDo: This is not stored in state.
+  });
+}
+
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
 
     const issue = props.issue || {};
 
-    this.state = Object.assign(blankIssue, {
-      issueDescription: issue.text || '',
-      alternatives: issue.alternatives || {},
-      secretVoting: issue.secret || false,
-      showOnlyWinner: issue.showOnlyWinner || false,
-      countBlankVotes: issue.countingBlankVotes || false,
-      voteDemand: issue.voteDemand || RESOLUTION_TYPES.regular.key,
-      questionType: MULTIPLE_CHOICE, // @ToDo: This is not stored in state.
+    const issueContents = getIssueContents(issue);
+
+    this.state = Object.assign(issueContents, {
       redirectToAdminHome: false,
-      editingIssue: issue.text && issue.text.length > 0,
+      editingIssue: props.activeIssue,
     });
   }
 
@@ -149,10 +156,9 @@ class IssueForm extends React.Component {
   }
 
   toggleUpdateExistingIssue() {
-    this.setState({
-      issueDescription: this.props.issue.text,
+    this.setState(Object.assign(getIssueContents(this.props.issue), {
       editingIssue: true,
-    });
+    }));
   }
 
   toggleCreateNewIssue() {
