@@ -33,6 +33,7 @@ services:
       - SDF_SENTRY_DSN_BACKEND
     volumes:
       - .:/srv/app/
+      - /srv/app/node_modules
 
   frontend: 
     build:
@@ -48,3 +49,4 @@ services:
       - SDF_SENTRY_DSN_FRONTEND
     volumes: 
       - .:/srv/app/
+      - /srv/app/node_modules
