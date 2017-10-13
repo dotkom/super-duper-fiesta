@@ -111,7 +111,10 @@ class IssueForm extends React.Component {
       issueAlternatives = YES_NO_ANSWERS.slice();
     }
 
-    DEFAULT_ALTERNATIVES.forEach(alternative => issueAlternatives.push(alternative));
+    if (!this.state.editingIssue) {
+      // Only add default options if not editing issue. Otherwise they'll already be added.
+      DEFAULT_ALTERNATIVES.forEach(alternative => issueAlternatives.push(alternative));
+    }
 
     this.props.createIssue(
       this.state.issueDescription,
