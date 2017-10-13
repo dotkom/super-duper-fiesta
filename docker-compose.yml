@@ -11,7 +11,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.node
-    container_name: fiestabackend
     depends_on:
       - mongo
     command: npm run backend
@@ -41,7 +40,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.node
-    container_name: frontend-fiesta
     depends_on:
       - mongo
     command: npm run frontend
