@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Button from '../Button';
 import Card from '../Card';
 import Dialog from '../Dialog';
@@ -13,6 +14,7 @@ class Issue extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirectToEditIssue: false,
       showCloseIssueDialog: false,
     };
   }
@@ -33,6 +35,7 @@ class Issue extends React.Component {
     const { showCloseIssueDialog } = this.state;
     return (
       <Card classes={css.issue}>
+        {this.state.redirectToEditIssue && <Redirect to="/admin/question" />}
         <Dialog
           title="Bekreft sletting av sak"
           subtitle={`Bekreft sletting av "${issueText}"`}
@@ -50,7 +53,11 @@ class Issue extends React.Component {
             <p className={css.title}>Aktiv sak</p>
           </div>
           {issueIsActive && <div className={css.actions}>
-            <ButtonIconText text="Rediger" iconClass={css.edit} />
+            <ButtonIconText
+              text="Rediger"
+              iconClass={css.edit}
+              onClick={() => { this.setState({ redirectToEditIssue: true }); }}
+            />
             <ButtonIconText text="Resett" iconClass={css.reset} />
             <ButtonIconText text="Avslutt" iconClass={css.end} onClick={closeIssue} />
             <ButtonIconText
