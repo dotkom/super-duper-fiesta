@@ -3,11 +3,17 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
+const entries = [];
+
+// Only add hot loader patch if not in production.
+// Cannot use webpack merge atm.
+if (process.env.NODE_ENV !== 'production') {
+  entries.push('react-hot-loader/patch');
+}
+entries.push('./client/src/index.js');
+
 module.exports = {
-  entry: [
-    process.env.NODE_ENV !== 'production' && 'react-hot-loader/patch',
-    './client/src/index.js',
-  ],
+  entry: entries,
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
