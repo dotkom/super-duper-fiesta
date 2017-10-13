@@ -11,7 +11,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.node
-    container_name: fiestabackend
     depends_on:
       - mongo
     command: npm run backend
@@ -34,19 +33,12 @@ services:
       - SDF_SENTRY_DSN_BACKEND
     volumes:
       - .:/srv/app/
-    tty: true
-    stdin_open: true
 
   frontend: 
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.node
-    container_name: frontend-fiesta
-    depends_on:
-      - mongo
     command: npm run frontend
-    links:
-      - mongo
     ports: 
       - "8080:8080"
     environment: 
@@ -56,5 +48,3 @@ services:
       - SDF_SENTRY_DSN_FRONTEND
     volumes: 
       - .:/srv/app/
-    tty: true
-    stdin_open: true
