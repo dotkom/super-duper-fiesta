@@ -72,7 +72,7 @@ pipeline:
   deploy:
     image: appleboy/drone-ssh
     pull: true
-    secrets: [registry_username, registry_password, ssh_key]
+    secrets: [ssh_key]
     host: nansen.online.ntnu.no
     port: 22
     username: root
@@ -82,7 +82,6 @@ pipeline:
       branch: master
       event: push
     script:
-      - /usr/bin/docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
       - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
       - /bin/systemctl restart super-duper-fiesta.service
 
