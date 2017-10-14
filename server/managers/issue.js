@@ -98,32 +98,31 @@ async function getPublicIssueWithVotes(issue) {
   let votes;
   try {
     votes = await (await getVotes(issue))
-      .map(async (x) => {
-        try {
-          return await generatePublicVote(issue._id, x);
-        } catch (err) {
-          logger.error('Failed generating public vote', err);
-          return {};
-        }
-      })
-      .reduce(async (existingVotes, nextVote) => {
-        const vote = await nextVote;
-        if (Object.keys(existingVotes).length === 0) {
-          return { [vote._id]: vote };
-        }
-        return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
-      }, {});
+    .map(async (x) => {
+      try {
+        return await generatePublicVote(issue._id, x);
+      } catch (err) {
+        logger.error('Failed generating public vote', err);
+        return {};
+      }
+    })
+    .reduce(async (existingVotes, nextVote) => {
+      const vote = await nextVote;
+      if (Object.keys(existingVotes).length === 0) {
+        return { [vote._id]: vote };
+      }
+      return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
+    }, {});
   } catch (err) {
     // eslint-disable-next-line no-underscore-dangle
     logger.error('Getting votes for issue failed', err, { issueId: issue._id });
   }
-
   const muhVotes = await votes;
 
   const issueVotes = await muhVotes;
   const voteData = {
-    ...issue.toObject(),
-    votes: issue.showOnlyWinner ? null : await muhVotes,
+    ...issue,
+    votes: issue.showOnlyWinner ? null : issueVotes,
     winner: calculateWinner(issue, issueVotes),
   };
   return voteData;

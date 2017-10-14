@@ -129,7 +129,23 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
       "secret": true,
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -287,6 +303,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -315,6 +356,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -343,6 +409,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -371,438 +462,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]
@@ -1148,6 +832,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -1176,6 +885,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -1204,6 +938,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -1232,438 +991,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]
@@ -1798,6 +1150,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -2061,6 +1429,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -2083,118 +1467,6 @@ Array [
       },
     },
     "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": 2,
-      "active": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": 2,
-      "active": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": 2,
-      "active": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": 2,
-      "active": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": 1,
-    },
   ],
 ]
 `;
@@ -2328,6 +1600,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -2485,6 +1773,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -2513,6 +1826,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -2541,6 +1879,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -2569,438 +1932,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]
@@ -3270,6 +2226,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -3298,6 +2279,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -3326,6 +2332,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -3354,438 +2385,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]
@@ -3920,6 +2544,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -4101,6 +2741,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -4129,6 +2794,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -4157,6 +2847,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -4185,438 +2900,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]
@@ -4858,6 +3166,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -5015,6 +3339,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -5043,6 +3392,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -5071,6 +3445,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+      },
+      "winner": null,
     },
   ],
   Array [
@@ -5099,438 +3498,31 @@ Array [
       "description": "Description goes here",
       "genfors": "1",
       "meeting": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+        Object {
+          "id": 2,
+          "text": "Yes",
         },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
+        Object {
+          "id": 3,
+          "text": "No",
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
+      "votes": Object {
+        "4": Object {
+          "_id": 4,
+          "option": 3,
+          "question": 2,
+          "user": 1,
         },
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 1,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 2,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 3,
-      "option": 3,
-      "question": 2,
-      "user": 1,
-    },
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": 4,
-      "option": 3,
-      "question": 2,
-      "user": 1,
+      "winner": null,
     },
   ],
 ]

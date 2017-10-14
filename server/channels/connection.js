@@ -114,10 +114,10 @@ const emitActiveQuestion = async (socket, meeting) => {
 const emitIssueBacklog = async (socket, meeting) => {
   try {
     const issues = await getQuestions(meeting);
-    issues.forEach(async (issue) => {
+    await Promise.all(issues.map(async (issue) => {
       // Get votes for backlogged issues
       emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue));
-    });
+    }));
   } catch (err) {
     logger.error('Getting issue backlog failed', err);
   }

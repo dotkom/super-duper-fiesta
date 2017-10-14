@@ -28,6 +28,22 @@ Array [
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -56,6 +72,22 @@ Array [
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
 ]
@@ -110,6 +142,22 @@ Array [
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
   Array [
@@ -138,6 +186,22 @@ Array [
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
 ]
@@ -170,6 +234,22 @@ Array [
       "active": false,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
 ]
@@ -223,6 +303,22 @@ Array [
       "active": false,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
   ],
 ]
@@ -285,6 +381,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
     Object {
       "action": "open",
@@ -320,6 +432,22 @@ Array [
       "active": true,
       "description": "Description goes here",
       "genfors": "1",
+      "options": Array [
+        Object {
+          "id": 1,
+          "text": "Blank",
+        },
+        Object {
+          "id": 2,
+          "text": "Yes",
+        },
+        Object {
+          "id": 3,
+          "text": "No",
+        },
+      ],
+      "showOnlyWinner": false,
+      "voteDemand": "regular",
     },
     Object {
       "action": "open",
