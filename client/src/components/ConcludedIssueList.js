@@ -3,44 +3,7 @@ import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
-import { RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import Button from './Button';
-
-// Maps over alternatives to see if any of them got majority vote
-const calculateWinner = (issue) => {
-  const { alternatives, votes } = issue;
-  const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
-  const numTotalVotes = Object.keys(votes).length;
-  const voteObjects = Object.keys(votes).map(key => votes[key]);
-
-  // Count votes for each alternative
-  const alternativeVoteCounts = alternatives.map(alternative => (
-    voteObjects.filter(vote => vote.alternative === alternative.id).length
-  ));
-
-  let countingTotalVotes = numTotalVotes;
-  const { countingBlankVotes } = issue;
-  const blankAlternative = alternatives.find(alternative => alternative.text === 'Blank');
-  const blankIdx = alternatives.indexOf(blankAlternative);
-  // Subtract blank votes if they don't count
-  if (!countingBlankVotes) {
-    countingTotalVotes -= alternativeVoteCounts[blankIdx];
-  }
-
-  // Check if any alternative meets the vote demand
-  const winnerVoteCount = alternativeVoteCounts.find((alternativeVoteCount, idx) => {
-    // Skip blank vote
-    if (idx === blankIdx) {
-      return false;
-    }
-    return alternativeVoteCount / countingTotalVotes > voteDemand;
-  });
-  if (winnerVoteCount === undefined) {
-    return null;
-  }
-  // Find alternative id
-  return alternatives[alternativeVoteCounts.indexOf(winnerVoteCount)].id;
-};
 
 class ConcludedIssueList extends React.Component {
   constructor() {
@@ -72,7 +35,7 @@ class ConcludedIssueList extends React.Component {
         </Button>}
         <div className={css.concludedIssueList}>
           {this.state.visible && Object.keys(issues).map((issue) => {
-            const winner = calculateWinner(issues[issue]);
+            const winner = issues[issue].winner;
             const majority = winner !== null;
             return (<ConcludedIssue
               key={issues[issue].id}

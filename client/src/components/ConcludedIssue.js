@@ -25,7 +25,6 @@ const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives, vote
           className={classNames({
             [css.alternativesWinner]:
               majority
-              && Object.keys(votes).length
               && alternative.id === winner,
           })}
         >
