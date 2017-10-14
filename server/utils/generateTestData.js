@@ -18,6 +18,7 @@ const generateIssue = (data) => {
 
     ],
   }, data);
+  issueObject.toObject = () => issueObject;
   return issueObject;
 };
 

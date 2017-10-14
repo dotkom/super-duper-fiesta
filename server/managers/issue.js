@@ -121,7 +121,7 @@ async function getPublicIssueWithVotes(issue) {
 
   const issueVotes = await muhVotes;
   const voteData = {
-    ...issue,
+    ...issue.toObject(),
     votes: issue.showOnlyWinner ? null : issueVotes,
     winner: calculateWinner(issue, issueVotes),
   };
