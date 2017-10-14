@@ -114,17 +114,37 @@ const emitIssueBacklog = async (socket, meeting) => {
   try {
     const issues = await getQuestions(meeting);
     issues.forEach(async (issue) => {
-      emit(socket, CLOSE_ISSUE, issue);
       // Get votes for backlogged issues
+      let votes;
       try {
-        const votes = await getVotes(issue);
-        votes.forEach(async (vote) => {
-          emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-        });
+        votes = await (await getVotes(issue))
+          .map(async (x) => {
+            try {
+              return await generatePublicVote(issue._id, x);
+            } catch (err) {
+              logger.error('Failed generating public vote', err);
+              return {};
+            }
+          })
+          .reduce(async (existingVotes, nextVote) => {
+            const vote = await nextVote;
+            if (Object.keys(existingVotes).length === 0) {
+              return { [vote._id]: vote };
+            }
+            return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
+          }, {});
       } catch (err) {
         // eslint-disable-next-line no-underscore-dangle
         logger.error('Getting votes for issue failed', err, { issueId: issue._id });
       }
+
+      const muhVotes = await votes;
+
+      const newIssue = (issue.showOnlyWinner)
+        ? issue
+        : Object.assign({ votes: await muhVotes }, await issue._doc);
+
+      emit(socket, CLOSE_ISSUE, await newIssue);
     });
   } catch (err) {
     logger.error('Getting issue backlog failed', err);
