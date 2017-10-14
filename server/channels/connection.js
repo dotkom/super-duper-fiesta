@@ -9,6 +9,7 @@ const { generatePublicVote } = require('../managers/vote');
 const haveIVoted = require('../models/vote').haveIVoted;
 const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
+const { getPublicIssueWithVotes } = require('../managers/issue');
 
 const { AUTH_ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
@@ -115,36 +116,7 @@ const emitIssueBacklog = async (socket, meeting) => {
     const issues = await getQuestions(meeting);
     issues.forEach(async (issue) => {
       // Get votes for backlogged issues
-      let votes;
-      try {
-        votes = await (await getVotes(issue))
-          .map(async (x) => {
-            try {
-              return await generatePublicVote(issue._id, x);
-            } catch (err) {
-              logger.error('Failed generating public vote', err);
-              return {};
-            }
-          })
-          .reduce(async (existingVotes, nextVote) => {
-            const vote = await nextVote;
-            if (Object.keys(existingVotes).length === 0) {
-              return { [vote._id]: vote };
-            }
-            return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
-          }, {});
-      } catch (err) {
-        // eslint-disable-next-line no-underscore-dangle
-        logger.error('Getting votes for issue failed', err, { issueId: issue._id });
-      }
-
-      const muhVotes = await votes;
-
-      const newIssue = (issue.showOnlyWinner)
-        ? issue
-        : Object.assign({ votes: await muhVotes }, await issue._doc);
-
-      emit(socket, CLOSE_ISSUE, await newIssue);
+      emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue));
     });
   } catch (err) {
     logger.error('Getting issue backlog failed', err);

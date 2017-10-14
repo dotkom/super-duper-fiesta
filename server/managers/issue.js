@@ -2,7 +2,9 @@ const model = require('../models/issue');
 const logger = require('../logging');
 const { getQualifiedUsers } = require('../models/user');
 const { getActiveGenfors } = require('../models/meeting');
+const { getVotes } = require('../models/vote');
 const { canEdit } = require('./meeting');
+const { generatePublicVote } = require('./vote');
 
 const permissionLevel = require('../../common/auth/permissions');
 
@@ -54,8 +56,40 @@ async function deleteIssue(issue, user) {
   return null;
 }
 
+async function getPublicIssueWithVotes(issue) {
+  let votes;
+  try {
+    votes = await (await getVotes(issue))
+      .map(async (x) => {
+        try {
+          return await generatePublicVote(issue._id, x);
+        } catch (err) {
+          logger.error('Failed generating public vote', err);
+          return {};
+        }
+      })
+      .reduce(async (existingVotes, nextVote) => {
+        const vote = await nextVote;
+        if (Object.keys(existingVotes).length === 0) {
+          return { [vote._id]: vote };
+        }
+        return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
+      }, {});
+  } catch (err) {
+    // eslint-disable-next-line no-underscore-dangle
+    logger.error('Getting votes for issue failed', err, { issueId: issue._id });
+  }
+
+  const muhVotes = await votes;
+
+  return (issue.showOnlyWinner)
+    ? issue
+    : Object.assign({ votes: await muhVotes }, await issue._doc);
+}
+
 module.exports = {
   endIssue,
   addIssue,
   deleteIssue,
+  getPublicIssueWithVotes,
 };
