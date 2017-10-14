@@ -1,9 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { getIssueText } from '../../selectors/issues';
 import Card from '../Card';
+import Loader from './Loader';
 import css from './Issue.css';
 
 const Issue = ({ text }) => (
@@ -14,11 +14,7 @@ const Issue = ({ text }) => (
     >
       <p>{text}</p>
       {text === Issue.defaultProps.text && (
-        <div className={css.loader}>
-          <div className={classNames(css.loaderPart, css.loaderFirst)} />
-          <div className={classNames(css.loaderPart, css.loaderSecond)} />
-          <div className={css.loaderBlend} />
-        </div>
+        <Loader />
       )}
     </Card>
   </DocumentTitle>
