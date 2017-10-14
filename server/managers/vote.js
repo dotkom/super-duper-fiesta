@@ -45,7 +45,6 @@ const getPublicVote = (vote, secret, showOnlyWinner) => ({
   question: vote.question,
   user: (showOnlyWinner || secret) ? '' : vote.user,
   option: showOnlyWinner ? '' : vote.option,
-  alternative: showOnlyWinner ? '' : vote.option,
 });
 
 const generatePublicVote = async (id, vote) => {
