@@ -57,17 +57,20 @@ async function deleteIssue(issue, user) {
   return null;
 }
 
-// Maps over alternatives to see if any of them got majority vote
-const calculateWinner = (issue, votes) => {
-  const { options } = issue;
-  const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
-  const numTotalVotes = Object.keys(votes).length;
+const countVoteOptions = (options, votes) => {
   const voteObjects = Object.keys(votes).map(key => votes[key]);
 
   // Count votes for each alternative
-  const optionVoteCounts = options.map(option => (
+  return options.map(option => (
     voteObjects.filter(vote => vote.option.toString() === option.id).length
   ));
+};
+
+// Maps over alternatives to see if any of them got majority vote
+const calculateWinner = (issue, votes, optionVoteCounts) => {
+  const { options } = issue;
+  const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
+  const numTotalVotes = Object.keys(votes).length;
 
   let countingTotalVotes = numTotalVotes;
   const { countingBlankVotes } = issue;
@@ -92,6 +95,13 @@ const calculateWinner = (issue, votes) => {
   // Find alternative id
   return options[optionVoteCounts.indexOf(winnerVoteCount)].id;
 };
+
+const voteArrayToObject = (voteCounts, options) => (
+  voteCounts.reduce((voteCountObject, voteCount, index) => ({
+    ...voteCountObject,
+    [options[index].id]: voteCount,
+  }), {})
+);
 
 
 async function getPublicIssueWithVotes(issue) {
@@ -120,10 +130,11 @@ async function getPublicIssueWithVotes(issue) {
   const muhVotes = await votes;
 
   const issueVotes = await muhVotes;
+  const voteCounts = countVoteOptions(issue.options, issueVotes);
   const voteData = {
     ...issue.toObject(),
-    votes: issue.showOnlyWinner ? null : issueVotes,
-    winner: calculateWinner(issue, issueVotes),
+    votes: issue.showOnlyWinner ? null : voteArrayToObject(voteCounts, issue.options),
+    winner: calculateWinner(issue, issueVotes, voteCounts),
   };
   return voteData;
 }
