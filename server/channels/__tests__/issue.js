@@ -23,10 +23,10 @@ beforeEach(() => {
     generateUser({ id: '4' }),
   ]);
   getVotes.mockImplementation(async ({ _id: issueId }) => [
-    generateVote({ question: issueId, _id: 1 }),
-    generateVote({ question: issueId, _id: 2 }),
-    generateVote({ question: issueId, _id: 3 }),
-    generateVote({ question: issueId, _id: 4 }),
+    generateVote({ question: issueId, _id: '1' }),
+    generateVote({ question: issueId, _id: '2' }),
+    generateVote({ question: issueId, _id: '3' }),
+    generateVote({ question: issueId, _id: '4' }),
   ]);
 });
 

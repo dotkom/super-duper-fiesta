@@ -100,7 +100,7 @@ async function getPublicIssueWithVotes(issue) {
     votes = await (await getVotes(issue))
     .map(async (x) => {
       try {
-        return await generatePublicVote(issue._id, x);
+        return await generatePublicVote(issue, x);
       } catch (err) {
         logger.error('Failed generating public vote', err);
         return {};
