@@ -402,6 +402,133 @@ Array [
 ]
 `;
 
+exports[`closeIssue emits winner when issue only shows winner 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": "1",
+      "active": false,
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
+      "options": Array [
+        Object {
+          "id": "1",
+          "text": "Blank",
+        },
+        Object {
+          "id": "2",
+          "text": "Yes",
+        },
+        Object {
+          "id": "3",
+          "text": "No",
+        },
+      ],
+      "secret": false,
+      "showOnlyWinner": true,
+      "toObject": [Function],
+      "voteDemand": "regular",
+      "votes": Object {},
+      "winner": "3",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits winner when issue only shows winner 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DISABLE_VOTING",
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": "1",
+      "active": false,
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
+      "options": Array [
+        Object {
+          "id": "1",
+          "text": "Blank",
+        },
+        Object {
+          "id": "2",
+          "text": "Yes",
+        },
+        Object {
+          "id": "3",
+          "text": "No",
+        },
+      ],
+      "secret": false,
+      "showOnlyWinner": true,
+      "toObject": [Function],
+      "voteDemand": "regular",
+      "votes": Object {},
+      "winner": "3",
+    },
+  ],
+]
+`;
+
 exports[`createIssue emits OPEN_ISSUE action creates issue 1`] = `
 Array [
   Array [

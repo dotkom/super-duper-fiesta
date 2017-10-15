@@ -68,6 +68,14 @@ describe('closeIssue', () => {
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
   });
+
+  it('emits winner when issue only shows winner', async () => {
+    endIssue.mockImplementation(async () => generateIssue({ active: false, showOnlyWinner: true }));
+    await closeIssue(generateSocket({ permissions: 10 }), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toMatchSnapshot();
+  });
 });
 
 describe('adminDeleteIssue', () => {

@@ -4,7 +4,6 @@ const { getQualifiedUsers } = require('../models/user');
 const { getActiveGenfors } = require('../models/meeting');
 const { getVotes } = require('../models/vote');
 const { canEdit } = require('./meeting');
-const { generatePublicVote } = require('./vote');
 
 const permissionLevel = require('../../common/auth/permissions');
 const { RESOLUTION_TYPES } = require('../../common/actionTypes/voting');
@@ -108,14 +107,6 @@ async function getPublicIssueWithVotes(issue) {
   let votes;
   try {
     votes = await (await getVotes(issue))
-    .map(async (x) => {
-      try {
-        return await generatePublicVote(issue, x);
-      } catch (err) {
-        logger.error('Failed generating public vote', err);
-        return {};
-      }
-    })
     .reduce(async (existingVotes, nextVote) => {
       const vote = await nextVote;
       return {
