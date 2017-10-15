@@ -322,6 +322,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -376,6 +394,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -430,6 +466,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -484,6 +538,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -855,6 +927,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -909,6 +999,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -963,6 +1071,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -1017,6 +1143,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -1803,6 +1947,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -1857,6 +2019,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -1911,6 +2091,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -1965,6 +2163,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2260,6 +2476,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2314,6 +2548,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2368,6 +2620,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2422,6 +2692,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2780,6 +3068,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2834,6 +3140,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2888,6 +3212,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -2942,6 +3284,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -3383,6 +3743,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -3437,6 +3815,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -3491,6 +3887,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,
@@ -3545,6 +3959,24 @@ Array [
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
+        "1": Object {
+          "_id": 1,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "2": Object {
+          "_id": 2,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
+        "3": Object {
+          "_id": 3,
+          "option": 3,
+          "question": 2,
+          "user": 1,
+        },
         "4": Object {
           "_id": 4,
           "option": 3,

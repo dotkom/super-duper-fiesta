@@ -108,10 +108,10 @@ async function getPublicIssueWithVotes(issue) {
     })
     .reduce(async (existingVotes, nextVote) => {
       const vote = await nextVote;
-      if (Object.keys(existingVotes).length === 0) {
-        return { [vote._id]: vote };
-      }
-      return Object.assign({ ...existingVotes }, { [vote._id]: nextVote });
+      return {
+        ...(await existingVotes),
+        [vote._id]: vote,
+      };
     }, {});
   } catch (err) {
     // eslint-disable-next-line no-underscore-dangle
