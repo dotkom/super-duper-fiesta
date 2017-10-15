@@ -29,7 +29,7 @@ const getIssue = genfors => new Promise((resolve, reject) => {
       addIssue({
         genfors,
         description: 'Example Issue #1',
-        options: [
+        alternatives: [
           { text: 'Hello' },
           { text: 'World' },
           { text: 'FeelsBadMan' },

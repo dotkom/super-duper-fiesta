@@ -10,7 +10,7 @@ const QuestionSchema = new Schema({
   date: { type: Date, required: true, default: new Date() },
   active: { type: Boolean, default: true },
   deleted: { type: Boolean, required: true, default: false },
-  options: [AlternativeSchema],
+  alternatives: [AlternativeSchema],
   secret: { type: Boolean, default: false },
   showOnlyWinner: { type: Boolean, default: true },
   countingBlankVotes: { type: Boolean, default: true },

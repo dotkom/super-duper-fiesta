@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const VoteSchema = new Schema({
   user: { type: Schema.Types.ObjectId, required: true },
   question: { type: Schema.Types.ObjectId, required: true },
-  option: { type: Schema.Types.ObjectId, required: true },
+  alternative: { type: Schema.Types.ObjectId, required: true },
 });
 const Vote = mongoose.model('Vote', VoteSchema);
 
@@ -20,11 +20,11 @@ async function haveIVoted(issue, user) {
   return votes.length > 0;
 }
 
-function createVote(user, question, option) {
+function createVote(user, question, alternative) {
   return new Vote({
     user,
     question,
-    option,
+    alternative,
   });
 }
 

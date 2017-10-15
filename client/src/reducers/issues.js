@@ -10,7 +10,7 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         id: action.data._id, // eslint-disable-line no-underscore-dangle
         active: action.data.active,
         text: action.data.description,
-        alternatives: action.data.options.map((originalAlternative) => {
+        alternatives: action.data.alternatives.map((originalAlternative) => {
           const alternative = Object.assign({}, originalAlternative);
           // Proxy `_id` as `id`.
           alternative.id = alternative._id; // eslint-disable-line no-underscore-dangle
@@ -82,7 +82,7 @@ const issues = (state = {}, action) => {
       const updatedAction = {
         type: action.type,
         issueId,
-        alternative: action.data.option,
+        alternative: action.data.alternative,
         voter: action.data.user,
         id: action.data._id, // eslint-disable-line no-underscore-dangle
       };

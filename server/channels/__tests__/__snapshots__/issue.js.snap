@@ -25,11 +25,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -43,6 +39,10 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -78,11 +78,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -96,6 +92,10 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -157,11 +157,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -175,6 +171,10 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -204,11 +204,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -222,6 +218,10 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "deleted": true,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -262,10 +262,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -279,6 +276,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -340,10 +340,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -357,6 +354,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -427,10 +427,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -444,6 +441,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": true,
       "toObject": [Function],
@@ -501,10 +501,7 @@ Array [
     Object {
       "_id": "1",
       "active": false,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -518,6 +515,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": true,
       "toObject": [Function],
@@ -554,10 +554,7 @@ Array [
     Object {
       "_id": "1",
       "active": true,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -571,6 +568,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
@@ -608,10 +608,7 @@ Array [
     Object {
       "_id": "1",
       "active": true,
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "options": Array [
+      "alternatives": Array [
         Object {
           "id": "1",
           "text": "Blank",
@@ -625,6 +622,9 @@ Array [
           "text": "No",
         },
       ],
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
       "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],

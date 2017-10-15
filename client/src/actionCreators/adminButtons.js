@@ -15,7 +15,7 @@ export const createIssue = (description, alternatives, voteDemand,
     type: ADMIN_CREATE_ISSUE,
     data: {
       description,
-      options: alternatives,
+      alternatives,
       voteDemand,
       showOnlyWinner,
       secret: secretVoting,
