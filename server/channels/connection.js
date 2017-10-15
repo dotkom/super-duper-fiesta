@@ -9,6 +9,7 @@ const { generatePublicVote } = require('../managers/vote');
 const haveIVoted = require('../models/vote').haveIVoted;
 const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
+const { getPublicIssueWithVotes } = require('../managers/issue');
 
 const { AUTH_ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
@@ -113,19 +114,10 @@ const emitActiveQuestion = async (socket, meeting) => {
 const emitIssueBacklog = async (socket, meeting) => {
   try {
     const issues = await getQuestions(meeting);
-    issues.forEach(async (issue) => {
-      emit(socket, CLOSE_ISSUE, issue);
+    await Promise.all(issues.map(async (issue) => {
       // Get votes for backlogged issues
-      try {
-        const votes = await getVotes(issue);
-        votes.forEach(async (vote) => {
-          emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-        });
-      } catch (err) {
-        // eslint-disable-next-line no-underscore-dangle
-        logger.error('Getting votes for issue failed', err, { issueId: issue._id });
-      }
-    });
+      emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue));
+    }));
   } catch (err) {
     logger.error('Getting issue backlog failed', err);
   }

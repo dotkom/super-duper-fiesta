@@ -1,9 +1,26 @@
-const generateIssue = data => (Object.assign({
-  _id: 1,
-  active: true,
-  genfors: '1',
-  description: 'Description goes here',
+const generateOption = data => (Object.assign({
+  id: 1,
+  text: 'Blank',
 }, data));
+
+const generateIssue = (data) => {
+  const issueObject = Object.assign({
+    _id: 1,
+    active: true,
+    genfors: '1',
+    description: 'Description goes here',
+    showOnlyWinner: false,
+    voteDemand: 'regular',
+    options: [
+      generateOption({ id: 1, text: 'Blank' }),
+      generateOption({ id: 2, text: 'Yes' }),
+      generateOption({ id: 3, text: 'No' }),
+
+    ],
+  }, data);
+  issueObject.toObject = () => issueObject;
+  return issueObject;
+};
 
 const generateUser = data => (Object.assign({
   _id: '123',
