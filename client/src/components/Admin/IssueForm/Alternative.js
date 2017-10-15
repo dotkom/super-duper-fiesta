@@ -61,10 +61,10 @@ class Alternative extends React.Component {
 
   render() {
     const {
-      alternativeText,
       alternatives,
       handleRemoveAlternative,
     } = this.props;
+    const { alternativeText } = this.state;
 
     return (
       <div className={css.alternative}>
@@ -113,12 +113,7 @@ class Alternative extends React.Component {
   }
 }
 
-Alternative.defaultProps = {
-  alternativeText: undefined,
-};
-
 Alternative.propTypes = {
-  alternativeText: PropTypes.string,
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
