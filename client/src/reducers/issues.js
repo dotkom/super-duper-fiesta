@@ -9,6 +9,7 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         ...state,
         id: action.data._id, // eslint-disable-line no-underscore-dangle
         active: action.data.active,
+        date: action.data.date,
         text: action.data.description,
         alternatives: action.data.options.map((originalAlternative) => {
           const alternative = Object.assign({}, originalAlternative);
