@@ -11,8 +11,8 @@ describe('requestUserList', () => {
   beforeEach(() => {
     getActiveGenfors.mockImplementation(async () => generateGenfors());
     getUsers.mockImplementation(async genfors => [
-      generateUser({ genfors: genfors.id, _id: 1 }),
-      generateUser({ genfors: genfors.id, _id: 2 }),
+      generateUser({ genfors: genfors.id, _id: '1' }),
+      generateUser({ genfors: genfors.id, _id: '2' }),
     ]);
   });
 

@@ -23,7 +23,7 @@ Array [
     },
     "TOGGLED_REGISTRATION_STATE",
     Object {
-      "id": 1,
+      "id": "1",
       "pin": 3141592653,
       "registrationOpen": false,
     },
@@ -54,7 +54,7 @@ Array [
     },
     "TOGGLED_REGISTRATION_STATE",
     Object {
-      "id": 1,
+      "id": "1",
       "pin": 3141592653,
       "registrationOpen": true,
     },

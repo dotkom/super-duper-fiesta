@@ -27,16 +27,16 @@ describe('connection', () => {
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
     getQuestions.mockImplementation(async meeting => [
-      generateIssue({ meeting: meeting.id, _id: 2 }),
-      generateIssue({ meeting: meeting.id, _id: 2 }),
-      generateIssue({ meeting: meeting.id, _id: 2 }),
-      generateIssue({ meeting: meeting.id, _id: 2 }),
+      generateIssue({ meeting: meeting.id, _id: '2' }),
+      generateIssue({ meeting: meeting.id, _id: '2' }),
+      generateIssue({ meeting: meeting.id, _id: '2' }),
+      generateIssue({ meeting: meeting.id, _id: '2' }),
     ]);
     getVotes.mockImplementation(async ({ _id: issueId }) => [
-      generateVote({ question: issueId, _id: 1 }),
-      generateVote({ question: issueId, _id: 2 }),
-      generateVote({ question: issueId, _id: 3 }),
-      generateVote({ question: issueId, _id: 4 }),
+      generateVote({ question: issueId, _id: '1' }),
+      generateVote({ question: issueId, _id: '2' }),
+      generateVote({ question: issueId, _id: '3' }),
+      generateVote({ question: issueId, _id: '4' }),
     ]);
     haveIVoted.mockImplementation(async () => false);
   });

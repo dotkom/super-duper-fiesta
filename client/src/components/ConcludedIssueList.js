@@ -40,7 +40,6 @@ class ConcludedIssueList extends React.Component {
             return (<ConcludedIssue
               key={issues[issue].id}
               majority={majority}
-              winner={winner}
               {...issues[issue]}
             />);
           })}

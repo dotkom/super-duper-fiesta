@@ -23,12 +23,12 @@ getGenfors.mockImplementation(async id => ({
   id,
 }));
 getAnonymousUser.mockImplementation(async () => ({
-  _id: 1,
+  _id: '1',
 }));
 
 const generateData = () => ({
-  issue: 1,
-  alternative: 1,
+  issue: '1',
+  alternative: '1',
 });
 
 

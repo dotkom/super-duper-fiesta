@@ -23,10 +23,10 @@ beforeEach(() => {
     generateUser({ id: '4' }),
   ]);
   getVotes.mockImplementation(async ({ _id: issueId }) => [
-    generateVote({ question: issueId, _id: 1 }),
-    generateVote({ question: issueId, _id: 2 }),
-    generateVote({ question: issueId, _id: 3 }),
-    generateVote({ question: issueId, _id: 4 }),
+    generateVote({ question: issueId, _id: '1' }),
+    generateVote({ question: issueId, _id: '2' }),
+    generateVote({ question: issueId, _id: '3' }),
+    generateVote({ question: issueId, _id: '4' }),
   ]);
 });
 
@@ -67,6 +67,14 @@ describe('closeIssue', () => {
 
     expect(emit.mock.calls).toMatchSnapshot();
     expect(broadcast.mock.calls).toEqual([]);
+  });
+
+  it('emits winner when issue only shows winner', async () => {
+    endIssue.mockImplementation(async () => generateIssue({ active: false, showOnlyWinner: true }));
+    await closeIssue(generateSocket({ permissions: 10 }), generateData());
+
+    expect(emit.mock.calls).toMatchSnapshot();
+    expect(broadcast.mock.calls).toMatchSnapshot();
   });
 });
 

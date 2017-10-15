@@ -23,55 +23,36 @@ Array [
     },
     "CLOSE_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
-        "1": Object {
-          "_id": 1,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "2": Object {
-          "_id": 2,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "3": Object {
-          "_id": 3,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "4": Object {
-          "_id": 4,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
+        "1": 0,
+        "2": 0,
+        "3": 4,
       },
-      "winner": null,
+      "winner": "3",
     },
   ],
   Array [
@@ -95,55 +76,36 @@ Array [
     },
     "DELETED_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
-        "1": Object {
-          "_id": 1,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "2": Object {
-          "_id": 2,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "3": Object {
-          "_id": 3,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "4": Object {
-          "_id": 4,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
+        "1": 0,
+        "2": 0,
+        "3": 4,
       },
-      "winner": null,
+      "winner": "3",
     },
   ],
 ]
@@ -193,25 +155,27 @@ Array [
     },
     "CLOSE_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
@@ -238,55 +202,36 @@ Array [
     },
     "DELETED_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "deleted": true,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
-        "1": Object {
-          "_id": 1,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "2": Object {
-          "_id": 2,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "3": Object {
-          "_id": 3,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "4": Object {
-          "_id": 4,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
+        "1": 0,
+        "2": 0,
+        "3": 4,
       },
-      "winner": null,
+      "winner": "3",
     },
   ],
 ]
@@ -315,54 +260,35 @@ Array [
     },
     "CLOSE_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
-        "1": Object {
-          "_id": 1,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "2": Object {
-          "_id": 2,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "3": Object {
-          "_id": 3,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "4": Object {
-          "_id": 4,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
+        "1": 0,
+        "2": 0,
+        "3": 4,
       },
-      "winner": null,
+      "winner": "3",
     },
   ],
 ]
@@ -412,54 +338,35 @@ Array [
     },
     "CLOSE_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": false,
+      "countingBlankVotes": false,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
       "votes": Object {
-        "1": Object {
-          "_id": 1,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "2": Object {
-          "_id": 2,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "3": Object {
-          "_id": 3,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
-        "4": Object {
-          "_id": 4,
-          "option": 3,
-          "question": 1,
-          "user": 1,
-        },
+        "1": 0,
+        "2": 0,
+        "3": 4,
       },
-      "winner": null,
+      "winner": "3",
     },
   ],
 ]
@@ -495,6 +402,133 @@ Array [
 ]
 `;
 
+exports[`closeIssue emits winner when issue only shows winner 1`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": "1",
+      "active": false,
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
+      "options": Array [
+        Object {
+          "id": "1",
+          "text": "Blank",
+        },
+        Object {
+          "id": "2",
+          "text": "Yes",
+        },
+        Object {
+          "id": "3",
+          "text": "No",
+        },
+      ],
+      "secret": false,
+      "showOnlyWinner": true,
+      "toObject": [Function],
+      "voteDemand": "regular",
+      "votes": Object {},
+      "winner": "3",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits winner when issue only shows winner 2`] = `
+Array [
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "DISABLE_VOTING",
+  ],
+  Array [
+    Object {
+      "request": Object {
+        "headers": Object {
+          "cookie": Object {
+            "passwordHash": "hashy",
+          },
+        },
+        "user": Object {
+          "_id": "123",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 10,
+        },
+      },
+    },
+    "CLOSE_ISSUE",
+    Object {
+      "_id": "1",
+      "active": false,
+      "countingBlankVotes": false,
+      "description": "Description goes here",
+      "genfors": "1",
+      "options": Array [
+        Object {
+          "id": "1",
+          "text": "Blank",
+        },
+        Object {
+          "id": "2",
+          "text": "Yes",
+        },
+        Object {
+          "id": "3",
+          "text": "No",
+        },
+      ],
+      "secret": false,
+      "showOnlyWinner": true,
+      "toObject": [Function],
+      "voteDemand": "regular",
+      "votes": Object {},
+      "winner": "3",
+    },
+  ],
+]
+`;
+
 exports[`createIssue emits OPEN_ISSUE action creates issue 1`] = `
 Array [
   Array [
@@ -518,24 +552,26 @@ Array [
     },
     "OPEN_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": true,
+      "countingBlankVotes": false,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",
@@ -570,24 +606,26 @@ Array [
     },
     "OPEN_ISSUE",
     Object {
-      "_id": 1,
+      "_id": "1",
       "active": true,
+      "countingBlankVotes": false,
       "description": "Description goes here",
       "genfors": "1",
       "options": Array [
         Object {
-          "id": 1,
+          "id": "1",
           "text": "Blank",
         },
         Object {
-          "id": 2,
+          "id": "2",
           "text": "Yes",
         },
         Object {
-          "id": 3,
+          "id": "3",
           "text": "No",
         },
       ],
+      "secret": false,
       "showOnlyWinner": false,
       "toObject": [Function],
       "voteDemand": "regular",

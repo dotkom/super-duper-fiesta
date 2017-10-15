@@ -56,18 +56,18 @@ Array [
     "USER_LIST",
     Array [
       Object {
-        "_id": 1,
+        "_id": "1",
         "completedRegistration": true,
-        "genfors": 1,
+        "genfors": "1",
         "logged_in": true,
         "name": "Namy",
         "onlinewebId": "123",
         "permissions": 5,
       },
       Object {
-        "_id": 2,
+        "_id": "2",
         "completedRegistration": true,
-        "genfors": 1,
+        "genfors": "1",
         "logged_in": true,
         "name": "Namy",
         "onlinewebId": "123",
