@@ -3,6 +3,7 @@ const emit = require('../../../utils').emit;
 const logger = require('../../../logging');
 
 const { updateUserById } = require('../../../models/user');
+const permissionLevels = require('../../../../common/auth/permissions');
 
 const { ADMIN_TOGGLE_CAN_VOTE: TOGGLE_CAN_VOTE, TOGGLE_CAN_VOTE: TOGGLED_CAN_VOTE } =
   require('../../../../common/actionTypes/users');
@@ -17,7 +18,7 @@ const toggleCanVote = async (socket, data) => {
     currentCanVote: canVote,
     expectedCanVote: !canVote,
   });
-  await updateUserById(userId, { canVote }, { new: true })
+  await updateUserById(userId, { canVote, permissions: permissionLevels.CAN_VOTE }, { new: true })
   .then((user) => {
     logger.debug('Updated canVote for user.', {
       adminUser: adminUser.name,

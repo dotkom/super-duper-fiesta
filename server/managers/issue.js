@@ -33,7 +33,7 @@ async function addIssue(issueData, closeCurrentIssue) {
     await model.endIssue(activeIssue);
   }
   // removed possible issues and proceeding to create a new one
-  const users = getQualifiedUsers(genfors);
+  const users = await getQualifiedUsers(genfors);
   const issue = Object.assign(issueData, {
     genfors,
     qualifiedVoters: users.length,
