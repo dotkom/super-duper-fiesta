@@ -5,7 +5,7 @@ import Card from './Card';
 import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../../../common/actionTypes/voting';
 import css from './ConcludedIssue.css';
 
-const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives, votes }) => (
+const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives }) => (
   <Card
     classes={css.concludedIssue}
     headerColor={majority ? 'green' : 'red'}
@@ -53,11 +53,6 @@ ConcludedIssue.propTypes = {
     _id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   })).isRequired,
-  votes: PropTypes.objectOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    alternative: PropTypes.string,
-    voter: PropTypes.string,
-  })),
   winner: PropTypes.string,
 };
 
