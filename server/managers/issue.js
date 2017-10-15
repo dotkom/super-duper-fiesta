@@ -133,7 +133,7 @@ async function getPublicIssueWithVotes(issue) {
   const voteCounts = countVoteOptions(issue.options, issueVotes);
   const voteData = {
     ...issue.toObject(),
-    votes: issue.showOnlyWinner ? null : voteArrayToObject(voteCounts, issue.options),
+    votes: issue.showOnlyWinner ? {} : voteArrayToObject(voteCounts, issue.options),
     winner: calculateWinner(issue, issueVotes, voteCounts),
   };
   return voteData;
