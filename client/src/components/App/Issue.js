@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { getIssueText } from '../../selectors/issues';
 import Card from '../Card';
+import Loader from './Loader';
 import css from './Issue.css';
 
 const Issue = ({ text }) => (
@@ -12,7 +13,9 @@ const Issue = ({ text }) => (
       subtitle="Aktiv sak"
     >
       <p>{text}</p>
-      {text === Issue.defaultProps.text && <div className={css.loader} />}
+      {text === Issue.defaultProps.text && (
+        <Loader />
+      )}
     </Card>
   </DocumentTitle>
 );
