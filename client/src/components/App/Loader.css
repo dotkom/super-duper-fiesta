@@ -1,0 +1,49 @@
+.loader {
+  margin: 2rem auto;
+  width: 2rem;
+  height: 2rem;
+  transform: rotate(-45deg);
+}
+/* http://cssload.net/en/horizontal-bars/2 */
+
+.loaderPart {
+  border-radius: 100%;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  animation: cssload-part-anim 0.92s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.loaderFirst {
+  background: rgb(99,105,157);
+  right: 0;
+  bottom: 0;
+  animation:
+    cssload-part-anim 0.92s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate-reverse,
+    swap-z-index 0.92s steps(2) -0.46s infinite alternate;
+}
+
+.loaderSecond {
+  background: rgb(113,147,214);
+  left: 0;
+  top: 0;
+}
+
+@keyframes cssload-part-anim {
+  0% {
+    transform: translate3d(-1rem, -1rem, 0);
+  }
+  100% {
+    transform: translate3d(1rem, 1rem, 0);
+  }
+}
+
+@keyframes swap-z-index {
+  from {
+    z-index: auto;
+  }
+  to {
+    z-index: 10;
+  }
+}
