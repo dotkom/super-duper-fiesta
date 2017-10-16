@@ -3,7 +3,7 @@ const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
-const getQuestions = require('../models/issue').getQuestions;
+const { getConcludedIssues } = require('../models/issue');
 const getVotes = require('../models/vote').getVotes;
 const { generatePublicVote } = require('../managers/vote');
 const haveIVoted = require('../models/vote').haveIVoted;
@@ -113,7 +113,7 @@ const emitActiveQuestion = async (socket, meeting) => {
 
 const emitIssueBacklog = async (socket, meeting) => {
   try {
-    const issues = await getQuestions(meeting);
+    const issues = await getConcludedIssues(meeting);
     await Promise.all(issues.map(async (issue) => {
       // Get votes for backlogged issues
       emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue));
