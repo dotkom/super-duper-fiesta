@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   genfors: { type: Schema.Types.ObjectId, required: false },
   name: { type: String, required: true },
   onlinewebId: { type: String, required: true },
-  registerDate: { type: Date, default: Date.now() },
+  registerDate: { type: Date, default: Date.now },
   canVote: { type: Boolean, default: false },
   notes: String,
   permissions: { type: Number, default: 0 },
