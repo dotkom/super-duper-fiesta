@@ -1,4 +1,4 @@
-const generateOption = data => (Object.assign({
+const generateAlternative = data => (Object.assign({
   id: '1',
   text: 'Blank',
 }, data));
@@ -13,10 +13,10 @@ const generateIssue = (data) => {
     voteDemand: 'regular',
     countingBlankVotes: false,
     secret: false,
-    options: [
-      generateOption({ id: '1', text: 'Blank' }),
-      generateOption({ id: '2', text: 'Yes' }),
-      generateOption({ id: '3', text: 'No' }),
+    alternatives: [
+      generateAlternative({ id: '1', text: 'Blank' }),
+      generateAlternative({ id: '2', text: 'Yes' }),
+      generateAlternative({ id: '3', text: 'No' }),
 
     ],
   }, data);
@@ -60,7 +60,7 @@ const generateVote = data => (Object.assign({
   _id: '0',
   issue: '1',
   user: '1',
-  option: '3',
+  alternative: '3',
 }, data));
 
 module.exports = {

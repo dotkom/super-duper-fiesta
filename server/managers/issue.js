@@ -56,49 +56,49 @@ async function deleteIssue(issue, user) {
   return null;
 }
 
-const countVoteOptions = (options, votes) => {
+const countVoteAlternatives = (alternatives, votes) => {
   const voteObjects = Object.keys(votes).map(key => votes[key]);
 
   // Count votes for each alternative
-  return options.map(option => (
-    voteObjects.filter(vote => vote.option.toString() === option.id).length
+  return alternatives.map(alternative => (
+    voteObjects.filter(vote => vote.alternative.toString() === alternative.id).length
   ));
 };
 
 // Maps over alternatives to see if any of them got majority vote
-const calculateWinner = (issue, votes, optionVoteCounts) => {
-  const { options } = issue;
+const calculateWinner = (issue, votes, alternativeVoteCounts) => {
+  const { alternatives } = issue;
   const voteDemand = RESOLUTION_TYPES[issue.voteDemand].voteDemand;
   const numTotalVotes = Object.keys(votes).length;
 
   let countingTotalVotes = numTotalVotes;
   const { countingBlankVotes } = issue;
-  const blankAlternative = options.find(option => option.text === 'Blank');
-  const blankIdx = options.indexOf(blankAlternative);
+  const blankAlternative = alternatives.find(alternative => alternative.text === 'Blank');
+  const blankIdx = alternatives.indexOf(blankAlternative);
   // Subtract blank votes if they don't count
   if (!countingBlankVotes) {
-    countingTotalVotes -= optionVoteCounts[blankIdx];
+    countingTotalVotes -= alternativeVoteCounts[blankIdx];
   }
 
   // Check if any alternative meets the vote demand
-  const winnerVoteCount = optionVoteCounts.find((optionVoteCount, idx) => {
+  const winnerVoteCount = alternativeVoteCounts.find((alternativeVoteCount, idx) => {
     // Skip blank vote
     if (idx === blankIdx) {
       return false;
     }
-    return optionVoteCount / countingTotalVotes > voteDemand;
+    return alternativeVoteCount / countingTotalVotes > voteDemand;
   });
   if (winnerVoteCount === undefined) {
     return null;
   }
   // Find alternative id
-  return options[optionVoteCounts.indexOf(winnerVoteCount)].id;
+  return alternatives[alternativeVoteCounts.indexOf(winnerVoteCount)].id;
 };
 
-const voteArrayToObject = (voteCounts, options) => (
+const voteArrayToObject = (voteCounts, alternatives) => (
   voteCounts.reduce((voteCountObject, voteCount, index) => ({
     ...voteCountObject,
-    [options[index].id]: voteCount,
+    [alternatives[index].id]: voteCount,
   }), {})
 );
 
@@ -121,10 +121,10 @@ async function getPublicIssueWithVotes(issue) {
   const muhVotes = await votes;
 
   const issueVotes = await muhVotes;
-  const voteCounts = countVoteOptions(issue.options, issueVotes);
+  const voteCounts = countVoteAlternatives(issue.alternatives, issueVotes);
   const voteData = {
     ...issue.toObject(),
-    votes: issue.showOnlyWinner ? {} : voteArrayToObject(voteCounts, issue.options),
+    votes: issue.showOnlyWinner ? {} : voteArrayToObject(voteCounts, issue.alternatives),
     winner: calculateWinner(issue, issueVotes, voteCounts),
   };
   return voteData;

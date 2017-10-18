@@ -84,7 +84,7 @@ Array [
     "ADD_VOTE",
     Object {
       "_id": undefined,
-      "option": undefined,
+      "alternative": undefined,
       "question": undefined,
       "user": undefined,
     },
@@ -140,7 +140,7 @@ Array [
     "ADD_VOTE",
     Object {
       "_id": undefined,
-      "option": undefined,
+      "alternative": undefined,
       "question": undefined,
       "user": undefined,
     },
@@ -232,7 +232,7 @@ Array [
     "ADD_VOTE",
     Object {
       "_id": undefined,
-      "option": undefined,
+      "alternative": undefined,
       "question": undefined,
       "user": undefined,
     },

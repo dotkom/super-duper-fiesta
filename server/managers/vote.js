@@ -4,7 +4,7 @@ const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById } = require('../models/issue');
 const { haveIVoted, createVote } = require('../models/vote');
 
-function addVote(issueId, user, option, voter) {
+function addVote(issueId, user, alternative, voter) {
   return new Promise((resolve, reject) => {
     getIssueById(issueId)
     .then((issue) => {
@@ -18,7 +18,7 @@ function addVote(issueId, user, option, voter) {
       canEdit(permissionLevel.CAN_VOTE, user, issue.genfors).then(async () => {
         const alreadyVoted = await haveIVoted(issueId, voter);
         if (!alreadyVoted) {
-          const vote = createVote(voter, issueId, option);
+          const vote = createVote(voter, issueId, alternative);
           logger.debug('Storing vote.', { issueId, user: user.onlinewebId, voter });
           vote.save().then(resolve).catch(reject);
         } else {
@@ -44,7 +44,7 @@ const getPublicVote = (vote, secret, showOnlyWinner) => ({
   _id: vote._id, // eslint-disable-line no-underscore-dangle
   question: vote.question,
   user: (showOnlyWinner || secret) ? '' : vote.user,
-  option: showOnlyWinner ? '' : vote.option,
+  alternative: showOnlyWinner ? '' : vote.alternative,
 });
 
 const generatePublicVote = async (id, vote) => {
