@@ -1,7 +1,5 @@
 jest.mock('../../../../models/user');
-jest.mock('../../../../utils');
 const { toggleCanVote } = require('../toggle_vote');
-const { emit, broadcast } = require('../../../../utils');
 const { updateUserById } = require('../../../../models/user');
 const { generateUser, generateSocket } = require('../../../../utils/generateTestData');
 
@@ -16,9 +14,10 @@ describe('toggleCanVote', () => {
   });
 
   it('emits toggled can vote action on success', async () => {
-    await toggleCanVote(generateSocket(), generateData());
+    const socket = generateSocket();
+    await toggleCanVote(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toMatchSnapshot();
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 });

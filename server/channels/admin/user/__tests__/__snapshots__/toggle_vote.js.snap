@@ -3,35 +3,20 @@
 exports[`toggleCanVote emits toggled can vote action on success 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "123",
+        "canVote": false,
+        "completedRegistration": true,
+        "genfors": "1",
+        "id": undefined,
+        "logged_in": true,
+        "name": "Namy",
+        "onlinewebId": "123",
+        "permissions": 5,
       },
-    },
-    "TOGGLE_CAN_VOTE",
-    Object {
-      "_id": "123",
-      "canVote": false,
-      "completedRegistration": true,
-      "genfors": "1",
-      "id": undefined,
-      "logged_in": true,
-      "name": "Namy",
-      "onlinewebId": "123",
-      "permissions": 5,
+      "type": "TOGGLE_CAN_VOTE",
     },
   ],
 ]
@@ -40,35 +25,20 @@ Array [
 exports[`toggleCanVote emits toggled can vote action on success 2`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "123",
+        "canVote": false,
+        "completedRegistration": true,
+        "genfors": "1",
+        "id": undefined,
+        "logged_in": true,
+        "name": "Namy",
+        "onlinewebId": "123",
+        "permissions": 5,
       },
-    },
-    "TOGGLE_CAN_VOTE",
-    Object {
-      "_id": "123",
-      "canVote": false,
-      "completedRegistration": true,
-      "genfors": "1",
-      "id": undefined,
-      "logged_in": true,
-      "name": "Namy",
-      "onlinewebId": "123",
-      "permissions": 5,
+      "type": "TOGGLE_CAN_VOTE",
     },
   ],
 ]

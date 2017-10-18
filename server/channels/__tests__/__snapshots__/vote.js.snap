@@ -3,28 +3,11 @@
 exports[`submitAnonymousVote emits error when not registered 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Du er ikke registert",
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -33,28 +16,11 @@ Array [
 exports[`submitAnonymousVote emits error with insufficient permissions 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 0,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "User does not have the required permissions.",
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -63,54 +29,24 @@ Array [
 exports[`submitAnonymousVote emits vote 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": undefined,
+        "alternative": undefined,
+        "question": undefined,
+        "user": undefined,
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": undefined,
-      "alternative": undefined,
-      "question": undefined,
-      "user": undefined,
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "voted": true,
       },
-    },
-    "VOTED_STATE",
-    Object {
-      "voted": true,
+      "type": "VOTED_STATE",
     },
   ],
 ]
@@ -119,30 +55,15 @@ Array [
 exports[`submitRegularVote broadcasts vote 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": undefined,
+        "alternative": undefined,
+        "question": undefined,
+        "user": undefined,
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": undefined,
-      "alternative": undefined,
-      "question": undefined,
-      "user": undefined,
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -151,28 +72,11 @@ Array [
 exports[`submitRegularVote emits error when not registered 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Du er ikke registert",
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -181,28 +85,11 @@ Array [
 exports[`submitRegularVote emits error with insufficient permissions 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 0,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Storing vote failed.",
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -211,54 +98,24 @@ Array [
 exports[`submitRegularVote emits vote 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": undefined,
+        "alternative": undefined,
+        "question": undefined,
+        "user": undefined,
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": undefined,
-      "alternative": undefined,
-      "question": undefined,
-      "user": undefined,
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "voted": true,
       },
-    },
-    "VOTED_STATE",
-    Object {
-      "voted": true,
+      "type": "VOTED_STATE",
     },
   ],
 ]

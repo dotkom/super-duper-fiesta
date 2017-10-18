@@ -1,8 +1,6 @@
 jest.mock('../../../../models/meeting');
 jest.mock('../../../../models/user');
-jest.mock('../../../../utils');
 const { requestUserList } = require('../userlist');
-const { emit, broadcast } = require('../../../../utils');
 const { getActiveGenfors } = require('../../../../models/meeting');
 const { getUsers } = require('../../../../models/user');
 const { generateUser, generateGenfors, generateSocket } = require('../../../../utils/generateTestData');
@@ -19,25 +17,28 @@ describe('requestUserList', () => {
   const generateData = () => ({});
 
   it('emits user list action on success', async () => {
-    await requestUserList(generateSocket(), generateData());
+    const socket = generateSocket();
+    await requestUserList(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when no active genfors was found', async () => {
     getActiveGenfors.mockImplementation(async () => { throw new Error('Failed'); });
-    await requestUserList(generateSocket(), generateData());
+    const socket = generateSocket();
+    await requestUserList(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when retrieving users fails', async () => {
     getUsers.mockImplementation(async () => { throw new Error('Failed'); });
-    await requestUserList(generateSocket(), generateData());
+    const socket = generateSocket();
+    await requestUserList(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });

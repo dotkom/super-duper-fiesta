@@ -5,28 +5,11 @@ exports[`requestUserList emits error when no active genfors was found 1`] = `Arr
 exports[`requestUserList emits error when retrieving users fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "USER_LIST",
-    Array [],
-    Object {
+      "data": Array [],
       "error": "Could not fetch user list.",
+      "type": "USER_LIST",
     },
   ],
 ]
@@ -35,15 +18,11 @@ Array [
 exports[`requestUserList emits user list action on success 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
+      "data": Array [
+        Object {
+          "_id": "1",
           "completedRegistration": true,
           "genfors": "1",
           "logged_in": true,
@@ -51,29 +30,18 @@ Array [
           "onlinewebId": "123",
           "permissions": 5,
         },
-      },
+        Object {
+          "_id": "2",
+          "completedRegistration": true,
+          "genfors": "1",
+          "logged_in": true,
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
     },
-    "USER_LIST",
-    Array [
-      Object {
-        "_id": "1",
-        "completedRegistration": true,
-        "genfors": "1",
-        "logged_in": true,
-        "name": "Namy",
-        "onlinewebId": "123",
-        "permissions": 5,
-      },
-      Object {
-        "_id": "2",
-        "completedRegistration": true,
-        "genfors": "1",
-        "logged_in": true,
-        "name": "Namy",
-        "onlinewebId": "123",
-        "permissions": 5,
-      },
-    ],
   ],
 ]
 `;

@@ -2,13 +2,11 @@ jest.mock('../../models/issue');
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
 jest.mock('../../models/vote');
-jest.mock('../../utils');
 const { createIssue, closeIssue, adminDeleteIssue } = require('../issue');
 const { addIssue, endIssue, deleteIssue, getActiveQuestion } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getQualifiedUsers } = require('../../models/user');
 const { getVotes } = require('../../models/vote');
-const { emit, broadcast } = require('../../utils');
 const { generateSocket, generateIssue, generateGenfors, generateUser, generateVote } = require('../../utils/generateTestData');
 
 beforeEach(() => {
@@ -33,18 +31,20 @@ beforeEach(() => {
 describe('createIssue', () => {
   const generateData = () => ({});
   it('emits OPEN_ISSUE action creates issue', async () => {
-    await createIssue(generateSocket(), generateData());
+    const socket = generateSocket();
+    await createIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toMatchSnapshot();
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits an error when it fails', async () => {
     addIssue.mockImplementation(async () => { throw new Error('Failed'); });
-    await createIssue(generateSocket(), generateData());
+    const socket = generateSocket();
+    await createIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });
 
@@ -55,26 +55,29 @@ describe('closeIssue', () => {
 
   it('emits close issue action and disables voting', async () => {
     endIssue.mockImplementation(async () => generateIssue({ active: false }));
-    await closeIssue(generateSocket({ permissions: 10 }), generateData());
+    const socket = generateSocket({ permissions: 10 });
+    await closeIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toMatchSnapshot();
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits error when it fails', async () => {
     endIssue.mockImplementation(async () => { throw new Error('Failed'); });
-    await closeIssue(generateSocket(), generateData());
+    const socket = generateSocket();
+    await closeIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits winner when issue only shows winner', async () => {
     endIssue.mockImplementation(async () => generateIssue({ active: false, showOnlyWinner: true }));
-    await closeIssue(generateSocket({ permissions: 10 }), generateData());
+    const socket = generateSocket({ permissions: 10 });
+    await closeIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toMatchSnapshot();
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 });
 
@@ -85,9 +88,10 @@ describe('adminDeleteIssue', () => {
   it('emits delete issue on success', async () => {
     deleteIssue.mockImplementation(async () => generateIssue({ active: false, deleted: true }));
 
-    await adminDeleteIssue(generateSocket({ permissions: 10 }), generateData());
+    const socket = generateSocket({ permissions: 10 });
+    await adminDeleteIssue(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toMatchSnapshot();
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 });

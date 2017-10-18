@@ -1,6 +1,4 @@
-jest.mock('../../../utils');
 jest.mock('../../../models/meeting');
-const { broadcast, emit } = require('../../../utils');
 const { toggleRegistration } = require('../meeting');
 const { getActiveGenfors, toggleRegistrationStatus } = require('../../../models/meeting');
 const { generateSocket, generateGenfors } = require('../../../utils/generateTestData');
@@ -18,16 +16,18 @@ describe('toggleRegistration', () => {
   }, data));
 
   it('emits a toggle action that closes registration', async () => {
-    await toggleRegistration(generateSocket(), generateData());
+    const socket = generateSocket();
+    await toggleRegistration(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits a toggle action that opens registration', async () => {
-    await toggleRegistration(generateSocket(), generateData({ registrationOpen: false }));
+    const socket = generateSocket();
+    await toggleRegistration(socket, generateData({ registrationOpen: false }));
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });

@@ -3,492 +3,283 @@
 exports[`connection emits correct actions when active question is secret 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": true,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": true,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "1",
-      "alternative": "3",
-      "question": "1",
-      "user": "",
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "2",
-      "alternative": "3",
-      "question": "1",
-      "user": "",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "3",
-      "alternative": "3",
-      "question": "1",
-      "user": "",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "4",
-      "alternative": "3",
-      "question": "1",
-      "user": "",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
+      "type": "CLOSE_ISSUE",
     },
-    "CLOSE_ISSUE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
+        "winner": "3",
       },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -497,75 +288,30 @@ Array [
 exports[`connection emits correct actions when not signed in and no active genfors 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": false,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": false,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
+      "data": Object {},
+      "type": "AUTH_SIGNED_OUT",
     },
-    "AUTH_SIGNED_OUT",
-    Object {},
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": false,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "code": "no_active_meeting",
+        "error": 1,
+        "message": "Ingen aktiv generalforsamling.",
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "code": "no_active_meeting",
-      "error": 1,
-      "message": "Ingen aktiv generalforsamling.",
+      "type": "OPEN_MEETING",
     },
   ],
 ]
@@ -574,104 +320,42 @@ Array [
 exports[`connection emits correct actions when retrieving active genfors fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": false,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": false,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Noe gikk galt. Vennligst prøv igjen.",
+      "type": "issue",
     },
   ],
 ]
@@ -680,344 +364,207 @@ Array [
 exports[`connection emits correct actions when retrieving active question fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
+    "action",
     Object {
       "action": null,
+      "data": Object {},
       "error": null,
       "message": "Det er ingen aktive saker for øyeblikket.",
+      "type": "issue",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -1026,280 +573,131 @@ Array [
 exports[`connection emits correct actions when retrieving questions fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "1",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "2",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "3",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
+      "type": "ADD_VOTE",
     },
-    "ADD_VOTE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "4",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
+      },
+      "type": "ADD_VOTE",
     },
   ],
 ]
@@ -1308,173 +706,84 @@ Array [
 exports[`connection emits correct actions when retrieving votes fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
-    "ENABLE_VOTING",
   ],
 ]
 `;
@@ -1482,492 +791,283 @@ Array [
 exports[`connection emits correct actions when signed in and active genfors 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "1",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "2",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "3",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "4",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
+      "type": "CLOSE_ISSUE",
     },
-    "CLOSE_ISSUE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
+        "winner": "3",
       },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -1976,105 +1076,45 @@ Array [
 exports[`connection emits correct actions when signed in and no active genfors 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "code": "no_active_meeting",
+        "error": 1,
+        "message": "Ingen aktiv generalforsamling.",
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "code": "no_active_meeting",
-      "error": 1,
-      "message": "Ingen aktiv generalforsamling.",
+      "type": "OPEN_MEETING",
     },
   ],
 ]
@@ -2083,344 +1123,207 @@ Array [
 exports[`connection emits correct actions when there is no active question 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
+    "action",
     Object {
       "action": null,
+      "data": Object {},
       "error": null,
       "message": "Det er ingen aktive saker for øyeblikket.",
+      "type": "issue",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -2429,516 +1332,292 @@ Array [
 exports[`connection emits correct actions when user has already voted 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "1",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "2",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "3",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "4",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "VOTED_STATE",
-    Object {
-      "voted": true,
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "voted": true,
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "VOTED_STATE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
+      "type": "CLOSE_ISSUE",
     },
-    "CLOSE_ISSUE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
+        "winner": "3",
       },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -2947,105 +1626,45 @@ Array [
 exports[`connection emits correct actions when user has not completed registration and no genfors is active 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": false,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": false,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "code": "no_active_meeting",
+        "error": 1,
+        "message": "Ingen aktiv generalforsamling.",
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "code": "no_active_meeting",
-      "error": 1,
-      "message": "Ingen aktiv generalforsamling.",
+      "type": "OPEN_MEETING",
     },
   ],
 ]
@@ -3054,492 +1673,283 @@ Array [
 exports[`connection emits correct actions when validation of password hash returns false 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": false,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": false,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "OPEN_MEETING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ENABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "1",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "2",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "3",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "ADD_VOTE",
-    Object {
-      "_id": "4",
-      "alternative": "3",
-      "question": "1",
-      "user": "1",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "ADD_VOTE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+        "winner": "3",
       },
+      "type": "CLOSE_ISSUE",
     },
-    "CLOSE_ISSUE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "2",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "meeting": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
+        "winner": "3",
       },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -3548,105 +1958,45 @@ Array [
 exports[`connection emits correct actions when validation of password hash returns throws error 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": false,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": false,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "code": "no_active_meeting",
+        "error": 1,
+        "message": "Ingen aktiv generalforsamling.",
       },
-    },
-    "OPEN_MEETING",
-    Object {
-      "code": "no_active_meeting",
-      "error": 1,
-      "message": "Ingen aktiv generalforsamling.",
+      "type": "OPEN_MEETING",
     },
   ],
 ]
@@ -3655,128 +2005,51 @@ Array [
 exports[`connection when no meeting warns about no active meeting 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": null,
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "version": "fake_git_hash",
       },
-    },
-    "VERSION",
-    Object {
-      "version": "fake_git_hash",
+      "type": "VERSION",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": null,
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 5,
+        "username": "123",
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 5,
-      "username": "123",
+      "type": "AUTH_SIGNED_IN",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": null,
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
+      "type": "AUTH_ERROR",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": null,
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": false,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": false,
+      "type": "AUTH_REGISTERED",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": null,
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Noe gikk galt. Vennligst prøv igjen.",
+      "type": "issue",
     },
   ],
 ]
