@@ -1,7 +1,5 @@
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
-jest.mock('../../utils');
-const { emit, broadcast } = require('../../utils');
 const { createGenfors } = require('../../models/meeting');
 const { updateUserById } = require('../../models/user');
 const { generateGenfors, generateSocket, generateUser } = require('../../utils/generateTestData');
@@ -18,38 +16,41 @@ beforeEach(() => {
 
 describe('admin login', () => {
   it('returns invalid admin password if incorrect', async () => {
-    await adminLogin(generateSocket(), generateData());
+    const socket = generateSocket();
+    await adminLogin(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits sign in with manager permissions if auth successful', async () => {
     updateUserById.mockImplementation(async (id, obj) => Object.assign(generateUser(), obj));
     const user = { permissions: 0 };
-    await adminLogin(generateSocket(user),
-                     generateData({ password: MOCK_PW }));
+    const socket = generateSocket(user);
+    await adminLogin(socket, generateData({ password: MOCK_PW }));
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 });
 
 describe('admin creates genfors', () => {
   it('returns invalid admin password if incorrect', async () => {
-    await createGenforsListener(generateSocket(), generateData());
+    const socket = generateSocket();
+    await createGenforsListener(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('creates a new meeting if admin password is correct', async () => {
     createGenfors.mockImplementation(async () => generateGenfors());
 
-    await createGenforsListener(generateSocket(), generateData({ password: MOCK_PW }));
+    const socket = generateSocket();
+    await createGenforsListener(socket, generateData({ password: MOCK_PW }));
 
-    expect(emit.mock.calls).toEqual([]);
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toEqual([]);
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 });
 

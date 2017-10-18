@@ -3,27 +3,12 @@
 exports[`admin creates genfors returns invalid admin password if incorrect 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Ugyldig administratorpassord.",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Ugyldig administratorpassord.",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -32,31 +17,16 @@ Array [
 exports[`admin login emits sign in with manager permissions if auth successful 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 0,
-        },
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "logged_in": true,
+        "permissions": 10,
+        "username": undefined,
       },
-    },
-    "AUTH_SIGNED_IN",
-    Object {
-      "full_name": "Namy",
-      "id": "123",
-      "logged_in": true,
-      "permissions": 10,
-      "username": undefined,
+      "type": "AUTH_SIGNED_IN",
     },
   ],
 ]
@@ -65,27 +35,12 @@ Array [
 exports[`admin login returns invalid admin password if incorrect 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Ugyldig administratorpassord.",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Ugyldig administratorpassord.",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
