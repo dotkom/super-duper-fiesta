@@ -1,10 +1,8 @@
 jest.mock('child_process');
-jest.mock('../../utils');
 jest.mock('../../models/meeting');
 jest.mock('../../models/issue');
 jest.mock('../../models/vote');
 jest.mock('../../models/user');
-const { broadcast, emit } = require('../../utils');
 const { execSync } = require('child_process');
 
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
@@ -42,115 +40,129 @@ describe('connection', () => {
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when signed in and no active genfors', async () => {
     getActiveGenfors.mockImplementation(async () => null);
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when not signed in and no active genfors', async () => {
     getActiveGenfors.mockImplementation(async () => null);
-    await connection(generateSocket({ logged_in: false, completedRegistration: false }));
+    const socket = generateSocket({ logged_in: false, completedRegistration: false });
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when user has not completed registration and no genfors is active', async () => {
     getActiveGenfors.mockImplementation(async () => null);
-    await connection(generateSocket({ completedRegistration: false }));
+    const socket = generateSocket({ completedRegistration: false });
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when validation of password hash returns false', async () => {
     getAnonymousUser.mockImplementation(async () => null);
-    await connection(generateSocket({ completedRegistration: true }));
+    const socket = generateSocket({ completedRegistration: true });
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when validation of password hash returns throws error', async () => {
     getAnonymousUser.mockImplementation(async () => { throw new Error('Failed'); });
     getActiveGenfors.mockImplementation(async () => null);
-    await connection(generateSocket({ completedRegistration: false }));
+    const socket = generateSocket({ completedRegistration: false });
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when there is no active question', async () => {
     getActiveQuestion.mockImplementation(async () => null);
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving votes fails', async () => {
     getVotes.mockImplementation(async () => { throw new Error('Failed'); });
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when active question is secret', async () => {
     getActiveQuestion.mockImplementation(async () => generateIssue({ secret: true }));
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when user has already voted', async () => {
     haveIVoted.mockImplementation(async () => true);
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving active question fails', async () => {
     getActiveQuestion.mockImplementation(async () => { throw new Error('Failed'); });
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving questions fails', async () => {
     getConcludedIssues.mockImplementation(async () => { throw new Error('Failed'); });
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving active genfors fails', async () => {
     getActiveGenfors.mockImplementation(async () => { throw new Error('Failed'); });
-    await connection(generateSocket());
+    const socket = generateSocket();
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 });
 
 describe('connection when no meeting', () => {
   it('warns about no active meeting', async () => {
-    await connection(generateSocket({ genfors: null }));
+    const socket = generateSocket({ genfors: null });
+    await connection(socket);
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 });
