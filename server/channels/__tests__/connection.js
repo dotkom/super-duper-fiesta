@@ -44,7 +44,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when signed in and no active genfors', async () => {
@@ -53,7 +53,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when not signed in and no active genfors', async () => {
@@ -62,7 +62,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when user has not completed registration and no genfors is active', async () => {
@@ -71,7 +71,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when validation of password hash returns false', async () => {
@@ -80,7 +80,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when validation of password hash returns throws error', async () => {
@@ -90,7 +90,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when there is no active question', async () => {
@@ -99,7 +99,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving votes fails', async () => {
@@ -108,7 +108,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when active question is secret', async () => {
@@ -117,7 +117,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when user has already voted', async () => {
@@ -126,7 +126,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving active question fails', async () => {
@@ -135,7 +135,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving questions fails', async () => {
@@ -144,7 +144,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits correct actions when retrieving active genfors fails', async () => {
@@ -153,7 +153,7 @@ describe('connection', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });
 
@@ -163,6 +163,6 @@ describe('connection when no meeting', () => {
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });

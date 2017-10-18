@@ -3,109 +3,79 @@
 exports[`adminDeleteIssue emits delete issue on success 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "deleted": true,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "deleted": true,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+        "winner": "3",
       },
-    },
-    "DELETED_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "DELETED_ISSUE",
     },
   ],
 ]
@@ -114,124 +84,80 @@ Array [
 exports[`adminDeleteIssue emits delete issue on success 2`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
-      },
-    },
-    "DISABLE_VOTING",
-  ],
-  Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
-      },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
+      "data": undefined,
+      "type": "DISABLE_VOTING",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "deleted": true,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
       },
+      "type": "CLOSE_ISSUE",
     },
-    "DELETED_ISSUE",
+  ],
+  Array [
+    "action",
     Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "deleted": true,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "deleted": true,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
+        "winner": "3",
       },
-      "winner": "3",
+      "type": "DELETED_ISSUE",
     },
   ],
 ]
@@ -240,55 +166,40 @@ Array [
 exports[`closeIssue emits close issue action and disables voting 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -297,76 +208,47 @@ Array [
 exports[`closeIssue emits close issue action and disables voting 2`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
-      },
+      "data": undefined,
+      "type": "DISABLE_VOTING",
     },
-    "DISABLE_VOTING",
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
         },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {
-        "1": 0,
-        "2": 0,
-        "3": 4,
-      },
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -375,28 +257,11 @@ Array [
 exports[`closeIssue emits error when it fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Closing issue failed",
+      "type": "issue",
     },
   ],
 ]
@@ -405,51 +270,36 @@ Array [
 exports[`closeIssue emits winner when issue only shows winner 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": true,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {},
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": true,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {},
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -458,72 +308,43 @@ Array [
 exports[`closeIssue emits winner when issue only shows winner 2`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
-      },
+      "data": undefined,
+      "type": "DISABLE_VOTING",
     },
-    "DISABLE_VOTING",
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
           },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 10,
-        },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": true,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {},
+        "winner": "3",
       },
-    },
-    "CLOSE_ISSUE",
-    Object {
-      "_id": "1",
-      "active": false,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": true,
-      "toObject": [Function],
-      "voteDemand": "regular",
-      "votes": Object {},
-      "winner": "3",
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]
@@ -532,52 +353,35 @@ Array [
 exports[`createIssue emits OPEN_ISSUE action creates issue 1`] = `
 Array [
   Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-    },
+    "action",
     Object {
       "action": "open",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+      },
+      "type": "OPEN_ISSUE",
     },
   ],
 ]
@@ -586,74 +390,43 @@ Array [
 exports[`createIssue emits OPEN_ISSUE action creates issue 2`] = `
 Array [
   Array [
-    Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "OPEN_ISSUE",
-    Object {
-      "_id": "1",
-      "active": true,
-      "alternatives": Array [
-        Object {
-          "id": "1",
-          "text": "Blank",
-        },
-        Object {
-          "id": "2",
-          "text": "Yes",
-        },
-        Object {
-          "id": "3",
-          "text": "No",
-        },
-      ],
-      "countingBlankVotes": false,
-      "description": "Description goes here",
-      "genfors": "1",
-      "secret": false,
-      "showOnlyWinner": false,
-      "toObject": [Function],
-      "voteDemand": "regular",
-    },
+    "action",
     Object {
       "action": "open",
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+      },
+      "type": "OPEN_ISSUE",
     },
   ],
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
+      "data": undefined,
+      "type": "ENABLE_VOTING",
     },
-    "ENABLE_VOTING",
   ],
 ]
 `;
@@ -661,28 +434,11 @@ Array [
 exports[`createIssue emits an error when it fails 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
-      },
-    },
-    "issue",
-    Object {},
-    Object {
+      "data": Object {},
       "error": "Adding new question failed",
+      "type": "issue",
     },
   ],
 ]

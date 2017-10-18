@@ -43,7 +43,9 @@ const generateSocket = (user = {}, cookie = {}) => ({
       }, cookie),
     },
   },
-  broadcast: jest.fn(),
+  broadcast: {
+    emit: jest.fn(),
+  },
   emit: jest.fn(),
 });
 

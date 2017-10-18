@@ -27,7 +27,7 @@ describe('register', () => {
     await register(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when registration is closed', async () => {
@@ -36,7 +36,7 @@ describe('register', () => {
     await register(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when pin code is wrong', async () => {
@@ -45,7 +45,7 @@ describe('register', () => {
     await register(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
 
@@ -57,7 +57,7 @@ describe('register', () => {
     );
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
 
@@ -75,7 +75,7 @@ describe('register', () => {
     );
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when handling errors when validating hash', async () => {
@@ -91,7 +91,7 @@ describe('register', () => {
     );
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits error when handling errors when saving anonymous user', async () => {
@@ -107,6 +107,6 @@ describe('register', () => {
     );
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });

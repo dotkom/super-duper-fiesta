@@ -20,7 +20,7 @@ describe('admin login', () => {
     await adminLogin(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('emits sign in with manager permissions if auth successful', async () => {
@@ -30,7 +30,7 @@ describe('admin login', () => {
     await adminLogin(socket, generateData({ password: MOCK_PW }));
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });
 
@@ -40,7 +40,7 @@ describe('admin creates genfors', () => {
     await createGenforsListener(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
   it('creates a new meeting if admin password is correct', async () => {
@@ -50,7 +50,7 @@ describe('admin creates genfors', () => {
     await createGenforsListener(socket, generateData({ password: MOCK_PW }));
 
     expect(socket.emit.mock.calls).toEqual([]);
-    expect(socket.broadcast.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 });
 
