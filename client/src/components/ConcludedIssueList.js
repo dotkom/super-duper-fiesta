@@ -5,6 +5,10 @@ import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
 import Button from './Button';
 
+const sortIssues = issues => (
+  (a, b) => new Date(issues[b].date) - new Date(issues[a].date)
+);
+
 class ConcludedIssueList extends React.Component {
   constructor() {
     super();
@@ -34,7 +38,7 @@ class ConcludedIssueList extends React.Component {
           {visible ? 'Skjul' : 'Vis'} konkluderte saker
         </Button>}
         <div className={css.concludedIssueList}>
-          {this.state.visible && Object.keys(issues).map((issue) => {
+          {this.state.visible && Object.keys(issues).sort(sortIssues(issues)).map((issue) => {
             const winner = issues[issue].winner;
             const majority = winner !== null;
             return (<ConcludedIssue
