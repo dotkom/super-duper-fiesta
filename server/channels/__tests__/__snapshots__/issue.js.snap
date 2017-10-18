@@ -260,6 +260,48 @@ Array [
 ]
 `;
 
+exports[`closeIssue emits close issue action and disables voting 3`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
+]
+`;
+
 exports[`closeIssue emits error when it fails 1`] = `
 Array [
   Array [
@@ -302,7 +344,11 @@ Array [
         "showOnlyWinner": true,
         "toObject": [Function],
         "voteDemand": "regular",
-        "votes": Object {},
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
         "winner": "3",
       },
       "type": "CLOSE_ISSUE",
@@ -348,6 +394,48 @@ Array [
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {},
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
+]
+`;
+
+exports[`closeIssue emits winner when issue only shows winner 3`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "active": false,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": true,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
         "winner": "3",
       },
       "type": "CLOSE_ISSUE",

@@ -1,7 +1,8 @@
-const { broadcast, broadcastAndEmit, emit } = require('../utils');
+const { adminBroadcast, broadcast, broadcastAndEmit, emit } = require('../utils');
 const logger = require('../logging');
 
 const { addIssue, endIssue, deleteIssue, getPublicIssueWithVotes } = require('../managers/issue');
+const { userIsAdmin } = require('../../common/auth/permissions');
 
 const {
   ADMIN_CLOSE_ISSUE,
@@ -41,8 +42,9 @@ const closeIssue = async (socket, payload) => {
       response: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
     });
     broadcast(socket, DISABLE_VOTING);
-    const publicIssue = await getPublicIssueWithVotes(updatedIssue);
-    broadcastAndEmit(socket, CLOSE_ISSUE, publicIssue);
+    broadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue));
+    adminBroadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, true));
+    emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(socket)));
   })
   .catch((err) => {
     logger.error('closing issue failed', err);

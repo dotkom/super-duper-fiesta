@@ -34,6 +34,8 @@ const generateUser = data => (Object.assign({
   logged_in: true,
 }, data));
 
+const roomEmit = jest.fn();
+
 const generateSocket = (user = {}, cookie = {}) => ({
   request: {
     user: generateUser(user),
@@ -47,6 +49,8 @@ const generateSocket = (user = {}, cookie = {}) => ({
     emit: jest.fn(),
   },
   emit: jest.fn(),
+  join: jest.fn(),
+  to: () => ({ emit: roomEmit }),
 });
 
 const generateGenfors = data => (Object.assign({

@@ -6,7 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passportSocketIo = require('passport.socketio');
 
-const permissions = require('../../common/auth/permissions');
+const { userIsAdmin } = require('../../common/auth/permissions');
 const connection = require('./connection');
 const { listener: authListener } = require('./auth');
 const { listener: issueListener } = require('./issue');
@@ -45,6 +45,7 @@ const listen = (server, mongooseConnection) => {
   const io = socketio(server);
   applyMiddlewares(io, mongooseConnection);
   io.on('connection', (socket) => {
+
     connection(socket);
     authListener(socket);
     voteListener(socket);
@@ -53,7 +54,8 @@ const listen = (server, mongooseConnection) => {
     adminAuthListener(socket);
 
     // Admin
-    if (socket.request.user.permissions >= permissions.IS_MANAGER) {
+    if (userIsAdmin(socket)) {
+      socket.join('admin');
       const user = socket.request.user;
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');

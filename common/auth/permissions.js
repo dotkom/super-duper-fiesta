@@ -3,6 +3,8 @@ const CAN_VOTE = 5; // Stemmeberettigede / Onlinere
 const IS_MANAGER = 10; // Tellekorps
 const IS_SUPERUSER = 100; // Dotkom
 
+const userIsAdmin = socket => socket.request.user.permissions >= IS_MANAGER;
+
 module.exports = {
-  IS_LOGGED_IN, CAN_VOTE, IS_MANAGER, IS_SUPERUSER,
+  IS_LOGGED_IN, CAN_VOTE, IS_MANAGER, IS_SUPERUSER, userIsAdmin,
 };
