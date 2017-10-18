@@ -10,7 +10,7 @@ WORKDIR $APP_DIR
 
 RUN apk --no-cache --update add git
 
-COPY package.json yarn.lock .
+COPY package.json yarn.lock $APP_DIR/
 RUN yarn
 
 COPY . .
