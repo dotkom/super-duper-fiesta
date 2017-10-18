@@ -59,6 +59,7 @@ pipeline:
   release:
     image: docker
     secrets: [registry_username, registry_password, sdf_sentry_dsn_frontend]
+    build_args_from_env: [sdf_sentry_dsn_frontend]
     when:
       branch: master
       event: push
