@@ -3,29 +3,14 @@
 exports[`toggleRegistration emits a toggle action that closes registration 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": false,
       },
-    },
-    "TOGGLED_REGISTRATION_STATE",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": false,
+      "type": "TOGGLED_REGISTRATION_STATE",
     },
   ],
 ]
@@ -34,29 +19,14 @@ Array [
 exports[`toggleRegistration emits a toggle action that opens registration 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
       },
-    },
-    "TOGGLED_REGISTRATION_STATE",
-    Object {
-      "id": "1",
-      "pin": 3141592653,
-      "registrationOpen": true,
+      "type": "TOGGLED_REGISTRATION_STATE",
     },
   ],
 ]
