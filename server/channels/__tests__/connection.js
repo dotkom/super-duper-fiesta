@@ -12,7 +12,7 @@ const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
 const { getVotes, haveIVoted } = require('../../models/vote');
-const { getActiveQuestion, getQuestions } = require('../../models/issue');
+const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote } = require('../../utils/generateTestData');
 
 
@@ -26,7 +26,7 @@ describe('connection', () => {
       },
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
-    getQuestions.mockImplementation(async meeting => [
+    getConcludedIssues.mockImplementation(async meeting => [
       generateIssue({ meeting: meeting.id, _id: '2' }),
       generateIssue({ meeting: meeting.id, _id: '2' }),
       generateIssue({ meeting: meeting.id, _id: '2' }),
@@ -130,7 +130,7 @@ describe('connection', () => {
   });
 
   it('emits correct actions when retrieving questions fails', async () => {
-    getQuestions.mockImplementation(async () => { throw new Error('Failed'); });
+    getConcludedIssues.mockImplementation(async () => { throw new Error('Failed'); });
     await connection(generateSocket());
 
     expect(emit.mock.calls).toMatchSnapshot();
