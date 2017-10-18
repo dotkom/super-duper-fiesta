@@ -1,6 +1,7 @@
 
 FROM node:8.5-alpine
 
+ARG SDF_SENTRY_DSN_FRONTEND
 ENV APP_DIR=/srv/app
 ENV PRODUCTION=true
 ENV NODE_ENV=production
