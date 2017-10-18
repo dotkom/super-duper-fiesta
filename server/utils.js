@@ -1,19 +1,19 @@
 const mergePermanentAndMetadata = (perm, meta) => Object.assign(perm, meta);
 
-const broadcast = (socket, channel, payload, metadata) => {
+const createSocketObject = (channel, payload, metadata) => {
   const obj = mergePermanentAndMetadata({
     type: channel,
   }, metadata);
   obj.data = payload;
-  socket.broadcast.emit('action', obj);
+  return obj;
+};
+
+const broadcast = (socket, channel, payload, metadata) => {
+  socket.broadcast.emit('action', createSocketObject(channel, payload, metadata));
 };
 
 const emit = (socket, channel, payload, metadata) => {
-  const obj = mergePermanentAndMetadata({
-    type: channel,
-  }, metadata);
-  obj.data = payload;
-  socket.emit('action', obj);
+  socket.emit('action', createSocketObject(channel, payload, metadata));
 };
 
 module.exports = {
