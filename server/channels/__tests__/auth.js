@@ -1,7 +1,5 @@
-jest.mock('../../utils');
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
-const { emit, broadcast } = require('../../utils');
 const { register } = require('../auth');
 const { getActiveGenfors } = require('../../models/meeting');
 const { getAnonymousUser, addAnonymousUser, getUserByUsername } = require('../../models/user');
@@ -25,37 +23,41 @@ const generateData = data => (Object.assign({
 
 describe('register', () => {
   it('emits registration status', async () => {
-    await register(generateSocket({ completedRegistration: false }), generateData());
+    const socket = generateSocket({ completedRegistration: false });
+    await register(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits error when registration is closed', async () => {
     getActiveGenfors.mockImplementation(async () => generateGenfors({ registrationOpen: false }));
-    await register(generateSocket({ completedRegistration: false }), generateData());
+    const socket = generateSocket({ completedRegistration: false });
+    await register(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits error when pin code is wrong', async () => {
     getActiveGenfors.mockImplementation(async () => generateGenfors({ pin: 5453577654 }));
-    await register(generateSocket({ completedRegistration: false }), generateData());
+    const socket = generateSocket({ completedRegistration: false });
+    await register(socket, generateData());
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
 
   it('emits error when user is already registered with wrong personal code', async () => {
+    const socket = generateSocket({ completedRegistration: true }, { passwordHash: 'correct' });
     await register(
-      generateSocket({ completedRegistration: true }, { passwordHash: 'correct' }),
+      socket,
       generateData({ passwordHash: 'wrong' }),
     );
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
 
@@ -66,13 +68,14 @@ describe('register', () => {
         genfors,
       },
     ));
+    const socket = generateSocket({ completedRegistration: true }, { passwordHash: 'correct' });
     await register(
-      generateSocket({ completedRegistration: true }, { passwordHash: 'correct' }),
+      socket,
       generateData({ passwordHash: 'correct' }),
     );
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits error when handling errors when validating hash', async () => {
@@ -81,13 +84,14 @@ describe('register', () => {
         throw new Error('Failed');
       },
     );
+    const socket = generateSocket({ completedRegistration: true }, { passwordHash: 'correct' });
     await register(
-      generateSocket({ completedRegistration: true }, { passwordHash: 'correct' }),
+      socket,
       generateData({ passwordHash: 'correct' }),
     );
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 
   it('emits error when handling errors when saving anonymous user', async () => {
@@ -96,12 +100,13 @@ describe('register', () => {
         throw new Error('Failed');
       },
     );
+    const socket = generateSocket({ completedRegistration: false });
     await register(
-      generateSocket({ completedRegistration: false }),
+      socket,
       generateData(),
     );
 
-    expect(emit.mock.calls).toMatchSnapshot();
-    expect(broadcast.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.mock.calls).toEqual([]);
   });
 });

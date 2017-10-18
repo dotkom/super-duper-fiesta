@@ -43,6 +43,8 @@ const generateSocket = (user = {}, cookie = {}) => ({
       }, cookie),
     },
   },
+  broadcast: jest.fn(),
+  emit: jest.fn(),
 });
 
 const generateGenfors = data => (Object.assign({

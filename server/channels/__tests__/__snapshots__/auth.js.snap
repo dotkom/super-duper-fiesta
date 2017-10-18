@@ -3,27 +3,12 @@
 exports[`register emits error when handling errors when saving anonymous user 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Noe gikk galt under registreringen. Prøv igjen",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Noe gikk galt under registreringen. Prøv igjen",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -32,27 +17,12 @@ Array [
 exports[`register emits error when handling errors when validating hash 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "correct",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Validering av personlig kode feilet",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Validering av personlig kode feilet",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -61,27 +31,12 @@ Array [
 exports[`register emits error when pin code is wrong 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Feil pinkode",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Feil pinkode",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -90,27 +45,12 @@ Array [
 exports[`register emits error when registration is closed 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Registreringen er ikke åpen.",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Registreringen er ikke åpen.",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -119,27 +59,12 @@ Array [
 exports[`register emits error when user is already registered with wrong personal code 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "correct",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "error": "Feil personlig kode",
       },
-    },
-    "AUTH_ERROR",
-    Object {
-      "error": "Feil personlig kode",
+      "type": "AUTH_ERROR",
     },
   ],
 ]
@@ -148,27 +73,12 @@ Array [
 exports[`register emits registered when user is already registered with correct personal code 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "correct",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": true,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
 ]
@@ -177,27 +87,12 @@ Array [
 exports[`register emits registration status 1`] = `
 Array [
   Array [
+    "action",
     Object {
-      "request": Object {
-        "headers": Object {
-          "cookie": Object {
-            "passwordHash": "hashy",
-          },
-        },
-        "user": Object {
-          "_id": "123",
-          "completedRegistration": false,
-          "genfors": "1",
-          "logged_in": true,
-          "name": "Namy",
-          "onlinewebId": "123",
-          "permissions": 5,
-        },
+      "data": Object {
+        "registered": true,
       },
-    },
-    "AUTH_REGISTERED",
-    Object {
-      "registered": true,
+      "type": "AUTH_REGISTERED",
     },
   ],
 ]
