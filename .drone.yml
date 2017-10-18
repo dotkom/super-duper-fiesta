@@ -58,13 +58,13 @@ pipeline:
   
   release:
     image: docker
-    secrets: [registry_username, registry_password]
+    secrets: [registry_username, registry_password, sdf_sentry_dsn_frontend]
     when:
       branch: master
       event: push
     commands:
       - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
-      - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod .
+      - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod --build-arg SDF_SENTRY_DSN_FRONTEND $SDF_SENTRY_DSN_FRONTEND .
       - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
