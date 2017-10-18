@@ -6,7 +6,7 @@ import Card from '../Card';
 import Loader from './Loader';
 import css from './Issue.css';
 
-const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes }) => (
+const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand }) => (
   <DocumentTitle title={text}>
     <Card
       classes={css.issue}
@@ -16,12 +16,17 @@ const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes }) => (
       {text === Issue.defaultProps.text && (
         <Loader />
       )}
-      <p id="issueInfoTags">{
-        "(" +
-        "Hemmelig: " + (secret ? " Ja, " : " Nei, ") +
-        "Vis bare vinner: " + (showOnlyWinner ? " Ja, " : " Nei, ") +
-        "Blanke stemmer telles: " + (countingBlankVotes ? " Ja" : " Nei") +
-        ")"
+      <p className={css.infoTags}>{
+        "Hemmelig: " + (secret ? " Ja" : " Nei")
+      }</p>
+      <p className={css.infoTags}>{
+        "Vis bare vinner: " + (showOnlyWinner ? " Ja" : " Nei")
+      }</p>
+      <p className={css.infoTags}>{
+        "Blanke stemmer telles: " + (countingBlankVotes ? " Ja" : " Nei")
+      }</p>
+      <p className={css.infoTags}>{
+        "Minimum stemmer for vedtak: " + (voteDemand === "regular" ? "1/2" : " 2/3")
       }</p>
     </Card>
   </DocumentTitle>
@@ -40,7 +45,8 @@ const mapStateToProps = state => ({
   text: getIssueText(state),
   secret: getIssueKey(state, "secret", false),
   showOnlyWinner: getIssueKey(state, "showOnlyWinner", false),
-  countingBlankVotes: getIssueKey(state, "countingBlankVotes", false)
+  countingBlankVotes: getIssueKey(state, "countingBlankVotes", false),
+  voteDemand: getIssueKey(state, "voteDemand", false),
 });
 
 export default Issue;
