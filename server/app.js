@@ -31,7 +31,9 @@ if (process.env.PRODUCTION) {
   // Register dist path for static files in prod
   const staticDir = './dist';
   logger.info(`Serving staticfiles from ${staticDir}`);
-  app.use('/dist', express.static(staticDir));
+  app.use('/', express.static(staticDir));
+  app.get('/index.html', (req, res) =>
+    res.sendFile('index.html', { root: staticDir }));
 } else {
   logger.info('Starting chokidar, watching server for changes');
   require('./chokidar.conf.js'); // eslint-disable-line global-require
