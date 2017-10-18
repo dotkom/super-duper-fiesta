@@ -118,6 +118,12 @@ Array [
         "showOnlyWinner": false,
         "toObject": [Function],
         "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
       },
       "type": "CLOSE_ISSUE",
     },
