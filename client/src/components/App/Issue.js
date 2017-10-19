@@ -10,23 +10,23 @@ const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand })
   <DocumentTitle title={text}>
     <Card
       classes={css.issue}
-      subtitle={"Aktiv sak"}
+      subtitle={'Aktiv sak'}
     >
       <p>{text}</p>
       {text === Issue.defaultProps.text && (
         <Loader />
       )}
       <p className={css.infoTags}>{
-        "Hemmelig: " + (secret ? " Ja" : " Nei")
+        'Hemmelig: ' + (secret ? ' Ja' : ' Nei')
       }</p>
       <p className={css.infoTags}>{
-        "Vis bare vinner: " + (showOnlyWinner ? " Ja" : " Nei")
+        'Vis bare vinner: ' + (showOnlyWinner ? ' Ja' : ' Nei')
       }</p>
       <p className={css.infoTags}>{
-        "Blanke stemmer telles: " + (countingBlankVotes ? " Ja" : " Nei")
+        'Blanke stemmer telles: ' + (countingBlankVotes ? ' Ja' : ' Nei')
       }</p>
       <p className={css.infoTags}>{
-        "Minimum stemmer for vedtak: " + (voteDemand === "regular" ? "1/2" : " 2/3")
+        'Minimum stemmer for vedtak: ' + (voteDemand === 'regular' ? '1/2' : '2/3')
       }</p>
     </Card>
   </DocumentTitle>
@@ -43,10 +43,10 @@ Issue.propTypes = {
 
 const mapStateToProps = state => ({
   text: getIssueText(state),
-  secret: getIssueKey(state, "secret", false),
-  showOnlyWinner: getIssueKey(state, "showOnlyWinner", false),
-  countingBlankVotes: getIssueKey(state, "countingBlankVotes", false),
-  voteDemand: getIssueKey(state, "voteDemand", false),
+  secret: getIssueKey(state, 'secret', false),
+  showOnlyWinner: getIssueKey(state, 'showOnlyWinner', false),
+  countingBlankVotes: getIssueKey(state, 'countingBlankVotes', false),
+  voteDemand: getIssueKey(state, 'voteDemand', false),
 });
 
 export default Issue;
