@@ -18,9 +18,7 @@ const checkRegistered = async (socket) => {
   const { passwordHash } = socket.request.headers.cookie;
   const registered = await isRegistered(user, passwordHash);
   if (!registered) {
-    emit(socket, SEND_VOTE, {}, {
-      error: 'Du er ikke registert',
-    });
+    emitError(socket, new Error('Du er ikke registert'));
     return false;
   }
   return true;

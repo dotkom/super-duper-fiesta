@@ -1,4 +1,4 @@
-const emit = require('../utils').emit;
+const { emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
@@ -11,7 +11,6 @@ const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 
-const { ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
@@ -53,7 +52,7 @@ const emitUserData = async (socket) => {
     });
 
     if (!user.genfors) {
-      emit(socket, ERROR, { error: 'Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.' });
+      emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
     }
 
     let validPasswordHash = false;
@@ -138,9 +137,7 @@ const emitGenforsData = async (socket) => {
     await emitIssueBacklog(socket, meeting);
   } catch (err) {
     logger.error('Something went wrong when fetching active genfors.', err);
-    emit(socket, 'issue', {}, {
-      error: 'Noe gikk galt. Vennligst prøv igjen.',
-    });
+    emitError(socket, new Error('Noe gikk galt. Vennligst prøv igjen.'));
   }
 };
 

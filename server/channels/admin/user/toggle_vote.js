@@ -1,5 +1,4 @@
-const { broadcastAndEmit } = require('../../../utils');
-const emit = require('../../../utils').emit;
+const { broadcastAndEmit, emitError } = require('../../../utils');
 const logger = require('../../../logging');
 
 const { updateUserById } = require('../../../models/user');
@@ -30,9 +29,7 @@ const toggleCanVote = async (socket, data) => {
     broadcastAndEmit(socket, TOGGLED_CAN_VOTE, user);
   }).catch((err) => {
     logger.error('Retrieving user failed.', err);
-    emit(socket, TOGGLED_CAN_VOTE, [], {
-      error: 'Could not fetch user list.',
-    });
+    emitError(socket, new Error('Could not fetch user list.'));
   });
 };
 

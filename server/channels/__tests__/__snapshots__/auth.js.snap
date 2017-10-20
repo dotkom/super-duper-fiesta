@@ -6,7 +6,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Noe gikk galt under registreringen. Prøv igjen",
+        "id": 0,
+        "message": "Noe gikk galt under registreringen. Prøv igjen",
       },
       "type": "ERROR",
     },
@@ -20,7 +21,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Validering av personlig kode feilet",
+        "id": 0,
+        "message": "Validering av personlig kode feilet",
       },
       "type": "ERROR",
     },
@@ -34,7 +36,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Feil pinkode",
+        "id": 0,
+        "message": "Feil pinkode",
       },
       "type": "ERROR",
     },
@@ -48,7 +51,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Registreringen er ikke åpen.",
+        "id": 0,
+        "message": "Registreringen er ikke åpen.",
       },
       "type": "ERROR",
     },
@@ -62,7 +66,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Feil personlig kode",
+        "id": 0,
+        "message": "Feil personlig kode",
       },
       "type": "ERROR",
     },
