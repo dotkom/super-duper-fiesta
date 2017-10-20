@@ -61,14 +61,14 @@ describe('submitRegularVote', () => {
   });
 
   it('emits error with insufficient permissions', async () => {
-    const socket = generateSocket({ completedRegistration: true, permissions: 0 });
+    const socket = generateSocket({ completedRegistration: true, permissions: IS_LOGGED_IN });
     await submitRegularVote(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
   });
 
   it('broadcasts nothing when voting with insufficient permissions', async () => {
-    const socket = generateSocket({ completedRegistration: true, permissions: 0 });
+    const socket = generateSocket({ completedRegistration: true, permissions: IS_LOGGED_IN });
     await submitRegularVote(socket, generateData());
 
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
@@ -104,14 +104,14 @@ describe('submitAnonymousVote', () => {
   });
 
   it('emits error with insufficient permissions', async () => {
-    const socket = generateSocket({ completedRegistration: true, permissions: 0 });
+    const socket = generateSocket({ completedRegistration: true, permissions: IS_LOGGED_IN });
     await submitAnonymousVote(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
   });
 
   it('broadcasts nothing when insufficient permissions', async () => {
-    const socket = generateSocket({ completedRegistration: true, permissions: 0 });
+    const socket = generateSocket({ completedRegistration: true, permissions: IS_LOGGED_IN });
     await submitAnonymousVote(socket, generateData());
 
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
