@@ -103,7 +103,7 @@ const voteArrayToObject = (voteCounts, alternatives) => (
 );
 
 
-async function getPublicIssueWithVotes(issue) {
+async function getPublicIssueWithVotes(issue, admin = false) {
   let votes;
   try {
     votes = await (await getVotes(issue))
@@ -124,7 +124,8 @@ async function getPublicIssueWithVotes(issue) {
   const voteCounts = countVoteAlternatives(issue.alternatives, issueVotes);
   const voteData = {
     ...issue.toObject(),
-    votes: issue.showOnlyWinner ? {} : voteArrayToObject(voteCounts, issue.alternatives),
+    votes: (issue.showOnlyWinner && !admin)
+      ? {} : voteArrayToObject(voteCounts, issue.alternatives),
     winner: calculateWinner(issue, issueVotes, voteCounts),
   };
   return voteData;

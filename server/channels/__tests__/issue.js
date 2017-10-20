@@ -60,6 +60,7 @@ describe('closeIssue', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits error when it fails', async () => {
@@ -69,6 +70,7 @@ describe('closeIssue', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
+    expect(socket.to('admin').emit.mock.calls).toEqual([]);
   });
 
   it('emits winner when issue only shows winner', async () => {
@@ -78,6 +80,7 @@ describe('closeIssue', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 });
 

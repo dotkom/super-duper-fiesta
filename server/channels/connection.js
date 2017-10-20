@@ -15,6 +15,7 @@ const { AUTH_ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
+const { userIsAdmin } = require('../../common/auth/permissions');
 const {
   AUTH_SIGNED_IN,
   AUTH_SIGNED_OUT,
@@ -116,7 +117,7 @@ const emitIssueBacklog = async (socket, meeting) => {
     const issues = await getConcludedIssues(meeting);
     await Promise.all(issues.map(async (issue) => {
       // Get votes for backlogged issues
-      emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue));
+      emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue, userIsAdmin(socket)));
     }));
   } catch (err) {
     logger.error('Getting issue backlog failed', err);

@@ -21,8 +21,13 @@ const broadcastAndEmit = (socket, channel, payload, metadata) => {
   emit(socket, channel, payload, metadata);
 };
 
+const adminBroadcast = (socket, channel, payload, metadata) => {
+  socket.to('admin').emit('action', createSocketObject(channel, payload, metadata));
+};
+
 module.exports = {
   broadcast,
   emit,
   broadcastAndEmit,
+  adminBroadcast,
 };
