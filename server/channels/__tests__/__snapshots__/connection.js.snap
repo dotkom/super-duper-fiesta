@@ -2032,7 +2032,7 @@ Array [
       "data": Object {
         "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
   Array [

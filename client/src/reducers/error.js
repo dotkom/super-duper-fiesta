@@ -1,15 +1,27 @@
-import { AUTH_ERROR, ERROR_DISMISS } from '../../../common/actionTypes/error';
+import { ERROR, ERROR_DISMISS } from '../../../common/actionTypes/error';
 
-const errorReducer = (state = null, action) => {
+const errorsReducer = (state = {}, action) => {
   const { type, data } = action;
 
   switch (type) {
-    case ERROR_DISMISS: return null;
-    case AUTH_ERROR: {
-      return data.error;
+    case ERROR_DISMISS: {
+      const { id } = data;
+      return Object.keys(state).reduce((acc, key) => {
+        const newState = acc;
+        if (key !== id.toString()) {
+          newState[key] = state[key];
+        }
+        return newState;
+      }, {});
+    }
+    case ERROR: {
+      return {
+        ...state,
+        [data.id]: data,
+      };
     }
     default: return state;
   }
 };
 
-export default errorReducer;
+export default errorsReducer;

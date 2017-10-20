@@ -7,7 +7,7 @@ const {
   ADMIN_CREATE_GENFORS,
   ADMIN_LOGIN,
   AUTH_SIGNED_IN } = require('../../../common/actionTypes/auth');
-const { AUTH_ERROR } = require('../../../common/actionTypes/error');
+const { ERROR } = require('../../../common/actionTypes/error');
 const permissionLevel = require('../../../common/auth/permissions');
 
 
@@ -33,7 +33,7 @@ const adminLogin = async (socket, data) => {
     });
   } else {
     logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
-    emit(socket, AUTH_ERROR, { error: 'Ugyldig administratorpassord.' });
+    emit(socket, ERROR, { error: 'Ugyldig administratorpassord.' });
   }
 };
 
@@ -44,7 +44,7 @@ const createGenfors = async (socket, data) => {
     logger.info('Created genfors by administrative request.', { title });
   } else {
     logger.warn('Someone tried to authenticate as administrator.', { title });
-    emit(socket, AUTH_ERROR, { error: 'Ugyldig administratorpassord.' });
+    emit(socket, ERROR, { error: 'Ugyldig administratorpassord.' });
   }
 };
 
