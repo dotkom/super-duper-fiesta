@@ -20,7 +20,7 @@ const createIssue = async (socket, payload) => {
     broadcast(socket, ENABLE_VOTING);
   }).catch((err) => {
     logger.error('Adding new question failed.', err);
-    emitError(socket, new Error('Adding new question failed'));
+    emitError(socket, new Error('Opprettelse av sak feilet'));
   });
 };
 
@@ -46,7 +46,7 @@ const closeIssue = async (socket, payload) => {
   })
   .catch((err) => {
     logger.error('closing issue failed', err);
-    emitError(socket, new Error('Closing issue failed'));
+    emitError(socket, new Error('Stenging av sak feilet'));
   });
 };
 

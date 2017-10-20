@@ -44,7 +44,7 @@ const toggleCanVote = async (socket, data) => {
     });
   } catch (err) {
     logger.error('Retrieving user failed.', err);
-    emitError(socket, new Error('Could not fetch user list.'));
+    emitError(socket, new Error('Noe gikk galt under oppdatering av stemmeberettiget'));
   }
 };
 
