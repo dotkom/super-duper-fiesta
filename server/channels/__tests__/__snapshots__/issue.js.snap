@@ -309,7 +309,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Closing issue failed",
+        "message": "Stenging av sak feilet",
       },
       "type": "ERROR",
     },
@@ -534,7 +534,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Adding new question failed",
+        "message": "Opprettelse av sak feilet",
       },
       "type": "ERROR",
     },

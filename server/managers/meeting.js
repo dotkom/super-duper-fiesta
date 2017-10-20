@@ -31,7 +31,7 @@ async function canEdit(securityLevel, user, genforsId) {
     userpermission: user.permissions,
     clearance: securityLevel,
   });
-  throw new Error('User does not have the required permissions.');
+  throw new Error('Brukeren har ikke riktig rettigheter');
 }
 
 

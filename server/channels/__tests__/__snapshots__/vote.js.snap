@@ -22,7 +22,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "User does not have the required permissions.",
+        "message": "Brukeren har ikke riktig rettigheter",
       },
       "type": "ERROR",
     },
@@ -95,7 +95,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "User does not have the required permissions.",
+        "message": "Brukeren har ikke riktig rettigheter",
       },
       "type": "ERROR",
     },

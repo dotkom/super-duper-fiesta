@@ -28,11 +28,7 @@ const {
 
 const emitNoActiveIssue = (socket) => {
   logger.debug('No active issue.');
-  emit(socket, 'issue', {}, {
-    action: null,
-    error: null,
-    message: 'Det er ingen aktive saker for øyeblikket.',
-  });
+  emitError(socket, new Error('Det er ingen aktive saker for øyeblikket.'));
 };
 
 // eslint-disable-next-line global-require
@@ -127,7 +123,7 @@ const emitGenforsData = async (socket) => {
   try {
     const meeting = await getActiveGenfors();
     if (!meeting) {
-      emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
+      emitError(socket, new Error('Ingen aktiv generalforsamling.'));
       return;
     }
     emit(socket, OPEN_MEETING, meeting);
