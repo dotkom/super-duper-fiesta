@@ -3,29 +3,27 @@ import { connect } from 'react-redux';
 import { dismissError } from '../actionCreators/error';
 import css from './Error.css';
 
-const Error = ({ errors, dismiss }) => {
-  return (
-    <div>
-      { errors.map(error => (
-        <div className={css.error}>
-          <span className={css.message}>{error.message}</span>
-          <button className={css.corner} onClick={() => dismiss(error.id)}>
-            <div className={css.close} />
-          </button>
-        </div>
-      ))}
-    </div>
-  );
-};
+const Error = ({ errors, dismiss }) => (
+  <div>
+    { errors.map(error => (
+      <div key={error.id} className={css.error}>
+        <span className={css.message}>{error.message}</span>
+        <button className={css.corner} onClick={() => dismiss(error.id)}>
+          <div className={css.close} />
+        </button>
+      </div>
+    ))}
+  </div>
+);
 
 Error.defaultProps = {
   errors: [],
 };
 
 Error.propTypes = {
-  errors: PropTypes.objectOf(PropTypes.shape({
+  errors: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    message: PropTypes.message,
+    message: PropTypes.string,
   })),
   dismiss: PropTypes.func.isRequired,
 };
