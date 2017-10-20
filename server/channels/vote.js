@@ -1,4 +1,4 @@
-const { broadcastAndEmit, emit } = require('../utils');
+const { broadcastAndEmit, emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const { addVote, generatePublicVote } = require('../managers/vote');
@@ -42,9 +42,7 @@ const submitRegularVote = async (socket, data) => {
     emit(socket, VOTING_STATE, { voted: true });
   } catch (err) {
     logger.error('Storing new vote failed.', err);
-    emit(socket, SEND_VOTE, {}, {
-      error: 'Storing vote failed.',
-    });
+    emitError(socket, err);
   }
 };
 
@@ -65,9 +63,7 @@ const submitAnonymousVote = async (socket, data) => {
     emit(socket, VOTING_STATE, { voted: true });
   } catch (err) {
     logger.error('Storing new anonymous vote failed.', err);
-    emit(socket, SEND_VOTE, {}, {
-      error: err.message,
-    });
+    emitError(socket, err);
   }
 };
 

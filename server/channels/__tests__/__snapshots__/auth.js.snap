@@ -8,7 +8,7 @@ Array [
       "data": Object {
         "error": "Noe gikk galt under registreringen. Prøv igjen",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]
@@ -22,7 +22,7 @@ Array [
       "data": Object {
         "error": "Validering av personlig kode feilet",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]
@@ -36,7 +36,7 @@ Array [
       "data": Object {
         "error": "Feil pinkode",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]
@@ -50,7 +50,7 @@ Array [
       "data": Object {
         "error": "Registreringen er ikke åpen.",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]
@@ -64,7 +64,7 @@ Array [
       "data": Object {
         "error": "Feil personlig kode",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]

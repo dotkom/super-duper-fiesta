@@ -1,3 +1,5 @@
+const { ERROR } = require('../common/actionTypes/error');
+
 const mergePermanentAndMetadata = (perm, meta) => Object.assign(perm, meta);
 
 const createSocketObject = (channel, payload, metadata) => {
@@ -25,9 +27,20 @@ const adminBroadcast = (socket, channel, payload, metadata) => {
   socket.to('admin').emit('action', createSocketObject(channel, payload, metadata));
 };
 
+let errorCounter = 0;
+
+const emitError = (socket, error) => {
+  emit(socket, ERROR, {
+    message: error.message,
+    id: errorCounter,
+  });
+  errorCounter += 1;
+};
+
 module.exports = {
   broadcast,
   emit,
   broadcastAndEmit,
   adminBroadcast,
+  emitError,
 };
