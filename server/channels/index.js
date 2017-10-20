@@ -45,7 +45,6 @@ const listen = (server, mongooseConnection) => {
   const io = socketio(server);
   applyMiddlewares(io, mongooseConnection);
   io.on('connection', (socket) => {
-
     connection(socket);
     authListener(socket);
     voteListener(socket);
