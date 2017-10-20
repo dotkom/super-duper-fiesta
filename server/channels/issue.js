@@ -1,4 +1,4 @@
-const { broadcast, emit } = require('../utils');
+const { broadcast, broadcastAndEmit, emit } = require('../utils');
 const logger = require('../logging');
 
 const { addIssue, endIssue, deleteIssue, getPublicIssueWithVotes } = require('../managers/issue');
@@ -15,8 +15,7 @@ const createIssue = async (socket, payload) => {
   await addIssue(payload)
   .then((question) => {
     logger.debug('Added new question. Broadcasting ...', { question: question.description });
-    emit(socket, OPEN_ISSUE, question, { action: 'open' });
-    broadcast(socket, OPEN_ISSUE, question, { action: 'open' });
+    broadcastAndEmit(socket, OPEN_ISSUE, question, { action: 'open' });
     broadcast(socket, ENABLE_VOTING);
   }).catch((err) => {
     logger.error('Adding new question failed.', err);
@@ -43,8 +42,7 @@ const closeIssue = async (socket, payload) => {
     });
     broadcast(socket, DISABLE_VOTING);
     const publicIssue = await getPublicIssueWithVotes(updatedIssue);
-    broadcast(socket, CLOSE_ISSUE, publicIssue);
-    emit(socket, CLOSE_ISSUE, publicIssue);
+    broadcastAndEmit(socket, CLOSE_ISSUE, publicIssue);
   })
   .catch((err) => {
     logger.error('closing issue failed', err);
@@ -65,10 +63,8 @@ const adminDeleteIssue = async (socket, payload) => {
   const deletedIssue = await deleteIssue(issue, socket.request.user);
   broadcast(socket, DISABLE_VOTING);
   const publicIssue = await getPublicIssueWithVotes(deletedIssue);
-  broadcast(socket, CLOSE_ISSUE, deletedIssue);
-  emit(socket, CLOSE_ISSUE, publicIssue);
-  broadcast(socket, DELETED_ISSUE, publicIssue);
-  emit(socket, DELETED_ISSUE, publicIssue);
+  broadcastAndEmit(socket, CLOSE_ISSUE, publicIssue);
+  broadcastAndEmit(socket, DELETED_ISSUE, publicIssue);
 };
 
 const listener = (socket) => {

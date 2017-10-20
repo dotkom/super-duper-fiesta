@@ -1,4 +1,4 @@
-const broadcast = require('../../../utils').broadcast;
+const { broadcastAndEmit } = require('../../../utils');
 const emit = require('../../../utils').emit;
 const logger = require('../../../logging');
 
@@ -27,8 +27,7 @@ const toggleCanVote = async (socket, data) => {
       userFullName: user.name,
       canVote: user.canVote,
     });
-    emit(socket, TOGGLED_CAN_VOTE, user);
-    broadcast(socket, TOGGLED_CAN_VOTE, user);
+    broadcastAndEmit(socket, TOGGLED_CAN_VOTE, user);
   }).catch((err) => {
     logger.error('Retrieving user failed.', err);
     emit(socket, TOGGLED_CAN_VOTE, [], {
