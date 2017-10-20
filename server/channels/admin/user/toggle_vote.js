@@ -30,8 +30,8 @@ const toggleCanVote = async (socket, data) => {
     currentCanVote: canVote,
     expectedCanVote: !canVote,
   });
-  await updateUserById(userId, { canVote }, { new: true })
-  .then((updatedUser) => {
+  try {
+    const updatedUser = await updateUserById(userId, { canVote }, { new: true });
     logger.debug('Updated canVote for user.', {
       adminUser: adminUser.name,
       userId,
@@ -43,12 +43,12 @@ const toggleCanVote = async (socket, data) => {
       _id: updatedUser._id,
       canVote: updatedUser.canVote,
     });
-  }).catch((err) => {
+  } catch (err) {
     logger.error('Retrieving user failed.', err);
     emit(socket, TOGGLED_CAN_VOTE, [], {
       error: 'Could not fetch user list.',
     });
-  });
+  }
 };
 
 const listener = (socket) => {
