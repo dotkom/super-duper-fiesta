@@ -5,9 +5,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Du er ikke registert",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -32,7 +34,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "id": 2,
+        "id": 0,
         "message": "User does not have the required permissions.",
       },
       "type": "ERROR",
@@ -89,9 +91,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Du er ikke registert",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
     },
   ],
 ]

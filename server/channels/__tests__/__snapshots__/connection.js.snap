@@ -353,9 +353,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Noe gikk galt. Vennligst prøv igjen.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt. Vennligst prøv igjen.",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -2030,7 +2032,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
+        "id": 0,
+        "message": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
       },
       "type": "ERROR",
     },
@@ -2047,9 +2050,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Noe gikk galt. Vennligst prøv igjen.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt. Vennligst prøv igjen.",
+      },
+      "type": "ERROR",
     },
   ],
 ]

@@ -34,7 +34,11 @@ const emitError = (socket, error) => {
     message: error.message,
     id: errorCounter,
   });
-  errorCounter += 1;
+
+  // Hack to produce deterministic snapshots
+  if (process.env.NODE_ENV !== 'test') {
+    errorCounter += 1;
+  }
 };
 
 module.exports = {
