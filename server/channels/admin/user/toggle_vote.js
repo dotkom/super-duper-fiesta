@@ -27,7 +27,10 @@ const toggleCanVote = async (socket, data) => {
       userFullName: user.name,
       canVote: user.canVote,
     });
-    broadcastAndEmit(socket, TOGGLED_CAN_VOTE, user);
+    broadcastAndEmit(socket, TOGGLED_CAN_VOTE, {
+      _id: user._id,
+      canVote: user.canVote,
+    });
   }).catch((err) => {
     logger.error('Retrieving user failed.', err);
     emit(socket, TOGGLED_CAN_VOTE, [], {
