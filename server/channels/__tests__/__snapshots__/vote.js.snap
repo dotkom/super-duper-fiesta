@@ -13,6 +13,19 @@ Array [
 ]
 `;
 
+exports[`submitAnonymousVote emits error when trying to vote with canVote false 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {},
+      "error": "You do not have the right to vote",
+      "type": "ADD_VOTE",
+    },
+  ],
+]
+`;
+
 exports[`submitAnonymousVote emits error with insufficient permissions 1`] = `
 Array [
   Array [
@@ -76,6 +89,19 @@ Array [
     Object {
       "data": Object {},
       "error": "Du er ikke registert",
+      "type": "ADD_VOTE",
+    },
+  ],
+]
+`;
+
+exports[`submitRegularVote emits error when trying to vote with canVote false 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {},
+      "error": "Storing vote failed.",
       "type": "ADD_VOTE",
     },
   ],
