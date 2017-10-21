@@ -20,9 +20,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "You do not have the right to vote",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du har ikke stemmerett",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -106,9 +108,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Storing vote failed.",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du har ikke stemmerett",
+      },
+      "type": "ERROR",
     },
   ],
 ]
