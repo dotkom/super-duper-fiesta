@@ -14,9 +14,7 @@ const { getActiveGenfors } = require('../../models/meeting');
 
 
 function getPermissionLevel(body) {
-  if (body.superuser) {
-    return permissions.IS_SUPERUSER;
-  } else if (body.member) {
+  if (body.member) {
     return permissions.CAN_VOTE;
   }
   return permissions.IS_LOGGED_IN;
@@ -90,3 +88,7 @@ passport.use(new OAuth2Strategy(
     });
   } // eslint-disable-line comma-dangle
 ));
+
+module.exports = {
+  getPermissionLevel,
+};
