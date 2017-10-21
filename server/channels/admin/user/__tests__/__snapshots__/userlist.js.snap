@@ -9,7 +9,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Could not fetch user list.",
+        "message": "Klarte ikke hente brukerliste",
       },
       "type": "ERROR",
     },

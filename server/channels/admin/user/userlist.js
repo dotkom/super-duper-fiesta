@@ -14,7 +14,7 @@ const requestUserList = async (socket) => {
       emit(socket, USER_LIST, users);
     }).catch((err) => {
       logger.error('Retrieving users failed.', err);
-      emitError(socket, new Error('Could not fetch user list.'));
+      emitError(socket, new Error('Klarte ikke hente brukerliste'));
     });
   }).catch((err) => {
     logger.error('Retrieving current active genfors failed', err);

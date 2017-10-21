@@ -16,7 +16,7 @@ function addVote(issueId, user, alternative, voter) {
       }
       if (!user.canVote) {
         logger.warn('Tried to vote without the right to vote!', { issueId, user: user.onlinewebId });
-        reject(new Error('You do not have the right to vote'));
+        reject(new Error('Du har ikke stemmerett'));
         return;
       }
       logger.silly('Checking permissions.', { issueId, user: user.onlinewebId });
