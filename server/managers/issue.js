@@ -136,4 +136,6 @@ module.exports = {
   addIssue,
   deleteIssue,
   getPublicIssueWithVotes,
+  calculateWinner,
+  countVoteAlternatives,
 };
