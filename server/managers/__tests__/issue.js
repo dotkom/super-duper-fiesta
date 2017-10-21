@@ -20,8 +20,8 @@ const createVotesObject = voteArray => (
 describe('calculateWinner', () => {
   const booleanAlternatives = [
     generateAlternative({ id: '1', text: 'Blank' }),
-    generateAlternative({ id: '2', text: 'Yes' }),
-    generateAlternative({ id: '3', text: 'No' }),
+    generateAlternative({ id: '2', text: 'Ja' }),
+    generateAlternative({ id: '3', text: 'Nei' }),
   ];
 
   const multipleChoiceAlternatives = [
@@ -161,5 +161,22 @@ describe('calculateWinner', () => {
     );
 
     expect(winner).toEqual('4');
+  });
+
+  it('does not count "no" as a winner when using boolean alternatives', () => {
+    const issue = generateIssue({
+      alternatives: booleanAlternatives,
+      voteDemand: RESOLUTION_TYPES.regular.key,
+      countingBlankVotes: false,
+    });
+    const votes = createVotesObject(
+      ['2', '2', '2', '3', '3', '3', '3'],
+    );
+
+    const winner = calculateWinner(issue, votes,
+      countVoteAlternatives(issue.alternatives, votes),
+    );
+
+    expect(winner).toEqual(null);
   });
 });
