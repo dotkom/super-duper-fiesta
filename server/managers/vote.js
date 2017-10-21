@@ -14,6 +14,11 @@ function addVote(issueId, user, alternative, voter) {
         reject();
         return;
       }
+      if (!user.canVote) {
+        logger.warn('Tried to vote without the right to vote!', { issueId, user: user.onlinewebId });
+        reject(new Error('You do not have the right to vote'));
+        return;
+      }
       logger.silly('Checking permissions.', { issueId, user: user.onlinewebId });
       canEdit(permissionLevel.CAN_VOTE, user, issue.genfors).then(async () => {
         const alreadyVoted = await haveIVoted(issueId, voter);

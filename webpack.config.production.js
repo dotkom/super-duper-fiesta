@@ -6,6 +6,7 @@ const merge = require('webpack-merge');
 module.exports = merge.smart(config, {
   devtool: 'cheap-module-source-map',
   output: {
+    publicPath: '/assets/',
     filename: '[name].[chunkhash].js',
   },
   module: {

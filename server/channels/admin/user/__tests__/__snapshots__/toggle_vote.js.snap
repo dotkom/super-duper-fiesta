@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`toggleCanVote emits error when user does not have CAN_VOTE permission 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Brukeren er ikke medlem og har derfor ikke lov til å stemme",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`toggleCanVote emits error when user does not have CAN_VOTE permission 2`] = `Array []`;
+
 exports[`toggleCanVote emits toggled can vote action on success 1`] = `
 Array [
   Array [
@@ -8,13 +25,6 @@ Array [
       "data": Object {
         "_id": "123",
         "canVote": false,
-        "completedRegistration": true,
-        "genfors": "1",
-        "id": undefined,
-        "logged_in": true,
-        "name": "Namy",
-        "onlinewebId": "123",
-        "permissions": 5,
       },
       "type": "TOGGLE_CAN_VOTE",
     },
@@ -30,13 +40,6 @@ Array [
       "data": Object {
         "_id": "123",
         "canVote": false,
-        "completedRegistration": true,
-        "genfors": "1",
-        "id": undefined,
-        "logged_in": true,
-        "name": "Namy",
-        "onlinewebId": "123",
-        "permissions": 5,
       },
       "type": "TOGGLE_CAN_VOTE",
     },
