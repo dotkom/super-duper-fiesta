@@ -31,8 +31,8 @@ if (process.env.PRODUCTION) {
   // Register dist path for static files in prod
   const staticDir = './dist';
   logger.info(`Serving staticfiles from ${staticDir}`);
-  app.use('/', express.static(staticDir));
-  app.get('/index.html', (req, res) =>
+  app.use('/assets/', express.static(staticDir));
+  app.get('*', (req, res) =>
     res.sendFile('index.html', { root: staticDir }));
 } else {
   logger.info('Starting chokidar, watching server for changes');
