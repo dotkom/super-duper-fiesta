@@ -23,6 +23,7 @@ Array [
       "data": Array [
         Object {
           "_id": "1",
+          "canVote": true,
           "completedRegistration": true,
           "genfors": "1",
           "logged_in": true,
@@ -32,6 +33,7 @@ Array [
         },
         Object {
           "_id": "2",
+          "canVote": true,
           "completedRegistration": true,
           "genfors": "1",
           "logged_in": true,
