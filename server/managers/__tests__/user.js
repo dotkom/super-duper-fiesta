@@ -31,14 +31,8 @@ describe('addUser manager', () => {
   it('doesnt add a new user if no genfors and not superuser', async () => {
     getActiveGenfors.mockImplementation(async () => null);
 
-    let err;
-
-    try {
-      await addUser(userObj.name, userObj.onlinewebId, userObj.permissions);
-    } catch (thrownErr) {
-      err = thrownErr;
-    }
-    expect(err).toEqual(new Error('Ingen aktive generalforsamlinger'));
+    await expect(addUser(userObj.name, userObj.onlinewebId, userObj.permissions)).rejects
+      .toEqual(new Error('Ingen aktive generalforsamlinger'));
   });
 
   it('adds a new user if no genfors but user is superuser', async () => {
