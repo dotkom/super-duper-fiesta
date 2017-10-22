@@ -25,8 +25,9 @@ async function addUser(name, onlinewebId, securityLevel) {
   }
 
   if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
-    return new Error('Ingen aktive generalforsamlinger');
+    throw new Error('Ingen aktive generalforsamlinger');
   }
+
   if (securityLevel >= permissionLevel.IS_SUPERUSER) {
     logger.info('Creating a user with high security clearance.', {
       name, onlinewebId, securityLevel,
