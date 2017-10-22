@@ -1,3 +1,4 @@
+jest.mock('../../../managers/user');
 jest.mock('../../../models/user');
 jest.mock('../../../models/meeting');
 const fetch = require('jest-fetch-mock');
@@ -7,7 +8,8 @@ jest.setMock('node-fetch', fetch);
 const { getPermissionLevel, getClientInformation } = require('../ow4');
 const permissionLevels = require('../../../../common/auth/permissions');
 const { getActiveGenfors } = require('../../../models/meeting');
-const { addUser, getUserByUsername, updateUserById } = require('../../../models/user');
+const { addUser } = require('../../../managers/user');
+const { getUserByUsername, updateUserById } = require('../../../models/user');
 const { generateGenfors, generateUser } = require('../../../utils/generateTestData');
 
 
@@ -63,7 +65,7 @@ describe('ow4 oauth2 provider', async () => {
   beforeEach(() => {
     fetch.mockResponse(JSON.stringify(mockOW4OAuth2ResponseBody()));
     addUser.mockImplementation((name, username, securityLevel) =>
-      generateUser(name, username, securityLevel));
+      generateUser({ name, onlinewebId: username, permissions: securityLevel }));
     getActiveGenfors.mockImplementation(async () => generateGenfors());
     getUserByUsername.mockImplementation(() => generateUser());
   });
