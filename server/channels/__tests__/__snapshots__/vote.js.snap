@@ -110,7 +110,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Brukeren har ikke riktig rettigheter",
+        "message": "Du har ikke stemmerett",
       },
       "type": "ERROR",
     },
@@ -125,7 +125,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Du har ikke stemmerett",
+        "message": "Brukeren har ikke riktig rettigheter",
       },
       "type": "ERROR",
     },

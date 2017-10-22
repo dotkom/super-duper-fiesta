@@ -18,9 +18,7 @@ const toggleCanVote = async (socket, data) => {
       userId,
       canVote,
     });
-    emit(socket, TOGGLED_CAN_VOTE, [], {
-      error: 'User is not a member and therefore isn\'t allowed to vote',
-    });
+    emitError(socket, new Error('Brukeren har ikke stemmerett og har derfor ikke lov til å stemme.'));
     return;
   }
   logger.debug('Toggling can vote status', {
