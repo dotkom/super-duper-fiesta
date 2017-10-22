@@ -17,7 +17,6 @@ const generateIssue = (data) => {
       generateAlternative({ id: '1', text: 'Blank' }),
       generateAlternative({ id: '2', text: 'Yes' }),
       generateAlternative({ id: '3', text: 'No' }),
-
     ],
   }, data);
   issueObject.toObject = () => issueObject;
@@ -79,4 +78,5 @@ module.exports = {
   generateAnonymousUser,
   generateUser,
   generateVote,
+  generateAlternative,
 };

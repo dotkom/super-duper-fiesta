@@ -65,6 +65,12 @@ const countVoteAlternatives = (alternatives, votes) => {
   ));
 };
 
+const isBooleanAlternatives = (alternatives) => {
+  const booleanAlternatives = ['Ja', 'Nei', 'Blank'].sort();
+  const sortedAlternatives = alternatives.map(alternative => alternative.text).sort();
+  return sortedAlternatives.every((alt, index) => booleanAlternatives[index] === alt);
+};
+
 // Maps over alternatives to see if any of them got majority vote
 const calculateWinner = (issue, votes, alternativeVoteCounts) => {
   const { alternatives } = issue;
@@ -91,8 +97,14 @@ const calculateWinner = (issue, votes, alternativeVoteCounts) => {
   if (winnerVoteCount === undefined) {
     return null;
   }
+  const winningAlternative = alternatives[alternativeVoteCounts.indexOf(winnerVoteCount)];
+
+  if (isBooleanAlternatives(alternatives) && winningAlternative.text === 'Nei') {
+    // No is not a valid winner for a boolean question
+    return null;
+  }
   // Find alternative id
-  return alternatives[alternativeVoteCounts.indexOf(winnerVoteCount)].id;
+  return winningAlternative.id;
 };
 
 const voteArrayToObject = (voteCounts, alternatives) => (
@@ -136,4 +148,6 @@ module.exports = {
   addIssue,
   deleteIssue,
   getPublicIssueWithVotes,
+  calculateWinner,
+  countVoteAlternatives,
 };
