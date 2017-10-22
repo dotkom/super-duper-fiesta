@@ -13,7 +13,8 @@ pipeline:
   setup:
     image: node:boron
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
+      branch: master
     commands:
       - yarn
   
@@ -32,7 +33,8 @@ pipeline:
     environment:
       SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
+      branch: master
     commands:
       - yarn test
       - yarn codecov
