@@ -307,11 +307,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "code": "no_active_meeting",
-        "error": 1,
+        "id": 0,
         "message": "Ingen aktiv generalforsamling.",
       },
-      "type": "OPEN_MEETING",
+      "type": "ERROR",
     },
   ],
 ]
@@ -353,9 +352,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Noe gikk galt. Vennligst prøv igjen.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt. Vennligst prøv igjen.",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -408,11 +409,11 @@ Array [
   Array [
     "action",
     Object {
-      "action": null,
-      "data": Object {},
-      "error": null,
-      "message": "Det er ingen aktive saker for øyeblikket.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Det er ingen aktive saker for øyeblikket.",
+      },
+      "type": "ERROR",
     },
   ],
   Array [
@@ -1110,11 +1111,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "code": "no_active_meeting",
-        "error": 1,
+        "id": 0,
         "message": "Ingen aktiv generalforsamling.",
       },
-      "type": "OPEN_MEETING",
+      "type": "ERROR",
     },
   ],
 ]
@@ -1167,11 +1167,11 @@ Array [
   Array [
     "action",
     Object {
-      "action": null,
-      "data": Object {},
-      "error": null,
-      "message": "Det er ingen aktive saker for øyeblikket.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Det er ingen aktive saker for øyeblikket.",
+      },
+      "type": "ERROR",
     },
   ],
   Array [
@@ -1660,11 +1660,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "code": "no_active_meeting",
-        "error": 1,
+        "id": 0,
         "message": "Ingen aktiv generalforsamling.",
       },
-      "type": "OPEN_MEETING",
+      "type": "ERROR",
     },
   ],
 ]
@@ -1992,11 +1991,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "code": "no_active_meeting",
-        "error": 1,
+        "id": 0,
         "message": "Ingen aktiv generalforsamling.",
       },
-      "type": "OPEN_MEETING",
+      "type": "ERROR",
     },
   ],
 ]
@@ -2030,9 +2028,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
+        "id": 0,
+        "message": "Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
   Array [
@@ -2047,9 +2046,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Noe gikk galt. Vennligst prøv igjen.",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt. Vennligst prøv igjen.",
+      },
+      "type": "ERROR",
     },
   ],
 ]

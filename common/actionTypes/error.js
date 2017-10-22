@@ -1,4 +1,4 @@
 module.exports = {
-  AUTH_ERROR: 'AUTH_ERROR',
+  ERROR: 'ERROR',
   ERROR_DISMISS: 'ERROR_DISMISS',
 };

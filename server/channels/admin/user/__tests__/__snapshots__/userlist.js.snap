@@ -7,9 +7,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Array [],
-      "error": "Could not fetch user list.",
-      "type": "USER_LIST",
+      "data": Object {
+        "id": 0,
+        "message": "Klarte ikke hente brukerliste",
+      },
+      "type": "ERROR",
     },
   ],
 ]

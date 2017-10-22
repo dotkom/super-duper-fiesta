@@ -307,9 +307,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Closing issue failed",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Stenging av sak feilet",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -530,9 +532,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Adding new question failed",
-      "type": "issue",
+      "data": Object {
+        "id": 0,
+        "message": "Opprettelse av sak feilet",
+      },
+      "type": "ERROR",
     },
   ],
 ]

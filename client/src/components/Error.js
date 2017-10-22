@@ -3,38 +3,37 @@ import { connect } from 'react-redux';
 import { dismissError } from '../actionCreators/error';
 import css from './Error.css';
 
-const Error = ({ dismiss, message }) => {
-  if (!message) {
-    return null;
-  }
-  return (
-    <div className={css.error}>
-      <span className={css.message}>{message}</span>
-      { dismiss &&
-        <button className={css.corner} onClick={dismiss}>
+const Error = ({ errors, dismiss }) => (
+  <div>
+    { errors.map(error => (
+      <div key={error.id} className={css.error}>
+        <span className={css.message}>{error.message}</span>
+        <button className={css.corner} onClick={() => dismiss(error.id)}>
           <div className={css.close} />
         </button>
-      }
-    </div>
-  );
-};
+      </div>
+    ))}
+  </div>
+);
 
 Error.defaultProps = {
-  message: null,
-  dismiss: null,
+  errors: [],
 };
 
 Error.propTypes = {
-  message: PropTypes.string,
-  dismiss: PropTypes.func,
+  errors: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    message: PropTypes.string,
+  })),
+  dismiss: PropTypes.func.isRequired,
 };
 
 export default Error;
 
 const mapStateToProps = ({ error }) => ({
-  message: error,
+  errors: Object.keys(error).map(key => error[key]),
 });
-const mapDispatchToProps = dispatch => ({
-  dismiss: () => dispatch(dismissError()),
-});
+const mapDispatchToProps = {
+  dismiss: dismissError,
+};
 export const ErrorContainer = connect(mapStateToProps, mapDispatchToProps)(Error);

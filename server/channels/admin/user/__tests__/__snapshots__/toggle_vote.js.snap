@@ -5,9 +5,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Array [],
-      "error": "User is not a member and therefore isn't allowed to vote",
-      "type": "TOGGLE_CAN_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Brukeren har ikke stemmerett og har derfor ikke lov til å stemme.",
+      },
+      "type": "ERROR",
     },
   ],
 ]

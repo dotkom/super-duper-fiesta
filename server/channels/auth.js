@@ -1,4 +1,4 @@
-const { emit } = require('../utils');
+const { emit, emitError } = require('../utils');
 const { getActiveGenfors } = require('../models/meeting');
 const { validatePin } = require('../managers/meeting');
 const { addAnonymousUser } = require('../managers/user');
@@ -6,19 +6,18 @@ const { validatePasswordHash } = require('../managers/user');
 const logger = require('../logging');
 
 const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
-const { AUTH_ERROR } = require('../../common/actionTypes/error');
 
 const register = async (socket, data) => {
   const { pin, passwordHash } = data;
   const username = socket.request.user.onlinewebId;
   const genfors = await getActiveGenfors();
   if (!genfors.registrationOpen) {
-    emit(socket, AUTH_ERROR, { error: 'Registreringen er ikke åpen.' });
+    emitError(socket, new Error('Registreringen er ikke åpen.'));
     return;
   }
   if (!await validatePin(pin)) {
     logger.silly('User failed pin code', { username, pin });
-    emit(socket, AUTH_ERROR, { error: 'Feil pinkode' });
+    emitError(socket, new Error('Feil pinkode'));
     return;
   }
   const { completedRegistration } = socket.request.user;
@@ -28,13 +27,13 @@ const register = async (socket, data) => {
       validPasswordHash = await validatePasswordHash(socket.request.user, passwordHash);
     } catch (err) {
       logger.debug('Failed to validate user', { username, err });
-      emit(socket, AUTH_ERROR, { error: 'Validering av personlig kode feilet' });
+      emitError(socket, new Error('Validering av personlig kode feilet'));
       return;
     }
     if (validPasswordHash) {
       emit(socket, AUTH_REGISTERED, { registered: true });
     } else {
-      emit(socket, AUTH_ERROR, { error: 'Feil personlig kode' });
+      emitError(socket, new Error('Feil personlig kode'));
     }
     return;
   }
@@ -42,7 +41,7 @@ const register = async (socket, data) => {
     await addAnonymousUser(username, passwordHash);
   } catch (err) {
     logger.debug('Failed to register user', { username, err });
-    emit(socket, AUTH_ERROR, { error: 'Noe gikk galt under registreringen. Prøv igjen' });
+    emitError(socket, new Error('Noe gikk galt under registreringen. Prøv igjen'));
     return;
   }
   logger.silly('Successfully registered', { username });

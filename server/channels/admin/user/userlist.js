@@ -1,4 +1,4 @@
-const emit = require('../../../utils').emit;
+const { emit, emitError } = require('../../../utils');
 const logger = require('../../../logging');
 
 const { getActiveGenfors } = require('../../../models/meeting');
@@ -14,9 +14,7 @@ const requestUserList = async (socket) => {
       emit(socket, USER_LIST, users);
     }).catch((err) => {
       logger.error('Retrieving users failed.', err);
-      emit(socket, USER_LIST, [], {
-        error: 'Could not fetch user list.',
-      });
+      emitError(socket, new Error('Klarte ikke hente brukerliste'));
     });
   }).catch((err) => {
     logger.error('Retrieving current active genfors failed', err);

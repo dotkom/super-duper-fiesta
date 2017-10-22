@@ -1,4 +1,4 @@
-const emit = require('../utils').emit;
+const { emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
@@ -11,7 +11,6 @@ const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 
-const { AUTH_ERROR } = require('../../common/actionTypes/error');
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
 const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
@@ -29,11 +28,7 @@ const {
 
 const emitNoActiveIssue = (socket) => {
   logger.debug('No active issue.');
-  emit(socket, 'issue', {}, {
-    action: null,
-    error: null,
-    message: 'Det er ingen aktive saker for øyeblikket.',
-  });
+  emitError(socket, new Error('Det er ingen aktive saker for øyeblikket.'));
 };
 
 // eslint-disable-next-line global-require
@@ -53,7 +48,7 @@ const emitUserData = async (socket) => {
     });
 
     if (!user.genfors) {
-      emit(socket, AUTH_ERROR, { error: 'Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.' });
+      emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
     }
 
     let validPasswordHash = false;
@@ -128,7 +123,7 @@ const emitGenforsData = async (socket) => {
   try {
     const meeting = await getActiveGenfors();
     if (!meeting) {
-      emit(socket, OPEN_MEETING, { error: 1, code: 'no_active_meeting', message: 'Ingen aktiv generalforsamling.' });
+      emitError(socket, new Error('Ingen aktiv generalforsamling.'));
       return;
     }
     emit(socket, OPEN_MEETING, meeting);
@@ -138,9 +133,7 @@ const emitGenforsData = async (socket) => {
     await emitIssueBacklog(socket, meeting);
   } catch (err) {
     logger.error('Something went wrong when fetching active genfors.', err);
-    emit(socket, 'issue', {}, {
-      error: 'Noe gikk galt. Vennligst prøv igjen.',
-    });
+    emitError(socket, new Error('Noe gikk galt. Vennligst prøv igjen.'));
   }
 };
 
