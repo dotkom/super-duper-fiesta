@@ -2,55 +2,56 @@ const { calculateWinner, countVoteAlternatives } = require('../issue');
 const { generateIssue, generateVote, generateAlternative } = require('../../utils/generateTestData');
 const { RESOLUTION_TYPES } = require('../../../common/actionTypes/voting');
 
-/*
-  Turns array of alternative ids into votes object
-  ['2', '3'] ->
-  {
-    0: { _id: 0, alterantive: '2' }
-    1: { _id: 1, alterantive: '3' }
-  }
-*/
-const createVotesObject = voteArray => (
-  voteArray.reduce((acc, alternativeId, id) => ({
-    ...acc,
-    [id]: generateVote({ _id: id.toString(), alternative: alternativeId }),
-  }), {})
-);
+const generateVotingData = (voteCounts) => {
+  const alternatives = Object.keys(voteCounts).map(
+    name => generateAlternative({
+      id: name, text: name,
+    }),
+  );
+
+  const votes = Object.keys(voteCounts)
+    // { Ja: 1, Nei: 2 } -> [JaId, NeiId, NeiId]
+    .reduce((acc, name) => (
+      [...acc, ...Array(voteCounts[name]).fill(name)]
+    ), [])
+    // [JaId, NeiId, NeiId] -> { '0': voteForJa, '1': voteForNei, '2': voteForNei }
+    .reduce((acc, alternativeId, id) => ({
+      ...acc,
+      [id]: generateVote({ _id: id.toString(), alternative: alternativeId }),
+    }), {});
+
+  return [alternatives, votes];
+};
 
 describe('calculateWinner', () => {
-  const booleanAlternatives = [
-    generateAlternative({ id: '1', text: 'Blank' }),
-    generateAlternative({ id: '2', text: 'Ja' }),
-    generateAlternative({ id: '3', text: 'Nei' }),
-  ];
-
-  const multipleChoiceAlternatives = [
-    generateAlternative({ id: '1', text: 'Blank' }),
-    generateAlternative({ id: '2', text: 'Person 1' }),
-    generateAlternative({ id: '3', text: 'Person 2' }),
-    generateAlternative({ id: '4', text: 'Person 3' }),
-  ];
-
   it('finds winner with regular vote demand', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 3,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
     });
-    const votes = createVotesObject(['2', '2', '2', '3', '3']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
 
-    expect(winner).toEqual('2');
+    expect(winner).toEqual('Ja');
   });
 
   it('does not find a winner when vote demand is not met', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 3,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.qualified.key,
     });
-    const votes = createVotesObject(['2', '2', '2', '3', '3']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
@@ -60,11 +61,15 @@ describe('calculateWinner', () => {
   });
 
   it('does not find a winner when an alternative has exactly 1/2 of votes with regular vote demand', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 2,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
     });
-    const votes = createVotesObject(['2', '2', '3', '3']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
@@ -74,11 +79,15 @@ describe('calculateWinner', () => {
   });
 
   it('does not find a winner when an alternative has exactly 2/3 of votes with qualified vote demand', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 4,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.qualified.key,
     });
-    const votes = createVotesObject(['2', '2', '2', '2', '3', '3']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
@@ -88,42 +97,53 @@ describe('calculateWinner', () => {
   });
 
   it('finds a winner when an alternative has above 2/3 of votes with qualified vote demand', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 5,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.qualified.key,
     });
-    const votes = createVotesObject(['2', '2', '2', '2', '2', '3', '3']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
 
-    expect(winner).toEqual('2');
+    expect(winner).toEqual('Ja');
   });
 
   it('ignores blank votes when countingBlankVotes is false', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 2,
+      Ja: 3,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
       countingBlankVotes: false,
     });
-    const votes = createVotesObject(['2', '2', '2', '3', '3', '1', '1']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
 
-    expect(winner).toEqual('2');
+    expect(winner).toEqual('Ja');
   });
 
   it('counts blank votes when countingBlankVotes is true', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 2,
+      Ja: 3,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
       countingBlankVotes: true,
     });
-    const votes = createVotesObject(['2', '2', '2', '3', '3', '1', '1']);
-
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
@@ -132,46 +152,55 @@ describe('calculateWinner', () => {
   });
 
   it('counts blank votes when countingBlankVotes is true, but still finds winner', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 2,
+      Ja: 5,
+      Nei: 2,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
       countingBlankVotes: true,
     });
-    const votes = createVotesObject(['2', '2', '2', '2', '2', '3', '3', '1', '1']);
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
 
-    expect(winner).toEqual('2');
+    expect(winner).toEqual('Ja');
   });
 
   it('handles multiple choice', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 2,
+      'Person 1': 4,
+      'Person 2': 1,
+      'Person 3': 6,
+    });
     const issue = generateIssue({
-      alternatives: multipleChoiceAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
       countingBlankVotes: false,
     });
-    const votes = createVotesObject(
-      ['2', '2', '2', '2', '3', '1', '1', '4', '4', '4', '4', '4', '4'],
-    );
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
     );
 
-    expect(winner).toEqual('4');
+    expect(winner).toEqual('Person 3');
   });
 
   it('does not count "no" as a winner when using boolean alternatives', () => {
+    const [alternatives, votes] = generateVotingData({
+      Blank: 0,
+      Ja: 3,
+      Nei: 4,
+    });
     const issue = generateIssue({
-      alternatives: booleanAlternatives,
+      alternatives,
       voteDemand: RESOLUTION_TYPES.regular.key,
       countingBlankVotes: false,
     });
-    const votes = createVotesObject(
-      ['2', '2', '2', '3', '3', '3', '3'],
-    );
 
     const winner = calculateWinner(issue, votes,
       countVoteAlternatives(issue.alternatives, votes),
