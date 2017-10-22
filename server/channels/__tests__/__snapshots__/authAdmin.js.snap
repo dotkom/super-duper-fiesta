@@ -6,9 +6,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Ugyldig administratorpassord.",
+        "id": 0,
+        "message": "Ugyldig administratorpassord.",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]
@@ -38,9 +39,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "error": "Ugyldig administratorpassord.",
+        "id": 0,
+        "message": "Ugyldig administratorpassord.",
       },
-      "type": "AUTH_ERROR",
+      "type": "ERROR",
     },
   ],
 ]

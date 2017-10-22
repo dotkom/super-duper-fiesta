@@ -5,9 +5,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Du er ikke registert",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -18,9 +20,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "You do not have the right to vote",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du har ikke stemmerett",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -31,9 +35,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "User does not have the required permissions.",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Brukeren har ikke riktig rettigheter",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -87,9 +93,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Du er ikke registert",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -100,9 +108,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Storing vote failed.",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Du har ikke stemmerett",
+      },
+      "type": "ERROR",
     },
   ],
 ]
@@ -113,9 +123,11 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {},
-      "error": "Storing vote failed.",
-      "type": "ADD_VOTE",
+      "data": Object {
+        "id": 0,
+        "message": "Brukeren har ikke riktig rettigheter",
+      },
+      "type": "ERROR",
     },
   ],
 ]

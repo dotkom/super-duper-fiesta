@@ -1,4 +1,4 @@
-const { adminBroadcast, broadcast, broadcastAndEmit, emit } = require('../utils');
+const { adminBroadcast, broadcast, broadcastAndEmit, emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const { addIssue, endIssue, deleteIssue, getPublicIssueWithVotes } = require('../managers/issue');
@@ -20,9 +20,7 @@ const createIssue = async (socket, payload) => {
     broadcast(socket, ENABLE_VOTING);
   }).catch((err) => {
     logger.error('Adding new question failed.', err);
-    emit(socket, 'issue', {}, {
-      error: 'Adding new question failed',
-    });
+    emitError(socket, new Error('Opprettelse av sak feilet'));
   });
 };
 
@@ -48,9 +46,7 @@ const closeIssue = async (socket, payload) => {
   })
   .catch((err) => {
     logger.error('closing issue failed', err);
-    emit(socket, 'issue', {}, {
-      error: 'Closing issue failed',
-    });
+    emitError(socket, new Error('Stenging av sak feilet'));
   });
 };
 

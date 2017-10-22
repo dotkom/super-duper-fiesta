@@ -1,5 +1,4 @@
-const { broadcastAndEmit } = require('../../../utils');
-const emit = require('../../../utils').emit;
+const { broadcastAndEmit, emitError } = require('../../../utils');
 const logger = require('../../../logging');
 
 const { getUserById, updateUserById } = require('../../../models/user');
@@ -19,9 +18,7 @@ const toggleCanVote = async (socket, data) => {
       userId,
       canVote,
     });
-    emit(socket, TOGGLED_CAN_VOTE, [], {
-      error: 'User is not a member and therefore isn\'t allowed to vote',
-    });
+    emitError(socket, new Error('Brukeren er ikke medlem og har derfor ikke lov til å stemme'));
     return;
   }
   logger.debug('Toggling can vote status', {
@@ -45,9 +42,7 @@ const toggleCanVote = async (socket, data) => {
     });
   } catch (err) {
     logger.error('Retrieving user failed.', err);
-    emit(socket, TOGGLED_CAN_VOTE, [], {
-      error: 'Could not fetch user list.',
-    });
+    emitError(socket, new Error('Noe gikk galt under oppdatering av stemmeberettiget'));
   }
 };
 

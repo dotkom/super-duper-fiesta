@@ -1,4 +1,5 @@
 .error {
+  margin-bottom: 2rem;
   display: flex;
   background: #ca3939;
   padding: 0.5rem 1rem;
