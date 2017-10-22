@@ -1,4 +1,7 @@
 # Super Duper Fiesta
+[![Build Status](https://ci.online.ntnu.no/api/badges/dotkom/super-duper-fiesta/status.svg?branch=master)](https://ci.online.ntnu.no/dotkom/super-duper-fiesta)
+[![codecov](https://codecov.io/gh/dotkom/super-duper-fiesta/branch/master/graph/badge.svg)](https://codecov.io/gh/dotkom/super-duper-fiesta)
+
 Electronic voting system for the annual general meeting (AGM), or "generalforsamlingen/genfors" of _Linjeforeningen Online_
 
 ## How to contribute
