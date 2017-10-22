@@ -63,7 +63,8 @@ pipeline:
     secrets: [registry_username, registry_password, sdf_sentry_dsn_frontend]
     when:
       branch: master
-      event: push
+      event: [push, tag, deployment]
+      status: success
     commands:
       - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
       - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod --build-arg SDF_SENTRY_DSN_FRONTEND .
@@ -82,7 +83,8 @@ pipeline:
     command_timeout: 600
     when:
       branch: master
-      event: push
+      event: [push, tag, deployment]
+      status: success
     script:
       - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
       - /bin/systemctl restart super-duper-fiesta.service
