@@ -90,5 +90,6 @@ passport.use(new OAuth2Strategy(
 ));
 
 module.exports = {
+  getClientInformation,
   getPermissionLevel,
 };

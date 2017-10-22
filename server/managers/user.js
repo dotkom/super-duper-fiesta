@@ -18,37 +18,36 @@ async function isRegistered(user, passwordHash) {
 }
 
 
-function addUser(name, onlinewebId, securityLevel) {
-  return new Promise((resolve, reject) => {
-    getActiveGenfors().then((genfors) => {
-      if (!genfors) {
-        logger.warn(`No active genfors when creating user '${name}' ('${onlinewebId}')`);
-      }
-      // @TODO make sure to connect all users to genfors
-      if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
-        return reject(new Error('Ingen aktive generalforsamlinger'));
-      }
-      if (securityLevel >= permissionLevel.IS_SUPERUSER) {
-        logger.info('Creating a user with high security clearance.', {
-          name, onlinewebId, securityLevel,
-        });
-      }
-      model.addUser({
-        genfors,
-        name,
-        onlinewebId,
-        notes: '',
-        permissions: securityLevel || 0,
-      }).then((user) => {
-        logger.debug('Created user', user.name);
-        resolve(user);
-      }).catch((err) => {
-        logger.error('Failed to create user', err);
-        reject(err);
-      });
-      return null;
-    }).catch(reject);
-  });
+async function addUser(name, onlinewebId, securityLevel) {
+  const genfors = await getActiveGenfors();
+  if (!genfors) {
+    logger.warn(`No active genfors when creating user '${name}' ('${onlinewebId}')`);
+  }
+
+  if (!genfors && securityLevel < permissionLevel.IS_SUPERUSER) {
+    throw new Error('Ingen aktive generalforsamlinger');
+  }
+
+  if (securityLevel >= permissionLevel.IS_SUPERUSER) {
+    logger.info('Creating a user with high security clearance.', {
+      name, onlinewebId, securityLevel,
+    });
+  }
+
+  try {
+    const user = await model.addUser({
+      genfors,
+      name,
+      onlinewebId,
+      notes: '',
+      permissions: securityLevel || 0,
+    });
+    logger.debug('Created user', user.name);
+    return user;
+  } catch (err) {
+    logger.error('Failed to create user', err);
+    throw err;
+  }
 }
 
 async function addAnonymousUser(username, passwordHash) {
