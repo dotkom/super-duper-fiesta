@@ -16,7 +16,39 @@ Array [
 ]
 `;
 
+exports[`toggleRegistration emits a toggle action that closes registration 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": false,
+      },
+      "type": "TOGGLED_REGISTRATION_STATE",
+    },
+  ],
+]
+`;
+
 exports[`toggleRegistration emits a toggle action that opens registration 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
+      },
+      "type": "TOGGLED_REGISTRATION_STATE",
+    },
+  ],
+]
+`;
+
+exports[`toggleRegistration emits a toggle action that opens registration 2`] = `
 Array [
   Array [
     "action",
