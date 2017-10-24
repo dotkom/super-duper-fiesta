@@ -1,14 +1,13 @@
 jest.mock('../../../models/meeting');
 const { toggleRegistration } = require('../meeting');
-const { getActiveGenfors, toggleRegistrationStatus } = require('../../../models/meeting');
+const { getActiveGenfors, updateGenfors } = require('../../../models/meeting');
 const { generateSocket, generateGenfors } = require('../../../utils/generateTestData');
 
 describe('toggleRegistration', () => {
   beforeEach(() => {
     getActiveGenfors.mockImplementation(async () => generateGenfors());
-    toggleRegistrationStatus.mockImplementation(
-      async (genfors, registrationOpen) =>
-        generateGenfors({ ...genfors, registrationOpen: !registrationOpen }));
+    updateGenfors.mockImplementation(async (genfors, data) =>
+      ({ ...genfors, ...data, pin: genfors.pin }));
   });
 
   const generateData = data => (Object.assign({
