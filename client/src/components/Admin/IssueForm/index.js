@@ -206,36 +206,42 @@ class IssueForm extends React.Component {
               value={this.state.issueDescription}
             />
           </label>
-          <label>
-            <h2 className={css.title}>Spørsmålstype</h2>
-            <SelectQuestionType
-              questionType={this.state.questionType}
-              handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
-            />
-          </label>
-          {this.state.questionType === MULTIPLE_CHOICE
-          && <Alternative
-            alternatives={this.state.alternatives}
-            handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
-            handleUpdateAlternativeText={(...a) => this.handleUpdateAlternativeText(...a)}
-            handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
-          />
-          }
-          <Checkboxes
-            handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
-            handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
-            handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
-            countBlankVotes={this.state.countBlankVotes}
-            secretVoting={this.state.secretVoting}
-            showOnlyWinner={this.state.showOnlyWinner}
-          />
-          <label>
-            <h2 className={css.title}>Flertallstype</h2>
-            <SelectResolutionType
-              handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
-              resolutionType={this.state.voteDemand}
-            />
-          </label>
+          <div className={css.inputGroups}>
+            <div className={css.inputGroup}>
+              <label>
+                <h2 className={css.title}>Spørsmålstype</h2>
+                <SelectQuestionType
+                  questionType={this.state.questionType}
+                  handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
+                />
+              </label>
+              {this.state.questionType === MULTIPLE_CHOICE
+              && <Alternative
+                alternatives={this.state.alternatives}
+                handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
+                handleUpdateAlternativeText={(...a) => this.handleUpdateAlternativeText(...a)}
+                handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
+              />
+              }
+            </div>
+            <div className={css.inputGroup}>
+              <Checkboxes
+                handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
+                handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
+                handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
+                countBlankVotes={this.state.countBlankVotes}
+                secretVoting={this.state.secretVoting}
+                showOnlyWinner={this.state.showOnlyWinner}
+              />
+              <label>
+                <h2 className={css.title}>Flertallstype</h2>
+                <SelectResolutionType
+                  handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
+                  resolutionType={this.state.voteDemand}
+                />
+              </label>
+            </div>
+          </div>
           {this.state.editingIssue ?
             <Button
               background
