@@ -33,25 +33,9 @@ async function createGenfors(title, date) {
   return genfors.save();
 }
 
-async function closeGenfors(id) {
-  Genfors.update({ _id: id }, { status: 'closed' });
-}
-
-async function toggleRegistrationStatus(genfors, currentStatus) {
-  // If currentStatus is passed to func, set it to the opposite
-  // If currentStatus is not passed to func, set it to the opposite of meeting.registrationOpen
-  const registrationOpen = currentStatus !== undefined ? !currentStatus : genfors.registrationOpen;
-
-  // eslint-disable-next-line no-underscore-dangle
-  return Genfors.findOneAndUpdate(genfors._id,
-  { registrationOpen, pin: parseInt(Math.random() * 10000, 10) }, { new: true });
-}
-
 module.exports = {
   getGenfors,
   createGenfors,
-  closeGenfors,
   getActiveGenfors,
-  toggleRegistrationStatus,
   updateGenfors,
 };
