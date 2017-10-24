@@ -1,4 +1,4 @@
-const { broadcastAndEmit, emit } = require('../../utils');
+const { broadcastAndEmit } = require('../../utils');
 const logger = require('../../logging');
 
 const { getActiveGenfors } = require('../../models/meeting');
@@ -24,7 +24,7 @@ const toggleRegistration = async (socket, data) => {
   const genfors = await getActiveGenfors();
   const updatedMeeting = await toggleRegistrationStatus(genfors,
     data.registrationOpen);
-  emit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
+  broadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
 };
 
 const listener = (socket) => {

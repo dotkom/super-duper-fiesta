@@ -8,6 +8,10 @@ import { ErrorContainer } from '../Error';
 import Heading from '../Heading';
 
 
+function zeroPadNumber(number) {
+  return number < 10 ? `0${number}` : `${number}`;
+}
+
 class AdminLogin extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +33,10 @@ class AdminLogin extends React.Component {
 
   render() {
     const date = new Date(this.state.date);
-    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const zeroPaddedMonth = zeroPadNumber(date.getMonth() + 1);
+    const zeroPaddedDay = zeroPadNumber(date.getDate());
+    const formattedDate =
+      `${date.getFullYear()}-${zeroPaddedMonth}-${zeroPaddedDay}`;
     return (
       <div>
         <div>
