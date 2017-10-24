@@ -46,5 +46,6 @@ const listener = (socket) => {
 
 module.exports = {
   listener,
+  endGAM,
   toggleRegistration,
 };
