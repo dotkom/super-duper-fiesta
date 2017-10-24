@@ -20,6 +20,10 @@ function getActiveGenfors() {
   return Genfors.findOne({ status: 'open' }).exec();
 }
 
+async function updateGenfors(genfors, data, options) {
+  return Genfors.findOneAndUpdate(genfors, data, options);
+}
+
 async function createGenfors(title, date) {
   // Add a new genfors
   const genfors = new Genfors({
@@ -49,4 +53,5 @@ module.exports = {
   closeGenfors,
   getActiveGenfors,
   toggleRegistrationStatus,
+  updateGenfors,
 };
