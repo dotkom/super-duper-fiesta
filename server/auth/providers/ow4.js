@@ -37,7 +37,11 @@ async function getClientInformation(accessToken) {
   }
   const username = body.username;
   const fullName = `${body.first_name} ${body.last_name}`;
-  const permissionLevel = getPermissionLevel(body);
+  let permissionLevel = getPermissionLevel(body);
+
+  if (!genfors && body.member && body.superuser) {
+    permissionLevel = permissions.IS_SUPERUSER;
+  }
 
   try {
     if (!genfors && permissionLevel < permissions.IS_SUPERUSER) {
