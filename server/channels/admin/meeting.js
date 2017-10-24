@@ -1,7 +1,8 @@
 const emit = require('../../utils').emit;
 const logger = require('../../logging');
 
-const { getActiveGenfors, toggleRegistrationStatus } = require('../../models/meeting');
+const { getActiveGenfors } = require('../../models/meeting');
+const { toggleRegistrationStatus } = require('../../managers/meeting');
 
 const {
   TOGGLE_REGISTRATION_STATE,

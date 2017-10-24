@@ -1,5 +1,5 @@
 const logger = require('../logging');
-const { createGenfors, getGenfors, getActiveGenfors, closeGenfors } = require('../models/meeting');
+const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting');
 
 const permissionLevel = require('../../common/auth/permissions');
 
@@ -36,11 +36,11 @@ async function canEdit(securityLevel, user, genforsId) {
 
 
 async function endGenfors(genfors, user) {
-  if (await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
-    logger.info('Closing genfors');
-    await closeGenfors(genfors.id);
-    logger.info('Closed genfors');
+  if (!await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
+    throw new Error('User does not have permission to end genfors');
   }
+  logger.info('Closing genfors', { genfors: genfors.title });
+  return updateGenfors({ _id: genfors.id }, { status: 'closed' });
 }
 
 
@@ -65,8 +65,21 @@ async function validatePin(pin) {
   return genfors.pin === pin;
 }
 
+
+async function toggleRegistrationStatus(genfors, currentStatus) {
+  // If currentStatus is passed to func, set it to the opposite
+  // If currentStatus is not passed to func, set it to the opposite of meeting.registrationOpen
+  const registrationOpen = currentStatus !== undefined ? !currentStatus : genfors.registrationOpen;
+
+  // eslint-disable-next-line no-underscore-dangle
+  return updateGenfors(genfors,
+  { registrationOpen, pin: parseInt(Math.random() * 10000, 10) }, { new: true });
+}
+
 module.exports = {
   canEdit,
   validatePin,
   addGenfors,
+  endGenfors,
+  toggleRegistrationStatus,
 };
