@@ -20,8 +20,7 @@ const OW4OAUTH2_SETUP = {
     'authentication.onlineuser.rfid.read'].join(' '),
 };
 
-logger.info('Running OAuth2 with the following settings.',
-  Object.assign({}, OW4OAUTH2_SETUP, { OW4_OAUTH2_PROVIDER_BACKEND }));
+logger.info(`Running OAuth2 against ${OW4_OAUTH2_PROVIDER_BACKEND}`);
 
 module.exports = {
   ids: OW4OAUTH2_SETUP,
