@@ -1,7 +1,8 @@
 jest.mock('../../../models/meeting');
 const { endGAM, toggleRegistration } = require('../meeting');
 const { getGenfors, getActiveGenfors, updateGenfors } = require('../../../models/meeting');
-const { generateSocket, generateGenfors } = require('../../../utils/generateTestData');
+const { generateSocket, generateGenfors, generateUser } = require('../../../utils/generateTestData');
+const permissionLevels = require('../../../../common/auth/permissions');
 
 describe('toggleRegistration', () => {
   beforeEach(() => {
@@ -39,7 +40,7 @@ describe('endGAM', () => {
   });
 
   it('closes meeting if requested', async () => {
-    const socket = generateSocket();
+    const socket = generateSocket(generateUser({ permissions: permissionLevels.IS_MANAGER }));
     const genfors = generateGenfors();
     getActiveGenfors.mockImplementation(async () => genfors);
     getGenfors.mockImplementation(async () => genfors);
