@@ -96,11 +96,14 @@ class Alternative extends React.Component {
               </li>,
             )}
           </ul>
+        </div>
+        <div className={css.content}>
           <div className={css.add}>
             <input
               type="text"
               value={alternativeText}
               onChange={e => this.handleAlternativeUpdate(e)}
+              placeholder="Nytt alternativ"
               onKeyPress={e => this.handleKeyPress(e)}
             />
             <Button onClick={(...a) => this.handleAddAlternative(...a)}>

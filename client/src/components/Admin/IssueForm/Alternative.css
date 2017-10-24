@@ -6,12 +6,16 @@
   composes: border from "css/border.css";
 }
 
+.content + .content {
+  margin-top: 1rem;
+}
+
 .alternative ul:empty {
   display: none;
 }
 
 .alternative ul {
-  margin: 0 0 0.5rem;
+  margin: 0;
   padding-left: 0;
 }
 
