@@ -36,11 +36,11 @@ async function canEdit(securityLevel, user, genforsId) {
 
 
 async function endGenfors(genfors, user) {
-  if (await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
-    logger.info('Closing genfors');
-    await updateGenfors({ _id: genfors.id }, { status: 'closed' });
-    logger.info('Closed genfors');
+  if (!await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
+    throw new Error('User does not have permission to end genfors');
   }
+  logger.info('Closing genfors', { genfors: genfors.title });
+  return updateGenfors({ _id: genfors.id }, { status: 'closed' });
 }
 
 
