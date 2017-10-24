@@ -65,7 +65,6 @@ class IssueForm extends React.Component {
 
     this.state = Object.assign(issueContents, {
       redirectToAdminHome: false,
-      editingIssue: props.activeIssue,
     });
   }
 
@@ -158,16 +157,6 @@ class IssueForm extends React.Component {
     this.setState({ questionType });
   }
 
-  toggleUpdateExistingIssue() {
-    this.setState(Object.assign(getIssueContents(this.props.issue), {
-      editingIssue: true,
-    }));
-  }
-
-  toggleCreateNewIssue() {
-    this.setState(Object.assign(blankIssue, { editingIssue: false }));
-  }
-
   render() {
     const showActiveIssueWarning = this.props.activeIssue;
     const { redirectToAdminHome } = this.state;
@@ -183,21 +172,6 @@ class IssueForm extends React.Component {
           >Det er allerede en aktiv sak!</p>}
           {redirectToAdminHome &&
             <Redirect to="/admin" />}
-          {this.props.activeIssue &&
-            <div>
-              <Button
-                background
-                disabled={this.state.editingIssue}
-                size="lg"
-                onClick={() => this.toggleUpdateExistingIssue()}
-              >Oppdater{this.state.editingIssue && 'er'} aktiv sak</Button>
-              <Button
-                background
-                disabled={!this.state.editingIssue}
-                size="lg"
-                onClick={() => this.toggleCreateNewIssue()}
-              >Opprett{!this.state.editingIssue && 'er'} ny sak</Button>
-            </div>}
           <label className={css.textarea}>
             <h2 className={css.title}>Beskrivelse av saken</h2>
             <textarea
@@ -242,7 +216,7 @@ class IssueForm extends React.Component {
               </label>
             </div>
           </div>
-          {this.state.editingIssue ?
+          {this.props.activeIssue ?
             <Button
               background
               onClick={() => this.handleUpdateIssue()}
