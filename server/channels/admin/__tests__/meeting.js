@@ -19,7 +19,7 @@ describe('toggleRegistration', () => {
     await toggleRegistration(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits a toggle action that opens registration', async () => {
@@ -27,6 +27,6 @@ describe('toggleRegistration', () => {
     await toggleRegistration(socket, generateData({ registrationOpen: false }));
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 });

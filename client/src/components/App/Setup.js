@@ -114,8 +114,14 @@ class Setup extends Component {
               </p>
             }
             <div>
-              <Button background size="lg" disabled={errorMessage !== null}>
-                Fullfør registrering
+              <Button
+                background
+                size="lg"
+                disabled={errorMessage !== null || !this.props.registrationOpen}
+              >
+                {this.props.registrationOpen
+                ? 'Fullfør registrering'
+                : 'Registreringen er ikke åpen'}
               </Button>
             </div>
           </form>
@@ -129,13 +135,15 @@ Setup.propTypes = {
   register: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
   registered: PropTypes.bool.isRequired,
+  registrationOpen: PropTypes.bool.isRequired,
 };
 
 export default Setup;
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, meeting }) => ({
   username: auth.username,
   registered: auth.registered,
+  registrationOpen: meeting.registrationOpen,
 });
 const mapDispatchToProps = dispatch => ({
   register: (...a) => {
