@@ -80,5 +80,6 @@ module.exports = {
   canEdit,
   validatePin,
   addGenfors,
+  endGenfors,
   toggleRegistrationStatus,
 };
