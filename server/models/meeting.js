@@ -39,7 +39,7 @@ async function toggleRegistrationStatus(genfors, currentStatus) {
   const registrationOpen = currentStatus !== undefined ? !currentStatus : genfors.registrationOpen;
 
   // eslint-disable-next-line no-underscore-dangle
-  return Genfors.findOneAndUpdate(genfors._id,
+  return Genfors.findOneAndUpdate({ _id: genfors._id },
   { registrationOpen, pin: parseInt(Math.random() * 10000, 10) }, { new: true });
 }
 
