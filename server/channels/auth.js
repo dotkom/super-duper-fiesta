@@ -1,11 +1,13 @@
-const { emit, emitError } = require('../utils');
+const { adminBroadcast, emit, emitError } = require('../utils');
 const { getActiveGenfors } = require('../models/meeting');
 const { validatePin } = require('../managers/meeting');
 const { addAnonymousUser } = require('../managers/user');
 const { validatePasswordHash } = require('../managers/user');
+const { getUserByUsername } = require('../models/user');
 const logger = require('../logging');
 
 const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
+const { ADD_USER } = require('../../common/actionTypes/users');
 
 const register = async (socket, data) => {
   const { pin, passwordHash } = data;
@@ -46,6 +48,7 @@ const register = async (socket, data) => {
   }
   logger.silly('Successfully registered', { username });
   emit(socket, AUTH_REGISTERED, { registered: true });
+  adminBroadcast(socket, ADD_USER, await getUserByUsername(username));
 };
 
 const listener = (socket) => {
