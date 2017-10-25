@@ -56,19 +56,24 @@ UserList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  // Use Fuse for fuzzy-search.
-  const fuse = new Fuse(state.users, {
-    threshold: 0.6,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: ['name'],
-  });
+  // Show all users if there is no filter in the box.
+  let presentedUsers = state.users;
+
+  // Filter users by using Fuse fuzzy search
+  if (state.userFilter && state.userFilter.length > 0) {
+    presentedUsers = new Fuse(Object.keys(state.users).map(key => state.users[key]), {
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ['name'],
+    }).search(state.userFilter)
+      .reduce((a, b) => ({ ...a, [b.id]: b }), {});
+  }
 
   return {
-    // Show all users if there is no filter in the box.
-    users: state.userFilter ? fuse.search(state.userFilter) : state.users,
+    users: presentedUsers,
   };
 };
 
