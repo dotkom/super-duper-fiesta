@@ -6,8 +6,9 @@ const permissionLevels = require('../../../../common/auth/permissions');
 
 describe('toggleRegistration', () => {
   beforeEach(() => {
-    getActiveGenfors.mockImplementation(async () => generateGenfors());
-    updateGenfors.mockImplementation(async (genfors, data) =>
+    const genfors = generateGenfors();
+    getActiveGenfors.mockImplementation(async () => genfors);
+    updateGenfors.mockImplementation(async (_, data) =>
       ({ ...genfors, ...data, pin: genfors.pin }));
   });
 
