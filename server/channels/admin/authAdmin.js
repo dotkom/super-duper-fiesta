@@ -6,7 +6,7 @@ const logger = require('../../logging');
 const {
   ADMIN_CREATE_GENFORS,
   ADMIN_LOGIN,
-  AUTH_SIGNED_IN } = require('../../../common/actionTypes/auth');
+  ADMIN_SIGNED_IN } = require('../../../common/actionTypes/auth');
 const { OPEN_MEETING } = require('../../../common/actionTypes/meeting');
 const permissionLevel = require('../../../common/auth/permissions');
 
@@ -21,16 +21,9 @@ const adminLogin = async (socket, data) => {
   const { password } = data;
   if (verifyAdminPassword(password)) {
     logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
-    // eslint-disable-next-line no-underscore-dangle
-    const updatedUser = await setUserPermissions(socket.request.user._id,
+    await setUserPermissions(socket.request.user._id,
       permissionLevel.IS_MANAGER);
-    emit(socket, AUTH_SIGNED_IN, {
-      username: updatedUser.username,
-      full_name: updatedUser.name,
-      logged_in: updatedUser.logged_in,
-      id: updatedUser._id, // eslint-disable-line no-underscore-dangle
-      permissions: updatedUser.permissions,
-    });
+    emit(socket, ADMIN_SIGNED_IN);
   } else {
     logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
     emitError(socket, new Error('Ugyldig administratorpassord.'));
