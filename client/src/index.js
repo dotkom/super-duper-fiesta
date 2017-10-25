@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotAppContainer } from 'react-hot-loader';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
@@ -26,7 +26,12 @@ const socket = IO.connect();
 
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
-const store = applyMiddleware(socketIoMiddleware, logger)(createStore)(votingApp);
+// eslint-disable-next-line no-underscore-dangle
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  votingApp,
+  composeEnhancers(applyMiddleware(socketIoMiddleware, logger)),
+);
 
 const render = (RootRoute) => {
   ReactDOM.render(
