@@ -31,6 +31,16 @@ describe('toggleRegistration', () => {
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
+
+  it('responds with an error if something wrong happens', async () => {
+    updateGenfors.mockImplementation(() => { throw new Error('Something wrong happened'); });
+
+    const socket = generateSocket();
+    await toggleRegistration(socket, generateData({ registrationOpen: false }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
 });
 
 describe('endGAM', () => {
