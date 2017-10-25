@@ -28,7 +28,7 @@ const toggleRegistration = async (socket, data) => {
     broadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
   } catch (err) {
     logger.warn('Toggling registration failed for meeting', { genfors: genfors.title, err });
-    emitError(socket, 'Noe gikk galt under oppdatering av registreringsstatus.');
+    emitError(socket, new Error('Noe gikk galt under oppdatering av registreringsstatus.'));
   }
 };
 
