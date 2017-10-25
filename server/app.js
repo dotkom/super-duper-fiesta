@@ -34,9 +34,6 @@ if (process.env.PRODUCTION) {
   app.use('/assets/', express.static(staticDir));
   app.get('*', (req, res) =>
     res.sendFile('index.html', { root: staticDir }));
-} else {
-  logger.info('Starting chokidar, watching server for changes');
-  require('./chokidar.conf.js'); // eslint-disable-line global-require
 }
 
 Raven
