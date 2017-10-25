@@ -17,16 +17,16 @@ const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand })
         <Loader />
       )}
       <p className={css.infoTags}>{
-        'Hemmelig: ' + (secret ? ' Ja' : ' Nei')
+        `Hemmelig: ${(secret ? ' Ja' : ' Nei')}`
       }</p>
       <p className={css.infoTags}>{
-        'Vis bare vinner: ' + (showOnlyWinner ? ' Ja' : ' Nei')
+        `Vis bare vinner: ${(showOnlyWinner ? ' Ja' : ' Nei')}`
       }</p>
       <p className={css.infoTags}>{
-        'Blanke stemmer telles: ' + (countingBlankVotes ? ' Ja' : ' Nei')
+        `Blanke stemmer telles: ${(countingBlankVotes ? ' Ja' : ' Nei')}`
       }</p>
       <p className={css.infoTags}>{
-        'Minimum stemmer for vedtak: ' + (voteDemand === 'regular' ? '1/2' : '2/3')
+        `Minimum stemmer for vedtak: ${(voteDemand === 'regular' ? '1/2' : '2/3')}`
       }</p>
     </Card>
   </DocumentTitle>
@@ -34,10 +34,18 @@ const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand })
 
 Issue.defaultProps = {
   text: 'Ingen aktiv sak for øyeblikket.',
+  secret: false,
+  showOnlyWinner: false,
+  countingBlankVotes: false,
+  voteDemand: 'regular',
 };
 
 Issue.propTypes = {
   text: React.PropTypes.string,
+  secret: React.PropTypes.boolean,
+  showOnlyWinner: React.PropTypes.boolean,
+  countingBlankVotes: React.PropTypes.boolean,
+  voteDemand: React.PropTypes.string,
 };
 
 
