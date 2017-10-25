@@ -6,6 +6,7 @@ const defaultState = {
   username: '',
   fullName: '',
   permissions: 0,
+  reloadPage: false,
 };
 
 const auth = (state = defaultState, action) => {
@@ -38,8 +39,10 @@ const auth = (state = defaultState, action) => {
     }
 
     case ADMIN_SIGNED_IN: {
-      window.location.reload();
-      break;
+      return {
+        ...state,
+        reloadPage: true,
+      };
     }
 
     default:
