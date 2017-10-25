@@ -29,6 +29,9 @@ class VotingMenu extends React.Component {
       this.state.selectedVote,
       this.props.voterKey,
     );
+    this.setState({
+      displayVote: false,
+    });
   }
 
   toggleVoteDisplay() {
