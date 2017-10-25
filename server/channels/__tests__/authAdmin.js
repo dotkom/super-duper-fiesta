@@ -49,8 +49,8 @@ describe('admin creates genfors', () => {
     const socket = generateSocket();
     await createGenforsListener(socket, generateData({ password: MOCK_PW }));
 
-    expect(socket.emit.mock.calls).toEqual([]);
-    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 });
 

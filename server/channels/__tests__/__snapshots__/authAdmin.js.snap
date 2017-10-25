@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`admin creates genfors creates a new meeting if admin password is correct 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
+      },
+      "type": "OPEN_MEETING",
+    },
+  ],
+]
+`;
+
+exports[`admin creates genfors creates a new meeting if admin password is correct 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
+      },
+      "type": "OPEN_MEETING",
+    },
+  ],
+]
+`;
+
 exports[`admin creates genfors returns invalid admin password if incorrect 1`] = `
 Array [
   Array [
