@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`endGAM closes meeting if requested 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": undefined,
+      "type": "END_MEETING",
+    },
+  ],
+]
+`;
+
+exports[`endGAM closes meeting if requested 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": undefined,
+      "type": "END_MEETING",
+    },
+  ],
+]
+`;
+
 exports[`toggleRegistration emits a toggle action that closes registration 1`] = `
 Array [
   Array [

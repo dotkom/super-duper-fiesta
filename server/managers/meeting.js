@@ -78,8 +78,8 @@ async function toggleRegistrationStatus(genfors, currentStatus) {
 
 module.exports = {
   canEdit,
+  endGenfors,
   validatePin,
   addGenfors,
-  endGenfors,
   toggleRegistrationStatus,
 };

@@ -1,4 +1,5 @@
 import {
+  END_MEETING,
   OPEN_MEETING,
   TOGGLED_REGISTRATION_STATE } from '../../../common/actionTypes/meeting';
 
@@ -12,6 +13,9 @@ const meeting = (state = {}, action) => {
         status: action.data.status,
         title: action.data.title,
       };
+    }
+    case END_MEETING: {
+      return {};
     }
     case TOGGLED_REGISTRATION_STATE:
       return {
