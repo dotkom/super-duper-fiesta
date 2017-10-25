@@ -6,8 +6,9 @@ const permissionLevels = require('../../../../common/auth/permissions');
 
 describe('toggleRegistration', () => {
   beforeEach(() => {
-    getActiveGenfors.mockImplementation(async () => generateGenfors());
-    updateGenfors.mockImplementation(async (genfors, data) =>
+    const genfors = generateGenfors();
+    getActiveGenfors.mockImplementation(async () => genfors);
+    updateGenfors.mockImplementation(async (_, data) =>
       ({ ...genfors, ...data, pin: genfors.pin }));
   });
 
@@ -24,6 +25,16 @@ describe('toggleRegistration', () => {
   });
 
   it('emits a toggle action that opens registration', async () => {
+    const socket = generateSocket();
+    await toggleRegistration(socket, generateData({ registrationOpen: false }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('responds with an error if something wrong happens', async () => {
+    updateGenfors.mockImplementation(() => { throw new Error('Something wrong happened'); });
+
     const socket = generateSocket();
     await toggleRegistration(socket, generateData({ registrationOpen: false }));
 

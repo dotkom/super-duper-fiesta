@@ -17,20 +17,27 @@ class UserList extends React.Component {
         <thead>
           <tr>
             <th className={css.left}>Bruker</th>
-            <th className={css.right}>Registrert</th>
+            <th className={css.right} title="Har fullført oppmøteregistrering">Registrert</th>
+            <th className={css.right}>Rettigheter</th>
             <th className={css.right}>Stemmeberettigelse</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(user =>
-            <User
-              name={user.name}
-              canVote={user.canVote}
-              key={user.id}
-              registered={user.registered}
-              toggleCanVote={toggleCanVote}
-              id={user.id}
-            />,
+          {Object.keys(users)
+            .sort((a, b) => users[a].name > users[b].name)
+            .map((key) => {
+              const user = users[key];
+              return (<User
+                name={user.name}
+                canVote={user.canVote}
+                completedRegistration={user.completedRegistration}
+                key={user.id}
+                permissions={user.permissions}
+                registered={user.registered}
+                toggleCanVote={toggleCanVote}
+                id={user.id}
+              />);
+            },
           )}
         </tbody>
       </table>
@@ -39,7 +46,7 @@ class UserList extends React.Component {
 }
 
 UserList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
+  users: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     canVote: PropTypes.bool.isRequired,
@@ -49,19 +56,24 @@ UserList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  // Use Fuse for fuzzy-search.
-  const fuse = new Fuse(state.users, {
-    threshold: 0.6,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: ['name'],
-  });
+  // Show all users if there is no filter in the box.
+  let presentedUsers = state.users;
+
+  // Filter users by using Fuse fuzzy search
+  if (state.userFilter && state.userFilter.length > 0) {
+    presentedUsers = new Fuse(Object.keys(state.users).map(key => state.users[key]), {
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ['name'],
+    }).search(state.userFilter)
+      .reduce((a, b) => ({ ...a, [b.id]: b }), {});
+  }
 
   return {
-    // Show all users if there is no filter in the box.
-    users: state.userFilter ? fuse.search(state.userFilter) : state.users,
+    users: presentedUsers,
   };
 };
 

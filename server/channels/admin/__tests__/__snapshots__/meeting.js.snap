@@ -87,3 +87,20 @@ Array [
   ],
 ]
 `;
+
+exports[`toggleRegistration responds with an error if something wrong happens 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt under oppdatering av registreringsstatus.",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`toggleRegistration responds with an error if something wrong happens 2`] = `Array []`;

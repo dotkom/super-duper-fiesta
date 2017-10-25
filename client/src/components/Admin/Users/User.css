@@ -37,6 +37,10 @@
   composes: icon close from 'css/flaticon.css';
 }
 
+.unavailable {
+  composes: icon lock from 'css/flaticon.css';
+}
+
 .toggle.success {
   color: #258573;
 }
