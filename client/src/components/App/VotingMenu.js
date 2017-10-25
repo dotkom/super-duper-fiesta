@@ -13,6 +13,7 @@ class VotingMenu extends React.Component {
 
     this.state = {
       selectedVote: null,
+      displayVote: false,
     };
   }
 
@@ -33,6 +34,12 @@ class VotingMenu extends React.Component {
     }
   }
 
+  toggleVoteDisplay() {
+    this.setState({
+      displayVote: !this.state.displayVote,
+    });
+  }
+
   render() {
     const isLoggedIn = this.props.loggedIn;
     const hasActiveIssue = this.props.issueIsActive;
@@ -41,7 +48,7 @@ class VotingMenu extends React.Component {
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
     const buttonHidden = !hasActiveIssue;
 
-    const selectedAlternative = hasVoted ? this.props.selectedAlternative : this.state.selectedVote;
+    const selectedAlternative = hasVoted ? (this.state.displayVote ? this.props.selectedAlternative : null) : this.state.selectedVote;
 
     return (
       <div>
@@ -60,19 +67,16 @@ class VotingMenu extends React.Component {
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
-        {(hasVoted && this.state.selectedVote) ?
+        {hasVoted && (
           <Button
             background
             size="lg"
-            onClick={() => this.setState({
-              selectedVote: this.state.selectedVote === this.props.selectedAlternative ?
-                undefined : this.props.selectedAlternative,
-            })}
+            onClick={() => this.toggleVoteDisplay()}
           >
-            {(hasVoted || (this.state.selectedVote === this.props.selectedAlternative)) ?
+            {this.state.displayVote ?
               'Skjul min stemme' : 'Vis min stemme'}
-          </Button> : ''
-        }
+          </Button>
+        )}
       </div>
     );
   }
