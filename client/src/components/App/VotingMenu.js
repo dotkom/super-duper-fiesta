@@ -24,14 +24,11 @@ class VotingMenu extends React.Component {
   }
 
   handleClick() {
-    // Voting is only allowed when you have a key.
-    if (this.props.loggedIn) {
-      this.props.handleVote(
-        this.props.issueId,
-        this.state.selectedVote,
-        this.props.voterKey,
-      );
-    }
+    this.props.handleVote(
+      this.props.issueId,
+      this.state.selectedVote,
+      this.props.voterKey,
+    );
   }
 
   toggleVoteDisplay() {
@@ -41,29 +38,27 @@ class VotingMenu extends React.Component {
   }
 
   render() {
-    const isLoggedIn = this.props.loggedIn;
-    const hasActiveIssue = this.props.issueIsActive;
-    const hasSelectedVote = !!this.state.selectedVote;
-    const hasVoted = !!this.props.selectedAlternative;
-    const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
-    const buttonHidden = !hasActiveIssue;
-
-    const selectedAlternative = hasVoted ? (this.state.displayVote ? this.props.selectedAlternative : null) : this.state.selectedVote;
+    const { alternatives, issueIsActive, isLoggedIn, ownVote } = this.props;
+    const { displayVote, selectedVote } = this.state;
+    const hasSelectedVote = !!selectedVote;
+    const hasVoted = !!ownVote;
+    const canVote = !isLoggedIn || !hasSelectedVote || hasVoted;
+    const selected = hasVoted ? (displayVote && ownVote) : selectedVote;
 
     return (
       <div>
         <Alternatives
-          alternatives={this.props.alternatives}
+          alternatives={alternatives}
           disabled={hasVoted}
           handleChange={(...a) => this.handleChange(...a)}
-          selectedVote={selectedAlternative}
+          selectedVote={selected}
         />
         <Button
           background
           size="lg"
           onClick={() => this.handleClick()}
-          disabled={buttonDisabled}
-          hidden={buttonHidden}
+          disabled={canVote}
+          hidden={!issueIsActive}
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
         </Button>
@@ -73,7 +68,7 @@ class VotingMenu extends React.Component {
             size="lg"
             onClick={() => this.toggleVoteDisplay()}
           >
-            {this.state.displayVote ?
+            {displayVote ?
               'Skjul min stemme' : 'Vis min stemme'}
           </Button>
         )}
@@ -86,8 +81,8 @@ VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
   issueId: '',
-  loggedIn: undefined,
-  selectedAlternative: null,
+  isLoggedIn: undefined,
+  ownVote: null,
 };
 
 VotingMenu.propTypes = {
@@ -95,8 +90,8 @@ VotingMenu.propTypes = {
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
   issueIsActive: React.PropTypes.bool.isRequired,
-  loggedIn: React.PropTypes.bool,
-  selectedAlternative: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool,
+  ownVote: React.PropTypes.string,
   voterKey: React.PropTypes.number,
 };
 
@@ -113,10 +108,10 @@ const mapStateToProps = state => ({
   issueId: getIssueId(state),
   issue: getIssue(state),
 
-  selectedAlternative: getOwnVote(state, state.auth.id),
+  ownVote: getOwnVote(state, state.auth.id),
 
   voterKey: state.voterKey,
-  loggedIn: state.auth.loggedIn,
+  isLoggedIn: state.auth.loggedIn,
 
   issueIsActive: activeIssueExists(state),
 });
