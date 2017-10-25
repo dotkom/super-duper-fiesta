@@ -26,18 +26,23 @@ const user = (state = {}, action) => {
   }
 };
 
-const users = (state = [], action) => {
+const users = (state = {}, action) => {
   switch (action.type) {
     case TOGGLE_CAN_VOTE:
-      return state.map(u => user(u, action));
+      return {
+        ...state,
+        [action.data._id]: user(state[action.data._id], action),
+      };
 
     case RECEIVE_USER_LIST: // Expecting that receiving a user list contains all users.
-      return action.data.map(u => user(undefined, { type: ADD_USER, user: u }));
+      return action.data.map(u => user(undefined, { type: ADD_USER, user: u }))
+        .reduce((prev, u) => ({ ...prev, [u.id]: u }), {});
 
     case ADD_USER: {
-      const stateCopy = state.slice();
-      stateCopy.push(user(undefined, { type: ADD_USER, user: action.data }));
-      return stateCopy;
+      return {
+        ...state,
+        [action.data.id]: user(undefined, { type: ADD_USER, user: action.data }),
+      };
     }
 
     default:

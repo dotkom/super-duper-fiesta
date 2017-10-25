@@ -22,15 +22,17 @@ class UserList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {users.map(user =>
-            <User
+          {Object.keys(users).map((key) => {
+            const user = users[key];
+            return (<User
               name={user.name}
               canVote={user.canVote}
               key={user.id}
               registered={user.registered}
               toggleCanVote={toggleCanVote}
               id={user.id}
-            />,
+            />);
+          },
           )}
         </tbody>
       </table>
@@ -39,7 +41,7 @@ class UserList extends React.Component {
 }
 
 UserList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
+  users: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     canVote: PropTypes.bool.isRequired,
