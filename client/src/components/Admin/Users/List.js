@@ -17,7 +17,8 @@ class UserList extends React.Component {
         <thead>
           <tr>
             <th className={css.left}>Bruker</th>
-            <th className={css.right}>Registrert</th>
+            <th className={css.right} title="Har fullført oppmøteregistrering">Registrert</th>
+            <th className={css.right}>Rettigheter</th>
             <th className={css.right}>Stemmeberettigelse</th>
           </tr>
         </thead>

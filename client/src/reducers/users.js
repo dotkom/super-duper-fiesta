@@ -18,7 +18,9 @@ const user = (state = {}, action) => {
         id: action.user._id, // eslint-disable-line no-underscore-dangle
         name: action.user.name,
         canVote: action.user.canVote,
+        completedRegistration: action.user.completedRegistration,
         registered: action.user.registerDate,
+        permissions: action.user.permissions,
       };
 
     default:
