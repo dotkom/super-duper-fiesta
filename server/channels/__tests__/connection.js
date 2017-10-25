@@ -124,7 +124,7 @@ describe('connection', () => {
 
   it('emits correct actions when user has already voted', async () => {
     getUserVote.mockImplementation(
-      async (question, user) => generateVote({ question: question._id, user })
+      async (question, user) => generateVote({ question: question._id, user }),
     );
     const socket = generateSocket();
     await connection(socket);
