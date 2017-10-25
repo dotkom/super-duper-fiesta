@@ -7,13 +7,13 @@ const { haveIVoted, createVote } = require('../../models/vote');
 const { getIssueById } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
-const { generateIssue, generateSocket } = require('../../utils/generateTestData');
+const { generateIssue, generateVote, generateSocket } = require('../../utils/generateTestData');
 const { CAN_VOTE, IS_LOGGED_IN } = require('../../../common/auth/permissions');
 
 getIssueById.mockImplementation(async () => generateIssue());
 haveIVoted.mockImplementation(async () => false);
-createVote.mockImplementation(() => ({
-  save: async () => jest.fn(),
+createVote.mockImplementation((user, question, alternative) => ({
+  save: async () => generateVote({ user, question, alternative }),
 }));
 getActiveGenfors.mockImplementation(async () => ({
   id: '1',

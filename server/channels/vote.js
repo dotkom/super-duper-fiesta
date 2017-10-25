@@ -10,7 +10,7 @@ const {
   RECEIVE_VOTE: SEND_VOTE,
   SUBMIT_ANONYMOUS_VOTE,
   SUBMIT_REGULAR_VOTE,
-  VOTING_STATE,
+  USER_VOTE,
 } = require('../../common/actionTypes/voting');
 
 const checkRegistered = async (socket) => {
@@ -37,7 +37,10 @@ const submitRegularVote = async (socket, data) => {
     );
     logger.debug('Stored new vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-    emit(socket, VOTING_STATE, { voted: true });
+    emit(socket, USER_VOTE, {
+      alternativeId: vote.alternative,
+      issueId: vote.question,
+    });
   } catch (err) {
     logger.error('Storing new vote failed.', err);
     emitError(socket, err);
@@ -58,7 +61,10 @@ const submitAnonymousVote = async (socket, data) => {
       data.alternative, anonymousUser._id);
     logger.debug('Stored new anonymous vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
-    emit(socket, VOTING_STATE, { voted: true });
+    emit(socket, USER_VOTE, {
+      alternativeId: vote.alternative,
+      issueId: vote.question,
+    });
   } catch (err) {
     logger.error('Storing new anonymous vote failed.', err);
     emitError(socket, err);

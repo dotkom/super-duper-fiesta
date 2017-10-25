@@ -4,9 +4,8 @@ const logger = require('../logging');
 const getActiveGenfors = require('../models/meeting').getActiveGenfors;
 const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const { getConcludedIssues } = require('../models/issue');
-const getVotes = require('../models/vote').getVotes;
+const { getUserVote, getVotes } = require('../models/vote');
 const { generatePublicVote } = require('../managers/vote');
-const haveIVoted = require('../models/vote').haveIVoted;
 const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
@@ -23,7 +22,7 @@ const {
 const {
   RECEIVE_VOTE: SEND_VOTE,
   ENABLE_VOTING,
-  VOTING_STATE,
+  USER_VOTE,
 } = require('../../common/actionTypes/voting');
 
 const emitNoActiveIssue = (socket) => {
@@ -99,8 +98,13 @@ const emitActiveQuestion = async (socket, meeting) => {
       voter = socket.request.user;
     }
     // eslint-disable-next-line no-underscore-dangle
-    const votedState = await haveIVoted(issue, voter._id);
-    if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
+    const vote = await getUserVote(issue, voter._id);
+    if (vote) {
+      emit(socket, USER_VOTE, {
+        alternativeId: vote.alternative,
+        issueId: vote.question,
+      });
+    }
   } catch (err) {
     logger.error('Getting currently active issue failed.', err);
     emitNoActiveIssue(socket);

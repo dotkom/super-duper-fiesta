@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { activeIssueExists, getIssue, getIssueId } from '../../selectors/issues';
-import { getOwnVote } from '../../selectors/voting';
+import { activeIssueExists, getIssue, getIssueId, getOwnVote } from '../../selectors/issues';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
 
@@ -13,7 +12,7 @@ class VotingMenu extends React.Component {
     super(props);
 
     this.state = {
-      selectedVote: this.props.selectedAlternative,
+      selectedVote: null,
     };
   }
 
@@ -38,9 +37,11 @@ class VotingMenu extends React.Component {
     const isLoggedIn = this.props.loggedIn;
     const hasActiveIssue = this.props.issueIsActive;
     const hasSelectedVote = !!this.state.selectedVote;
-    const hasVoted = !!this.props.selectedAlternative || this.props.voted;
+    const hasVoted = !!this.props.selectedAlternative;
     const buttonDisabled = !isLoggedIn || !hasSelectedVote || hasVoted;
     const buttonHidden = !hasActiveIssue;
+
+    const selectedAlternative = hasVoted ? this.props.selectedAlternative : this.state.selectedVote;
 
     return (
       <div>
@@ -48,7 +49,7 @@ class VotingMenu extends React.Component {
           alternatives={this.props.alternatives}
           disabled={hasVoted}
           handleChange={(...a) => this.handleChange(...a)}
-          selectedVote={this.state.selectedVote}
+          selectedVote={selectedAlternative}
         />
         <Button
           background
@@ -83,7 +84,6 @@ VotingMenu.defaultProps = {
   issueId: '',
   loggedIn: undefined,
   selectedAlternative: null,
-  voted: false,
 };
 
 VotingMenu.propTypes = {
@@ -94,7 +94,6 @@ VotingMenu.propTypes = {
   loggedIn: React.PropTypes.bool,
   selectedAlternative: React.PropTypes.string,
   voterKey: React.PropTypes.number,
-  voted: React.PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
@@ -110,14 +109,12 @@ const mapStateToProps = state => ({
   issueId: getIssueId(state),
   issue: getIssue(state),
 
-  selectedAlternative: getOwnVote(state, state.auth.id)
-    && getOwnVote(state, state.auth.id).alternative,
+  selectedAlternative: getOwnVote(state, state.auth.id),
 
   voterKey: state.voterKey,
   loggedIn: state.auth.loggedIn,
 
   issueIsActive: activeIssueExists(state),
-  voted: state.voting.voted,
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
