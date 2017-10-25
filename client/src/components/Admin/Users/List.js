@@ -23,17 +23,21 @@ class UserList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(users).map((key) => {
-            const user = users[key];
-            return (<User
-              name={user.name}
-              canVote={user.canVote}
-              key={user.id}
-              registered={user.registered}
-              toggleCanVote={toggleCanVote}
-              id={user.id}
-            />);
-          },
+          {Object.keys(users)
+            .sort((a, b) => users[a].name > users[b].name)
+            .map((key) => {
+              const user = users[key];
+              return (<User
+                name={user.name}
+                canVote={user.canVote}
+                completedRegistration={user.completedRegistration}
+                key={user.id}
+                permissions={user.permissions}
+                registered={user.registered}
+                toggleCanVote={toggleCanVote}
+                id={user.id}
+              />);
+            },
           )}
         </tbody>
       </table>
