@@ -1,4 +1,5 @@
-import { AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED } from '../../../common/actionTypes/auth';
+import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED }
+  from '../../../common/actionTypes/auth';
 
 const defaultState = {
   id: '',
@@ -34,6 +35,11 @@ const auth = (state = defaultState, action) => {
         ...state,
         registered: action.data.registered,
       };
+    }
+
+    case ADMIN_SIGNED_IN: {
+      window.location.reload();
+      break;
     }
 
     default:
