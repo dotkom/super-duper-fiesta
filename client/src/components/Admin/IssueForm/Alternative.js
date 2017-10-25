@@ -82,21 +82,23 @@ class Alternative extends React.Component {
           <Button background onClick={(...a) => this.confirmUpdateDialog(...a)}>Bekreft</Button>
           <Button background onClick={(...a) => this.closeUpdateDialog(...a)}>Avbryt</Button>
         </Dialog>
-        <div className={css.content}>
-          <ul>
-            {Object.keys(alternatives).map(id =>
-              <li key={id}>
-                <p>{alternatives[id].text}</p>
-                <Button onClick={() => this.openUpdateDialog(id)}>
-                  <div className={css.edit} />
-                </Button>
-                <Button onClick={() => handleRemoveAlternative(id)}>
-                  <div className={css.remove} />
-                </Button>
-              </li>,
-            )}
-          </ul>
-        </div>
+        { Object.keys(alternatives).length > 0 && (
+          <div className={css.content}>
+            <ul>
+              {Object.keys(alternatives).map(id =>
+                <li key={id}>
+                  <p>{alternatives[id].text}</p>
+                  <Button onClick={() => this.openUpdateDialog(id)}>
+                    <div className={css.edit} />
+                  </Button>
+                  <Button onClick={() => handleRemoveAlternative(id)}>
+                    <div className={css.remove} />
+                  </Button>
+                </li>,
+              )}
+            </ul>
+          </div>
+        )}
         <div className={css.content}>
           <div className={css.add}>
             <input
