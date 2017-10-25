@@ -34,8 +34,9 @@ class Setup extends Component {
   }
 
   changePin(e) {
+    const value = e.target.value;
     this.setState({
-      pin: Number(e.target.value),
+      pin: value !== '' ? Number(value) : '',
     });
   }
 
