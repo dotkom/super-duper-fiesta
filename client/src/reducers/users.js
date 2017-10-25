@@ -34,6 +34,12 @@ const users = (state = [], action) => {
     case RECEIVE_USER_LIST: // Expecting that receiving a user list contains all users.
       return action.data.map(u => user(undefined, { type: ADD_USER, user: u }));
 
+    case ADD_USER: {
+      const stateCopy = state.slice();
+      stateCopy.push(user(undefined, { type: ADD_USER, user: action.data }));
+      return stateCopy;
+    }
+
     default:
       return state;
   }
