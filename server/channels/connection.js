@@ -97,7 +97,7 @@ const emitActiveQuestion = async (socket, meeting) => {
     if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
   } catch (err) {
     logger.error('Getting currently active issue failed.', err);
-    emitError(socket, new Error('Failed to fetch currently active issue.'));
+    emitError(socket, new Error('Noe gikk galt under henting av aktiv sak.'));
   }
 };
 
