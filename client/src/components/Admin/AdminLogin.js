@@ -32,6 +32,8 @@ class AdminLogin extends React.Component {
   }
 
   render() {
+    // Reload page if logged in as admin
+    if (this.props.reloadPage) window.location.reload();
     const date = new Date(this.state.date);
     const zeroPaddedMonth = zeroPadNumber(date.getMonth() + 1);
     const zeroPaddedDay = zeroPadNumber(date.getDate());
@@ -91,6 +93,7 @@ AdminLogin.propTypes = {
   createGenfors: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   meetingExists: PropTypes.bool.isRequired,
+  reloadPage: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -98,6 +101,7 @@ const mapStateToProps = state => ({
                  state.meeting.title &&
                  state.meeting.title !== '' &&
                  state.meeting.title.length > 0,
+  reloadPage: state.auth.reloadPage,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -52,14 +52,8 @@ Array [
   Array [
     "action",
     Object {
-      "data": Object {
-        "full_name": "Namy",
-        "id": "123",
-        "logged_in": true,
-        "permissions": 10,
-        "username": undefined,
-      },
-      "type": "AUTH_SIGNED_IN",
+      "data": undefined,
+      "type": "ADMIN_SIGNED_IN",
     },
   ],
 ]
