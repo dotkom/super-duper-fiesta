@@ -1,5 +1,5 @@
 import { SUBMIT_ANONYMOUS_VOTE, SUBMIT_REGULAR_VOTE,
-  DISABLE_VOTING, ENABLE_VOTING, RECEIVE_VOTE, VOTING_STATE } from '../../../common/actionTypes/voting';
+  DISABLE_VOTING, ENABLE_VOTING, RECEIVE_VOTE } from '../../../common/actionTypes/voting';
 
 export const disableVoting = () => ({
   type: DISABLE_VOTING,
@@ -25,9 +25,4 @@ export const submitAnonymousVote = (issue, alternative, passwordHash) => ({
 export const receiveVote = vote => ({
   type: RECEIVE_VOTE,
   vote,
-});
-
-export const setVoteState = voteState => ({
-  type: VOTING_STATE,
-  voteState,
 });

@@ -1,5 +1,5 @@
 import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from '../../../common/actionTypes/issues';
-import { RECEIVE_VOTE } from '../../../common/actionTypes/voting';
+import { RECEIVE_VOTE, USER_VOTE } from '../../../common/actionTypes/voting';
 
 const issue = (state = { votes: {} }, action, currentIssue) => {
   switch (action.type) {
@@ -25,14 +25,20 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         showOnlyWinner: action.data.showOnlyWinner,
         votes: action.data.votes || {},
         winner: action.data.winner,
+        userVote: state.userVote || null,
+      };
+    }
+    case USER_VOTE: {
+      return {
+        ...state,
+        userVoteAlternative: action.data.alternativeId,
       };
     }
 
-    case RECEIVE_VOTE:
-    case SEND_VOTE: {
+    case RECEIVE_VOTE: {
       // If the vote has been cancelled before this vote was submitted, it needs
       // to be discarded. We also skip it if this is not the current issue.
-      if (action.type === SEND_VOTE && (state.id !== currentIssue || state.id !== action.issueId)) {
+      if (state.id !== currentIssue || state.id !== action.issueId) {
         return state;
       }
       const voteId = action.id;
@@ -76,6 +82,13 @@ const issues = (state = {}, action) => {
         }
         return result;
       }, {});
+    }
+    case USER_VOTE: {
+      const { issueId } = action.data;
+      return {
+        ...state,
+        [issueId]: issue(state[issueId], action, issueId),
+      };
     }
     case RECEIVE_VOTE:
     case SEND_VOTE: {

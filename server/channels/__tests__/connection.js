@@ -9,7 +9,7 @@ execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
-const { getVotes, haveIVoted } = require('../../models/vote');
+const { getVotes, getUserVote } = require('../../models/vote');
 const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote } = require('../../utils/generateTestData');
 
@@ -36,7 +36,9 @@ describe('connection', () => {
       generateVote({ question: issueId, _id: '3' }),
       generateVote({ question: issueId, _id: '4' }),
     ]);
-    haveIVoted.mockImplementation(async () => false);
+    getUserVote.mockImplementation(
+      async () => null,
+    );
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
@@ -121,7 +123,9 @@ describe('connection', () => {
   });
 
   it('emits correct actions when user has already voted', async () => {
-    haveIVoted.mockImplementation(async () => true);
+    getUserVote.mockImplementation(
+      async (question, user) => generateVote({ question: question._id, user }),
+    );
     const socket = generateSocket();
     await connection(socket);
 

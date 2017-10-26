@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 export const activeIssueExists = state => (
   state.issues && Object.keys(state.issues).some(id => state.issues[id].active)
 );
@@ -32,3 +34,9 @@ export const getIssueId = state =>
   getKeyForIssueObjIfExists(state, 'id', '');
 export const getIssueKey = (state, key, defaultValue) =>
   getKeyForIssueObjIfExists(state, key, defaultValue);
+
+export const getOwnVote = createSelector(
+  getIssue,
+  // eslint-disable-next-line no-confusing-arrow
+  issue => issue ? issue.userVoteAlternative : null,
+);

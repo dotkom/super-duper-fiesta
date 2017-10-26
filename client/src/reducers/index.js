@@ -8,7 +8,6 @@ import votingEnabled from './votingEnabled';
 import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
 import users from './users';
-import voting from './voting';
 import error from './error';
 
 const votingApp = combineReducers({
@@ -21,7 +20,6 @@ const votingApp = combineReducers({
   userFilter,
   users,
   version,
-  voting,
   error,
 });
 

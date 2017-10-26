@@ -51,10 +51,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": undefined,
-        "alternative": undefined,
-        "question": undefined,
-        "user": undefined,
+        "_id": "0",
+        "alternative": "1",
+        "question": "1",
+        "user": "1",
       },
       "type": "ADD_VOTE",
     },
@@ -63,9 +63,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "voted": true,
+        "alternativeId": "1",
+        "issueId": "1",
       },
-      "type": "VOTED_STATE",
+      "type": "USER_VOTE",
     },
   ],
 ]
@@ -77,10 +78,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": undefined,
-        "alternative": undefined,
-        "question": undefined,
-        "user": undefined,
+        "_id": "0",
+        "alternative": "1",
+        "question": "1",
+        "user": "123",
       },
       "type": "ADD_VOTE",
     },
@@ -139,10 +140,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": undefined,
-        "alternative": undefined,
-        "question": undefined,
-        "user": undefined,
+        "_id": "0",
+        "alternative": "1",
+        "question": "1",
+        "user": "123",
       },
       "type": "ADD_VOTE",
     },
@@ -151,9 +152,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "voted": true,
+        "alternativeId": "1",
+        "issueId": "1",
       },
-      "type": "VOTED_STATE",
+      "type": "USER_VOTE",
     },
   ],
 ]

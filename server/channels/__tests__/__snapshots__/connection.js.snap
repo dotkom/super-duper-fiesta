@@ -1453,9 +1453,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "voted": true,
+        "alternativeId": "3",
+        "issueId": "1",
       },
-      "type": "VOTED_STATE",
+      "type": "USER_VOTE",
     },
   ],
   Array [
