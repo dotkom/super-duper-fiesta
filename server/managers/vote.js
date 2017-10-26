@@ -11,7 +11,7 @@ function addVote(issueId, user, alternative, voter) {
       logger.debug('Storing vote.', { issueId, user: user.onlinewebId });
       if (!issue.active) {
         logger.warn('Tried to vote on inactive issue!', { issueId, user: user.onlinewebId });
-        reject();
+        reject(new Error('Saken du stemte på er ikke lenger aktiv'));
         return;
       }
       if (!user.canVote) {
@@ -41,6 +41,7 @@ function addVote(issueId, user, alternative, voter) {
       });
     }).catch((err) => {
       logger.error('Retrieving issue for vote failed!', err, { issueId });
+      reject(new Error('Noe gikk galt. Vennligst prøv igjen.'));
     });
   });
 }

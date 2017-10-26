@@ -10,20 +10,22 @@ const { getAnonymousUser } = require('../../models/user');
 const { generateIssue, generateVote, generateSocket } = require('../../utils/generateTestData');
 const { CAN_VOTE, IS_LOGGED_IN } = require('../../../common/auth/permissions');
 
-getIssueById.mockImplementation(async () => generateIssue());
-haveIVoted.mockImplementation(async () => false);
-createVote.mockImplementation((user, question, alternative) => ({
-  save: async () => generateVote({ user, question, alternative }),
-}));
-getActiveGenfors.mockImplementation(async () => ({
-  id: '1',
-}));
-getGenfors.mockImplementation(async id => ({
-  id,
-}));
-getAnonymousUser.mockImplementation(async () => ({
-  _id: '1',
-}));
+beforeEach(() => {
+  getIssueById.mockImplementation(async () => generateIssue());
+  haveIVoted.mockImplementation(async () => false);
+  createVote.mockImplementation((user, question, alternative) => ({
+    save: async () => generateVote({ user, question, alternative }),
+  }));
+  getActiveGenfors.mockImplementation(async () => ({
+    id: '1',
+  }));
+  getGenfors.mockImplementation(async id => ({
+    id,
+  }));
+  getAnonymousUser.mockImplementation(async () => ({
+    _id: '1',
+  }));
+});
 
 const generateData = () => ({
   issue: '1',
@@ -80,6 +82,36 @@ describe('submitRegularVote', () => {
       permissions: CAN_VOTE,
       canVote: false,
     });
+
+    await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits error when trying to vote on inactive issue', async () => {
+    getIssueById.mockImplementation(async () => generateIssue({ active: false }));
+    const socket = generateSocket({ completedRegistration: true });
+
+    await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits error when trying to vote twice', async () => {
+    haveIVoted.mockImplementation(async () => true);
+    const socket = generateSocket({ completedRegistration: true });
+
+    await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits error when issue fetching fails', async () => {
+    getIssueById.mockImplementation(async () => { throw new Error('Failed'); });
+    const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
 
