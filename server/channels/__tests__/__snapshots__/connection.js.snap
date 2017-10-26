@@ -1168,16 +1168,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "id": 0,
-        "message": "Det er ingen aktive saker for øyeblikket.",
-      },
-      "type": "ERROR",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": Object {
         "_id": "2",
         "active": true,
         "alternatives": Array [

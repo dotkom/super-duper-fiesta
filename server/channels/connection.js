@@ -26,11 +26,6 @@ const {
   VOTING_STATE,
 } = require('../../common/actionTypes/voting');
 
-const emitNoActiveIssue = (socket) => {
-  logger.debug('No active issue.');
-  emitError(socket, new Error('Det er ingen aktive saker for øyeblikket.'));
-};
-
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
@@ -73,7 +68,6 @@ const emitActiveQuestion = async (socket, meeting) => {
     // eslint-disable-next-line no-underscore-dangle
     const issue = await getActiveQuestion(meeting._id);
     if (issue === null) {
-      emitNoActiveIssue(socket);
       return;
     }
     logger.debug('Current issue', { issue: issue.description });
@@ -103,7 +97,6 @@ const emitActiveQuestion = async (socket, meeting) => {
     if (votedState) emit(socket, VOTING_STATE, { voted: votedState });
   } catch (err) {
     logger.error('Getting currently active issue failed.', err);
-    emitNoActiveIssue(socket);
   }
 };
 
