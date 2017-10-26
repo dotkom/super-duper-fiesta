@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
-import { getIssueText, getIssueKey } from '../../selectors/issues';
+import { activeIssueExists, getIssueText, getIssueKey } from '../../selectors/issues';
 import Card from '../Card';
 import Loader from './Loader';
 import css from './Issue.css';
 
-const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand }) => (
+const Issue = ({ issueExists, text, secret, showOnlyWinner, countingBlankVotes, voteDemand }) => (
   <DocumentTitle title={text}>
     <Card
       classes={css.issue}
@@ -16,23 +16,26 @@ const Issue = ({ text, secret, showOnlyWinner, countingBlankVotes, voteDemand })
       {text === Issue.defaultProps.text && (
         <Loader />
       )}
-      <p className={css.infoTags}>{
-        `Hemmelig: ${(secret ? ' Ja' : ' Nei')}`
-      }</p>
-      <p className={css.infoTags}>{
-        `Vis bare vinner: ${(showOnlyWinner ? ' Ja' : ' Nei')}`
-      }</p>
-      <p className={css.infoTags}>{
-        `Blanke stemmer telles: ${(countingBlankVotes ? ' Ja' : ' Nei')}`
-      }</p>
-      <p className={css.infoTags}>{
-        `Minimum stemmer for vedtak: ${(voteDemand === 'regular' ? '1/2' : '2/3')}`
-      }</p>
+      {issueExists && <div>
+        <p className={css.infoTags}>{
+          `Hemmelig: ${(secret ? ' Ja' : ' Nei')}`
+        }</p>
+        <p className={css.infoTags}>{
+          `Vis bare vinner: ${(showOnlyWinner ? ' Ja' : ' Nei')}`
+        }</p>
+        <p className={css.infoTags}>{
+          `Blanke stemmer telles: ${(countingBlankVotes ? ' Ja' : ' Nei')}`
+        }</p>
+        <p className={css.infoTags}>{
+          `Minimum stemmer for vedtak: ${(voteDemand === 'regular' ? '1/2' : '2/3')}`
+        }</p>
+      </div>}
     </Card>
   </DocumentTitle>
 );
 
 Issue.defaultProps = {
+  issueExists: false,
   text: 'Ingen aktiv sak for øyeblikket.',
   secret: false,
   showOnlyWinner: false,
@@ -41,6 +44,7 @@ Issue.defaultProps = {
 };
 
 Issue.propTypes = {
+  issueExists: React.PropTypes.boolean,
   text: React.PropTypes.string,
   secret: React.PropTypes.boolean,
   showOnlyWinner: React.PropTypes.boolean,
@@ -50,6 +54,7 @@ Issue.propTypes = {
 
 
 const mapStateToProps = state => ({
+  issueExists: activeIssueExists(state),
   text: getIssueText(state),
   secret: getIssueKey(state, 'secret', false),
   showOnlyWinner: getIssueKey(state, 'showOnlyWinner', false),
