@@ -411,7 +411,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Det er ingen aktive saker for øyeblikket.",
+        "message": "Noe gikk galt under henting av aktiv sak.",
       },
       "type": "ERROR",
     },
@@ -1162,16 +1162,6 @@ Array [
         "registrationOpen": true,
       },
       "type": "OPEN_MEETING",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": Object {
-        "id": 0,
-        "message": "Det er ingen aktive saker for øyeblikket.",
-      },
-      "type": "ERROR",
     },
   ],
   Array [
