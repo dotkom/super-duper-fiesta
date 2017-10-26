@@ -411,7 +411,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Det er ingen aktive saker for øyeblikket.",
+        "message": "Failed to fetch currently active issue.",
       },
       "type": "ERROR",
     },
