@@ -7,10 +7,10 @@
   position: flex;
   float: right;
 
-  font-size: 0.7em;
-  background-color: hotpink;
-  color: white;
-  padding: 5px;
-  margin: 2px;
+  font-size: 0.7rem;
+  background-color: #e0e2ef;
+  color: #555;
+  padding: 0.35rem 0.3rem;
+  margin: 1rem 0.1rem 0.1rem;
   border-radius: 2px;
 }
