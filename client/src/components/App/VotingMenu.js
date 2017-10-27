@@ -31,6 +31,7 @@ class VotingMenu extends React.Component {
     );
     this.setState({
       displayVote: false,
+      selectedVote: null,
     });
   }
 
