@@ -17,7 +17,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -285,37 +284,6 @@ Array [
 ]
 `;
 
-exports[`connection emits correct actions when not signed in and no active genfors 1`] = `
-Array [
-  Array [
-    "action",
-    Object {
-      "data": Object {
-        "version": "fake_git_hash",
-      },
-      "type": "VERSION",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": Object {},
-      "type": "AUTH_SIGNED_OUT",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": Object {
-        "id": 0,
-        "message": "Ingen aktiv generalforsamling.",
-      },
-      "type": "ERROR",
-    },
-  ],
-]
-`;
-
 exports[`connection emits correct actions when retrieving active genfors fails 1`] = `
 Array [
   Array [
@@ -333,7 +301,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -379,7 +346,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -588,7 +554,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -721,7 +686,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -806,7 +770,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1091,7 +1054,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1137,7 +1099,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1336,7 +1297,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1631,7 +1591,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1677,7 +1636,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -1962,7 +1920,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
@@ -2008,7 +1965,6 @@ Array [
       "data": Object {
         "full_name": "Namy",
         "id": "123",
-        "logged_in": true,
         "permissions": 5,
         "username": "123",
       },
