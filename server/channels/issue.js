@@ -25,7 +25,7 @@ const createIssue = async (socket, payload) => {
 };
 
 const closeIssue = async (socket, payload) => {
-  const user = socket.request.user;
+  const user = await socket.request.user();
   const issue = payload.issue;
   logger.info('Closing issue.', {
     description: issue.description,
@@ -42,7 +42,7 @@ const closeIssue = async (socket, payload) => {
     broadcast(socket, DISABLE_VOTING);
     broadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue));
     adminBroadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, true));
-    emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(socket)));
+    emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(user)));
   })
   .catch((err) => {
     logger.error('closing issue failed', err);
@@ -51,14 +51,14 @@ const closeIssue = async (socket, payload) => {
 };
 
 const adminDeleteIssue = async (socket, payload) => {
-  const user = socket.request.user;
+  const user = await socket.request.user();
   const issue = payload.issue;
   logger.info('Deleting issue.', {
     description: issue.description,
     issue: issue.toString(), // eslint-disable-line no-underscore-dangle
     user: user.name,
   });
-  const deletedIssue = await deleteIssue(issue, socket.request.user);
+  const deletedIssue = await deleteIssue(issue, user);
   broadcast(socket, DISABLE_VOTING);
   const publicIssue = await getPublicIssueWithVotes(deletedIssue);
   broadcastAndEmit(socket, CLOSE_ISSUE, publicIssue);

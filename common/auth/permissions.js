@@ -7,7 +7,7 @@ const IS_MANAGER_DISPLAY = 'Tellekorps';
 const IS_SUPERUSER = 100;
 const IS_SUPERUSER_DISPLAY = 'Dotkom';
 
-const userIsAdmin = socket => socket.request.user.permissions >= IS_MANAGER;
+const userIsAdmin = user => user.permissions >= IS_MANAGER;
 
 function getPermissionDisplay(permissions) {
   switch (permissions) {

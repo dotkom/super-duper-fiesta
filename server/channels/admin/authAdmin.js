@@ -19,13 +19,14 @@ function verifyAdminPassword(password) {
 
 const adminLogin = async (socket, data) => {
   const { password } = data;
+  const user = await socket.request.user();
   if (verifyAdminPassword(password)) {
-    logger.info(`'${socket.request.user.name}' authenticated as admin using admin password.`);
-    await setUserPermissions(socket.request.user._id,
+    logger.info(`'${user.name}' authenticated as admin using admin password.`);
+    await setUserPermissions(user._id,
       permissionLevel.IS_MANAGER);
     emit(socket, ADMIN_SIGNED_IN);
   } else {
-    logger.info(`'${socket.request.user.name}' tried to authenticate as admin using admin password.`);
+    logger.info(`'${user.name}' tried to authenticate as admin using admin password.`);
     emitError(socket, new Error('Ugyldig administratorpassord.'));
   }
 };

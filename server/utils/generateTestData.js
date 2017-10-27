@@ -37,7 +37,7 @@ const roomEmit = jest.fn();
 
 const generateSocket = (user = {}, cookie = {}) => ({
   request: {
-    user: generateUser(user),
+    user: async () => generateUser(user),
     headers: {
       cookie: Object.assign({
         passwordHash: 'hashy',
