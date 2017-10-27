@@ -14,7 +14,7 @@ const {
 async function endGAM(socket) {
   const genfors = await getActiveGenfors();
   logger.info('Ending meeting', { genfors: genfors.title });
-  await endGenfors(genfors, socket.request.user);
+  await endGenfors(genfors, await socket.request.user());
 
   broadcastAndEmit(socket, END_MEETING);
 }

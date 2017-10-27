@@ -13,12 +13,7 @@ module.exports = (app) => {
 
   passport.deserializeUser((id, done) => {
     logger.silly('Deserializing user', { userId: id });
-    getUserById(id).then((user) => {
-      logger.silly('Deserialized user', { username: user.onlinewebId, fullName: user.name });
-      done(null, user);
-    }).catch((err) => {
-      logger.error('Error deserializing user', err);
-    });
+    done(null, () => getUserById(id));
   });
   app.use(passport.initialize());
   app.use(passport.session());

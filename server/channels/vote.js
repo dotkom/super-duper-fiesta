@@ -14,7 +14,7 @@ const {
 } = require('../../common/actionTypes/voting');
 
 const checkRegistered = async (socket) => {
-  const { user } = socket.request;
+  const user = await socket.request.user();
   const { passwordHash } = socket.request.headers.cookie;
   const registered = await isRegistered(user, passwordHash);
   if (!registered) {
@@ -25,15 +25,16 @@ const checkRegistered = async (socket) => {
 };
 
 const submitRegularVote = async (socket, data) => {
-  logger.debug('Received vote', { userFullName: socket.request.user.name });
+  const user = await socket.request.user();
+  logger.debug('Received vote', { userFullName: user.name });
   if (!await checkRegistered(socket)) {
     return;
   }
   try {
     const vote = await addVote(
-      data.issue, socket.request.user,
+      data.issue, user,
       // eslint-disable-next-line no-underscore-dangle
-      data.alternative, socket.request.user._id,
+      data.alternative, user._id,
     );
     logger.debug('Stored new vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
@@ -52,11 +53,12 @@ const submitAnonymousVote = async (socket, data) => {
   if (!await checkRegistered(socket)) {
     return;
   }
+  const user = await socket.request.user();
   const genfors = await getActiveGenfors();
   const anonymousUser = await getAnonymousUser(data.passwordHash,
-  socket.request.user.onlinewebId, genfors);
+  user.onlinewebId, genfors);
   try {
-    const vote = await addVote(data.issue, socket.request.user,
+    const vote = await addVote(data.issue, user,
       // eslint-disable-next-line no-underscore-dangle
       data.alternative, anonymousUser._id);
     logger.debug('Stored new anonymous vote. Broadcasting ...');

@@ -11,7 +11,8 @@ const { ADD_USER } = require('../../common/actionTypes/users');
 
 const register = async (socket, data) => {
   const { pin, passwordHash } = data;
-  const username = socket.request.user.onlinewebId;
+  const user = await socket.request.user();
+  const username = user.onlinewebId;
   const genfors = await getActiveGenfors();
   if (!genfors.registrationOpen) {
     emitError(socket, new Error('Registreringen er ikke åpen.'));
@@ -22,11 +23,11 @@ const register = async (socket, data) => {
     emitError(socket, new Error('Feil pinkode'));
     return;
   }
-  const { completedRegistration } = socket.request.user;
+  const { completedRegistration } = user;
   if (completedRegistration) {
     let validPasswordHash = false;
     try {
-      validPasswordHash = await validatePasswordHash(socket.request.user, passwordHash);
+      validPasswordHash = await validatePasswordHash(user, passwordHash);
     } catch (err) {
       logger.debug('Failed to validate user', { username, err });
       emitError(socket, new Error('Validering av personlig kode feilet'));

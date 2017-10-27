@@ -29,7 +29,7 @@ const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toSt
 
 const emitUserData = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
-  const user = socket.request.user;
+  const user = await socket.request.user();
   emit(socket, AUTH_SIGNED_IN, {
     username: user.onlinewebId,
     full_name: user.name,
@@ -56,6 +56,7 @@ const emitUserData = async (socket) => {
 };
 
 const emitActiveQuestion = async (socket, meeting) => {
+  const user = await socket.request.user();
   try {
     // eslint-disable-next-line no-underscore-dangle
     const issue = await getActiveQuestion(meeting._id);
@@ -80,9 +81,9 @@ const emitActiveQuestion = async (socket, meeting) => {
     let voter;
     if (issue.secret) {
       voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
-        socket.request.user.onlinewebId, meeting);
+        user.onlinewebId, meeting);
     } else {
-      voter = socket.request.user;
+      voter = user;
     }
     // eslint-disable-next-line no-underscore-dangle
     const vote = await getUserVote(issue, voter._id);
@@ -103,7 +104,11 @@ const emitIssueBacklog = async (socket, meeting) => {
     const issues = await getConcludedIssues(meeting);
     await Promise.all(issues.map(async (issue) => {
       // Get votes for backlogged issues
-      emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(issue, userIsAdmin(socket)));
+      emit(
+        socket,
+        CLOSE_ISSUE,
+        await getPublicIssueWithVotes(issue, userIsAdmin(await socket.request.user())),
+      );
     }));
   } catch (err) {
     logger.error('Getting issue backlog failed', err);

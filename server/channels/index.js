@@ -44,7 +44,7 @@ const applyMiddlewares = (io, mongooseConnection) => {
 const listen = (server, mongooseConnection) => {
   const io = socketio(server);
   applyMiddlewares(io, mongooseConnection);
-  io.on('connection', (socket) => {
+  io.on('connection', async (socket) => {
     connection(socket);
     authListener(socket);
     voteListener(socket);
@@ -52,10 +52,10 @@ const listen = (server, mongooseConnection) => {
     // Listeners used to login as admin
     adminAuthListener(socket);
 
+    const user = await socket.request.user();
     // Admin
-    if (userIsAdmin(socket)) {
+    if (userIsAdmin(user)) {
       socket.join('admin');
-      const user = socket.request.user;
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');
       issueListener(socket);

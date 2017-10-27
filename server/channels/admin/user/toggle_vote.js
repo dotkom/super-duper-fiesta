@@ -8,7 +8,7 @@ const { ADMIN_TOGGLE_CAN_VOTE: TOGGLE_CAN_VOTE, TOGGLE_CAN_VOTE: TOGGLED_CAN_VOT
   require('../../../../common/actionTypes/users');
 
 const toggleCanVote = async (socket, data) => {
-  const adminUser = socket.request.user;
+  const adminUser = await socket.request.user();
   const userId = data.id;
   const canVote = data.canVote;
   const user = await getUserById(userId);
