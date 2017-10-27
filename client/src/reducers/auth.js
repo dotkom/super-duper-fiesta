@@ -1,4 +1,4 @@
-import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_SIGNED_OUT, AUTH_REGISTERED }
+import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_REGISTERED }
   from '../../../common/actionTypes/auth';
 
 const defaultState = {
@@ -7,6 +7,7 @@ const defaultState = {
   fullName: '',
   permissions: 0,
   reloadPage: false,
+  loggedIn: false,
 };
 
 const auth = (state = defaultState, action) => {
@@ -16,18 +17,10 @@ const auth = (state = defaultState, action) => {
         ...state,
         username: action.data.username,
         fullName: action.data.full_name,
-        loggedIn: action.data.logged_in,
+        loggedIn: true,
         registered: action.data.completedRegistration,
         id: action.data.id,
         permissions: action.data.permissions,
-      };
-    }
-
-    case AUTH_SIGNED_OUT: {
-      return {
-        ...defaultState,
-        registered: false,
-        loggedIn: false,
       };
     }
 

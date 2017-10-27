@@ -16,7 +16,6 @@ const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const { userIsAdmin } = require('../../common/auth/permissions');
 const {
   AUTH_SIGNED_IN,
-  AUTH_SIGNED_OUT,
   AUTH_REGISTERED,
 } = require('../../common/actionTypes/auth');
 const {
