@@ -58,15 +58,6 @@ describe('connection', () => {
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
   });
 
-  it('emits correct actions when not signed in and no active genfors', async () => {
-    getActiveGenfors.mockImplementation(async () => null);
-    const socket = generateSocket({ logged_in: false, completedRegistration: false });
-    await connection(socket);
-
-    expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.emit.mock.calls).toEqual([]);
-  });
-
   it('emits correct actions when user has not completed registration and no genfors is active', async () => {
     getActiveGenfors.mockImplementation(async () => null);
     const socket = generateSocket({ completedRegistration: false });

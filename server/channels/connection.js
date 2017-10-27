@@ -16,7 +16,6 @@ const { OPEN_MEETING } = require('../../common/actionTypes/meeting');
 const { userIsAdmin } = require('../../common/auth/permissions');
 const {
   AUTH_SIGNED_IN,
-  AUTH_SIGNED_OUT,
   AUTH_REGISTERED,
 } = require('../../common/actionTypes/auth');
 const {
@@ -30,35 +29,29 @@ const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toSt
 
 const emitUserData = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
-  const loggedIn = socket.request.user.logged_in;
-  if (loggedIn) {
-    const user = socket.request.user;
-    emit(socket, AUTH_SIGNED_IN, {
-      username: user.onlinewebId,
-      full_name: user.name,
-      logged_in: user.logged_in,
-      id: user._id, // eslint-disable-line no-underscore-dangle
-      permissions: user.permissions,
-    });
+  const user = socket.request.user;
+  emit(socket, AUTH_SIGNED_IN, {
+    username: user.onlinewebId,
+    full_name: user.name,
+    id: user._id, // eslint-disable-line no-underscore-dangle
+    permissions: user.permissions,
+  });
 
-    if (!user.genfors) {
-      emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
-    }
+  if (!user.genfors) {
+    emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
+  }
 
-    let validPasswordHash = false;
-    try {
-      const { passwordHash } = socket.request.headers.cookie;
-      validPasswordHash = await validatePasswordHash(user, passwordHash);
-    } catch (err) {
-      logger.error('Failed to validate passwordHash', user, err);
-    }
-    if (user.completedRegistration && validPasswordHash) {
-      emit(socket, AUTH_REGISTERED, { registered: true });
-    } else {
-      emit(socket, AUTH_REGISTERED, { registered: false });
-    }
+  let validPasswordHash = false;
+  try {
+    const { passwordHash } = socket.request.headers.cookie;
+    validPasswordHash = await validatePasswordHash(user, passwordHash);
+  } catch (err) {
+    logger.error('Failed to validate passwordHash', user, err);
+  }
+  if (user.completedRegistration && validPasswordHash) {
+    emit(socket, AUTH_REGISTERED, { registered: true });
   } else {
-    emit(socket, AUTH_SIGNED_OUT, {});
+    emit(socket, AUTH_REGISTERED, { registered: false });
   }
 };
 

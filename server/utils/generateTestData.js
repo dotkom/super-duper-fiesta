@@ -30,7 +30,6 @@ const generateUser = data => (Object.assign({
   completedRegistration: true,
   permissions: 5,
   genfors: '1',
-  logged_in: true,
   canVote: true,
 }, data));
 
