@@ -27,9 +27,10 @@ beforeEach(() => {
   }));
 });
 
-const generateData = () => ({
+const generateData = data => ({
   issue: '1',
   alternative: '1',
+  ...data,
 });
 
 
@@ -114,6 +115,17 @@ describe('submitRegularVote', () => {
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits error when trying to vote on non-existing alternative', async () => {
+    const socket = generateSocket({
+      completedRegistration: true,
+    });
+
+    await submitRegularVote(socket, generateData({ alternative: '-1' }));
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toEqual([]);

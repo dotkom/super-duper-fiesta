@@ -24,6 +24,10 @@ async function addVote(issueId, user, alternative, voter) {
   logger.silly('Checking permissions.', { issueId, user: user.onlinewebId });
   try {
     await canEdit(permissionLevel.CAN_VOTE, user, issue.genfors);
+    const validAlternative = issue.alternatives.some(alt => alt.id === alternative);
+    if (!validAlternative) {
+      throw new Error('Alternativet du stemte på finnes ikke');
+    }
     const alreadyVoted = await haveIVoted(issueId, voter);
     if (!alreadyVoted) {
       const vote = createVote(voter, issueId, alternative);
