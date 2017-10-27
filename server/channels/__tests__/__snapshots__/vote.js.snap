@@ -89,6 +89,21 @@ Array [
 ]
 `;
 
+exports[`submitRegularVote emits error when issue fetching fails 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt. Vennligst prøv igjen.",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
 exports[`submitRegularVote emits error when not registered 1`] = `
 Array [
   Array [
@@ -97,6 +112,36 @@ Array [
       "data": Object {
         "id": 0,
         "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`submitRegularVote emits error when trying to vote on inactive issue 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Saken du stemte på er ikke lenger aktiv",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`submitRegularVote emits error when trying to vote twice 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Du har allerede stemt.",
       },
       "type": "ERROR",
     },
