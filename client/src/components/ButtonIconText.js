@@ -26,6 +26,7 @@ class ButtonIconText extends Component {
         onClick={onClick}
         onMouseEnter={() => this.hover(true)}
         onMouseLeave={() => this.hover(false)}
+        {...other}
       >
         <IconText hovering={hovering} {...other} />
       </button>
