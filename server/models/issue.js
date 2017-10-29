@@ -47,6 +47,10 @@ function deleteIssue(issue) {
   return Question.findByIdAndUpdate(issue, { active: false, deleted: true }, { new: true });
 }
 
+function updateIssue(issue, data, options) {
+  return Question.findOneAndUpdate(issue, data, options);
+}
+
 module.exports = {
   addIssue,
   getActiveQuestion,
@@ -56,4 +60,5 @@ module.exports = {
   endIssue,
   // updateQuestionCounter,
   deleteIssue,
+  updateIssue,
 };
