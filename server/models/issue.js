@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const AlternativeSchema = require('./alternative');
+const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 const Schema = mongoose.Schema;
 
@@ -18,6 +19,8 @@ const QuestionSchema = new Schema({
   qualifiedVoters: Number,
   currentVotes: { type: Number, default: 0 },
   result: Boolean,
+  // status types: NOT_STARTED, IN_PROGRESS, FINISHED
+  status: { type: String, required: true, default: VOTING_NOT_STARTED },
 });
 const Question = mongoose.model('Question', QuestionSchema);
 
@@ -40,11 +43,15 @@ function getClosedQuestions(genfors) {
 }
 
 function endIssue(issue) {
-  return Question.findByIdAndUpdate(issue, { active: false }, { new: true });
+  return Question.findByIdAndUpdate(issue,
+    { active: false, status: VOTING_FINISHED },
+    { new: true });
 }
 
 function deleteIssue(issue) {
-  return Question.findByIdAndUpdate(issue, { active: false, deleted: true }, { new: true });
+  return Question.findByIdAndUpdate(issue,
+    { active: false, deleted: true, status: VOTING_FINISHED },
+    { new: true });
 }
 
 function updateIssue(issue, data, options) {

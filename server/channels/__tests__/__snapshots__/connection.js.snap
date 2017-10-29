@@ -68,6 +68,7 @@ Array [
         "genfors": "1",
         "secret": true,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -155,6 +156,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -193,6 +195,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -231,6 +234,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -269,6 +273,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -408,6 +413,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -446,6 +452,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -484,6 +491,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -522,6 +530,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -605,6 +614,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -737,6 +747,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -821,6 +832,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -908,6 +920,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -946,6 +959,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -984,6 +998,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1022,6 +1037,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1151,6 +1167,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1189,6 +1206,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1227,6 +1245,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1265,6 +1284,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1348,6 +1368,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -1445,6 +1466,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1483,6 +1505,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1521,6 +1544,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1559,6 +1583,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1687,6 +1712,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -1774,6 +1800,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1812,6 +1839,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1850,6 +1878,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -1888,6 +1917,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {

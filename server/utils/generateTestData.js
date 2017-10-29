@@ -18,6 +18,7 @@ const generateIssue = (data) => {
       generateAlternative({ id: '2', text: 'Yes' }),
       generateAlternative({ id: '3', text: 'No' }),
     ],
+    status: 'VOTING_IN_PROGRESS',
   }, data);
   issueObject.toObject = () => issueObject;
   return issueObject;
