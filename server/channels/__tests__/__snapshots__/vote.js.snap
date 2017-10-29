@@ -134,6 +134,21 @@ Array [
 ]
 `;
 
+exports[`submitRegularVote emits error when trying to vote on non-existing alternative 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Alternativet du stemte på finnes ikke",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
 exports[`submitRegularVote emits error when trying to vote twice 1`] = `
 Array [
   Array [
