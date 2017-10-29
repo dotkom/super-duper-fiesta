@@ -34,6 +34,24 @@ Array [
 ]
 `;
 
+exports[`admin creates genfors creates a new meeting if admin password is correct 3`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
+      },
+      "type": "OPEN_MEETING",
+    },
+  ],
+]
+`;
+
 exports[`admin creates genfors returns invalid admin password if incorrect 1`] = `
 Array [
   Array [

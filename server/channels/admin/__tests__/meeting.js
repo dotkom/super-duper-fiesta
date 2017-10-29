@@ -22,6 +22,7 @@ describe('toggleRegistration', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits a toggle action that opens registration', async () => {
@@ -30,6 +31,7 @@ describe('toggleRegistration', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 
   it('responds with an error if something wrong happens', async () => {
@@ -40,6 +42,7 @@ describe('toggleRegistration', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toEqual([]);
   });
 });
 
@@ -60,5 +63,6 @@ describe('endGAM', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toEqual([]);
   });
 });

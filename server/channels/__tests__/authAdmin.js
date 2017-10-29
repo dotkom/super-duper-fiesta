@@ -51,6 +51,7 @@ describe('admin creates genfors', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+    expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 });
 
