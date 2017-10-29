@@ -3,6 +3,7 @@ const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById } = require('../models/issue');
 const { haveIVoted, createVote } = require('../models/vote');
+const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 async function addVote(issueId, user, alternative, voter) {
   let issue;
@@ -16,6 +17,10 @@ async function addVote(issueId, user, alternative, voter) {
   if (!issue.active) {
     logger.warn('Tried to vote on inactive issue!', { issueId, user: user.onlinewebId });
     throw new Error('Saken du stemte på er ikke lenger aktiv');
+  } else if (issue.status === VOTING_NOT_STARTED) {
+    throw new Error('Votering for denne saken har ikke startet enda.');
+  } else if (issue.status === VOTING_FINISHED) {
+    throw new Error('Votering for denne saken har blitt avsluttet.');
   }
   if (!user.canVote) {
     logger.warn('Tried to vote without the right to vote!', { issueId, user: user.onlinewebId });
