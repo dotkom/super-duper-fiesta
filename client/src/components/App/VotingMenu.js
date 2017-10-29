@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import { submitAnonymousVote, submitRegularVote } from '../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../selectors/alternatives';
-import { activeIssueExists, getIssue, getIssueId, getOwnVote } from '../../selectors/issues';
+import { activeIssueExists, getIssue, getIssueId, getOwnVote, getIssueKey } from '../../selectors/issues';
 import Alternatives from '../Alternatives';
 import Button from '../Button';
+import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from '../../../../common/actionTypes/issues';
 
 class VotingMenu extends React.Component {
   constructor(props) {
@@ -42,8 +43,9 @@ class VotingMenu extends React.Component {
   }
 
   render() {
-    const { alternatives, issueIsActive, isLoggedIn, ownVote } = this.props;
+    const { alternatives, issueIsActive, issueStatus, isLoggedIn, ownVote } = this.props;
     const { displayVote, selectedVote } = this.state;
+    const votingInProgress = issueStatus === VOTING_IN_PROGRESS;
     const hasSelectedVote = !!selectedVote;
     const hasVoted = !!ownVote;
     const canVote = !isLoggedIn || !hasSelectedVote || hasVoted;
@@ -53,19 +55,18 @@ class VotingMenu extends React.Component {
       <div>
         <Alternatives
           alternatives={alternatives}
-          disabled={hasVoted}
+          disabled={hasVoted || !votingInProgress}
           handleChange={(...a) => this.handleChange(...a)}
           selectedVote={selected}
         />
-        <Button
+        {issueIsActive && votingInProgress && <Button
           background
           size="lg"
           onClick={() => this.handleClick()}
-          disabled={canVote}
-          hidden={!issueIsActive}
+          disabled={canVote || !votingInProgress}
         >
           {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
-        </Button>
+        </Button>}
         {hasVoted && (
           <Button
             background
@@ -85,6 +86,7 @@ VotingMenu.defaultProps = {
   voterKey: undefined,
   alternatives: [],
   issueId: '',
+  issueStatus: VOTING_NOT_STARTED,
   isLoggedIn: undefined,
   ownVote: null,
 };
@@ -94,6 +96,7 @@ VotingMenu.propTypes = {
   handleVote: React.PropTypes.func.isRequired,
   issueId: React.PropTypes.string,
   issueIsActive: React.PropTypes.bool.isRequired,
+  issueStatus: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   ownVote: React.PropTypes.string,
   voterKey: React.PropTypes.number,
@@ -118,6 +121,7 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.loggedIn,
 
   issueIsActive: activeIssueExists(state),
+  issueStatus: getIssueKey(state, 'status'),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
