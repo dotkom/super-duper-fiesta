@@ -123,7 +123,7 @@ const emitGenforsData = async (socket) => {
       emitError(socket, new Error('Ingen aktiv generalforsamling.'));
       return;
     }
-    emit(socket, OPEN_MEETING, publicMeeting(meeting));
+    emit(socket, OPEN_MEETING, publicMeeting(meeting, userIsAdmin(await socket.request.user())));
     await emitActiveQuestion(socket, meeting);
 
     // Fill backlog of old issues too
