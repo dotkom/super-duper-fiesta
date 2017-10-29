@@ -8,9 +8,10 @@ const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getQualifiedUsers } = require('../../models/user');
 const { getVotes } = require('../../models/vote');
 const { generateSocket, generateIssue, generateGenfors, generateUser, generateVote } = require('../../utils/generateTestData');
+const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 beforeEach(() => {
-  addIssue.mockImplementation(async () => generateIssue());
+  addIssue.mockImplementation(async () => generateIssue({ status: VOTING_NOT_STARTED }));
   getActiveQuestion.mockImplementation(async () => null);
   endIssue.mockImplementation(async () => generateIssue());
   getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '1' }));
@@ -54,7 +55,8 @@ describe('closeIssue', () => {
   });
 
   it('emits close issue action and disables voting', async () => {
-    endIssue.mockImplementation(async () => generateIssue({ active: false }));
+    endIssue.mockImplementation(async () =>
+      generateIssue({ active: false, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -74,7 +76,8 @@ describe('closeIssue', () => {
   });
 
   it('emits winner when issue only shows winner', async () => {
-    endIssue.mockImplementation(async () => generateIssue({ active: false, showOnlyWinner: true }));
+    endIssue.mockImplementation(async () =>
+      generateIssue({ active: false, showOnlyWinner: true, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -89,7 +92,8 @@ describe('adminDeleteIssue', () => {
     issue: generateIssue(),
   });
   it('emits delete issue on success', async () => {
-    deleteIssue.mockImplementation(async () => generateIssue({ active: false, deleted: true }));
+    deleteIssue.mockImplementation(async () =>
+      generateIssue({ active: false, deleted: true, status: VOTING_FINISHED }));
 
     const socket = generateSocket({ permissions: 10 });
     await adminDeleteIssue(socket, generateData());

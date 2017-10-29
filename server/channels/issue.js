@@ -1,13 +1,16 @@
 const { adminBroadcast, broadcast, broadcastAndEmit, emit, emitError } = require('../utils');
 const logger = require('../logging');
 
-const { addIssue, endIssue, deleteIssue, getPublicIssueWithVotes } = require('../managers/issue');
+const { addIssue, endIssue, deleteIssue, getPublicIssueWithVotes, disableVoting, enableVoting }
+  = require('../managers/issue');
 const { userIsAdmin } = require('../../common/auth/permissions');
 
 const {
   ADMIN_CLOSE_ISSUE,
   ADMIN_CREATE_ISSUE,
   ADMIN_DELETE_ISSUE,
+  ADMIN_DISABLE_VOTING,
+  ADMIN_ENABLE_VOTING,
 } = require('../../common/actionTypes/adminButtons');
 const { CLOSE_ISSUE, OPEN_ISSUE, DELETED_ISSUE } = require('../../common/actionTypes/issues');
 const { DISABLE_VOTING, ENABLE_VOTING } = require('../../common/actionTypes/voting');
@@ -17,7 +20,10 @@ const createIssue = async (socket, payload) => {
   .then((question) => {
     logger.debug('Added new question. Broadcasting ...', { question: question.description });
     broadcastAndEmit(socket, OPEN_ISSUE, question, { action: 'open' });
-    broadcast(socket, ENABLE_VOTING);
+    broadcast(socket, ENABLE_VOTING, {
+      _id: question._id,
+      status: question.status,
+    });
   }).catch((err) => {
     logger.error('Adding new question failed.', err);
     emitError(socket, new Error('Opprettelse av sak feilet'));
@@ -39,7 +45,10 @@ const closeIssue = async (socket, payload) => {
       issue: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
       response: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
     });
-    broadcast(socket, DISABLE_VOTING);
+    broadcast(socket, DISABLE_VOTING, {
+      _id: updatedIssue._id,
+      status: updatedIssue.status,
+    });
     broadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue));
     adminBroadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, true));
     emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(user)));
@@ -59,7 +68,10 @@ const adminDeleteIssue = async (socket, payload) => {
     user: user.name,
   });
   const deletedIssue = await deleteIssue(issue, user);
-  broadcast(socket, DISABLE_VOTING);
+  broadcast(socket, DISABLE_VOTING, {
+    _id: deletedIssue._id,
+    status: deletedIssue.status,
+  });
   const publicIssue = await getPublicIssueWithVotes(deletedIssue);
   broadcastAndEmit(socket, CLOSE_ISSUE, publicIssue);
   broadcastAndEmit(socket, DELETED_ISSUE, publicIssue);

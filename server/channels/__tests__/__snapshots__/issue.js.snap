@@ -28,7 +28,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -67,7 +67,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -88,7 +88,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -118,7 +121,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -157,7 +160,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -200,7 +203,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -221,7 +224,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -250,7 +256,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -293,7 +299,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -351,7 +357,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -372,7 +378,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -401,7 +410,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {},
@@ -440,7 +449,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -484,7 +493,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_NOT_STARTED",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -522,7 +531,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
-        "status": "VOTING_IN_PROGRESS",
+        "status": "VOTING_NOT_STARTED",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -532,7 +541,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_NOT_STARTED",
+      },
       "type": "ENABLE_VOTING",
     },
   ],
