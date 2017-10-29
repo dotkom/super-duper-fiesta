@@ -4,7 +4,7 @@ jest.mock('../../models/meeting');
 const { canEdit } = require('../meeting');
 const { getActiveQuestion, updateIssue } = require('../../models/issue');
 const { disableVoting, enableVoting } = require('../issue');
-const { generateIssue, generateManager }
+const { generateIssue, generateManager, generateUser }
   = require('../../utils/generateTestData');
 const { VOTING_IN_PROGRESS, VOTING_FINISHED }
   = require('../../../common/actionTypes/issues');
@@ -24,6 +24,14 @@ describe('enable voting', () => {
 
     expect(enabledVotingIssue).toMatchObject({ ...issue, status: VOTING_IN_PROGRESS });
   });
+
+  it('throws an error if user does not have permissions to do so', async () => {
+    const issue = await getActiveQuestion();
+
+    const updatedIssue = enableVoting(issue, generateUser());
+
+    await expect(updatedIssue).rejects.toEqual(new Error('User is not authorized to enable voting on this issue.'));
+  });
 });
 
 describe('disable voting', () => {
@@ -39,5 +47,13 @@ describe('disable voting', () => {
     const disabledVotingIssue = await disableVoting(issue, generateManager());
 
     expect(disabledVotingIssue).toMatchObject({ ...issue, status: VOTING_FINISHED });
+  });
+
+  it('throws an error if user does not have permissions to do so', async () => {
+    const issue = await getActiveQuestion();
+
+    const updatedIssue = disableVoting(issue, generateUser());
+
+    await expect(updatedIssue).rejects.toEqual(new Error('User is not authorized to disable voting on this issue.'));
   });
 });
