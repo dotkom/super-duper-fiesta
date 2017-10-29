@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotAppContainer } from 'react-hot-loader';
 import { applyMiddleware, createStore, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import IO from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
@@ -12,6 +13,7 @@ import { notifyPermission, notify } from './utils/notification';
 
 import votingApp from './reducers';
 import Routes from './routes';
+import rootSaga from './sagas';
 
 moment.locale('nb');
 
@@ -26,16 +28,18 @@ Raven
 const socket = IO.connect();
 
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
+const sagaMiddleware = createSagaMiddleware();
 
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   votingApp,
-  composeEnhancers(applyMiddleware(socketIoMiddleware, logger)),
+  composeEnhancers(applyMiddleware(socketIoMiddleware, sagaMiddleware, logger)),
 );
 
+sagaMiddleware.run(rootSaga);
+
 notifyPermission();
-notify('Test!');
 
 const render = (RootRoute) => {
   ReactDOM.render(
