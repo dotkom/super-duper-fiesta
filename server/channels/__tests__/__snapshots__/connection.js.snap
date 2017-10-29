@@ -78,13 +78,6 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
-    },
-  ],
-  Array [
-    "action",
-    Object {
       "data": Object {
         "_id": "1",
         "alternative": "3",
@@ -624,13 +617,6 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
-    },
-  ],
-  Array [
-    "action",
-    Object {
       "data": Object {
         "_id": "1",
         "alternative": "3",
@@ -754,13 +740,6 @@ Array [
       "type": "OPEN_ISSUE",
     },
   ],
-  Array [
-    "action",
-    Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
-    },
-  ],
 ]
 `;
 
@@ -837,13 +816,6 @@ Array [
         "voteDemand": "regular",
       },
       "type": "OPEN_ISSUE",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
     },
   ],
   Array [
@@ -1378,13 +1350,6 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
-    },
-  ],
-  Array [
-    "action",
-    Object {
       "data": Object {
         "_id": "1",
         "alternative": "3",
@@ -1717,13 +1682,6 @@ Array [
         "voteDemand": "regular",
       },
       "type": "OPEN_ISSUE",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
     },
   ],
   Array [

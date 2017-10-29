@@ -20,7 +20,6 @@ const {
 } = require('../../common/actionTypes/auth');
 const {
   RECEIVE_VOTE: SEND_VOTE,
-  ENABLE_VOTING,
   USER_VOTE,
 } = require('../../common/actionTypes/voting');
 
@@ -65,7 +64,6 @@ const emitActiveQuestion = async (socket, meeting) => {
     }
     logger.debug('Current issue', { issue: issue.description });
     emit(socket, OPEN_ISSUE, issue);
-    emit(socket, ENABLE_VOTING);
 
     // Issue is active, let's emit already given votes.
     try {
