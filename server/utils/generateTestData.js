@@ -33,6 +33,8 @@ const generateUser = data => (Object.assign({
   canVote: true,
 }, data));
 
+const generateManager = data => ({ ...generateUser(), permissions: 10, ...data });
+
 const roomEmit = jest.fn();
 
 const generateSocket = (user = {}, cookie = {}) => ({
@@ -76,6 +78,7 @@ module.exports = {
   generateGenfors,
   generateAnonymousUser,
   generateUser,
+  generateManager,
   generateVote,
   generateAlternative,
 };
