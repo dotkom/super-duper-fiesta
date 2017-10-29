@@ -9,6 +9,7 @@ import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
 import users from './users';
 import error from './error';
+import notification from './notification';
 
 const votingApp = combineReducers({
   auth,
@@ -21,6 +22,7 @@ const votingApp = combineReducers({
   users,
   version,
   error,
+  notification,
 });
 
 export default votingApp;

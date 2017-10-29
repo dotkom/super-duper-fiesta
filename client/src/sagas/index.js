@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
-import issue from './issue';
+import notification from './notification';
 
 export default function* rootSaga() {
-  yield all([issue()]);
+  yield all([notification()]);
 }
