@@ -176,6 +176,66 @@ Array [
 ]
 `;
 
+exports[`adminDisableVoting emits disable voting on success 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
+      "type": "DISABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminDisableVoting emits disable voting on success 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
+      "type": "DISABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminEnableVoting emits enable voting on success 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_IN_PROGRESS",
+      },
+      "type": "ENABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminEnableVoting emits enable voting on success 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_IN_PROGRESS",
+      },
+      "type": "ENABLE_VOTING",
+    },
+  ],
+]
+`;
+
 exports[`closeIssue emits close issue action and disables voting 1`] = `
 Array [
   Array [

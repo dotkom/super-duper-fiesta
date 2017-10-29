@@ -77,6 +77,32 @@ const adminDeleteIssue = async (socket, payload) => {
   broadcastAndEmit(socket, DELETED_ISSUE, publicIssue);
 };
 
+async function adminDisableVoting(socket, data) {
+  const user = await socket.request.user();
+  const issue = data.issue;
+  logger.debug('Disabling voting', { issue, user: user.name });
+
+  const updatedIssue = await disableVoting({ _id: issue }, user);
+
+  broadcastAndEmit(socket, DISABLE_VOTING, {
+    _id: updatedIssue._id,
+    status: updatedIssue.status,
+  });
+}
+
+async function adminEnableVoting(socket, data) {
+  const user = await socket.request.user();
+  const issue = data.issue;
+  logger.debug('Enabling voting', { issue, user: user.name });
+
+  const updatedIssue = await enableVoting({ _id: issue }, user);
+
+  broadcastAndEmit(socket, ENABLE_VOTING, {
+    _id: updatedIssue._id,
+    status: updatedIssue.status,
+  });
+}
+
 const listener = (socket) => {
   socket.on('action', async (data) => {
     const payload = data.data;
@@ -93,6 +119,14 @@ const listener = (socket) => {
         adminDeleteIssue(socket, payload);
         break;
       }
+      case ADMIN_DISABLE_VOTING: {
+        adminDisableVoting(socket, payload);
+        break;
+      }
+      case ADMIN_ENABLE_VOTING: {
+        adminEnableVoting(socket, payload);
+        break;
+      }
       default:
         break;
     }
@@ -104,4 +138,6 @@ module.exports = {
   createIssue,
   closeIssue,
   adminDeleteIssue,
+  adminDisableVoting,
+  adminEnableVoting,
 };

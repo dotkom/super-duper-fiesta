@@ -2,12 +2,12 @@ jest.mock('../../models/issue');
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
 jest.mock('../../models/vote');
-const { createIssue, closeIssue, adminDeleteIssue } = require('../issue');
-const { addIssue, endIssue, deleteIssue, getActiveQuestion } = require('../../models/issue');
+const { createIssue, closeIssue, adminDeleteIssue, adminDisableVoting, adminEnableVoting } = require('../issue');
+const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getQualifiedUsers } = require('../../models/user');
 const { getVotes } = require('../../models/vote');
-const { generateSocket, generateIssue, generateGenfors, generateUser, generateVote } = require('../../utils/generateTestData');
+const { generateSocket, generateIssue, generateGenfors, generateUser, generateManager, generateVote } = require('../../utils/generateTestData');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 beforeEach(() => {
@@ -97,6 +97,38 @@ describe('adminDeleteIssue', () => {
 
     const socket = generateSocket({ permissions: 10 });
     await adminDeleteIssue(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe('adminDisableVoting', () => {
+  beforeEach(() => {
+    getActiveQuestion.mockImplementation(() => generateIssue());
+    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+  });
+
+  it('emits disable voting on success', async () => {
+    const socket = generateSocket(generateManager());
+
+    await adminDisableVoting(socket, { issue: '1' });
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe('adminEnableVoting', () => {
+  beforeEach(() => {
+    getActiveQuestion.mockImplementation(() => generateIssue());
+    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+  });
+
+  it('emits enable voting on success', async () => {
+    const socket = generateSocket(generateManager());
+
+    await adminEnableVoting(socket, { issue: '1' });
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
