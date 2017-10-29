@@ -1,13 +1,11 @@
-import { call, takeLatest, put, select } from 'redux-saga/effects';
+import { call, takeLatest, select } from 'redux-saga/effects';
 import { OPEN_ISSUE } from '../../../common/actionTypes/issues';
 import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/notification';
 import { notify, notifyPermission } from '../utils/notification';
-import { toggleNotification as toggleNotificationAction } from '../actionCreators/notification';
 import { notificationIsEnabled } from '../selectors/notification';
 
 function* openIssue(action) {
   const { description } = action.data;
-  // yield put(toggleNotificationAction());
   const notificationEnabled = yield select(notificationIsEnabled);
   if (notificationEnabled) {
     yield call(notify, description);
