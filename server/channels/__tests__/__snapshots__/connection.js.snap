@@ -37,8 +37,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -366,8 +367,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -574,8 +576,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -706,8 +709,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -790,8 +794,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1119,8 +1124,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1317,8 +1323,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1656,8 +1663,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },

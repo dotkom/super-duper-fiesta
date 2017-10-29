@@ -31,8 +31,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": false,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "TOGGLED_REGISTRATION_STATE",
     },
@@ -47,8 +48,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": false,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "TOGGLED_REGISTRATION_STATE",
     },
@@ -63,8 +65,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "TOGGLED_REGISTRATION_STATE",
     },
@@ -79,8 +82,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "TOGGLED_REGISTRATION_STATE",
     },

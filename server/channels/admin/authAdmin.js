@@ -1,5 +1,5 @@
 const { broadcastAndEmit, emit, emitError } = require('../../utils');
-const { addGenfors } = require('../../managers/meeting');
+const { addGenfors, publicMeeting } = require('../../managers/meeting');
 const { setUserPermissions } = require('../../managers/user');
 const logger = require('../../logging');
 
@@ -36,7 +36,7 @@ const createGenfors = async (socket, data) => {
   if (verifyAdminPassword(password)) {
     const genfors = await addGenfors(title, date);
     logger.info('Created genfors by administrative request.', { title });
-    broadcastAndEmit(socket, OPEN_MEETING, genfors);
+    broadcastAndEmit(socket, OPEN_MEETING, publicMeeting(genfors));
   } else {
     logger.warn('Someone tried to authenticate as administrator.', { title });
     emitError(socket, new Error('Ugyldig administratorpassord.'));
