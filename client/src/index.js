@@ -9,7 +9,6 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
 import 'normalize.css';
 import Raven from 'raven-js';
-import { notifyPermission, notify } from './utils/notification';
 
 import votingApp from './reducers';
 import Routes from './routes';
@@ -38,8 +37,6 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
-
-notifyPermission();
 
 const render = (RootRoute) => {
   ReactDOM.render(
