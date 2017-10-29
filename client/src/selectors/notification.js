@@ -1,3 +1,3 @@
-export const notificationIsEnabled = state => state.notification;
+export const notificationIsEnabled = state => state.notification.enabled;
 
 export default notificationIsEnabled;

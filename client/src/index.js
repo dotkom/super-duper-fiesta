@@ -9,6 +9,8 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import logger from 'redux-logger';
 import 'normalize.css';
 import Raven from 'raven-js';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import storage from 'redux-persist/es/storage';
 
 import votingApp from './reducers';
 import Routes from './routes';
@@ -24,6 +26,12 @@ Raven
     })
     .install();
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['notification'],
+};
+
 const socket = IO.connect();
 
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
@@ -32,16 +40,17 @@ const sagaMiddleware = createSagaMiddleware();
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  votingApp,
+  persistCombineReducers(persistConfig, votingApp),
   composeEnhancers(applyMiddleware(socketIoMiddleware, sagaMiddleware, logger)),
 );
+const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 
 const render = (RootRoute) => {
   ReactDOM.render(
     <HotAppContainer>
-      <RootRoute store={store} />
+      <RootRoute store={store} persistor={persistor} />
     </HotAppContainer>,
     document.getElementById('app'),
   );

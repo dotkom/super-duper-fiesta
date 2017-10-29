@@ -11,7 +11,7 @@ import users from './users';
 import error from './error';
 import notification from './notification';
 
-const votingApp = combineReducers({
+const votingApp = {
   auth,
   issues,
   meeting,
@@ -23,6 +23,6 @@ const votingApp = combineReducers({
   version,
   error,
   notification,
-});
+};
 
 export default votingApp;

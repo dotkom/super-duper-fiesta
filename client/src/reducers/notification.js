@@ -1,9 +1,16 @@
 import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/notification';
 
-const notification = (state = false, action) => {
+const initial = {
+  enabled: false,
+};
+
+const notification = (state = initial, action) => {
   switch (action.type) {
     case TOGGLE_NOTIFICATION: {
-      return !state;
+      return {
+        ...state,
+        enabled: !state.enabled,
+      };
     }
     default:
       return state;

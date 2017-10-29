@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from './Button';
 import { toggleNotification } from '../actionCreators/notification';
+import { notificationIsEnabled } from '../selectors/notification';
 
 const NotificationToggle = ({ enabled, toggle }) => (
   <Button
@@ -19,8 +20,8 @@ NotificationToggle.propTypes = {
   toggle: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ notification }) => ({
-  enabled: notification,
+const mapStateToProps = state => ({
+  enabled: notificationIsEnabled(state),
 });
 
 const mapDispatchToProps = {
