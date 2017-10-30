@@ -1,7 +1,7 @@
 .alternative {
   display: flex;
   margin: 0.5rem 0;
-  background: #6b71a5;
+  background: #666a99;
   color: #fff;
   transition: all 0.3s;
   border-radius: 2px;
@@ -15,15 +15,15 @@
 }
 
 .alternative:hover {
-  background: #8d93c7;
+  background: #8588ad;
 }
 
 .selected {
-  background: #4d516f;
+  background: #474a6b;
 }
 
 .selected:hover {
-  background: #575c7d;
+  background: #52557a;
 }
 
 .disabled {
