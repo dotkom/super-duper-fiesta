@@ -19,8 +19,10 @@ class VotingMenu extends React.Component {
   }
 
   handleChange(event) {
+    const newVote = this.state.selectedVote === event.currentTarget.value
+      ? null : event.currentTarget.value;
     this.setState({
-      selectedVote: event.currentTarget.value,
+      selectedVote: newVote,
     });
   }
 
@@ -65,7 +67,7 @@ class VotingMenu extends React.Component {
           onClick={() => this.handleClick()}
           disabled={canVote || !votingInProgress}
         >
-          {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
+          {hasVoted ? 'Du har stemt' : 'Avgi stemme'}
         </Button>}
         {hasVoted && (
           <Button
