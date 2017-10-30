@@ -50,6 +50,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.NamedChunksPlugin(),
     new HtmlWebpackPlugin({
       template: 'client/index.html',
     }),

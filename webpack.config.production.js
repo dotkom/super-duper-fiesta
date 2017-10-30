@@ -53,5 +53,9 @@ module.exports = merge.smart(config, {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    }),
   ],
 });
