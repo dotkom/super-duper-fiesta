@@ -5,6 +5,25 @@ const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');
 
+function publicUser(user, admin = false) {
+  const { _id, name, canVote, registerDate, permissions, completedRegistration } = user;
+  let publicData = {
+    _id,
+    name,
+    canVote,
+  };
+  if (admin) {
+    publicData = {
+      ...publicData,
+      registerDate,
+      permissions,
+      completedRegistration,
+    };
+  }
+  return publicData;
+}
+
+
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
   logger.silly('Checking password hash for user', user, genfors, passwordHash);
@@ -79,4 +98,5 @@ module.exports = {
   addUser,
   addAnonymousUser,
   setUserPermissions,
+  publicUser,
 };

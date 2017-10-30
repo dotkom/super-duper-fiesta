@@ -7,7 +7,7 @@ const { getConcludedIssues } = require('../models/issue');
 const { getUserVote, getVotes } = require('../models/vote');
 const { generatePublicVote } = require('../managers/vote');
 const { getAnonymousUser, getUsers } = require('../models/user');
-const { validatePasswordHash } = require('../managers/user');
+const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 const { publicMeeting } = require('../managers/meeting');
 
@@ -123,10 +123,12 @@ const emitGenforsData = async (socket) => {
       return;
     }
 
-    const users = await getUsers(meeting);
-    emit(socket, USER_LIST, users);
+    const isAdmin = userIsAdmin(await socket.request.user());
 
-    emit(socket, OPEN_MEETING, publicMeeting(meeting, userIsAdmin(await socket.request.user())));
+    const users = await getUsers(meeting);
+    emit(socket, USER_LIST, users.map(user => publicUser(user, isAdmin)));
+
+    emit(socket, OPEN_MEETING, publicMeeting(meeting, isAdmin));
     await emitActiveQuestion(socket, meeting);
 
     // Fill backlog of old issues too
