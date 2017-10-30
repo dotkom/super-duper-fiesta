@@ -3,7 +3,7 @@ import Alternative from './Alternative';
 import css from './Alternatives.css';
 
 const Alternatives = ({ disabled, alternatives, handleChange, selectedVote }) => (
-  <div className={css.lternatives}>
+  <div className={css.alternatives}>
     {alternatives.map(alternative => (
       <Alternative
         disabled={disabled && alternative.id !== selectedVote}
