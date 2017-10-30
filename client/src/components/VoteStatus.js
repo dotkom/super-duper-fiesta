@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
 import { getShuffledAlternatives } from '../selectors/alternatives';
-import { activeIssueExists, getIssue, getIssueKey } from '../selectors/issues';
+import { activeIssueExists, getIssue, getIssueKey, getOwnVote } from '../selectors/issues';
 import css from './VoteStatus.css';
 import { VOTING_NOT_STARTED } from '../../../common/actionTypes/issues';
 
 const VoteStatus = ({
   activeIssue,
   alternatives,
+  hasVoted,
   issueStatus,
   showOnlyWinner,
   userCount,
@@ -21,7 +22,7 @@ const VoteStatus = ({
         <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />}
 
       {issueStatus !== VOTING_NOT_STARTED
-      ? (!showOnlyWinner && alternatives) &&
+      ? !showOnlyWinner && alternatives && hasVoted &&
         alternatives.map(alternative =>
           <VoteCounter
             label={alternative.text}
@@ -46,6 +47,7 @@ VoteStatus.defaultProps = {
 VoteStatus.propTypes = {
   activeIssue: PropTypes.bool.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
+  hasVoted: PropTypes.bool.isRequired,
   issueStatus: PropTypes.string,
   showOnlyWinner: PropTypes.bool,
   userCount: VoteCounter.propTypes.total,
@@ -81,6 +83,7 @@ const mapStateToProps = (state) => {
 
   return {
     activeIssue: activeIssueExists(state),
+    hasVoted: !!getOwnVote(state, state.auth.id),
     voteCount,
     userCount,
     alternatives,
