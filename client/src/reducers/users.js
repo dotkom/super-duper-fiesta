@@ -41,9 +41,10 @@ const users = (state = {}, action) => {
         .reduce((prev, u) => ({ ...prev, [u.id]: u }), {});
 
     case ADD_USER: {
+      const u = user(undefined, { type: ADD_USER, user: action.data });
       return {
         ...state,
-        [action.data.id]: user(undefined, { type: ADD_USER, user: action.data }),
+        [u.id]: u,
       };
     }
 
