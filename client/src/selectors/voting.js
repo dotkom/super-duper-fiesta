@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { getIssue } from './issues';
+import { usersSelector } from './users';
 
 export const getOwnVoteForIssue = (issue, userId) => {
   // No issue? User haven't voted.
@@ -26,9 +27,10 @@ export const issueVotesSelector = createSelector(
 export const voteWithNameSelector = createSelector(
   getIssue,
   issueVotesSelector,
-  (issue, votes) => (
+  usersSelector,
+  (issue, votes, users) => (
     votes.map(({ voter, alternative }) => ({
-      voter,
+      voter: issue.secret ? 'Anynom bruker' : users[voter].name,
       alternative: issue.alternatives.find(alt => alt._id === alternative).text,
     }))
   ),
