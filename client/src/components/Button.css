@@ -37,9 +37,10 @@
 }
 
 .button:disabled {
-  background: #747586;
+  background: #a0a0ac;
   color: white;
-  cursor: not-allowed
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .size-sm {

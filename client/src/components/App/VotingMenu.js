@@ -67,7 +67,7 @@ class VotingMenu extends React.Component {
           onClick={() => this.handleClick()}
           disabled={canVote || !votingInProgress}
         >
-          {hasVoted ? 'Du har allerede stemt' : 'Avgi stemme'}
+          {hasVoted ? 'Du har stemt' : 'Avgi stemme'}
         </Button>}
         {hasVoted && (
           <Button
