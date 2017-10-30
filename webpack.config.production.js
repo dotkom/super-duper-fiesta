@@ -15,14 +15,19 @@ module.exports = merge.smart(config, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
             },
-          },
+            {
+              loader: 'postcss-loader',
+            },
+          ],
         }),
       },
     ],
@@ -47,6 +52,10 @@ module.exports = merge.smart(config, {
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
     }),
   ],
 });
