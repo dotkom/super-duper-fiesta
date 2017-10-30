@@ -37,8 +37,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -364,8 +365,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -576,8 +578,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -702,8 +705,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -780,8 +784,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1107,8 +1112,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1309,8 +1315,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1646,8 +1653,9 @@ Array [
     Object {
       "data": Object {
         "id": "1",
-        "pin": 3141592653,
         "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
       },
       "type": "OPEN_MEETING",
     },
@@ -1931,6 +1939,292 @@ Array [
         "message": "Ingen aktiv generalforsamling.",
       },
       "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`connection emits sensitive data like meeting pin if user is manager 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "version": "fake_git_hash",
+      },
+      "type": "VERSION",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "full_name": "Namy",
+        "id": "123",
+        "permissions": 10,
+        "username": "123",
+      },
+      "type": "AUTH_SIGNED_IN",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "registered": true,
+      },
+      "type": "AUTH_REGISTERED",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": "1",
+        "pin": 3141592653,
+        "registrationOpen": true,
+        "status": "open",
+        "title": "Testfors",
+      },
+      "type": "OPEN_MEETING",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+      },
+      "type": "OPEN_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": undefined,
+      "type": "ENABLE_VOTING",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "2",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "3",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "4",
+        "alternative": "3",
+        "question": "1",
+        "user": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "2",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "genfors": "1",
+        "meeting": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "toObject": [Function],
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
     },
   ],
 ]

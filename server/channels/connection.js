@@ -9,6 +9,7 @@ const { generatePublicVote } = require('../managers/vote');
 const { getAnonymousUser } = require('../models/user');
 const { validatePasswordHash } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
+const { publicMeeting } = require('../managers/meeting');
 
 const { VERSION } = require('../../common/actionTypes/version');
 const { CLOSE_ISSUE, OPEN_ISSUE } = require('../../common/actionTypes/issues');
@@ -120,7 +121,7 @@ const emitGenforsData = async (socket) => {
       emitError(socket, new Error('Ingen aktiv generalforsamling.'));
       return;
     }
-    emit(socket, OPEN_MEETING, meeting);
+    emit(socket, OPEN_MEETING, publicMeeting(meeting, userIsAdmin(await socket.request.user())));
     await emitActiveQuestion(socket, meeting);
 
     // Fill backlog of old issues too

@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import version from './version';
 import auth from './auth';
 import issues from './issues';
@@ -9,8 +8,9 @@ import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
 import users from './users';
 import error from './error';
+import notification from './notification';
 
-const votingApp = combineReducers({
+const votingApp = {
   auth,
   issues,
   meeting,
@@ -21,6 +21,7 @@ const votingApp = combineReducers({
   users,
   version,
   error,
-});
+  notification,
+};
 
 export default votingApp;

@@ -12,7 +12,7 @@ const { getAnonymousUser } = require('../../models/user');
 const { getVotes, getUserVote } = require('../../models/vote');
 const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote } = require('../../utils/generateTestData');
-
+const permissionLevels = require('../../../common/auth/permissions');
 
 describe('connection', () => {
   beforeEach(() => {
@@ -136,6 +136,14 @@ describe('connection', () => {
   it('emits correct actions when retrieving questions fails', async () => {
     getConcludedIssues.mockImplementation(async () => { throw new Error('Failed'); });
     const socket = generateSocket();
+    await connection(socket);
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits sensitive data like meeting pin if user is manager', async () => {
+    const socket = generateSocket({ permissions: permissionLevels.IS_MANAGER });
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();

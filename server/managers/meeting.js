@@ -3,6 +3,23 @@ const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('
 
 const permissionLevel = require('../../common/auth/permissions');
 
+function publicMeeting(meeting, admin = false) {
+  const { id, registrationOpen, status, title, pin } = meeting;
+  let publicData = {
+    id,
+    registrationOpen,
+    status,
+    title,
+  };
+  if (admin) {
+    publicData = {
+      ...publicData,
+      pin,
+    };
+  }
+  return publicData;
+}
+
 async function canEdit(securityLevel, user, genforsId) {
   logger.silly('Checking permissions');
   const active = await getActiveGenfors();
@@ -82,4 +99,5 @@ module.exports = {
   validatePin,
   addGenfors,
   toggleRegistrationStatus,
+  publicMeeting,
 };
