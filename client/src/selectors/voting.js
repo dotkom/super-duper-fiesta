@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import { getIssue } from './issues';
 
 export const getOwnVoteForIssue = (issue, userId) => {
@@ -15,4 +16,20 @@ export const getOwnVoteForIssue = (issue, userId) => {
 
 export const getOwnVote = (state, userId) => (
   getOwnVoteForIssue(getIssue(state), userId)
+);
+
+export const issueVotesSelector = createSelector(
+  getIssue,
+  issue => (issue ? Object.keys(issue.votes).map(key => issue.votes[key]) : []),
+);
+
+export const voteWithNameSelector = createSelector(
+  getIssue,
+  issueVotesSelector,
+  (issue, votes) => (
+    votes.map(({ voter, alternative }) => ({
+      voter,
+      alternative: issue.alternatives.find(alt => alt._id === alternative).text,
+    }))
+  ),
 );
