@@ -100,5 +100,32 @@ Array [
       "type": "AUTH_REGISTERED",
     },
   ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "123",
+        "canVote": true,
+        "name": "Namy",
+      },
+      "type": "ADD_USER",
+    },
+  ],
+]
+`;
+
+exports[`register emits registration status 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "123",
+        "canVote": true,
+        "name": "Namy",
+      },
+      "type": "ADD_USER",
+    },
+  ],
 ]
 `;

@@ -27,7 +27,7 @@ describe('register', () => {
     await register(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
-    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
 
   it('emits error when registration is closed', async () => {
