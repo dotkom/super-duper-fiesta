@@ -35,6 +35,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -363,6 +380,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -576,6 +610,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -703,6 +754,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -777,6 +845,23 @@ Array [
         "registered": true,
       },
       "type": "AUTH_REGISTERED",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
     },
   ],
   Array [
@@ -1110,6 +1195,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -1308,6 +1410,23 @@ Array [
         "registered": true,
       },
       "type": "AUTH_REGISTERED",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
     },
   ],
   Array [
@@ -1651,6 +1770,23 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -1974,6 +2110,23 @@ Array [
         "registered": true,
       },
       "type": "AUTH_REGISTERED",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "genfors": "1",
+          "name": "Namy",
+          "onlinewebId": "123",
+          "permissions": 5,
+        },
+      ],
+      "type": "USER_LIST",
     },
   ],
   Array [

@@ -59,7 +59,6 @@ const listen = (server, mongooseConnection) => {
       logger.debug(`${user.name} ('${user.onlinewebId}') has manager status, ` +
         'authorized for admin sockets.');
       issueListener(socket);
-      userListListener(socket);
       toggleCanVoteListener(socket);
       meetingListener(socket);
     }

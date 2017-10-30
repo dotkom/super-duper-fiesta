@@ -8,10 +8,10 @@ const { execSync } = require('child_process');
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting');
-const { getAnonymousUser } = require('../../models/user');
+const { getAnonymousUser, getUsers } = require('../../models/user');
 const { getVotes, getUserVote } = require('../../models/vote');
 const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
-const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote } = require('../../utils/generateTestData');
+const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 
 describe('connection', () => {
@@ -39,6 +39,7 @@ describe('connection', () => {
     getUserVote.mockImplementation(
       async () => null,
     );
+    getUsers.mockImplementation(async () => [generateUser()]);
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
