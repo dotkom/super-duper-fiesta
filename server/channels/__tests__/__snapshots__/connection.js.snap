@@ -2014,17 +2014,11 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
       },
       "type": "OPEN_ISSUE",
-    },
-  ],
-  Array [
-    "action",
-    Object {
-      "data": undefined,
-      "type": "ENABLE_VOTING",
     },
   ],
   Array [
@@ -2101,6 +2095,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -2139,6 +2134,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -2177,6 +2173,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -2215,6 +2212,7 @@ Array [
         "meeting": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
