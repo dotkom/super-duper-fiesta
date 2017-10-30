@@ -19,8 +19,10 @@ class VotingMenu extends React.Component {
   }
 
   handleChange(event) {
+    const newVote = this.state.selectedVote === event.currentTarget.value
+      ? null : event.currentTarget.value;
     this.setState({
-      selectedVote: event.currentTarget.value,
+      selectedVote: newVote,
     });
   }
 
