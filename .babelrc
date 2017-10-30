@@ -1,13 +1,31 @@
 {
-  "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "react"
-  ],
   "plugins": [
     "transform-runtime",
     "react-hot-loader/babel",
     "transform-object-rest-spread"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "env",
+        "react"
+      ]
+    },
+    "production": {
+      "presets": [
+        ["env", {
+          "modules": false
+        }],
+        "react"
+      ]
+    },
+    "development": {
+      "presets": [
+        ["env", {
+          "modules": false
+        }],
+        "react"
+      ]
+    }
+  }
 }

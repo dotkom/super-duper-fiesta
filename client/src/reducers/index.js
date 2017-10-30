@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import version from './version';
 import auth from './auth';
 import issues from './issues';
