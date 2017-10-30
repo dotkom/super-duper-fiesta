@@ -28,6 +28,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -66,6 +67,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -86,7 +88,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -116,6 +121,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -154,6 +160,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -164,6 +171,66 @@ Array [
         "winner": "3",
       },
       "type": "DELETED_ISSUE",
+    },
+  ],
+]
+`;
+
+exports[`adminDisableVoting emits disable voting on success 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
+      "type": "DISABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminDisableVoting emits disable voting on success 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
+      "type": "DISABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminEnableVoting emits enable voting on success 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_IN_PROGRESS",
+      },
+      "type": "ENABLE_VOTING",
+    },
+  ],
+]
+`;
+
+exports[`adminEnableVoting emits enable voting on success 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_IN_PROGRESS",
+      },
+      "type": "ENABLE_VOTING",
     },
   ],
 ]
@@ -196,6 +263,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -216,7 +284,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -245,6 +316,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -287,6 +359,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -344,6 +417,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -364,7 +438,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_FINISHED",
+      },
       "type": "DISABLE_VOTING",
     },
   ],
@@ -393,6 +470,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {},
@@ -431,6 +509,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": true,
+        "status": "VOTING_FINISHED",
         "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
@@ -474,6 +553,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_NOT_STARTED",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -511,6 +591,7 @@ Array [
         "genfors": "1",
         "secret": false,
         "showOnlyWinner": false,
+        "status": "VOTING_NOT_STARTED",
         "toObject": [Function],
         "voteDemand": "regular",
       },
@@ -520,7 +601,10 @@ Array [
   Array [
     "action",
     Object {
-      "data": undefined,
+      "data": Object {
+        "_id": "1",
+        "status": "VOTING_NOT_STARTED",
+      },
       "type": "ENABLE_VOTING",
     },
   ],

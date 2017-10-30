@@ -18,6 +18,7 @@ const generateIssue = (data) => {
       generateAlternative({ id: '2', text: 'Yes' }),
       generateAlternative({ id: '3', text: 'No' }),
     ],
+    status: 'VOTING_IN_PROGRESS',
   }, data);
   issueObject.toObject = () => issueObject;
   return issueObject;
@@ -32,6 +33,8 @@ const generateUser = data => (Object.assign({
   genfors: '1',
   canVote: true,
 }, data));
+
+const generateManager = data => ({ ...generateUser(), permissions: 10, ...data });
 
 const roomEmit = jest.fn();
 
@@ -78,6 +81,7 @@ module.exports = {
   generateGenfors,
   generateAnonymousUser,
   generateUser,
+  generateManager,
   generateVote,
   generateAlternative,
 };

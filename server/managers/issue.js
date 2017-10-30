@@ -7,6 +7,7 @@ const { canEdit } = require('./meeting');
 
 const permissionLevel = require('../../common/auth/permissions');
 const { RESOLUTION_TYPES } = require('../../common/actionTypes/voting');
+const { VOTING_IN_PROGRESS, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 
 async function endIssue(question, user) {
@@ -143,10 +144,26 @@ async function getPublicIssueWithVotes(issue, admin = false) {
   return voteData;
 }
 
+async function disableVoting(issue, user) {
+  if (await !canEdit(permissionLevel.IS_MANAGER, user, await getActiveGenfors())) {
+    throw new Error('User is not authorized to disable voting on this issue.');
+  }
+  return model.updateIssue(issue, { status: VOTING_FINISHED }, { new: true });
+}
+
+async function enableVoting(issue, user) {
+  if (await !canEdit(permissionLevel.IS_MANAGER, user, await getActiveGenfors())) {
+    throw new Error('User is not authorized to enable voting on this issue.');
+  }
+  return model.updateIssue(issue, { status: VOTING_IN_PROGRESS }, { new: true });
+}
+
 module.exports = {
   endIssue,
   addIssue,
   deleteIssue,
+  disableVoting,
+  enableVoting,
   getPublicIssueWithVotes,
   calculateWinner,
   countVoteAlternatives,

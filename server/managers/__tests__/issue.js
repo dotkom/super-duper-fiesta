@@ -1,211 +1,59 @@
-const { calculateWinner, countVoteAlternatives } = require('../issue');
-const { generateIssue, generateVote, generateAlternative } = require('../../utils/generateTestData');
-const { RESOLUTION_TYPES } = require('../../../common/actionTypes/voting');
+jest.mock('../meeting');
+jest.mock('../../models/issue');
+jest.mock('../../models/meeting');
+const { canEdit } = require('../meeting');
+const { getActiveQuestion, updateIssue } = require('../../models/issue');
+const { disableVoting, enableVoting } = require('../issue');
+const { generateIssue, generateManager, generateUser }
+  = require('../../utils/generateTestData');
+const { VOTING_IN_PROGRESS, VOTING_FINISHED }
+  = require('../../../common/actionTypes/issues');
 
-const generateVotingData = (voteCounts) => {
-  const alternatives = Object.keys(voteCounts).map(
-    name => generateAlternative({
-      id: name, text: name,
-    }),
-  );
 
-  const votes = Object.keys(voteCounts)
-    // { Ja: 1, Nei: 2 } -> [JaId, NeiId, NeiId]
-    .reduce((acc, name) => (
-      [...acc, ...Array(voteCounts[name]).fill(name)]
-    ), [])
-    // [JaId, NeiId, NeiId] -> { '0': voteForJa, '1': voteForNei, '2': voteForNei }
-    .reduce((acc, alternativeId, id) => ({
-      ...acc,
-      [id]: generateVote({ _id: id.toString(), alternative: alternativeId }),
-    }), {});
-
-  return [alternatives, votes];
-};
-
-describe('calculateWinner', () => {
-  it('finds winner with regular vote demand', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 3,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-    });
-
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual('Ja');
+describe('enable voting', () => {
+  beforeEach(() => {
+    canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
+    getActiveQuestion.mockImplementation(() => ({ ...generateIssue() }));
+    updateIssue.mockImplementation(async (identifiers, data) => ({ ...identifiers, ...data }));
   });
 
-  it('does not find a winner when vote demand is not met', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 3,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.qualified.key,
-    });
+  it('sets status of an issue to VOTING_IN_PROGRESS', async () => {
+    const issue = await getActiveQuestion();
 
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
+    const enabledVotingIssue = await enableVoting(issue, generateManager());
 
-    expect(winner).toEqual(null);
+    expect(enabledVotingIssue).toMatchObject({ ...issue, status: VOTING_IN_PROGRESS });
   });
 
-  it('does not find a winner when an alternative has exactly 1/2 of votes with regular vote demand', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 2,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-    });
+  it('throws an error if user does not have permissions to do so', async () => {
+    const issue = await getActiveQuestion();
 
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
+    const updatedIssue = enableVoting(issue, generateUser());
 
-    expect(winner).toEqual(null);
+    await expect(updatedIssue).rejects.toEqual(new Error('User is not authorized to enable voting on this issue.'));
+  });
+});
+
+describe('disable voting', () => {
+  beforeEach(() => {
+    canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
+    getActiveQuestion.mockImplementation(() => generateIssue());
+    updateIssue.mockImplementation(async (identifiers, data) => ({ ...identifiers, ...data }));
   });
 
-  it('does not find a winner when an alternative has exactly 2/3 of votes with qualified vote demand', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 4,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.qualified.key,
-    });
+  it('sets status of an issue to VOTING_FINISHED', async () => {
+    const issue = await getActiveQuestion();
 
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
+    const disabledVotingIssue = await disableVoting(issue, generateManager());
 
-    expect(winner).toEqual(null);
+    expect(disabledVotingIssue).toMatchObject({ ...issue, status: VOTING_FINISHED });
   });
 
-  it('finds a winner when an alternative has above 2/3 of votes with qualified vote demand', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 5,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.qualified.key,
-    });
+  it('throws an error if user does not have permissions to do so', async () => {
+    const issue = await getActiveQuestion();
 
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
+    const updatedIssue = disableVoting(issue, generateUser());
 
-    expect(winner).toEqual('Ja');
-  });
-
-  it('ignores blank votes when countingBlankVotes is false', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 2,
-      Ja: 3,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      countingBlankVotes: false,
-    });
-
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual('Ja');
-  });
-
-  it('counts blank votes when countingBlankVotes is true', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 2,
-      Ja: 3,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      countingBlankVotes: true,
-    });
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual(null);
-  });
-
-  it('counts blank votes when countingBlankVotes is true, but still finds winner', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 2,
-      Ja: 5,
-      Nei: 2,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      countingBlankVotes: true,
-    });
-
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual('Ja');
-  });
-
-  it('handles multiple choice', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 2,
-      'Person 1': 4,
-      'Person 2': 1,
-      'Person 3': 6,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      countingBlankVotes: false,
-    });
-
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual('Person 3');
-  });
-
-  it('does not count "no" as a winner when using boolean alternatives', () => {
-    const [alternatives, votes] = generateVotingData({
-      Blank: 0,
-      Ja: 3,
-      Nei: 4,
-    });
-    const issue = generateIssue({
-      alternatives,
-      voteDemand: RESOLUTION_TYPES.regular.key,
-      countingBlankVotes: false,
-    });
-
-    const winner = calculateWinner(issue, votes,
-      countVoteAlternatives(issue.alternatives, votes),
-    );
-
-    expect(winner).toEqual(null);
+    await expect(updatedIssue).rejects.toEqual(new Error('User is not authorized to disable voting on this issue.'));
   });
 });

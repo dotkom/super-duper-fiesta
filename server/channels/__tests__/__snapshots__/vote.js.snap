@@ -119,6 +119,36 @@ Array [
 ]
 `;
 
+exports[`submitRegularVote emits error when tring to vote on issue when voting has ended 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Votering for denne saken har blitt avsluttet.",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`submitRegularVote emits error when tring to vote on issue when voting hasn't started 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Votering for denne saken har ikke startet enda.",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
 exports[`submitRegularVote emits error when trying to vote on inactive issue 1`] = `
 Array [
   Array [

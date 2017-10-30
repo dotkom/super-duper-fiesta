@@ -2,15 +2,16 @@ jest.mock('../../models/issue');
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
 jest.mock('../../models/vote');
-const { createIssue, closeIssue, adminDeleteIssue } = require('../issue');
-const { addIssue, endIssue, deleteIssue, getActiveQuestion } = require('../../models/issue');
+const { createIssue, closeIssue, adminDeleteIssue, adminDisableVoting, adminEnableVoting } = require('../issue');
+const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getQualifiedUsers } = require('../../models/user');
 const { getVotes } = require('../../models/vote');
-const { generateSocket, generateIssue, generateGenfors, generateUser, generateVote } = require('../../utils/generateTestData');
+const { generateSocket, generateIssue, generateGenfors, generateUser, generateManager, generateVote } = require('../../utils/generateTestData');
+const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 beforeEach(() => {
-  addIssue.mockImplementation(async () => generateIssue());
+  addIssue.mockImplementation(async () => generateIssue({ status: VOTING_NOT_STARTED }));
   getActiveQuestion.mockImplementation(async () => null);
   endIssue.mockImplementation(async () => generateIssue());
   getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '1' }));
@@ -54,7 +55,8 @@ describe('closeIssue', () => {
   });
 
   it('emits close issue action and disables voting', async () => {
-    endIssue.mockImplementation(async () => generateIssue({ active: false }));
+    endIssue.mockImplementation(async () =>
+      generateIssue({ active: false, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -74,7 +76,8 @@ describe('closeIssue', () => {
   });
 
   it('emits winner when issue only shows winner', async () => {
-    endIssue.mockImplementation(async () => generateIssue({ active: false, showOnlyWinner: true }));
+    endIssue.mockImplementation(async () =>
+      generateIssue({ active: false, showOnlyWinner: true, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -89,10 +92,43 @@ describe('adminDeleteIssue', () => {
     issue: generateIssue(),
   });
   it('emits delete issue on success', async () => {
-    deleteIssue.mockImplementation(async () => generateIssue({ active: false, deleted: true }));
+    deleteIssue.mockImplementation(async () =>
+      generateIssue({ active: false, deleted: true, status: VOTING_FINISHED }));
 
     const socket = generateSocket({ permissions: 10 });
     await adminDeleteIssue(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe('adminDisableVoting', () => {
+  beforeEach(() => {
+    getActiveQuestion.mockImplementation(() => generateIssue());
+    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+  });
+
+  it('emits disable voting on success', async () => {
+    const socket = generateSocket(generateManager());
+
+    await adminDisableVoting(socket, { issue: '1' });
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
+});
+
+describe('adminEnableVoting', () => {
+  beforeEach(() => {
+    getActiveQuestion.mockImplementation(() => generateIssue());
+    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+  });
+
+  it('emits enable voting on success', async () => {
+    const socket = generateSocket(generateManager());
+
+    await adminEnableVoting(socket, { issue: '1' });
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();

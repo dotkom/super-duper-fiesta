@@ -9,6 +9,7 @@ const { getActiveGenfors, getGenfors } = require('../../models/meeting');
 const { getAnonymousUser } = require('../../models/user');
 const { generateIssue, generateVote, generateSocket } = require('../../utils/generateTestData');
 const { CAN_VOTE, IS_LOGGED_IN } = require('../../../common/auth/permissions');
+const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
@@ -83,6 +84,28 @@ describe('submitRegularVote', () => {
       permissions: CAN_VOTE,
       canVote: false,
     });
+
+    await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it("emits error when tring to vote on issue when voting hasn't started", async () => {
+    const issue = generateIssue({ status: VOTING_NOT_STARTED });
+    getIssueById.mockImplementation(() => issue);
+    const socket = generateSocket({ completedRegistration: true });
+
+    await submitRegularVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits error when tring to vote on issue when voting has ended', async () => {
+    const issue = generateIssue({ status: VOTING_FINISHED });
+    getIssueById.mockImplementation(() => issue);
+    const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
 

@@ -42,3 +42,11 @@
 .delete {
   composes: icon cross from 'css/flaticon.css';
 }
+
+.unlock {
+  composes: icon unlock from 'css/flaticon.css';
+}
+
+.lock {
+  composes: icon lock from 'css/flaticon.css';
+}
