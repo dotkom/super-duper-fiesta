@@ -8,7 +8,13 @@ import css from './VoteStatus.css';
 import { VOTING_NOT_STARTED } from '../../../common/actionTypes/issues';
 
 const VoteStatus = ({
-  activeIssue, voteCount, userCount, alternatives, votePercentages, showOnlyWinner, issueStatus,
+  activeIssue,
+  alternatives,
+  issueStatus,
+  showOnlyWinner,
+  userCount,
+  voteCount,
+  votePercentages,
   }) => (
     <div className={css.status}>
       {activeIssue &&
@@ -39,12 +45,12 @@ VoteStatus.defaultProps = {
 
 VoteStatus.propTypes = {
   activeIssue: PropTypes.bool.isRequired,
-  voteCount: VoteCounter.propTypes.count.isRequired,
-  userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
-  showOnlyWinner: PropTypes.bool,
-  votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
   issueStatus: PropTypes.string,
+  showOnlyWinner: PropTypes.bool,
+  userCount: VoteCounter.propTypes.total,
+  voteCount: VoteCounter.propTypes.count.isRequired,
+  votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 const mapStateToProps = (state) => {
