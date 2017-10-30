@@ -19,7 +19,7 @@ async function addVote(issueId, user, alternative, voter) {
   }
   if (!user.canVote) {
     logger.warn('Tried to vote without the right to vote!', { issueId, user: user.onlinewebId });
-    throw new Error('Du har ikke stemmerett');
+    throw new Error('Du er ikke stemmeberettiget');
   }
   logger.silly('Checking permissions.', { issueId, user: user.onlinewebId });
   try {
