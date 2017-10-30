@@ -1,8 +1,8 @@
-const { broadcastAndEmit, emitError } = require('../../utils');
+const { broadcastAndEmit, emitError, adminBroadcast } = require('../../utils');
 const logger = require('../../logging');
 
 const { getActiveGenfors } = require('../../models/meeting');
-const { endGenfors, toggleRegistrationStatus } = require('../../managers/meeting');
+const { endGenfors, toggleRegistrationStatus, publicMeeting } = require('../../managers/meeting');
 
 const {
   ADMIN_END_MEETING,
@@ -25,7 +25,8 @@ const toggleRegistration = async (socket, data) => {
   try {
     const updatedMeeting = await toggleRegistrationStatus({ _id: genfors._id },
     data.registrationOpen);
-    broadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, updatedMeeting);
+    broadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, publicMeeting(updatedMeeting));
+    adminBroadcast(socket, TOGGLE_REGISTRATION_STATE, publicMeeting(updatedMeeting, true));
   } catch (err) {
     logger.warn('Toggling registration failed for meeting', { genfors: genfors.title, err });
     emitError(socket, new Error('Noe gikk galt under oppdatering av registreringsstatus.'));

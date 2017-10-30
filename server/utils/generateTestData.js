@@ -56,6 +56,8 @@ const generateGenfors = data => (Object.assign({
   id: '1',
   registrationOpen: true,
   pin: 3141592653,
+  title: 'Testfors',
+  status: 'open',
 }, data));
 
 const generateAnonymousUser = data => (Object.assign({
