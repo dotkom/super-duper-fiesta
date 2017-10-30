@@ -1,5 +1,5 @@
 import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from '../../../common/actionTypes/issues';
-import { RECEIVE_VOTE, USER_VOTE } from '../../../common/actionTypes/voting';
+import { RECEIVE_VOTE, USER_VOTE, DISABLE_VOTING, ENABLE_VOTING } from '../../../common/actionTypes/voting';
 
 const issue = (state = { votes: {} }, action, currentIssue) => {
   switch (action.type) {
@@ -23,6 +23,7 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         voteDemand: action.data.voteDemand,
         countingBlankVotes: action.data.countingBlankVotes,
         showOnlyWinner: action.data.showOnlyWinner,
+        status: action.data.status,
         votes: action.data.votes || {},
         winner: action.data.winner,
         userVote: state.userVote || null,
@@ -57,6 +58,13 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
       });
     }
 
+    case DISABLE_VOTING:
+    case ENABLE_VOTING:
+      return {
+        ...state,
+        status: action.data.status,
+      };
+
     default:
       return state;
   }
@@ -65,6 +73,8 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
 const issues = (state = {}, action) => {
   switch (action.type) {
     case CLOSE_ISSUE:
+    case DISABLE_VOTING:
+    case ENABLE_VOTING:
     case OPEN_ISSUE: {
       const issueId = action.data._id; // eslint-disable-line no-underscore-dangle
       return Object.assign({}, state, {

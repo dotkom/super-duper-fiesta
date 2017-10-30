@@ -6,9 +6,15 @@ import Card from '../Card';
 import Dialog from '../Dialog';
 import ButtonIconText from '../ButtonIconText';
 import Pin from './Pin';
-import { adminCloseIssue, adminDeleteIssue } from '../../actionCreators/adminButtons';
-import { getIssueText, activeIssueExists, getIssue } from '../../selectors/issues';
+import {
+  adminCloseIssue,
+  adminDeleteIssue,
+  enableVoting,
+  disableVoting,
+} from '../../actionCreators/adminButtons';
+import { getIssueText, activeIssueExists, getIssue, getIssueKey } from '../../selectors/issues';
 import css from './Issue.css';
+import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } from '../../../../common/actionTypes/issues';
 
 class Issue extends React.Component {
   constructor(props) {
@@ -28,11 +34,24 @@ class Issue extends React.Component {
     this.props.deleteIssue();
   }
 
+  votingBtnOnClick() {
+    if (this.props.issueStatus === VOTING_NOT_STARTED) {
+      this.props.enableVoting();
+    } else {
+      this.props.disableVoting();
+    }
+  }
+
   render() {
     const {
-      closeIssue, issueIsActive, issueText, pin, registrationOpen,
+      closeIssue, issueIsActive, issueStatus, issueText, pin, registrationOpen,
     } = this.props;
     const { showCloseIssueDialog } = this.state;
+    const votingInProgress = issueStatus === VOTING_IN_PROGRESS;
+    let enableDisableVotingBtnText;
+    if (issueStatus === VOTING_NOT_STARTED) enableDisableVotingBtnText = 'Start votering';
+    else if (issueStatus === VOTING_IN_PROGRESS) enableDisableVotingBtnText = 'Avslutt votering';
+    else enableDisableVotingBtnText = 'Votering er ferdig';
     return (
       <Card classes={css.issue}>
         {this.state.redirectToEditIssue && <Redirect to="/admin/question" />}
@@ -54,11 +73,17 @@ class Issue extends React.Component {
           </div>
           {issueIsActive && <div className={css.actions}>
             <ButtonIconText
+              text={enableDisableVotingBtnText}
+              iconClass={votingInProgress || issueStatus === VOTING_FINISHED
+                ? css.lock : css.unlock}
+              onClick={() => this.votingBtnOnClick()}
+              disabled={this.props.issueStatus === VOTING_FINISHED}
+            />
+            <ButtonIconText
               text="Rediger"
               iconClass={css.edit}
               onClick={() => { this.setState({ redirectToEditIssue: true }); }}
             />
-            <ButtonIconText text="Resett" iconClass={css.reset} />
             <ButtonIconText text="Avslutt" iconClass={css.end} onClick={closeIssue} />
             <ButtonIconText
               text="Slett"
@@ -76,13 +101,17 @@ class Issue extends React.Component {
 
 Issue.defaultProps = {
   pin: 0,
+  issueStatus: VOTING_NOT_STARTED,
   registrationOpen: false,
 };
 
 Issue.propTypes = {
   closeIssue: React.PropTypes.func.isRequired,
   deleteIssue: React.PropTypes.func.isRequired,
+  disableVoting: React.PropTypes.func.isRequired,
+  enableVoting: React.PropTypes.func.isRequired,
   issueIsActive: React.PropTypes.bool.isRequired,
+  issueStatus: React.PropTypes.string,
   issueText: React.PropTypes.string.isRequired,
   pin: React.PropTypes.number,
   registrationOpen: React.PropTypes.bool,
@@ -90,6 +119,7 @@ Issue.propTypes = {
 
 const mapStateToProps = state => ({
   issueIsActive: activeIssueExists(state),
+  issueStatus: getIssueKey(state, 'status'),
   issueText: getIssueText(state),
   issue: getIssue(state),
   pin: state.meeting.pin,
@@ -108,6 +138,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     deleteIssue: () => {
       dispatch(adminDeleteIssue({ issue: stateProps.issue.id }));
+    },
+    disableVoting: () => {
+      dispatch(disableVoting({ issue: stateProps.issue.id }));
+    },
+    enableVoting: () => {
+      dispatch(enableVoting({ issue: stateProps.issue.id }));
     },
   };
 };

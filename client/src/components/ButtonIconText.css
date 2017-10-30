@@ -7,3 +7,7 @@
 .button:hover {
   color: #141523;
 }
+
+.button:disabled {
+  color: #555;
+}

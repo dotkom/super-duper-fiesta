@@ -3,37 +3,48 @@ import { connect } from 'react-redux';
 import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
 import { getShuffledAlternatives } from '../selectors/alternatives';
-import { getIssue } from '../selectors/issues';
+import { activeIssueExists, getIssue, getIssueKey } from '../selectors/issues';
 import css from './VoteStatus.css';
+import { VOTING_NOT_STARTED } from '../../../common/actionTypes/issues';
 
-const VoteStatus = ({ voteCount, userCount, alternatives, votePercentages, showOnlyWinner }) => (
-  <div className={css.status}>
-    <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />
+const VoteStatus = ({
+  activeIssue, voteCount, userCount, alternatives, votePercentages, showOnlyWinner, issueStatus,
+  }) => (
+    <div className={css.status}>
+      {activeIssue &&
+        <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />}
 
-    {!showOnlyWinner && alternatives && alternatives.map(alternative =>
-      <VoteCounter
-        label={alternative.text}
-        count={votePercentages[alternative.id]}
-        key={alternative.id}
-        total={voteCount}
-      />,
-    )}
+      {issueStatus !== VOTING_NOT_STARTED
+      ? (!showOnlyWinner && alternatives) &&
+        alternatives.map(alternative =>
+          <VoteCounter
+            label={alternative.text}
+            count={votePercentages[alternative.id]}
+            key={alternative.id}
+            total={voteCount}
+          />,
+      )
+      : <p>Voteringen har ikke startet.</p>
+      }
 
-  </div>
+    </div>
 );
 
 VoteStatus.defaultProps = {
   alternatives: undefined,
   userCount: 0,
   showOnlyWinner: false,
+  issueStatus: VOTING_NOT_STARTED,
 };
 
 VoteStatus.propTypes = {
+  activeIssue: PropTypes.bool.isRequired,
   voteCount: VoteCounter.propTypes.count.isRequired,
   userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
   showOnlyWinner: PropTypes.bool,
   votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
+  issueStatus: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
@@ -63,11 +74,13 @@ const mapStateToProps = (state) => {
   }
 
   return {
+    activeIssue: activeIssueExists(state),
     voteCount,
     userCount,
     alternatives,
     votePercentages,
     showOnlyWinner: currentIssue && currentIssue.showOnlyWinner,
+    issueStatus: getIssueKey(state, 'status'),
   };
 };
 
