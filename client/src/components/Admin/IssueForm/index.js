@@ -185,69 +185,69 @@ class IssueForm extends React.Component {
               onClick={() => this.setState({ showUpdateIssuePrompt: false })}
             >Avbryt</Button>
           </Dialog>
-        <div className={css.form}>
-          {showActiveIssueWarning && <p
-            className={css.warning}
-          >Det er allerede en aktiv sak!</p>}
-          {redirectToAdminHome &&
-            <Redirect to="/admin" />}
-          <label className={css.textarea}>
-            <h2 className={css.title}>Beskrivelse av saken</h2>
-            <textarea
-              onChange={(...a) => this.updateIssueDescription(...a)}
-              placeholder="Skriv inn saken her."
-              value={this.state.issueDescription}
-            />
-          </label>
-          <div className={css.inputGroups}>
-            <div className={css.inputGroup}>
-              <label>
-                <h2 className={css.title}>Spørsmålstype</h2>
-                <SelectQuestionType
-                  questionType={this.state.questionType}
-                  handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
-                />
-              </label>
-              {this.state.questionType === MULTIPLE_CHOICE
-              && <Alternative
-                alternatives={this.state.alternatives}
-                handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
-                handleUpdateAlternativeText={(...a) => this.handleUpdateAlternativeText(...a)}
-                handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
+          <div className={css.form}>
+            {showActiveIssueWarning && <p
+              className={css.warning}
+            >Det er allerede en aktiv sak!</p>}
+            {redirectToAdminHome &&
+              <Redirect to="/admin" />}
+            <label className={css.textarea}>
+              <h2 className={css.title}>Beskrivelse av saken</h2>
+              <textarea
+                onChange={(...a) => this.updateIssueDescription(...a)}
+                placeholder="Skriv inn saken her."
+                value={this.state.issueDescription}
               />
-              }
-            </div>
-            <div className={css.inputGroup}>
-              <Checkboxes
-                handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
-                handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
-                handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
-                countBlankVotes={this.state.countBlankVotes}
-                secretVoting={this.state.secretVoting}
-                showOnlyWinner={this.state.showOnlyWinner}
-              />
-              <label>
-                <h2 className={css.title}>Flertallstype</h2>
-                <SelectResolutionType
-                  handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
-                  resolutionType={this.state.voteDemand}
+            </label>
+            <div className={css.inputGroups}>
+              <div className={css.inputGroup}>
+                <label>
+                  <h2 className={css.title}>Spørsmålstype</h2>
+                  <SelectQuestionType
+                    questionType={this.state.questionType}
+                    handleQuestionTypeChange={(...a) => this.handleQuestionTypeChange(...a)}
+                  />
+                </label>
+                {this.state.questionType === MULTIPLE_CHOICE
+                && <Alternative
+                  alternatives={this.state.alternatives}
+                  handleAddAlternative={(...a) => this.handleAddAlternative(...a)}
+                  handleUpdateAlternativeText={(...a) => this.handleUpdateAlternativeText(...a)}
+                  handleRemoveAlternative={(...a) => this.handleRemoveAlternative(...a)}
                 />
-              </label>
+                }
+              </div>
+              <div className={css.inputGroup}>
+                <Checkboxes
+                  handleUpdateCountBlankVotes={(...a) => this.handleUpdateCountBlankVotes(...a)}
+                  handleUpdateSecretVoting={(...a) => this.handleUpdateSecretVoting(...a)}
+                  handleUpdateShowOnlyWinner={(...a) => this.handleUpdateShowOnlyWinner(...a)}
+                  countBlankVotes={this.state.countBlankVotes}
+                  secretVoting={this.state.secretVoting}
+                  showOnlyWinner={this.state.showOnlyWinner}
+                />
+                <label>
+                  <h2 className={css.title}>Flertallstype</h2>
+                  <SelectResolutionType
+                    handleResolutionTypeChange={(...a) => this.handleResolutionTypeChange(...a)}
+                    resolutionType={this.state.voteDemand}
+                  />
+                </label>
+              </div>
             </div>
+            {this.props.activeIssue ?
+              <Button
+                background
+                onClick={() => this.setState({ showUpdateIssuePrompt: true })}
+                size="lg"
+              >Oppdater aktiv sak</Button> :
+              <Button
+                background
+                onClick={() => this.handleCreateIssue()}
+                disabled={!issueReadyToCreate}
+                size="lg"
+              >Opprett ny sak</Button>}
           </div>
-          {this.props.activeIssue ?
-            <Button
-              background
-              onClick={() => this.setState({ showUpdateIssuePrompt: true })}
-              size="lg"
-            >Oppdater aktiv sak</Button> :
-            <Button
-              background
-              onClick={() => this.handleCreateIssue()}
-              disabled={!issueReadyToCreate}
-              size="lg"
-            >Opprett ny sak</Button>}
-        </div>
         </div>
       </DocumentTitle>
     );
