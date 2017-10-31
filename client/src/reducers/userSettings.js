@@ -1,7 +1,11 @@
-import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/userSettings';
+import {
+  TOGGLE_NOTIFICATION,
+  TOGGLE_SHOW_CONCLUDED_ISSUE_LIST,
+} from '../../../common/actionTypes/userSettings';
 
 const initial = {
   notifications: false,
+  concludedIssueList: false,
 };
 
 const userSettings = (state = initial, action) => {
@@ -10,6 +14,12 @@ const userSettings = (state = initial, action) => {
       return {
         ...state,
         notifications: !state.notifications,
+      };
+    }
+    case TOGGLE_SHOW_CONCLUDED_ISSUE_LIST: {
+      return {
+        ...state,
+        concludedIssueList: !state.concludedIssueList,
       };
     }
     default:

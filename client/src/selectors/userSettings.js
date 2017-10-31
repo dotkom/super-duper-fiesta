@@ -1,3 +1,2 @@
 export const notificationIsEnabled = state => state.userSettings.notifications;
-
-export default notificationIsEnabled;
+export const concludedIssueListIsEnabled = state => state.userSettings.concludedIssueList;

@@ -1,6 +1,12 @@
-import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/userSettings';
+import {
+  TOGGLE_NOTIFICATION,
+  TOGGLE_SHOW_CONCLUDED_ISSUE_LIST,
+} from '../../../common/actionTypes/userSettings';
 
-// eslint-disable-next-line import/prefer-default-export
 export const toggleNotification = () => ({
   type: TOGGLE_NOTIFICATION,
+});
+
+export const toggleShowConcludedIssueList = () => ({
+  type: TOGGLE_SHOW_CONCLUDED_ISSUE_LIST,
 });

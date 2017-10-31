@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
 import { getConcludedIssues } from '../selectors/issues';
-import Button from './Button';
+import { concludedIssueListIsEnabled } from '../selectors/userSettings';
 
 const sortIssues = issues => (
   (a, b) => new Date(issues[b].date) - new Date(issues[a].date)
@@ -18,35 +18,23 @@ class ConcludedIssueList extends React.Component {
     };
   }
 
-  toggleVisibility() {
-    this.setState(prevState => ({
-      visible: !prevState.visible,
-    }));
-  }
-
   render() {
     const issues = this.props.issues;
-    const { visible } = this.state;
 
     return (
       <div>
-        {Object.keys(issues).length > 0 && <Button
-          background
-          size="lg"
-          onClick={() => this.toggleVisibility()}
-        >
-          {visible ? 'Skjul' : 'Vis'} konkluderte saker
-        </Button>}
         <div className={css.concludedIssueList}>
-          {this.state.visible && Object.keys(issues).sort(sortIssues(issues)).map((issue) => {
-            const winner = issues[issue].winner;
-            const majority = winner !== null;
-            return (<ConcludedIssue
-              key={issues[issue].id}
-              majority={majority}
-              {...issues[issue]}
-            />);
-          })}
+          {this.props.concludedIssueListEnabled && Object.keys(issues)
+            .sort(sortIssues(issues))
+            .map((issue) => {
+              const winner = issues[issue].winner;
+              const majority = winner !== null;
+              return (<ConcludedIssue
+                key={issues[issue].id}
+                majority={majority}
+                {...issues[issue]}
+              />);
+            })}
         </div>
       </div>
     );
@@ -57,6 +45,7 @@ ConcludedIssueList.propTypes = {
   issues: PropTypes.shape({
     votes: React.PropTypes.objectOf(React.PropTypes.string),
   }).isRequired,
+  concludedIssueListEnabled: React.PropTypes.bool.isRequired,
 };
 
 export default ConcludedIssueList;
@@ -64,6 +53,7 @@ export default ConcludedIssueList;
 const mapStateToProps = state => ({
   issues: state.votingEnabled ?
     getConcludedIssues(state) : state.issues,
+  concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });
 
 export const ConcludedIssueListContainer = connect(
