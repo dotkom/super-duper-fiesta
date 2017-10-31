@@ -53,6 +53,7 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
             alternative: action.alternative,
             id: voteId,
             voter,
+            randomName: action.randomName,
           },
         },
       });
@@ -108,7 +109,8 @@ const issues = (state = {}, action) => {
         issueId,
         alternative: action.data.alternative,
         voter: action.data.user,
-        id: action.data._id, // eslint-disable-line no-underscore-dangle
+        id: action.data._id,
+        randomName: action.data.randomName,
       };
       return Object.assign({}, state, {
         [issueId]: issue(state[issueId], updatedAction, issueId),

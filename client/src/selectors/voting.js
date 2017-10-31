@@ -29,9 +29,21 @@ export const voteWithNameSelector = createSelector(
   issueVotesSelector,
   usersSelector,
   (issue, votes, users) => (
-    votes.map(({ voter, alternative }) => ({
-      voter: issue.secret ? 'Anynom bruker' : users[voter].name,
-      alternative: issue.alternatives.find(alt => alt._id === alternative).text,
-    }))
+    votes.map(({ randomName, voter, alternative }) => {
+      let name;
+      if (issue.secret) {
+        if (randomName !== null) {
+          name = randomName;
+        } else {
+          name = 'Anynom bruker';
+        }
+      } else {
+        name = users[voter].name;
+      }
+      return {
+        voter: name,
+        alternative: issue.alternatives.find(alt => alt._id === alternative).text,
+      };
+    })
   ),
 );
