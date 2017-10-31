@@ -7,12 +7,14 @@ import { voteWithNameSelector } from '../selectors/voting';
 const LastVotes = ({ votes }) => (
   <div className={css.component}>
     <h3>Siste stemmer</h3>
-    { votes.map(vote => (
+    { votes.length > 0 ? votes.map(vote => (
       <div className={css.vote}>
-        { vote.voter }:
-        <span className={css.alternative}> { vote.alternative }</span>
+        { vote.voter }: { vote.alternative }
       </div>
-    ))}
+    ))
+    : (
+      <div>Ingen stemmer enda</div>
+    )}
   </div>
 );
 
