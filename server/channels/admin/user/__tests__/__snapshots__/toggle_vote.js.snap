@@ -1,5 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`setUserPermissions does not update user permissions if not authorized 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Du har ikke rettigheter til å oppdatere andres rettigheter",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`setUserPermissions emits error when failing to update user permissions 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt under oppdatering av brukerens rettigheter",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`setUserPermissions updates user permissions if requested and user authorized 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "123",
+        "canVote": true,
+        "completedRegistration": true,
+        "name": "Namy",
+        "permissions": 5,
+        "registerDate": undefined,
+      },
+      "type": "ADD_USER",
+    },
+  ],
+]
+`;
+
+exports[`setUserPermissions updates user permissions if requested and user authorized 2`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "_id": "123",
+        "canVote": true,
+        "completedRegistration": true,
+        "name": "Namy",
+        "permissions": 5,
+        "registerDate": undefined,
+      },
+      "type": "ADD_USER",
+    },
+  ],
+]
+`;
+
 exports[`toggleCanVote emits error when user does not have CAN_VOTE permission 1`] = `
 Array [
   Array [
