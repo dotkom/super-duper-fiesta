@@ -19,14 +19,26 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
   return defaultValue;
 };
 
-export const getConcludedIssues = state => (
+const concludedIssues = state => (
   state.issues && Object.keys(state.issues)
-    .filter(issue => state.issues[issue].status === VOTING_FINISHED)
-    .map(issue => state.issues[issue])
+  .filter(issue => state.issues[issue].status === VOTING_FINISHED)
+  .map(issue => state.issues[issue])
+);
+
+export const getLatestConcludedIssue = createSelector(
+  concludedIssues,
+  issues => (issues.length > 0 ? issues[0] : null),
+);
+
+export const getConcludedIssuesExceptLatest = createSelector(
+  concludedIssues,
+  issues =>
+    issues
+    .slice(1)
     .reduce((a, b) => ({
       ...a,
       [b.id]: b,
-    }), {})
+    }), {}),
 );
 
 export const getIssueText = state =>

@@ -2,7 +2,7 @@ import React from 'react';
 import DocumentTitle from 'react-document-title';
 import { IssueContainer } from './Issue';
 import Alternatives from './Alternatives';
-import ConcludedIssue from '../ConcludedIssue';
+import LatestConcludedIssue from '../LatestConcludedIssue';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
 import IssueStatus from '../IssueStatus';
@@ -20,7 +20,7 @@ const AdminHome = () => (
         <IssueStatus />
       </div>
       <div className={css.components}>
-        <ConcludedIssue />
+        <LatestConcludedIssue />
         <UserSettings />
       </div>
       <ConcludedIssueListContainer />

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import IssueStatus from '../IssueStatus';
 import { VotingMenuContainer } from './VotingMenu';
 import { IssueContainer } from './Issue';
-import ConcludedIssue from '../ConcludedIssue';
+import LatestConcludedIssue from '../LatestConcludedIssue';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
 import { activeIssueExists } from '../../selectors/issues';
@@ -21,7 +21,7 @@ const Home = ({ issueExists, registered }) => (
       { issueExists && <IssueStatus /> }
     </div>
     <div className={css.components}>
-      <ConcludedIssue />
+      <LatestConcludedIssue />
       <UserSettings />
     </div>
     <ConcludedIssueListContainer />

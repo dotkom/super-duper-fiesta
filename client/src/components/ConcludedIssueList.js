@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
-import { getConcludedIssues } from '../selectors/issues';
+import { getConcludedIssuesExceptLatest } from '../selectors/issues';
 import { concludedIssueListIsEnabled } from '../selectors/userSettings';
 
 const sortIssues = issues => (
@@ -39,7 +39,7 @@ ConcludedIssueList.propTypes = {
 export default ConcludedIssueList;
 
 const mapStateToProps = state => ({
-  issues: getConcludedIssues(state),
+  issues: getConcludedIssuesExceptLatest(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });
 

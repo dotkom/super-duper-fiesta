@@ -6,7 +6,7 @@ import {
   toggleNotification,
   toggleShowConcludedIssueList,
 } from '../actionCreators/userSettings';
-import { getConcludedIssues } from '../selectors/issues';
+import { getConcludedIssuesExceptLatest } from '../selectors/issues';
 import {
   notificationIsEnabled,
   concludedIssueListIsEnabled,
@@ -53,7 +53,7 @@ UserSettings.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  concludedIssues: getConcludedIssues(state),
+  concludedIssues: getConcludedIssuesExceptLatest(state),
   notificationsEnabled: notificationIsEnabled(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });
