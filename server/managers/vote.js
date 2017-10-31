@@ -58,7 +58,7 @@ const getPublicVote = (vote, secret, showOnlyWinner) => ({
   question: vote.question,
   user: (showOnlyWinner || secret) ? '' : vote.user,
   alternative: showOnlyWinner ? '' : vote.alternative,
-  randomName: secret ? generateSillyName(vote.user) : null,
+  randomName: secret ? generateSillyName(vote.question + vote.user) : null,
 });
 
 const generatePublicVote = async (id, vote) => {
