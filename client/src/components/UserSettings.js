@@ -21,22 +21,20 @@ const UserSettings = ({
   concludedIssueListToggle,
 }) => (
   <div className={css.component}>
-    <div className={css.toggleButtons}>
-      <Button
-        background
-        size="lg"
-        onClick={notificationToggle}
-      >
-        Skru { notificationsEnabled ? 'av' : 'på' } notifikasjoner
-      </Button>
-      {Object.keys(concludedIssues).length > 0 && <Button
-        background
-        size="lg"
-        onClick={concludedIssueListToggle}
-      >
-        {concludedIssueListEnabled ? 'Skjul' : 'Vis'} konkluderte saker
-      </Button>}
-    </div>
+    <Button
+      background
+      size="lg"
+      onClick={notificationToggle}
+    >
+      Skru { notificationsEnabled ? 'av' : 'på' } notifikasjoner
+    </Button>
+    {Object.keys(concludedIssues).length > 0 && <Button
+      background
+      size="lg"
+      onClick={concludedIssueListToggle}
+    >
+      {concludedIssueListEnabled ? 'Skjul' : 'Vis'} konkluderte saker
+    </Button>}
   </div>
 );
 
