@@ -6,8 +6,8 @@ const getActiveQuestion = require('../models/issue').getActiveQuestion;
 const { getConcludedIssues } = require('../models/issue');
 const { getUserVote, getVotes } = require('../models/vote');
 const { generatePublicVote } = require('../managers/vote');
-const { getAnonymousUser } = require('../models/user');
-const { validatePasswordHash } = require('../managers/user');
+const { getAnonymousUser, getUsers } = require('../models/user');
+const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 const { publicMeeting } = require('../managers/meeting');
 
@@ -23,6 +23,7 @@ const {
   RECEIVE_VOTE: SEND_VOTE,
   USER_VOTE,
 } = require('../../common/actionTypes/voting');
+const { RECEIVE_USER_LIST: USER_LIST } = require('../../common/actionTypes/users');
 
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
@@ -121,7 +122,13 @@ const emitGenforsData = async (socket) => {
       emitError(socket, new Error('Ingen aktiv generalforsamling.'));
       return;
     }
-    emit(socket, OPEN_MEETING, publicMeeting(meeting, userIsAdmin(await socket.request.user())));
+
+    const isAdmin = userIsAdmin(await socket.request.user());
+
+    const users = await getUsers(meeting);
+    emit(socket, USER_LIST, users.map(user => publicUser(user, isAdmin)));
+
+    emit(socket, OPEN_MEETING, publicMeeting(meeting, isAdmin));
     await emitActiveQuestion(socket, meeting);
 
     // Fill backlog of old issues too

@@ -4,6 +4,7 @@ const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById } = require('../models/issue');
 const { haveIVoted, createVote } = require('../models/vote');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
+const generateSillyName = require('../utils/sillyName');
 
 async function addVote(issueId, user, alternative, voter) {
   let issue;
@@ -57,6 +58,7 @@ const getPublicVote = (vote, secret, showOnlyWinner) => ({
   question: vote.question,
   user: (showOnlyWinner || secret) ? '' : vote.user,
   alternative: showOnlyWinner ? '' : vote.alternative,
+  randomName: secret ? generateSillyName(vote.question + vote.user) : null,
 });
 
 const generatePublicVote = async (id, vote) => {

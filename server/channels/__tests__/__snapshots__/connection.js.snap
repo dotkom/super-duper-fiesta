@@ -35,6 +35,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -83,6 +96,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": "Sourtaker Foot",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -95,6 +109,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": "Sourtaker Foot",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -107,6 +122,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": "Sourtaker Foot",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -119,6 +135,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": "Sourtaker Foot",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -363,6 +380,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -576,6 +606,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -624,6 +667,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -636,6 +680,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -648,6 +693,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -660,6 +706,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -698,6 +745,19 @@ Array [
         "registered": true,
       },
       "type": "AUTH_REGISTERED",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
     },
   ],
   Array [
@@ -782,6 +842,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -830,6 +903,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -842,6 +916,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -854,6 +929,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -866,6 +942,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1110,6 +1187,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -1313,6 +1403,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -1361,6 +1464,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1373,6 +1477,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1385,6 +1490,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1397,6 +1503,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1651,6 +1758,19 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "name": "Namy",
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "registrationOpen": true,
@@ -1699,6 +1819,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1711,6 +1832,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1723,6 +1845,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1735,6 +1858,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -1979,6 +2103,22 @@ Array [
   Array [
     "action",
     Object {
+      "data": Array [
+        Object {
+          "_id": "123",
+          "canVote": true,
+          "completedRegistration": true,
+          "name": "Namy",
+          "permissions": 5,
+          "registerDate": undefined,
+        },
+      ],
+      "type": "USER_LIST",
+    },
+  ],
+  Array [
+    "action",
+    Object {
       "data": Object {
         "id": "1",
         "pin": 3141592653,
@@ -2028,6 +2168,7 @@ Array [
         "_id": "1",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -2040,6 +2181,7 @@ Array [
         "_id": "2",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -2052,6 +2194,7 @@ Array [
         "_id": "3",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",
@@ -2064,6 +2207,7 @@ Array [
         "_id": "4",
         "alternative": "3",
         "question": "1",
+        "randomName": null,
         "user": "1",
       },
       "type": "ADD_VOTE",

@@ -1,0 +1,11 @@
+.component {
+  margin-top: 2rem;
+}
+
+.vote {
+  font-weight: 300;
+}
+
+.vote + .vote {
+  margin-top: 1rem;
+}
