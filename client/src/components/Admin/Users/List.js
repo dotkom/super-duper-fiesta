@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { adminToggleCanVote } from '../../../actionCreators/users';
-import User from './User';
+import { UserContainer } from './User';
 import css from './List.css';
 import { CAN_VOTE } from '../../../../../common/auth/permissions';
 
@@ -39,7 +39,7 @@ const UserList = ({ users, toggleCanVote }) => {
           .sort((a, b) => users[a].name > users[b].name)
           .map((key) => {
             const user = users[key];
-            return (<User
+            return (<UserContainer
               name={user.name}
               canVote={user.canVote}
               completedRegistration={user.completedRegistration}

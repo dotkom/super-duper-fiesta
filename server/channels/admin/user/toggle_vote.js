@@ -1,11 +1,18 @@
-const { broadcastAndEmit, emitError } = require('../../../utils');
+const { adminBroadcastAndEmit, broadcastAndEmit, emitError } = require('../../../utils');
 const logger = require('../../../logging');
 
+const { getActiveGenfors } = require('../../../models/meeting');
 const { getUserById, updateUserById } = require('../../../models/user');
-const { CAN_VOTE } = require('../../../../common/auth/permissions');
+const { canEdit } = require('../../../managers/meeting');
+const { publicUser, setUserPermissions } = require('../../../managers/user');
+const { CAN_VOTE, IS_MANAGER } = require('../../../../common/auth/permissions');
 
-const { ADMIN_TOGGLE_CAN_VOTE: TOGGLE_CAN_VOTE, TOGGLE_CAN_VOTE: TOGGLED_CAN_VOTE } =
-  require('../../../../common/actionTypes/users');
+const {
+  ADD_USER,
+  ADMIN_TOGGLE_CAN_VOTE: TOGGLE_CAN_VOTE,
+  TOGGLE_CAN_VOTE: TOGGLED_CAN_VOTE,
+  ADMIN_SET_PERMISSIONS,
+ } = require('../../../../common/actionTypes/users');
 
 const toggleCanVote = async (socket, data) => {
   const adminUser = await socket.request.user();
@@ -46,11 +53,34 @@ const toggleCanVote = async (socket, data) => {
   }
 };
 
+async function adminSetPermissions(socket, data) {
+  const adminUser = await socket.request.user();
+  const { permissions, id: userId } = data;
+
+  try {
+    if (await !canEdit(IS_MANAGER, adminUser, await getActiveGenfors())) {
+      emitError(socket, new Error('Du har ikke rettigheter til å oppdatere andres rettigheter'));
+      return;
+    }
+    const updatedUser = await setUserPermissions(userId, permissions);
+    adminBroadcastAndEmit(socket, ADD_USER, publicUser(updatedUser, true));
+  } catch (err) {
+    logger.error('Setting user permissions failed', { err });
+    emitError(socket, new Error('Noe gikk galt under oppdatering av brukerens rettigheter'));
+  }
+
+  toggleCanVote(socket, { id: userId, canVote: data.canVote });
+}
+
 const listener = (socket) => {
   socket.on('action', (data) => {
     switch (data.type) {
       case TOGGLE_CAN_VOTE: {
         toggleCanVote(socket, data);
+        break;
+      }
+      case ADMIN_SET_PERMISSIONS: {
+        adminSetPermissions(socket, data);
         break;
       }
       default:
@@ -61,5 +91,6 @@ const listener = (socket) => {
 
 module.exports = {
   listener,
+  adminSetPermissions,
   toggleCanVote,
 };
