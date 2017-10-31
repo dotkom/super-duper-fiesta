@@ -9,36 +9,24 @@ const sortIssues = issues => (
   (a, b) => new Date(issues[b].date) - new Date(issues[a].date)
 );
 
-class ConcludedIssueList extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      visible: false,
-    };
-  }
-
-  render() {
-    const issues = this.props.issues;
-
-    return (
-      <div>
-        <div className={css.concludedIssueList}>
-          {this.props.concludedIssueListEnabled && Object.keys(issues)
-            .sort(sortIssues(issues))
-            .map((issue) => {
-              const winner = issues[issue].winner;
-              const majority = winner !== null;
-              return (<ConcludedIssue
-                key={issues[issue].id}
-                majority={majority}
-                {...issues[issue]}
-              />);
-            })}
-        </div>
+function ConcludedIssueList({ concludedIssueListEnabled, issues }) {
+  return (
+    <div>
+      <div className={css.concludedIssueList}>
+        {concludedIssueListEnabled && Object.keys(issues)
+          .sort(sortIssues(issues))
+          .map((issue) => {
+            const winner = issues[issue].winner;
+            const majority = winner !== null;
+            return (<ConcludedIssue
+              key={issues[issue].id}
+              majority={majority}
+              {...issues[issue]}
+            />);
+          })}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 ConcludedIssueList.propTypes = {
