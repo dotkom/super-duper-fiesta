@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import { requestUserList, adminToggleCanVote } from '../../../actionCreators/users';
 import User from './User';
 import css from './List.css';
+import { CAN_VOTE } from '../../../../../common/auth/permissions';
 
 class UserList extends React.Component {
   constructor(props) {
@@ -12,14 +13,31 @@ class UserList extends React.Component {
   }
   render() {
     const { users, toggleCanVote } = this.props;
+    const userKeys = Object.keys(users);
+    const totalUsers = userKeys.length;
+    const usersCanVote = userKeys
+      .filter(u => users[u].canVote)
+      .length;
+    const usersHasPermsToVote = userKeys
+      .filter(u => users[u].permissions >= CAN_VOTE)
+      .length;
+    const usersRegistered = userKeys
+      .filter(u => users[u].completedRegistration)
+      .length;
     return (
       <table className={css.list}>
         <thead>
           <tr>
-            <th className={css.left}>Bruker</th>
-            <th className={css.right} title="Har fullført oppmøteregistrering">Registrert</th>
-            <th className={css.right}>Rettigheter</th>
-            <th className={css.right}>Stemmeberettigelse</th>
+            <th className={css.left}>Bruker ({totalUsers})</th>
+            <th className={css.right} title="Har fullført oppmøteregistrering">
+              Registrert ({usersRegistered})
+            </th>
+            <th className={css.right} title="(Antall med stemmerett)">
+              Rettigheter ({usersHasPermsToVote})
+            </th>
+            <th className={css.right}>
+              Stemmeberettigelse ({usersCanVote}/{usersHasPermsToVote})
+            </th>
           </tr>
         </thead>
         <tbody>
