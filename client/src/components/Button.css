@@ -58,6 +58,6 @@
   font-size: 1rem;
 }
 
-.background + .background {
+h3 + .background + .background {
   margin-left: 0.5rem;
 }
