@@ -21,7 +21,10 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
 
 const concludedIssues = state => (
   state.issues && Object.keys(state.issues)
-  .filter(issue => state.issues[issue].status === VOTING_FINISHED)
+  .filter(issue => (
+    state.issues[issue].status === VOTING_FINISHED
+    && !state.issues[issue].active),
+  )
   .map(issue => state.issues[issue])
 );
 
