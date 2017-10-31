@@ -65,6 +65,7 @@ class Setup extends Component {
       const passwordHash = SHA256(privateCode + username).toString();
       this.props.register(pin, passwordHash);
       Cookies.set('passwordHash', passwordHash);
+      window.location.reload(); // Reload page after submitting to update cookies.
     }
   }
 
