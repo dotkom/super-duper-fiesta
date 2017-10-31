@@ -29,7 +29,7 @@ Raven
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['notification'],
+  whitelist: ['userSettings'],
 };
 
 const socket = IO.connect();
