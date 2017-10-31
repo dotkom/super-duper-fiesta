@@ -5,7 +5,7 @@ import IssueStatus from '../IssueStatus';
 import { VotingMenuContainer } from './VotingMenu';
 import { IssueContainer } from './Issue';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';
-import NotificationToggle from '../NotificationToggle';
+import UserSettings from '../UserSettings';
 import { activeIssueExists } from '../../selectors/issues';
 import css from '../../css/Home.css';
 
@@ -19,7 +19,7 @@ const Home = ({ issueExists, registered }) => (
       </div>
       { issueExists && <IssueStatus /> }
     </div>
-    <NotificationToggle />
+    <UserSettings />
     <ConcludedIssueListContainer />
   </div>
 );
