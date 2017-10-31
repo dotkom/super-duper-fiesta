@@ -20,7 +20,9 @@ const AdminHome = () => (
         <IssueStatus />
       </div>
       <div className={css.components}>
-        <LatestConcludedIssue />
+        <div className={css.latestIssue}>
+          <LatestConcludedIssue />
+        </div>
         <UserSettings />
       </div>
       <ConcludedIssueListContainer />
