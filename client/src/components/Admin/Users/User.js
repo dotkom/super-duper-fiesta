@@ -1,13 +1,24 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
+import Button from '../../Button';
+import Dialog from '../../Dialog';
 import css from './User.css';
 import { CAN_VOTE, getPermissionDisplay } from '../../../../../common/auth/permissions';
+import { adminSetPermissions } from '../../../actionCreators/users';
 
 class User extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showToggleCanVoteWarning: false,
+    };
+  }
+
+  canVoteHandler(id, toggleTo) {
+    this.setState({ showToggleCanVoteWarning: false });
+    this.props.setPermissions(id, toggleTo, CAN_VOTE);
   }
 
   render() {
@@ -46,10 +57,28 @@ class User extends React.Component {
           {permissionLevel}
         </td>
         <td className={css.right}>
+          <Dialog
+            title="Gi stemmerett"
+            subtitle={'Denne personen er ikke medlem av Online. Ønsker du å ' +
+            'gi dem stemmerett?'}
+            visible={this.state.showToggleCanVoteWarning}
+            onClose={() => this.setState({ showToggleCanVoteWarning: false })}
+          >
+            <p>Dette kan bare gjøres dersom generalforsamlingen vedtar det.</p>
+            <Button
+              background
+              onClick={() => this.canVoteHandler(id, true)}
+            >Bekreft</Button>
+            <Button
+              background
+              onClick={() => this.setState({ showToggleCanVoteWarning: false })}
+            >Avbryt</Button>
+          </Dialog>
           <button
             className={css.action}
-            disabled={permissions < CAN_VOTE}
-            onClick={() => toggleCanVote(id, true)}
+            onClick={() => (permissions >= CAN_VOTE
+              ? toggleCanVote(id, true)
+              : this.setState({ showToggleCanVoteWarning: true }))}
           >
             <div
               className={permissions >= CAN_VOTE ? successToggle : css.unavailable}
@@ -58,7 +87,10 @@ class User extends React.Component {
                 : 'Brukeren har ikke rett til å få stemmerett.'}
             />
           </button>
-          <button className={css.action} onClick={() => toggleCanVote(id, false)}>
+          <button
+            className={css.action}
+            onClick={() => toggleCanVote(id, false)}
+          >
             <div className={closeToggle} title="Fjern brukerens stemmerett" />
           </button>
         </td>
@@ -74,7 +106,16 @@ User.propTypes = {
   id: PropTypes.string.isRequired,
   permissions: PropTypes.number.isRequired,
   registered: PropTypes.string.isRequired,
+  setPermissions: PropTypes.func.isRequired,
   toggleCanVote: PropTypes.func.isRequired,
 };
 
+const mapDispatchToProps = ({
+  setPermissions: adminSetPermissions,
+});
+
 export default User;
+export const UserContainer = connect(
+  null,
+  mapDispatchToProps,
+)(User);
