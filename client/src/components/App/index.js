@@ -56,11 +56,11 @@ class App extends React.Component {
               <Route exact path={match.path} component={AppHomeContainer} />
               <Route component={NotFound} />
             </Switch>
-            : <Link to="/login">
+            : <a href="/login">
               <h2 className={css.loginRequired}>
                 Vennligst logg inn for å få tilgang til generalforsamlingen
               </h2>
-            </Link>
+            </a>
           }
         </main>
       </div>
