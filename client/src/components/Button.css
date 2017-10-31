@@ -19,7 +19,7 @@
 
 .background {
   color: #fff;
-  background: #686b92;
+  background: #666a99;
   font-weight: bold;
   border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 2px;
@@ -29,17 +29,18 @@
 
 .background:hover {
   color: #fff;
-  background: #888db5;
+  background: #8588ad;
 }
 
 .background:active {
-  background: #abaec5;
+  background: #a3a6c2;
 }
 
 .button:disabled {
-  background: #747586;
+  background: #9497b8;
   color: white;
-  cursor: not-allowed
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .size-sm {
@@ -57,6 +58,6 @@
   font-size: 1rem;
 }
 
-.background + .background {
+h3 + .background + .background {
   margin-left: 0.5rem;
 }

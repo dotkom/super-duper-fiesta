@@ -3,19 +3,26 @@ import { connect } from 'react-redux';
 import VoteCounter from '../components/VoteCounter';
 import Alternative from './Alternative';
 import { getShuffledAlternatives } from '../selectors/alternatives';
-import { activeIssueExists, getIssue, getIssueKey } from '../selectors/issues';
+import { activeIssueExists, getIssue, getIssueKey, getOwnVote } from '../selectors/issues';
 import css from './VoteStatus.css';
 import { VOTING_NOT_STARTED } from '../../../common/actionTypes/issues';
 
 const VoteStatus = ({
-  activeIssue, voteCount, userCount, alternatives, votePercentages, showOnlyWinner, issueStatus,
+  activeIssue,
+  alternatives,
+  hasVoted,
+  issueStatus,
+  showOnlyWinner,
+  userCount,
+  voteCount,
+  votePercentages,
   }) => (
     <div className={css.status}>
       {activeIssue &&
         <VoteCounter label="Stemmer totalt" count={voteCount} total={userCount} />}
 
       {issueStatus !== VOTING_NOT_STARTED
-      ? (!showOnlyWinner && alternatives) &&
+      ? !showOnlyWinner && alternatives && hasVoted &&
         alternatives.map(alternative =>
           <VoteCounter
             label={alternative.text}
@@ -39,12 +46,13 @@ VoteStatus.defaultProps = {
 
 VoteStatus.propTypes = {
   activeIssue: PropTypes.bool.isRequired,
-  voteCount: VoteCounter.propTypes.count.isRequired,
-  userCount: VoteCounter.propTypes.total,
   alternatives: PropTypes.arrayOf(PropTypes.shape(Alternative.propTypes)),
-  showOnlyWinner: PropTypes.bool,
-  votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
+  hasVoted: PropTypes.bool.isRequired,
   issueStatus: PropTypes.string,
+  showOnlyWinner: PropTypes.bool,
+  userCount: VoteCounter.propTypes.total,
+  voteCount: VoteCounter.propTypes.count.isRequired,
+  votePercentages: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -75,6 +83,7 @@ const mapStateToProps = (state) => {
 
   return {
     activeIssue: activeIssueExists(state),
+    hasVoted: !!getOwnVote(state, state.auth.id),
     voteCount,
     userCount,
     alternatives,

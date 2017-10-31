@@ -8,7 +8,7 @@ import registrationEnabled from './adminButtons';
 import userFilter from './userFilter';
 import users from './users';
 import error from './error';
-import notification from './notification';
+import userSettings from './userSettings';
 
 const votingApp = {
   auth,
@@ -21,7 +21,7 @@ const votingApp = {
   users,
   version,
   error,
-  notification,
+  userSettings,
 };
 
 export default votingApp;

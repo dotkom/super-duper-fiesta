@@ -44,11 +44,11 @@ Issue.defaultProps = {
 };
 
 Issue.propTypes = {
-  issueExists: React.PropTypes.boolean,
+  issueExists: React.PropTypes.bool,
   text: React.PropTypes.string,
-  secret: React.PropTypes.boolean,
-  showOnlyWinner: React.PropTypes.boolean,
-  countingBlankVotes: React.PropTypes.boolean,
+  secret: React.PropTypes.bool,
+  showOnlyWinner: React.PropTypes.bool,
+  countingBlankVotes: React.PropTypes.bool,
   voteDemand: React.PropTypes.string,
 };
 

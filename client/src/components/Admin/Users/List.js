@@ -4,37 +4,57 @@ import Fuse from 'fuse.js';
 import { adminToggleCanVote } from '../../../actionCreators/users';
 import User from './User';
 import css from './List.css';
+import { CAN_VOTE } from '../../../../../common/auth/permissions';
 
-const UserList = ({ users, toggleCanVote }) => (
-  <table className={css.list}>
-    <thead>
-      <tr>
-        <th className={css.left}>Bruker</th>
-        <th className={css.right} title="Har fullført oppmøteregistrering">Registrert</th>
-        <th className={css.right}>Rettigheter</th>
-        <th className={css.right}>Stemmeberettigelse</th>
-      </tr>
-    </thead>
-    <tbody>
-      {Object.keys(users)
-        .sort((a, b) => users[a].name > users[b].name)
-        .map((key) => {
-          const user = users[key];
-          return (<User
-            name={user.name}
-            canVote={user.canVote}
-            completedRegistration={user.completedRegistration}
-            key={user.id}
-            permissions={user.permissions}
-            registered={user.registered}
-            toggleCanVote={toggleCanVote}
-            id={user.id}
-          />);
-        },
-      )}
-    </tbody>
-  </table>
-);
+const UserList = ({ users, toggleCanVote }) => {
+  const userKeys = Object.keys(users);
+  const totalUsers = userKeys.length;
+  const usersCanVote = userKeys
+    .filter(u => users[u].canVote)
+    .length;
+  const usersHasPermsToVote = userKeys
+    .filter(u => users[u].permissions >= CAN_VOTE)
+    .length;
+  const usersRegistered = userKeys
+    .filter(u => users[u].completedRegistration)
+    .length;
+  return (
+    <table className={css.list}>
+      <thead>
+        <tr>
+          <th className={css.left}>Bruker ({totalUsers})</th>
+          <th className={css.right} title="Har fullført oppmøteregistrering">
+            Registrert ({usersRegistered})
+          </th>
+          <th className={css.right} title="(Antall med stemmerett)">
+            Rettigheter ({usersHasPermsToVote})
+          </th>
+          <th className={css.right}>
+            Stemmeberettigelse ({usersCanVote}/{usersHasPermsToVote})
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.keys(users)
+          .sort((a, b) => users[a].name > users[b].name)
+          .map((key) => {
+            const user = users[key];
+            return (<User
+              name={user.name}
+              canVote={user.canVote}
+              completedRegistration={user.completedRegistration}
+              key={user.id}
+              permissions={user.permissions}
+              registered={user.registered}
+              toggleCanVote={toggleCanVote}
+              id={user.id}
+            />);
+          },
+        )}
+      </tbody>
+    </table>
+  );
+};
 
 UserList.propTypes = {
   users: PropTypes.objectOf(PropTypes.shape({

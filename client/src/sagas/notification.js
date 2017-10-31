@@ -1,8 +1,8 @@
 import { call, takeLatest, select } from 'redux-saga/effects';
 import { OPEN_ISSUE } from '../../../common/actionTypes/issues';
-import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/notification';
+import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/userSettings';
 import { notify, notifyPermission } from '../utils/notification';
-import { notificationIsEnabled } from '../selectors/notification';
+import { notificationIsEnabled } from '../selectors/userSettings';
 
 function* openIssue(action) {
   const { description } = action.data;
