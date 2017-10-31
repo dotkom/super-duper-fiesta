@@ -19,6 +19,8 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
   return defaultValue;
 };
 
+const sortIssues = (a, b) => new Date(b.date) - new Date(a.date);
+
 const concludedIssues = state => (
   state.issues && Object.keys(state.issues)
   .filter(issue => (
@@ -26,6 +28,7 @@ const concludedIssues = state => (
     && !state.issues[issue].active),
   )
   .map(issue => state.issues[issue])
+  .sort(sortIssues)
 );
 
 export const getLatestConcludedIssue = createSelector(
