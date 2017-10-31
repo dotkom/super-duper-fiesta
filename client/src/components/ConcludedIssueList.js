@@ -39,8 +39,7 @@ ConcludedIssueList.propTypes = {
 export default ConcludedIssueList;
 
 const mapStateToProps = state => ({
-  issues: state.votingEnabled ?
-    getConcludedIssues(state) : state.issues,
+  issues: getConcludedIssues(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });
 

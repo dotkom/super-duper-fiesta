@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { VOTING_FINISHED } from '../../../common/actionTypes/issues';
 
 export const activeIssueExists = state => (
   state.issues && Object.keys(state.issues).some(id => state.issues[id].active)
@@ -20,7 +21,7 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
 
 export const getConcludedIssues = state => (
   state.issues && Object.keys(state.issues)
-    .filter(issue => !state.issues[issue].active)
+    .filter(issue => state.issues[issue].status === VOTING_FINISHED)
     .map(issue => state.issues[issue])
     .reduce((a, b) => ({
       ...a,
