@@ -1,0 +1,15 @@
+.component {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.component > .toggleButtons {
+  width: 20rem;
+}
+
+.toggleButtons {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-end;
+  width: 100%;
+}
