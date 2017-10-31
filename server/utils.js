@@ -27,6 +27,11 @@ const adminBroadcast = (socket, channel, payload, metadata) => {
   socket.to('admin').emit('action', createSocketObject(channel, payload, metadata));
 };
 
+function adminBroadcastAndEmit(socket, channel, payload, metadata) {
+  adminBroadcast(socket, channel, payload, metadata);
+  emit(socket, channel, payload, metadata);
+}
+
 let errorCounter = 0;
 
 const emitError = (socket, error) => {
@@ -46,5 +51,6 @@ module.exports = {
   emit,
   broadcastAndEmit,
   adminBroadcast,
+  adminBroadcastAndEmit,
   emitError,
 };
