@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Button from '../../Button';
+import Dialog from '../../Dialog';
 import { adminDeleteIssue, createIssue } from '../../../actionCreators/adminButtons';
 import { RESOLUTION_TYPES } from '../../../../../common/actionTypes/voting';
 import { activeIssueExists, getIssue } from '../../../selectors/issues';
@@ -65,6 +66,7 @@ class IssueForm extends React.Component {
 
     this.state = Object.assign(issueContents, {
       redirectToAdminHome: false,
+      showUpdateIssuePrompt: false,
     });
   }
 
@@ -166,6 +168,23 @@ class IssueForm extends React.Component {
       && this.state.issueDescription.length;
     return (
       <DocumentTitle title="Ny sak">
+        <div>
+          <Dialog
+            title="Bekreft oppdatering av sak"
+            subtitle={'Ved oppdatering av en sak vil aktiv sak lukkes og det åpnes en ny ' +
+            'med de nye innstillingene.'}
+            visible={this.state.showUpdateIssuePrompt}
+            onClose={() => this.setState({ showUpdateIssuePrompt: false })}
+          >
+            <Button
+              background
+              onClick={() => this.handleUpdateIssue()}
+            >Bekreft</Button>
+            <Button
+              background
+              onClick={() => this.setState({ showUpdateIssuePrompt: false })}
+            >Avbryt</Button>
+          </Dialog>
         <div className={css.form}>
           {showActiveIssueWarning && <p
             className={css.warning}
@@ -219,7 +238,7 @@ class IssueForm extends React.Component {
           {this.props.activeIssue ?
             <Button
               background
-              onClick={() => this.handleUpdateIssue()}
+              onClick={() => this.setState({ showUpdateIssuePrompt: true })}
               size="lg"
             >Oppdater aktiv sak</Button> :
             <Button
@@ -228,6 +247,7 @@ class IssueForm extends React.Component {
               disabled={!issueReadyToCreate}
               size="lg"
             >Opprett ny sak</Button>}
+        </div>
         </div>
       </DocumentTitle>
     );
