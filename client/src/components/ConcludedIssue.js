@@ -20,6 +20,7 @@ const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives, vote
   >
     <ul className={css.alternatives}>
       {alternatives
+        .sort((_, a) => a.id === winner)
         .map(alternative => (
           <li
             key={alternative.id}
