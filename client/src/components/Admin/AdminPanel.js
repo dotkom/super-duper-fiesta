@@ -9,6 +9,7 @@ import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 import { endGAM, toggleRegistration } from '../../actionCreators/meeting';
+import NewVersionAvailable from '../NewVersionAvailable';
 import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 import { AdminLoginContainer } from './AdminLogin';
@@ -21,7 +22,20 @@ class AdminPanel extends React.Component {
       showRegistrationDialog: false,
       openRegistration: false,
       showEndGAMDialog: false,
+      newVersionAvailable: false,
+      currentVersion: props.version,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // If no version stored in state, store the incoming version.
+    if (this.state && !this.state.currentVersion.length) {
+      this.setState({
+        currentVersion: nextProps.version,
+      });
+    } else if (this.state.currentVersion !== nextProps.version) {
+      this.setState({ newVersionAvailable: true });
+    }
   }
 
   openRegistrationDialog() {
@@ -53,6 +67,9 @@ class AdminPanel extends React.Component {
 
     return (
       <div>
+        <NewVersionAvailable
+          newVersionAvailable={this.state.newVersionAvailable}
+        />
         {permissionDenied || !this.props.meetingExists ?
           <Route component={AdminLoginContainer} /> :
           <div>
@@ -118,6 +135,7 @@ AdminPanel.propTypes = {
   })).isRequired,
   meetingExists: PropTypes.bool.isRequired,
   userPermissions: PropTypes.number.isRequired,
+  version: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -127,6 +145,7 @@ const mapStateToProps = state => ({
                  state.meeting.title.length > 0,
   registrationOpen: state.meeting.registrationOpen,
   userPermissions: state.auth.permissions,
+  version: state.version,
 });
 
 const mapDispatchToProps = dispatch => ({
