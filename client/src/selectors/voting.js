@@ -37,6 +37,7 @@ export const voteWithNameSelector = createSelector(
       }
       return 0;
     })
+    .filter(vote => !!vote.alternative)
     .map(({ randomName, voter, alternative }) => {
       let name;
       if (issue.secret) {
