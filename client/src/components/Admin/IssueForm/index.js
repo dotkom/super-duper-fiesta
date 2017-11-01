@@ -47,7 +47,7 @@ const blankIssue = {
 function getIssueContents(issue) {
   return Object.assign(blankIssue, {
     issueDescription: issue.text || '',
-    alternatives: issue.alternatives || {},
+    alternatives: issue.alternatives ? issue.alternatives.filter(alt => alt.text !== 'Blank') : {},
     secretVoting: issue.secret || false,
     showOnlyWinner: issue.showOnlyWinner || false,
     countBlankVotes: issue.countingBlankVotes || false,
