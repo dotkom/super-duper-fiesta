@@ -19,17 +19,18 @@ const ConcludedIssue = ({ majority, winner, voteDemand, text, alternatives, vote
     subtitle={`Flertallskrav: ${getResolutionTypeDisplay(voteDemand).name} (${getResolutionTypeDisplay(voteDemand).voteDemandText})`}
   >
     <ul className={css.alternatives}>
-      {alternatives.map(alternative => (
-        <li
-          key={alternative.id}
-          className={classNames({
-            [css.alternativesWinner]:
-              majority
-              && alternative.id === winner,
-          })}
-        >
-          {alternative.text}{ Object.keys(votes).length > 0 && `: ${votes[alternative.id]}` }
-        </li>
+      {alternatives
+        .map(alternative => (
+          <li
+            key={alternative.id}
+            className={classNames({
+              [css.alternativesWinner]:
+                majority
+                && alternative.id === winner,
+            })}
+          >
+            {alternative.text}{ Object.keys(votes).length > 0 && `: ${votes[alternative.id]}` }
+          </li>
       ))}
     </ul>
   </Card>
