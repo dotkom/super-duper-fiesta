@@ -3,6 +3,7 @@
   display: inline-flex;
   flex-direction: column;
   font-size: 0.8rem;
+  word-break: normal;
 }
 
 .iconText:before {
