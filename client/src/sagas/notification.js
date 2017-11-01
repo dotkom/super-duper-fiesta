@@ -1,13 +1,13 @@
 import { call, takeLatest, select } from 'redux-saga/effects';
-import { OPEN_ISSUE } from '../../../common/actionTypes/issues';
+import { OPEN_ISSUE, VOTING_IN_PROGRESS } from '../../../common/actionTypes/issues';
 import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/userSettings';
 import { notify, notifyPermission } from '../utils/notification';
 import { notificationIsEnabled } from '../selectors/userSettings';
 
 function* openIssue(action) {
-  const { description } = action.data;
+  const { description, status } = action.data;
   const notificationEnabled = yield select(notificationIsEnabled);
-  if (notificationEnabled) {
+  if (notificationEnabled && status === VOTING_IN_PROGRESS) {
     yield call(notify, description);
   }
 }
