@@ -2,7 +2,7 @@ export function notify(title) {
   if (Notification.permission === 'granted') {
     // New is required
     // eslint-disable-next-line no-new
-    new Notification('En ny sak ble akkurat åpnet', {
+    new Notification('En sak har akkurat åpnet for votering', {
       body: `«${title}»`,
     });
   }
