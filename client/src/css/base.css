@@ -23,3 +23,12 @@ h1, h2, h3, h4 {
 p {
   margin-bottom: 0;
 }
+
+a {
+  color: #636bb2;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #8186b3;
+}
