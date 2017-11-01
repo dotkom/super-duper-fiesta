@@ -37,11 +37,18 @@ const socket = IO.connect();
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 const sagaMiddleware = createSagaMiddleware();
 
+let middleware = [socketIoMiddleware, sagaMiddleware];
+if (process.env.NODE_ENV !== 'production') {
+  middleware = [...middleware, logger];
+}
+
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   persistCombineReducers(persistConfig, votingApp),
-  composeEnhancers(applyMiddleware(socketIoMiddleware, sagaMiddleware, logger)),
+  (process.env.NODE_ENV !== 'production')
+    ? composeEnhancers(applyMiddleware(...middleware))
+    : applyMiddleware(...middleware),
 );
 const persistor = persistStore(store);
 
