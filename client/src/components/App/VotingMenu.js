@@ -7,6 +7,7 @@ import { activeIssueExists, getIssue, getIssueId, getOwnVote, getIssueKey } from
 import Alternatives from '../Alternatives';
 import Button from '../Button';
 import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from '../../../../common/actionTypes/issues';
+import css from './VotingMenu.css';
 
 class VotingMenu extends React.Component {
   constructor(props) {
@@ -61,24 +62,26 @@ class VotingMenu extends React.Component {
           handleChange={(...a) => this.handleChange(...a)}
           selectedVote={selected}
         />
-        {issueIsActive && votingInProgress && <Button
-          background
-          size="lg"
-          onClick={() => this.handleClick()}
-          disabled={canVote || !votingInProgress}
-        >
-          {hasVoted ? 'Du har stemt' : 'Avgi stemme'}
-        </Button>}
-        {hasVoted && (
-          <Button
+        <div className={css.buttons}>
+          {issueIsActive && votingInProgress && <Button
             background
             size="lg"
-            onClick={() => this.toggleVoteDisplay()}
+            onClick={() => this.handleClick()}
+            disabled={canVote || !votingInProgress}
           >
-            {displayVote ?
-              'Skjul min stemme' : 'Vis min stemme'}
-          </Button>
-        )}
+            {hasVoted ? 'Du har stemt' : 'Avgi stemme'}
+          </Button>}
+          {hasVoted && (
+            <Button
+              background
+              size="lg"
+              onClick={() => this.toggleVoteDisplay()}
+            >
+              {displayVote ?
+                'Skjul min stemme' : 'Vis min stemme'}
+            </Button>
+          )}
+        </div>
       </div>
     );
   }
