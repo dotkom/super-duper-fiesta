@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { VOTING_FINISHED } from '../../../common/actionTypes/issues';
 
 export const activeIssueExists = state => (
   state.issues && Object.keys(state.issues).some(id => state.issues[id].active)
@@ -18,14 +19,32 @@ const getKeyForIssueObjIfExists = (state, key, defaultValue = undefined) => {
   return defaultValue;
 };
 
-export const getConcludedIssues = state => (
+const sortIssues = (a, b) => new Date(b.date) - new Date(a.date);
+
+const concludedIssues = state => (
   state.issues && Object.keys(state.issues)
-    .filter(issue => !state.issues[issue].active)
-    .map(issue => state.issues[issue])
+  .filter(issue => (
+    state.issues[issue].status === VOTING_FINISHED
+    && !state.issues[issue].active),
+  )
+  .map(issue => state.issues[issue])
+  .sort(sortIssues)
+);
+
+export const getLatestConcludedIssue = createSelector(
+  concludedIssues,
+  issues => (issues.length > 0 ? issues[0] : null),
+);
+
+export const getConcludedIssuesExceptLatest = createSelector(
+  concludedIssues,
+  issues =>
+    issues
+    .slice(1)
     .reduce((a, b) => ({
       ...a,
       [b.id]: b,
-    }), {})
+    }), {}),
 );
 
 export const getIssueText = state =>

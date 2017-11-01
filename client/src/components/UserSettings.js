@@ -6,7 +6,7 @@ import {
   toggleNotification,
   toggleShowConcludedIssueList,
 } from '../actionCreators/userSettings';
-import { getConcludedIssues } from '../selectors/issues';
+import { getConcludedIssuesExceptLatest } from '../selectors/issues';
 import {
   notificationIsEnabled,
   concludedIssueListIsEnabled,
@@ -21,22 +21,20 @@ const UserSettings = ({
   concludedIssueListToggle,
 }) => (
   <div className={css.component}>
-    <div className={css.toggleButtons}>
-      <Button
-        background
-        size="lg"
-        onClick={notificationToggle}
-      >
-        Skru { notificationsEnabled ? 'av' : 'på' } notifikasjoner
-      </Button>
-      {Object.keys(concludedIssues).length > 0 && <Button
-        background
-        size="lg"
-        onClick={concludedIssueListToggle}
-      >
-        {concludedIssueListEnabled ? 'Skjul' : 'Vis'} konkluderte saker
-      </Button>}
-    </div>
+    <Button
+      background
+      size="lg"
+      onClick={notificationToggle}
+    >
+      Skru { notificationsEnabled ? 'av' : 'på' } notifikasjoner
+    </Button>
+    {Object.keys(concludedIssues).length > 0 && <Button
+      background
+      size="lg"
+      onClick={concludedIssueListToggle}
+    >
+      {concludedIssueListEnabled ? 'Skjul' : 'Vis'} konkluderte saker
+    </Button>}
   </div>
 );
 
@@ -55,7 +53,7 @@ UserSettings.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  concludedIssues: getConcludedIssues(state),
+  concludedIssues: getConcludedIssuesExceptLatest(state),
   notificationsEnabled: notificationIsEnabled(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });

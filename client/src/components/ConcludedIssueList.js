@@ -2,19 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ConcludedIssue from './ConcludedIssue';
 import css from './ConcludedIssueList.css';
-import { getConcludedIssues } from '../selectors/issues';
+import { getConcludedIssuesExceptLatest } from '../selectors/issues';
 import { concludedIssueListIsEnabled } from '../selectors/userSettings';
-
-const sortIssues = issues => (
-  (a, b) => new Date(issues[b].date) - new Date(issues[a].date)
-);
 
 function ConcludedIssueList({ concludedIssueListEnabled, issues }) {
   return (
     <div>
       <div className={css.concludedIssueList}>
         {concludedIssueListEnabled && Object.keys(issues)
-          .sort(sortIssues(issues))
           .map((issue) => {
             const winner = issues[issue].winner;
             const majority = winner !== null;
@@ -39,8 +34,7 @@ ConcludedIssueList.propTypes = {
 export default ConcludedIssueList;
 
 const mapStateToProps = state => ({
-  issues: state.votingEnabled ?
-    getConcludedIssues(state) : state.issues,
+  issues: getConcludedIssuesExceptLatest(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),
 });
 

@@ -5,6 +5,10 @@
   margin: -2rem -0.5rem 0;
 }
 
+.components + .components {
+  margin-top: 1rem;
+}
+
 .components > * {
   margin: 2rem 0.5rem 0 0.5rem;
 }
@@ -13,4 +17,13 @@
   display: flex;
   flex: 4 20rem;
   flex-direction: column;
+}
+
+.latestIssue {
+  display: flex;
+  flex: 1 25rem;
+}
+
+.latestIssue > * {
+  margin: 0;
 }
