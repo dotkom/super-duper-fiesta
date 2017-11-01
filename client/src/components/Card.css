@@ -1,6 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  word-break: break-all;
   composes: border from "css/border.css";
 }
 
