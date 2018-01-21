@@ -1,9 +1,9 @@
 import { call, takeLatest, select } from 'redux-saga/effects';
-import { TOGGLE_NOTIFICATION } from '../../../common/actionTypes/userSettings';
-import { ENABLE_VOTING } from '../../../common/actionTypes/voting';
-import { notify, notifyPermission } from '../utils/notification';
-import { getIssueText } from '../selectors/issues';
-import { notificationIsEnabled } from '../selectors/userSettings';
+import { TOGGLE_NOTIFICATION } from '../../../../common/actionTypes/userSettings';
+import { ENABLE_VOTING } from '../../../../common/actionTypes/voting';
+import { notify, notifyPermission } from '../../utils/notification';
+import { getIssueText } from '../../selectors/issues';
+import { notificationIsEnabled } from '../../selectors/userSettings';
 
 function* openIssue() {
   const notificationEnabled = yield select(notificationIsEnabled);
