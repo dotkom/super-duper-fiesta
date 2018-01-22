@@ -1,7 +1,7 @@
 import {
   TOGGLE_NOTIFICATION,
   TOGGLE_SHOW_CONCLUDED_ISSUE_LIST,
-} from '../../../common/actionTypes/userSettings';
+} from 'common/actionTypes/userSettings';
 
 const initial = {
   notifications: false,

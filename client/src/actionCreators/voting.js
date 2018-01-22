@@ -1,5 +1,5 @@
 import { SUBMIT_ANONYMOUS_VOTE, SUBMIT_REGULAR_VOTE,
-  DISABLE_VOTING, ENABLE_VOTING, RECEIVE_VOTE } from '../../../common/actionTypes/voting';
+  DISABLE_VOTING, ENABLE_VOTING, RECEIVE_VOTE } from 'common/actionTypes/voting';
 
 export const disableVoting = () => ({
   type: DISABLE_VOTING,

@@ -1,7 +1,7 @@
 import {
   END_MEETING,
   OPEN_MEETING,
-  TOGGLED_REGISTRATION_STATE } from '../../../common/actionTypes/meeting';
+  TOGGLED_REGISTRATION_STATE } from 'common/actionTypes/meeting';
 
 const meeting = (state = {}, action) => {
   switch (action.type) {

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { VOTING_NOT_STARTED } from 'common/actionTypes/issues';
 import VoteCounter from './VoteCounter';
 import Alternative from '../../Alternatives/Alternative';
 import { getShuffledAlternatives } from '../../../selectors/alternatives';
 import { activeIssueExists, getIssue, getIssueKey, getOwnVote } from '../../../selectors/issues';
 import css from './VoteStatus.css';
-import { VOTING_NOT_STARTED } from '../../../../../common/actionTypes/issues';
 
 const VoteStatus = ({
   activeIssue,

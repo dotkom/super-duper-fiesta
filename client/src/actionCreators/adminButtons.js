@@ -4,7 +4,7 @@ import {
   ADMIN_DELETE_ISSUE,
   ADMIN_ENABLE_VOTING,
   ADMIN_DISABLE_VOTING,
-} from '../../../common/actionTypes/adminButtons';
+} from 'common/actionTypes/adminButtons';
 
 export const adminCloseIssue = data => ({
   type: ADMIN_CLOSE_ISSUE,

@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { IS_MANAGER } from 'common/auth/permissions';
 import { HomeContainer as AppHomeContainer } from './Home';
 import { SetupContainer } from './Setup';
 import Button from '../Button';
 import Heading from '../Heading';
 import NewVersionAvailable from '../NewVersionAvailable';
 import { ErrorContainer } from '../Error';
-import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 import css from './index.css';
 

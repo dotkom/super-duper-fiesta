@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import { getResolutionTypeDisplay, RESOLUTION_TYPES } from 'common/actionTypes/voting';
 import IconText from '../IconText';
 import Card from '../Card';
-import { getResolutionTypeDisplay, RESOLUTION_TYPES } from '../../../../common/actionTypes/voting';
 import css from './ConcludedIssue.css';
 
 const ConcludedIssue = (

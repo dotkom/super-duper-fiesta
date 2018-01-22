@@ -1,5 +1,4 @@
-import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_REGISTERED }
-  from '../../../common/actionTypes/auth';
+import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_REGISTERED } from 'common/actionTypes/auth';
 
 const defaultState = {
   id: '',

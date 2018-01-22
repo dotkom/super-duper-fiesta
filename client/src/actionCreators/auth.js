@@ -1,4 +1,4 @@
-import { ADMIN_CREATE_GENFORS, ADMIN_LOGIN, AUTH_REGISTER } from '../../../common/actionTypes/auth';
+import { ADMIN_CREATE_GENFORS, ADMIN_LOGIN, AUTH_REGISTER } from 'common/actionTypes/auth';
 
 export const register = (pin, passwordHash) => ({
   type: AUTH_REGISTER,

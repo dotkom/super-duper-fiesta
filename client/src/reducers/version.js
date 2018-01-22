@@ -1,4 +1,4 @@
-import { VERSION } from '../../../common/actionTypes/version';
+import { VERSION } from 'common/actionTypes/version';
 
 const appVersion = (state = '', action) => {
   switch (action.type) {

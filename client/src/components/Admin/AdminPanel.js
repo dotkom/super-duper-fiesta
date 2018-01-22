@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, Switch } from 'react-router-dom';
+import { IS_MANAGER } from 'common/auth/permissions';
 import AdminHome from './Home';
 import { IssueFormContainer } from './IssueForm';
 import Users from './Users';
@@ -10,7 +11,6 @@ import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
 import { endGAM, toggleRegistration } from '../../actionCreators/meeting';
 import NewVersionAvailable from '../NewVersionAvailable';
-import { IS_MANAGER } from '../../../../common/auth/permissions';
 import NotFound from '../NotFound';
 import { AdminLoginContainer } from './AdminLogin';
 

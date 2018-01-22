@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
+import { CAN_VOTE, getPermissionDisplay } from 'common/auth/permissions';
 import Button from '../../../Button';
 import Dialog from '../../../Dialog';
 import css from './User.css';
-import { CAN_VOTE, getPermissionDisplay } from '../../../../../../common/auth/permissions';
 import { adminSetPermissions } from '../../../../actionCreators/users';
 
 class User extends React.Component {

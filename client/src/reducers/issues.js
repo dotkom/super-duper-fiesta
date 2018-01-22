@@ -1,5 +1,5 @@
-import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from '../../../common/actionTypes/issues';
-import { RECEIVE_VOTE, USER_VOTE, DISABLE_VOTING, ENABLE_VOTING } from '../../../common/actionTypes/voting';
+import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from 'common/actionTypes/issues';
+import { RECEIVE_VOTE, USER_VOTE, DISABLE_VOTING, ENABLE_VOTING } from 'common/actionTypes/voting';
 
 const issue = (state = { votes: {} }, action, currentIssue) => {
   switch (action.type) {

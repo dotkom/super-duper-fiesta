@@ -1,4 +1,4 @@
-import { ADMIN_END_MEETING, TOGGLE_REGISTRATION_STATE } from '../../../common/actionTypes/meeting';
+import { ADMIN_END_MEETING, TOGGLE_REGISTRATION_STATE } from 'common/actionTypes/meeting';
 
 export const endGAM = () => ({
   type: ADMIN_END_MEETING,

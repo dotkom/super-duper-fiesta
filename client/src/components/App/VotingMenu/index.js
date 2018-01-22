@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
+import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from 'common/actionTypes/issues';
 import { submitAnonymousVote, submitRegularVote } from '../../../actionCreators/voting';
 import { getShuffledAlternatives } from '../../../selectors/alternatives';
 import { activeIssueExists, getIssue, getIssueId, getOwnVote, getIssueKey } from '../../../selectors/issues';
 import Alternatives from '../../Alternatives';
 import Button from '../../Button';
-import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from '../../../../../common/actionTypes/issues';
 import css from './VotingMenu.css';
 
 class VotingMenu extends React.Component {

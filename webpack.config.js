@@ -20,6 +20,9 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
+    alias: {
+      common: path.resolve(__dirname, 'common'),
+    },
     modules: [
       path.resolve('./client/src'),
       'node_modules',

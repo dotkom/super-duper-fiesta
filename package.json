@@ -94,6 +94,7 @@
     "winston-error": "^1.0.1"
   },
   "devDependencies": {
+    "eslint-import-resolver-webpack": "^0.8.4",
     "supertest": "^3.0.0"
   }
 }

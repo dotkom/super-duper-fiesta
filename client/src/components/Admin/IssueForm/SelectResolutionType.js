@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { RESOLUTION_TYPES } from '../../../../../common/actionTypes/voting';
+import { RESOLUTION_TYPES } from 'common/actionTypes/voting';
 
 
 const SelectResolutionType = ({ resolutionType, handleResolutionTypeChange }) => (

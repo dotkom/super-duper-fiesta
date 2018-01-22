@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } from 'common/actionTypes/issues';
 import Button from '../../Button';
 import Card from '../../Card';
 import Dialog from '../../Dialog';
@@ -14,7 +15,6 @@ import {
 } from '../../../actionCreators/adminButtons';
 import { getIssueText, activeIssueExists, getIssue, getIssueKey } from '../../../selectors/issues';
 import css from './Issue.css';
-import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } from '../../../../../common/actionTypes/issues';
 
 class Issue extends React.Component {
   constructor(props) {

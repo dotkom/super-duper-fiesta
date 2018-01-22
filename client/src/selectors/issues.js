@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { VOTING_FINISHED } from '../../../common/actionTypes/issues';
+import { VOTING_FINISHED } from 'common/actionTypes/issues';
 
 export const activeIssueExists = state => (
   state.issues && Object.keys(state.issues).some(id => state.issues[id].active)
