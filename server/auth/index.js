@@ -5,7 +5,7 @@ const getUserById = require('../models/user').getUserById;
 
 require('./providers/ow4.js');
 
-module.exports = (app) => {
+module.exports = async (app) => {
   passport.serializeUser((user, done) => {
     logger.silly('Serializing user', { user });
     done(null, user._id); // eslint-disable-line no-underscore-dangle
@@ -25,4 +25,5 @@ module.exports = (app) => {
   app.get('/auth', passport.authenticate('oauth2', { callback: true }), (req, res) => {
     res.redirect('/');
   });
+  return app;
 };

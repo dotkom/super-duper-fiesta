@@ -1,20 +1,15 @@
 jest.mock('../../models/user');
-const express = require('express');
 const request = require('supertest');
+const express = require('express');
 const auth = require('../index');
-
 const authProviderConfig = require('../conf');
 
-const { getUserById } = require('../../models/user');
-const { generateUser } = require('../../utils/generateTestData');
-
-const app = express();
-auth(app);
-
+const server = express();
+let app;
 
 describe('auth', () => {
-  beforeAll(() => {
-    getUserById.mockImplementation(id => generateUser({ _id: id }));
+  beforeAll(async () => {
+    app = await auth(server);
   });
 
   it('redirects to auth provider when hitting /login', async () => {
