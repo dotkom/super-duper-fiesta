@@ -11,9 +11,11 @@ const app = express();
 // Set up session store using database connection
 const store = new SequelizeStore({ db: db.sequelize });
 
+const sessionSecret = process.env.SDF_SESSION_STORE_SECRET || 'super secret';
+
 // Set up session store
 app.use(session({
-  secret: 'super secret',
+  secret: sessionSecret,
   store,
   resave: true,
   saveUninitialized: true,
