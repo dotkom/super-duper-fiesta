@@ -12,7 +12,8 @@ async function getOIDCClient() {
   const clientId = process.env.SDF_OIDC_CLIENT_ID;
 
   if (!provider || !clientId) {
-    logger.crit('Did not provide "SDF_OIDC_PROVIDER" and "SDF_OIDC_CLIENT_ID" when using OIDC.');
+    logger.error('Did not provide "SDF_OIDC_PROVIDER" and "SDF_OIDC_CLIENT_ID" when using OIDC.');
+    throw Error('Did not provide "SDF_OIDC_PROVIDER" and "SDF_OIDC_CLIENT_ID" when using OIDC.');
   }
 
   logger.debug('Discovering OIDC issuer.', { provider });
@@ -51,12 +52,11 @@ async function setupOIDC() {
   let client;
   try {
     client = await getOIDCClient();
+    await configureOIDCPassport(client);
+    return true;
   } catch (err) {
     logger.error('Getting OIDC client failed', err);
-  }
-
-  if (client !== null) {
-    await configureOIDCPassport(client);
+    return false;
   }
 }
 
