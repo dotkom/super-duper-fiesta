@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } from 'common/actionTypes/issues';
-import Button from '../../Button';
-import Card from '../../Card';
-import Dialog from '../../Dialog';
-import ButtonIconText from '../../ButtonIconText';
-import Pin from '../Pin';
 import {
   adminCloseIssue,
   adminDeleteIssue,
   enableVoting,
   disableVoting,
-} from '../../../features/adminButtons/actionCreators';
-import { getIssueText, activeIssueExists, getIssue, getIssueKey } from '../../../features/issue/selectors';
+} from 'features/adminButtons/actionCreators';
+import { getIssueText, activeIssueExists, getIssue, getIssueKey } from 'features/issue/selectors';
+import Button from '../../Button';
+import Card from '../../Card';
+import Dialog from '../../Dialog';
+import ButtonIconText from '../../ButtonIconText';
+import Pin from '../Pin';
 import css from './Issue.css';
 
 class Issue extends React.Component {

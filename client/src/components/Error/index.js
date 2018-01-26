@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { dismissError } from '../../features/error/actionCreators';
+import { dismissError } from 'features/error/actionCreators';
 import css from './Error.css';
 
 const Error = ({ errors, dismiss }) => (

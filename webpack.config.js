@@ -24,6 +24,7 @@ module.exports = {
       common: path.resolve(__dirname, 'common'),
     },
     modules: [
+      // Allows importing directly from the src folder. e.g. 'features/user/reducer'
       path.resolve('./client/src'),
       'node_modules',
     ],

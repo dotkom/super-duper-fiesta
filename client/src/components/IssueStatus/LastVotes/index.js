@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { voteWithNameSelector } from 'features/voting/selectors';
+import { activeIssueExists, getOwnVote, getIssueKey } from 'features/issue/selectors';
 import css from './LastVotes.css';
-import { voteWithNameSelector } from '../../../features/voting/selectors';
-import { activeIssueExists, getOwnVote, getIssueKey } from '../../../features/issue/selectors';
 
 const LastVotes = ({ votes, hideVotes }) => {
   if (hideVotes) {

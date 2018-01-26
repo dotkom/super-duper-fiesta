@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { activeIssueExists } from 'features/issue/selectors';
 import IssueStatus from '../IssueStatus';
 import { VotingMenuContainer } from './VotingMenu';
 import { IssueContainer } from './Issue';
 import LatestConcludedIssue from '../LatestConcludedIssue';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
-import { activeIssueExists } from '../../features/issue/selectors';
 import css from '../../css/Home.css';
 
 const Home = ({ issueExists, registered }) => (

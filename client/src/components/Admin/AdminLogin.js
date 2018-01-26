@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { adminCreateGenfors, adminLogin } from '../../features/auth/actionCreators';
+import { adminCreateGenfors, adminLogin } from 'features/auth/actionCreators';
 import Button from '../Button';
 import { ErrorContainer } from '../Error';
 import Heading from '../Heading';

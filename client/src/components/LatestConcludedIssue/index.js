@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getLatestConcludedIssue } from 'features/issue/selectors';
 import ConcludedIssue from '../ConcludedIssue';
-import { getLatestConcludedIssue } from '../../features/issue/selectors';
 
 const LatestConcludedIssue = ({ issue }) => {
   if (!issue) {

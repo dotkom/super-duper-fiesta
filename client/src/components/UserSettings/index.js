@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Button from '../Button';
 import {
   toggleNotification,
   toggleShowConcludedIssueList,
-} from '../../features/userSettings/actionCreators';
-import { getConcludedIssuesExceptLatest } from '../../features/issue/selectors';
+} from 'features/userSettings/actionCreators';
+import { getConcludedIssuesExceptLatest } from 'features/issue/selectors';
 import {
   notificationIsEnabled,
   concludedIssueListIsEnabled,
-} from '../../features/userSettings/selectors';
+} from 'features/userSettings/selectors';
+import Button from '../Button';
 import css from './UserSettings.css';
 
 const UserSettings = ({

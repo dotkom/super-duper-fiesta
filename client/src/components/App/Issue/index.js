@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
-import { activeIssueExists, getIssueText, getIssueKey } from '../../../features/issue/selectors';
+import { activeIssueExists, getIssueText, getIssueKey } from 'features/issue/selectors';
 import Card from '../../Card';
 import Loader from '../Loader';
 import css from './Issue.css';

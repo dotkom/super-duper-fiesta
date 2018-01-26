@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { getConcludedIssuesExceptLatest } from 'features/issue/selectors';
+import { concludedIssueListIsEnabled } from 'features/userSettings/selectors';
 import ConcludedIssue from '../ConcludedIssue';
 import css from './ConcludedIssueList.css';
-import { getConcludedIssuesExceptLatest } from '../../features/issue/selectors';
-import { concludedIssueListIsEnabled } from '../../features/userSettings/selectors';
 
 function ConcludedIssueList({ concludedIssueListEnabled, issues }) {
   return (
