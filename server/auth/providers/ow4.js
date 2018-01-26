@@ -37,9 +37,7 @@ passport.use(new OAuth2Strategy(
   },
   async (accessToken, refreshToken, profile, cb) => {
     try {
-      const userInfo = await getClientInformation(accessToken);
-      const user = await createUser(userInfo);
-      return cb(null, user, null);
+      return cb(null, await createUser(await getClientInformation(accessToken)), null);
     } catch (err) {
       return cb(err, null, null);
     }
