@@ -11,10 +11,10 @@
     "codecov": "codecov",
     "coverage": "codecov",
     "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
-    "backend": "node server/app.js",
+    "backend": "node server/server.js",
     "lint": "eslint client/src/ server/",
     "start": "npm run backend",
-    "prod": "node server/app.js",
+    "prod": "node server/server.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
