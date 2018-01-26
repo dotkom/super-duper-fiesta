@@ -92,5 +92,7 @@
     "winston": "^2.4.0",
     "winston-error": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "supertest": "^3.0.0"
+  }
 }

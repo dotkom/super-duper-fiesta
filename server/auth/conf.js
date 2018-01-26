@@ -28,4 +28,5 @@ module.exports = {
     backend: process.env.SDF_OAUTH2_RESOURCE_BACKEND || '',
     userEndpoint: process.env.SDF_OW4_USERS_API_ENDPOINT || '/sso/user/',
   },
+  authProviderBackend: OW4_OAUTH2_PROVIDER_BACKEND,
 };
