@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const logger = require('./logging');
+const auth = require('./auth');
 
 // Initialize express
 const app = express();
@@ -17,12 +18,6 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-// Set up auth
-const auth = require('./auth');
-
-auth(app);
-
-
 if (process.env.PRODUCTION) {
   // Register dist path for static files in prod
   const staticDir = './dist';
@@ -32,4 +27,4 @@ if (process.env.PRODUCTION) {
     res.sendFile('index.html', { root: staticDir }));
 }
 
-module.exports = app;
+module.exports = async () => auth(app);
