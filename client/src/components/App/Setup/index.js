@@ -5,7 +5,7 @@ import SHA256 from 'crypto-js/sha256';
 import Cookies from 'js-cookie';
 import DocumentTitle from 'react-document-title';
 
-import { register } from '../../../actionCreators/auth';
+import { register } from '../../../features/auth/actionCreators';
 import Button from '../../Button';
 import Card from '../../Card';
 import css from './Setup.css';

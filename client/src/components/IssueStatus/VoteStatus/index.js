@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { VOTING_NOT_STARTED } from 'common/actionTypes/issues';
 import VoteCounter from './VoteCounter';
 import Alternative from '../../Alternatives/Alternative';
-import { getShuffledAlternatives } from '../../../selectors/alternatives';
-import { activeIssueExists, getIssue, getIssueKey, getOwnVote } from '../../../selectors/issues';
+import { getShuffledAlternatives } from '../../../features/alternative/selectors';
+import { activeIssueExists, getIssue, getIssueKey, getOwnVote } from '../../../features/issue/selectors';
 import css from './VoteStatus.css';
 
 const VoteStatus = ({

@@ -9,7 +9,7 @@ import Button from '../Button';
 import Dialog from '../Dialog';
 import Heading from '../Heading';
 import { ErrorContainer } from '../Error';
-import { endGAM, toggleRegistration } from '../../actionCreators/meeting';
+import { endGAM, toggleRegistration } from '../../features/meeting/actionCreators';
 import NewVersionAvailable from '../NewVersionAvailable';
 import NotFound from '../NotFound';
 import { AdminLoginContainer } from './AdminLogin';

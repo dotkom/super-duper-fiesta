@@ -12,8 +12,8 @@ import {
   adminDeleteIssue,
   enableVoting,
   disableVoting,
-} from '../../../actionCreators/adminButtons';
-import { getIssueText, activeIssueExists, getIssue, getIssueKey } from '../../../selectors/issues';
+} from '../../../features/adminButtons/actionCreators';
+import { getIssueText, activeIssueExists, getIssue, getIssueKey } from '../../../features/issue/selectors';
 import css from './Issue.css';
 
 class Issue extends React.Component {

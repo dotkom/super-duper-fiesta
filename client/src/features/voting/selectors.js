@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import { getIssue } from './issues';
-import { usersSelector } from './users';
+import { getIssue } from '../issue/selectors';
+import { usersSelector } from '../user/selectors';
 
 export const getOwnVoteForIssue = (issue, userId) => {
   // No issue? User haven't voted.

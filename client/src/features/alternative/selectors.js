@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import arrayShuffle from 'array-shuffle';
-import { getIssue } from './issues';
+import { getIssue } from '../issue/selectors';
 
 export const getAlternatives = (state) => {
   const issue = getIssue(state);

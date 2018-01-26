@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { CAN_VOTE } from 'common/auth/permissions';
-import { adminToggleCanVote } from '../../../../actionCreators/users';
+import { adminToggleCanVote } from '../../../../features/user/actionCreators';
 import { UserContainer } from '../User';
 import css from './List.css';
 

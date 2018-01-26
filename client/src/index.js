@@ -11,9 +11,9 @@ import Raven from 'raven-js';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
-import votingApp from './reducers';
+import votingApp from './features/reducers';
 import Routes from './routes';
-import { sagaMiddleware, runSaga } from './saga';
+import { sagaMiddleware, runSaga } from './features/sagas';
 
 moment.locale('nb');
 

@@ -6,7 +6,7 @@ import { CAN_VOTE, getPermissionDisplay } from 'common/auth/permissions';
 import Button from '../../../Button';
 import Dialog from '../../../Dialog';
 import css from './User.css';
-import { adminSetPermissions } from '../../../../actionCreators/users';
+import { adminSetPermissions } from '../../../../features/user/actionCreators';
 
 class User extends React.Component {
   constructor(props) {

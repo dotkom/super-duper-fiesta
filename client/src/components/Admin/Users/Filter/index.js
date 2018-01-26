@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import setUserFilter from '../../../../actionCreators/setUserFilter';
+import setUserFilter from '../../../../features/userFilter/actionCreators';
 import css from './Filter.css';
 
 const UserFilter = ({ filter, onChange }) => (

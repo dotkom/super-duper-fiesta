@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Alternatives from '../Alternatives';
-import { getAlternatives } from '../../selectors/alternatives';
+import { getAlternatives } from '../../features/alternative/selectors';
 
 const mapStateToProps = state => ({
   alternatives: getAlternatives(state),

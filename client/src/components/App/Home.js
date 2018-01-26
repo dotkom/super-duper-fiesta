@@ -7,7 +7,7 @@ import { IssueContainer } from './Issue';
 import LatestConcludedIssue from '../LatestConcludedIssue';
 import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
-import { activeIssueExists } from '../../selectors/issues';
+import { activeIssueExists } from '../../features/issue/selectors';
 import css from '../../css/Home.css';
 
 const Home = ({ issueExists, registered }) => (

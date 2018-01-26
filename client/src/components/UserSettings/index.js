@@ -5,12 +5,12 @@ import Button from '../Button';
 import {
   toggleNotification,
   toggleShowConcludedIssueList,
-} from '../../actionCreators/userSettings';
-import { getConcludedIssuesExceptLatest } from '../../selectors/issues';
+} from '../../features/userSettings/actionCreators';
+import { getConcludedIssuesExceptLatest } from '../../features/issue/selectors';
 import {
   notificationIsEnabled,
   concludedIssueListIsEnabled,
-} from '../../selectors/userSettings';
+} from '../../features/userSettings/selectors';
 import css from './UserSettings.css';
 
 const UserSettings = ({
