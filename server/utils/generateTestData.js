@@ -75,6 +75,22 @@ const generateVote = data => (Object.assign({
   alternative: '3',
 }, data));
 
+function generateOW4OAuth2ResponseBody(data) {
+  return Object.assign({
+    first_name: 'first name',
+    last_name: 'last name',
+    username: 'username',
+    email: 'test@example.org',
+    member: false,
+    staff: false,
+    superuser: false,
+    nickname: 'nickname',
+    rfid: '12345678',
+    image: '',
+    field_of_study: '',
+  }, data);
+}
+
 module.exports = {
   generateIssue,
   generateSocket,
@@ -84,4 +100,5 @@ module.exports = {
   generateManager,
   generateVote,
   generateAlternative,
+  generateOW4OAuth2ResponseBody,
 };
