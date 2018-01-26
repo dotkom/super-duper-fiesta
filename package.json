@@ -59,6 +59,7 @@
     "mongoose": "^4.7.6",
     "node-fetch": "^1.6.3",
     "normalize.css": "^6.0.0",
+    "openid-client": "^1.19.3",
     "passport": "^0.3.2",
     "passport-oauth2": "^1.4.0",
     "passport.socketio": "^3.7.0",

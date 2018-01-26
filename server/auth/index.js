@@ -1,5 +1,6 @@
 const logger = require('../logging');
 const passport = require('passport');
+const { setupOIDC } = require('./oidc');
 
 const getUserById = require('../models/user').getUserById;
 
@@ -25,5 +26,13 @@ module.exports = async (app) => {
   app.get('/auth', passport.authenticate('oauth2', { callback: true }), (req, res) => {
     res.redirect('/');
   });
+  if (process.env.SDF_OIDC && process.env.SDF_OIDC.toLowerCase() === 'true') {
+    const success = await setupOIDC();
+    if (success) {
+      app.get('/openid-login', passport.authenticate('oidc'));
+      app.get('/openid-auth', passport.authenticate('oidc', { successRedirect: '/', failureRedirect: '/openid-login' }));
+    }
+    return app;
+  }
   return app;
 };

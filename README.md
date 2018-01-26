@@ -143,6 +143,18 @@ To configure the app to use the OAuth2 provider, set the following values using 
 
 _If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
+### OpenID Connect
+
+Authentication can be done through OpenID Connect.
+
+This requires an OpenID Client ID as well as an OpenID Provider capable of providing the "onlineweb4" claim. [source](https://github.com/dotkom/onlineweb4/blob/develop/apps/oidc_provider/claims.py#L33)
+
+| Key | Description | Example | Default |
+| --- | ---         | ---     | ---     |
+| `SDF_OIDC` | Enable OpenID Connect | `true` | `` |
+| `SDF_OIDC_PROVIDER` | OpenID Connect Provider (Issuer) | `http://127.0.0.1:8000/openid` | `` |
+| `SDF_OIDC_CLIENT_ID` | ClientID of an OIDC client on OIDC provider | `123456` | `` |
+| `SDF_OIDC_REDIRECT_URI` | Redirect URI back to SDF | `http://127.0.0.1:8080/openid-auth` | `` |
 
 ## WIP Screenshots
 

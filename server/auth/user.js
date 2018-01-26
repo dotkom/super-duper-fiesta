@@ -24,6 +24,18 @@ function parseOW4OAuth2User(data) {
   };
 }
 
+function parseOpenIDUserinfo(data) {
+  return {
+    fullName: data.name,
+    username: data.preferred_username,
+    onlinewebId: data.preferred_username,
+    name: data.name,
+    member: data.member,
+    superuser: data.superuser,
+    staff: data.staff,
+  };
+}
+
 async function createUser(user) {
   const genfors = await getActiveGenfors();
   const {
@@ -69,5 +81,6 @@ async function createUser(user) {
 module.exports = {
   createUser,
   getPermissionLevel,
+  parseOpenIDUserinfo,
   parseOW4OAuth2User,
 };
