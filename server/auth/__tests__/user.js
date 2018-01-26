@@ -6,7 +6,7 @@ const fetch = require('jest-fetch-mock');
 jest.setMock('node-fetch', fetch);
 
 const permissionLevels = require('../../../common/auth/permissions');
-const { createUser, getPermissionLevel } = require('../user');
+const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
 const { getClientInformation } = require('../providers/ow4');
 const { getActiveGenfors } = require('../../models/meeting');
 const { addUser } = require('../../managers/user');
@@ -99,5 +99,48 @@ describe('ow4 oauth2 provider', async () => {
       onlinewebId: testUserData.username,
       permissions: permissionLevels.CAN_VOTE,
     });
+  });
+});
+
+describe('openid user parser', () => {
+  it('parses openid userinfo to some data we can use', () => {
+    const userinfo = generateOW4OAuth2ResponseBody(generateUser());
+    const expectedUserFields = {
+      name: userinfo.name,
+      onlinewebId: userinfo.username,
+      member: userinfo.member,
+      superuser: userinfo.superuser,
+    };
+
+    expect(parseOpenIDUserinfo(userinfo)).toEqual(
+      expect.objectContaining(expectedUserFields),
+    );
+  });
+});
+
+describe('create user', () => {
+  beforeEach(async () => {
+    addUser.mockImplementation((name, username, securityLevel) =>
+      generateUser({ name, onlinewebId: username, permissions: securityLevel }));
+    getActiveGenfors.mockImplementation(async () => generateGenfors());
+    getUserByUsername.mockImplementation(() => generateUser());
+  });
+
+  it('creates a regular user if active genfors and user is superuser', async () => {
+    const user = await createUser(generateUser({ superuser: true }));
+
+    expect(user.permissions).toEqual(permissionLevels.CAN_VOTE);
+  });
+
+  it('creates a superuser if no active genfors and user is superuser', async () => {
+    getActiveGenfors.mockImplementation(async () => null);
+    const user = await createUser(generateUser({ member: true, superuser: true }));
+
+    expect(user.permissions).toEqual(permissionLevels.IS_SUPERUSER);
+  });
+
+  it('throws error if no active genfors and no active genfors', async () => {
+    getActiveGenfors.mockImplementation(async () => null);
+    await expect(createUser(generateUser())).rejects.toEqual(new Error('No active genfors'));
   });
 });

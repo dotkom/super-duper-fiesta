@@ -80,6 +80,7 @@ function generateOW4OAuth2ResponseBody(data) {
     first_name: 'first name',
     last_name: 'last name',
     username: 'username',
+    preferred_username: 'username',
     email: 'test@example.org',
     member: false,
     staff: false,
