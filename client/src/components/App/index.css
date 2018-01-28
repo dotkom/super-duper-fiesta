@@ -8,6 +8,17 @@ a {
 
 .loginRequired {
     padding-top: 2rem;
-    text-align: center;
-    text-decoration: none;
+    color: #636bb2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.loginRequired > a {
+    width: 100%;
+}
+
+.loginRequired > a > button {
+    margin: auto;
 }

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IS_MANAGER } from 'common/auth/permissions';
+import { LoginButton } from '@dotkomonline/react-components/Buttons';
 import { HomeContainer as AppHomeContainer } from './Home';
 import { SetupContainer } from './Setup';
 import Button from '../Button';
@@ -39,9 +40,10 @@ class App extends React.Component {
       <div>
         <Heading link="/" title={title}>
           <span className={css.name}>{fullName}</span>
-          <a href={loggedIn ? '/logout' : '/login'}>
-            <Button>Logg {loggedIn ? 'ut' : 'inn'}</Button>
-          </a>
+          { loggedIn &&
+            <a href="/logout">
+              <Button>Logg ut</Button>
+            </a>}
           {userIsManager &&
             <Link to="/admin">
               <Button>Tellekorps</Button>
@@ -56,11 +58,14 @@ class App extends React.Component {
               <Route exact path={match.path} component={AppHomeContainer} />
               <Route component={NotFound} />
             </Switch>
-            : <a href="/login">
-              <h2 className={css.loginRequired}>
+            : <div className={css.loginRequired}>
+              <h2>
                 Vennligst logg inn for å få tilgang til generalforsamlingen
               </h2>
-            </a>
+              <a href="/login">
+                <LoginButton />
+              </a>
+            </div>
           }
         </main>
       </div>

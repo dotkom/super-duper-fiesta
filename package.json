@@ -23,6 +23,7 @@
     "> 5% in NO"
   ],
   "dependencies": {
+    "@dotkomonline/react-components": "^2.0.0",
     "array-shuffle": "^1.0.1",
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.24.1",

@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@dotkomonline/react-components@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@dotkomonline/react-components/-/react-components-2.0.0.tgz#f46d1019d0da7345a91eeda98492ac04879f5f99"
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
