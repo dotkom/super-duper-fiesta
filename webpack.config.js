@@ -41,7 +41,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
+        test: /\.(eot|png|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
         use: [
           {
             loader: 'url-loader',
