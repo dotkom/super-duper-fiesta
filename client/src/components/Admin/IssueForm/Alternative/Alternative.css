@@ -1,0 +1,73 @@
+.content {
+  background: #f5f5f5;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  composes: border from "css/border.css";
+}
+
+.content + .content {
+  margin-top: 1rem;
+}
+
+.alternative ul:empty {
+  display: none;
+}
+
+.alternative ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.alternative li {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+}
+
+.alternative li:not(:first-child) {
+  border-top: 1px solid #bbb;
+}
+
+.alternative li p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+/* TODO: Find a better solution than overriding style for all buttons */
+.content button {
+  margin: 0 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.dialogInput {
+  display: block;
+}
+
+.add {
+  display: flex;
+  justify-items: center;
+}
+
+.add input {
+  flex-grow: 1;
+}
+
+.title {
+  composes: title from '../index.css';
+}
+
+.addIcon {
+  composes: icon plus from 'css/flaticon.css';
+}
+
+.edit {
+  composes: icon edit from 'css/flaticon.css';
+}
+
+.remove {
+  composes: icon cross from 'css/flaticon.css';
+}
+
+.addIcon:hover, .edit:hover, .remove:hover {
+  transform: scale(1.25);
+}

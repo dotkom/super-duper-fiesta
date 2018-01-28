@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "common/*": [
+                "./common/*"
+            ],
+            "features/*": [
+                "./client/src/features/*"
+            ]
+        }
+    }
+}
