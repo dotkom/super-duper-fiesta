@@ -58,7 +58,7 @@ const listener = (socket) => {
   async function action(data) {
     switch (data.type) {
       case AUTH_REGISTER: {
-        register(socket, data);
+        await register(socket, data);
         break;
       }
       default:

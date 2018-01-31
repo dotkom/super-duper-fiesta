@@ -1,6 +1,7 @@
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
-const { register } = require('../auth');
+const { listener, register } = require('../auth');
+const { AUTH_REGISTER } = require('../../../common/actionTypes/auth');
 const { getActiveGenfors } = require('../../models/meeting');
 const { getAnonymousUser, addAnonymousUser, getUserByUsername } = require('../../models/user');
 const { generateGenfors, generateSocket, generateAnonymousUser, generateUser } = require('../../utils/generateTestData');
@@ -18,6 +19,7 @@ beforeEach(() => {
 const generateData = data => (Object.assign({
   pin: 1234567890,
   passwordHash: null,
+  type: AUTH_REGISTER,
 }, data));
 
 
@@ -108,5 +110,27 @@ describe('register', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+});
+
+describe('listener', () => {
+  it('listens to AUTH_REGISTER', async () => {
+    const socket = generateSocket({ completedRegistration: false });
+    await listener(socket);
+
+    await socket.createAction(generateData());
+
+    expect(socket.emit).toBeCalled();
+    expect(socket.broadcast.emit).toBeCalled();
+  });
+
+  it('ignores INVALID_ACTION', async () => {
+    const socket = generateSocket({ completedRegistration: false });
+    await listener(socket);
+
+    await socket.createAction(generateData({ type: 'INVALID_ACTION' }));
+
+    expect(socket.emit).not.toBeCalled();
+    expect(socket.broadcast.emit).not.toBeCalled();
   });
 });

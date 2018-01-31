@@ -53,6 +53,11 @@ const generateSocket = (user = {}, cookie = {}) => ({
   emit: jest.fn(),
   join: jest.fn(),
   to: () => ({ emit: roomEmit }),
+  on: function on(action, callback) {
+    this.createAction = callback;
+  },
+  // HACK: access on's callback
+  createAction: null,
 });
 
 const generateGenfors = data => (Object.assign({
