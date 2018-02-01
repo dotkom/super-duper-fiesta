@@ -14,7 +14,6 @@ pipeline:
     image: node:boron
     when:
       event: [push, pull_request, tag, deployment]
-      branch: master
     commands:
       - yarn
   
@@ -34,7 +33,6 @@ pipeline:
       SDF_DATABASE_URL: "mongodb://127.0.0.1:27017"
     when:
       event: [push, pull_request, tag, deployment]
-      branch: master
     commands:
       - yarn test
       - yarn codecov
@@ -43,7 +41,7 @@ pipeline:
     image: node:boron
     group: testing
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
     commands:
       - npm run lint
 
@@ -51,7 +49,7 @@ pipeline:
     image: drillster/drone-volume-cache
     pull: true
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
     rebuild: true
     mount:
       - ./node_modules

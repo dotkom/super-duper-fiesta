@@ -34,7 +34,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /node_modules(?!\/@dotkomonline\/react-components)/,
         use: [
           {
             loader: 'babel-loader',
@@ -42,7 +42,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
+        test: /\.(eot|png|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
         use: [
           {
             loader: 'url-loader',
