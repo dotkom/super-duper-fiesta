@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const entries = [];
 
@@ -70,5 +71,6 @@ module.exports = {
         module.context && module.context.indexOf('node_modules') !== -1
       ),
     }),
+    new OfflinePlugin({ scope: 'sdf' }),
   ],
 };
