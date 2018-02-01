@@ -38,9 +38,6 @@ const getIssueById = id => (
 function getActiveQuestion(genfors) {
   return Question.findOne({ genfors, active: true, deleted: false });
 }
-function getClosedQuestions(genfors) {
-  return Question.find({ genfors, active: false, deleted: false }).exec();
-}
 
 function endIssue(issue) {
   return Question.findByIdAndUpdate(issue,
@@ -61,11 +58,10 @@ function updateIssue(issue, data, options) {
 module.exports = {
   addIssue,
   getActiveQuestion,
-  getClosedQuestions,
+  getClosedQuestions: getConcludedIssues,
   getIssueById,
   getConcludedIssues,
   endIssue,
-  // updateQuestionCounter,
   deleteIssue,
   updateIssue,
 };
