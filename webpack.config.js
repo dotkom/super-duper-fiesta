@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const entries = [];
 
@@ -69,6 +70,10 @@ module.exports = {
       minChunks: module => (
         module.context && module.context.indexOf('node_modules') !== -1
       ),
+    }),
+    new OfflinePlugin({
+      ServiceWorker: { events: true },
+      AppCache: { events: true },
     }),
   ],
 };

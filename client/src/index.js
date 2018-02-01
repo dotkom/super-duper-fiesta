@@ -10,6 +10,7 @@ import 'normalize.css';
 import Raven from 'raven-js';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 import votingApp from './features/reducers';
 import Routes from './routes';
@@ -69,3 +70,10 @@ if (module.hot) {
     render(Routes);
   });
 }
+
+OfflinePluginRuntime.install({
+  onUpdateReady: () => {
+    // Tells to new SW to take control immediately
+    OfflinePluginRuntime.applyUpdate();
+  },
+});

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { IS_MANAGER } from 'common/auth/permissions';
 import { HomeContainer as AppHomeContainer } from './Home';
 import { SetupContainer } from './Setup';
@@ -28,6 +29,7 @@ class App extends React.Component {
       });
     } else if (this.state.currentVersion !== nextProps.version) {
       this.setState({ newVersionAvailable: true });
+      OfflinePluginRuntime.update();
     }
   }
 
