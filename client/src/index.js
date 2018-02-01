@@ -71,4 +71,9 @@ if (module.hot) {
   });
 }
 
-OfflinePluginRuntime.install();
+OfflinePluginRuntime.install({
+  onUpdateReady: () => {
+    // Tells to new SW to take control immediately
+    OfflinePluginRuntime.applyUpdate();
+  },
+});

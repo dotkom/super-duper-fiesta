@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, Switch } from 'react-router-dom';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { IS_MANAGER } from 'common/auth/permissions';
 import { endGAM, toggleRegistration } from 'features/meeting/actionCreators';
 import AdminHome from './Home';
@@ -35,6 +36,7 @@ class AdminPanel extends React.Component {
       });
     } else if (this.state.currentVersion !== nextProps.version) {
       this.setState({ newVersionAvailable: true });
+      OfflinePluginRuntime.update();
     }
   }
 

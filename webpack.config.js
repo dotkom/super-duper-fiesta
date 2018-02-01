@@ -71,6 +71,9 @@ module.exports = {
         module.context && module.context.indexOf('node_modules') !== -1
       ),
     }),
-    new OfflinePlugin({ scope: 'sdf' }),
+    new OfflinePlugin({
+      ServiceWorker: { events: true },
+      AppCache: { events: true },
+    }),
   ],
 };
