@@ -1,10 +1,17 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const connection = require('./postgresql');
 
-const Schema = mongoose.Schema;
+const { Issue } = require('./issue');
 
-const AlternativeSchema = new Schema({
-  text: { type: String, required: true },
-});
-const Alternative = mongoose.model('Alternative', AlternativeSchema); // eslint-disable-line no-unused-vars
+let Alternative;
 
-module.exports = AlternativeSchema;
+async function AlternativeModel(sequelize, DataTypes) {
+  const model = await sequelize.define('Alternative', {
+    text: DataTypes.TEXT,
+  });
+  model.belongsTo(Issue);
+  return model;
+}
+(async () => { Alternative = await AlternativeModel(await connection(), Sequelize); })();
+
+module.exports = Alternative;

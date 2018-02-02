@@ -1,35 +1,48 @@
-const mongoose = require('mongoose');
-const AlternativeSchema = require('./alternative');
+const Sequelize = require('sequelize');
+const connection = require('./postgresql');
+
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
-const Schema = mongoose.Schema;
 
+let Question;
 
-const QuestionSchema = new Schema({
-  genfors: { type: Schema.Types.ObjectId, required: true },
-  description: { type: String, required: true },
-  date: { type: Date, required: true, default: Date.now },
-  active: { type: Boolean, default: true },
-  deleted: { type: Boolean, required: true, default: false },
-  alternatives: [AlternativeSchema],
-  secret: { type: Boolean, default: false },
-  showOnlyWinner: { type: Boolean, default: true },
-  countingBlankVotes: { type: Boolean, default: true },
-  voteDemand: { type: String, required: true }, // Either "regular" or "qualified".
-  qualifiedVoters: Number,
-  currentVotes: { type: Number, default: 0 },
-  result: Boolean,
-  // status types: NOT_STARTED, IN_PROGRESS, FINISHED
-  status: { type: String, required: true, default: VOTING_NOT_STARTED },
-});
-const Question = mongoose.model('Question', QuestionSchema);
+async function QuestionModel(sequelize, DataTypes) {
+  let Genfors;
+  try {
+    Genfors = await sequelize.import('./meetingModel');
+  } catch (err) {
+    console.log('Importing failed', err);
+  }
+  const model = await sequelize.define('issue', {
+    description: DataTypes.TEXT,
+    date: DataTypes.DATE,
+    active: DataTypes.BOOLEAN,
+    deleted: DataTypes.BOOLEAN,
+    secret: DataTypes.BOOLEAN,
+    showOnlyWinner: DataTypes.BOOLEAN,
+    countingBlankVotes: DataTypes.BOOLEAN,
+    // voteDemand: Either "regular" or "qualified".
+    voteDemand: DataTypes.STRING,
+    qualifiedVoters: DataTypes.SMALLINT,
+    currentVotes: DataTypes.SMALLINT,
+    result: DataTypes.BOOLEAN,
+    // status types: NOT_STARTED, IN_PROGRESS, FINISHED
+    status: DataTypes.TEXT,
+  });
+  // await model.belongsTo(Genfors);
+  return model;
+}
+(async () => { Question = await QuestionModel(await connection(), Sequelize); })();
 
-function addIssue(issue) {
-  return new Question(issue).save();
+async function addIssue(issue) {
+  return Question.create(issue);
 }
 
 function getConcludedIssues(genfors) {
-  return Question.find({ genfors, deleted: false, active: false }).exec();
+  const id = genfors.id || genfors;
+  return Question.findOne({ where:
+    { id, deleted: false, active: false },
+  });
 }
 
 const getIssueById = id => (
