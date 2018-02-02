@@ -1,19 +1,18 @@
-const databaseSetup = require('../essentials');
 const { getActiveGenfors, getGenfors, updateGenfors } = require('../meeting');
 
 const { generateMeeting } = require('../../utils/integrationTestUtils');
 
 
 describe('meeting', () => {
-  beforeAll(async () => {
-    await databaseSetup();
-  });
-
   afterEach(async () => {
-    let meeting = await getActiveGenfors();
-    while (meeting !== null) {
-      updateGenfors({ _id: meeting._id }, { status: 'closed' });
-      meeting = await getActiveGenfors();
+    // Sneaky way to make sure to not break "getActiveMeeting".
+    // We close all active meetings during testing.
+    let genfors = await getActiveGenfors();
+    while (genfors !== null) {
+      // eslint-disable-next-line no-await-in-loop
+      await updateGenfors(genfors.id, { status: 'closed' });
+      // eslint-disable-next-line no-await-in-loop
+      genfors = await getActiveGenfors();
     }
   });
 
@@ -26,23 +25,23 @@ describe('meeting', () => {
   });
 
   it('gets a meeting by id', async () => {
-    const { _id: meetingId } = await generateMeeting();
+    const { id: meetingId } = await generateMeeting();
     const meeting = await getGenfors(meetingId);
 
     expect(meeting).toEqual(expect.objectContaining({
-      _id: meetingId,
+      id: meetingId,
     }));
   });
 
   it('updates a meeting', async () => {
     const meeting = await generateMeeting();
 
-    const updatedMeeting = await updateGenfors({ _id: meeting._id }, {
+    const updatedMeeting = await updateGenfors({ id: meeting.id }, {
       title: 'new title',
     }, { new: true });
 
     expect(updatedMeeting).toEqual(expect.objectContaining({
-      _id: meeting._id,
+      id: meeting.id,
       title: 'new title',
     }));
   });
@@ -50,10 +49,10 @@ describe('meeting', () => {
   it('gets active genfors', async () => {
     const meeting1 = await generateMeeting();
 
-    await updateGenfors({ _id: meeting1._id }, { status: 'open' });
+    await updateGenfors({ id: meeting1.id }, { status: 'open' });
 
     const activeMeeting = await getActiveGenfors();
 
-    expect(activeMeeting._id).toEqual(meeting1._id);
+    expect(activeMeeting.id).toEqual(meeting1.id);
   });
 });

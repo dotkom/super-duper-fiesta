@@ -7,8 +7,10 @@ async function generateMeeting(data) {
   const meeting = Object.assign({}, {
     title: 'title',
     date: new Date(2010, 1, 1, 1, 1, 1),
+    registrationOpen: false,
+    status: 'open',
   }, data);
-  return createGenfors(meeting.title, meeting.date);
+  return createGenfors(meeting);
 }
 
 async function generateIssue(data) {
