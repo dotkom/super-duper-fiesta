@@ -65,6 +65,8 @@
     "passport": "^0.3.2",
     "passport-oauth2": "^1.4.0",
     "passport.socketio": "^3.7.0",
+    "pg": "6",
+    "pg-hstore": "^2.3.2",
     "postcss-loader": "^2.0.8",
     "raven": "^2.1.2",
     "raven-js": "^3.17.0",
@@ -80,6 +82,7 @@
     "redux-saga": "^0.16.0",
     "redux-socket.io": "^1.3.1",
     "reselect": "^2.5.4",
+    "sequelize": "^4.32.2",
     "sillyname": "^0.1.0",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
@@ -97,6 +100,7 @@
   },
   "devDependencies": {
     "eslint-import-resolver-webpack": "^0.8.4",
+    "sequelize-cli": "^3.2.0",
     "supertest": "^3.0.0"
   }
 }
