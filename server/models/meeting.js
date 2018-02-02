@@ -1,36 +1,39 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const connection = require('./postgresql');
 
-const Schema = mongoose.Schema;
+
+let Genfors;
+
+async function GenforsModel(sequelize, DataTypes) {
+  const model = await sequelize.define('meeting', {
+    title: DataTypes.STRING,
+    date: DataTypes.DATE,
+    registrationOpen: DataTypes.BOOLEAN,
+    status: DataTypes.TEXT,
+    pin: DataTypes.SMALLINT,
+  });
+  return model;
+}
+(async () => { Genfors = await GenforsModel(await connection(), Sequelize); })();
 
 
-const GenforsSchema = new Schema({
-  title: { type: String, required: true },
-  date: { type: Date, required: true },
-  registrationOpen: { type: Boolean, required: true, default: false },
-  status: { type: String, default: 'open' }, // Open/Closed/Whatever
-  pin: { type: Number, required: true, default: parseInt(Math.random() * 10000, 10) },
-});
-const Genfors = mongoose.model('Genfors', GenforsSchema);
-
-const getGenfors = id => (
-  Genfors.findOne({ _id: id })
-);
+async function getGenfors(genfors) {
+  const id = genfors.id || genfors;
+  return Genfors.findById(id);
+}
 
 function getActiveGenfors() {
-  return Genfors.findOne({ status: 'open' }).exec();
+  return Genfors.findOne({ where: { status: 'open' } });
 }
 
-async function updateGenfors(genfors, data, options) {
-  return Genfors.findOneAndUpdate(genfors, data, options);
+async function updateGenfors(query, data) {
+  const id = query.id || query;
+  const genfors = await getGenfors(id);
+  return Object.assign(genfors, data).save();
 }
 
-async function createGenfors(title, date) {
-  // Add a new genfors
-  const genfors = new Genfors({
-    title,
-    date,
-  });
-  return genfors.save();
+async function createGenfors(meeting) {
+  return Genfors.create(meeting);
 }
 
 module.exports = {
