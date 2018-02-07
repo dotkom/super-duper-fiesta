@@ -4,7 +4,7 @@ async function Alternative(sequelize, DataTypes) {
   });
 
   model.associate = models =>
-    models.issue.belongsTo(models.issue, {
+    models.alternative.belongsTo(models.issue, {
       onDelete: 'CASCADE',
       foreignKey: {
         allowNull: false,
