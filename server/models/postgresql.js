@@ -21,7 +21,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
 });
 
 // Import all models
-fs.readdirSync(__dirname)
+Promise.all(fs.readdirSync(__dirname)
   .filter(file =>
     // Ignore hidden files
     (file.indexOf('.') !== 0)
@@ -34,20 +34,29 @@ fs.readdirSync(__dirname)
       && (file.search('.accessors.') === -1)
       && (file !== 'essentials.js'), // Ignore mongodb file
   )
-  .forEach(async (file) => {
+  .map(async (file) => {
     try {
       const model = await sequelize.import(path.join(__dirname, file));
       db[model.name] = model;
     } catch (err) {
       logger.error(`import of model from file "${file}" failed`, err);
     }
+  })).then(async () => {
+    logger.debug('Imported all models, starting association.');
+    Object.keys(db)
+      .filter(key => (key.search(/sequelize/i) === -1))
+      .map(async (model) => {
+        console.log('associating ', model);
+        if (db[model].associate) {
+          await db[model].associate(db);
+        }
+      });
+      // console.log('done', db)
+  })
+  .catch((err) => {
+    console.log('Error during association of model relations', err);
   });
 
-Object.keys(db).forEach(async (model) => {
-  if (db[model].associate) {
-    await db[model].associate(db);
-  }
-});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
