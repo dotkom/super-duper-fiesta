@@ -1,4 +1,4 @@
-async function Vote(sequelize, DataTypes) {
+async function Vote(sequelize) {
   const model = await sequelize.define('vote', {
   });
 

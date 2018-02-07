@@ -1,5 +1,5 @@
 const {
-  addIssue, deleteIssue, endIssue, getActiveQuestion, getConcludedIssues,
+  deleteIssue, endIssue, getActiveQuestion, getConcludedIssues,
   getIssueById, updateIssue,
 } = require('../issue.accessors');
 const { getActiveGenfors } = require('../meeting.accessors');
@@ -12,7 +12,9 @@ describe('issue', () => {
     const meeting = await getActiveGenfors();
     let activeIssue = await getActiveQuestion(meeting.id);
     while (activeIssue !== null && activeIssue !== undefined) {
+      // eslint-disable-next-line no-await-in-loop
       await deleteIssue(activeIssue.id);
+      // eslint-disable-next-line no-await-in-loop
       activeIssue = await getActiveQuestion(meeting.id);
     }
   });

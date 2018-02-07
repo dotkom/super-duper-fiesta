@@ -1,6 +1,6 @@
 const databaseSetup = require('../essentials');
 const {
-  addUser, getAnonymousUser, getQualifiedUsers, getUserById,
+  getAnonymousUser, getQualifiedUsers, getUserById,
   getUserByUsername, getUsers, updateUserById,
 } = require('../user.accessors');
 const { hashWithSalt } = require('../../utils/crypto');

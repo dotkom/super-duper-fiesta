@@ -3,7 +3,7 @@ const { createGenfors } = require('../models/meeting.accessors');
 const { addUser, addAnonymousUser } = require('../models/user.accessors');
 const { createVote } = require('../models/vote.accessors');
 
-const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
+const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
 
 async function generateMeeting(data) {
   const meeting = Object.assign({}, {

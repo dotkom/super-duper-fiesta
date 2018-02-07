@@ -52,7 +52,7 @@ Promise.all(fs.readdirSync(__dirname)
       });
   })
   .catch((err) => {
-    console.log('Error during association of model relations', err);
+    logger.error('Error during association of model relations', err);
   });
 
 
