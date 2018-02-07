@@ -2,7 +2,7 @@ const databaseSetup = require('../essentials');
 const {
   addUser, getAnonymousUser, getQualifiedUsers, getUserById,
   getUserByUsername, getUsers, updateUserById,
-} = require('../user');
+} = require('../user.accessors');
 const { hashWithSalt } = require('../../utils/crypto');
 const { CAN_VOTE } = require('../../../common/auth/permissions');
 

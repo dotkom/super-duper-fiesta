@@ -1,7 +1,7 @@
 const databaseSetup = require('../essentials');
 const {
   getUserVote, getVotes, haveIVoted,
-} = require('../vote');
+} = require('../vote.accessors');
 
 const { generateIssue, generateMeeting, generateUser, generateVote } = require('../../utils/integrationTestUtils');
 

@@ -1,7 +1,7 @@
-const { addIssue } = require('../models/issue');
-const { createGenfors } = require('../models/meeting');
-const { addUser, addAnonymousUser } = require('../models/user');
-const { createVote } = require('../models/vote');
+const { addIssue } = require('../models/issue.accessors');
+const { createGenfors } = require('../models/meeting.accessors');
+const { addUser, addAnonymousUser } = require('../models/user.accessors');
+const { createVote } = require('../models/vote.accessors');
 
 async function generateMeeting(data) {
   const meeting = Object.assign({}, {

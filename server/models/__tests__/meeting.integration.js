@@ -1,4 +1,5 @@
-const { getActiveGenfors, getGenfors, updateGenfors } = require('../meeting');
+const _ = require('../postgresql');
+const { getActiveGenfors, getGenfors, updateGenfors } = require('../meeting.accessors');
 
 const { generateMeeting } = require('../../utils/integrationTestUtils');
 

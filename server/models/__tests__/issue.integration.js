@@ -1,7 +1,7 @@
 const {
   addIssue, deleteIssue, endIssue, getActiveQuestion, getConcludedIssues,
   getIssueById, updateIssue,
-} = require('../issue');
+} = require('../issue.accessors');
 
 const { generateIssue, generateMeeting } = require('../../utils/integrationTestUtils');
 
