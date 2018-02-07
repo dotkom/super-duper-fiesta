@@ -17,12 +17,6 @@ describe('issue', () => {
     }
   });
 
-  it.skip("doesn't create issue if invalid", async () => {
-    const issue = addIssue();
-
-    await expect(issue).rejects.toEqual(new Error('Question validation failed: voteDemand: Path `voteDemand` is required., description: Path `description` is required., genfors: Path `genfors` is required.'));
-  });
-
   it('creates an issue', async () => {
     const issue = await generateIssue();
 
