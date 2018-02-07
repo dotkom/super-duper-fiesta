@@ -122,10 +122,10 @@ Alternative.propTypes = {
   handleUpdateAlternativeText: PropTypes.func.isRequired,
   handleAddAlternative: PropTypes.func.isRequired,
   handleRemoveAlternative: PropTypes.func.isRequired,
-  alternatives: PropTypes.objectOf(PropTypes.shape({
+  alternatives: PropTypes.shape({
     text: PropTypes.string,
     id: PropTypes.number,
-  })).isRequired,
+  }).isRequired,
 };
 
 export default Alternative;
