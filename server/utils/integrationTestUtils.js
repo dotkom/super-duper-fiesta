@@ -33,16 +33,25 @@ async function generateIssue(data) {
 }
 
 async function generateUser(data) {
+  const meeting = (data && data.meeting) || await generateMeeting();
   const user = Object.assign({}, {
     onlinewebId: 'test',
     name: 'test user',
+    registerDate: new Date(2010, 1, 1, 0, 0, 0),
+    canVote: false,
+    notes: '',
+    permissions: 0,
+    completedRegistration: false,
+    meetingId: meeting.id,
   }, data);
   return addUser(user);
 }
 
 async function generateAnonymousUser(data) {
+  const meeting = (data && data.meeting) || await generateMeeting();
   const user = Object.assign({}, {
     passwordHash: '123',
+    meetingId: meeting.id,
   }, data);
   return addAnonymousUser(user);
 }

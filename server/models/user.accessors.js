@@ -6,45 +6,53 @@ const AnonymousUser = db.sequelize.models.anonymoususer;
 const User = db.sequelize.models.user;
 
 
-function getQualifiedUsers(genfors) {
-  return User.find({ genfors, canVote: true, permissions: { $gte: permissionLevel.CAN_VOTE } });
+function getQualifiedUsers(meeting) {
+  const meetingId = meeting.id || meeting;
+  return User.findAll({ where: {
+    meetingId, canVote: true, permissions: { $gte: permissionLevel.CAN_VOTE },
+  } });
 }
 
 function getUserById(userId, anonymous) {
   if (anonymous) {
-    return AnonymousUser.findOne({ _id: userId });
+    return AnonymousUser.findOne({ where: { id: userId } });
   }
-  return User.findOne({ _id: userId });
+  return User.findOne({ where: { id: userId } });
 }
 
-function getUserByUsername(username, genfors) {
-  return User.findOne({ onlinewebId: username, genfors });
+function getUserByUsername(username, meeting) {
+  const meetingId = meeting.id || meeting;
+  return User.findOne({ where: { meetingId, onlinewebId: username } });
 }
 
-function getAnonymousUser(passwordHash, username, genfors) {
-  return AnonymousUser.findOne({
+function getAnonymousUser(passwordHash, username, meeting) {
+  const meetingId = meeting.id || meeting;
+  return AnonymousUser.findOne({ where: {
     passwordHash: hashWithSalt(passwordHash, username),
-    genfors,
+    meetingId,
+  },
   });
 }
 
-function getUsers(genfors, anonymous) {
+function getUsers(meeting, anonymous) {
+  const meetingId = meeting.id || meeting;
   if (anonymous) {
-    return AnonymousUser.find({ genfors });
+    return AnonymousUser.findAll({ where: { meetingId } });
   }
-  return User.find({ genfors });
+  return User.findAll({ where: { meetingId } });
 }
 
-function updateUserById(id, updatedFields, opts) {
-  return User.findByIdAndUpdate(id, updatedFields, opts);
+async function updateUserById(id, updatedFields) {
+  const user = await User.findOne({ where: { id } });
+  return Object.assign(user, updatedFields).save();
 }
 
 function addUser(user) {
-  return new User(user).save();
+  return User.create(user);
 }
 
 async function addAnonymousUser(anonymousUser) {
-  return new AnonymousUser(anonymousUser).save();
+  return AnonymousUser.create(anonymousUser);
 }
 
 module.exports = {
