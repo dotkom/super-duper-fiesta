@@ -7,7 +7,7 @@ const Pin = ({ code }) => (
 );
 
 Pin.propTypes = {
-  code: PropTypes.string.isRequired,
+  code: PropTypes.number.isRequired,
 };
 
 export default Pin;
