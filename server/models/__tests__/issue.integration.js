@@ -23,18 +23,18 @@ describe('issue', () => {
   it.skip('gets an issue by id', async () => {
     const issue = await generateIssue();
 
-    expect(await getIssueById(issue._id)).toEqual(
-      expect.objectContaining({ _id: issue._id }));
+    expect(await getIssueById(issue.id)).toEqual(
+      expect.objectContaining({ id: issue.id }));
   });
 
   it.skip('gets active issue', async () => {
     const meeting = await generateMeeting();
-    const activeIssue = await generateIssue({ genfors: meeting, active: true });
-    await generateIssue({ genfors: meeting, active: false });
+    const activeIssue = await generateIssue({ genforsId: meeting.id, active: true });
+    await generateIssue({ genforsId: meeting.id, active: false });
 
-    expect(await getActiveQuestion(meeting._id)).toEqual(
+    expect(await getActiveQuestion(meeting.id)).toEqual(
       expect.objectContaining({
-        _id: activeIssue._id,
+        id: activeIssue.id,
       }),
     );
   });
@@ -59,23 +59,24 @@ describe('issue', () => {
 
     await endIssue(issue);
 
-    const endedIssue = await getIssueById(issue._id);
+    const endedIssue = await getIssueById(issue.id);
 
     expect(endedIssue).toEqual(expect.objectContaining({
-      _id: issue._id,
+      id: issue.id,
       active: false,
     }));
   });
 
+  // @ToDo: TEST Delete issue by ID and by object
   it.skip('deletes an issue', async () => {
     const issue = await generateIssue({ deleted: false });
 
     await deleteIssue(issue);
 
-    const deletedIssue = await getIssueById(issue._id);
+    const deletedIssue = await getIssueById(issue.id);
 
     expect(deletedIssue).toEqual(expect.objectContaining({
-      _id: issue._id,
+      id: issue.id,
       deleted: true,
     }));
   });
@@ -83,12 +84,12 @@ describe('issue', () => {
   it.skip('updates an issue', async () => {
     const issue = await generateIssue({ deleted: false });
 
-    await updateIssue({ _id: issue._id }, { description: 'updated' });
+    await updateIssue({ id: issue.id }, { description: 'updated' });
 
-    const updatedIssue = await getIssueById(issue._id);
+    const updatedIssue = await getIssueById(issue.id);
 
     expect(updatedIssue).toEqual(expect.objectContaining({
-      _id: issue._id,
+      id: issue.id,
       description: 'updated',
     }));
   });
