@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const logger = require('../logging');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -8,6 +9,9 @@ const db = {};
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
+  // Use winston for logging.
+  // See https://github.com/sequelize/sequelize/issues/7821#issuecomment-311564259
+  logging: msg => logger.debug(msg),
   pool: {
     max: 5,
     min: 0,
@@ -35,7 +39,7 @@ fs.readdirSync(__dirname)
       const model = await sequelize.import(path.join(__dirname, file));
       db[model.name] = model;
     } catch (err) {
-      console.log(`import of model from file "${file}" failed`, err);
+      logger.error(`import of model from file "${file}" failed`, err);
     }
   });
 
