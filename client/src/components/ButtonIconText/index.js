@@ -26,7 +26,6 @@ class ButtonIconText extends Component {
         onClick={onClick}
         onMouseEnter={() => this.hover(true)}
         onMouseLeave={() => this.hover(false)}
-        {...other}
       >
         <IconText hovering={hovering} {...other} />
       </button>
@@ -34,8 +33,13 @@ class ButtonIconText extends Component {
   }
 }
 
+ButtonIconText.defaultProps = {
+  disabled: false,
+};
+
 ButtonIconText.propTypes = {
   onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default ButtonIconText;
