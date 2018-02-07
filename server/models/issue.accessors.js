@@ -10,32 +10,38 @@ async function addIssue(issue) {
 
 function getConcludedIssues(genfors) {
   const id = genfors.id || genfors;
-  return Question.findOne({ where:
-    { id, deleted: false, active: false },
+  return Question.findAll({ where:
+    { genforsId: id, deleted: false, active: false },
   });
 }
 
 const getIssueById = id => (
-  Question.findOne({ _id: id })
+  Question.findOne({ where: { id } })
 );
 function getActiveQuestion(genfors) {
-  return Question.findOne({ genfors, active: true, deleted: false });
+  return Question.findOne({ where:
+    { genforsId: genfors, active: true, deleted: false },
+  });
 }
 
-function endIssue(issue) {
-  return Question.findByIdAndUpdate(issue,
-    { active: false, status: VOTING_FINISHED },
-    { new: true });
+async function updateIssue(issueOrId, data) {
+  const id = issueOrId.id || issueOrId;
+  const issue = await getIssueById(id);
+  return Object.assign(issue, data).save();
 }
 
-function deleteIssue(issue) {
-  return Question.findByIdAndUpdate(issue,
+async function deleteIssue(issue) {
+  const id = issue.id || issue;
+  return updateIssue(id,
     { active: false, deleted: true, status: VOTING_FINISHED },
     { new: true });
 }
 
-function updateIssue(issue, data, options) {
-  return Question.findOneAndUpdate(issue, data, options);
+function endIssue(issue) {
+  const id = issue.id || issue;
+  return updateIssue(id,
+    { active: false, status: VOTING_FINISHED },
+    { new: true });
 }
 
 
