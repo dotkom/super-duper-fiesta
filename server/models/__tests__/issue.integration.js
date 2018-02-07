@@ -2,10 +2,21 @@ const {
   addIssue, deleteIssue, endIssue, getActiveQuestion, getConcludedIssues,
   getIssueById, updateIssue,
 } = require('../issue.accessors');
+const { getActiveGenfors } = require('../meeting.accessors');
 
 const { generateIssue, generateMeeting } = require('../../utils/integrationTestUtils');
 
 describe('issue', () => {
+  afterEach(async () => {
+    // Invalidate test data
+    const meeting = await getActiveGenfors();
+    let activeIssue = await getActiveQuestion(meeting.id);
+    while (activeIssue !== null && activeIssue !== undefined) {
+      await deleteIssue(activeIssue.id);
+      activeIssue = await getActiveQuestion(meeting.id);
+    }
+  });
+
   it.skip("doesn't create issue if invalid", async () => {
     const issue = addIssue();
 
