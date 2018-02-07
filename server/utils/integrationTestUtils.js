@@ -3,6 +3,8 @@ const { createGenfors } = require('../models/meeting.accessors');
 const { addUser, addAnonymousUser } = require('../models/user.accessors');
 const { createVote } = require('../models/vote.accessors');
 
+const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
+
 async function generateMeeting(data) {
   const meeting = Object.assign({}, {
     title: 'title',
@@ -14,10 +16,18 @@ async function generateMeeting(data) {
 }
 
 async function generateIssue(data) {
+  const meeting = (data && data.genfors) || await generateMeeting();
   const issue = Object.assign({}, {
-    voteDemand: 0.5,
+    voteDemand: 'regular',
+    date: new Date(2010, 1, 1, 0, 0, 0),
     description: 'question',
-    genfors: await generateMeeting(),
+    meetingId: meeting.id,
+    status: VOTING_NOT_STARTED,
+    active: true,
+    deleted: false,
+    secret: false,
+    showOnlyWinner: false,
+    countingBlankVotes: false,
   }, data);
   return addIssue(issue);
 }

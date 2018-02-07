@@ -37,11 +37,11 @@ module.exports = {
           key: 'id',
         },
       },
-      anonymousUserId: {
+      anonymoususerId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'anonymousUsers',
+          model: 'anonymoususers',
           key: 'id',
         },
       },

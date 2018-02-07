@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      genforsId: {
+      meetingId: {
         // FK to Genfors
         // type: Sequelize.FOREIGNKEY,
         // to: GENFORS
@@ -49,7 +49,7 @@ module.exports = {
         // Default true
         type: Sequelize.BOOLEAN
       },
-      countOnlyBlankVotes: {
+      countingBlankVotes: {
         // Default true
         type: Sequelize.BOOLEAN
       },

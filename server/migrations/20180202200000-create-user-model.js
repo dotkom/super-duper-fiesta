@@ -50,7 +50,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
     }).then(() => {
-      queryInterface.createTable('anonymousUsers', {
+      queryInterface.createTable('anonymoususers', {
         id: {
           allowNull: false,
           autoIncrement: true,
@@ -82,7 +82,7 @@ module.exports = {
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('users').then(() => {
-      return queryInterface.dropTable('anonymousUsers');
+      return queryInterface.dropTable('anonymoususers');
     });
   }
 };
