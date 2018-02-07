@@ -1,78 +1,24 @@
-const mongoose = require('mongoose');
-const { hashWithSalt } = require('../utils/crypto');
-
-const permissionLevel = require('../../common/auth/permissions');
-
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-  genfors: { type: Schema.Types.ObjectId, required: false },
-  name: { type: String, required: true },
-  onlinewebId: { type: String, required: true },
-  registerDate: { type: Date, default: Date.now },
-  canVote: { type: Boolean, default: false },
-  notes: String,
-  permissions: { type: Number, default: 0 },
-  completedRegistration: { type: Boolean, default: false },
-});
-
-const AnonymousUserSchema = new Schema({
-  genfors: { type: Schema.Types.ObjectId, required: false },
-  passwordHash: { type: String, required: true },
-});
-
-const User = mongoose.model('User', UserSchema);
-const AnonymousUser = mongoose.model('AnonymousUser', AnonymousUserSchema);
-
-
-function getQualifiedUsers(genfors) {
-  return User.find({ genfors, canVote: true, permissions: { $gte: permissionLevel.CAN_VOTE } });
-}
-
-function getUserById(userId, anonymous) {
-  if (anonymous) {
-    return AnonymousUser.findOne({ _id: userId });
-  }
-  return User.findOne({ _id: userId });
-}
-
-function getUserByUsername(username, genfors) {
-  return User.findOne({ onlinewebId: username, genfors });
-}
-
-function getAnonymousUser(passwordHash, username, genfors) {
-  return AnonymousUser.findOne({
-    passwordHash: hashWithSalt(passwordHash, username),
-    genfors,
+async function User(sequelize, DataTypes) {
+  const model = await sequelize.define('user', {
+    name: DataTypes.TEXT,
+    onlinewebId: DataTypes.TEXT,
+    registerDate: DataTypes.DATE,
+    canVote: DataTypes.BOOLEAN,
+    notes: DataTypes.TEXT,
+    permissions: DataTypes.SMALLINT,
+    completedRegistration: DataTypes.BOOLEAN,
   });
+
+  model.associate = (models) => {
+    models.user.belongsTo(models.meeting, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
+  return model;
 }
 
-function getUsers(genfors, anonymous) {
-  if (anonymous) {
-    return AnonymousUser.find({ genfors });
-  }
-  return User.find({ genfors });
-}
-
-function updateUserById(id, updatedFields, opts) {
-  return User.findByIdAndUpdate(id, updatedFields, opts);
-}
-
-function addUser(user) {
-  return new User(user).save();
-}
-
-async function addAnonymousUser(anonymousUser) {
-  return new AnonymousUser(anonymousUser).save();
-}
-
-module.exports = {
-  addUser,
-  addAnonymousUser,
-  getAnonymousUser,
-  getUsers,
-  getUserById,
-  getUserByUsername,
-  getQualifiedUsers,
-  updateUserById,
-};
+module.exports = User;

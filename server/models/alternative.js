@@ -1,17 +1,17 @@
-const Sequelize = require('sequelize');
-const connection = require('./postgresql');
-
-const { Issue } = require('./issue');
-
-let Alternative;
-
-async function AlternativeModel(sequelize, DataTypes) {
-  const model = await sequelize.define('Alternative', {
+async function Alternative(sequelize, DataTypes) {
+  const model = await sequelize.define('alternative', {
     text: DataTypes.TEXT,
   });
-  model.belongsTo(Issue);
+
+  model.associate = models =>
+    models.issue.belongsTo(models.issue, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+
   return model;
 }
-(async () => { Alternative = await AlternativeModel(await connection(), Sequelize); })();
 
 module.exports = Alternative;
