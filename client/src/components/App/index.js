@@ -87,9 +87,9 @@ App.propTypes = {
   fullName: PropTypes.string,
   loggedIn: PropTypes.bool,
   title: PropTypes.string,
-  match: PropTypes.objectOf(PropTypes.shape({
+  match: PropTypes.shape({
     path: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
   userPermissions: PropTypes.number.isRequired,
   version: PropTypes.string,
 };
