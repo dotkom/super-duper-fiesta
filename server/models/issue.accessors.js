@@ -11,7 +11,7 @@ async function addIssue(issue) {
 function getConcludedIssues(genfors) {
   const id = genfors.id || genfors;
   return Question.findAll({ where:
-    { genforsId: id, deleted: false, active: false },
+    { meetingId: id, deleted: false, active: false },
   });
 }
 
@@ -19,8 +19,9 @@ const getIssueById = id => (
   Question.findOne({ where: { id } })
 );
 function getActiveQuestion(genfors) {
+  // const genforsId = genfors.id || genf
   return Question.findOne({ where:
-    { genforsId: genfors, active: true, deleted: false },
+    { meetingId: genfors, active: true, deleted: false },
   });
 }
 

@@ -46,12 +46,10 @@ Promise.all(fs.readdirSync(__dirname)
     Object.keys(db)
       .filter(key => (key.search(/sequelize/i) === -1))
       .map(async (model) => {
-        console.log('associating ', model);
         if (db[model].associate) {
           await db[model].associate(db);
         }
       });
-      // console.log('done', db)
   })
   .catch((err) => {
     console.log('Error during association of model relations', err);

@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      genforsId: {
+      meetingId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'meetings',
@@ -65,7 +65,7 @@ module.exports = {
           allowNull: false,
           type: Sequelize.DATE
         },
-        genforsId: {
+        meetingId: {
           type: Sequelize.INTEGER,
           references: {
             model: 'meetings',
