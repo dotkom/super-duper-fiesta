@@ -1,4 +1,3 @@
-// jest.mock('connect-mongo');
 jest.mock('express-session');
 jest.mock('socket.io');
 jest.mock('passport.socketio');
@@ -23,14 +22,12 @@ const { generateManager, generateUser } = require('../../utils/generateTestData'
 
 const socketIOListener = () => (
   new Promise((resolve) => {
-    socketio.mockImplementation(() => {
-      return {
-        on: (action, callback) => {
-          resolve(callback);
-        },
-        use: () => jest.fn(),
-      };
-    });
+    socketio.mockImplementation(() => ({
+      on: (action, callback) => {
+        resolve(callback);
+      },
+      use: () => jest.fn(),
+    }));
     listen(jest.fn(), {
       once: jest.fn(),
     });

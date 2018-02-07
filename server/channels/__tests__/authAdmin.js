@@ -6,8 +6,6 @@ const { generateGenfors, generateSocket, generateUser } = require('../../utils/g
 const { adminLogin, createGenfors: createGenforsListener, listener } = require('../admin/authAdmin');
 const { ADMIN_CREATE_GENFORS, ADMIN_LOGIN } = require('../../../common/actionTypes/auth');
 
-
-
 const MOCK_PW = 'correct';
 
 const generateData = data => Object.assign({}, data);
