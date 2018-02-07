@@ -3,7 +3,7 @@ const {
   getUserVote, getVotes, haveIVoted,
 } = require('../vote.accessors');
 
-const { generateIssue, generateMeeting, generateUser, generateVote } = require('../../utils/integrationTestUtils');
+const { generateAlternative, generateIssue, generateMeeting, generateUser, generateVote } = require('../../utils/integrationTestUtils');
 
 describe('vote', () => {
   beforeAll(async () => {
@@ -11,31 +11,29 @@ describe('vote', () => {
   });
 
   it('creates a vote', async () => {
-    const vote = await generateVote({});
+    const vote = await generateVote();
 
     expect(vote).toEqual(expect.objectContaining({
-      _id: vote._id,
+      id: vote.id,
     }));
   });
 
   it('gets a vote for a user', async () => {
     const meeting = await generateMeeting();
-    const user = await generateUser({ genfors: meeting });
-    const issue = await generateIssue({ genfors: meeting,
-      alternatives: [
-        { text: 'one' },
-      ],
-    });
+    const user = await generateUser({ meeting });
+    const issue = await generateIssue({ meeting });
+    const alternative = await generateAlternative();
+
     const vote = await generateVote({
-      user: user._id,
-      question: issue,
-      alternative: issue.alternatives[0]._id,
+      user: user.id,
+      question: issue.id,
+      alternative: alternative.id,
     });
 
-    const userVote = await getUserVote(issue._id, user._id);
+    const userVote = await getUserVote(issue.id, user.id);
 
     expect(userVote).toEqual(expect.objectContaining({
-      _id: vote._id,
+      id: vote.id,
     }));
   });
 
@@ -48,17 +46,17 @@ describe('vote', () => {
       question: await generateIssue({ alternatives: [{ text: 'two' }] }),
     });
 
-    const votes = await getVotes(issue._id);
+    const votes = await getVotes(issue.id);
 
     expect(votes).toEqual(expect.arrayContaining([
       expect.objectContaining({
-        _id: vote1._id,
+        id: vote1.id,
       }),
     ]));
 
     expect(votes).not.toEqual(expect.arrayContaining([
       expect.objectContaining({
-        _id: vote2._id,
+        id: vote2.id,
       }),
     ]));
   });

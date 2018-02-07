@@ -2,6 +2,7 @@ const { addIssue } = require('../models/issue.accessors');
 const { createGenfors } = require('../models/meeting.accessors');
 const { addUser, addAnonymousUser } = require('../models/user.accessors');
 const { createVote } = require('../models/vote.accessors');
+const { addAlternative } = require('../models/alternative.accessors');
 
 const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
 
@@ -56,20 +57,26 @@ async function generateAnonymousUser(data) {
   return addAnonymousUser(user);
 }
 
+async function generateAlternative(data) {
+  const issue = await generateIssue();
+  const alternative = Object.assign({}, {
+    text: 'default alternative',
+    issueId: (data && data.issueId) || issue.id,
+  }, data);
+  return addAlternative(alternative);
+}
+
 async function generateVote(data) {
-  const issue = data.question || await generateIssue({ alternatives: [{ text: 'one' }] });
-  const user = data.user || await generateUser();
-  const alternative = issue.alternatives[0]._id;
-  // const vote = Object.assign({}, {
-  //   question: issue._id,
-  //   user: user._id,
-  //   alternative: issue.alternatives[0]._id,
-  // }, data);
-  // @ToDo: Move this .save() into createVote
-  return createVote(user, issue, alternative).save();
+  const issue = (data && data.question) || await generateIssue();
+  const alternative = (data && data.alternative) || await addAlternative({
+    issueId: issue.id,
+  });
+  const user = (data && data.user) || await generateUser();
+  return createVote(user, issue, alternative);
 }
 
 module.exports = {
+  generateAlternative,
   generateIssue,
   generateMeeting,
   generateUser,
