@@ -18,6 +18,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
     acquire: 30000,
     idle: 10000,
   },
+  operatorsAliases: false,
 });
 
 // Import all models

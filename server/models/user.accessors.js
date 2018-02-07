@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 const db = require('./postgresql');
 const { hashWithSalt } = require('../utils/crypto');
 const permissionLevel = require('../../common/auth/permissions');
@@ -5,11 +6,12 @@ const permissionLevel = require('../../common/auth/permissions');
 const AnonymousUser = db.sequelize.models.anonymoususer;
 const User = db.sequelize.models.user;
 
+const Op = Sequelize.Op;
 
 function getQualifiedUsers(meeting) {
   const meetingId = meeting.id || meeting;
   return User.findAll({ where: {
-    meetingId, canVote: true, permissions: { $gte: permissionLevel.CAN_VOTE },
+    meetingId, canVote: true, permissions: { [Op.gte]: permissionLevel.CAN_VOTE },
   } });
 }
 
