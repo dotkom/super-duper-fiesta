@@ -3,8 +3,8 @@ jest.mock('../../models/user');
 const { createGenfors } = require('../../models/meeting');
 const { updateUserById } = require('../../models/user');
 const { generateGenfors, generateSocket, generateUser } = require('../../utils/generateTestData');
-const { adminLogin, createGenfors: createGenforsListener } = require('../admin/authAdmin');
-
+const { adminLogin, createGenfors: createGenforsListener, listener } = require('../admin/authAdmin');
+const { ADMIN_CREATE_GENFORS, ADMIN_LOGIN } = require('../../../common/actionTypes/auth');
 
 const MOCK_PW = 'correct';
 
@@ -54,6 +54,38 @@ describe('admin creates genfors', () => {
     expect(socket.to('admin').emit.mock.calls).toMatchSnapshot();
   });
 });
+
+describe('listener', () => {
+  it('listens to ADMIN_CREATE_GENFORS', async () => {
+    createGenfors.mockImplementation(async () => generateGenfors());
+    const socket = generateSocket();
+    await listener(socket);
+
+    await socket.createAction(generateData({ type: ADMIN_CREATE_GENFORS }));
+
+    expect(socket.emit).toBeCalled();
+  });
+
+  it('listens to ADMIN_LOGIN', async () => {
+    const socket = generateSocket();
+    await listener(socket);
+
+    await socket.createAction(generateData({ type: ADMIN_LOGIN }));
+
+    expect(socket.emit).toBeCalled();
+  });
+
+  it('ignores INVALID_ACTION', async () => {
+    const socket = generateSocket();
+    await listener(socket);
+
+    await socket.createAction(generateData({ type: 'INVALID_ACTION' }));
+
+    expect(socket.emit).not.toBeCalled();
+    expect(socket.broadcast.emit).not.toBeCalled();
+  });
+});
+
 
 afterEach(() => {
   process.env.SDF_GENFORS_ADMIN_PASSWORD = '';
