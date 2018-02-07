@@ -56,10 +56,10 @@ Issue.propTypes = {
 const mapStateToProps = state => ({
   issueExists: activeIssueExists(state),
   text: getIssueText(state),
-  secret: getIssueKey(state, 'secret', false),
-  showOnlyWinner: getIssueKey(state, 'showOnlyWinner', false),
-  countingBlankVotes: getIssueKey(state, 'countingBlankVotes', false),
-  voteDemand: getIssueKey(state, 'voteDemand', false),
+  secret: getIssueKey(state, 'secret'),
+  showOnlyWinner: getIssueKey(state, 'showOnlyWinner'),
+  countingBlankVotes: getIssueKey(state, 'countingBlankVotes'),
+  voteDemand: getIssueKey(state, 'voteDemand'),
 });
 
 export default Issue;
