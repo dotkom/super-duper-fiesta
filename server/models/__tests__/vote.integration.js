@@ -1,4 +1,3 @@
-const databaseSetup = require('../essentials');
 const {
   getUserVote, getVotes, haveIVoted,
 } = require('../vote.accessors');
@@ -6,10 +5,6 @@ const {
 const { generateAlternative, generateIssue, generateMeeting, generateUser, generateVote } = require('../../utils/integrationTestUtils');
 
 describe('vote', () => {
-  beforeAll(async () => {
-    await databaseSetup();
-  });
-
   it('creates a vote', async () => {
     const vote = await generateVote();
 
