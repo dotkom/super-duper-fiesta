@@ -45,7 +45,6 @@ function endIssue(issue) {
     { new: true });
 }
 
-
 module.exports = {
   addIssue,
   getActiveQuestion,
