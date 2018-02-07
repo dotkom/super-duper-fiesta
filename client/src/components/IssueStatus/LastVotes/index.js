@@ -25,10 +25,10 @@ const LastVotes = ({ votes, hideVotes }) => {
 };
 
 LastVotes.propTypes = {
-  votes: PropTypes.shape({
+  votes: PropTypes.arrayOf(PropTypes.shape({
     voter: PropTypes.string.isRequired,
     alternative: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
   hideVotes: PropTypes.bool.isRequired,
 };
 
