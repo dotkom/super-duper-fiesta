@@ -1,4 +1,3 @@
-const databaseSetup = require('../essentials');
 const {
   getAnonymousUser, getQualifiedUsers, getUserById,
   getUserByUsername, getUsers, updateUserById,
@@ -11,10 +10,6 @@ const {
 } = require('../../utils/integrationTestUtils');
 
 describe('user', () => {
-  beforeAll(async () => {
-    await databaseSetup();
-  });
-
   it('adds user', async () => {
     const user = await generateUser({
       onlinewebId: 'test',
