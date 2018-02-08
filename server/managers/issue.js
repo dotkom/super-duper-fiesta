@@ -1,5 +1,6 @@
 const model = require('../models/issue.accessors');
 const logger = require('../logging');
+const { addAlternative } = require('../models/alternative.accessors');
 const { getQualifiedUsers } = require('../models/user.accessors');
 const { getActiveGenfors } = require('../models/meeting.accessors');
 const { getVotes } = require('../models/vote.accessors');
@@ -37,15 +38,28 @@ async function addIssue(issueData, closeCurrentIssue) {
   }
   // removed possible issues and proceeding to create a new one
   const users = await getQualifiedUsers(genfors);
-  const issue = Object.assign(issueData, {
-    genfors,
+  const meetingId = genfors.id;
+  const data = Object.assign(issueData, {
+    meetingId,
     qualifiedVoters: users.length,
     currentVotes: 0,
   });
-  logger.debug('Created issue', { issue });
 
-  // @ToDo: Create alternatives, map it to issue obj, then create issue.
-  return model.addIssue(issue);
+  // @ToDo: Do these in a transaction.
+  const issue = await model.addIssue(data);
+
+  // Add alternatives
+  try {
+    await Promise.all(issueData.alternatives.map(async alternative =>
+      addAlternative(Object.assign(alternative, { issueId: issue.id, id: null }))));
+  } catch (err) {
+    logger.error('Failed to add alternatives!', err);
+    throw err;
+  }
+
+  logger.debug('Created issue', { issue: issue.id });
+
+  return model.getIssueWithAlternatives(issue.id);
 }
 
 async function deleteIssue(issue, user) {
@@ -62,7 +76,7 @@ const countVoteAlternatives = (alternatives, votes) => {
 
   // Count votes for each alternative
   return alternatives.map(alternative => (
-    voteObjects.filter(vote => vote.alternative.toString() === alternative.id).length
+    voteObjects.filter(vote => vote.alternativeId.toString() === alternative.id).length
   ));
 };
 
@@ -116,7 +130,9 @@ const voteArrayToObject = (voteCounts, alternatives) => (
 );
 
 
-async function getPublicIssueWithVotes(issue, admin = false) {
+async function getPublicIssueWithVotes(issueIdOrObj, admin = false) {
+  const issueId = issueIdOrObj.id || issueIdOrObj;
+  const issue = await model.getIssueWithAlternatives(issueId);
   let votes;
   try {
     votes = await (await getVotes(issue))
@@ -128,14 +144,14 @@ async function getPublicIssueWithVotes(issue, admin = false) {
       };
     }, {});
   } catch (err) {
-    logger.error('Getting votes for issue failed', err, { issueId: issue.id });
+    logger.error('Getting votes for issue failed', err, { issueId });
   }
   const muhVotes = await votes;
 
   const issueVotes = await muhVotes;
   const voteCounts = countVoteAlternatives(issue.alternatives, issueVotes);
   const voteData = {
-    ...issue.toObject(),
+    ...issue,
     votes: (issue.showOnlyWinner && !admin)
       ? {} : voteArrayToObject(voteCounts, issue.alternatives),
     winner: calculateWinner(issue, issueVotes, voteCounts),
