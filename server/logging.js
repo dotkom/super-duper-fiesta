@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
-if (process.env.SDF_CATCH_UNHANDLED_REJECTIONS.toLowerCase() === 'true' && process.env.NODE_ENV !== 'test') {
+if (process.env.SDF_CATCH_UNHANDLED_REJECTIONS === 'true' && process.env.NODE_ENV !== 'test') {
   consoleLogger.info('Catching unhandled rejections.');
   process.on('unhandledRejection', msg => consoleLogger.warn('Caught unhandled rejection:', msg));
 }
