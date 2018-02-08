@@ -1122,7 +1122,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "registered": false,
       },
       "type": "AUTH_REGISTERED",
     },

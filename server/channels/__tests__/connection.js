@@ -10,7 +10,7 @@ const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser, getUsers } = require('../../models/user.accessors');
 const { getVotes, getUserVote } = require('../../models/vote.accessors');
-const { getActiveQuestion, getConcludedIssues } = require('../../models/issue.accessors');
+const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues } = require('../../models/issue.accessors');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 
@@ -24,6 +24,7 @@ describe('connection', () => {
       },
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
+    getIssueWithAlternatives.mockImplementation(async () => generateIssue({ id: '2' }));
     getConcludedIssues.mockImplementation(async meeting => [
       generateIssue({ meetingId: meeting.id, id: '2' }),
       generateIssue({ meetingId: meeting.id, id: '2' }),
