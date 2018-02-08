@@ -32,14 +32,14 @@ async function canEdit(securityLevel, user, genforsId) {
   logger.silly('security check', {
     active: active.id,
     genfors: genfors.id,
-    usergenfors: user.genfors.toString(),
+    usergenfors: user.meetingId,
     userperms: user.permissions,
     securityLevel,
   });
   // Checking if current genfors == requested genfors == user genfors
   // But if user is superuser it is not nessecary
   if ((active.id === genfors.id)
-    && (genfors.id === user.genfors.toString())
+    && (genfors.id === user.meetingId)
     && (user.permissions >= securityLevel)) {
     logger.silly('Cleared security check');
     return true;

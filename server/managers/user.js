@@ -55,7 +55,7 @@ async function addUser(name, onlinewebId, securityLevel) {
 
   try {
     const user = await model.addUser({
-      genfors,
+      meetingId: (genfors && genfors.id) || null,
       name,
       onlinewebId,
       notes: '',
@@ -80,7 +80,7 @@ async function addAnonymousUser(username, passwordHash) {
     throw new Error('Anonymous user aleady exists');
   }
   await model.addAnonymousUser({
-    genfors,
+    meetingId: genfors.id,
     passwordHash: hashWithSalt(passwordHash, username),
   });
   await model.updateUserById(user.id, { completedRegistration: true });

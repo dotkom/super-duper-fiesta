@@ -38,7 +38,7 @@ const emitUserData = async (socket) => {
     permissions: user.permissions,
   });
 
-  if (!user.genfors) {
+  if (!user.meetingId) {
     emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
   }
 

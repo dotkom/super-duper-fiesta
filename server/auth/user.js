@@ -60,8 +60,8 @@ async function createUser(user) {
       // Create user if not exists
       logger.debug('User does not exist -- creating', { username });
       const newUser = await addUser(fullName, username, permissionLevel);
-      logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`,
-        { username, fullName: newUser.name, genfors: newUser.genfors });
+      logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.meetingId}`,
+        { username, fullName: newUser.name, genfors: newUser.meetingId });
       return newUser;
     }
     logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });

@@ -17,7 +17,7 @@ async function generateMeeting(data) {
 }
 
 async function generateIssue(data) {
-  const meeting = (data && data.genfors) || await generateMeeting();
+  const meeting = (data && data.meeting) || await generateMeeting();
   const issue = Object.assign({}, {
     voteDemand: 'regular',
     date: new Date(2010, 1, 1, 0, 0, 0),
