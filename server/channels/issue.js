@@ -16,18 +16,18 @@ const { CLOSE_ISSUE, OPEN_ISSUE, DELETED_ISSUE } = require('../../common/actionT
 const { DISABLE_VOTING, ENABLE_VOTING } = require('../../common/actionTypes/voting');
 
 const createIssue = async (socket, payload) => {
-  await addIssue(payload)
-  .then((question) => {
+  try {
+    const question = await addIssue(payload);
     logger.debug('Added new question. Broadcasting ...', { question: question.description });
     broadcastAndEmit(socket, OPEN_ISSUE, question, { action: 'open' });
     broadcast(socket, ENABLE_VOTING, {
       id: question.id,
       status: question.status,
     });
-  }).catch((err) => {
+  } catch (err) {
     logger.error('Adding new question failed.', err);
     emitError(socket, new Error('Opprettelse av sak feilet'));
-  });
+  }
 };
 
 const closeIssue = async (socket, payload) => {
@@ -38,8 +38,8 @@ const closeIssue = async (socket, payload) => {
     issue: issue.toString(),
     user: user.name,
   });
-  await endIssue(issue, user)
-  .then(async (updatedIssue) => {
+  try {
+    const updatedIssue = await endIssue(issue, user);
     logger.info('Closed issue.', {
       description: updatedIssue.description,
       issue: updatedIssue.id.toString(),
@@ -52,11 +52,10 @@ const closeIssue = async (socket, payload) => {
     broadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue));
     adminBroadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, true));
     emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(user)));
-  })
-  .catch((err) => {
+  } catch (err) {
     logger.error('closing issue failed', err);
     emitError(socket, new Error('Stenging av sak feilet'));
-  });
+  }
 };
 
 const adminDeleteIssue = async (socket, payload) => {
