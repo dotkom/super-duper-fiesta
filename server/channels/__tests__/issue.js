@@ -1,16 +1,19 @@
+jest.mock('../../models/alternative.accessors');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
 jest.mock('../../models/user.accessors');
 jest.mock('../../models/vote.accessors');
+const { addAlternative } = require('../../models/alternative.accessors');
 const { createIssue, closeIssue, adminDeleteIssue, adminDisableVoting, adminEnableVoting } = require('../issue');
-const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue.accessors');
+const { addIssue, endIssue, deleteIssue, getActiveQuestion, getIssueWithAlternatives, updateIssue } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
 const { getQualifiedUsers } = require('../../models/user.accessors');
 const { getVotes } = require('../../models/vote.accessors');
-const { generateSocket, generateIssue, generateGenfors, generateUser, generateManager, generateVote } = require('../../utils/generateTestData');
+const { generateSocket, generateIssue, generateGenfors, generateUser, generateManager, generateVote, generateAlternative } = require('../../utils/generateTestData');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 beforeEach(() => {
+  addAlternative.mockImplementation(async () => generateAlternative());
   addIssue.mockImplementation(async () => generateIssue({ status: VOTING_NOT_STARTED }));
   getActiveQuestion.mockImplementation(async () => null);
   endIssue.mockImplementation(async () => generateIssue());
@@ -27,10 +30,12 @@ beforeEach(() => {
     generateVote({ issueId, id: '3' }),
     generateVote({ issueId, id: '4' }),
   ]);
+  getIssueWithAlternatives.mockImplementation(async () =>
+    generateIssue({ status: VOTING_NOT_STARTED }));
 });
 
 describe('createIssue', () => {
-  const generateData = () => ({});
+  const generateData = () => generateIssue();
   it('emits OPEN_ISSUE action creates issue', async () => {
     const socket = generateSocket();
     await createIssue(socket, generateData());
@@ -57,6 +62,8 @@ describe('closeIssue', () => {
   it('emits close issue action and disables voting', async () => {
     endIssue.mockImplementation(async () =>
       generateIssue({ active: false, status: VOTING_FINISHED }));
+    getIssueWithAlternatives.mockImplementation(async () =>
+      generateIssue({ active: false, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -78,6 +85,8 @@ describe('closeIssue', () => {
   it('emits winner when issue only shows winner', async () => {
     endIssue.mockImplementation(async () =>
       generateIssue({ active: false, showOnlyWinner: true, status: VOTING_FINISHED }));
+    getIssueWithAlternatives.mockImplementation(async () =>
+      generateIssue({ active: false, showOnlyWinner: true, status: VOTING_FINISHED }));
     const socket = generateSocket({ permissions: 10 });
     await closeIssue(socket, generateData());
 
@@ -93,6 +102,8 @@ describe('adminDeleteIssue', () => {
   });
   it('emits delete issue on success', async () => {
     deleteIssue.mockImplementation(async () =>
+      generateIssue({ active: false, deleted: true, status: VOTING_FINISHED }));
+    getIssueWithAlternatives.mockImplementation(async () =>
       generateIssue({ active: false, deleted: true, status: VOTING_FINISHED }));
 
     const socket = generateSocket({ permissions: 10 });
