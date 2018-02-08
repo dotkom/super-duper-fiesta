@@ -7,14 +7,12 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
     case OPEN_ISSUE: {
       return {
         ...state,
-        id: action.data._id, // eslint-disable-line no-underscore-dangle
+        id: action.data.id,
         active: action.data.active,
         date: action.data.date,
         text: action.data.description,
         alternatives: action.data.alternatives.map((originalAlternative) => {
           const alternative = Object.assign({}, originalAlternative);
-          // Proxy `_id` as `id`.
-          alternative.id = alternative._id; // eslint-disable-line no-underscore-dangle
           return alternative;
         }),
         qualifiedVoters: action.data.qualifiedVoters,
@@ -77,13 +75,13 @@ const issues = (state = {}, action) => {
     case DISABLE_VOTING:
     case ENABLE_VOTING:
     case OPEN_ISSUE: {
-      const issueId = action.data._id; // eslint-disable-line no-underscore-dangle
+      const issueId = action.data.id;
       return Object.assign({}, state, {
         [issueId]: issue(state[issueId], action),
       });
     }
     case DELETED_ISSUE: {
-      const deletedIssueId = action.data._id; // eslint-disable-line no-underscore-dangle
+      const deletedIssueId = action.data.id;
       return Object.keys(state).reduce((result, issueId) => {
         if (issueId !== deletedIssueId) {
           return {
@@ -109,7 +107,7 @@ const issues = (state = {}, action) => {
         issueId,
         alternative: action.data.alternative,
         voter: action.data.user,
-        id: action.data._id,
+        id: action.data.id,
         randomName: action.data.randomName,
       };
       return Object.assign({}, state, {
