@@ -4,7 +4,7 @@ const Genfors = db.sequelize.models.meeting;
 
 async function getGenfors(genfors) {
   const id = genfors.id || genfors;
-  return Genfors.findById(id);
+  return Genfors.findOne({ where: { id } });
 }
 
 function getActiveGenfors() {
@@ -17,7 +17,8 @@ async function updateGenfors(query, data) {
   return Object.assign(genfors, data).save();
 }
 
-async function createGenfors(meeting) {
+async function createGenfors(title, date) {
+  const meeting = { title, date };
   return Genfors.create(meeting);
 }
 

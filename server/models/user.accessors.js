@@ -28,7 +28,7 @@ function getUserByUsername(username, meeting) {
 }
 
 function getAnonymousUser(passwordHash, username, meeting) {
-  const meetingId = meeting.id || meeting;
+  const meetingId = (meeting && meeting.id) || meeting;
   return AnonymousUser.findOne({ where: {
     passwordHash: hashWithSalt(passwordHash, username),
     meetingId,
@@ -44,7 +44,8 @@ function getUsers(meeting, anonymous) {
   return User.findAll({ where: { meetingId } });
 }
 
-async function updateUserById(id, updatedFields) {
+async function updateUserById(userOrId, updatedFields) {
+  const id = (userOrId && userOrId.id) || userOrId;
   const user = await User.findOne({ where: { id } });
   return Object.assign(user, updatedFields).save();
 }

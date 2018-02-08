@@ -51,6 +51,7 @@ Promise.all(fs.readdirSync(__dirname)
           await db[model].associate(db);
         }
       });
+    logger.info('Done setting up database.');
   })
   .catch((err) => {
     logger.error('Error during association of model relations', err);

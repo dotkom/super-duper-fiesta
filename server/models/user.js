@@ -2,7 +2,10 @@ async function User(sequelize, DataTypes) {
   const model = await sequelize.define('user', {
     name: DataTypes.TEXT,
     onlinewebId: DataTypes.TEXT,
-    registerDate: DataTypes.DATE,
+    registerDate: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
     canVote: DataTypes.BOOLEAN,
     notes: DataTypes.TEXT,
     permissions: DataTypes.SMALLINT,
