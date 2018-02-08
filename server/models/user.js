@@ -13,7 +13,9 @@ async function User(sequelize, DataTypes) {
     models.user.belongsTo(models.meeting, {
       onDelete: 'CASCADE',
       foreignKey: {
-        allowNull: false,
+        // We need to allow this to be NULL because otherwise
+        // you cannot log in without a genfors to create a genfors
+        allowNull: true,
       },
     });
   };

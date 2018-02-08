@@ -17,6 +17,9 @@ module.exports = {
       },
       meetingId: {
         type: Sequelize.INTEGER,
+        // We need to allow this to be NULL because otherwise
+        // you cannot log in without a genfors to create a genfors
+        allowNull: true,
         references: {
           model: 'meetings',
           key: 'id',
