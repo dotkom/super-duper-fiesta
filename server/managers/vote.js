@@ -36,14 +36,14 @@ async function addVote(issueId, user, alternative, voter) {
     }
     const alreadyVoted = await haveIVoted(issueId, voter);
     if (!alreadyVoted) {
-      const vote = createVote(voter, issueId, alternative);
       logger.debug('Storing vote.', { issueId, user: user.onlinewebId, voter });
       return createVote(voter, issueId, alternative);
     }
     logger.debug('User has already voted!', { issueId, user: user.onlinewebId, voter });
     throw new Error('Du har allerede stemt.');
   } catch (err) {
-    logger.warn('User tried to vote without having appropriate permissions.', {
+    logger.warn('Failed to store vote.', {
+      err,
       issueId,
       user: user.onlinewebId,
       requiredPerms: permissionLevel.CAN_VOTE,
