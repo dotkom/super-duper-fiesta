@@ -6,9 +6,9 @@ const { hashWithSalt } = require('../utils/crypto');
 const permissionLevel = require('../../common/auth/permissions');
 
 function publicUser(user, admin = false) {
-  const { _id, name, canVote, registerDate, permissions, completedRegistration } = user;
+  const { id, name, canVote, registerDate, permissions, completedRegistration } = user;
   let publicData = {
-    _id,
+    id,
     name,
     canVote,
   };

@@ -25,16 +25,16 @@ describe('connection', () => {
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
     getConcludedIssues.mockImplementation(async meeting => [
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
     ]);
-    getVotes.mockImplementation(async ({ _id: issueId }) => [
-      generateVote({ question: issueId, _id: '1' }),
-      generateVote({ question: issueId, _id: '2' }),
-      generateVote({ question: issueId, _id: '3' }),
-      generateVote({ question: issueId, _id: '4' }),
+    getVotes.mockImplementation(async ({ id: issueId }) => [
+      generateVote({ issueId, id: '1' }),
+      generateVote({ issueId, id: '2' }),
+      generateVote({ issueId, id: '3' }),
+      generateVote({ issueId, id: '4' }),
     ]);
     getUserVote.mockImplementation(
       async () => null,
@@ -163,7 +163,7 @@ describe('connection', () => {
 
 describe('connection when no meeting', () => {
   it('warns about no active meeting', async () => {
-    const socket = generateSocket({ genfors: null });
+    const socket = generateSocket({ meetingId: null });
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();

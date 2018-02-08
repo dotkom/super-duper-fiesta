@@ -24,7 +24,7 @@ beforeEach(() => {
     id,
   }));
   getAnonymousUser.mockImplementation(async () => ({
-    _id: '1',
+    id: '1',
   }));
 });
 

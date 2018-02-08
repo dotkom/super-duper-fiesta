@@ -37,8 +37,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -61,7 +61,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -80,6 +79,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": true,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -93,10 +93,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
-        "randomName": "Sourtaker Foot",
+        "randomName": "Glowroach Mind",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -106,10 +106,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
-        "randomName": "Sourtaker Foot",
+        "randomName": "Glowroach Mind",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -119,10 +119,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
-        "randomName": "Sourtaker Foot",
+        "randomName": "Glowroach Mind",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -132,10 +132,10 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
-        "randomName": "Sourtaker Foot",
+        "randomName": "Glowroach Mind",
         "user": "",
       },
       "type": "ADD_VOTE",
@@ -145,7 +145,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -164,7 +163,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -184,7 +184,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -203,7 +202,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -223,7 +223,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -242,7 +241,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -262,7 +262,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -281,7 +280,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -382,8 +382,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -416,7 +416,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -435,7 +434,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -455,7 +455,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -474,7 +473,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -494,7 +494,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -513,7 +512,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -533,7 +533,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -552,7 +551,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -608,8 +608,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -632,7 +632,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -651,6 +650,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -664,8 +664,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -677,8 +677,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -690,8 +690,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -703,8 +703,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -752,8 +752,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -776,7 +776,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -795,6 +794,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -844,8 +844,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -868,7 +868,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -887,6 +886,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -900,8 +900,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -913,8 +913,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -926,8 +926,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -939,8 +939,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -952,7 +952,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -971,7 +970,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -991,7 +991,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1010,7 +1009,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1030,7 +1030,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1049,7 +1048,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1069,7 +1069,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1088,7 +1087,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1189,8 +1189,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -1213,7 +1213,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1232,7 +1231,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1252,7 +1252,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1271,7 +1270,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1291,7 +1291,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1310,7 +1309,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1330,7 +1330,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1349,7 +1348,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1405,8 +1405,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -1429,7 +1429,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1448,6 +1447,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1461,8 +1461,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1474,8 +1474,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1487,8 +1487,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1500,8 +1500,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1523,7 +1523,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1542,7 +1541,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1562,7 +1562,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1581,7 +1580,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1601,7 +1601,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1620,7 +1619,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1640,7 +1640,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1659,7 +1658,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1760,8 +1760,8 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
+          "id": "123",
           "name": "Namy",
         },
       ],
@@ -1784,7 +1784,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1803,6 +1802,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1816,8 +1816,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1829,8 +1829,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1842,8 +1842,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1855,8 +1855,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -1868,7 +1868,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1887,7 +1886,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1907,7 +1907,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1926,7 +1925,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1946,7 +1946,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -1965,7 +1964,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -1985,7 +1985,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2004,7 +2003,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -2105,9 +2105,9 @@ Array [
     Object {
       "data": Array [
         Object {
-          "_id": "123",
           "canVote": true,
           "completedRegistration": true,
+          "id": "123",
           "name": "Namy",
           "permissions": 5,
           "registerDate": undefined,
@@ -2133,7 +2133,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2152,6 +2151,7 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
+        "id": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -2165,8 +2165,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "alternative": "3",
+        "id": "1",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -2178,8 +2178,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "alternative": "3",
+        "id": "2",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -2191,8 +2191,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "3",
         "alternative": "3",
+        "id": "3",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -2204,8 +2204,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "4",
         "alternative": "3",
+        "id": "4",
         "question": "1",
         "randomName": null,
         "user": "1",
@@ -2217,7 +2217,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2236,7 +2235,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -2256,7 +2256,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2275,7 +2274,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -2295,7 +2295,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2314,7 +2313,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",
@@ -2334,7 +2334,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "2",
         "active": true,
         "alternatives": Array [
           Object {
@@ -2353,7 +2352,8 @@ Array [
         "countingBlankVotes": false,
         "description": "Description goes here",
         "genfors": "1",
-        "meeting": "1",
+        "id": "2",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_IN_PROGRESS",

@@ -45,7 +45,7 @@ describe('addUser manager', () => {
 
 describe('updating user permissions', () => {
   it('returns updated user object', async () => {
-    updateUserById.mockImplementation(async (id, obj) => Object.assign({ _id: id }, obj));
+    updateUserById.mockImplementation(async (id, obj) => Object.assign({ id }, obj));
     const updatedUser = await setUserPermissions('id', permissionLevels.CAN_VOTE);
 
     expect(updatedUser).toMatchObject({ permissions: permissionLevels.CAN_VOTE });

@@ -19,7 +19,7 @@ describe('endGenfors', () => {
   });
 
   it('throws error if user does not have access to close it', async () => {
-    const genfors = generateGenfors({ _id: '1' });
+    const genfors = generateGenfors({ id: '1' });
     getActiveGenfors.mockImplementation(() => genfors);
     getGenfors.mockImplementation(() => genfors);
     const user = generateUser({ permissions: permissionLevels.IS_LOGGED_IN });

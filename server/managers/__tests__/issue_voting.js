@@ -17,7 +17,7 @@ const generateVotingData = (voteCounts) => {
     // [JaId, NeiId, NeiId] -> { '0': voteForJa, '1': voteForNei, '2': voteForNei }
     .reduce((acc, alternativeId, id) => ({
       ...acc,
-      [id]: generateVote({ _id: id.toString(), alternative: alternativeId }),
+      [id]: generateVote({ id: id.toString(), alternative: alternativeId }),
     }), {});
 
   return [alternatives, votes];

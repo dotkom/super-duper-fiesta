@@ -5,7 +5,7 @@ const generateAlternative = data => (Object.assign({
 
 const generateIssue = (data) => {
   const issueObject = Object.assign({
-    _id: '1',
+    id: '1',
     active: true,
     genfors: '1',
     description: 'Description goes here',
@@ -25,12 +25,12 @@ const generateIssue = (data) => {
 };
 
 const generateUser = data => (Object.assign({
-  _id: '123',
+  id: '123',
   onlinewebId: '123',
   name: 'Namy',
   completedRegistration: true,
   permissions: 5,
-  genfors: '1',
+  meetingId: 1,
   canVote: true,
 }, data));
 
@@ -74,7 +74,7 @@ const generateAnonymousUser = data => (Object.assign({
 }, data));
 
 const generateVote = data => (Object.assign({
-  _id: '0',
+  id: '0',
   issue: '1',
   user: '1',
   alternative: '3',
