@@ -7,7 +7,7 @@ const generateIssue = (data) => {
   const issueObject = Object.assign({
     id: '1',
     active: true,
-    genfors: '1',
+    meetingId: '1',
     description: 'Description goes here',
     showOnlyWinner: false,
     voteDemand: 'regular',
@@ -75,7 +75,7 @@ const generateAnonymousUser = data => (Object.assign({
 
 const generateVote = data => (Object.assign({
   id: '0',
-  issue: '1',
+  issueId: '1',
   user: '1',
   alternative: '3',
 }, data));
