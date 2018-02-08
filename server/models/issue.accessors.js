@@ -2,6 +2,7 @@ const db = require('./postgresql');
 
 const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
+const Alternative = db.sequelize.models.alternative;
 const Question = db.sequelize.models.issue;
 
 async function addIssue(issue) {
@@ -15,13 +16,19 @@ function getConcludedIssues(genfors) {
   });
 }
 
-const getIssueById = id => (
-  Question.findOne({ where: { id } })
+const getIssueById = (id, options) => (
+  Question.findOne({ where: { id }, ...options })
 );
-function getActiveQuestion(genfors) {
-  // const genforsId = genfors.id || genf
+
+async function getIssueWithAlternatives(id, options) {
+  return getIssueById(id, { include: [Alternative], ...options });
+}
+
+async function getActiveQuestion(genfors) {
+  const meetingId = (genfors && genfors.id) || genfors;
   return Question.findOne({ where:
-    { meetingId: genfors, active: true, deleted: false },
+    { meetingId, active: true, deleted: false },
+    include: [Alternative],
   });
 }
 
@@ -50,6 +57,7 @@ module.exports = {
   getActiveQuestion,
   getClosedQuestions: getConcludedIssues,
   getIssueById,
+  getIssueWithAlternatives,
   getConcludedIssues,
   endIssue,
   deleteIssue,

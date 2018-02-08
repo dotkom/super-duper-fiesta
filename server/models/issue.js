@@ -23,6 +23,7 @@ async function Question(sequelize, DataTypes) {
         allowNull: false,
       },
     });
+    models.issue.hasMany(models.alternative);
   };
 
   return model;
