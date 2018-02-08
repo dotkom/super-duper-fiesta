@@ -39,7 +39,7 @@ const submitRegularVote = async (socket, data) => {
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
       alternativeId: vote.alternative,
-      issueId: vote.question,
+      issueId: vote.issueId,
     });
   } catch (err) {
     logger.error('Storing new vote failed.', err);
@@ -63,7 +63,7 @@ const submitAnonymousVote = async (socket, data) => {
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
       alternativeId: vote.alternative,
-      issueId: vote.question,
+      issueId: vote.issueId,
     });
   } catch (err) {
     logger.error('Storing new anonymous vote failed.', err);
