@@ -1,10 +1,10 @@
-jest.mock('../../../../managers/meeting');
-jest.mock('../../../../models/meeting');
-jest.mock('../../../../models/user');
+jest.mock('../../../../managers/meeting.accessors');
+jest.mock('../../../../models/meeting.accessors');
+jest.mock('../../../../models/user.accessors');
 const { adminSetPermissions, toggleCanVote } = require('../toggle_vote');
 const { canEdit } = require('../../../../managers/meeting');
-const { getActiveGenfors, getGenfors } = require('../../../../models/meeting');
-const { getUserById, updateUserById } = require('../../../../models/user');
+const { getActiveGenfors, getGenfors } = require('../../../../models/meeting.accessors');
+const { getUserById, updateUserById } = require('../../../../models/user.accessors');
 const { generateGenfors, generateManager, generateUser, generateSocket } = require('../../../../utils/generateTestData');
 const permissions = require('../../../../../common/auth/permissions');
 

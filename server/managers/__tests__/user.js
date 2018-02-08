@@ -1,7 +1,7 @@
-jest.mock('../../models/meeting');
-jest.mock('../../models/user');
-const { addUser: modelAddUser, updateUserById } = require('../../models/user');
-const { getActiveGenfors } = require('../../models/meeting');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/user.accessors');
+const { addUser: modelAddUser, updateUserById } = require('../../models/user.accessors');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser, setUserPermissions } = require('../user');
 const permissionLevels = require('../../../common/auth/permissions');
 const { generateGenfors, generateUser } = require('../../utils/generateTestData');

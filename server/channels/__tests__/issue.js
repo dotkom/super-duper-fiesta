@@ -1,7 +1,7 @@
-jest.mock('../../models/issue');
-jest.mock('../../models/meeting');
-jest.mock('../../models/user');
-jest.mock('../../models/vote');
+jest.mock('../../models/issue.accessors');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/user.accessors');
+jest.mock('../../models/vote.accessors');
 const { createIssue, closeIssue, adminDeleteIssue, adminDisableVoting, adminEnableVoting } = require('../issue');
 const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');

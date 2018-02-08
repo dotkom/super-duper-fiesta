@@ -1,8 +1,8 @@
 jest.mock('child_process');
-jest.mock('../../models/meeting');
-jest.mock('../../models/issue');
-jest.mock('../../models/vote');
-jest.mock('../../models/user');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/issue.accessors');
+jest.mock('../../models/vote.accessors');
+jest.mock('../../models/user.accessors');
 const { execSync } = require('child_process');
 
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));

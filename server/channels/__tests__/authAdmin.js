@@ -1,5 +1,5 @@
-jest.mock('../../models/meeting');
-jest.mock('../../models/user');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/user.accessors');
 const { createGenfors } = require('../../models/meeting.accessors');
 const { updateUserById } = require('../../models/user.accessors');
 const { generateGenfors, generateSocket, generateUser } = require('../../utils/generateTestData');

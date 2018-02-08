@@ -1,7 +1,7 @@
-jest.mock('../../models/user');
-jest.mock('../../models/vote');
-jest.mock('../../models/issue');
-jest.mock('../../models/meeting');
+jest.mock('../../models/user.accessors');
+jest.mock('../../models/vote.accessors');
+jest.mock('../../models/issue.accessors');
+jest.mock('../../models/meeting.accessors');
 const { submitRegularVote, submitAnonymousVote } = require('../vote');
 const { haveIVoted, createVote } = require('../../models/vote.accessors');
 const { getIssueById } = require('../../models/issue.accessors');
