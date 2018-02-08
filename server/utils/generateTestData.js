@@ -73,12 +73,17 @@ const generateAnonymousUser = data => (Object.assign({
   genfors: '1',
 }, data));
 
-const generateVote = data => (Object.assign({
-  id: '0',
-  issueId: '1',
-  user: '1',
-  alternative: '3',
-}, data));
+function generateVote(data) {
+  const alternativeId = data.alternative || data.alternativeId || '3';
+  const issueId = data.issue || data.issueId || '1';
+  return Object.assign({
+    id: '0',
+    issueId,
+    user: '1',
+    alternativeId: '3',
+    alternative: alternativeId,
+  }, data);
+}
 
 function generateOW4OAuth2ResponseBody(data) {
   return Object.assign({
