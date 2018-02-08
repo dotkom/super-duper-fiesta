@@ -26,7 +26,7 @@ function publicUser(user, admin = false) {
 
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
-  logger.silly('Checking password hash for user', user, genfors, passwordHash);
+  logger.silly('Checking password hash for user', user.id, genfors.id);
   const existingUser = await model.getAnonymousUser(passwordHash, user.onlinewebId, genfors);
   // using != instead of !== to also catch undefined
   return existingUser != null;
