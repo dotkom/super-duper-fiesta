@@ -36,9 +36,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": true,
         "completedRegistration": true,
+        "id": 1,
         "name": "Namy",
         "permissions": 5,
         "registerDate": undefined,
@@ -55,9 +55,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": true,
         "completedRegistration": true,
+        "id": 1,
         "name": "Namy",
         "permissions": 5,
         "registerDate": undefined,
@@ -91,8 +91,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": false,
+        "id": 1,
       },
       "type": "TOGGLE_CAN_VOTE",
     },
@@ -106,8 +106,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": false,
+        "id": 1,
       },
       "type": "TOGGLE_CAN_VOTE",
     },

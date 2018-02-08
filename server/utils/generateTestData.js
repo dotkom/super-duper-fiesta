@@ -30,7 +30,7 @@ const generateUser = data => (Object.assign({
   name: 'Namy',
   completedRegistration: true,
   permissions: 5,
-  meetingId: 1,
+  meetingId: '1',
   canVote: true,
 }, data));
 
