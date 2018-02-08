@@ -29,7 +29,7 @@ const register = async (socket, data) => {
     try {
       validPasswordHash = await validatePasswordHash(user, passwordHash);
     } catch (err) {
-      logger.debug('Failed to validate user', { username, err });
+      logger.debug('Failed to validate user', { username });
       emitError(socket, new Error('Validering av personlig kode feilet'));
       return;
     }
@@ -43,7 +43,7 @@ const register = async (socket, data) => {
   try {
     await addAnonymousUser(username, passwordHash);
   } catch (err) {
-    logger.debug('Failed to register user', { username, err });
+    logger.debug('Failed to register user', { username });
     emitError(socket, new Error('Noe gikk galt under registreringen. Prøv igjen'));
     return;
   }
