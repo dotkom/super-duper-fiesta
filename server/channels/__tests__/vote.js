@@ -4,7 +4,7 @@ jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
 const { submitRegularVote, submitAnonymousVote } = require('../vote');
 const { haveIVoted, createVote } = require('../../models/vote.accessors');
-const { getIssueById } = require('../../models/issue.accessors');
+const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser } = require('../../models/user.accessors');
 const { generateIssue, generateVote, generateSocket } = require('../../utils/generateTestData');
@@ -13,10 +13,11 @@ const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionT
 
 beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
+  getIssueWithAlternatives.mockImplementation(async () => generateIssue());
   haveIVoted.mockImplementation(async () => false);
-  createVote.mockImplementation((user, question, alternative) => ({
-    save: async () => generateVote({ user, question, alternative }),
-  }));
+  createVote.mockImplementation((user, issueId, alternativeId) =>
+    generateVote({ user, issueId, alternativeId }),
+  );
   getActiveGenfors.mockImplementation(async () => ({
     id: '1',
   }));
@@ -93,7 +94,7 @@ describe('submitRegularVote', () => {
 
   it("emits error when tring to vote on issue when voting hasn't started", async () => {
     const issue = generateIssue({ status: VOTING_NOT_STARTED });
-    getIssueById.mockImplementation(() => issue);
+    getIssueWithAlternatives.mockImplementation(() => issue);
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
@@ -104,7 +105,7 @@ describe('submitRegularVote', () => {
 
   it('emits error when tring to vote on issue when voting has ended', async () => {
     const issue = generateIssue({ status: VOTING_FINISHED });
-    getIssueById.mockImplementation(() => issue);
+    getIssueWithAlternatives.mockImplementation(() => issue);
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
@@ -114,7 +115,7 @@ describe('submitRegularVote', () => {
   });
 
   it('emits error when trying to vote on inactive issue', async () => {
-    getIssueById.mockImplementation(async () => generateIssue({ active: false }));
+    getIssueWithAlternatives.mockImplementation(async () => generateIssue({ active: false }));
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
@@ -134,7 +135,7 @@ describe('submitRegularVote', () => {
   });
 
   it('emits error when issue fetching fails', async () => {
-    getIssueById.mockImplementation(async () => { throw new Error('Failed'); });
+    getIssueWithAlternatives.mockImplementation(async () => { throw new Error('Failed'); });
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
