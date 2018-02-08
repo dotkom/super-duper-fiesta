@@ -13,7 +13,7 @@ async function generateMeeting(data) {
     registrationOpen: false,
     status: 'open',
   }, data);
-  return createGenfors(meeting);
+  return createGenfors(meeting.title, meeting.date);
 }
 
 async function generateIssue(data) {

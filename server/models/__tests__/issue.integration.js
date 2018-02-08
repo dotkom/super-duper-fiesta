@@ -48,8 +48,8 @@ describe('issue', () => {
 
   it('gets concluded issues', async () => {
     const meeting = await generateMeeting();
-    const concluded = await generateIssue({ genfors: meeting, active: false });
-    await generateIssue({ genfors: meeting, active: true });
+    const concluded = await generateIssue({ meetingId: meeting.id, active: false });
+    await generateIssue({ meetingId: meeting.id, active: true });
 
     const concludedIssues = await getConcludedIssues(meeting);
 
