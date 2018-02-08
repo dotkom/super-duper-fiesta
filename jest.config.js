@@ -3,7 +3,7 @@ function integrationTest() {
 }
 
 function coverageGlobs() {
-  const globs = ['server/**/*.js'];
+  const globs = ['server/**/*.js', '!server/migrations/*.js'];
   if (!integrationTest()) {
     globs.push('!server/models/**');
   }
