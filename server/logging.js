@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'test') {
     handleExceptions: true,
     humanReadableUnhandledException: true,
     timestamp: true,
+    colorize: process.env.SDF_COLORIZE_LOGS.toLowerCase() === 'true',
   });
 }
 
