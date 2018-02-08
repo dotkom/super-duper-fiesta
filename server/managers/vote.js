@@ -1,7 +1,7 @@
 const logger = require('../logging');
 const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
-const { getIssueById } = require('../models/issue.accessors');
+const { getIssueById, getIssueWithAlternatives } = require('../models/issue.accessors');
 const { haveIVoted, createVote } = require('../models/vote.accessors');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 const generateSillyName = require('../utils/sillyName');
@@ -9,7 +9,7 @@ const generateSillyName = require('../utils/sillyName');
 async function addVote(issueId, user, alternative, voter) {
   let issue;
   try {
-    issue = await getIssueById(issueId);
+    issue = await getIssueWithAlternatives(issueId);
   } catch (err) {
     logger.error('Retrieving issue for vote failed!', err, { issueId });
     throw new Error('Noe gikk galt. Vennligst prøv igjen.');
@@ -30,7 +30,7 @@ async function addVote(issueId, user, alternative, voter) {
   logger.silly('Checking permissions.', { issueId, user: user.onlinewebId });
   try {
     await canEdit(permissionLevel.CAN_VOTE, user, issue.meetingId);
-    const validAlternative = issue.alternatives.some(alt => alt.id === alternative);
+    const validAlternative = issue.alternatives.some(alt => alt.id.toString() === alternative);
     if (!validAlternative) {
       throw new Error('Alternativet du stemte på finnes ikke');
     }
@@ -38,7 +38,7 @@ async function addVote(issueId, user, alternative, voter) {
     if (!alreadyVoted) {
       const vote = createVote(voter, issueId, alternative);
       logger.debug('Storing vote.', { issueId, user: user.onlinewebId, voter });
-      return vote.save();
+      return createVote(voter, issueId, alternative);
     }
     logger.debug('User has already voted!', { issueId, user: user.onlinewebId, voter });
     throw new Error('Du har allerede stemt.');

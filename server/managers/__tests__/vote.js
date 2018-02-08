@@ -2,30 +2,34 @@ jest.mock('../../models/issue.accessors');
 jest.mock('../../models/vote.accessors');
 jest.mock('../meeting');
 const { canEdit } = require('../meeting');
-const { getIssueById } = require('../../models/issue.accessors');
+const { getIssueWithAlternatives } = require('../../models/issue.accessors');
+const { createVote } = require('../../models/vote.accessors');
 
 const { addVote } = require('../vote');
-const { generateAlternative, generateIssue, generateUser } = require('../../utils/generateTestData');
+const { generateAlternative, generateIssue, generateUser, generateVote } = require('../../utils/generateTestData');
 const { VOTING_NOT_STARTED, VOTING_FINISHED }
   = require('../../../common/actionTypes/issues');
 
 describe('addVote', () => {
   beforeEach(() => {
+    createVote.mockImplementation(async data => generateVote(data));
     canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
-    getIssueById.mockImplementation(async () => generateIssue());
+    getIssueWithAlternatives.mockImplementation(async () => generateIssue());
   });
 
   it('adds a vote if all requirements pass', async () => {
-    const alternative = generateAlternative();
+    const alternative = generateAlternative({ id: '1' });
     const user = generateUser();
-    const vote = addVote('', user, alternative.id, user.id);
+    const vote = await addVote('', user, alternative.id, user.id);
 
-    // A bit sneaky since we currently use .save() in a manager.
-    await expect(vote).rejects.toEqual(new Error("Cannot read property 'save' of undefined"));
+    await expect(vote).toEqual(expect.objectContaining({
+      id: vote.id,
+    }));
   });
 
   it('throws error if voting state is NOT_STARTED', async () => {
-    getIssueById.mockImplementation(async () => generateIssue({ status: VOTING_NOT_STARTED }));
+    getIssueWithAlternatives.mockImplementation(async () =>
+      generateIssue({ status: VOTING_NOT_STARTED }));
 
     const alternative = generateAlternative();
     const user = generateUser();
@@ -35,7 +39,8 @@ describe('addVote', () => {
   });
 
   it('throws error if voting state is VOTING_FINISHED', async () => {
-    getIssueById.mockImplementation(async () => generateIssue({ status: VOTING_FINISHED }));
+    getIssueWithAlternatives.mockImplementation(async () =>
+      generateIssue({ status: VOTING_FINISHED }));
 
     const alternative = generateAlternative();
     const user = generateUser();
