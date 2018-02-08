@@ -1,4 +1,4 @@
-jest.mock('../../../../managers/meeting.accessors');
+jest.mock('../../../../managers/meeting');
 jest.mock('../../../../models/meeting.accessors');
 jest.mock('../../../../models/user.accessors');
 const { adminSetPermissions, toggleCanVote } = require('../toggle_vote');
