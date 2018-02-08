@@ -1,19 +1,42 @@
+const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
+
 async function Question(sequelize, DataTypes) {
   const model = await sequelize.define('issue', {
     description: DataTypes.TEXT,
-    date: DataTypes.DATE,
-    active: DataTypes.BOOLEAN,
-    deleted: DataTypes.BOOLEAN,
-    secret: DataTypes.BOOLEAN,
-    showOnlyWinner: DataTypes.BOOLEAN,
-    countingBlankVotes: DataTypes.BOOLEAN,
+    date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    secret: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    showOnlyWinner: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    countingBlankVotes: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     // voteDemand: Either "regular" or "qualified".
     voteDemand: DataTypes.STRING,
     qualifiedVoters: DataTypes.SMALLINT,
     currentVotes: DataTypes.SMALLINT,
     result: DataTypes.BOOLEAN,
     // status types: NOT_STARTED, IN_PROGRESS, FINISHED
-    status: DataTypes.TEXT,
+    status: {
+      type: DataTypes.TEXT,
+      defaultValue: VOTING_NOT_STARTED,
+    },
   });
 
   model.associate = (models) => {

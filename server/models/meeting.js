@@ -4,7 +4,7 @@ async function Genfors(sequelize, DataTypes) {
     date: DataTypes.DATE,
     registrationOpen: {
       type: DataTypes.BOOLEAN,
-      defaultValeue: false,
+      defaultValue: false,
     },
     status: {
       type: DataTypes.TEXT,
