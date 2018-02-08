@@ -1,22 +1,25 @@
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const logger = require('./logging');
 const auth = require('./auth');
+const db = require('./models/postgresql');
 
 // Initialize express
 const app = express();
 
 // Set up database and get connection
-const mongooseConnection = require('./models/essentials')(app);
+const store = new SequelizeStore({ db: db.sequelize });
 
 // Set up session store
 app.use(session({
   secret: 'super secret',
-  store: new MongoStore({ mongooseConnection }),
+  store,
   resave: true,
   saveUninitialized: true,
 }));
+
+store.sync();
 
 if (process.env.PRODUCTION) {
   // Register dist path for static files in prod
