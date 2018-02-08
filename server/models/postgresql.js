@@ -11,7 +11,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
   // Use winston for logging.
   // See https://github.com/sequelize/sequelize/issues/7821#issuecomment-311564259
-  logging: msg => logger.debug(msg),
+  logging: msg => logger.silly(msg),
   pool: {
     max: 5,
     min: 0,
