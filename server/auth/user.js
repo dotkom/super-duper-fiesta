@@ -1,8 +1,8 @@
 const logger = require('../logging');
 const permissions = require('../../common/auth/permissions');
-const { getActiveGenfors } = require('../models/meeting');
+const { getActiveGenfors } = require('../models/meeting.accessors');
 const { addUser } = require('../managers/user');
-const { getUserByUsername, updateUserById } = require('../models/user');
+const { getUserByUsername, updateUserById } = require('../models/user.accessors');
 
 function getPermissionLevel(user) {
   if (user.member) {

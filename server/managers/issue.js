@@ -1,8 +1,8 @@
-const model = require('../models/issue');
+const model = require('../models/issue.accessors');
 const logger = require('../logging');
-const { getQualifiedUsers } = require('../models/user');
-const { getActiveGenfors } = require('../models/meeting');
-const { getVotes } = require('../models/vote');
+const { getQualifiedUsers } = require('../models/user.accessors');
+const { getActiveGenfors } = require('../models/meeting.accessors');
+const { getVotes } = require('../models/vote.accessors');
 const { canEdit } = require('./meeting');
 
 const permissionLevel = require('../../common/auth/permissions');

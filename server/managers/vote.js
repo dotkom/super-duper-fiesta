@@ -1,8 +1,8 @@
 const logger = require('../logging');
 const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
-const { getIssueById } = require('../models/issue');
-const { haveIVoted, createVote } = require('../models/vote');
+const { getIssueById } = require('../models/issue.accessors');
+const { haveIVoted, createVote } = require('../models/vote.accessors');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 const generateSillyName = require('../utils/sillyName');
 

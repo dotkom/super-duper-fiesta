@@ -2,8 +2,8 @@ const { broadcastAndEmit, emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const { addVote, generatePublicVote } = require('../managers/vote');
-const { getActiveGenfors } = require('../models/meeting');
-const { getAnonymousUser } = require('../models/user');
+const { getActiveGenfors } = require('../models/meeting.accessors');
+const { getAnonymousUser } = require('../models/user.accessors');
 const { isRegistered } = require('../managers/user');
 
 const {

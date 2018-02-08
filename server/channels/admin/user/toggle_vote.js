@@ -1,8 +1,8 @@
 const { adminBroadcastAndEmit, broadcastAndEmit, emitError } = require('../../../utils');
 const logger = require('../../../logging');
 
-const { getActiveGenfors } = require('../../../models/meeting');
-const { getUserById, updateUserById } = require('../../../models/user');
+const { getActiveGenfors } = require('../../../models/meeting.accessors');
+const { getUserById, updateUserById } = require('../../../models/user.accessors');
 const { canEdit } = require('../../../managers/meeting');
 const { publicUser, setUserPermissions } = require('../../../managers/user');
 const { CAN_VOTE, IS_MANAGER } = require('../../../../common/auth/permissions');

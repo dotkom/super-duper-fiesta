@@ -7,10 +7,10 @@ const { execSync } = require('child_process');
 
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
-const { getActiveGenfors } = require('../../models/meeting');
-const { getAnonymousUser, getUsers } = require('../../models/user');
-const { getVotes, getUserVote } = require('../../models/vote');
-const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
+const { getAnonymousUser, getUsers } = require('../../models/user.accessors');
+const { getVotes, getUserVote } = require('../../models/vote.accessors');
+const { getActiveQuestion, getConcludedIssues } = require('../../models/issue.accessors');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 

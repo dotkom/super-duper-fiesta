@@ -1,5 +1,5 @@
 const logger = require('../logging');
-const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting');
+const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting.accessors');
 
 const permissionLevel = require('../../common/auth/permissions');
 

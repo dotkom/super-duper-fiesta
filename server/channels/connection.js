@@ -1,12 +1,12 @@
 const { emit, emitError } = require('../utils');
 const logger = require('../logging');
 
-const getActiveGenfors = require('../models/meeting').getActiveGenfors;
-const getActiveQuestion = require('../models/issue').getActiveQuestion;
-const { getConcludedIssues } = require('../models/issue');
-const { getUserVote, getVotes } = require('../models/vote');
+const getActiveGenfors = require('../models/meeting.accessors').getActiveGenfors;
+const getActiveQuestion = require('../models/issue.accessors').getActiveQuestion;
+const { getConcludedIssues } = require('../models/issue.accessors');
+const { getUserVote, getVotes } = require('../models/vote.accessors');
 const { generatePublicVote } = require('../managers/vote');
-const { getAnonymousUser, getUsers } = require('../models/user');
+const { getAnonymousUser, getUsers } = require('../models/user.accessors');
 const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 const { publicMeeting } = require('../managers/meeting');

@@ -1,7 +1,7 @@
 const { broadcast, broadcastAndEmit, emitError, adminBroadcastAndEmit } = require('../../utils');
 const logger = require('../../logging');
 
-const { getActiveGenfors } = require('../../models/meeting');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { endGenfors, toggleRegistrationStatus, publicMeeting } = require('../../managers/meeting');
 
 const {

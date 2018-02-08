@@ -2,7 +2,7 @@ const logger = require('../logging');
 const passport = require('passport');
 const { setupOIDC } = require('./oidc');
 
-const getUserById = require('../models/user').getUserById;
+const getUserById = require('../models/user.accessors').getUserById;
 
 require('./providers/ow4.js');
 

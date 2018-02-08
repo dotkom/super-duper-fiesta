@@ -1,6 +1,6 @@
 const logger = require('../logging');
-const model = require('../models/user');
-const { getActiveGenfors } = require('../models/meeting');
+const model = require('../models/user.accessors');
+const { getActiveGenfors } = require('../models/meeting.accessors');
 const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');

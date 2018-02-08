@@ -1,7 +1,7 @@
 jest.mock('../../models/meeting');
 jest.mock('../../models/user');
-const { createGenfors } = require('../../models/meeting');
-const { updateUserById } = require('../../models/user');
+const { createGenfors } = require('../../models/meeting.accessors');
+const { updateUserById } = require('../../models/user.accessors');
 const { generateGenfors, generateSocket, generateUser } = require('../../utils/generateTestData');
 const { adminLogin, createGenfors: createGenforsListener, listener } = require('../admin/authAdmin');
 const { ADMIN_CREATE_GENFORS, ADMIN_LOGIN } = require('../../../common/actionTypes/auth');

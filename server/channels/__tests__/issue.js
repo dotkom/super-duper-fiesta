@@ -3,10 +3,10 @@ jest.mock('../../models/meeting');
 jest.mock('../../models/user');
 jest.mock('../../models/vote');
 const { createIssue, closeIssue, adminDeleteIssue, adminDisableVoting, adminEnableVoting } = require('../issue');
-const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue');
-const { getActiveGenfors, getGenfors } = require('../../models/meeting');
-const { getQualifiedUsers } = require('../../models/user');
-const { getVotes } = require('../../models/vote');
+const { addIssue, endIssue, deleteIssue, getActiveQuestion, updateIssue } = require('../../models/issue.accessors');
+const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
+const { getQualifiedUsers } = require('../../models/user.accessors');
+const { getVotes } = require('../../models/vote.accessors');
 const { generateSocket, generateIssue, generateGenfors, generateUser, generateManager, generateVote } = require('../../utils/generateTestData');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
