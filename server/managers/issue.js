@@ -124,12 +124,11 @@ async function getPublicIssueWithVotes(issue, admin = false) {
       const vote = await nextVote;
       return {
         ...(await existingVotes),
-        [vote._id]: vote,
+        [vote.id]: vote,
       };
     }, {});
   } catch (err) {
-    // eslint-disable-next-line no-underscore-dangle
-    logger.error('Getting votes for issue failed', err, { issueId: issue._id });
+    logger.error('Getting votes for issue failed', err, { issueId: issue.id });
   }
   const muhVotes = await votes;
 

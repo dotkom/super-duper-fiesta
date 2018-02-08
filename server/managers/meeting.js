@@ -57,7 +57,7 @@ async function endGenfors(genfors, user) {
     throw new Error('User does not have permission to end genfors');
   }
   logger.info('Closing genfors', { genfors: genfors.title });
-  return updateGenfors({ _id: genfors.id }, { status: 'closed' });
+  return updateGenfors({ id: genfors.id }, { status: 'closed' });
 }
 
 

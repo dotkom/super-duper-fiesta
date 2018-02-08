@@ -44,7 +44,7 @@ const toggleCanVote = async (socket, data) => {
       canVote: updatedUser.canVote,
     });
     broadcastAndEmit(socket, TOGGLED_CAN_VOTE, {
-      _id: updatedUser._id,
+      id: updatedUser.id,
       canVote: updatedUser.canVote,
     });
   } catch (err) {

@@ -34,7 +34,7 @@ const emitUserData = async (socket) => {
   emit(socket, AUTH_SIGNED_IN, {
     username: user.onlinewebId,
     full_name: user.name,
-    id: user._id, // eslint-disable-line no-underscore-dangle
+    id: user.id,
     permissions: user.permissions,
   });
 
@@ -59,8 +59,7 @@ const emitUserData = async (socket) => {
 const emitActiveQuestion = async (socket, meeting) => {
   const user = await socket.request.user();
   try {
-    // eslint-disable-next-line no-underscore-dangle
-    const issue = await getActiveQuestion(meeting._id);
+    const issue = await getActiveQuestion(meeting.id);
     if (issue === null) {
       return;
     }
@@ -85,8 +84,7 @@ const emitActiveQuestion = async (socket, meeting) => {
     } else {
       voter = user;
     }
-    // eslint-disable-next-line no-underscore-dangle
-    const vote = await getUserVote(issue, voter._id);
+    const vote = await getUserVote(issue, voter.id);
     if (vote) {
       emit(socket, USER_VOTE, {
         alternativeId: vote.alternative,

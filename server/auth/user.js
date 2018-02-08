@@ -66,7 +66,7 @@ async function createUser(user) {
     }
     logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });
     // Update if user exists
-    const updatedUser = await updateUserById(existingUser._id, {
+    const updatedUser = await updateUserById(existingUser.id, {
       name: fullName,
       onlinewebId: username,
       permissions: permissionLevel,

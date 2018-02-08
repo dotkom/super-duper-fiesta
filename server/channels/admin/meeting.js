@@ -23,7 +23,7 @@ const toggleRegistration = async (socket, data) => {
   logger.debug('Toggling meeting registration status', data);
   const genfors = await getActiveGenfors();
   try {
-    const updatedMeeting = await toggleRegistrationStatus({ _id: genfors._id },
+    const updatedMeeting = await toggleRegistrationStatus({ id: genfors.id },
     data.registrationOpen);
     broadcast(socket, TOGGLED_REGISTRATION_STATE, publicMeeting(updatedMeeting));
     adminBroadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, publicMeeting(updatedMeeting, true));

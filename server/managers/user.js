@@ -83,8 +83,7 @@ async function addAnonymousUser(username, passwordHash) {
     genfors,
     passwordHash: hashWithSalt(passwordHash, username),
   });
-  // eslint-disable-next-line no-underscore-dangle
-  await model.updateUserById(user._id, { completedRegistration: true });
+  await model.updateUserById(user.id, { completedRegistration: true });
 }
 
 async function setUserPermissions(id, requestedPermissions) {

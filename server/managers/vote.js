@@ -54,7 +54,7 @@ async function addVote(issueId, user, alternative, voter) {
 }
 
 const getPublicVote = (vote, secret, showOnlyWinner) => ({
-  _id: vote._id, // eslint-disable-line no-underscore-dangle
+  id: vote.id,
   question: vote.question,
   user: (showOnlyWinner || secret) ? '' : vote.user,
   alternative: showOnlyWinner ? '' : vote.alternative,

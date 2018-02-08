@@ -33,8 +33,7 @@ const submitRegularVote = async (socket, data) => {
   try {
     const vote = await addVote(
       data.issue, user,
-      // eslint-disable-next-line no-underscore-dangle
-      data.alternative, user._id,
+      data.alternative, user.id,
     );
     logger.debug('Stored new vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
@@ -59,8 +58,7 @@ const submitAnonymousVote = async (socket, data) => {
   user.onlinewebId, genfors);
   try {
     const vote = await addVote(data.issue, user,
-      // eslint-disable-next-line no-underscore-dangle
-      data.alternative, anonymousUser._id);
+      data.alternative, anonymousUser.id);
     logger.debug('Stored new anonymous vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {

@@ -9,7 +9,7 @@ require('./providers/ow4.js');
 module.exports = async (app) => {
   passport.serializeUser((user, done) => {
     logger.silly('Serializing user', { user });
-    done(null, user._id); // eslint-disable-line no-underscore-dangle
+    done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {

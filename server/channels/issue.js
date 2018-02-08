@@ -21,7 +21,7 @@ const createIssue = async (socket, payload) => {
     logger.debug('Added new question. Broadcasting ...', { question: question.description });
     broadcastAndEmit(socket, OPEN_ISSUE, question, { action: 'open' });
     broadcast(socket, ENABLE_VOTING, {
-      _id: question._id,
+      id: question.id,
       status: question.status,
     });
   }).catch((err) => {
@@ -35,18 +35,18 @@ const closeIssue = async (socket, payload) => {
   const issue = payload.issue;
   logger.info('Closing issue.', {
     description: issue.description,
-    issue: issue.toString(), // eslint-disable-line no-underscore-dangle
+    issue: issue.toString(),
     user: user.name,
   });
   await endIssue(issue, user)
   .then(async (updatedIssue) => {
     logger.info('Closed issue.', {
       description: updatedIssue.description,
-      issue: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
-      response: updatedIssue._id.toString(), // eslint-disable-line no-underscore-dangle
+      issue: updatedIssue.id.toString(),
+      response: updatedIssue.id.toString(),
     });
     broadcast(socket, DISABLE_VOTING, {
-      _id: updatedIssue._id,
+      id: updatedIssue.id,
       status: updatedIssue.status,
     });
     broadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue));
@@ -64,12 +64,12 @@ const adminDeleteIssue = async (socket, payload) => {
   const issue = payload.issue;
   logger.info('Deleting issue.', {
     description: issue.description,
-    issue: issue.toString(), // eslint-disable-line no-underscore-dangle
+    issue: issue.toString(),
     user: user.name,
   });
   const deletedIssue = await deleteIssue(issue, user);
   broadcast(socket, DISABLE_VOTING, {
-    _id: deletedIssue._id,
+    id: deletedIssue.id,
     status: deletedIssue.status,
   });
   const publicIssue = await getPublicIssueWithVotes(deletedIssue);
@@ -82,10 +82,10 @@ async function adminDisableVoting(socket, data) {
   const issue = data.issue;
   logger.debug('Disabling voting', { issue, user: user.name });
 
-  const updatedIssue = await disableVoting({ _id: issue }, user);
+  const updatedIssue = await disableVoting({ id: issue }, user);
 
   broadcastAndEmit(socket, DISABLE_VOTING, {
-    _id: updatedIssue._id,
+    id: updatedIssue.id,
     status: updatedIssue.status,
   });
 }
@@ -95,10 +95,10 @@ async function adminEnableVoting(socket, data) {
   const issue = data.issue;
   logger.debug('Enabling voting', { issue, user: user.name });
 
-  const updatedIssue = await enableVoting({ _id: issue }, user);
+  const updatedIssue = await enableVoting({ id: issue }, user);
 
   broadcastAndEmit(socket, ENABLE_VOTING, {
-    _id: updatedIssue._id,
+    id: updatedIssue.id,
     status: updatedIssue.status,
   });
 }
