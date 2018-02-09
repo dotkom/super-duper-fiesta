@@ -101,12 +101,12 @@ const issues = (state = {}, action) => {
     }
     case RECEIVE_VOTE:
     case SEND_VOTE: {
-      const issueId = action.data.question;
+      const issueId = action.data.issueId;
       const updatedAction = {
         type: action.type,
         issueId,
-        alternative: action.data.alternative,
-        voter: action.data.user,
+        alternative: action.data.alternativeId,
+        voter: action.data.userId,
         id: action.data.id,
         randomName: action.data.randomName,
       };

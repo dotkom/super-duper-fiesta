@@ -87,8 +87,8 @@ const emitActiveQuestion = async (socket, meeting) => {
     const vote = await getUserVote(issue, voter.id);
     if (vote) {
       emit(socket, USER_VOTE, {
-        alternativeId: vote.alternative,
-        issueId: vote.question,
+        alternativeId: vote.alternativeId,
+        issueId: vote.issueId,
       });
     }
   } catch (err) {
