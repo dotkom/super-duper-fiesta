@@ -62,9 +62,7 @@ async function deleteIssue(issue) {
 
 function endIssue(issue) {
   const id = issue.id || issue;
-  return updateIssue(id,
-    { active: false, status: VOTING_FINISHED },
-    { new: true });
+  return updateIssue(id, { active: false, status: VOTING_FINISHED });
 }
 
 module.exports = {
