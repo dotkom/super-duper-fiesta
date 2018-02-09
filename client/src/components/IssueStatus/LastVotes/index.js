@@ -13,7 +13,7 @@ const LastVotes = ({ votes, hideVotes }) => {
     <div className={css.component}>
       <h3>Siste stemmer</h3>
       { votes.length > 0 ? votes.map(vote => (
-        <div className={css.vote}>
+        <div key={vote.voter} className={css.vote}>
           { vote.voter }: { vote.alternative }
         </div>
       ))
