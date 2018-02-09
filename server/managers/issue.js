@@ -45,21 +45,10 @@ async function addIssue(issueData, closeCurrentIssue) {
     currentVotes: 0,
   });
 
-  // @ToDo: Do these in a transaction.
-  const issue = await model.addIssue(data);
+  const { id: issueId } = await model.addIssue(data, issueData.alternatives);
+  logger.debug('Created issue', { issueId });
 
-  // Add alternatives
-  try {
-    await Promise.all(issueData.alternatives.map(async alternative =>
-      addAlternative(Object.assign(alternative, { issueId: issue.id, id: null }))));
-  } catch (err) {
-    logger.error('Failed to add alternatives!', err);
-    throw err;
-  }
-
-  logger.debug('Created issue', { issue: issue.id });
-
-  return model.getIssueWithAlternatives(issue.id);
+  return model.getIssueWithAlternatives(issueId);
 }
 
 async function deleteIssue(issue, user) {

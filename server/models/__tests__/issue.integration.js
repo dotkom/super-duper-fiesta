@@ -19,6 +19,12 @@ describe('issue', () => {
     }
   });
 
+  it('creating an issue fails if trying to create issue without alternatives', async () => {
+    const issue = generateIssue({}, true);
+
+    await expect(issue).rejects.toEqual(new Error('An issue requires alternatives.'));
+  });
+
   it('creates an issue', async () => {
     const issue = await generateIssue();
 

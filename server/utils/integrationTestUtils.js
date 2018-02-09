@@ -4,6 +4,8 @@ const { addUser, addAnonymousUser } = require('../models/user.accessors');
 const { createVote } = require('../models/vote.accessors');
 const { addAlternative } = require('../models/alternative.accessors');
 
+const { generateAlternative: generateAlternativeData } = require('./generateTestData');
+
 const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
 
 async function generateMeeting(data) {
@@ -16,8 +18,10 @@ async function generateMeeting(data) {
   return createGenfors(meeting.title, meeting.date);
 }
 
-async function generateIssue(data) {
+async function generateIssue(data, noAlternatives = false) {
   const meeting = (data && data.meeting) || await generateMeeting();
+  const alternatives = (data && data.alternatives) ||
+    [Object.assign(generateAlternativeData(), { id: undefined })];
   const issue = Object.assign({}, {
     voteDemand: 'regular',
     date: new Date(2010, 1, 1, 0, 0, 0),
@@ -30,7 +34,7 @@ async function generateIssue(data) {
     showOnlyWinner: false,
     countingBlankVotes: false,
   }, data);
-  return addIssue(issue);
+  return (noAlternatives) ? addIssue(issue) : addIssue(issue, alternatives);
 }
 
 async function generateUser(data) {

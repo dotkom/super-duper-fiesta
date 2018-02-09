@@ -1,12 +1,25 @@
 const db = require('./postgresql');
+const logger = require('../logging');
 
 const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 const Alternative = db.sequelize.models.alternative;
 const Question = db.sequelize.models.issue;
 
-async function addIssue(issue) {
-  return Question.create(issue);
+async function addIssue(issueData, alternatives) {
+  return db.sequelize.transaction(async (transaction) => {
+    if (!alternatives || alternatives.length < 1) {
+      logger.error('Tried to add issue without adding alternatives');
+      throw new Error('An issue requires alternatives.');
+    }
+
+    const issue = await Question.create(issueData, { transaction });
+    await Promise.all(alternatives.map(async alternative =>
+      Alternative.create(Object.assign(alternative, { issueId: issue.id }), { transaction }),
+    ));
+
+    return issue;
+  });
 }
 
 function getConcludedIssues(genfors) {
