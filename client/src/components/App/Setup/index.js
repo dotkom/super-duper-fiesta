@@ -132,11 +132,16 @@ class Setup extends Component {
   }
 }
 
+Setup.defaultProps = {
+  registered: false,
+  registrationOpen: false,
+};
+
 Setup.propTypes = {
   register: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
-  registered: PropTypes.bool.isRequired,
-  registrationOpen: PropTypes.bool.isRequired,
+  registered: PropTypes.bool,
+  registrationOpen: PropTypes.bool,
 };
 
 export default Setup;
