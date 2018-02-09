@@ -1,11 +1,13 @@
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('meetings', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -21,14 +23,15 @@ module.exports = {
       },
       date: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       registrationOpen: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       status: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.ENUM(...Object.keys(meetingStates)),
       },
       pin: {
         allowNull: true,

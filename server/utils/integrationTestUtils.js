@@ -74,6 +74,7 @@ async function generateVote(data) {
   const issue = (data && data.question) || await generateIssue();
   const alternative = (data && data.alternative) || await addAlternative({
     issueId: issue.id,
+    text: 'Blank',
   });
   const user = (data && data.user) || await generateUser();
   return createVote(user, issue, alternative);

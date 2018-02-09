@@ -3,9 +3,9 @@ module.exports = {
     queryInterface.createTable('users', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       meetingId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         // We need to allow this to be NULL because otherwise
         // you cannot log in without a genfors to create a genfors
         allowNull: true,
@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       canVote: {
-        // DEFAULT false
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
       notes: {
@@ -46,19 +46,20 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       permissions: {
+        defaultValue: 0,
         type: Sequelize.SMALLINT,
       },
       completedRegistration: {
-        // DEFAULT false
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
     }).then(() => {
       queryInterface.createTable('anonymoususers', {
         id: {
           allowNull: false,
-          autoIncrement: true,
           primaryKey: true,
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
+          defaultValue: Sequelize.UUIDV4,
         },
         createdAt: {
           allowNull: false,
@@ -69,7 +70,7 @@ module.exports = {
           type: Sequelize.DATE
         },
         meetingId: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
           references: {
             model: 'meetings',
             key: 'id',

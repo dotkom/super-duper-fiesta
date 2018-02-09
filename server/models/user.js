@@ -1,15 +1,39 @@
 async function User(sequelize, DataTypes) {
   const model = await sequelize.define('user', {
-    name: DataTypes.TEXT,
-    onlinewebId: DataTypes.TEXT,
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    name: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    onlinewebId: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     registerDate: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-    canVote: DataTypes.BOOLEAN,
-    notes: DataTypes.TEXT,
-    permissions: DataTypes.SMALLINT,
-    completedRegistration: DataTypes.BOOLEAN,
+    canVote: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    permissions: {
+      type: DataTypes.SMALLINT,
+      defaultValue: 0,
+    },
+    completedRegistration: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 
   model.associate = (models) => {

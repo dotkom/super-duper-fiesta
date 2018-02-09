@@ -1,11 +1,14 @@
+const { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } = require('../../common/actionTypes/issues');
+const { RESOLUTION_TYPES } = require('../../common/actionTypes/voting');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('issues', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -16,10 +19,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       meetingId: {
-        // FK to Genfors
-        // type: Sequelize.FOREIGNKEY,
-        // to: GENFORS
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'meetings',
           key: 'id'
@@ -34,43 +34,45 @@ module.exports = {
         type: Sequelize.DATE
       },
       active: {
-        // Default: true
+        defaultValue: true,
         type: Sequelize.BOOLEAN
       },
       deleted: {
-        // Default: false
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       secret: {
-        // Default false
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       showOnlyWinner: {
-        // Default true
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       countingBlankVotes: {
-        // Default true
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       voteDemand: {
-        // "regular" or "qualified"
-        type: Sequelize.TEXT
+        defaultValue: RESOLUTION_TYPES.regular.key,
+        type: Sequelize.ENUM(...Object.keys(RESOLUTION_TYPES)),
       },
       qualifiedVoters: {
+        allowNull: true,
         type: Sequelize.SMALLINT
       },
       currentVotes: {
+        allowNull: true,
         type: Sequelize.SMALLINT
       },
       result: {
-        // nullable
+        allowNull: true,
         type: Sequelize.BOOLEAN
       },
       status: {
-        // NOT STARTED, IN PROGRESS, FINISHED
         allowNull: false,
-        type: Sequelize.TEXT,
+        defaultValue: VOTING_NOT_STARTED,
+        type: Sequelize.ENUM(VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED),
       },
     });
   },

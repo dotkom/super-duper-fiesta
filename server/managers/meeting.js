@@ -2,6 +2,7 @@ const logger = require('../logging');
 const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting.accessors');
 
 const permissionLevel = require('../../common/auth/permissions');
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
 
 function publicMeeting(meeting, admin = false) {
   const { id, registrationOpen, status, title, pin } = meeting;
@@ -57,7 +58,7 @@ async function endGenfors(genfors, user) {
     throw new Error('User does not have permission to end genfors');
   }
   logger.info('Closing genfors', { genfors: genfors.title });
-  return updateGenfors({ id: genfors.id }, { status: 'closed' });
+  return updateGenfors({ id: genfors.id }, { status: meetingStates.closed });
 }
 
 

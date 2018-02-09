@@ -3,9 +3,9 @@ module.exports = {
     return queryInterface.createTable('alternatives', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -16,10 +16,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       text: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       issueId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'issues',
           key: 'id'
