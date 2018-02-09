@@ -3,7 +3,7 @@ pipeline:
     image: drillster/drone-volume-cache
     pull: true
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
     restore: true
     mount:
       - ./node_modules
