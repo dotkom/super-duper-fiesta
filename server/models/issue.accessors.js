@@ -15,7 +15,9 @@ async function addIssue(issueData, alternatives) {
 
     const issue = await Question.create(issueData, { transaction });
     await Promise.all(alternatives.map(async alternative =>
-      Alternative.create(Object.assign(alternative, { issueId: issue.id }), { transaction }),
+      // Override ID coming from frontend.
+      Alternative.create(Object.assign(alternative, { id: undefined, issueId: issue.id }),
+      { transaction }),
     ));
 
     return issue;
