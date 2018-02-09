@@ -8,7 +8,7 @@ const db = require('./models/postgresql');
 // Initialize express
 const app = express();
 
-// Set up database and get connection
+// Set up session store using database connection
 const store = new SequelizeStore({ db: db.sequelize });
 
 // Set up session store
