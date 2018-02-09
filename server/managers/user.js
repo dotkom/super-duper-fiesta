@@ -26,9 +26,8 @@ function publicUser(user, admin = false) {
 
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
-  if (!genfors || (user.meetingId !== genfors.id)) {
-    // No active genfors or user not connected to current genfors
-    logger.warn('User logged in when no active genfors or incorrect active genfors.', { userId: user.id, userMeetingId: user.meetingId });
+  if (!genfors) {
+    logger.warn('User logged in when no active genfors.', { userId: user.id });
     return false;
   }
 
