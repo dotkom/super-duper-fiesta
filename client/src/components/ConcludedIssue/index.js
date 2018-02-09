@@ -5,10 +5,9 @@ import IconText from '../IconText';
 import Card from '../Card';
 import css from './ConcludedIssue.css';
 
-const ConcludedIssue = (
-  { majority, winner, voteDemand, text, alternatives, votes, qualifiedVoters }) =>
-(
-  <Card
+const ConcludedIssue = ({ winner, voteDemand, text, alternatives, votes, qualifiedVoters }) => {
+  const majority = winner !== null;
+  return (<Card
     classes={css.concludedIssue}
     headerColor={majority ? 'green' : 'red'}
     title={text}
@@ -37,8 +36,8 @@ const ConcludedIssue = (
           </li>
       ))}
     </ul>
-  </Card>
-);
+  </Card>);
+};
 
 ConcludedIssue.defaultProps = {
   alternatives: [],
@@ -51,7 +50,6 @@ ConcludedIssue.defaultProps = {
 ConcludedIssue.propTypes = {
   voteDemand: PropTypes.oneOfType(
     [PropTypes.number, PropTypes.string]), // Kept for backwards compatibility. 'oldResolutionTypes'
-  majority: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

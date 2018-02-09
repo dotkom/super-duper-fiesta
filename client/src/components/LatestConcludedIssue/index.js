@@ -11,7 +11,6 @@ const LatestConcludedIssue = ({ issue }) => {
   return (
     <ConcludedIssue
       key={issue.id}
-      majority={issue.winner !== null}
       {...issue}
     />
   );
