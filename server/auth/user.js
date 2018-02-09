@@ -73,7 +73,7 @@ async function createUser(user) {
     });
     return updatedUser;
   } catch (err) {
-    logger.error('Updating user failed.', { username, err });
+    logger.error('Updating user failed.', { username, err: err.message });
     throw err;
   }
 }

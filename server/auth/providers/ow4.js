@@ -20,7 +20,7 @@ async function getClientInformation(accessToken) {
       },
     }).then(_ => _.json());
   } catch (err) {
-    logger.error('Fetching user from resource failed', err);
+    logger.error('Fetching user from resource failed', { err: err.message });
     throw err;
   }
   return parseOW4OAuth2User(body);

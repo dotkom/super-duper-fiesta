@@ -8,7 +8,7 @@ require('./providers/ow4.js');
 
 module.exports = async (app) => {
   passport.serializeUser((user, done) => {
-    logger.silly('Serializing user', { user });
+    logger.silly('Serializing user', { userId: user.id });
     done(null, user.id);
   });
 
