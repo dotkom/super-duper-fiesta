@@ -1,5 +1,11 @@
 async function Genfors(sequelize, DataTypes) {
   const model = await sequelize.define('meeting', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
     title: DataTypes.STRING,
     date: DataTypes.DATE,
     registrationOpen: {

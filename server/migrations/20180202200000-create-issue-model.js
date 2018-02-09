@@ -6,9 +6,9 @@ module.exports = {
     return queryInterface.createTable('issues', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       meetingId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'meetings',
           key: 'id'

@@ -3,6 +3,12 @@ const { RESOLUTION_TYPES } = require('../../common/actionTypes/voting');
 
 async function Question(sequelize, DataTypes) {
   const model = await sequelize.define('issue', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
     description: DataTypes.TEXT,
     date: {
       type: DataTypes.DATE,
