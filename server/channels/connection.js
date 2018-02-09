@@ -47,7 +47,7 @@ const emitUserData = async (socket) => {
     const { passwordHash } = socket.request.headers.cookie;
     validPasswordHash = await validatePasswordHash(user, passwordHash);
   } catch (err) {
-    logger.error('Failed to validate passwordHash', user, err);
+    logger.error('Failed to validate passwordHash', { userId: user.id, err: err.message });
   }
   if (user.completedRegistration && validPasswordHash) {
     emit(socket, AUTH_REGISTERED, { registered: true });

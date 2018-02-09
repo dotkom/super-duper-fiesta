@@ -26,7 +26,13 @@ function publicUser(user, admin = false) {
 
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
-  logger.silly('Checking password hash for user', user.id, genfors.id);
+  if (!genfors || (user.meetingId !== genfors.id)) {
+    // No active genfors or user not connected to current genfors
+    logger.warn('User logged in when no active genfors or incorrect active genfors.', { userId: user.id, userMeetingId: user.meetingId });
+    return false;
+  }
+
+  logger.silly('Checking password hash for user', { userId: user.id, meetingId: genfors.id });
   const existingUser = await model.getAnonymousUser(passwordHash, user.onlinewebId, genfors);
   // using != instead of !== to also catch undefined
   return existingUser != null;
