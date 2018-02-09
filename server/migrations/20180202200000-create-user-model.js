@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       canVote: {
-        // DEFAULT false
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
       notes: {
@@ -46,10 +46,11 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       permissions: {
+        defaultValue: 0,
         type: Sequelize.SMALLINT,
       },
       completedRegistration: {
-        // DEFAULT false
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
     }).then(() => {
