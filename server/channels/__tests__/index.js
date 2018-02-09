@@ -48,35 +48,35 @@ describe('channel listen user', () => {
     await listenerCallback(socketMock);
   });
 
-  it.skip('calls connection', () => {
+  it('calls connection', () => {
     expect(connection).toBeCalled();
   });
 
-  it.skip('calls authListener', () => {
+  it('calls authListener', () => {
     expect(authListener).toBeCalled();
   });
 
-  it.skip('calls voteListener', () => {
+  it('calls voteListener', () => {
     expect(voteListener).toBeCalled();
   });
 
-  it.skip('calls adminAuthListener', () => {
+  it('calls adminAuthListener', () => {
     expect(adminAuthListener).toBeCalled();
   });
 
-  it.skip('does not call issueListener', () => {
+  it('does not call issueListener', () => {
     expect(issueListener).not.toBeCalled();
   });
 
-  it.skip('does not call toggleCanVoteListener', () => {
+  it('does not call toggleCanVoteListener', () => {
     expect(toggleCanVoteListener).not.toBeCalled();
   });
 
-  it.skip('does not call meetingListener', () => {
+  it('does not call meetingListener', () => {
     expect(meetingListener).not.toBeCalled();
   });
 
-  it.skip('does not join the admin socket channel', async () => {
+  it('does not join the admin socket channel', async () => {
     expect(socketMock.join).not.toBeCalled();
   });
 });
@@ -95,35 +95,35 @@ describe('channel listen manager', () => {
     await listenerCallback(socketMock);
   });
 
-  it.skip('calls connection', () => {
+  it('calls connection', () => {
     expect(connection).toBeCalled();
   });
 
-  it.skip('calls authListener', () => {
+  it('calls authListener', () => {
     expect(authListener).toBeCalled();
   });
 
-  it.skip('calls voteListener', () => {
+  it('calls voteListener', () => {
     expect(voteListener).toBeCalled();
   });
 
-  it.skip('calls adminAuthListener', () => {
+  it('calls adminAuthListener', () => {
     expect(adminAuthListener).toBeCalled();
   });
 
-  it.skip('calls issueListener', () => {
+  it('calls issueListener', () => {
     expect(issueListener).toBeCalled();
   });
 
-  it.skip('calls toggleCanVoteListener', () => {
+  it('calls toggleCanVoteListener', () => {
     expect(toggleCanVoteListener).toBeCalled();
   });
 
-  it.skip('calls meetingListener', () => {
+  it('calls meetingListener', () => {
     expect(meetingListener).toBeCalled();
   });
 
-  it.skip('joins the admin socket channel', async () => {
+  it('joins the admin socket channel', async () => {
     expect(socketMock.join).toBeCalledWith('admin');
   });
 });
