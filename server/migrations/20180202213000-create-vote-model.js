@@ -16,6 +16,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       issueId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'issues',
@@ -23,6 +24,7 @@ module.exports = {
         },
       },
       alternativeId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'alternatives',
