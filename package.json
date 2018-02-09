@@ -10,6 +10,7 @@
     "build:prod": "webpack --config webpack.config.production.js",
     "codecov": "codecov",
     "coverage": "codecov",
+    "db:migrate": "sequelize db:migrate",
     "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
     "backend": "node server/server.js",
     "lint": "eslint client/src/ server/",
