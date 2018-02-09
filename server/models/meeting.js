@@ -4,6 +4,7 @@ async function Genfors(sequelize, DataTypes) {
     date: DataTypes.DATE,
     registrationOpen: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false,
     },
     status: {
@@ -11,7 +12,10 @@ async function Genfors(sequelize, DataTypes) {
       type: DataTypes.ENUM('open', 'closed'),
       defaultValue: 'open',
     },
-    pin: DataTypes.SMALLINT,
+    pin: {
+      allowNull: true,
+      type: DataTypes.SMALLINT,
+    },
   });
   return model;
 }
