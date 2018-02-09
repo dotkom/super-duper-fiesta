@@ -24,11 +24,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       registrationOpen: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       status: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.ENUM('open', 'closed'),
       },
       pin: {
         allowNull: true,

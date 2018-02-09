@@ -2,13 +2,15 @@ const db = require('./postgresql');
 
 const Genfors = db.sequelize.models.meeting;
 
+const meetingStates = { open: 'open', closed: 'closed' };
+
 async function getGenfors(genfors) {
   const id = genfors.id || genfors;
   return Genfors.findOne({ where: { id } });
 }
 
 function getActiveGenfors() {
-  return Genfors.findOne({ where: { status: 'open' } });
+  return Genfors.findOne({ where: { status: meetingStates.open } });
 }
 
 async function updateGenfors(query, data) {
@@ -27,4 +29,5 @@ module.exports = {
   createGenfors,
   getActiveGenfors,
   updateGenfors,
+  meetingStates,
 };

@@ -7,7 +7,8 @@ async function Genfors(sequelize, DataTypes) {
       defaultValue: false,
     },
     status: {
-      type: DataTypes.TEXT,
+      allowNull: false,
+      type: DataTypes.ENUM('open', 'closed'),
       defaultValue: 'open',
     },
     pin: DataTypes.SMALLINT,
