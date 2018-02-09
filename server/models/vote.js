@@ -1,5 +1,11 @@
-async function Vote(sequelize) {
+async function Vote(sequelize, DataTypes) {
   const model = await sequelize.define('vote', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
   });
 
   model.associate = (models) => {

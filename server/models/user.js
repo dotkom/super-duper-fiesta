@@ -1,5 +1,11 @@
 async function User(sequelize, DataTypes) {
   const model = await sequelize.define('user', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
     name: {
       type: DataTypes.TEXT,
       allowNull: false,

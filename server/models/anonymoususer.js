@@ -2,6 +2,12 @@
 
 async function AnonymousUser(sequelize, DataTypes) {
   const model = await sequelize.define('anonymoususer', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
     passwordHash: DataTypes.TEXT,
   });
 

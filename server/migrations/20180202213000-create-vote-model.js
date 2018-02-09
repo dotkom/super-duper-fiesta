@@ -3,9 +3,9 @@ module.exports = {
     return queryInterface.createTable('votes', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       createdAt: {
         allowNull: false,
@@ -17,7 +17,7 @@ module.exports = {
       },
       issueId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'issues',
           key: 'id',
@@ -25,7 +25,7 @@ module.exports = {
       },
       alternativeId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'alternatives',
           key: 'id',
@@ -33,7 +33,7 @@ module.exports = {
       },
       userId: {
         allowNull: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'users',
           key: 'id',
@@ -41,7 +41,7 @@ module.exports = {
       },
       anonymoususerId: {
         allowNull: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'anonymoususers',
           key: 'id',
