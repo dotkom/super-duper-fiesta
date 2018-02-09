@@ -22,6 +22,10 @@ function testGlobs() {
   return globs;
 }
 
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = 'sqlite:///db.db';
+}
+
 module.exports = {
   clearMocks: true,
   collectCoverage: true,

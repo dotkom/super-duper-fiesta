@@ -32,8 +32,7 @@ Promise.all(fs.readdirSync(__dirname)
       && (file.slice(-3) === '.js')
       // Ignore files containing only accessor functions (getters and setters)
       // (These requires the model to be imported first)
-      && (file.search('.accessors.') === -1)
-      && (file !== 'essentials.js'), // Ignore mongodb file
+      && (file.search('.accessors.') === -1),
   )
   .map(async (file) => {
     try {
