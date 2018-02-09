@@ -1,6 +1,9 @@
 async function Alternative(sequelize, DataTypes) {
   const model = await sequelize.define('alternative', {
-    text: DataTypes.TEXT,
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   });
 
   model.associate = models =>

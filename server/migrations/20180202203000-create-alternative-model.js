@@ -16,10 +16,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       text: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       issueId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'issues',
           key: 'id'
