@@ -21,7 +21,7 @@ module.exports = {
       },
       date: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       registrationOpen: {
         allowNull: false,

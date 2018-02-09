@@ -1,4 +1,5 @@
-const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
+const { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } = require('../../common/actionTypes/issues');
+const { RESOLUTION_TYPES } = require('../../common/actionTypes/voting');
 
 async function Question(sequelize, DataTypes) {
   const model = await sequelize.define('issue', {
@@ -27,14 +28,22 @@ async function Question(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    // voteDemand: Either "regular" or "qualified".
-    voteDemand: DataTypes.STRING,
-    qualifiedVoters: DataTypes.SMALLINT,
-    currentVotes: DataTypes.SMALLINT,
+    voteDemand: {
+      defaultValue: RESOLUTION_TYPES.regular.key,
+      type: DataTypes.ENUM(...Object.keys(RESOLUTION_TYPES)),
+    },
+    qualifiedVoters: {
+      type: DataTypes.SMALLINT,
+      allowNull: true,
+    },
+    currentVotes: {
+      type: DataTypes.SMALLINT,
+      allowNull: true,
+    },
     result: DataTypes.BOOLEAN,
-    // status types: NOT_STARTED, IN_PROGRESS, FINISHED
     status: {
-      type: DataTypes.TEXT,
+      allowNull: false,
+      type: DataTypes.ENUM(VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED),
       defaultValue: VOTING_NOT_STARTED,
     },
   });
