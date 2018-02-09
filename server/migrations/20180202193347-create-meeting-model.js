@@ -1,3 +1,5 @@
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('meetings', {
@@ -29,7 +31,7 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM('open', 'closed'),
+        type: Sequelize.ENUM(...Object.keys(meetingStates)),
       },
       pin: {
         allowNull: true,

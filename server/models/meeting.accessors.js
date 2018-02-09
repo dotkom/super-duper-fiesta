@@ -2,7 +2,7 @@ const db = require('./postgresql');
 
 const Genfors = db.sequelize.models.meeting;
 
-const meetingStates = { open: 'open', closed: 'closed' };
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
 
 async function getGenfors(genfors) {
   const id = genfors.id || genfors;
@@ -29,5 +29,4 @@ module.exports = {
   createGenfors,
   getActiveGenfors,
   updateGenfors,
-  meetingStates,
 };

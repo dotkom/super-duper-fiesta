@@ -1,7 +1,8 @@
 const logger = require('../logging');
-const { createGenfors, getGenfors, getActiveGenfors, updateGenfors, meetingStates } = require('../models/meeting.accessors');
+const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting.accessors');
 
 const permissionLevel = require('../../common/auth/permissions');
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
 
 function publicMeeting(meeting, admin = false) {
   const { id, registrationOpen, status, title, pin } = meeting;
@@ -100,5 +101,4 @@ module.exports = {
   addGenfors,
   toggleRegistrationStatus,
   publicMeeting,
-  meetingStates,
 };
