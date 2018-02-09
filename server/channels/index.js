@@ -44,7 +44,6 @@ const applyMiddlewares = (io) => {
 
 const listen = (server) => {
   const io = socketio(server);
-  applyMiddlewares(io);
   io.on('connection', async (socket) => {
     connection(socket);
     authListener(socket);
@@ -64,6 +63,7 @@ const listen = (server) => {
       meetingListener(socket);
     }
   });
+  return io;
 };
 
 module.exports = {

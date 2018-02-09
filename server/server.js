@@ -3,13 +3,15 @@ const appConfig = require('./app');
 const channels = require('./channels/index');
 const logger = require('./logging');
 const Raven = require('raven');
+const { applyMiddlewares } = require('./channels/index');
 
 (async () => {
   const app = await appConfig();
 
   // Set up socket.io
   const server = http.Server(app);
-  channels.listen(server);
+  const io = channels.listen(server);
+  applyMiddlewares(io);
 
   Raven
   .config(process.env.SDF_SENTRY_DSN_BACKEND, {
