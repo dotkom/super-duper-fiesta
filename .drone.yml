@@ -65,8 +65,7 @@ pipeline:
     repo: registry.online.ntnu.no/dotkom/super-duper-fiesta
     registry: registry.online.ntnu.no
     dockerfile: Dockerfile.prod
-    build_args:
-      - SDF_SENTRY_DSN_FRONTEND="${SDF_SENTRY_DSN_FRONTEND}"
+    build_args_from_env: [sdf_sentry_dsn_frontend]
     tags: "${DRONE_TAG}"
 
   deploy:
