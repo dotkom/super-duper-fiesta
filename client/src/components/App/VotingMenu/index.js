@@ -52,7 +52,8 @@ class VotingMenu extends React.Component {
     const hasSelectedVote = !!selectedVote;
     const hasVoted = !!ownVote;
     const canVote = !isLoggedIn || !hasSelectedVote || hasVoted;
-    const selected = hasVoted ? (displayVote && ownVote) : selectedVote;
+    const displayedOwnVote = displayVote ? ownVote : null;
+    const selected = hasVoted ? displayedOwnVote : selectedVote;
 
     return (
       <div>

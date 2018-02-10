@@ -10,15 +10,12 @@ function ConcludedIssueList({ concludedIssueListEnabled, issues }) {
     <div>
       <div className={css.concludedIssueList}>
         {concludedIssueListEnabled && Object.keys(issues)
-          .map((issue) => {
-            const winner = issues[issue].winner;
-            const majority = winner !== null;
-            return (<ConcludedIssue
+          .map(issue => (
+            <ConcludedIssue
               key={issues[issue].id}
-              majority={majority}
               {...issues[issue]}
-            />);
-          })}
+            />
+          ))}
       </div>
     </div>
   );

@@ -11,14 +11,17 @@ const LatestConcludedIssue = ({ issue }) => {
   return (
     <ConcludedIssue
       key={issue.id}
-      majority={issue.winner !== null}
       {...issue}
     />
   );
 };
 
+LatestConcludedIssue.defaultProps = {
+  issue: null,
+};
+
 LatestConcludedIssue.propTypes = {
-  issue: PropTypes.shape(ConcludedIssue.propTypes).isRequired,
+  issue: PropTypes.shape(ConcludedIssue.propTypes),
 };
 
 const mapStateToProps = state => ({

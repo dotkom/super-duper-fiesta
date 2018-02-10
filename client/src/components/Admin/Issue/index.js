@@ -42,6 +42,10 @@ class Issue extends React.Component {
     }
   }
 
+  closeDeleteDialog() {
+    this.setState({ showCloseIssueDialog: false });
+  }
+
   render() {
     const {
       closeIssue, issueIsActive, issueStatus, issueText, pin, registrationOpen,
@@ -59,11 +63,12 @@ class Issue extends React.Component {
           title="Bekreft sletting av sak"
           subtitle={`Bekreft sletting av "${issueText}"`}
           visible={showCloseIssueDialog}
+          onClose={() => this.closeDeleteDialog()}
         >
           <Button background onClick={() => this.deleteIssue()}>Bekreft</Button>
           <Button
             background
-            onClick={() => { this.setState({ showCloseIssueDialog: false }); }}
+            onClick={() => this.closeDeleteDialog()}
           >Avbryt</Button>
         </Dialog>
         <div className={css.content}>

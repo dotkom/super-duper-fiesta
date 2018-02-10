@@ -44,10 +44,15 @@ const blankIssue = {
   questionType: MULTIPLE_CHOICE,
 };
 
+const arrayToObject = array => array.reduce((obj, item, index) => ({
+  ...obj, [index]: item,
+}), {});
+
 function getIssueContents(issue) {
+  const alternatives = issue.alternatives ? issue.alternatives.filter(alt => alt.text !== 'Blank') : [];
   return Object.assign(blankIssue, {
     issueDescription: issue.text || '',
-    alternatives: issue.alternatives ? issue.alternatives.filter(alt => alt.text !== 'Blank') : {},
+    alternatives: arrayToObject(alternatives),
     secretVoting: issue.secret || false,
     showOnlyWinner: issue.showOnlyWinner || false,
     countBlankVotes: issue.countingBlankVotes || false,
@@ -256,22 +261,28 @@ class IssueForm extends React.Component {
 
 IssueForm.defaultProps = {
   createIssue: undefined,
-  issue: {},
+  issue: {
+    active: false,
+    alternatives: [],
+    secret: false,
+    showOnlyWinner: false,
+    voteDemand: 'regular',
+  },
 };
 
 IssueForm.propTypes = {
   createIssue: React.PropTypes.func,
   deleteIssue: React.PropTypes.func.isRequired,
-  issue: React.PropTypes.objectOf(React.PropTypes.shape({
+  issue: React.PropTypes.shape({
     active: React.PropTypes.bool.isRequired,
     alternatives: React.PropTypes.arrayOf(
-      React.PropTypes.objectOf({
+      React.PropTypes.shape({
         text: React.PropTypes.string.isRequired,
       })),
     secret: React.PropTypes.bool.isRequired,
     showOnlyWinner: React.PropTypes.bool.isRequired,
     voteDemand: React.PropTypes.string.isRequired,
-  })),
+  }),
   activeIssue: React.PropTypes.bool.isRequired,
 };
 

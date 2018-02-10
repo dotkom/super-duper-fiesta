@@ -128,14 +128,19 @@ class AdminPanel extends React.Component {
   }
 }
 
+AdminPanel.defaultProps = {
+  registrationOpen: false,
+  meetingExists: false,
+};
+
 AdminPanel.propTypes = {
   endGAM: PropTypes.func.isRequired,
-  registrationOpen: PropTypes.bool.isRequired,
+  registrationOpen: PropTypes.bool,
   toggleRegistration: PropTypes.func.isRequired,
-  match: PropTypes.objectOf(PropTypes.shape({
+  match: PropTypes.shape({
     path: PropTypes.string.isRequired,
-  })).isRequired,
-  meetingExists: PropTypes.bool.isRequired,
+  }).isRequired,
+  meetingExists: PropTypes.bool,
   userPermissions: PropTypes.number.isRequired,
   version: PropTypes.string.isRequired,
 };
