@@ -21,7 +21,7 @@ pipeline:
     image: node:boron
     group: testing
     when:
-      event: pull_request
+      event: [push, pull_request, tag, deployment]
     commands:
       - npm run build:prod
 
@@ -58,14 +58,17 @@ pipeline:
   
   release:
     image: docker
-    secrets: [registry_username, registry_password, sdf_sentry_dsn_frontend]
+    secrets: [docker_username, docker_password, sdf_sentry_dsn_frontend]
     when:
-      branch: master
-      event: [push, tag, deployment]
+      event: tag
       status: success
+    repo: registry.online.ntnu.no/dotkom/super-duper-fiesta
+    registry: registry.online.ntnu.no
+    dockerfile: Dockerfile.prod
+    build_args:
+      - SDF_SENTRY_DSN_FRONTEND="${SDF_SENTRY_DSN_FRONTEND}"
+    tags: "${DRONE_TAG}"
     commands:
-      - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD registry.online.ntnu.no
-      - docker build -t registry.online.ntnu.no/dotkom/super-duper-fiesta -f Dockerfile.prod --build-arg SDF_SENTRY_DSN_FRONTEND .
       - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -80,10 +83,9 @@ pipeline:
     key: ${SSH_KEY}
     command_timeout: 600
     when:
-      branch: master
-      event: [push, tag, deployment]
+      event: tag
       status: success
     script:
-      - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
+      - /usr/bin/docker pull registry.online.ntnu.no/dotkom/super-duper-fiesta:"${DRONE_TAG}"
       - /bin/systemctl restart super-duper-fiesta.service
 
