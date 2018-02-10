@@ -80,8 +80,7 @@ function generateVote(data) {
     id: '0',
     issueId,
     userId: '1',
-    alternativeId: '3',
-    alternative: alternativeId,
+    alternativeId,
   }, data);
 }
 
