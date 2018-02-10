@@ -2,14 +2,14 @@ const logger = require('../logging');
 const passport = require('passport');
 const { setupOIDC } = require('./oidc');
 
-const getUserById = require('../models/user').getUserById;
+const getUserById = require('../models/user.accessors').getUserById;
 
 require('./providers/ow4.js');
 
 module.exports = async (app) => {
   passport.serializeUser((user, done) => {
-    logger.silly('Serializing user', { user });
-    done(null, user._id); // eslint-disable-line no-underscore-dangle
+    logger.silly('Serializing user', { userId: user.id });
+    done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {

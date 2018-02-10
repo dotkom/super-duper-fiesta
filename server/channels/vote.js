@@ -2,8 +2,8 @@ const { broadcastAndEmit, emit, emitError } = require('../utils');
 const logger = require('../logging');
 
 const { addVote, generatePublicVote } = require('../managers/vote');
-const { getActiveGenfors } = require('../models/meeting');
-const { getAnonymousUser } = require('../models/user');
+const { getActiveGenfors } = require('../models/meeting.accessors');
+const { getAnonymousUser } = require('../models/user.accessors');
 const { isRegistered } = require('../managers/user');
 
 const {
@@ -33,14 +33,13 @@ const submitRegularVote = async (socket, data) => {
   try {
     const vote = await addVote(
       data.issue, user,
-      // eslint-disable-next-line no-underscore-dangle
-      data.alternative, user._id,
+      data.alternative, user.id,
     );
     logger.debug('Stored new vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
-      alternativeId: vote.alternative,
-      issueId: vote.question,
+      alternativeId: vote.alternativeId,
+      issueId: vote.issueId,
     });
   } catch (err) {
     logger.error('Storing new vote failed.', err);
@@ -59,13 +58,12 @@ const submitAnonymousVote = async (socket, data) => {
   user.onlinewebId, genfors);
   try {
     const vote = await addVote(data.issue, user,
-      // eslint-disable-next-line no-underscore-dangle
-      data.alternative, anonymousUser._id);
+      data.alternative, anonymousUser.id);
     logger.debug('Stored new anonymous vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
-      alternativeId: vote.alternative,
-      issueId: vote.question,
+      alternativeId: vote.alternativeId,
+      issueId: vote.issueId,
     });
   } catch (err) {
     logger.error('Storing new anonymous vote failed.', err);

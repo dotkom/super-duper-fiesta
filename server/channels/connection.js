@@ -1,12 +1,12 @@
 const { emit, emitError } = require('../utils');
 const logger = require('../logging');
 
-const getActiveGenfors = require('../models/meeting').getActiveGenfors;
-const getActiveQuestion = require('../models/issue').getActiveQuestion;
-const { getConcludedIssues } = require('../models/issue');
-const { getUserVote, getVotes } = require('../models/vote');
-const { generatePublicVote } = require('../managers/vote');
-const { getAnonymousUser, getUsers } = require('../models/user');
+const getActiveGenfors = require('../models/meeting.accessors').getActiveGenfors;
+const getActiveQuestion = require('../models/issue.accessors').getActiveQuestion;
+const { getConcludedIssues } = require('../models/issue.accessors');
+const { getVotes } = require('../models/vote.accessors');
+const { generatePublicVote, getUserVote } = require('../managers/vote');
+const { getAnonymousUser, getUsers } = require('../models/user.accessors');
 const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
 const { publicMeeting } = require('../managers/meeting');
@@ -34,11 +34,11 @@ const emitUserData = async (socket) => {
   emit(socket, AUTH_SIGNED_IN, {
     username: user.onlinewebId,
     full_name: user.name,
-    id: user._id, // eslint-disable-line no-underscore-dangle
+    id: user.id,
     permissions: user.permissions,
   });
 
-  if (!user.genfors) {
+  if (!user.meetingId) {
     emitError(socket, new Error('Denne brukeren er ikke koblet til en generalforsamling. Vennligst logg ut og inn igjen.'));
   }
 
@@ -47,7 +47,7 @@ const emitUserData = async (socket) => {
     const { passwordHash } = socket.request.headers.cookie;
     validPasswordHash = await validatePasswordHash(user, passwordHash);
   } catch (err) {
-    logger.error('Failed to validate passwordHash', user, err);
+    logger.error('Failed to validate passwordHash', { userId: user.id, err: err.message });
   }
   if (user.completedRegistration && validPasswordHash) {
     emit(socket, AUTH_REGISTERED, { registered: true });
@@ -59,8 +59,7 @@ const emitUserData = async (socket) => {
 const emitActiveQuestion = async (socket, meeting) => {
   const user = await socket.request.user();
   try {
-    // eslint-disable-next-line no-underscore-dangle
-    const issue = await getActiveQuestion(meeting._id);
+    const issue = await getActiveQuestion(meeting.id);
     if (issue === null) {
       return;
     }
@@ -85,12 +84,11 @@ const emitActiveQuestion = async (socket, meeting) => {
     } else {
       voter = user;
     }
-    // eslint-disable-next-line no-underscore-dangle
-    const vote = await getUserVote(issue, voter._id);
+    const vote = await getUserVote(issue.id, voter.id);
     if (vote) {
       emit(socket, USER_VOTE, {
-        alternativeId: vote.alternative,
-        issueId: vote.question,
+        alternativeId: vote.alternativeId,
+        issueId: vote.issueId,
       });
     }
   } catch (err) {

@@ -1,7 +1,7 @@
 const { broadcast, broadcastAndEmit, emitError, adminBroadcastAndEmit } = require('../../utils');
 const logger = require('../../logging');
 
-const { getActiveGenfors } = require('../../models/meeting');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { endGenfors, toggleRegistrationStatus, publicMeeting } = require('../../managers/meeting');
 
 const {
@@ -23,7 +23,7 @@ const toggleRegistration = async (socket, data) => {
   logger.debug('Toggling meeting registration status', data);
   const genfors = await getActiveGenfors();
   try {
-    const updatedMeeting = await toggleRegistrationStatus({ _id: genfors._id },
+    const updatedMeeting = await toggleRegistrationStatus({ id: genfors.id },
     data.registrationOpen);
     broadcast(socket, TOGGLED_REGISTRATION_STATE, publicMeeting(updatedMeeting));
     adminBroadcastAndEmit(socket, TOGGLED_REGISTRATION_STATE, publicMeeting(updatedMeeting, true));

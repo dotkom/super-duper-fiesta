@@ -51,11 +51,11 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "0",
-        "alternative": "1",
-        "question": "1",
-        "randomName": null,
-        "user": "1",
+        "alternativeId": "1",
+        "id": "0",
+        "issueId": "1",
+        "randomName": "Heatherpixie Hawk",
+        "userId": "",
       },
       "type": "ADD_VOTE",
     },
@@ -79,11 +79,11 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "0",
-        "alternative": "1",
-        "question": "1",
+        "alternativeId": "1",
+        "id": "0",
+        "issueId": "1",
         "randomName": null,
-        "user": "123",
+        "userId": "123",
       },
       "type": "ADD_VOTE",
     },
@@ -232,11 +232,11 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "0",
-        "alternative": "1",
-        "question": "1",
+        "alternativeId": "1",
+        "id": "0",
+        "issueId": "1",
         "randomName": null,
-        "user": "123",
+        "userId": "123",
       },
       "type": "ADD_VOTE",
     },

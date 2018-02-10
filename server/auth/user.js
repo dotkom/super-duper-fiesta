@@ -1,8 +1,8 @@
 const logger = require('../logging');
 const permissions = require('../../common/auth/permissions');
-const { getActiveGenfors } = require('../models/meeting');
+const { getActiveGenfors } = require('../models/meeting.accessors');
 const { addUser } = require('../managers/user');
-const { getUserByUsername, updateUserById } = require('../models/user');
+const { getUserByUsername, updateUserById } = require('../models/user.accessors');
 
 function getPermissionLevel(user) {
   if (user.member) {
@@ -60,20 +60,20 @@ async function createUser(user) {
       // Create user if not exists
       logger.debug('User does not exist -- creating', { username });
       const newUser = await addUser(fullName, username, permissionLevel);
-      logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.genfors}`,
-        { username, fullName: newUser.name, genfors: newUser.genfors });
+      logger.info(`Successfully registered ${newUser.name} for genfors ${newUser.meetingId}`,
+        { username, fullName: newUser.name, genfors: newUser.meetingId });
       return newUser;
     }
     logger.silly('Fetched existing user, updating.', { username: user.onlinewebId });
     // Update if user exists
-    const updatedUser = await updateUserById(existingUser._id, {
+    const updatedUser = await updateUserById(existingUser.id, {
       name: fullName,
       onlinewebId: username,
       permissions: permissionLevel,
     });
     return updatedUser;
   } catch (err) {
-    logger.error('Updating user failed.', { username, err });
+    logger.error('Updating user failed.', { username, err: err.message });
     throw err;
   }
 }

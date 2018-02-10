@@ -1,8 +1,8 @@
 jest.mock('../meeting');
-jest.mock('../../models/issue');
-jest.mock('../../models/meeting');
+jest.mock('../../models/issue.accessors');
+jest.mock('../../models/meeting.accessors');
 const { canEdit } = require('../meeting');
-const { getActiveQuestion, updateIssue } = require('../../models/issue');
+const { getActiveQuestion, updateIssue } = require('../../models/issue.accessors');
 const { disableVoting, enableVoting } = require('../issue');
 const { generateIssue, generateManager, generateUser }
   = require('../../utils/generateTestData');

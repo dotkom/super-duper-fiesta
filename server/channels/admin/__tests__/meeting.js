@@ -1,6 +1,6 @@
-jest.mock('../../../models/meeting');
+jest.mock('../../../models/meeting.accessors');
 const { endGAM, toggleRegistration } = require('../meeting');
-const { getGenfors, getActiveGenfors, updateGenfors } = require('../../../models/meeting');
+const { getGenfors, getActiveGenfors, updateGenfors } = require('../../../models/meeting.accessors');
 const { generateSocket, generateGenfors, generateUser } = require('../../../utils/generateTestData');
 const permissionLevels = require('../../../../common/auth/permissions');
 

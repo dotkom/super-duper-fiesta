@@ -121,6 +121,30 @@ Current user (permanent):
 | `SDF_DATABASE_URL` | Connection string for MongoDB (including database name) | `mongodb://localhost/` | `mongodb://localhost/sdf` |
 | `SDF_DATABASE_NAME` | Name of MongoDB database | `sdf` | `sdf` |
 
+### Database
+
+The database connection can be configured using DATABASE_URL, which is a connection URI exposed to ENV on the format:
+
+- `protocol://[user:password@]address[:port]/database_name`
+
+Example PostgreSQL connection URI:
+
+- `postgresql://sdf:secretpassword@127.0.0.1:5432/sdf`
+
+Or SQLite: `sqlite:///path/to/database.db` (note the three `/`, the first two are part of the protocol separator and the final one denotes the root of your file system)
+
+For further configuration of Sequelize, check out `.sequelizerc`. This contains information about paths to model, migration and seed folders.
+
+#### Migrations
+
+The project is bootstrapped and expected to use migrations for model changes. Migrations can be applied by running
+
+- `yarn db:migrations` (which executes `sequelize db:migrate`)
+
+When running migrations, you have to specify `--url $DATABASE_URL` for Sequelize-cli to understand that you want to connect using the DATABASE_URL configuration.
+
+The (fairly lacking) documentation for Sequelize migrations and how to create them can be found [here](http://docs.sequelizejs.com/manual/tutorial/migrations.html) or by executing `sequelize --help`.
+
 ### OAuth2
 
 Authentication and authorization happens using OAuth2 and SSO.

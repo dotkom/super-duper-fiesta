@@ -1,9 +1,9 @@
 const { adminBroadcast, broadcastAndEmit, emit, emitError } = require('../utils');
-const { getActiveGenfors } = require('../models/meeting');
+const { getActiveGenfors } = require('../models/meeting.accessors');
 const { validatePin } = require('../managers/meeting');
 const { addAnonymousUser } = require('../managers/user');
 const { validatePasswordHash, publicUser } = require('../managers/user');
-const { getUserByUsername } = require('../models/user');
+const { getUserByUsername } = require('../models/user.accessors');
 const logger = require('../logging');
 
 const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
@@ -29,7 +29,7 @@ const register = async (socket, data) => {
     try {
       validPasswordHash = await validatePasswordHash(user, passwordHash);
     } catch (err) {
-      logger.debug('Failed to validate user', { username, err });
+      logger.debug('Failed to validate user', { username });
       emitError(socket, new Error('Validering av personlig kode feilet'));
       return;
     }
@@ -43,7 +43,7 @@ const register = async (socket, data) => {
   try {
     await addAnonymousUser(username, passwordHash);
   } catch (err) {
-    logger.debug('Failed to register user', { username, err });
+    logger.debug('Failed to register user', { username });
     emitError(socket, new Error('Noe gikk galt under registreringen. Prøv igjen'));
     return;
   }

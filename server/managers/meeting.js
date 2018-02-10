@@ -1,7 +1,8 @@
 const logger = require('../logging');
-const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting');
+const { createGenfors, getGenfors, getActiveGenfors, updateGenfors } = require('../models/meeting.accessors');
 
 const permissionLevel = require('../../common/auth/permissions');
+const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
 
 function publicMeeting(meeting, admin = false) {
   const { id, registrationOpen, status, title, pin } = meeting;
@@ -32,14 +33,14 @@ async function canEdit(securityLevel, user, genforsId) {
   logger.silly('security check', {
     active: active.id,
     genfors: genfors.id,
-    usergenfors: user.genfors.toString(),
+    usergenfors: user.meetingId,
     userperms: user.permissions,
     securityLevel,
   });
   // Checking if current genfors == requested genfors == user genfors
   // But if user is superuser it is not nessecary
   if ((active.id === genfors.id)
-    && (genfors.id === user.genfors.toString())
+    && (genfors.id === user.meetingId)
     && (user.permissions >= securityLevel)) {
     logger.silly('Cleared security check');
     return true;
@@ -57,7 +58,7 @@ async function endGenfors(genfors, user) {
     throw new Error('User does not have permission to end genfors');
   }
   logger.info('Closing genfors', { genfors: genfors.title });
-  return updateGenfors({ _id: genfors.id }, { status: 'closed' });
+  return updateGenfors({ id: genfors.id }, { status: meetingStates.closed });
 }
 
 

@@ -1,16 +1,16 @@
 jest.mock('child_process');
-jest.mock('../../models/meeting');
-jest.mock('../../models/issue');
-jest.mock('../../models/vote');
-jest.mock('../../models/user');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/issue.accessors');
+jest.mock('../../models/vote.accessors');
+jest.mock('../../models/user.accessors');
 const { execSync } = require('child_process');
 
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
-const { getActiveGenfors } = require('../../models/meeting');
-const { getAnonymousUser, getUsers } = require('../../models/user');
-const { getVotes, getUserVote } = require('../../models/vote');
-const { getActiveQuestion, getConcludedIssues } = require('../../models/issue');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
+const { getAnonymousUser, getUsers } = require('../../models/user.accessors');
+const { getVotes, getUserVote, getAnonymousUserVote } = require('../../models/vote.accessors');
+const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues, getIssueById } = require('../../models/issue.accessors');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 
@@ -24,22 +24,27 @@ describe('connection', () => {
       },
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
+    getIssueWithAlternatives.mockImplementation(async () => generateIssue({ id: '2' }));
     getConcludedIssues.mockImplementation(async meeting => [
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
-      generateIssue({ meeting: meeting.id, _id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
+      generateIssue({ meetingId: meeting.id, id: '2' }),
     ]);
-    getVotes.mockImplementation(async ({ _id: issueId }) => [
-      generateVote({ question: issueId, _id: '1' }),
-      generateVote({ question: issueId, _id: '2' }),
-      generateVote({ question: issueId, _id: '3' }),
-      generateVote({ question: issueId, _id: '4' }),
+    getVotes.mockImplementation(async ({ id: issueId }) => [
+      generateVote({ issueId, id: '1' }),
+      generateVote({ issueId, id: '2' }),
+      generateVote({ issueId, id: '3' }),
+      generateVote({ issueId, id: '4' }),
     ]);
     getUserVote.mockImplementation(
       async () => null,
     );
+    getAnonymousUserVote.mockImplementation(
+      async () => null,
+    );
     getUsers.mockImplementation(async () => [generateUser()]);
+    getIssueById.mockImplementation(async id => generateIssue({ id }));
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
@@ -107,6 +112,7 @@ describe('connection', () => {
 
   it('emits correct actions when active question is secret', async () => {
     getActiveQuestion.mockImplementation(async () => generateIssue({ secret: true }));
+    getIssueById.mockImplementation(async id => generateIssue({ id, secret: true }));
     const socket = generateSocket();
     await connection(socket);
 
@@ -116,7 +122,7 @@ describe('connection', () => {
 
   it('emits correct actions when user has already voted', async () => {
     getUserVote.mockImplementation(
-      async (question, user) => generateVote({ question: question._id, user }),
+      async (question, userId) => generateVote({ question: question.id, userId }),
     );
     const socket = generateSocket();
     await connection(socket);
@@ -163,7 +169,7 @@ describe('connection', () => {
 
 describe('connection when no meeting', () => {
   it('warns about no active meeting', async () => {
-    const socket = generateSocket({ genfors: null });
+    const socket = generateSocket({ meetingId: null });
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();

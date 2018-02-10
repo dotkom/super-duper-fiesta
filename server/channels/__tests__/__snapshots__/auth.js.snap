@@ -104,8 +104,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": true,
+        "id": "123",
         "name": "Namy",
       },
       "type": "ADD_USER",
@@ -120,8 +120,8 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "123",
         "canVote": true,
+        "id": "123",
         "name": "Namy",
       },
       "type": "ADD_USER",

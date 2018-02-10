@@ -1,14 +1,14 @@
 const logger = require('../logging');
-const model = require('../models/user');
-const { getActiveGenfors } = require('../models/meeting');
+const model = require('../models/user.accessors');
+const { getActiveGenfors } = require('../models/meeting.accessors');
 const { hashWithSalt } = require('../utils/crypto');
 
 const permissionLevel = require('../../common/auth/permissions');
 
 function publicUser(user, admin = false) {
-  const { _id, name, canVote, registerDate, permissions, completedRegistration } = user;
+  const { id, name, canVote, registerDate, permissions, completedRegistration } = user;
   let publicData = {
-    _id,
+    id,
     name,
     canVote,
   };
@@ -26,7 +26,12 @@ function publicUser(user, admin = false) {
 
 async function validatePasswordHash(user, passwordHash) {
   const genfors = await getActiveGenfors();
-  logger.silly('Checking password hash for user', user, genfors, passwordHash);
+  if (!genfors) {
+    logger.warn('User logged in when no active genfors.', { userId: user.id });
+    return false;
+  }
+
+  logger.silly('Checking password hash for user', { userId: user.id, meetingId: genfors.id });
   const existingUser = await model.getAnonymousUser(passwordHash, user.onlinewebId, genfors);
   // using != instead of !== to also catch undefined
   return existingUser != null;
@@ -55,7 +60,7 @@ async function addUser(name, onlinewebId, securityLevel) {
 
   try {
     const user = await model.addUser({
-      genfors,
+      meetingId: (genfors && genfors.id) || null,
       name,
       onlinewebId,
       notes: '',
@@ -80,11 +85,10 @@ async function addAnonymousUser(username, passwordHash) {
     throw new Error('Anonymous user aleady exists');
   }
   await model.addAnonymousUser({
-    genfors,
+    meetingId: genfors.id,
     passwordHash: hashWithSalt(passwordHash, username),
   });
-  // eslint-disable-next-line no-underscore-dangle
-  await model.updateUserById(user._id, { completedRegistration: true });
+  await model.updateUserById(user.id, { completedRegistration: true });
 }
 
 async function setUserPermissions(id, requestedPermissions) {

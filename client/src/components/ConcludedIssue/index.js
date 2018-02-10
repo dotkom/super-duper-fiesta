@@ -53,7 +53,6 @@ ConcludedIssue.propTypes = {
   text: PropTypes.string.isRequired,
   alternatives: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   })).isRequired,
   qualifiedVoters: React.PropTypes.number.isRequired,

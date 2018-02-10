@@ -3,15 +3,14 @@ const appConfig = require('./app');
 const channels = require('./channels/index');
 const logger = require('./logging');
 const Raven = require('raven');
-const mongodbConfig = require('./models/essentials');
 
 (async () => {
   const app = await appConfig();
-  const mongooseConnection = mongodbConfig(app);
 
   // Set up socket.io
   const server = http.Server(app);
-  channels.listen(server, mongooseConnection);
+  const io = channels.listen(server);
+  channels.applyMiddlewares(io);
 
   Raven
   .config(process.env.SDF_SENTRY_DSN_BACKEND, {

@@ -6,7 +6,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -25,7 +24,8 @@ Array [
         "countingBlankVotes": false,
         "deleted": true,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -45,7 +45,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -64,7 +63,8 @@ Array [
         "countingBlankVotes": false,
         "deleted": true,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -89,7 +89,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_FINISHED",
       },
       "type": "DISABLE_VOTING",
@@ -99,7 +99,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -118,7 +117,8 @@ Array [
         "countingBlankVotes": false,
         "deleted": true,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -138,7 +138,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -157,7 +156,8 @@ Array [
         "countingBlankVotes": false,
         "deleted": true,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -182,7 +182,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_FINISHED",
       },
       "type": "DISABLE_VOTING",
@@ -197,7 +197,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_FINISHED",
       },
       "type": "DISABLE_VOTING",
@@ -212,7 +212,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_IN_PROGRESS",
       },
       "type": "ENABLE_VOTING",
@@ -227,7 +227,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_IN_PROGRESS",
       },
       "type": "ENABLE_VOTING",
@@ -242,7 +242,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -260,7 +259,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -285,7 +285,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_FINISHED",
       },
       "type": "DISABLE_VOTING",
@@ -295,7 +295,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -313,7 +312,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -338,7 +338,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -356,7 +355,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
@@ -396,7 +396,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -414,7 +413,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
@@ -439,7 +439,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_FINISHED",
       },
       "type": "DISABLE_VOTING",
@@ -449,7 +449,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -467,7 +466,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
@@ -488,7 +488,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
         "active": false,
         "alternatives": Array [
           Object {
@@ -506,7 +505,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
@@ -532,7 +532,6 @@ Array [
     Object {
       "action": "open",
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -550,7 +549,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_NOT_STARTED",
@@ -570,7 +570,6 @@ Array [
     Object {
       "action": "open",
       "data": Object {
-        "_id": "1",
         "active": true,
         "alternatives": Array [
           Object {
@@ -588,7 +587,8 @@ Array [
         ],
         "countingBlankVotes": false,
         "description": "Description goes here",
-        "genfors": "1",
+        "id": "1",
+        "meetingId": "1",
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_NOT_STARTED",
@@ -602,7 +602,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "_id": "1",
+        "id": "1",
         "status": "VOTING_NOT_STARTED",
       },
       "type": "ENABLE_VOTING",

@@ -1,41 +1,29 @@
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
-
-const GenforsSchema = new Schema({
-  title: { type: String, required: true },
-  date: { type: Date, required: true },
-  registrationOpen: { type: Boolean, required: true, default: false },
-  status: { type: String, default: 'open' }, // Open/Closed/Whatever
-  pin: { type: Number, required: true, default: parseInt(Math.random() * 10000, 10) },
-});
-const Genfors = mongoose.model('Genfors', GenforsSchema);
-
-const getGenfors = id => (
-  Genfors.findOne({ _id: id })
-);
-
-function getActiveGenfors() {
-  return Genfors.findOne({ status: 'open' }).exec();
-}
-
-async function updateGenfors(genfors, data, options) {
-  return Genfors.findOneAndUpdate(genfors, data, options);
-}
-
-async function createGenfors(title, date) {
-  // Add a new genfors
-  const genfors = new Genfors({
-    title,
-    date,
+async function Genfors(sequelize, DataTypes) {
+  const model = await sequelize.define('meeting', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    title: DataTypes.STRING,
+    date: DataTypes.DATE,
+    registrationOpen: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    status: {
+      allowNull: false,
+      type: DataTypes.ENUM('open', 'closed'),
+      defaultValue: 'open',
+    },
+    pin: {
+      allowNull: true,
+      type: DataTypes.SMALLINT,
+    },
   });
-  return genfors.save();
+  return model;
 }
 
-module.exports = {
-  getGenfors,
-  createGenfors,
-  getActiveGenfors,
-  updateGenfors,
-};
+module.exports = Genfors;

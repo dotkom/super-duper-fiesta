@@ -22,7 +22,7 @@ const adminLogin = async (socket, data) => {
   const user = await socket.request.user();
   if (verifyAdminPassword(password)) {
     logger.info(`'${user.name}' authenticated as admin using admin password.`);
-    await setUserPermissions(user._id,
+    await setUserPermissions(user.id,
       permissionLevel.IS_MANAGER);
     emit(socket, ADMIN_SIGNED_IN);
   } else {

@@ -1,9 +1,9 @@
-jest.mock('../../models/meeting');
-jest.mock('../../models/user');
-const { listener, register } = require('../auth');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/user.accessors');
 const { AUTH_REGISTER } = require('../../../common/actionTypes/auth');
-const { getActiveGenfors } = require('../../models/meeting');
-const { getAnonymousUser, addAnonymousUser, getUserByUsername } = require('../../models/user');
+const { listener, register } = require('../auth');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
+const { getAnonymousUser, addAnonymousUser, getUserByUsername } = require('../../models/user.accessors');
 const { generateGenfors, generateSocket, generateAnonymousUser, generateUser } = require('../../utils/generateTestData');
 
 beforeEach(() => {

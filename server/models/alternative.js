@@ -1,10 +1,26 @@
-const mongoose = require('mongoose');
+async function Alternative(sequelize, DataTypes) {
+  const model = await sequelize.define('alternative', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  });
 
-const Schema = mongoose.Schema;
+  model.associate = models =>
+    models.alternative.belongsTo(models.issue, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false,
+      },
+    });
 
-const AlternativeSchema = new Schema({
-  text: { type: String, required: true },
-});
-const Alternative = mongoose.model('Alternative', AlternativeSchema); // eslint-disable-line no-unused-vars
+  return model;
+}
 
-module.exports = AlternativeSchema;
+module.exports = Alternative;

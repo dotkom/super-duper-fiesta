@@ -1,40 +1,41 @@
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-
-
-const VoteSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, required: true },
-  question: { type: Schema.Types.ObjectId, required: true },
-  alternative: { type: Schema.Types.ObjectId, required: true },
-});
-const Vote = mongoose.model('Vote', VoteSchema);
-
-
-function getVotes(question) {
-  return Vote.find({ question });
-}
-
-function getUserVote(issue, user) {
-  return Vote.findOne({ question: issue, user });
-}
-
-async function haveIVoted(issue, user) {
-  const vote = await getUserVote(issue, user);
-  return !!vote;
-}
-
-function createVote(user, question, alternative) {
-  return new Vote({
-    user,
-    question,
-    alternative,
+async function Vote(sequelize, DataTypes) {
+  const model = await sequelize.define('vote', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
   });
+
+  model.associate = (models) => {
+    models.vote.belongsTo(models.user, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: true,
+      },
+    });
+    models.vote.belongsTo(models.anonymoususer, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: true,
+      },
+    });
+    models.vote.belongsTo(models.issue, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    models.vote.belongsTo(models.alternative, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
+  return model;
 }
 
-module.exports = {
-  getVotes,
-  haveIVoted,
-  createVote,
-  getUserVote,
-};
+module.exports = Vote;

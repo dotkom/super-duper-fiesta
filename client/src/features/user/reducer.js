@@ -3,7 +3,7 @@ import { ADD_USER, TOGGLE_CAN_VOTE, RECEIVE_USER_LIST } from 'common/actionTypes
 const user = (state = {}, action) => {
   switch (action.type) {
     case TOGGLE_CAN_VOTE: {
-      if (state.id !== action.data._id) { // eslint-disable-line no-underscore-dangle
+      if (state.id !== action.data.id) {
         return state;
       }
 
@@ -15,7 +15,7 @@ const user = (state = {}, action) => {
 
     case ADD_USER:
       return {
-        id: action.user._id, // eslint-disable-line no-underscore-dangle
+        id: action.user.id,
         name: action.user.name,
         canVote: action.user.canVote,
         completedRegistration: action.user.completedRegistration,
@@ -33,7 +33,7 @@ const users = (state = {}, action) => {
     case TOGGLE_CAN_VOTE:
       return {
         ...state,
-        [action.data._id]: user(state[action.data._id], action),
+        [action.data.id]: user(state[action.data.id], action),
       };
 
     case RECEIVE_USER_LIST: // Expecting that receiving a user list contains all users.

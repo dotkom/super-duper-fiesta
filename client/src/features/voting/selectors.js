@@ -51,7 +51,7 @@ export const voteWithNameSelector = createSelector(
       }
       return {
         voter: name,
-        alternative: issue.alternatives.find(alt => alt._id === alternative).text,
+        alternative: issue.alternatives.find(alt => alt.id === alternative).text,
       };
     })
   ),

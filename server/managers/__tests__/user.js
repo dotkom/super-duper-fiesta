@@ -1,7 +1,7 @@
-jest.mock('../../models/meeting');
-jest.mock('../../models/user');
-const { addUser: modelAddUser, updateUserById } = require('../../models/user');
-const { getActiveGenfors } = require('../../models/meeting');
+jest.mock('../../models/meeting.accessors');
+jest.mock('../../models/user.accessors');
+const { addUser: modelAddUser, updateUserById } = require('../../models/user.accessors');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser, setUserPermissions } = require('../user');
 const permissionLevels = require('../../../common/auth/permissions');
 const { generateGenfors, generateUser } = require('../../utils/generateTestData');
@@ -45,7 +45,7 @@ describe('addUser manager', () => {
 
 describe('updating user permissions', () => {
   it('returns updated user object', async () => {
-    updateUserById.mockImplementation(async (id, obj) => Object.assign({ _id: id }, obj));
+    updateUserById.mockImplementation(async (id, obj) => Object.assign({ id }, obj));
     const updatedUser = await setUserPermissions('id', permissionLevels.CAN_VOTE);
 
     expect(updatedUser).toMatchObject({ permissions: permissionLevels.CAN_VOTE });

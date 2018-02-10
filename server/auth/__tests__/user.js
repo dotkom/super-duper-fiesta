@@ -1,6 +1,6 @@
 jest.mock('../../managers/user');
-jest.mock('../../models/user');
-jest.mock('../../models/meeting');
+jest.mock('../../models/user.accessors');
+jest.mock('../../models/meeting.accessors');
 const fetch = require('jest-fetch-mock');
 
 jest.setMock('node-fetch', fetch);
@@ -8,9 +8,9 @@ jest.setMock('node-fetch', fetch);
 const permissionLevels = require('../../../common/auth/permissions');
 const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
 const { getClientInformation } = require('../providers/ow4');
-const { getActiveGenfors } = require('../../models/meeting');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser } = require('../../managers/user');
-const { getUserByUsername, updateUserById } = require('../../models/user');
+const { getUserByUsername, updateUserById } = require('../../models/user.accessors');
 const { generateGenfors, generateUser, generateOW4OAuth2ResponseBody } = require('../../utils/generateTestData');
 
 describe('permission level parser', () => {
