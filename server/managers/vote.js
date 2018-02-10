@@ -2,12 +2,20 @@ const logger = require('../logging');
 const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById, getIssueWithAlternatives } = require('../models/issue.accessors');
-const { createVote, getUserVote } = require('../models/vote.accessors');
+const model = require('../models/vote.accessors');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 const generateSillyName = require('../utils/sillyName');
 
-async function haveIVoted(issue, user) {
-  const vote = await getUserVote(issue, user);
+async function getUserVote(issueId, userId) {
+  const issue = await getIssueById(issueId);
+  if (issue.secret) {
+    return model.getAnonymousUserVote(issueId, userId);
+  }
+  return model.getUserVote(issueId, userId);
+}
+
+async function haveIVoted(issueId, user) {
+  const vote = await getUserVote(issueId, user);
   return !!vote;
 }
 
@@ -42,7 +50,7 @@ async function addVote(issueId, user, alternative, voter) {
     const alreadyVoted = await haveIVoted(issueId, voter);
     if (!alreadyVoted) {
       logger.debug('Storing vote.', { issueId, user: user.onlinewebId, voter });
-      return createVote(voter, issueId, alternative);
+      return model.createVote(voter, issueId, alternative);
     }
     logger.debug('User has already voted!', { issueId, user: user.onlinewebId, voter });
     throw new Error('Du har allerede stemt.');
@@ -79,4 +87,5 @@ module.exports = {
   addVote,
   generatePublicVote,
   getPublicVote,
+  getUserVote,
 };

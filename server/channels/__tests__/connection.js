@@ -9,8 +9,8 @@ execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
 const connection = require('../connection');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser, getUsers } = require('../../models/user.accessors');
-const { getVotes, getUserVote } = require('../../models/vote.accessors');
-const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues } = require('../../models/issue.accessors');
+const { getVotes, getUserVote, getAnonymousUserVote } = require('../../models/vote.accessors');
+const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues, getIssueById } = require('../../models/issue.accessors');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 
@@ -40,7 +40,11 @@ describe('connection', () => {
     getUserVote.mockImplementation(
       async () => null,
     );
+    getAnonymousUserVote.mockImplementation(
+      async () => null,
+    );
     getUsers.mockImplementation(async () => [generateUser()]);
+    getIssueById.mockImplementation(async id => generateIssue({ id }));
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
@@ -108,6 +112,7 @@ describe('connection', () => {
 
   it('emits correct actions when active question is secret', async () => {
     getActiveQuestion.mockImplementation(async () => generateIssue({ secret: true }));
+    getIssueById.mockImplementation(async id => generateIssue({ id, secret: true }));
     const socket = generateSocket();
     await connection(socket);
 

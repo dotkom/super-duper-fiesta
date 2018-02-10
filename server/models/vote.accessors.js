@@ -13,6 +13,11 @@ function getUserVote(issue, user) {
   return Vote.findOne({ where: { issueId, userId } });
 }
 
+function getAnonymousUserVote(issueId, anonymoususerId) {
+  return Vote.findOne({ where: { issueId, anonymoususerId } });
+}
+
+
 function createVote(user, question, alternative) {
   const userId = user.id || user;
   const issueId = question.id || question;
@@ -24,4 +29,5 @@ module.exports = {
   getVotes,
   createVote,
   getUserVote,
+  getAnonymousUserVote,
 };
