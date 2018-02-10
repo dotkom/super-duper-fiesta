@@ -13,11 +13,6 @@ function getUserVote(issue, user) {
   return Vote.findOne({ where: { issueId, userId } });
 }
 
-async function haveIVoted(issue, user) {
-  const vote = await getUserVote(issue, user);
-  return !!vote;
-}
-
 function createVote(user, question, alternative) {
   const userId = user.id || user;
   const issueId = question.id || question;
@@ -27,7 +22,6 @@ function createVote(user, question, alternative) {
 
 module.exports = {
   getVotes,
-  haveIVoted,
   createVote,
   getUserVote,
 };

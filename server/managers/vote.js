@@ -2,9 +2,14 @@ const logger = require('../logging');
 const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById, getIssueWithAlternatives } = require('../models/issue.accessors');
-const { haveIVoted, createVote } = require('../models/vote.accessors');
+const { createVote, getUserVote } = require('../models/vote.accessors');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 const generateSillyName = require('../utils/sillyName');
+
+async function haveIVoted(issue, user) {
+  const vote = await getUserVote(issue, user);
+  return !!vote;
+}
 
 async function addVote(issueId, user, alternative, voter) {
   let issue;

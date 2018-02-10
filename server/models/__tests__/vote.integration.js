@@ -1,5 +1,5 @@
 const {
-  getUserVote, getVotes, haveIVoted,
+  getUserVote, getVotes,
 } = require('../vote.accessors');
 
 const { generateAlternative, generateIssue, generateMeeting, generateUser, generateVote } = require('../../utils/integrationTestUtils');
@@ -54,23 +54,5 @@ describe('vote', () => {
         id: vote2.id,
       }),
     ]));
-  });
-
-  it('gets voted status for a not voted on question', async () => {
-    const issue = await generateIssue();
-    const user = await generateUser();
-
-    expect(await haveIVoted(issue, user)).toEqual(false);
-  });
-
-  it('gets voted status for a voted on question', async () => {
-    const issue = await generateIssue({ alternatives: [{ text: 'one' }] });
-    const user = await generateUser();
-    await generateVote({
-      user,
-      question: issue,
-    });
-
-    expect(await haveIVoted(issue, user)).toEqual(true);
   });
 });
