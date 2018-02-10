@@ -68,10 +68,6 @@ pipeline:
     build_args:
       - SDF_SENTRY_DSN_FRONTEND="${SDF_SENTRY_DSN_FRONTEND}"
     tags: "${DRONE_TAG}"
-    commands:
-      - docker push registry.online.ntnu.no/dotkom/super-duper-fiesta:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   deploy:
     image: appleboy/drone-ssh
