@@ -38,7 +38,7 @@ const submitRegularVote = async (socket, data) => {
     logger.debug('Stored new vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
-      alternativeId: vote.alternative,
+      alternativeId: vote.alternativeId,
       issueId: vote.issueId,
     });
   } catch (err) {
@@ -62,7 +62,7 @@ const submitAnonymousVote = async (socket, data) => {
     logger.debug('Stored new anonymous vote. Broadcasting ...');
     broadcastAndEmit(socket, SEND_VOTE, await generatePublicVote(data.issue, vote));
     emit(socket, USER_VOTE, {
-      alternativeId: vote.alternative,
+      alternativeId: vote.alternativeId,
       issueId: vote.issueId,
     });
   } catch (err) {

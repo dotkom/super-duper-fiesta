@@ -76,10 +76,10 @@ async function addVote(issueId, user, alternative, voter) {
 
 const getPublicVote = (vote, secret, showOnlyWinner) => ({
   id: vote.id,
-  question: vote.issueId,
-  user: (showOnlyWinner || secret) ? '' : vote.user,
-  alternative: showOnlyWinner ? '' : vote.alternative,
-  randomName: secret ? generateSillyName(vote.question + vote.user) : null,
+  issueId: vote.issueId,
+  userId: (showOnlyWinner || secret) ? '' : vote.userId,
+  alternativeId: showOnlyWinner ? '' : vote.alternativeId,
+  randomName: secret ? generateSillyName(vote.issueId + vote.anonymoususerId) : null,
 });
 
 const generatePublicVote = async (id, vote) => {

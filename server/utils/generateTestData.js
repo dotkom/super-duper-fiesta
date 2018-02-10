@@ -79,7 +79,7 @@ function generateVote(data) {
   return Object.assign({
     id: '0',
     issueId,
-    user: '1',
+    userId: '1',
     alternativeId: '3',
     alternative: alternativeId,
   }, data);

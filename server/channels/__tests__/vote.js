@@ -15,8 +15,8 @@ beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
   getIssueWithAlternatives.mockImplementation(async () => generateIssue());
   getUserVote.mockImplementation(async () => null);
-  createUserVote.mockImplementation((user, issueId, alternativeId) =>
-    generateVote({ user, issueId, alternativeId }),
+  createUserVote.mockImplementation((userId, issueId, alternativeId) =>
+    generateVote({ userId, issueId, alternativeId }),
   );
   getActiveGenfors.mockImplementation(async () => ({
     id: '1',
@@ -159,8 +159,8 @@ describe('submitRegularVote', () => {
 describe('submitAnonymousVote', () => {
   beforeEach(() => {
     getIssueById.mockImplementation(async id => generateIssue({ id, secret: true }));
-    createAnonymousVote.mockImplementation((user, issueId, alternativeId) =>
-      generateVote({ user, issueId, alternativeId }),
+    createAnonymousVote.mockImplementation((userId, issueId, alternativeId) =>
+      generateVote({ userId, issueId, alternativeId }),
     );
   });
   it('emits error when not registered', async () => {
