@@ -3,7 +3,7 @@ jest.mock('../../models/vote.accessors');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
 const { submitRegularVote, submitAnonymousVote } = require('../vote');
-const { haveIVoted, createVote } = require('../../models/vote.accessors');
+const { createUserVote, createAnonymousVote, getUserVote } = require('../../models/vote.accessors');
 const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser } = require('../../models/user.accessors');
@@ -14,9 +14,9 @@ const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionT
 beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
   getIssueWithAlternatives.mockImplementation(async () => generateIssue());
-  haveIVoted.mockImplementation(async () => false);
-  createVote.mockImplementation((user, issueId, alternativeId) =>
-    generateVote({ user, issueId, alternativeId }),
+  getUserVote.mockImplementation(async () => null);
+  createUserVote.mockImplementation((userId, issueId, alternativeId) =>
+    generateVote({ userId, issueId, alternativeId }),
   );
   getActiveGenfors.mockImplementation(async () => ({
     id: '1',
@@ -125,7 +125,7 @@ describe('submitRegularVote', () => {
   });
 
   it('emits error when trying to vote twice', async () => {
-    haveIVoted.mockImplementation(async () => true);
+    getUserVote.mockImplementation(async () => generateVote());
     const socket = generateSocket({ completedRegistration: true });
 
     await submitRegularVote(socket, generateData());
@@ -157,6 +157,12 @@ describe('submitRegularVote', () => {
 });
 
 describe('submitAnonymousVote', () => {
+  beforeEach(() => {
+    getIssueById.mockImplementation(async id => generateIssue({ id, secret: true }));
+    createAnonymousVote.mockImplementation((userId, issueId, alternativeId) =>
+      generateVote({ userId, issueId, alternativeId }),
+    );
+  });
   it('emits error when not registered', async () => {
     const socket = generateSocket({ completedRegistration: false });
     await submitAnonymousVote(socket, generateData());

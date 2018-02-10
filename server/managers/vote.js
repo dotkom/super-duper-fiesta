@@ -2,9 +2,30 @@ const logger = require('../logging');
 const { canEdit } = require('../managers/meeting');
 const permissionLevel = require('../../common/auth/permissions');
 const { getIssueById, getIssueWithAlternatives } = require('../models/issue.accessors');
-const { haveIVoted, createVote } = require('../models/vote.accessors');
+const model = require('../models/vote.accessors');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../common/actionTypes/issues');
 const generateSillyName = require('../utils/sillyName');
+
+async function getUserVote(issueId, userId) {
+  const issue = await getIssueById(issueId);
+  if (issue.secret) {
+    return model.getAnonymousUserVote(issueId, userId);
+  }
+  return model.getUserVote(issueId, userId);
+}
+
+async function createVote(voterId, issueId, alternativeId) {
+  const issue = await getIssueById(issueId);
+  if (issue.secret) {
+    return model.createAnonymousVote(voterId, issueId, alternativeId);
+  }
+  return model.createUserVote(voterId, issueId, alternativeId);
+}
+
+async function haveIVoted(issueId, userId) {
+  const vote = await getUserVote(issueId, userId);
+  return !!vote;
+}
 
 async function addVote(issueId, user, alternative, voter) {
   let issue;
@@ -55,10 +76,10 @@ async function addVote(issueId, user, alternative, voter) {
 
 const getPublicVote = (vote, secret, showOnlyWinner) => ({
   id: vote.id,
-  question: vote.issueId,
-  user: (showOnlyWinner || secret) ? '' : vote.user,
-  alternative: showOnlyWinner ? '' : vote.alternative,
-  randomName: secret ? generateSillyName(vote.question + vote.user) : null,
+  issueId: vote.issueId,
+  userId: (showOnlyWinner || secret) ? '' : vote.userId,
+  alternativeId: showOnlyWinner ? '' : vote.alternativeId,
+  randomName: secret ? generateSillyName(vote.issueId + vote.anonymoususerId) : null,
 });
 
 const generatePublicVote = async (id, vote) => {
@@ -74,4 +95,5 @@ module.exports = {
   addVote,
   generatePublicVote,
   getPublicVote,
+  getUserVote,
 };

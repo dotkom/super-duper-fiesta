@@ -4,8 +4,8 @@ const logger = require('../logging');
 const getActiveGenfors = require('../models/meeting.accessors').getActiveGenfors;
 const getActiveQuestion = require('../models/issue.accessors').getActiveQuestion;
 const { getConcludedIssues } = require('../models/issue.accessors');
-const { getUserVote, getVotes } = require('../models/vote.accessors');
-const { generatePublicVote } = require('../managers/vote');
+const { getVotes } = require('../models/vote.accessors');
+const { generatePublicVote, getUserVote } = require('../managers/vote');
 const { getAnonymousUser, getUsers } = require('../models/user.accessors');
 const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getPublicIssueWithVotes } = require('../managers/issue');
@@ -84,7 +84,7 @@ const emitActiveQuestion = async (socket, meeting) => {
     } else {
       voter = user;
     }
-    const vote = await getUserVote(issue, voter.id);
+    const vote = await getUserVote(issue.id, voter.id);
     if (vote) {
       emit(socket, USER_VOTE, {
         alternativeId: vote.alternativeId,

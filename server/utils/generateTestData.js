@@ -74,14 +74,13 @@ const generateAnonymousUser = data => (Object.assign({
 }, data));
 
 function generateVote(data) {
-  const alternativeId = data.alternative || data.alternativeId || '3';
-  const issueId = data.issue || data.issueId || '1';
+  const alternativeId = (data && data.alternative) || (data && data.alternativeId) || '3';
+  const issueId = (data && data.issue) || (data && data.issueId) || '1';
   return Object.assign({
     id: '0',
     issueId,
-    user: '1',
-    alternativeId: '3',
-    alternative: alternativeId,
+    userId: '1',
+    alternativeId,
   }, data);
 }
 

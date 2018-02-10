@@ -47,3 +47,4 @@ jspm_packages
 # Local environment vars
 .env*
 
+db.db

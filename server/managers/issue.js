@@ -138,11 +138,12 @@ async function getPublicIssueWithVotes(issueIdOrObj, admin = false) {
 
   const issueVotes = await muhVotes;
   const voteCounts = countVoteAlternatives(issue.alternatives, issueVotes);
-  const voteData = Object.assign(issue, {
+  const voteData = {
+    ...issue,
     votes: (issue.showOnlyWinner && !admin)
       ? {} : voteArrayToObject(voteCounts, issue.alternatives),
     winner: calculateWinner(issue, issueVotes, voteCounts),
-  });
+  };
   return voteData;
 }
 

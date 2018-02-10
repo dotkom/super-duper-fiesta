@@ -1,5 +1,6 @@
 const db = require('./postgresql');
 const logger = require('../logging');
+const { plainObject, plainObjectOrNull } = require('./utils');
 
 const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
@@ -28,11 +29,11 @@ function getConcludedIssues(genfors) {
   const id = genfors.id || genfors;
   return Question.findAll({ where:
     { meetingId: id, deleted: false, active: false },
-  });
+  }).map(plainObject);
 }
 
 const getIssueById = (id, options) => (
-  Question.findOne({ where: { id }, ...options })
+  plainObjectOrNull(Question.findOne({ where: { id }, ...options }))
 );
 
 async function getIssueWithAlternatives(id, options) {
@@ -41,15 +42,15 @@ async function getIssueWithAlternatives(id, options) {
 
 async function getActiveQuestion(genfors) {
   const meetingId = (genfors && genfors.id) || genfors;
-  return Question.findOne({ where:
+  return plainObjectOrNull(Question.findOne({ where:
     { meetingId, active: true, deleted: false },
     include: [Alternative],
-  });
+  }));
 }
 
 async function updateIssue(issueOrId, data) {
   const id = issueOrId.id || issueOrId;
-  const issue = await getIssueById(id);
+  const issue = await Question.findOne({ where: { id } });
   return Object.assign(issue, data).save();
 }
 
