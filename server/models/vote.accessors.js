@@ -18,16 +18,18 @@ function getAnonymousUserVote(issueId, anonymoususerId) {
 }
 
 
-function createVote(user, question, alternative) {
-  const userId = user.id || user;
-  const issueId = question.id || question;
-  const alternativeId = alternative.id || alternative;
+function createUserVote(userId, issueId, alternativeId) {
   return Vote.create({ userId, issueId, alternativeId });
+}
+
+function createAnonymousVote(anonymoususerId, issueId, alternativeId) {
+  return Vote.create({ anonymoususerId, issueId, alternativeId });
 }
 
 module.exports = {
   getVotes,
-  createVote,
+  createUserVote,
+  createAnonymousVote,
   getUserVote,
   getAnonymousUserVote,
 };

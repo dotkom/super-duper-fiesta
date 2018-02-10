@@ -14,8 +14,16 @@ async function getUserVote(issueId, userId) {
   return model.getUserVote(issueId, userId);
 }
 
-async function haveIVoted(issueId, user) {
-  const vote = await getUserVote(issueId, user);
+async function createVote(voterId, issueId, alternativeId) {
+  const issue = await getIssueById(issueId);
+  if (issue.secret) {
+    return model.createAnonymousVote(voterId, issueId, alternativeId);
+  }
+  return model.createUserVote(voterId, issueId, alternativeId);
+}
+
+async function haveIVoted(issueId, userId) {
+  const vote = await getUserVote(issueId, userId);
   return !!vote;
 }
 
@@ -50,7 +58,7 @@ async function addVote(issueId, user, alternative, voter) {
     const alreadyVoted = await haveIVoted(issueId, voter);
     if (!alreadyVoted) {
       logger.debug('Storing vote.', { issueId, user: user.onlinewebId, voter });
-      return model.createVote(voter, issueId, alternative);
+      return createVote(voter, issueId, alternative);
     }
     logger.debug('User has already voted!', { issueId, user: user.onlinewebId, voter });
     throw new Error('Du har allerede stemt.');

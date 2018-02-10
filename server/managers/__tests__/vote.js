@@ -3,7 +3,7 @@ jest.mock('../../models/vote.accessors');
 jest.mock('../meeting');
 const { canEdit } = require('../meeting');
 const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
-const { createVote } = require('../../models/vote.accessors');
+const { createUserVote } = require('../../models/vote.accessors');
 
 const { addVote } = require('../vote');
 const { generateAlternative, generateIssue, generateUser, generateVote } = require('../../utils/generateTestData');
@@ -12,7 +12,7 @@ const { VOTING_NOT_STARTED, VOTING_FINISHED }
 
 describe('addVote', () => {
   beforeEach(() => {
-    createVote.mockImplementation(async data => generateVote(data));
+    createUserVote.mockImplementation(async data => generateVote(data));
     canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
     getIssueWithAlternatives.mockImplementation(async id => generateIssue(id));
     getIssueById.mockImplementation(async id => generateIssue({ id }));

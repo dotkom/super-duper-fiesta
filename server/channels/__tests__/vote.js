@@ -3,7 +3,7 @@ jest.mock('../../models/vote.accessors');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
 const { submitRegularVote, submitAnonymousVote } = require('../vote');
-const { createVote, getUserVote } = require('../../models/vote.accessors');
+const { createUserVote, createAnonymousVote, getUserVote } = require('../../models/vote.accessors');
 const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser } = require('../../models/user.accessors');
@@ -15,7 +15,7 @@ beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
   getIssueWithAlternatives.mockImplementation(async () => generateIssue());
   getUserVote.mockImplementation(async () => null);
-  createVote.mockImplementation((user, issueId, alternativeId) =>
+  createUserVote.mockImplementation((user, issueId, alternativeId) =>
     generateVote({ user, issueId, alternativeId }),
   );
   getActiveGenfors.mockImplementation(async () => ({
@@ -157,6 +157,12 @@ describe('submitRegularVote', () => {
 });
 
 describe('submitAnonymousVote', () => {
+  beforeEach(() => {
+    getIssueById.mockImplementation(async id => generateIssue({ id, secret: true }));
+    createAnonymousVote.mockImplementation((user, issueId, alternativeId) =>
+      generateVote({ user, issueId, alternativeId }),
+    );
+  });
   it('emits error when not registered', async () => {
     const socket = generateSocket({ completedRegistration: false });
     await submitAnonymousVote(socket, generateData());

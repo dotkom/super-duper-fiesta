@@ -1,12 +1,27 @@
 const { addIssue } = require('../models/issue.accessors');
 const { createGenfors } = require('../models/meeting.accessors');
 const { addUser, addAnonymousUser } = require('../models/user.accessors');
-const { createVote } = require('../models/vote.accessors');
+const { createUserVote } = require('../models/vote.accessors');
 const { addAlternative } = require('../models/alternative.accessors');
 
 const { generateAlternative: generateAlternativeData } = require('./generateTestData');
 
 const { VOTING_NOT_STARTED } = require('../../common/actionTypes/issues');
+
+// TODO: Refactor away the need for this helper
+async function getObjectOrDefault(data, key, defaultFunc, args = null) {
+  if (data && data[key]) {
+    if (typeof data[key] === 'string') {
+      return { id: data[key] };
+    }
+    return data[key];
+  }
+  if (args) {
+    return defaultFunc(args);
+  }
+  return defaultFunc();
+}
+
 
 async function generateMeeting(data) {
   const meeting = Object.assign({}, {
@@ -71,13 +86,13 @@ async function generateAlternative(data) {
 }
 
 async function generateVote(data) {
-  const issue = (data && data.question) || await generateIssue();
-  const alternative = (data && data.alternative) || await addAlternative({
+  const issue = await getObjectOrDefault(data, 'question', generateIssue);
+  const alternative = await getObjectOrDefault(data, 'alternative', generateAlternative, {
     issueId: issue.id,
     text: 'Blank',
   });
-  const user = (data && data.user) || await generateUser();
-  return createVote(user, issue, alternative);
+  const user = await getObjectOrDefault(data, 'user', generateUser);
+  return createUserVote(user.id, issue.id, alternative.id);
 }
 
 module.exports = {
