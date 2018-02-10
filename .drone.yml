@@ -57,7 +57,7 @@ pipeline:
       - /tmp/cache:/cache
   
   release:
-    image: docker
+    image: plugins/docker
     secrets: [docker_username, docker_password, sdf_sentry_dsn_frontend]
     when:
       event: tag
