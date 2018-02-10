@@ -1,20 +1,21 @@
 const db = require('./postgresql');
+const { plainObject, plainObjectOrNull } = require('./utils');
 
 const Vote = db.sequelize.models.vote;
 
 function getVotes(question) {
   const issueId = question.id || question;
-  return Vote.findAll({ where: { issueId } });
+  return Vote.findAll({ where: { issueId } }).map(plainObject);
 }
 
 function getUserVote(issue, user) {
   const issueId = issue.id || issue;
   const userId = user.id || user;
-  return Vote.findOne({ where: { issueId, userId } });
+  return plainObjectOrNull(Vote.findOne({ where: { issueId, userId } }));
 }
 
 function getAnonymousUserVote(issueId, anonymoususerId) {
-  return Vote.findOne({ where: { issueId, anonymoususerId } });
+  return plainObjectOrNull(Vote.findOne({ where: { issueId, anonymoususerId } }));
 }
 
 
