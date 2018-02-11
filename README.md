@@ -27,18 +27,15 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 
 This is an example of a docker command to run super-duper-fiesta in production.
 
-`docker build -f Dockerfile.prod -t sdf_prod .`
+Build image: `docker build -f Dockerfile.prod -t sdf_prod .`
 
-```
+```bash
 docker run \
   -p 3000:3000 \
-  -e SDF_OAUTH2_RESOURCE_BACKEND \
-  -e SDF_OAUTH2_PROVIDER_BACKEND \
-  -e SDF_OAUTH2_CLIENT_ID \
-  -e SDF_OAUTH2_CLIENT_SECRET \
-  -e SDF_OAUTH2_CALLBACK_URL \
-  -e SDF_DATABASE_URL=mongodb://path_to_db/sdf \
-  -e SDF_HOST=0.0.0.0 \
+  -e DATABASE_URL \
+  -e SDF_OIDC_PROVIDER \
+  -e SDF_OIDC_CLIENT_ID \
+  -e SDF_BACKEND_HOST=0.0.0.0 \
   --name sdf_prod \
   --rm \
   sdf_prod
@@ -110,16 +107,16 @@ Current user (permanent):
 | Key | Description | Example | Default |
 | --- | ---         | ---     | ---     |
 | `PRODUCTION` | Run the app in production mode | `true` | `''` |
+| `SDF_HOST` | Host to run the webpack dev server on | `127.0.0.1` | `127.0.0.1` |
+| `SDF_PORT` | Port to run the webpack dev server on | `3000` | `3000` |
 
 ### ExpressJS
 
 | Key | Description | Example | Default |
 | --- | ---         | ---     | ---     |
-| `SDF_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
-| `SDF_PORT` | Port to run the app on | `3000` | `3000` |
+| `SDF_BACKEND_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
+| `SDF_BACKEND_PORT` | Port to run the app on | `8080` | `8080` |
 | `SDF_SCHEME` | HTTP Scheme to run the app on | `http` | `http` |
-| `SDF_DATABASE_URL` | Connection string for MongoDB (including database name) | `mongodb://localhost/` | `mongodb://localhost/sdf` |
-| `SDF_DATABASE_NAME` | Name of MongoDB database | `sdf` | `sdf` |
 
 ### Database
 
@@ -145,28 +142,6 @@ When running migrations, you have to specify `--url $DATABASE_URL` for Sequelize
 
 The (fairly lacking) documentation for Sequelize migrations and how to create them can be found [here](http://docs.sequelizejs.com/manual/tutorial/migrations.html) or by executing `sequelize --help`.
 
-### OAuth2
-
-Authentication and authorization happens using OAuth2 and SSO.
-
-Make sure to have access to the OAuth2 client ID and secret for the app, or create your own.
-
-To configure the app to use the OAuth2 provider, set the following values using environment variables (`export KEY=VALUE`).
-
-| Key | Description | Example | Default |
-| --- | ---         | ---     | ---     |
-| `SDF_OAUTH2_RESOURCE_BACKEND` | Resource backend (API) | `http://127.0.0.1:8000` | `''` |
-| `SDF_OW4_USERS_API_ENDPOINT` | Endpoint for the users resource | `/sso/user/` |  `/sso/user/` |
-| `SDF_OAUTH2_PROVIDER_BACKEND` | OAuth2 Provider backend | `http://127.0.0.1:8000` | `''` |
-| `SDF_OAUTH2_AUTHORIZATION_URL` | URL to redirect user to for OAuth2 authorization | `/sso/o/authorize/` | `/sso/o/authorize/` |
-| `SDF_OAUTH2_TOKEN_URL` | URL to fetch OAuth2 token | `/sso/o/token/` | `/sso/o/token/` |
-| `SDF_OAUTH2_CLIENT_ID` | Client ID for app | `client id` | `''` |
-| `SDF_OAUTH2_CLIENT_SECRET` | Client secret for app | `client secret` | `''` |
-| `SDF_OAUTH2_CALLBACK_URL` | Callback URL to the app | `http://127.0.0.1:8080/auth` | `''` |
-
-
-_If running the OAuth2 provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
-
 ### OpenID Connect
 
 Authentication can be done through OpenID Connect.
@@ -175,10 +150,11 @@ This requires an OpenID Client ID as well as an OpenID Provider capable of provi
 
 | Key | Description | Example | Default |
 | --- | ---         | ---     | ---     |
-| `SDF_OIDC` | Enable OpenID Connect | `true` | `` |
 | `SDF_OIDC_PROVIDER` | OpenID Connect Provider (Issuer) | `http://127.0.0.1:8000/openid` | `` |
 | `SDF_OIDC_CLIENT_ID` | ClientID of an OIDC client on OIDC provider | `123456` | `` |
-| `SDF_OIDC_REDIRECT_URI` | Redirect URI back to SDF | `http://127.0.0.1:8080/openid-auth` | `` |
+| `SDF_OIDC_REDIRECT_URI` | Redirect URI back to SDF | `http://127.0.0.1:8080/auth` | `` |
+
+_If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
 ## WIP Screenshots
 
