@@ -29,7 +29,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -68,7 +67,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -122,7 +120,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -161,7 +158,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -264,7 +260,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -317,7 +312,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -360,7 +354,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -418,7 +411,6 @@ Array [
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -471,7 +463,6 @@ Array [
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {},
         "winner": "3",
@@ -510,7 +501,6 @@ Array [
         "secret": false,
         "showOnlyWinner": true,
         "status": "VOTING_FINISHED",
-        "toObject": [Function],
         "voteDemand": "regular",
         "votes": Object {
           "1": 0,
@@ -554,7 +544,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_NOT_STARTED",
-        "toObject": [Function],
         "voteDemand": "regular",
       },
       "type": "OPEN_ISSUE",
@@ -592,7 +581,6 @@ Array [
         "secret": false,
         "showOnlyWinner": false,
         "status": "VOTING_NOT_STARTED",
-        "toObject": [Function],
         "voteDemand": "regular",
       },
       "type": "OPEN_ISSUE",

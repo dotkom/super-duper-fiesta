@@ -20,7 +20,6 @@ const generateIssue = (data) => {
     ],
     status: 'VOTING_IN_PROGRESS',
   }, data);
-  issueObject.toObject = () => issueObject;
   return issueObject;
 };
 
