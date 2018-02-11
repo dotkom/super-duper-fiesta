@@ -45,6 +45,21 @@ Array [
 ]
 `;
 
+exports[`submitAnonymousVote emits error with wrong passwordHash 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Du er ikke registert",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
 exports[`submitAnonymousVote emits vote 1`] = `
 Array [
   Array [

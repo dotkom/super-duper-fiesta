@@ -7,7 +7,7 @@ const { createUserVote, createAnonymousVote, getUserVote } = require('../../mode
 const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser } = require('../../models/user.accessors');
-const { generateIssue, generateVote, generateSocket } = require('../../utils/generateTestData');
+const { generateIssue, generateVote, generateSocket, generateAnonymousUser } = require('../../utils/generateTestData');
 const { CAN_VOTE, IS_LOGGED_IN } = require('../../../common/auth/permissions');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
@@ -162,9 +162,20 @@ describe('submitAnonymousVote', () => {
     createAnonymousVote.mockImplementation((userId, issueId, alternativeId) =>
       generateVote({ userId, issueId, alternativeId }),
     );
+    getAnonymousUser.mockImplementation(async (passwordHash, onlinewebId, meetingId) =>
+      generateAnonymousUser({ passwordHash, meetingId }),
+    );
   });
   it('emits error when not registered', async () => {
     const socket = generateSocket({ completedRegistration: false });
+    await submitAnonymousVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+  });
+
+  it('emits error with wrong passwordHash', async () => {
+    getAnonymousUser.mockImplementation(async () => null);
+    const socket = generateSocket();
     await submitAnonymousVote(socket, generateData());
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
