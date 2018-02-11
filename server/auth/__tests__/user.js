@@ -7,7 +7,6 @@ jest.setMock('node-fetch', fetch);
 
 const permissionLevels = require('../../../common/auth/permissions');
 const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
-const { getClientInformation } = require('../providers/ow4');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser } = require('../../managers/user');
 const { getUserByUsername, updateUserById } = require('../../models/user.accessors');
@@ -45,63 +44,6 @@ describe('permission level parser', () => {
   });
 });
 
-describe('ow4 oauth2 provider', async () => {
-  beforeEach(() => {
-    fetch.mockResponse(JSON.stringify(generateOW4OAuth2ResponseBody()));
-    addUser.mockImplementation((name, username, securityLevel) =>
-      generateUser({ name, onlinewebId: username, permissions: securityLevel }));
-    getActiveGenfors.mockImplementation(async () => generateGenfors());
-    getUserByUsername.mockImplementation(() => generateUser());
-  });
-
-  it('adds a new user with details from ow4', async () => {
-    const testUserData = {
-      first_name: 'Test',
-      last_name: 'User',
-      member: true,
-      username: 'testuser1',
-    };
-    fetch.mockResponse(JSON.stringify(generateOW4OAuth2ResponseBody(testUserData)));
-    getUserByUsername.mockImplementation(() => null);
-
-    const user = await createUser(await getClientInformation());
-
-    expect(user).toMatchObject({
-      name: `${testUserData.first_name} ${testUserData.last_name}`,
-      onlinewebId: testUserData.username,
-      permissions: permissionLevels.CAN_VOTE,
-    });
-  });
-
-  it('updates an existing user if logging in again', async () => {
-    const testUserData = {
-      first_name: 'Test',
-      last_name: 'User',
-      member: false,
-      username: 'testuser1',
-    };
-    const testUserMock = {
-      name: `${testUserData.first_name} ${testUserData.last_name}`,
-      permissions: permissionLevels.IS_LOGGED_IN,
-      onlinewebId: testUserData.username,
-    };
-
-    fetch.mockResponse(JSON.stringify(generateOW4OAuth2ResponseBody(testUserData)));
-    getUserByUsername.mockImplementation(() =>
-      generateUser(testUserMock));
-    updateUserById.mockImplementation(() =>
-      generateUser(Object.assign(testUserMock, { permissions: permissionLevels.CAN_VOTE })));
-
-    const updatedUser = await createUser(await getClientInformation());
-
-    expect(updatedUser).toMatchObject({
-      name: `${testUserData.first_name} ${testUserData.last_name}`,
-      onlinewebId: testUserData.username,
-      permissions: permissionLevels.CAN_VOTE,
-    });
-  });
-});
-
 describe('openid user parser', () => {
   it('parses openid userinfo to some data we can use', () => {
     const userinfo = generateOW4OAuth2ResponseBody(generateUser());
@@ -127,7 +69,8 @@ describe('create user', () => {
   });
 
   it('creates a regular user if active genfors and user is superuser', async () => {
-    const user = await createUser(generateUser({ superuser: true }));
+    getUserByUsername.mockImplementation(() => null);
+    const user = await createUser(generateUser({ member: true, superuser: true }));
 
     expect(user.permissions).toEqual(permissionLevels.CAN_VOTE);
   });
@@ -137,6 +80,34 @@ describe('create user', () => {
     const user = await createUser(generateUser({ member: true, superuser: true }));
 
     expect(user.permissions).toEqual(permissionLevels.IS_SUPERUSER);
+  });
+
+  it('updates an existing user if logging in again', async () => {
+    const testUserData = {
+      first_name: 'Test',
+      last_name: 'User',
+      member: false,
+      username: 'testuser1',
+    };
+    const testUserMock = {
+      name: `${testUserData.first_name} ${testUserData.last_name}`,
+      permissions: permissionLevels.IS_LOGGED_IN,
+      onlinewebId: testUserData.username,
+    };
+
+    fetch.mockResponse(JSON.stringify(generateOW4OAuth2ResponseBody(testUserData)));
+    getUserByUsername.mockImplementation(() =>
+      generateUser(testUserMock));
+    updateUserById.mockImplementation(() =>
+      generateUser(Object.assign(testUserMock, { permissions: permissionLevels.CAN_VOTE })));
+
+    const updatedUser = await createUser(await generateUser());
+
+    expect(updatedUser).toMatchObject({
+      name: `${testUserData.first_name} ${testUserData.last_name}`,
+      onlinewebId: testUserData.username,
+      permissions: permissionLevels.CAN_VOTE,
+    });
   });
 
   it('throws error if no active genfors and no active genfors', async () => {
