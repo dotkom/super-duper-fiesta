@@ -37,8 +37,13 @@ module.exports = merge.smart(config, {
     port,
     proxy: [
       {
-        context: ['/socket.io/', '/login', '/auth', '/logout', '/openid-login', '/openid-auth'],
+        context: ['/login', '/auth', '/logout', '/openid-login', '/openid-auth'],
         target: `http://${backendHost}:${backendPort}`,
+      },
+      {
+        context: ['/socket.io/'],
+        target: `http://${backendHost}:${backendPort}`,
+        ws: true,
       },
     ],
     historyApiFallback: {
