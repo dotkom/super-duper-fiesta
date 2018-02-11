@@ -26,7 +26,7 @@ if (process.env.PRODUCTION) {
   const staticDir = './dist';
   logger.info(`Serving staticfiles from ${staticDir}`);
   app.use('/assets/', express.static(staticDir));
-  app.get(/^(?!\/log(in|out))/, (req, res) =>
+  app.get(/^(?!\/(log(in|out)|auth))/, (req, res) =>
     res.sendFile('index.html', { root: staticDir }));
 }
 
