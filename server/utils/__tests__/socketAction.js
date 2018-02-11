@@ -3,8 +3,8 @@ const { emit } = require('../../utils');
 const { waitForAction } = require('../socketAction');
 const { EventEmitter } = require('events');
 
-function emulateSocketResponse(socket, event, payload) {
-  socket.emit(event, payload);
+function emulateSocketResponse(socket, eventName, payload) {
+  socket.emit(eventName, payload);
 }
 
 describe('waitForAction', () => {
@@ -12,11 +12,11 @@ describe('waitForAction', () => {
   const SEND_ACTION = 'SEND_ACTION';
   it('calls emit and returns payload', async () => {
     const socket = new EventEmitter();
-    const event = 'test';
+    const eventName = 'test';
     const payload = { type: SEND_ACTION, data: 123 };
 
-    const actionPromise = waitForAction(socket, event, REQUEST_ACTION, SEND_ACTION);
-    emulateSocketResponse(socket, event, payload);
+    const actionPromise = waitForAction(socket, eventName, REQUEST_ACTION, SEND_ACTION);
+    emulateSocketResponse(socket, eventName, payload);
 
     await expect(actionPromise).resolves.toEqual(payload);
     expect(emit).toBeCalledWith(socket, REQUEST_ACTION);

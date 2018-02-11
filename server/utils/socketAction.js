@@ -1,8 +1,8 @@
 const { emit } = require('../utils');
 
-const waitForAction = (socket, event, requestAction, receiveAction) => (
+const waitForAction = (socket, eventName, requestAction, receiveAction) => (
   new Promise((resolve) => {
-    socket.once(event, async (payload) => {
+    socket.once(eventName, async (payload) => {
       if (payload.type === receiveAction) {
         resolve(payload);
       }
