@@ -7,7 +7,7 @@ import { notificationIsEnabled } from '../userSettings/selectors';
 
 function* openIssue() {
   const notificationEnabled = yield select(notificationIsEnabled);
-  const { description } = yield select(getIssueText);
+  const description = yield select(getIssueText);
   if (notificationEnabled) {
     yield call(notify, description);
   }
