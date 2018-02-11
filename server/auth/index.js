@@ -4,8 +4,6 @@ const { setupOIDC } = require('./oidc');
 
 const getUserById = require('../models/user.accessors').getUserById;
 
-require('./providers/ow4.js');
-
 module.exports = async (app) => {
   await setupOIDC();
 
@@ -25,6 +23,6 @@ module.exports = async (app) => {
     req.logout();
     res.redirect('/');
   });
-  app.get('/auth', passport.authenticate('oidc', { successRedirect: '/', failureRedirect: '/openid-login' }));
+  app.get('/auth', passport.authenticate('oidc', { successRedirect: '/', failureRedirect: '/' }));
   return app;
 };
