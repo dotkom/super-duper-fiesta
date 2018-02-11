@@ -1,7 +1,6 @@
 const cookieParser = require('cookie-parser');
 const logger = require('../logging');
 const socketio = require('socket.io');
-const cookieParserIO = require('socket.io-cookie');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passportSocketIo = require('passport.socketio');
@@ -39,7 +38,6 @@ const applyMiddlewares = (io) => {
     success: authorizeSuccess,
     fail: authorizeFailure,
   }));
-  io.use(cookieParserIO);
 };
 
 const listen = (server) => {

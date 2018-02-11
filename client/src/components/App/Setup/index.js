@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
-import Cookies from 'js-cookie';
 import DocumentTitle from 'react-document-title';
 import { register } from 'features/auth/actionCreators';
 import Button from '../../Button';
@@ -63,7 +62,7 @@ class Setup extends Component {
       const { username } = this.props;
       const passwordHash = SHA256(privateCode + username).toString();
       this.props.register(pin, passwordHash);
-      Cookies.set('passwordHash', passwordHash);
+      localStorage.setItem('passwordHash', passwordHash);
       window.location.reload(); // Reload page after submitting to update cookies.
     }
   }
