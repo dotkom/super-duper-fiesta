@@ -58,7 +58,7 @@ async function adminSetPermissions(socket, data) {
   const { permissions, id: userId } = data;
 
   try {
-    if (await !canEdit(IS_MANAGER, adminUser, await getActiveGenfors())) {
+    if (await !canEdit(IS_MANAGER, adminUser, (await getActiveGenfors()).id)) {
       emitError(socket, new Error('Du har ikke rettigheter til å oppdatere andres rettigheter'));
       return;
     }
