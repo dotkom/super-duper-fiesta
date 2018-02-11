@@ -109,14 +109,14 @@ Current user (permanent):
 | --- | ---         | ---     | ---     |
 | `PRODUCTION` | Run the app in production mode | `true` | `''` |
 | `SDF_HOST` | Host to run the webpack dev server on | `127.0.0.1` | `127.0.0.1` |
-| `SDF_PORT` | Port to run the webpack dev server on | `3000` | `3000` |
+| `SDF_PORT` | Port to run the webpack dev server on | `8080` | `8080` |
 
 ### ExpressJS
 
 | Key | Description | Example | Default |
 | --- | ---         | ---     | ---     |
 | `SDF_BACKEND_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
-| `SDF_BACKEND_PORT` | Port to run the app on | `8080` | `8080` |
+| `SDF_BACKEND_PORT` | Port to run the app on | `3000` | `3000` |
 | `SDF_SCHEME` | HTTP Scheme to run the app on | `http` | `http` |
 
 ### Database
