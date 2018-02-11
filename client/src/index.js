@@ -71,9 +71,11 @@ if (module.hot) {
   });
 }
 
-OfflinePluginRuntime.install({
-  onUpdateReady: () => {
-    // Tells to new SW to take control immediately
-    OfflinePluginRuntime.applyUpdate();
-  },
-});
+if (process.env.NODE_ENV === 'production') {
+  OfflinePluginRuntime.install({
+    onUpdateReady: () => {
+      // Tells to new SW to take control immediately
+      OfflinePluginRuntime.applyUpdate();
+    },
+  });
+}
