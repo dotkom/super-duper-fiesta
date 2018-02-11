@@ -118,7 +118,7 @@ describe('listener', () => {
     const socket = generateSocket({ completedRegistration: false });
     await listener(socket);
 
-    await socket.createAction.action(generateData());
+    await socket.mockEmit('action', generateData());
 
     expect(socket.emit).toBeCalled();
     expect(socket.broadcast.emit).toBeCalled();
@@ -128,7 +128,7 @@ describe('listener', () => {
     const socket = generateSocket({ completedRegistration: false });
     await listener(socket);
 
-    await socket.createAction.action(generateData({ type: 'INVALID_ACTION' }));
+    await socket.mockEmit('action', generateData({ type: 'INVALID_ACTION' }));
 
     expect(socket.emit).not.toBeCalled();
     expect(socket.broadcast.emit).not.toBeCalled();

@@ -49,10 +49,13 @@ const generateSocket = (user = {}) => ({
   join: jest.fn(),
   to: () => ({ emit: roomEmit }),
   on: function on(action, callback) {
-    this.createAction[action] = callback;
+    this.callbacks[action] = callback;
   },
   // HACK: access on's callback
-  createAction: {},
+  callbacks: {},
+  mockEmit(eventName, data) {
+    return this.callbacks[eventName](data);
+  },
 });
 
 const generateGenfors = data => (Object.assign({
