@@ -19,4 +19,4 @@ RUN yarn build:prod
 
 EXPOSE 3000
 
-CMD ["yarn", "prod"]
+ENTRYPOINT ["/srv/app/docker-entrypoint.sh"]
