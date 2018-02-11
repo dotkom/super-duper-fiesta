@@ -68,7 +68,7 @@ The backend and frontend are connected by socket.io, following the ideology of [
 
 If the frontend dispatches an action `server/hello`, redux-socket.io will automatically dispatch this event to the backend. It's now up to the backend to handle this event.
 
-Check out [this](https://github.com/dotKom/super-duper-fiesta/blob/master/src/reducers/issues.js#L3) example. Basically much like any other action as defined by redux.
+Check out [this](https://github.com/dotkom/super-duper-fiesta/blob/v1.1.0/client/src/features/auth/reducer.js#L14) example. Basically much like any other action as defined by redux.
 
 If the backend dispatches an event on the channel `action`, it is required to have a `type` for the frontend to be able to parse it as an action. Import and use the helper function `emit` from `utils.js` to automate some of the repetetive tasks as demonstrated below.
 
