@@ -38,14 +38,9 @@ const generateManager = data => ({ ...generateUser(), permissions: 10, ...data }
 
 const roomEmit = jest.fn();
 
-const generateSocket = (user = {}, cookie = {}) => ({
+const generateSocket = (user = {}) => ({
   request: {
     user: async () => generateUser(user),
-    headers: {
-      cookie: Object.assign({
-        passwordHash: 'hashy',
-      }, cookie),
-    },
   },
   broadcast: {
     emit: jest.fn(),

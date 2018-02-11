@@ -82,8 +82,9 @@ const emitActiveQuestion = async (socket, meeting) => {
     // Emit voted state if user has voted.
     let voter;
     if (issue.secret) {
-      voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
-        user.onlinewebId, meeting);
+      // TODO: Consider refactoring so that password hash is only retrieved once
+      const { passwordHash } = await waitForAction(socket, 'auth', REQUEST_PASSWORD_HASH, SEND_PASSWORD_HASH);
+      voter = await getAnonymousUser(passwordHash, user.onlinewebId, meeting);
     } else {
       voter = user;
     }
