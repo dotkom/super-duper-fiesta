@@ -1,4 +1,5 @@
 const { emit, emitError } = require('../utils');
+const { waitForAction } = require('../utils/socketAction');
 const logger = require('../logging');
 
 const getActiveGenfors = require('../models/meeting.accessors').getActiveGenfors;
@@ -18,6 +19,8 @@ const { userIsAdmin } = require('../../common/auth/permissions');
 const {
   AUTH_SIGNED_IN,
   AUTH_REGISTERED,
+  REQUEST_PASSWORD_HASH,
+  SEND_PASSWORD_HASH,
 } = require('../../common/actionTypes/auth');
 const {
   RECEIVE_VOTE: SEND_VOTE,
@@ -44,7 +47,7 @@ const emitUserData = async (socket) => {
 
   let validPasswordHash = false;
   try {
-    const { passwordHash } = socket.request.headers.cookie;
+    const { passwordHash } = await waitForAction(socket, 'auth', REQUEST_PASSWORD_HASH, SEND_PASSWORD_HASH);
     validPasswordHash = await validatePasswordHash(user, passwordHash);
   } catch (err) {
     logger.error('Failed to validate passwordHash', { userId: user.id, err: err.message });
@@ -79,8 +82,9 @@ const emitActiveQuestion = async (socket, meeting) => {
     // Emit voted state if user has voted.
     let voter;
     if (issue.secret) {
-      voter = await getAnonymousUser(socket.request.headers.cookie.passwordHash,
-        user.onlinewebId, meeting);
+      // TODO: Consider refactoring so that password hash is only retrieved once
+      const { passwordHash } = await waitForAction(socket, 'auth', REQUEST_PASSWORD_HASH, SEND_PASSWORD_HASH);
+      voter = await getAnonymousUser(passwordHash, user.onlinewebId, meeting);
     } else {
       voter = user;
     }

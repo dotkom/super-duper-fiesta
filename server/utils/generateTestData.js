@@ -38,14 +38,9 @@ const generateManager = data => ({ ...generateUser(), permissions: 10, ...data }
 
 const roomEmit = jest.fn();
 
-const generateSocket = (user = {}, cookie = {}) => ({
+const generateSocket = (user = {}) => ({
   request: {
     user: async () => generateUser(user),
-    headers: {
-      cookie: Object.assign({
-        passwordHash: 'hashy',
-      }, cookie),
-    },
   },
   broadcast: {
     emit: jest.fn(),
@@ -54,10 +49,13 @@ const generateSocket = (user = {}, cookie = {}) => ({
   join: jest.fn(),
   to: () => ({ emit: roomEmit }),
   on: function on(action, callback) {
-    this.createAction = callback;
+    this.callbacks[action] = callback;
   },
   // HACK: access on's callback
-  createAction: null,
+  callbacks: {},
+  mockEmit(eventName, data) {
+    return this.callbacks[eventName](data);
+  },
 });
 
 const generateGenfors = data => (Object.assign({
@@ -70,7 +68,7 @@ const generateGenfors = data => (Object.assign({
 
 const generateAnonymousUser = data => (Object.assign({
   passwordHash: 'secret_hash',
-  genfors: '1',
+  meetingId: '1',
 }, data));
 
 function generateVote(data) {

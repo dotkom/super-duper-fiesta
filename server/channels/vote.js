@@ -4,7 +4,7 @@ const logger = require('../logging');
 const { addVote, generatePublicVote } = require('../managers/vote');
 const { getActiveGenfors } = require('../models/meeting.accessors');
 const { getAnonymousUser } = require('../models/user.accessors');
-const { isRegistered } = require('../managers/user');
+const { isRegistered, validatePasswordHash } = require('../managers/user');
 
 const {
   RECEIVE_VOTE: SEND_VOTE,
@@ -15,8 +15,7 @@ const {
 
 const checkRegistered = async (socket) => {
   const user = await socket.request.user();
-  const { passwordHash } = socket.request.headers.cookie;
-  const registered = await isRegistered(user, passwordHash);
+  const registered = await isRegistered(user);
   if (!registered) {
     emitError(socket, new Error('Du er ikke registert'));
     return false;
@@ -53,6 +52,10 @@ const submitAnonymousVote = async (socket, data) => {
     return;
   }
   const user = await socket.request.user();
+  if (!await validatePasswordHash(user, data.passwordHash)) {
+    emitError(socket, new Error('Din personlige kode er feil'));
+    return;
+  }
   const genfors = await getActiveGenfors();
   const anonymousUser = await getAnonymousUser(data.passwordHash,
   user.onlinewebId, genfors);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
 import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from 'common/actionTypes/issues';
 import { submitAnonymousVote, submitRegularVote } from 'features/voting/actionCreators';
 import { getShuffledAlternatives } from 'features/alternative/selectors';
@@ -137,7 +136,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     handleVote: (issue, alternative) => {
       dispatch(stateProps.issue.secret ?
-        submitAnonymousVote(issue, alternative, Cookies.get('passwordHash')) : submitRegularVote(issue, alternative));
+        submitAnonymousVote(issue, alternative, localStorage.getItem('passwordHash')) : submitRegularVote(issue, alternative));
     },
   };
 };

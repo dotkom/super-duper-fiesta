@@ -65,9 +65,9 @@ describe('register', () => {
 
   it('emits registered when user is already registered with correct personal code', async () => {
     getAnonymousUser.mockImplementation(
-      async (passwordHash, onlinewebId, genfors) => generateAnonymousUser({
+      async (passwordHash, onlinewebId, meetingId) => generateAnonymousUser({
         passwordHash,
-        genfors,
+        meetingId,
       },
     ));
     const socket = generateSocket({ completedRegistration: true }, { passwordHash: 'correct' });
@@ -118,7 +118,7 @@ describe('listener', () => {
     const socket = generateSocket({ completedRegistration: false });
     await listener(socket);
 
-    await socket.createAction(generateData());
+    await socket.mockEmit('action', generateData());
 
     expect(socket.emit).toBeCalled();
     expect(socket.broadcast.emit).toBeCalled();
@@ -128,7 +128,7 @@ describe('listener', () => {
     const socket = generateSocket({ completedRegistration: false });
     await listener(socket);
 
-    await socket.createAction(generateData({ type: 'INVALID_ACTION' }));
+    await socket.mockEmit('action', generateData({ type: 'INVALID_ACTION' }));
 
     expect(socket.emit).not.toBeCalled();
     expect(socket.broadcast.emit).not.toBeCalled();

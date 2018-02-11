@@ -61,7 +61,7 @@ describe('listener', () => {
     const socket = generateSocket();
     await listener(socket);
 
-    await socket.createAction(generateData({ type: ADMIN_CREATE_GENFORS }));
+    await socket.mockEmit('action', generateData({ type: ADMIN_CREATE_GENFORS }));
 
     expect(socket.emit).toBeCalled();
   });
@@ -70,7 +70,7 @@ describe('listener', () => {
     const socket = generateSocket();
     await listener(socket);
 
-    await socket.createAction(generateData({ type: ADMIN_LOGIN }));
+    await socket.mockEmit('action', generateData({ type: ADMIN_LOGIN }));
 
     expect(socket.emit).toBeCalled();
   });
@@ -79,7 +79,7 @@ describe('listener', () => {
     const socket = generateSocket();
     await listener(socket);
 
-    await socket.createAction(generateData({ type: 'INVALID_ACTION' }));
+    await socket.mockEmit('action', generateData({ type: 'INVALID_ACTION' }));
 
     expect(socket.emit).not.toBeCalled();
     expect(socket.broadcast.emit).not.toBeCalled();
