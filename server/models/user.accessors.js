@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('./postgresql');
 const { hashWithSalt } = require('../utils/crypto');
 const permissionLevel = require('../../common/auth/permissions');
-const { plainObject, plainObjectOrNull } = require('./utils');
+const { plainObject, plainObjectOrNull, deprecateObject } = require('./utils');
 
 const AnonymousUser = db.sequelize.models.anonymoususer;
 const User = db.sequelize.models.user;
@@ -10,6 +10,7 @@ const User = db.sequelize.models.user;
 const Op = Sequelize.Op;
 
 function getQualifiedUsers(meeting) {
+  deprecateObject(meeting);
   const meetingId = meeting.id || meeting;
   return User.findAll({ where: {
     meetingId, canVote: true, permissions: { [Op.gte]: permissionLevel.CAN_VOTE },
@@ -27,11 +28,13 @@ function getUserById(userId, anonymous) {
 }
 
 function getUserByUsername(username, meeting) {
+  deprecateObject(meeting);
   const meetingId = meeting.id || meeting;
   return plainObjectOrNull(User.findOne({ where: { meetingId, onlinewebId: username } }));
 }
 
 function getAnonymousUser(passwordHash, username, meeting) {
+  deprecateObject(meeting);
   const meetingId = (meeting && meeting.id) || meeting;
   return plainObjectOrNull(AnonymousUser.findOne({ where: {
     passwordHash: hashWithSalt(passwordHash, username),
@@ -41,6 +44,7 @@ function getAnonymousUser(passwordHash, username, meeting) {
 }
 
 function getUsers(meeting, anonymous) {
+  deprecateObject(meeting);
   const meetingId = meeting.id || meeting;
   let users;
   if (anonymous) {
@@ -52,6 +56,7 @@ function getUsers(meeting, anonymous) {
 }
 
 async function updateUserById(userOrId, updatedFields) {
+  deprecateObject(userOrId);
   const id = (userOrId && userOrId.id) || userOrId;
   const user = await User.findOne({ where: { id } });
   return Object.assign(user, updatedFields).save();

@@ -1,6 +1,6 @@
 const db = require('./postgresql');
 const logger = require('../logging');
-const { plainObject, plainObjectOrNull } = require('./utils');
+const { plainObject, plainObjectOrNull, deprecateObject } = require('./utils');
 
 const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
@@ -26,6 +26,7 @@ async function addIssue(issueData, alternatives) {
 }
 
 function getConcludedIssues(genfors) {
+  deprecateObject(genfors);
   const id = genfors.id || genfors;
   return Question.findAll({ where:
     { meetingId: id, deleted: false, active: false },
@@ -41,6 +42,7 @@ async function getIssueWithAlternatives(id, options) {
 }
 
 async function getActiveQuestion(genfors) {
+  deprecateObject(genfors);
   const meetingId = (genfors && genfors.id) || genfors;
   return plainObjectOrNull(Question.findOne({ where:
     { meetingId, active: true, deleted: false },
@@ -49,12 +51,14 @@ async function getActiveQuestion(genfors) {
 }
 
 async function updateIssue(issueOrId, data) {
+  deprecateObject(issueOrId);
   const id = issueOrId.id || issueOrId;
   const issue = await Question.findOne({ where: { id } });
   return Object.assign(issue, data).save();
 }
 
 async function deleteIssue(issue) {
+  deprecateObject(issue);
   const id = issue.id || issue;
   return updateIssue(id,
     { active: false, deleted: true, status: VOTING_FINISHED },
@@ -62,6 +66,7 @@ async function deleteIssue(issue) {
 }
 
 function endIssue(issue) {
+  deprecateObject(issue);
   const id = issue.id || issue;
   return updateIssue(id, { active: false, status: VOTING_FINISHED });
 }
