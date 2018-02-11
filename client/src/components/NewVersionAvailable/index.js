@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from '../Dialog';
 import css from './NewVersionAvailable.css';
 
@@ -18,7 +19,7 @@ const NewVersionAvailable = ({ newVersionAvailable }) => (
 );
 
 NewVersionAvailable.propTypes = {
-  newVersionAvailable: React.PropTypes.bool.isRequired,
+  newVersionAvailable: PropTypes.bool.isRequired,
 };
 
 export default NewVersionAvailable;

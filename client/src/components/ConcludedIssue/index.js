@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getResolutionTypeDisplay, RESOLUTION_TYPES } from 'common/actionTypes/voting';
 import IconText from '../IconText';
@@ -55,8 +56,8 @@ ConcludedIssue.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   })).isRequired,
-  qualifiedVoters: React.PropTypes.number.isRequired,
-  votes: React.PropTypes.objectOf(React.PropTypes.number),
+  qualifiedVoters: PropTypes.number.isRequired,
+  votes: PropTypes.objectOf(PropTypes.number),
   winner: PropTypes.string,
 };
 
