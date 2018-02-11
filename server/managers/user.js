@@ -37,8 +37,8 @@ async function validatePasswordHash(user, passwordHash) {
   return existingUser != null;
 }
 
-async function isRegistered(user, passwordHash) {
-  return user.completedRegistration && await validatePasswordHash(user, passwordHash) === true;
+function isRegistered(user) {
+  return user.completedRegistration;
 }
 
 

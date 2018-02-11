@@ -52,7 +52,7 @@ Array [
     Object {
       "data": Object {
         "id": 0,
-        "message": "Du er ikke registert",
+        "message": "Din personlige kode er feil",
       },
       "type": "ERROR",
     },
