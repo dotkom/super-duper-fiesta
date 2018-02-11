@@ -6,10 +6,10 @@ const fetch = require('jest-fetch-mock');
 jest.setMock('node-fetch', fetch);
 
 const permissionLevels = require('../../../common/auth/permissions');
-const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
+const { createUser, getPermissionLevel, parseOpenIDUserinfo, getClientInformation } = require('../user');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser } = require('../../managers/user');
-const { getUserByUsername } = require('../../models/user.accessors');
+const { getUserByUsername, updateUserById } = require('../../models/user.accessors');
 const { generateGenfors, generateUser, generateOW4OAuth2ResponseBody } = require('../../utils/generateTestData');
 
 describe('permission level parser', () => {
@@ -80,6 +80,34 @@ describe('create user', () => {
     const user = await createUser(generateUser({ member: true, superuser: true }));
 
     expect(user.permissions).toEqual(permissionLevels.IS_SUPERUSER);
+  });
+
+  it('updates an existing user if logging in again', async () => {
+    const testUserData = {
+      first_name: 'Test',
+      last_name: 'User',
+      member: false,
+      username: 'testuser1',
+    };
+    const testUserMock = {
+      name: `${testUserData.first_name} ${testUserData.last_name}`,
+      permissions: permissionLevels.IS_LOGGED_IN,
+      onlinewebId: testUserData.username,
+    };
+
+    fetch.mockResponse(JSON.stringify(generateOW4OAuth2ResponseBody(testUserData)));
+    getUserByUsername.mockImplementation(() =>
+      generateUser(testUserMock));
+    updateUserById.mockImplementation(() =>
+      generateUser(Object.assign(testUserMock, { permissions: permissionLevels.CAN_VOTE })));
+
+    const updatedUser = await createUser(await generateUser());
+
+    expect(updatedUser).toMatchObject({
+      name: `${testUserData.first_name} ${testUserData.last_name}`,
+      onlinewebId: testUserData.username,
+      permissions: permissionLevels.CAN_VOTE,
+    });
   });
 
   it('throws error if no active genfors and no active genfors', async () => {
