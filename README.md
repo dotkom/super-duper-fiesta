@@ -1,4 +1,5 @@
 # Super Duper Fiesta
+
 [![Build Status](https://ci.online.ntnu.no/api/badges/dotkom/super-duper-fiesta/status.svg?branch=master)](https://ci.online.ntnu.no/dotkom/super-duper-fiesta)
 [![codecov](https://codecov.io/gh/dotkom/super-duper-fiesta/branch/master/graph/badge.svg)](https://codecov.io/gh/dotkom/super-duper-fiesta)
 
@@ -13,13 +14,12 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 ### Dependencies
 
 - Node.JS (and npm)
-- MongoDB
 
 ### Instructions
 
-- Start by cloning the repository, then running `npm install` from the root directory.
-- Run backend with `npm run backend`.
-- Run frontend with `npm run frontend`
+- Start by cloning the repository, then running `npm install` (or `yarn`) from the root directory.
+- Run backend with `npm run backend` (or `yarn backend`)
+- Run frontend with `npm run frontend` (or `yarn frontend`)
 
 ### Instructions (production)
 
@@ -46,26 +46,25 @@ docker run \
 - `npm install`
 - `npm run build:prod`
 - Make sure the relevant environment variables are set
-  - `NODE_EN=production`
+  - `NODE_ENV=production`
   - `PRODUCTION=true`
   - Any other required variables, see the [configuration section](#configuration)
 - `npm start` (or `node server/app.js`)
 
 #### Other requirements
 
-- All code is to be linted according to the specification listed in `.eslintrc`.
-
+- All code is to be linted according to the specification listed in `.eslintrc`. You can verify this by running `yarn lint`.
 
 ### Architecture
 
 - The project uses React.JS for the frontend code, with redux mixed in for state management.
 - The backend is an ExpressJS web server which exposes WebSockets in addition to a simple API. WebSockets is the primary source of communication in this project.
 
-## Communication between backend and frontend
+### Communication between backend and frontend
 
-The backend and frontend are connected by socket.io, following the ideology of [redux-socket.io](https://github.com/itaylor/redux-socket.io), namely that any action to be dispatched to the backend starts is on the form `server/<action>`, where `action` is a unique name for the action to be performed. The backend will emit events on the `action` channel, and every event will contain a `type` which is parsed by the client side of the library, and passed through to the correct reducer in the frontend. 
+The backend and frontend are connected by socket.io, following the ideology of [redux-socket.io](https://github.com/itaylor/redux-socket.io), namely that any action to be dispatched to the backend starts is on the form `server/<action>`, where `action` is a unique name for the action to be performed. The backend will emit events on the `action` channel, and every event will contain a `type` which is parsed by the client side of the library, and passed through to the correct reducer in the frontend.
 
-### Example
+#### Example
 
 If the frontend dispatches an action `server/hello`, redux-socket.io will automatically dispatch this event to the backend. It's now up to the backend to handle this event.
 
@@ -73,13 +72,12 @@ Check out [this](https://github.com/dotKom/super-duper-fiesta/blob/master/src/re
 
 If the backend dispatches an event on the channel `action`, it is required to have a `type` for the frontend to be able to parse it as an action. Import and use the helper function `emit` from `utils.js` to automate some of the repetetive tasks as demonstrated below.
 
-```
+```js
 // Emit an action to be handled by the frontend
 emit(socket, 'OPEN_ISSUE', { description: "Issue number 1" });
 ```
 
 This will be emitted on the `action` channel and be passed on to the reducers in the front end.
-
 
 ## Configuration
 
@@ -89,17 +87,20 @@ Most of the configuration of this app is done using environment variables.
 
 Linux, MacOS:
 
-Current terminal:  
+Current terminal:
+
 - `export VARIABLE_NAME=VARIABLE_VALUE`
 
 To persist the changes, look into a tool like "autoenv" as mentioned earlier, or set them in `~/.profile` (not recommended...).
 
-Windows: 
+Windows:
 
-Current terminal:  
+Current terminal:
+
 - `set VARIABLE_NAME=VARIABLE_VALUE`
 
-Current user (permanent):  
+Current user (permanent):
+
 - `setx VARIABLE_NAME VARIABLE_VALUE`
 
 ### General
@@ -162,7 +163,6 @@ _If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) loca
 
 ![https://i.imgur.com/hzqz3KN.png](https://i.imgur.com/hzqz3KN.png)
 
-
 ### Front page, active issue
 
 ![https://i.imgur.com/ZnwjXwR.png](https://i.imgur.com/ZnwjXwR.png)
@@ -170,7 +170,6 @@ _If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) loca
 ### Admin page, overview
 
 ![https://i.imgur.com/6D5XOXd.png](https://i.imgur.com/6D5XOXd.png)
-
 
 ### Admin page, user administration
 
