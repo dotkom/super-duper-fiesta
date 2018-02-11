@@ -57,7 +57,7 @@ class Setup extends Component {
 
   submit(e) {
     e.preventDefault();
-    if (this.validate() === null) {
+    if (this.props.registered || this.validate() === null) {
       const { pin, privateCode } = this.state;
       const { username } = this.props;
       const passwordHash = SHA256(privateCode + username).toString();
@@ -68,8 +68,14 @@ class Setup extends Component {
 
   render() {
     const { privateCode, repeatPrivateCode, pin } = this.state;
-    const { registered, signedIn } = this.props;
-    const errorMessage = this.validate();
+    const { registered, registrationOpen, signedIn } = this.props;
+    const errorMessage = !registered && this.validate();
+    let buttonText = 'Registreringen er ikke åpen';
+    if (registrationOpen) {
+      buttonText = 'Fullfør registering';
+    } else if (registered) {
+      buttonText = 'Logg inn';
+    }
     // Redirect to home if already registered
     if (signedIn) {
       return <Redirect to="/" />;
@@ -78,7 +84,7 @@ class Setup extends Component {
       <DocumentTitle title="Registrering for generalforsamling">
         <Card classes={css.setup} title="Registrering for generalforsamling">
           <form onSubmit={e => this.submit(e)}>
-            <label>
+            {!registered && <label>
               <div className={css.text}>Pin kode</div>
               <input
                 type="number"
@@ -86,7 +92,7 @@ class Setup extends Component {
                 onChange={e => this.changePin(e)}
               />
               <div className={css.help}>Kode oppgitt under generalforsamling</div>
-            </label>
+            </label>}
             <label>
               <div className={css.text}>Personlig kode</div>
               <input
@@ -99,14 +105,14 @@ class Setup extends Component {
                 Denne lagres ikke og det er derfor ytterst viktig at du ikke glemmer den.
               </div>
             </label>
-            <label>
+            {!registered && <label>
               <div className={css.text}>Gjenta personlig kode</div>
               <input
                 type="password"
                 value={repeatPrivateCode}
                 onChange={e => this.changeRepeatPrivateCode(e)}
               />
-            </label>
+            </label>}
             { errorMessage &&
               <p className={css.warning}>
                 {errorMessage}
@@ -116,11 +122,9 @@ class Setup extends Component {
               <Button
                 background
                 size="lg"
-                disabled={errorMessage !== null || !this.props.registrationOpen}
+                disabled={!registered && (errorMessage !== null || !this.props.registrationOpen)}
               >
-                {this.props.registrationOpen
-                ? 'Fullfør registrering'
-                : 'Registreringen er ikke åpen'}
+                {buttonText}
               </Button>
             </div>
           </form>

@@ -7,6 +7,7 @@ const defaultState = {
   permissions: 0,
   reloadPage: false,
   loggedIn: false,
+  registered: false,
   signedIn: false,
 };
 
