@@ -6,7 +6,7 @@ const fetch = require('jest-fetch-mock');
 jest.setMock('node-fetch', fetch);
 
 const permissionLevels = require('../../../common/auth/permissions');
-const { createUser, getPermissionLevel, parseOpenIDUserinfo, getClientInformation } = require('../user');
+const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser } = require('../../managers/user');
 const { getUserByUsername, updateUserById } = require('../../models/user.accessors');
