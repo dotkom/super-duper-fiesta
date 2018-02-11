@@ -68,10 +68,10 @@ class Setup extends Component {
 
   render() {
     const { privateCode, repeatPrivateCode, pin } = this.state;
-    const { registered } = this.props;
+    const { registered, signedIn } = this.props;
     const errorMessage = this.validate();
     // Redirect to home if already registered
-    if (registered) {
+    if (signedIn) {
       return <Redirect to="/" />;
     }
     return (
@@ -133,6 +133,7 @@ class Setup extends Component {
 Setup.defaultProps = {
   registered: false,
   registrationOpen: false,
+  signedIn: false,
 };
 
 Setup.propTypes = {
@@ -140,6 +141,7 @@ Setup.propTypes = {
   username: PropTypes.string.isRequired,
   registered: PropTypes.bool,
   registrationOpen: PropTypes.bool,
+  signedIn: PropTypes.bool,
 };
 
 export default Setup;
@@ -148,6 +150,7 @@ const mapStateToProps = ({ auth, meeting }) => ({
   username: auth.username,
   registered: auth.registered,
   registrationOpen: meeting.registrationOpen,
+  signedIn: auth.signedIn,
 });
 const mapDispatchToProps = dispatch => ({
   register: (...a) => {

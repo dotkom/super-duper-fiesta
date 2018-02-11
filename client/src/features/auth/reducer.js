@@ -7,6 +7,7 @@ const defaultState = {
   permissions: 0,
   reloadPage: false,
   loggedIn: false,
+  signedIn: false,
 };
 
 const auth = (state = defaultState, action) => {
@@ -26,7 +27,7 @@ const auth = (state = defaultState, action) => {
     case AUTH_REGISTERED: {
       return {
         ...state,
-        registered: action.data.registered,
+        signedIn: action.data.signedIn,
       };
     }
 
