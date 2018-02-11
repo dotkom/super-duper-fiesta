@@ -66,7 +66,9 @@ pipeline:
     registry: registry.online.ntnu.no
     dockerfile: Dockerfile.prod
     build_args_from_env: [sdf_sentry_dsn_frontend]
-    tags: "${DRONE_TAG}"
+    tags:
+      - "${DRONE_TAG}"
+      - latest
 
   deploy:
     image: appleboy/drone-ssh
