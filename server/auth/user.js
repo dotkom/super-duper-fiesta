@@ -11,19 +11,6 @@ function getPermissionLevel(user) {
   return permissions.IS_LOGGED_IN;
 }
 
-function parseOW4OAuth2User(data) {
-  const fullName = `${data.first_name} ${data.last_name}`;
-  return {
-    fullName,
-    username: data.username,
-    onlinewebId: data.username,
-    name: fullName,
-    member: data.member,
-    superuser: data.superuser,
-    staff: data.staff,
-  };
-}
-
 function parseOpenIDUserinfo(data) {
   return {
     fullName: data.name,
@@ -82,5 +69,4 @@ module.exports = {
   createUser,
   getPermissionLevel,
   parseOpenIDUserinfo,
-  parseOW4OAuth2User,
 };
