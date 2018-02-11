@@ -6,7 +6,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
         "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
@@ -21,7 +20,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
         "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
@@ -51,7 +49,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
         "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
@@ -141,7 +138,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
         "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
@@ -156,7 +152,6 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
         "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
