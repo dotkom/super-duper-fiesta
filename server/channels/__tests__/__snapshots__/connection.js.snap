@@ -1116,7 +1116,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "completedRegistration": false,
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
