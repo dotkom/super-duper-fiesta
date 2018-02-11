@@ -34,10 +34,29 @@ const persistConfig = {
 
 const socket = IO.connect();
 
-const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
+const socketIoConfig = [
+  {
+    // Special listener used for initial connection auth
+    prefix: 'auth/',
+    eventName: 'auth',
+  },
+  {
+    // Admin listener
+    prefix: 'admin/',
+    eventName: 'admin',
+  },
+  {
+    // Default listener
+    prefix: 'server/',
+    eventName: 'action',
+  },
+];
 
+const socketIoMiddlewares = socketIoConfig.map(({ prefix, eventName }) => (
+  createSocketIoMiddleware(socket, prefix, { eventName })
+));
 
-let middleware = [socketIoMiddleware, sagaMiddleware];
+let middleware = [...socketIoMiddlewares, sagaMiddleware];
 if (process.env.NODE_ENV !== 'production') {
   middleware = [...middleware, logger];
 }

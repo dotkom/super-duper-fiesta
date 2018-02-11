@@ -3,6 +3,7 @@ jest.mock('../../models/meeting.accessors');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/vote.accessors');
 jest.mock('../../models/user.accessors');
+jest.mock('../../utils/socketAction');
 const { execSync } = require('child_process');
 
 execSync.mockImplementation(() => Buffer.from('fake_git_hash'));
@@ -11,6 +12,7 @@ const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { getAnonymousUser, getUsers } = require('../../models/user.accessors');
 const { getVotes, getUserVote, getAnonymousUserVote } = require('../../models/vote.accessors');
 const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues, getIssueById } = require('../../models/issue.accessors');
+const { waitForAction } = require('../../utils/socketAction');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
 
@@ -45,6 +47,7 @@ describe('connection', () => {
     );
     getUsers.mockImplementation(async () => [generateUser()]);
     getIssueById.mockImplementation(async id => generateIssue({ id }));
+    waitForAction.mockImplementation(async () => ({ passwordHash: 'fake_password_hash' }));
   });
 
   it('emits correct actions when signed in and active genfors', async () => {
