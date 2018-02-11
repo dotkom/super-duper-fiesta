@@ -70,7 +70,7 @@ const generateGenfors = data => (Object.assign({
 
 const generateAnonymousUser = data => (Object.assign({
   passwordHash: 'secret_hash',
-  genfors: '1',
+  meetingId: '1',
 }, data));
 
 function generateVote(data) {

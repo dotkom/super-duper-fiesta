@@ -65,9 +65,9 @@ describe('register', () => {
 
   it('emits registered when user is already registered with correct personal code', async () => {
     getAnonymousUser.mockImplementation(
-      async (passwordHash, onlinewebId, genfors) => generateAnonymousUser({
+      async (passwordHash, onlinewebId, meetingId) => generateAnonymousUser({
         passwordHash,
-        genfors,
+        meetingId,
       },
     ));
     const socket = generateSocket({ completedRegistration: true }, { passwordHash: 'correct' });

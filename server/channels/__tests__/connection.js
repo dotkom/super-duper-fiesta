@@ -20,9 +20,9 @@ describe('connection', () => {
   beforeEach(() => {
     getActiveGenfors.mockImplementation(async () => generateGenfors());
     getAnonymousUser.mockImplementation(
-      async (passwordHash, onlinewebId, genfors) => generateAnonymousUser({
+      async (passwordHash, onlinewebId, meetingId) => generateAnonymousUser({
         passwordHash,
-        genfors,
+        meetingId,
       },
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
