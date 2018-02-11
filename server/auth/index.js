@@ -1,8 +1,7 @@
 const logger = require('../logging');
 const passport = require('passport');
 const { setupOIDC } = require('./oidc');
-
-const getUserById = require('../models/user.accessors').getUserById;
+const { deserializeUser } = require('./user');
 
 module.exports = async (app) => {
   await setupOIDC();
@@ -12,10 +11,7 @@ module.exports = async (app) => {
     done(null, user.id);
   });
 
-  passport.deserializeUser((id, done) => {
-    logger.silly('Deserializing user', { userId: id });
-    done(null, () => getUserById(id));
-  });
+  passport.deserializeUser(deserializeUser);
   app.use(passport.initialize());
   app.use(passport.session());
   app.get('/login', passport.authenticate('oidc'));

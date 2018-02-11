@@ -6,10 +6,10 @@ const fetch = require('jest-fetch-mock');
 jest.setMock('node-fetch', fetch);
 
 const permissionLevels = require('../../../common/auth/permissions');
-const { createUser, getPermissionLevel, parseOpenIDUserinfo } = require('../user');
+const { createUser, getPermissionLevel, parseOpenIDUserinfo, deserializeUser } = require('../user');
 const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { addUser } = require('../../managers/user');
-const { getUserByUsername, updateUserById } = require('../../models/user.accessors');
+const { getUserByUsername, updateUserById, getUserById } = require('../../models/user.accessors');
 const { generateGenfors, generateUser, generateOW4OAuth2ResponseBody } = require('../../utils/generateTestData');
 
 describe('permission level parser', () => {
@@ -113,5 +113,51 @@ describe('create user', () => {
   it('throws error if no active genfors and no active genfors', async () => {
     getActiveGenfors.mockImplementation(async () => null);
     await expect(createUser(generateUser())).rejects.toEqual(new Error('No active genfors'));
+  });
+});
+
+
+describe('deserialize user', () => {
+  it('deserializes to promise that returns user on success', async () => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '4321' }));
+    getUserById.mockImplementation(async id => generateUser({ id, meetingId: '4321' }));
+    const done = jest.fn();
+    const id = '123';
+
+    await deserializeUser(id, done);
+
+    const [error, user] = done.mock.calls[0];
+    expect(error).toBeNull();
+    await expect(user()).resolves.toEqual(
+      expect.objectContaining({ id: '123', meetingId: '4321' }),
+    );
+  });
+
+  it('returns false if user isn\'t found', async () => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '4321' }));
+    getUserById.mockImplementation(async () => null);
+    const done = jest.fn();
+    const id = '123';
+
+    await deserializeUser(id, done);
+
+    const [error, user, message] = done.mock.calls[0];
+    expect(error).toBeNull();
+    expect(user).toEqual(false);
+    expect(message).toEqual('Unable to find user');
+  });
+
+  it('returns false user is not connected to current meeting', async () => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors({ id: '4321' }));
+    getUserById.mockImplementation(async id => generateUser({ id, meetingId: '54321' }));
+    const done = jest.fn();
+    const id = '123';
+
+    await deserializeUser(id, done);
+
+    const [error, user, message] = done.mock.calls[0];
+    expect(error).toBeNull();
+    expect(user).toEqual(false);
+    expect(message).toEqual('User is not connected to current meeting');
   });
 });

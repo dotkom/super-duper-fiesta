@@ -2,7 +2,7 @@ const logger = require('../logging');
 const permissions = require('../../common/auth/permissions');
 const { getActiveGenfors } = require('../models/meeting.accessors');
 const { addUser } = require('../managers/user');
-const { getUserByUsername, updateUserById } = require('../models/user.accessors');
+const { getUserByUsername, updateUserById, getUserById } = require('../models/user.accessors');
 
 function getPermissionLevel(user) {
   if (user.member) {
@@ -65,8 +65,27 @@ async function createUser(user) {
   }
 }
 
+async function deserializeUser(id, done) {
+  logger.silly('Deserializing user', { userId: id });
+  const meeting = await getActiveGenfors();
+  const user = await getUserById(id);
+  if (!user) {
+    logger.warn('User tried to login as non-existing user', id);
+    done(null, false, 'Unable to find user');
+    return;
+  }
+  const meetingId = meeting && meeting.id;
+  if (user.meetingId !== meetingId) {
+    logger.silly('Removed invalid user session', id);
+    done(null, false, 'User is not connected to current meeting');
+    return;
+  }
+  done(null, () => getUserById(id));
+}
+
 module.exports = {
   createUser,
   getPermissionLevel,
   parseOpenIDUserinfo,
+  deserializeUser,
 };
