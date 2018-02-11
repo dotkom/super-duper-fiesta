@@ -20,10 +20,6 @@ const createIssue = async (socket, payload) => {
     const question = await addIssue(payload);
     logger.debug('Added new question. Broadcasting ...', { question: question.description });
     broadcastAndEmit(socket, OPEN_ISSUE, question, { action: 'open' });
-    broadcast(socket, ENABLE_VOTING, {
-      id: question.id,
-      status: question.status,
-    });
   } catch (err) {
     logger.error('Adding new question failed.', err);
     emitError(socket, new Error('Opprettelse av sak feilet'));

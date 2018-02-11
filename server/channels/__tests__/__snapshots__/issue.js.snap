@@ -598,16 +598,6 @@ Array [
       "type": "OPEN_ISSUE",
     },
   ],
-  Array [
-    "action",
-    Object {
-      "data": Object {
-        "id": "1",
-        "status": "VOTING_NOT_STARTED",
-      },
-      "type": "ENABLE_VOTING",
-    },
-  ],
 ]
 `;
 
