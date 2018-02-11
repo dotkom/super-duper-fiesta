@@ -6,9 +6,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "signedIn": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
 ]
@@ -20,9 +20,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "signedIn": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
 ]
@@ -49,9 +49,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "signedIn": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
 ]
@@ -138,9 +138,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "signedIn": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
 ]
@@ -152,9 +152,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "signedIn": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [

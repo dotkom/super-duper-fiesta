@@ -10,9 +10,9 @@ import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
 import css from '../../css/Home.css';
 
-const Home = ({ issueExists, signedIn }) => (
+const Home = ({ issueExists, authenticated }) => (
   <div>
-    { signedIn === false && <Redirect to="/register" />}
+    { authenticated === false && <Redirect to="/register" />}
     <div className={css.components}>
       <div className={css.voteWrapper}>
         <IssueContainer />
@@ -31,17 +31,17 @@ const Home = ({ issueExists, signedIn }) => (
 );
 
 Home.defaultProps = {
-  signedIn: undefined,
+  authenticated: undefined,
 };
 
 Home.propTypes = {
   issueExists: PropTypes.bool.isRequired,
-  signedIn: PropTypes.bool,
+  authenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   issueExists: activeIssueExists(state),
-  signedIn: state.auth.signedIn,
+  authenticated: state.auth.authenticated,
 });
 
 

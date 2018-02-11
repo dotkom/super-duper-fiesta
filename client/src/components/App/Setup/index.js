@@ -68,7 +68,7 @@ class Setup extends Component {
 
   render() {
     const { privateCode, repeatPrivateCode, pin } = this.state;
-    const { registered, registrationOpen, signedIn } = this.props;
+    const { registered, registrationOpen, authenticated } = this.props;
     const errorMessage = !registered && this.validate();
     let buttonText = 'Registreringen er ikke åpen';
     if (registrationOpen) {
@@ -77,7 +77,7 @@ class Setup extends Component {
       buttonText = 'Logg inn';
     }
     // Redirect to home if already registered
-    if (signedIn) {
+    if (authenticated) {
       return <Redirect to="/" />;
     }
     return (
@@ -137,7 +137,7 @@ class Setup extends Component {
 Setup.defaultProps = {
   registered: false,
   registrationOpen: false,
-  signedIn: false,
+  authenticated: false,
 };
 
 Setup.propTypes = {
@@ -145,7 +145,7 @@ Setup.propTypes = {
   username: PropTypes.string.isRequired,
   registered: PropTypes.bool,
   registrationOpen: PropTypes.bool,
-  signedIn: PropTypes.bool,
+  authenticated: PropTypes.bool,
 };
 
 export default Setup;
@@ -154,7 +154,7 @@ const mapStateToProps = ({ auth, meeting }) => ({
   username: auth.username,
   registered: auth.registered,
   registrationOpen: meeting.registrationOpen,
-  signedIn: auth.signedIn,
+  authenticated: auth.authenticated,
 });
 const mapDispatchToProps = dispatch => ({
   register: (...a) => {
