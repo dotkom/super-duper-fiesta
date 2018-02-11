@@ -15,6 +15,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -27,7 +28,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -311,6 +312,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -323,7 +325,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -356,6 +358,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -368,7 +371,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -578,6 +581,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -590,7 +594,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -722,6 +726,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -734,7 +739,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -814,6 +819,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -826,7 +832,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -1110,6 +1116,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1122,7 +1129,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -1155,6 +1162,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1167,7 +1175,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -1367,6 +1375,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1379,7 +1388,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -1673,6 +1682,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1685,7 +1695,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -1718,6 +1728,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1730,7 +1741,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -2014,6 +2025,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -2026,7 +2038,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -2059,6 +2071,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 10,
@@ -2071,7 +2084,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "signedIn": true,
       },
       "type": "AUTH_REGISTERED",
     },
@@ -2359,6 +2372,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -2381,7 +2395,7 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "signedIn": false,
       },
       "type": "AUTH_REGISTERED",
     },

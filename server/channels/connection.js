@@ -39,6 +39,7 @@ const emitUserData = async (socket) => {
     full_name: user.name,
     id: user.id,
     permissions: user.permissions,
+    completedRegistration: user.completedRegistration,
   });
 
   if (!user.meetingId) {
@@ -53,9 +54,9 @@ const emitUserData = async (socket) => {
     logger.error('Failed to validate passwordHash', { userId: user.id, err: err.message });
   }
   if (user.completedRegistration && validPasswordHash) {
-    emit(socket, AUTH_REGISTERED, { registered: true });
+    emit(socket, AUTH_REGISTERED, { signedIn: true });
   } else {
-    emit(socket, AUTH_REGISTERED, { registered: false });
+    emit(socket, AUTH_REGISTERED, { signedIn: false });
   }
 };
 

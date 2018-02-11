@@ -60,7 +60,7 @@ describe('connection', () => {
 
   it('emits correct actions when signed in and no active genfors', async () => {
     getActiveGenfors.mockImplementation(async () => null);
-    const socket = generateSocket();
+    const socket = generateSocket({ completedRegistration: false, signedIn: false });
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();

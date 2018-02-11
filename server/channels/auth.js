@@ -25,7 +25,7 @@ const register = async (socket, data) => {
       return;
     }
     if (validPasswordHash) {
-      emit(socket, AUTH_REGISTERED, { registered: true });
+      emit(socket, AUTH_REGISTERED, { registered: true, signedIn: true });
     } else {
       emitError(socket, new Error('Feil personlig kode'));
     }
@@ -48,7 +48,7 @@ const register = async (socket, data) => {
     return;
   }
   logger.silly('Successfully registered', { username });
-  emit(socket, AUTH_REGISTERED, { registered: true });
+  emit(socket, AUTH_REGISTERED, { registered: true, signedIn: true });
   const registeredUser = await getUserByUsername(username, genfors);
   broadcastAndEmit(socket, ADD_USER, publicUser(registeredUser));
   adminBroadcast(socket, ADD_USER, publicUser(registeredUser, true));
