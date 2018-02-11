@@ -14,15 +14,6 @@ const register = async (socket, data) => {
   const user = await socket.request.user();
   const username = user.onlinewebId;
   const genfors = await getActiveGenfors();
-  if (!genfors.registrationOpen) {
-    emitError(socket, new Error('Registreringen er ikke åpen.'));
-    return;
-  }
-  if (!await validatePin(pin)) {
-    logger.silly('User failed pin code', { username, pin });
-    emitError(socket, new Error('Feil pinkode'));
-    return;
-  }
   const { completedRegistration } = user;
   if (completedRegistration) {
     let validPasswordHash = false;
@@ -38,6 +29,15 @@ const register = async (socket, data) => {
     } else {
       emitError(socket, new Error('Feil personlig kode'));
     }
+    return;
+  }
+  if (!genfors.registrationOpen) {
+    emitError(socket, new Error('Registreringen er ikke åpen.'));
+    return;
+  }
+  if (!await validatePin(pin)) {
+    logger.silly('User failed pin code', { username, pin });
+    emitError(socket, new Error('Feil pinkode'));
     return;
   }
   try {
