@@ -134,3 +134,55 @@ describe('listener', () => {
     expect(socket.broadcast.emit).not.toBeCalled();
   });
 });
+
+describe('login to registered user', () => {
+  beforeEach(() => {
+    getAnonymousUser.mockImplementation(
+      async (passwordHash, onlinewebId, meetingId) => generateAnonymousUser({
+        passwordHash,
+        meetingId,
+      },
+    ));
+  });
+
+  it('logs you in if you have a session', async () => {
+    const socket = generateSocket({ completedRegistration: true });
+    await register(socket, generateData({ pin: undefined, passwordHash: 'correct' }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('logs you in if you supply correct personal code', async () => {
+    const socket = generateSocket({
+      completedRegistration: true,
+      passwordHash: 'correct',
+    });
+    await register(socket, generateData({ pin: undefined, passwordHash: 'correct' }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('returns error if trying to log in with incorrect personal code', async () => {
+    getAnonymousUser.mockImplementation(async () => null);
+    const socket = generateSocket({ completedRegistration: true });
+    await register(socket, generateData({ pin: undefined, passwordHash: 'incorrect' }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('works even if registration is closed', async () => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors({ registrationOpen: false }));
+
+    const socket = generateSocket({
+      completedRegistration: true,
+      passwordHash: 'correct',
+    });
+    await register(socket, generateData({ passwordHash: 'correct' }));
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+});

@@ -15,6 +15,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -27,9 +28,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -306,6 +307,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -318,9 +320,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -351,6 +353,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -363,9 +366,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -569,6 +572,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -581,9 +585,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -712,6 +716,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -724,9 +729,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -803,6 +808,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -815,9 +821,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1094,6 +1100,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1106,9 +1113,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1139,6 +1146,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1151,9 +1159,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1347,6 +1355,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1359,9 +1368,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1648,6 +1657,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1660,9 +1670,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1693,6 +1703,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1705,9 +1716,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -1984,6 +1995,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -1996,9 +2008,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -2029,6 +2041,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 10,
@@ -2041,9 +2054,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [
@@ -2324,6 +2337,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
         "permissions": 5,
@@ -2346,9 +2360,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": false,
+        "authenticated": false,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [

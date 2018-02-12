@@ -11,9 +11,9 @@ import { ConcludedIssueListContainer } from '../ConcludedIssueList';
 import UserSettings from '../UserSettings';
 import css from '../../css/Home.css';
 
-const Home = ({ issueExists, registered }) => (
+const Home = ({ issueExists, authenticated }) => (
   <div>
-    { registered === false && <Redirect to="/register" />}
+    { authenticated === false && <Redirect to="/register" />}
     <div className={css.components}>
       <div className={css.voteWrapper}>
         <IssueContainer />
@@ -32,17 +32,17 @@ const Home = ({ issueExists, registered }) => (
 );
 
 Home.defaultProps = {
-  registered: undefined,
+  authenticated: undefined,
 };
 
 Home.propTypes = {
   issueExists: PropTypes.bool.isRequired,
-  registered: PropTypes.bool,
+  authenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   issueExists: activeIssueExists(state),
-  registered: state.auth.registered,
+  authenticated: state.auth.authenticated,
 });
 
 

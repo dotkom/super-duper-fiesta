@@ -1,5 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`login to registered user logs you in if you have a session 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "authenticated": true,
+      },
+      "type": "AUTH_AUTHENTICATED",
+    },
+  ],
+]
+`;
+
+exports[`login to registered user logs you in if you supply correct personal code 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "authenticated": true,
+      },
+      "type": "AUTH_AUTHENTICATED",
+    },
+  ],
+]
+`;
+
+exports[`login to registered user returns error if trying to log in with incorrect personal code 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Feil personlig kode",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`login to registered user works even if registration is closed 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "authenticated": true,
+      },
+      "type": "AUTH_AUTHENTICATED",
+    },
+  ],
+]
+`;
+
 exports[`register emits error when handling errors when saving anonymous user 1`] = `
 Array [
   Array [
@@ -81,9 +138,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
 ]
@@ -95,9 +152,9 @@ Array [
     "action",
     Object {
       "data": Object {
-        "registered": true,
+        "authenticated": true,
       },
-      "type": "AUTH_REGISTERED",
+      "type": "AUTH_AUTHENTICATED",
     },
   ],
   Array [

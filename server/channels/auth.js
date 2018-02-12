@@ -6,7 +6,7 @@ const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getUserByUsername } = require('../models/user.accessors');
 const logger = require('../logging');
 
-const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
+const { AUTH_REGISTER, AUTH_AUTHENTICATED } = require('../../common/actionTypes/auth');
 const { ADD_USER } = require('../../common/actionTypes/users');
 
 const register = async (socket, data) => {
@@ -14,15 +14,6 @@ const register = async (socket, data) => {
   const user = await socket.request.user();
   const username = user.onlinewebId;
   const genfors = await getActiveGenfors();
-  if (!genfors.registrationOpen) {
-    emitError(socket, new Error('Registreringen er ikke åpen.'));
-    return;
-  }
-  if (!await validatePin(pin)) {
-    logger.silly('User failed pin code', { username, pin });
-    emitError(socket, new Error('Feil pinkode'));
-    return;
-  }
   const { completedRegistration } = user;
   if (completedRegistration) {
     let validPasswordHash = false;
@@ -34,10 +25,19 @@ const register = async (socket, data) => {
       return;
     }
     if (validPasswordHash) {
-      emit(socket, AUTH_REGISTERED, { registered: true });
+      emit(socket, AUTH_AUTHENTICATED, { authenticated: true });
     } else {
       emitError(socket, new Error('Feil personlig kode'));
     }
+    return;
+  }
+  if (!genfors.registrationOpen) {
+    emitError(socket, new Error('Registreringen er ikke åpen.'));
+    return;
+  }
+  if (!await validatePin(pin)) {
+    logger.silly('User failed pin code', { username, pin });
+    emitError(socket, new Error('Feil pinkode'));
     return;
   }
   try {
@@ -48,7 +48,7 @@ const register = async (socket, data) => {
     return;
   }
   logger.silly('Successfully registered', { username });
-  emit(socket, AUTH_REGISTERED, { registered: true });
+  emit(socket, AUTH_AUTHENTICATED, { authenticated: true });
   const registeredUser = await getUserByUsername(username, genfors.id);
   broadcastAndEmit(socket, ADD_USER, publicUser(registeredUser));
   adminBroadcast(socket, ADD_USER, publicUser(registeredUser, true));
