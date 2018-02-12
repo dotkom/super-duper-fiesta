@@ -42,7 +42,7 @@ async function createUser(user) {
       throw new Error('No active genfors');
     }
 
-    const existingUser = await getUserByUsername(username, genfors);
+    const existingUser = await getUserByUsername(username, genfors.id);
     if (existingUser === null) {
       // Create user if not exists
       logger.debug('User does not exist -- creating', { username });

@@ -27,13 +27,13 @@ describe('connection', () => {
     ));
     getActiveQuestion.mockImplementation(async () => generateIssue());
     getIssueWithAlternatives.mockImplementation(async () => generateIssue({ id: '2' }));
-    getConcludedIssues.mockImplementation(async meeting => [
-      generateIssue({ meetingId: meeting.id, id: '2' }),
-      generateIssue({ meetingId: meeting.id, id: '2' }),
-      generateIssue({ meetingId: meeting.id, id: '2' }),
-      generateIssue({ meetingId: meeting.id, id: '2' }),
+    getConcludedIssues.mockImplementation(async meetingId => [
+      generateIssue({ meetingId, id: '2' }),
+      generateIssue({ meetingId, id: '2' }),
+      generateIssue({ meetingId, id: '2' }),
+      generateIssue({ meetingId, id: '2' }),
     ]);
-    getVotes.mockImplementation(async ({ id: issueId }) => [
+    getVotes.mockImplementation(async issueId => [
       generateVote({ issueId, id: '1' }),
       generateVote({ issueId, id: '2' }),
       generateVote({ issueId, id: '3' }),
@@ -125,7 +125,7 @@ describe('connection', () => {
 
   it('emits correct actions when user has already voted', async () => {
     getUserVote.mockImplementation(
-      async (question, userId) => generateVote({ question: question.id, userId }),
+      async (issueId, userId) => generateVote({ issueId, userId }),
     );
     const socket = generateSocket();
     await connection(socket);

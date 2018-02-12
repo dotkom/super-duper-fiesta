@@ -58,7 +58,7 @@ const submitAnonymousVote = async (socket, data) => {
   }
   const genfors = await getActiveGenfors();
   const anonymousUser = await getAnonymousUser(data.passwordHash,
-  user.onlinewebId, genfors);
+  user.onlinewebId, genfors.id);
   try {
     const vote = await addVote(data.issue, user,
       data.alternative, anonymousUser.id);

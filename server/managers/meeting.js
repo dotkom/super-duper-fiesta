@@ -54,11 +54,11 @@ async function canEdit(securityLevel, user, genforsId) {
 
 
 async function endGenfors(genfors, user) {
-  if (!await canEdit(permissionLevel.IS_MANAGER, user, genfors)) {
+  if (!await canEdit(permissionLevel.IS_MANAGER, user, genfors.id)) {
     throw new Error('User does not have permission to end genfors');
   }
   logger.info('Closing genfors', { genfors: genfors.title });
-  return updateGenfors({ id: genfors.id }, { status: meetingStates.closed });
+  return updateGenfors(genfors.id, { status: meetingStates.closed });
 }
 
 
@@ -90,7 +90,7 @@ async function toggleRegistrationStatus(genfors, currentStatus) {
   const registrationOpen = currentStatus !== undefined ? !currentStatus : genfors.registrationOpen;
 
   // eslint-disable-next-line no-underscore-dangle
-  return updateGenfors(genfors,
+  return updateGenfors(genfors.id,
   { registrationOpen, pin: parseInt(Math.random() * 10000, 10) }, { new: true });
 }
 

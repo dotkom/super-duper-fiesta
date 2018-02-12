@@ -32,7 +32,7 @@ async function validatePasswordHash(user, passwordHash) {
   }
 
   logger.silly('Checking password hash for user', { userId: user.id, meetingId: genfors.id });
-  const existingUser = await model.getAnonymousUser(passwordHash, user.onlinewebId, genfors);
+  const existingUser = await model.getAnonymousUser(passwordHash, user.onlinewebId, genfors.id);
   // using != instead of !== to also catch undefined
   return existingUser != null;
 }
@@ -76,11 +76,11 @@ async function addUser(name, onlinewebId, securityLevel) {
 
 async function addAnonymousUser(username, passwordHash) {
   const genfors = await getActiveGenfors();
-  const user = await model.getUserByUsername(username, genfors);
+  const user = await model.getUserByUsername(username, genfors.id);
   if (user.completedRegistration) {
     throw new Error('User is already registered');
   }
-  const existingUser = await model.getAnonymousUser(passwordHash, username, genfors);
+  const existingUser = await model.getAnonymousUser(passwordHash, username, genfors.id);
   if (existingUser) {
     throw new Error('Anonymous user aleady exists');
   }

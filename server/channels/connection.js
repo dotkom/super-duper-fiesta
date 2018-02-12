@@ -71,7 +71,7 @@ const emitActiveQuestion = async (socket, meeting) => {
 
     // Issue is active, let's emit already given votes.
     try {
-      const votes = await getVotes(issue);
+      const votes = await getVotes(issue.id);
       votes.forEach(async (vote) => {
         emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
       });
@@ -84,7 +84,7 @@ const emitActiveQuestion = async (socket, meeting) => {
     if (issue.secret) {
       // TODO: Consider refactoring so that password hash is only retrieved once
       const { passwordHash } = await waitForAction(socket, 'auth', REQUEST_PASSWORD_HASH, SEND_PASSWORD_HASH);
-      voter = await getAnonymousUser(passwordHash, user.onlinewebId, meeting);
+      voter = await getAnonymousUser(passwordHash, user.onlinewebId, meeting.id);
     } else {
       voter = user;
     }
@@ -127,14 +127,14 @@ const emitGenforsData = async (socket) => {
 
     const isAdmin = userIsAdmin(await socket.request.user());
 
-    const users = await getUsers(meeting);
+    const users = await getUsers(meeting.id);
     emit(socket, USER_LIST, users.map(user => publicUser(user, isAdmin)));
 
     emit(socket, OPEN_MEETING, publicMeeting(meeting, isAdmin));
     await emitActiveQuestion(socket, meeting);
 
     // Fill backlog of old issues too
-    await emitIssueBacklog(socket, meeting);
+    await emitIssueBacklog(socket, meeting.id);
   } catch (err) {
     logger.error('Something went wrong when fetching active genfors.', err);
     emitError(socket, new Error('Noe gikk galt. Vennligst prøv igjen.'));
