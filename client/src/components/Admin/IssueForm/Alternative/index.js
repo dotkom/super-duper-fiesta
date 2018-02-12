@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from '../../../Dialog';
 import Button from '../../../Button';
 import css from './Alternative.css';

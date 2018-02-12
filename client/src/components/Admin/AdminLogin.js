@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { adminCreateGenfors, adminLogin } from 'features/auth/actionCreators';
@@ -113,7 +114,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 AdminLogin.propTypes = {
-  login: React.PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default AdminLogin;

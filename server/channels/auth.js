@@ -49,7 +49,7 @@ const register = async (socket, data) => {
   }
   logger.silly('Successfully registered', { username });
   emit(socket, AUTH_AUTHENTICATED, { authenticated: true });
-  const registeredUser = await getUserByUsername(username, genfors);
+  const registeredUser = await getUserByUsername(username, genfors.id);
   broadcastAndEmit(socket, ADD_USER, publicUser(registeredUser));
   adminBroadcast(socket, ADD_USER, publicUser(registeredUser, true));
 };

@@ -1,10 +1,11 @@
 jest.mock('../meeting');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
+const { getActiveGenfors } = require('../../models/meeting.accessors');
 const { canEdit } = require('../meeting');
 const { getActiveQuestion, updateIssue } = require('../../models/issue.accessors');
 const { disableVoting, enableVoting } = require('../issue');
-const { generateIssue, generateManager, generateUser }
+const { generateIssue, generateManager, generateUser, generateGenfors }
   = require('../../utils/generateTestData');
 const { VOTING_IN_PROGRESS, VOTING_FINISHED }
   = require('../../../common/actionTypes/issues');
@@ -12,9 +13,10 @@ const { VOTING_IN_PROGRESS, VOTING_FINISHED }
 
 describe('enable voting', () => {
   beforeEach(() => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors());
     canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
     getActiveQuestion.mockImplementation(() => ({ ...generateIssue() }));
-    updateIssue.mockImplementation(async (identifiers, data) => ({ ...identifiers, ...data }));
+    updateIssue.mockImplementation(async (id, data) => generateIssue({ id, ...data }));
   });
 
   it('sets status of an issue to VOTING_IN_PROGRESS', async () => {
@@ -37,8 +39,8 @@ describe('enable voting', () => {
 describe('disable voting', () => {
   beforeEach(() => {
     canEdit.mockImplementation((securityLevel, user) => user.permissions >= securityLevel);
-    getActiveQuestion.mockImplementation(() => generateIssue());
-    updateIssue.mockImplementation(async (identifiers, data) => ({ ...identifiers, ...data }));
+    getActiveQuestion.mockImplementation(async () => generateIssue());
+    updateIssue.mockImplementation(async (id, data) => generateIssue({ id, ...data }));
   });
 
   it('sets status of an issue to VOTING_FINISHED', async () => {

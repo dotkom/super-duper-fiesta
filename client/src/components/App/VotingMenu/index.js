@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS } from 'common/actionTypes/issues';
 import { submitAnonymousVote, submitRegularVote } from 'features/voting/actionCreators';
@@ -98,13 +99,13 @@ VotingMenu.defaultProps = {
 
 VotingMenu.propTypes = {
   alternatives: Alternatives.propTypes.alternatives,
-  handleVote: React.PropTypes.func.isRequired,
-  issueId: React.PropTypes.string,
-  issueIsActive: React.PropTypes.bool.isRequired,
-  issueStatus: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  ownVote: React.PropTypes.string,
-  voterKey: React.PropTypes.number,
+  handleVote: PropTypes.func.isRequired,
+  issueId: PropTypes.string,
+  issueIsActive: PropTypes.bool.isRequired,
+  issueStatus: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  ownVote: PropTypes.string,
+  voterKey: PropTypes.number,
 };
 
 const mapStateToProps = state => ({

@@ -13,7 +13,7 @@ const { VOTING_IN_PROGRESS, VOTING_FINISHED } = require('../../common/actionType
 async function endIssue(question, user) {
   logger.debug('Closing issue', { issue: question });
   const genfors = await getActiveGenfors();
-  const result = await canEdit(permissionLevel.IS_MANAGER, user, genfors);
+  const result = await canEdit(permissionLevel.IS_MANAGER, user, genfors.id);
   if (result === true) {
     return model.endIssue(question);
   }
@@ -24,7 +24,7 @@ async function addIssue(issueData, closeCurrentIssue) {
   logger.debug('Creating issue', issueData);
   const genfors = await getActiveGenfors();
   if (!genfors) throw new Error('No genfors active');
-  const activeIssue = model.getActiveQuestion(genfors);
+  const activeIssue = model.getActiveQuestion(genfors.id);
   if (activeIssue && activeIssue.active && !closeCurrentIssue) {
     throw new Error("There's already an active question");
   } else if (activeIssue && !activeIssue.active && closeCurrentIssue) {
@@ -36,7 +36,7 @@ async function addIssue(issueData, closeCurrentIssue) {
     await model.endIssue(activeIssue);
   }
   // removed possible issues and proceeding to create a new one
-  const users = await getQualifiedUsers(genfors);
+  const users = await getQualifiedUsers(genfors.id);
   const meetingId = genfors.id;
   const data = Object.assign(issueData, {
     meetingId,
@@ -52,7 +52,7 @@ async function addIssue(issueData, closeCurrentIssue) {
 
 async function deleteIssue(issue, user) {
   const genfors = await getActiveGenfors();
-  const userCanEdit = await canEdit(permissionLevel.IS_MANAGER, user, genfors);
+  const userCanEdit = await canEdit(permissionLevel.IS_MANAGER, user, genfors.id);
   if (userCanEdit) {
     return model.deleteIssue(issue);
   }
@@ -123,7 +123,7 @@ async function getPublicIssueWithVotes(issueIdOrObj, admin = false) {
   const issue = await model.getIssueWithAlternatives(issueId);
   let votes;
   try {
-    votes = await (await getVotes(issue))
+    votes = await (await getVotes(issue.id))
     .reduce(async (existingVotes, nextVote) => {
       const vote = await nextVote;
       return {
@@ -148,17 +148,17 @@ async function getPublicIssueWithVotes(issueIdOrObj, admin = false) {
 }
 
 async function disableVoting(issue, user) {
-  if (await !canEdit(permissionLevel.IS_MANAGER, user, await getActiveGenfors())) {
+  if (await !canEdit(permissionLevel.IS_MANAGER, user, (await getActiveGenfors()).id)) {
     throw new Error('User is not authorized to disable voting on this issue.');
   }
-  return model.updateIssue(issue, { status: VOTING_FINISHED }, { new: true });
+  return model.updateIssue(issue.id, { status: VOTING_FINISHED }, { new: true });
 }
 
 async function enableVoting(issue, user) {
-  if (await !canEdit(permissionLevel.IS_MANAGER, user, await getActiveGenfors())) {
+  if (await !canEdit(permissionLevel.IS_MANAGER, user, (await getActiveGenfors()).id)) {
     throw new Error('User is not authorized to enable voting on this issue.');
   }
-  return model.updateIssue(issue, { status: VOTING_IN_PROGRESS }, { new: true });
+  return model.updateIssue(issue.id, { status: VOTING_IN_PROGRESS }, { new: true });
 }
 
 module.exports = {

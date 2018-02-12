@@ -1,11 +1,12 @@
 const db = require('./postgresql');
-const { plainObjectOrNull } = require('./utils');
+const { plainObjectOrNull, deprecateObject } = require('./utils');
 
 const Genfors = db.sequelize.models.meeting;
 
 const { MEETING_STATUSES: meetingStates } = require('../../common/actionTypes/meeting');
 
 async function getGenfors(genfors) {
+  deprecateObject(genfors);
   const id = genfors.id || genfors;
   return plainObjectOrNull(Genfors.findOne({ where: { id } }));
 }
@@ -15,6 +16,7 @@ function getActiveGenfors() {
 }
 
 async function updateGenfors(query, data) {
+  deprecateObject(query);
   const id = query.id || query;
   const genfors = await Genfors.findOne({ where: { id } });
   return Object.assign(genfors, data).save();

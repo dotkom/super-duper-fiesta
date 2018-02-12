@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { VOTING_NOT_STARTED, VOTING_IN_PROGRESS, VOTING_FINISHED } from 'common/actionTypes/issues';
@@ -111,15 +112,15 @@ Issue.defaultProps = {
 };
 
 Issue.propTypes = {
-  closeIssue: React.PropTypes.func.isRequired,
-  deleteIssue: React.PropTypes.func.isRequired,
-  disableVoting: React.PropTypes.func.isRequired,
-  enableVoting: React.PropTypes.func.isRequired,
-  issueIsActive: React.PropTypes.bool.isRequired,
-  issueStatus: React.PropTypes.string,
-  issueText: React.PropTypes.string.isRequired,
-  pin: React.PropTypes.number,
-  registrationOpen: React.PropTypes.bool,
+  closeIssue: PropTypes.func.isRequired,
+  deleteIssue: PropTypes.func.isRequired,
+  disableVoting: PropTypes.func.isRequired,
+  enableVoting: PropTypes.func.isRequired,
+  issueIsActive: PropTypes.bool.isRequired,
+  issueStatus: PropTypes.string,
+  issueText: PropTypes.string.isRequired,
+  pin: PropTypes.number,
+  registrationOpen: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

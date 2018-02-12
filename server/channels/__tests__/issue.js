@@ -117,7 +117,7 @@ describe('adminDeleteIssue', () => {
 describe('adminDisableVoting', () => {
   beforeEach(() => {
     getActiveQuestion.mockImplementation(() => generateIssue());
-    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+    updateIssue.mockImplementation(async (id, data) => generateIssue({ id, ...data }));
   });
 
   it('emits disable voting on success', async () => {
@@ -133,7 +133,7 @@ describe('adminDisableVoting', () => {
 describe('adminEnableVoting', () => {
   beforeEach(() => {
     getActiveQuestion.mockImplementation(() => generateIssue());
-    updateIssue.mockImplementation((identifiers, data) => ({ ...identifiers, ...data }));
+    updateIssue.mockImplementation(async (id, data) => generateIssue({ id, ...data }));
   });
 
   it('emits enable voting on success', async () => {
