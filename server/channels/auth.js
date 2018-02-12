@@ -6,7 +6,7 @@ const { validatePasswordHash, publicUser } = require('../managers/user');
 const { getUserByUsername } = require('../models/user.accessors');
 const logger = require('../logging');
 
-const { AUTH_REGISTER, AUTH_REGISTERED } = require('../../common/actionTypes/auth');
+const { AUTH_REGISTER, AUTH_AUTHENTICATED } = require('../../common/actionTypes/auth');
 const { ADD_USER } = require('../../common/actionTypes/users');
 
 const register = async (socket, data) => {
@@ -25,7 +25,7 @@ const register = async (socket, data) => {
       return;
     }
     if (validPasswordHash) {
-      emit(socket, AUTH_REGISTERED, { signedIn: true });
+      emit(socket, AUTH_AUTHENTICATED, { authenticated: true });
     } else {
       emitError(socket, new Error('Feil personlig kode'));
     }
@@ -48,7 +48,7 @@ const register = async (socket, data) => {
     return;
   }
   logger.silly('Successfully registered', { username });
-  emit(socket, AUTH_REGISTERED, { signedIn: true });
+  emit(socket, AUTH_AUTHENTICATED, { authenticated: true });
   const registeredUser = await getUserByUsername(username, genfors);
   broadcastAndEmit(socket, ADD_USER, publicUser(registeredUser));
   adminBroadcast(socket, ADD_USER, publicUser(registeredUser, true));
