@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { activeIssueExists, getIssueText, getIssueKey } from 'features/issue/selectors';
@@ -44,12 +45,12 @@ Issue.defaultProps = {
 };
 
 Issue.propTypes = {
-  issueExists: React.PropTypes.bool,
-  text: React.PropTypes.string,
-  secret: React.PropTypes.bool,
-  showOnlyWinner: React.PropTypes.bool,
-  countingBlankVotes: React.PropTypes.bool,
-  voteDemand: React.PropTypes.string,
+  issueExists: PropTypes.bool,
+  text: PropTypes.string,
+  secret: PropTypes.bool,
+  showOnlyWinner: PropTypes.bool,
+  countingBlankVotes: PropTypes.bool,
+  voteDemand: PropTypes.string,
 };
 
 

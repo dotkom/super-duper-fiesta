@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getConcludedIssuesExceptLatest } from 'features/issue/selectors';
 import { concludedIssueListIsEnabled } from 'features/userSettings/selectors';
@@ -23,9 +24,9 @@ function ConcludedIssueList({ concludedIssueListEnabled, issues }) {
 
 ConcludedIssueList.propTypes = {
   issues: PropTypes.shape({
-    votes: React.PropTypes.objectOf(React.PropTypes.string),
+    votes: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
-  concludedIssueListEnabled: React.PropTypes.bool.isRequired,
+  concludedIssueListEnabled: PropTypes.bool.isRequired,
 };
 
 export default ConcludedIssueList;

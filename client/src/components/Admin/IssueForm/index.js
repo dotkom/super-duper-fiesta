@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
@@ -271,19 +272,19 @@ IssueForm.defaultProps = {
 };
 
 IssueForm.propTypes = {
-  createIssue: React.PropTypes.func,
-  deleteIssue: React.PropTypes.func.isRequired,
-  issue: React.PropTypes.shape({
-    active: React.PropTypes.bool.isRequired,
-    alternatives: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        text: React.PropTypes.string.isRequired,
+  createIssue: PropTypes.func,
+  deleteIssue: PropTypes.func.isRequired,
+  issue: PropTypes.shape({
+    active: PropTypes.bool.isRequired,
+    alternatives: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string.isRequired,
       })),
-    secret: React.PropTypes.bool.isRequired,
-    showOnlyWinner: React.PropTypes.bool.isRequired,
-    voteDemand: React.PropTypes.string.isRequired,
+    secret: PropTypes.bool.isRequired,
+    showOnlyWinner: PropTypes.bool.isRequired,
+    voteDemand: PropTypes.string.isRequired,
   }),
-  activeIssue: React.PropTypes.bool.isRequired,
+  activeIssue: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
