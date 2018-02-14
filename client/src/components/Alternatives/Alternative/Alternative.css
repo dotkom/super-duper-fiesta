@@ -22,6 +22,11 @@
   background: #474a6b;
 }
 
+.selected label:after {
+  content: "✓";
+  float: right;
+}
+
 .selected:hover {
   background: #52557a;
 }
