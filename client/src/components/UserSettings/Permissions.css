@@ -1,0 +1,7 @@
+.card {
+  margin-top: 1rem;
+}
+
+.canNotVote {
+  composes: icon warning from 'css/flaticon.css';
+}
