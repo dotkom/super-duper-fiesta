@@ -103,6 +103,17 @@ Current user (permanent):
 
 - `setx VARIABLE_NAME VARIABLE_VALUE`
 
+### Required config for development
+
+These variables are required in development. The others are safe to skip.
+
+* `DATABASE_URL` (example: `sqlite:///path/to/working/directory/db.db` (note the **three** `/`-es))
+* `SDF_OIDC_PROVIDER` (example: `https://online.ntnu.no/openid/`)
+* `SDF_OIDC_CLIENT_ID` (example: `123456`) You can get this ID from the adminstration panel in Django for OW4.
+* `SDF_OIDC_REDIRECT_URI` (example: `http://127.0.0.1:8080/auth`) Make sure this value is included in the allowed redirect uris in the OpenID Client.
+* `SDF_BACKEND_HOST` (default: `'backend'`) should be set (example: `127.0.0.1`) if not running in docker.
+* `SDF_BACKEND_PORT` (default: `3000`) should be set if running OW4 with webpack locally.
+
 ### General
 
 | Key | Description | Example | Default |
