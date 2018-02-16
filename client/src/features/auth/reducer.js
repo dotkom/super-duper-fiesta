@@ -9,6 +9,7 @@ const defaultState = {
   loggedIn: false,
   registered: false,
   authenticated: false,
+  canVote: false,
 };
 
 const auth = (state = defaultState, action) => {
@@ -16,6 +17,7 @@ const auth = (state = defaultState, action) => {
     case AUTH_SIGNED_IN: {
       return {
         ...state,
+        canVote: action.data.canVote,
         username: action.data.username,
         fullName: action.data.full_name,
         loggedIn: true,
