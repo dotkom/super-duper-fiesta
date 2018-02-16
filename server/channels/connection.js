@@ -35,6 +35,7 @@ const emitUserData = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
   const user = await socket.request.user();
   emit(socket, AUTH_SIGNED_IN, {
+    canVote: user.canVote,
     username: user.onlinewebId,
     full_name: user.name,
     id: user.id,
