@@ -1,4 +1,5 @@
 import { ADMIN_SIGNED_IN, AUTH_SIGNED_IN, AUTH_AUTHENTICATED } from 'common/actionTypes/auth';
+import { TOGGLE_CAN_VOTE } from 'common/actionTypes/users';
 
 const defaultState = {
   id: '',
@@ -38,6 +39,16 @@ const auth = (state = defaultState, action) => {
       return {
         ...state,
         reloadPage: true,
+      };
+    }
+
+    case TOGGLE_CAN_VOTE: {
+      if (state.id !== action.data.id) {
+        return state;
+      }
+      return {
+        ...state,
+        canVote: action.data.canVote,
       };
     }
 
