@@ -13,7 +13,8 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 
 ### Dependencies
 
-- Node.JS (and npm)
+- Node.JS(8.9 or higher)
+- npm
 
 ### Instructions
 
