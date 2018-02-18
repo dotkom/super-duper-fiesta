@@ -11,14 +11,17 @@ import {
   concludedIssueListIsEnabled,
 } from 'features/userSettings/selectors';
 import Button from '../Button';
+import Permissions from './Permissions';
 import css from './UserSettings.css';
 
 const UserSettings = ({
+  canVote,
   concludedIssues,
   notificationsEnabled,
   notificationToggle,
   concludedIssueListEnabled,
   concludedIssueListToggle,
+  permissions,
 }) => (
   <div className={css.component}>
     <Button
@@ -35,14 +38,18 @@ const UserSettings = ({
     >
       {concludedIssueListEnabled ? 'Skjul' : 'Vis'} konkluderte saker
     </Button>}
+    <Permissions canVote={canVote} permissions={permissions} />
   </div>
 );
 
 UserSettings.defaultProps = {
+  canVote: false,
   concludedIssues: {},
+  permissions: 0,
 };
 
 UserSettings.propTypes = {
+  canVote: PropTypes.bool,
   concludedIssues: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   })),
@@ -50,9 +57,12 @@ UserSettings.propTypes = {
   concludedIssueListToggle: PropTypes.func.isRequired,
   notificationsEnabled: PropTypes.bool.isRequired,
   notificationToggle: PropTypes.func.isRequired,
+  permissions: PropTypes.number,
 };
 
 const mapStateToProps = state => ({
+  canVote: state.auth.canVote,
+  permissions: state.auth.permissions,
   concludedIssues: getConcludedIssuesExceptLatest(state),
   notificationsEnabled: notificationIsEnabled(state),
   concludedIssueListEnabled: concludedIssueListIsEnabled(state),

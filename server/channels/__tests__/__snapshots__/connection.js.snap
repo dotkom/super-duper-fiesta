@@ -15,6 +15,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -307,6 +308,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -353,6 +355,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -572,6 +575,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -716,6 +720,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -808,6 +813,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -1100,6 +1106,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -1146,6 +1153,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -1355,6 +1363,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -1657,6 +1666,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
@@ -1703,6 +1713,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -1995,6 +2006,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": false,
         "full_name": "Namy",
         "id": "123",
@@ -2041,6 +2053,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
@@ -2337,6 +2350,7 @@ Array [
     "action",
     Object {
       "data": Object {
+        "canVote": true,
         "completedRegistration": true,
         "full_name": "Namy",
         "id": "123",
