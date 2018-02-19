@@ -26,7 +26,6 @@ const AdminHome = ({ issue }) => (
         <IssueStatus />
       </div>
       {(issue && issue.status === VOTING_FINISHED) && <ConcludedIssue
-        classes={[]}
         {...issue}
       />}
       <div className={css.components}>
