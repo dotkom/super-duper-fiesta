@@ -27,6 +27,7 @@ const {
   USER_VOTE,
 } = require('../../common/actionTypes/voting');
 const { RECEIVE_USER_LIST: USER_LIST } = require('../../common/actionTypes/users');
+const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
@@ -69,16 +70,24 @@ const emitActiveQuestion = async (socket, meeting) => {
       return;
     }
     logger.debug('Current issue', { issue: issue.description });
-    emit(socket, OPEN_ISSUE, issue);
+
+    if (userIsAdmin(user) && issue.status === VOTING_FINISHED) {
+      emit(socket, OPEN_ISSUE, await getPublicIssueWithVotes(issue, true));
+    } else {
+      emit(socket, OPEN_ISSUE, issue);
+    }
 
     // Issue is active, let's emit already given votes.
-    try {
-      const votes = await getVotes(issue.id);
-      votes.forEach(async (vote) => {
-        emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-      });
-    } catch (err) {
-      logger.error('Fetching stored votes failed for issue', err, { issue });
+    // Unless user is admin and voting is finished; we've already emitted the votes.
+    if (!userIsAdmin(user) && issue.status !== VOTING_FINISHED) {
+      try {
+        const votes = await getVotes(issue.id);
+        votes.forEach(async (vote) => {
+          emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
+        });
+      } catch (err) {
+        logger.error('Fetching stored votes failed for issue', err, { issue });
+      }
     }
 
     // Emit voted state if user has voted.
@@ -91,7 +100,11 @@ const emitActiveQuestion = async (socket, meeting) => {
       voter = user;
     }
     const vote = await getUserVote(issue.id, voter.id);
-    if (vote) {
+
+    // Emit own vote unless user is admin and voting is finshed.
+    // This is to stop breaking concluded issue component with different datatypes for
+    // votes on active issues and votes on concluded issues.
+    if (vote && !userIsAdmin(user) && issue.status !== VOTING_FINISHED) {
       emit(socket, USER_VOTE, {
         alternativeId: vote.alternativeId,
         issueId: vote.issueId,
