@@ -184,6 +184,43 @@ Array [
       "type": "DISABLE_VOTING",
     },
   ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "id": "1",
+        "meetingId": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "status": "VOTING_NOT_STARTED",
+        "voteDemand": "regular",
+        "votes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "winner": "3",
+      },
+      "type": "CLOSE_ISSUE",
+    },
+  ],
 ]
 `;
 
