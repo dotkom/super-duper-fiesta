@@ -2105,10 +2105,89 @@ Array [
     "action",
     Object {
       "data": Object {
-        "id": 0,
-        "message": "Noe gikk galt under henting av aktiv sak.",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "concludedVotes": Object {
+          "1": 0,
+          "2": 0,
+          "3": 4,
+        },
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "id": "2",
+        "meetingId": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "status": "VOTING_IN_PROGRESS",
+        "voteDemand": "regular",
+        "winner": "3",
       },
-      "type": "ERROR",
+      "type": "OPEN_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "1",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "2",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "3",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "4",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
     },
   ],
   Array [
@@ -2325,10 +2404,83 @@ Array [
     "action",
     Object {
       "data": Object {
-        "id": 0,
-        "message": "Noe gikk galt under henting av aktiv sak.",
+        "active": true,
+        "alternatives": Array [
+          Object {
+            "id": "1",
+            "text": "Blank",
+          },
+          Object {
+            "id": "2",
+            "text": "Yes",
+          },
+          Object {
+            "id": "3",
+            "text": "No",
+          },
+        ],
+        "countingBlankVotes": false,
+        "description": "Description goes here",
+        "id": "1",
+        "meetingId": "1",
+        "secret": false,
+        "showOnlyWinner": false,
+        "status": "VOTING_FINISHED",
+        "voteDemand": "regular",
       },
-      "type": "ERROR",
+      "type": "OPEN_ISSUE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "1",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "2",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "3",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
+    },
+  ],
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "alternativeId": "3",
+        "id": "4",
+        "issueId": "1",
+        "randomName": null,
+        "userId": "1",
+      },
+      "type": "ADD_VOTE",
     },
   ],
   Array [
