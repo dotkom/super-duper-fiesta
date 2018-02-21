@@ -1,7 +1,7 @@
 import { CLOSE_ISSUE, OPEN_ISSUE, SEND_VOTE, DELETED_ISSUE } from 'common/actionTypes/issues';
 import { RECEIVE_VOTE, USER_VOTE, DISABLE_VOTING, ENABLE_VOTING } from 'common/actionTypes/voting';
 
-const issue = (state = { votes: {} }, action, currentIssue) => {
+const issue = (state = { votes: {}, concludedVotes: {} }, action, currentIssue) => {
   switch (action.type) {
     case CLOSE_ISSUE:
     case OPEN_ISSUE: {
@@ -22,9 +22,10 @@ const issue = (state = { votes: {} }, action, currentIssue) => {
         countingBlankVotes: action.data.countingBlankVotes,
         showOnlyWinner: action.data.showOnlyWinner,
         status: action.data.status,
-        votes: action.data.votes || {},
+        votes: action.data.votes || state.votes,
         winner: action.data.winner,
         userVote: state.userVote || null,
+        concludedVotes: action.data.concludedVotes || {},
       };
     }
     case USER_VOTE: {

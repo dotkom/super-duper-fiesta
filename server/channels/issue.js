@@ -83,6 +83,9 @@ async function adminDisableVoting(socket, data) {
     id: updatedIssue.id,
     status: updatedIssue.status,
   });
+
+  adminBroadcast(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, true));
+  emit(socket, CLOSE_ISSUE, await getPublicIssueWithVotes(updatedIssue, userIsAdmin(user)));
 }
 
 async function adminEnableVoting(socket, data) {

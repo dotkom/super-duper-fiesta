@@ -15,6 +15,7 @@ const { getActiveQuestion, getIssueWithAlternatives, getConcludedIssues, getIssu
 const { waitForAction } = require('../../utils/socketAction');
 const { generateSocket, generateGenfors, generateAnonymousUser, generateIssue, generateVote, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
+const { VOTING_FINISHED } = require('../../../common/actionTypes/issues');
 
 describe('connection', () => {
   beforeEach(() => {
@@ -154,6 +155,24 @@ describe('connection', () => {
 
   it('emits sensitive data like meeting pin if user is manager', async () => {
     const socket = generateSocket({ permissions: permissionLevels.IS_MANAGER });
+    await connection(socket);
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits final votes for issue if user is manager and voting is finished', async () => {
+    getActiveQuestion.mockImplementation(async () => generateIssue({ status: VOTING_FINISHED }));
+    const socket = generateSocket({ permissions: permissionLevels.IS_MANAGER });
+    await connection(socket);
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+
+  it('emits question without final votes if voting is finished and user is not manager', async () => {
+    getActiveQuestion.mockImplementation(async () => generateIssue({ status: VOTING_FINISHED }));
+    const socket = generateSocket({ permissions: permissionLevels.CAN_VOTE });
     await connection(socket);
 
     expect(socket.emit.mock.calls).toMatchSnapshot();

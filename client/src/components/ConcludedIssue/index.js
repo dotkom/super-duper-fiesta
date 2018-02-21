@@ -6,7 +6,9 @@ import IconText from '../IconText';
 import Card from '../Card';
 import css from './ConcludedIssue.css';
 
-const ConcludedIssue = ({ winner, voteDemand, text, alternatives, votes, qualifiedVoters }) => {
+const ConcludedIssue = ({
+  winner, voteDemand, text, alternatives, concludedVotes, qualifiedVoters,
+  }) => {
   const majority = winner !== null;
   return (<Card
     classes={css.concludedIssue}
@@ -33,7 +35,7 @@ const ConcludedIssue = ({ winner, voteDemand, text, alternatives, votes, qualifi
                 && alternative.id === winner,
             })}
           >
-            {alternative.text}{ Object.keys(votes).length > 0 && `: ${votes[alternative.id]}` }
+            {alternative.text}{ Object.keys(concludedVotes).length > 0 && `: ${concludedVotes[alternative.id]}` }
           </li>
       ))}
     </ul>
@@ -42,7 +44,7 @@ const ConcludedIssue = ({ winner, voteDemand, text, alternatives, votes, qualifi
 
 ConcludedIssue.defaultProps = {
   alternatives: [],
-  votes: {},
+  concludedVotes: {},
   voteDemand: RESOLUTION_TYPES.regular.voteDemand,
   text: 'Denne saken har ingen tittel.',
   winner: null,
@@ -57,7 +59,7 @@ ConcludedIssue.propTypes = {
     text: PropTypes.string.isRequired,
   })).isRequired,
   qualifiedVoters: PropTypes.number.isRequired,
-  votes: PropTypes.objectOf(PropTypes.number),
+  concludedVotes: PropTypes.objectOf(PropTypes.number),
   winner: PropTypes.string,
 };
 

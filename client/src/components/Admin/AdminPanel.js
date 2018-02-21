@@ -5,7 +5,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { IS_MANAGER } from 'common/auth/permissions';
 import { endGAM, toggleRegistration } from 'features/meeting/actionCreators';
-import AdminHome from './Home';
+import { AdminHomeContainer } from './Home';
 import { IssueFormContainer } from './IssueForm';
 import Users from './Users';
 import Button from '../Button';
@@ -119,7 +119,7 @@ class AdminPanel extends React.Component {
               <Switch>
                 <Route exact path={`${match.path}/question`} component={IssueFormContainer} />
                 <Route exact path={`${match.path}/users`} component={Users} />
-                <Route exact path={match.path} component={AdminHome} />
+                <Route exact path={match.path} component={AdminHomeContainer} />
                 <Route component={NotFound} />
               </Switch>
             </main>

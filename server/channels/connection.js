@@ -27,6 +27,7 @@ const {
   USER_VOTE,
 } = require('../../common/actionTypes/voting');
 const { RECEIVE_USER_LIST: USER_LIST } = require('../../common/actionTypes/users');
+const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
 
 // eslint-disable-next-line global-require
 const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
@@ -69,9 +70,13 @@ const emitActiveQuestion = async (socket, meeting) => {
       return;
     }
     logger.debug('Current issue', { issue: issue.description });
-    emit(socket, OPEN_ISSUE, issue);
 
-    // Issue is active, let's emit already given votes.
+    if (userIsAdmin(user) && issue.status === VOTING_FINISHED) {
+      emit(socket, OPEN_ISSUE, await getPublicIssueWithVotes(issue, true));
+    } else {
+      emit(socket, OPEN_ISSUE, issue);
+    }
+
     try {
       const votes = await getVotes(issue.id);
       votes.forEach(async (vote) => {
@@ -91,6 +96,8 @@ const emitActiveQuestion = async (socket, meeting) => {
       voter = user;
     }
     const vote = await getUserVote(issue.id, voter.id);
+
+    // Emit own vote if voted
     if (vote) {
       emit(socket, USER_VOTE, {
         alternativeId: vote.alternativeId,
