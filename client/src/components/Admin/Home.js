@@ -25,9 +25,11 @@ const AdminHome = ({ issue }) => (
         </div>
         <IssueStatus />
       </div>
-      {(issue && issue.status === VOTING_FINISHED) && <ConcludedIssue
-        {...issue}
-      />}
+      {(issue && issue.status === VOTING_FINISHED) && <div className={css.latestIssueRemoveMargin}>
+        <ConcludedIssue
+          {...issue}
+        />
+      </div>}
       <div className={css.components}>
         <div className={css.latestIssue}>
           <LatestConcludedIssue />

@@ -27,3 +27,7 @@
 .latestIssue > * {
   margin: 0;
 }
+
+.latestIssueRemoveMargin {
+  margin: 0 -0.5rem;
+}
