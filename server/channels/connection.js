@@ -77,17 +77,13 @@ const emitActiveQuestion = async (socket, meeting) => {
       emit(socket, OPEN_ISSUE, issue);
     }
 
-    // Issue is active, let's emit already given votes.
-    // Unless user is admin and voting is finished; we've already emitted the votes.
-    if (!userIsAdmin(user) && issue.status !== VOTING_FINISHED) {
-      try {
-        const votes = await getVotes(issue.id);
-        votes.forEach(async (vote) => {
-          emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
-        });
-      } catch (err) {
-        logger.error('Fetching stored votes failed for issue', err, { issue });
-      }
+    try {
+      const votes = await getVotes(issue.id);
+      votes.forEach(async (vote) => {
+        emit(socket, SEND_VOTE, await generatePublicVote(issue, vote));
+      });
+    } catch (err) {
+      logger.error('Fetching stored votes failed for issue', err, { issue });
     }
 
     // Emit voted state if user has voted.
@@ -101,10 +97,8 @@ const emitActiveQuestion = async (socket, meeting) => {
     }
     const vote = await getUserVote(issue.id, voter.id);
 
-    // Emit own vote unless user is admin and voting is finshed.
-    // This is to stop breaking concluded issue component with different datatypes for
-    // votes on active issues and votes on concluded issues.
-    if (vote && !userIsAdmin(user) && issue.status !== VOTING_FINISHED) {
+    // Emit own vote if voted
+    if (vote) {
       emit(socket, USER_VOTE, {
         alternativeId: vote.alternativeId,
         issueId: vote.issueId,
