@@ -21,6 +21,9 @@ const Alternative = ({ disabled, id, text, selected, onClick }) => {
         />
         {text}
       </label>
+      <span
+        id="checked"
+      />
     </div>
   );
 };
