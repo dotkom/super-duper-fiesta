@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { voteWithNameSelector } from 'features/voting/selectors';
+import { voteWithNameSelector } from 'features/lastVotes/selectors';
 import { activeIssueExists, getOwnVote, getIssueKey } from 'features/issue/selectors';
 import css from './LastVotes.css';
 
