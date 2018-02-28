@@ -1,5 +1,5 @@
 jest.mock('../../models/meeting.accessors');
-const { endGenfors } = require('../meeting');
+const { addGenfors, endGenfors } = require('../meeting');
 const { getGenfors, getActiveGenfors, updateGenfors } = require('../../models/meeting.accessors');
 const { generateGenfors, generateUser } = require('../../utils/generateTestData');
 const permissionLevels = require('../../../common/auth/permissions');
@@ -26,5 +26,15 @@ describe('endGenfors', () => {
 
     await expect(endGenfors(genfors, user)).rejects
       .toEqual(new Error('Brukeren har ikke riktig rettigheter'));
+  });
+});
+
+describe('addGenfors', () => {
+  it('throws error if meeting is in progress', async () => {
+    getActiveGenfors.mockImplementation(async () => generateGenfors());
+
+    const genfors = addGenfors(generateGenfors());
+
+    expect(genfors).rejects.toEqual(new Error('Meeting in progress, you need to close it or force new'));
   });
 });

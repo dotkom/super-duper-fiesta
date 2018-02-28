@@ -62,17 +62,12 @@ async function endGenfors(genfors, user) {
 }
 
 
-// TODO add security function
-async function addGenfors(title, date, user, force) {
-  // Only allow one at a time
+async function addGenfors(title, date) {
+  // Only allow one genfors at a time, so check if one exists first
   const meeting = await getActiveGenfors();
-  // @TODO Prompt user for confirmations and disable active genfors
 
   if (meeting) {
-    if (!force) {
-      throw new Error('Meeting in progress, you need to close it or force new');
-    }
-    await endGenfors(meeting, user);
+    throw new Error('Meeting in progress, you need to close it or force new');
   }
   return createGenfors(title, date);
 }

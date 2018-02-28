@@ -27,15 +27,8 @@ async function addIssue(issueData, closeCurrentIssue) {
   const activeIssue = model.getActiveQuestion(genfors.id);
   if (activeIssue && activeIssue.active && !closeCurrentIssue) {
     throw new Error("There's already an active question");
-  } else if (activeIssue && !activeIssue.active && closeCurrentIssue) {
-    logger.warn("There's already an active issue. Closing it and proceeding", {
-      issue: activeIssue.description,
-      // user: user,
-      closeCurrentIssue,
-    });
-    await model.endIssue(activeIssue);
   }
-  // removed possible issues and proceeding to create a new one
+
   const users = await getQualifiedUsers(genfors.id);
   const meetingId = genfors.id;
   const data = Object.assign(issueData, {
@@ -56,7 +49,7 @@ async function deleteIssue(issue, user) {
   if (userCanEdit) {
     return model.deleteIssue(issue);
   }
-  return null;
+  throw new Error("You don't have permission to delete this issue");
 }
 
 const countVoteAlternatives = (alternatives, votes) => {
