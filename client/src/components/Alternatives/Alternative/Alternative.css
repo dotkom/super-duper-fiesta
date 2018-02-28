@@ -8,6 +8,7 @@
   box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.25) inset,
               0 2px 1px 0 rgba(0, 0, 0, 0.2);
   composes: border from "css/border.css";
+  align-items: center;
 }
 
 .alternative:last-of-type {
@@ -22,9 +23,13 @@
   background: #474a6b;
 }
 
-.selected label:after {
+.alternative span {
+    flex-shrink: 1;
+    padding: 1rem;
+}
+
+.selected span:before {
   content: "✓";
-  float: right;
 }
 
 .selected:hover {
