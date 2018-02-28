@@ -1,8 +1,9 @@
 jest.mock('../../../models/meeting.accessors');
-const { endGAM, toggleRegistration } = require('../meeting');
+const { listener, endGAM, toggleRegistration } = require('../meeting');
 const { getGenfors, getActiveGenfors, updateGenfors } = require('../../../models/meeting.accessors');
 const { generateSocket, generateGenfors, generateUser } = require('../../../utils/generateTestData');
 const permissionLevels = require('../../../../common/auth/permissions');
+const { ADMIN_END_MEETING, TOGGLE_REGISTRATION_STATE } = require('../../../../common/actionTypes/meeting');
 
 describe('toggleRegistration', () => {
   beforeEach(() => {
@@ -64,5 +65,47 @@ describe('endGAM', () => {
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
     expect(socket.to('admin').emit.mock.calls).toEqual([]);
+  });
+});
+
+function generateSocketData(data) {
+  return { type: '', ...data };
+}
+
+describe('listener', () => {
+  it('listens to ADMIN_END_MEETING', async (done) => {
+    const socket = generateSocket({ permissions: permissionLevels.IS_MANAGER });
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: ADMIN_END_MEETING }));
+
+    setTimeout(() => {
+      expect(socket.emit).toBeCalled();
+      expect(socket.broadcast.emit).toBeCalled();
+      done();
+    });
+  });
+
+  it('listens to TOGGLE_REGISTRATION_STATE', async (done) => {
+    const socket = generateSocket({ permissions: permissionLevels.IS_MANAGER });
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: TOGGLE_REGISTRATION_STATE }));
+
+    setTimeout(() => {
+      expect(socket.emit).toBeCalled();
+      expect(socket.broadcast.emit).toBeCalled();
+      done();
+    });
+  });
+
+  it('ignores INVALID_ACTION', async () => {
+    const socket = generateSocket();
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: 'INVALID_ACTION' }));
+
+    expect(socket.emit).not.toBeCalled();
+    expect(socket.broadcast.emit).not.toBeCalled();
   });
 });
