@@ -68,6 +68,23 @@ Array [
 ]
 `;
 
+exports[`toggleCanVote emits error if update function fails 1`] = `
+Array [
+  Array [
+    "action",
+    Object {
+      "data": Object {
+        "id": 0,
+        "message": "Noe gikk galt under oppdatering av stemmeberettiget",
+      },
+      "type": "ERROR",
+    },
+  ],
+]
+`;
+
+exports[`toggleCanVote emits error if update function fails 2`] = `Array []`;
+
 exports[`toggleCanVote emits error when user does not have CAN_VOTE permission 1`] = `
 Array [
   Array [

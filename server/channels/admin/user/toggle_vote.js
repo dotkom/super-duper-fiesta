@@ -48,7 +48,7 @@ const toggleCanVote = async (socket, data) => {
       canVote: updatedUser.canVote,
     });
   } catch (err) {
-    logger.error('Retrieving user failed.', err);
+    logger.error('Something went wrong while updating CAN_VOTE for user', err);
     emitError(socket, new Error('Noe gikk galt under oppdatering av stemmeberettiget'));
   }
 };

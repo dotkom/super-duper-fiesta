@@ -44,6 +44,16 @@ describe('toggleCanVote', () => {
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
   });
+
+  it('emits error if update function fails', async () => {
+    updateUserById.mockImplementation(async () => { throw new Error(); });
+    const socket = generateSocket();
+
+    await toggleCanVote(socket, generateData());
+
+    expect(socket.emit.mock.calls).toMatchSnapshot();
+    expect(socket.broadcast.emit.mock.calls).toMatchSnapshot();
+  });
 });
 
 describe('setUserPermissions', () => {
