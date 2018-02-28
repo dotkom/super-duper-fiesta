@@ -2,7 +2,7 @@ jest.mock('../../models/user.accessors');
 jest.mock('../../models/vote.accessors');
 jest.mock('../../models/issue.accessors');
 jest.mock('../../models/meeting.accessors');
-const { submitRegularVote, submitAnonymousVote } = require('../vote');
+const { listener, submitRegularVote, submitAnonymousVote } = require('../vote');
 const { createUserVote, createAnonymousVote, getUserVote } = require('../../models/vote.accessors');
 const { getIssueById, getIssueWithAlternatives } = require('../../models/issue.accessors');
 const { getActiveGenfors, getGenfors } = require('../../models/meeting.accessors');
@@ -10,6 +10,7 @@ const { getAnonymousUser } = require('../../models/user.accessors');
 const { generateIssue, generateVote, generateSocket, generateAnonymousUser } = require('../../utils/generateTestData');
 const { CAN_VOTE, IS_LOGGED_IN } = require('../../../common/auth/permissions');
 const { VOTING_NOT_STARTED, VOTING_FINISHED } = require('../../../common/actionTypes/issues');
+const { SUBMIT_ANONYMOUS_VOTE, SUBMIT_REGULAR_VOTE } = require('../../../common/actionTypes/voting');
 
 beforeEach(() => {
   getIssueById.mockImplementation(async () => generateIssue());
@@ -222,5 +223,50 @@ describe('submitAnonymousVote', () => {
 
     expect(socket.emit.mock.calls).toMatchSnapshot();
     expect(socket.broadcast.emit.mock.calls).toEqual([]);
+  });
+});
+
+function generateSocketData(data) {
+  return {
+    type: '',
+    ...data,
+  };
+}
+
+describe('listener', () => {
+  it('listens to SUBMIT_ANONYMOUS_VOTE', async (done) => {
+    const socket = generateSocket({ permissions: CAN_VOTE });
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: SUBMIT_ANONYMOUS_VOTE, ...generateData() }));
+
+    setTimeout(() => {
+      expect(socket.emit).toBeCalled();
+      expect(socket.broadcast.emit).toBeCalled();
+      done();
+    });
+  });
+
+  it('listens to SUBMIT_REGULAR_VOTE', async (done) => {
+    const socket = generateSocket({ permissions: CAN_VOTE });
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: SUBMIT_REGULAR_VOTE, ...generateData() }));
+
+    setTimeout(() => {
+      expect(socket.emit).toBeCalled();
+      expect(socket.broadcast.emit).toBeCalled();
+      done();
+    });
+  });
+
+  it('ignores INVALID_ACTION', async () => {
+    const socket = generateSocket();
+    await listener(socket);
+
+    await socket.mockEmit('action', generateSocketData({ type: 'INVALID_ACTION' }));
+
+    expect(socket.emit).not.toBeCalled();
+    expect(socket.broadcast.emit).not.toBeCalled();
   });
 });
