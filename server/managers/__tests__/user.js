@@ -63,7 +63,8 @@ describe('addAnonymousUser', () => {
 
   it('throws error if anonUser already exists', async () => {
     getActiveGenfors.mockImplementation(async () => generateGenfors());
-    getUserByUsername.mockImplementation(async () => generateUser({ completedRegistration: false }));
+    getUserByUsername.mockImplementation(async () =>
+      generateUser({ completedRegistration: false }));
     getAnonymousUser.mockImplementation(async () => generateAnonymousUser());
 
     const anonUser = addAnonymousUser(generateAnonymousUser());
