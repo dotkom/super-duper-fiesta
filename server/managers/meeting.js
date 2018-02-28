@@ -62,7 +62,6 @@ async function endGenfors(genfors, user) {
 }
 
 
-// TODO add security function
 async function addGenfors(title, date) {
   // Only allow one genfors at a time, so check if one exists first
   const meeting = await getActiveGenfors();
