@@ -1,4 +1,3 @@
-const logger = require('../logging');
 const passport = require('passport');
 const { setupOIDC } = require('./oidc');
 const { deserializeUser } = require('./user');
@@ -6,11 +5,7 @@ const { deserializeUser } = require('./user');
 module.exports = async (app) => {
   await setupOIDC();
 
-  passport.serializeUser((user, done) => {
-    logger.silly('Serializing user', { userId: user.id });
-    done(null, user.id);
-  });
-
+  passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser(deserializeUser);
   app.use(passport.initialize());
   app.use(passport.session());
