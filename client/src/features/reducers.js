@@ -9,6 +9,7 @@ import userFilter from './userFilter/reducer';
 import users from './user/reducer';
 import error from './error/reducer';
 import userSettings from './userSettings/reducer';
+import voting from './voting/reducer';
 
 const votingApp = {
   auth,
@@ -22,6 +23,7 @@ const votingApp = {
   version,
   error,
   userSettings,
+  voting,
 };
 
 export default votingApp;

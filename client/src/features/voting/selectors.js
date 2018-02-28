@@ -19,10 +19,10 @@ export const getOwnVote = (state, userId) => (
   getOwnVoteForIssue(getIssue(state), userId)
 );
 
-export const issueVotesSelector = createSelector(
-  getIssue,
-  issue => (issue ? Object.keys(issue.votes).map(key => issue.votes[key]) : []),
-);
+export const issueVotesSelector = (state) => {
+  const issue = getIssue(state);
+  return issue ? state.voting.lastVotes.map(key => issue.votes[key]) : [];
+};
 
 export const voteWithNameSelector = createSelector(
   getIssue,

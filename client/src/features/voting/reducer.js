@@ -1,16 +1,16 @@
-import { OPEN_ISSUE } from 'common/actionTypes/issues';
-import { VOTING_STATE } from 'common/actionTypes/voting';
+import { RECEIVE_VOTE } from 'common/actionTypes/voting';
 
-const votedState = (state = false, action) => {
+const votedState = (state = { lastVotes: [] }, action) => {
   switch (action.type) {
-    case VOTING_STATE:
+    case RECEIVE_VOTE: {
+      let newLastVotes = state.lastVotes;
+      newLastVotes.push(action.data.id);
+      newLastVotes = newLastVotes.slice(Math.max(newLastVotes.length - 5, 0), newLastVotes.length);
       return {
-        voted: action.data.voted,
+        ...state,
+        lastVotes: newLastVotes,
       };
-    case OPEN_ISSUE:
-      return {
-        voted: false,
-      };
+    }
 
     default:
       return state;
