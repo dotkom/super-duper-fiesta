@@ -6,7 +6,10 @@ const Vote = db.sequelize.models.vote;
 function getVotes(question) {
   deprecateObject(question);
   const issueId = question.id || question;
-  return Vote.findAll({ where: { issueId } }).map(plainObject);
+  return Vote.findAll({
+    where: { issueId },
+    order: ['createdAt', 'ASC'],
+  }).map(plainObject);
 }
 
 function getUserVote(issue, user) {
