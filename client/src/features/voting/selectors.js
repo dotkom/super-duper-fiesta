@@ -34,14 +34,7 @@ export const voteWithNameSelector = createSelector(
   issueVotesSelector,
   usersSelector,
   (issue, votes, users) => (
-    votes.sort(({ id: id1 }, { id: id2 }) => {
-      if (id1 < id2) {
-        return 1;
-      } else if (id1 > id2) {
-        return -1;
-      }
-      return 0;
-    })
+    votes
     .filter(vote => !!vote.alternative)
     .map(({ randomName, voter, alternative }) => {
       let name;
