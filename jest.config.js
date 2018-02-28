@@ -7,6 +7,8 @@ function coverageGlobs() {
   if (!integrationTest()) {
     globs.push('!server/models/**');
     globs.push('!server/utils/integrationTestUtils.js');
+    globs.push('!server/app.js');
+    globs.push('!server/server.js');
   }
 
   return globs;
