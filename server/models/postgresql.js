@@ -7,16 +7,21 @@ const DATABASE_URL = process.env.DATABASE_URL || 'sqlite://db.db';
 
 const db = {};
 
+const SDF_DB_POOL_MIN = process.env.SDF_DB_POOL_MIN || 0;
+const SDF_DB_POOL_MAX = process.env.SDF_DB_POOL_MAX || 5;
+const SDF_DB_POOL_ACQUIRE = process.env.SDF_DB_POOL_ACQUIRE || 30000;
+const SDF_DB_POOL_IDLE = process.env.SDF_DB_POOL_IDLE || 10000;
+
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
   // Use winston for logging.
   // See https://github.com/sequelize/sequelize/issues/7821#issuecomment-311564259
   logging: msg => logger.silly(msg),
   pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
+    max: SDF_DB_POOL_MAX,
+    min: SDF_DB_POOL_MIN,
+    acquire: SDF_DB_POOL_ACQUIRE,
+    idle: SDF_DB_POOL_IDLE,
   },
   operatorsAliases: false,
 });
