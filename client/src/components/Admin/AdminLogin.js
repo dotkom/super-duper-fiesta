@@ -6,6 +6,7 @@ import { adminCreateGenfors, adminLogin } from 'features/auth/actionCreators';
 import Button from '../Button';
 import { ErrorContainer } from '../Error';
 import Heading from '../Heading';
+import css from './AdminLogin.css';
 
 
 function zeroPadNumber(number) {
@@ -49,39 +50,44 @@ class AdminLogin extends React.Component {
           </Heading>
           <main>
             <ErrorContainer />
-            <h1>Logg inn</h1>
-            {this.props.meetingExists
-              ? <p>Vennligst logg inn for å få tilgang til denne funksjonaliteten.</p>
-              : <p>Vennligst opprett en generalforsamling</p>}
-            <form action="">
-              {!this.props.meetingExists &&
-              (<div>
-                <input
-                  type="text"
-                  placeholder="Tittel"
-                  value={this.state.title}
-                  onChange={e => this.setState({ title: e.target.value })}
-                />
-                <input
-                  type="date"
-                  value={formattedDate}
-                  onChange={e => this.setState({ date: new Date(e.target.value) })}
-                />
-              </div>
-              )}
-              <input
-                type="password"
-                placeholder="Administratorpassord"
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-              />
+            <div className={css.component}>
+              <h1>Logg inn som tellekorps</h1>
+              {this.props.meetingExists
+                ? <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
+                : <p>Vennligst opprett en generalforsamling</p>}
+              <form action="">
+                {!this.props.meetingExists &&
+                (<div className={css.createGenfors}>
+                  <input
+                    type="text"
+                    placeholder="Tittel"
+                    value={this.state.title}
+                    onChange={e => this.setState({ title: e.target.value })}
+                  />
+                  <input
+                    type="date"
+                    value={formattedDate}
+                    onChange={e => this.setState({ date: new Date(e.target.value) })}
+                  />
+                </div>
+                )}
+                <div className={css.adminPassword}>
+                  <input
+                    type="password"
+                    placeholder="Administratorpassord"
+                    value={this.state.password}
+                    onChange={e => this.setState({ password: e.target.value })}
+                  />
+                </div>
+              </form>
               <Button
                 background
+                size="lg"
                 onClick={e => this.authenticateAdmin(e)}
               >
                 Logg inn
               </Button>
-            </form>
+            </div>
           </main>
         </div>
       </div>
