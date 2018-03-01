@@ -2,8 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const logger = require('../logging');
-
-const DATABASE_URL = process.env.DATABASE_URL || 'sqlite://db.db';
+const config = require('../../config');
 
 const db = {};
 
@@ -12,7 +11,7 @@ const SDF_DB_POOL_MAX = process.env.SDF_DB_POOL_MAX || 5;
 const SDF_DB_POOL_ACQUIRE = process.env.SDF_DB_POOL_ACQUIRE || 30000;
 const SDF_DB_POOL_IDLE = process.env.SDF_DB_POOL_IDLE || 10000;
 
-const sequelize = new Sequelize(DATABASE_URL, {
+const sequelize = new Sequelize(config.database.uri, {
   dialect: 'postgres',
   // Use winston for logging.
   // See https://github.com/sequelize/sequelize/issues/7821#issuecomment-311564259
