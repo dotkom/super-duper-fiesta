@@ -8,7 +8,9 @@ function getVotes(question) {
   const issueId = question.id || question;
   return Vote.findAll({
     where: { issueId },
-    order: ['createdAt'],
+    order: [
+      ['createdAt', 'ASC'],
+    ],
   }).map(plainObject);
 }
 
