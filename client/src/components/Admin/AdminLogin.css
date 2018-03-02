@@ -1,0 +1,37 @@
+input {
+  margin: 1rem;
+  box-sizing: border-box;
+}
+
+form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20%;
+}
+
+.component {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.createGenfors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.createGenfors > input {
+  flex: 1;
+}
+
+.adminPassword {
+  display: flex;
+}
+
+.adminPassword > input {
+  flex: 1;
+}
