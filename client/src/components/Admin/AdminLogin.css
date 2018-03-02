@@ -1,9 +1,9 @@
-input {
+.component input {
   margin: 1rem;
   box-sizing: border-box;
 }
 
-form {
+.component > form {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
