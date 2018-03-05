@@ -3,6 +3,7 @@ const appConfig = require('./app');
 const channels = require('./channels/index');
 const logger = require('./logging');
 const Raven = require('raven');
+const { getGitSha } = require('./utils/git');
 
 (async () => {
   const app = await appConfig();
@@ -18,6 +19,7 @@ const Raven = require('raven');
     tags: {
       app: 'backend',
     },
+    release: getGitSha(),
   })
   .install();
 
