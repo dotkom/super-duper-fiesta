@@ -28,9 +28,9 @@ const {
 } = require('../../common/actionTypes/voting');
 const { RECEIVE_USER_LIST: USER_LIST } = require('../../common/actionTypes/users');
 const { VOTING_FINISHED } = require('../../common/actionTypes/issues');
+const { getGitSha } = require('../utils/git');
 
-// eslint-disable-next-line global-require
-const APP_VERSION = require('child_process').execSync('git rev-parse HEAD').toString().trim();
+const APP_VERSION = getGitSha();
 
 const emitUserData = async (socket) => {
   emit(socket, VERSION, { version: APP_VERSION });
