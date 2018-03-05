@@ -16,6 +16,8 @@ const { listener: meetingListener } = require('./admin/meeting');
 const { listener: toggleCanVoteListener } = require('./admin/user/toggle_vote');
 const { listener: voteListener } = require('./vote');
 
+const sessionSecret = process.env.SDF_SESSION_STORE_SECRET || 'super secret';
+
 const authorizeSuccess = (data, accept) => {
   logger.silly('Authorized socket connection');
   accept();
@@ -33,7 +35,7 @@ const applyMiddlewares = (io) => {
   io.use(passportSocketIo.authorize({
     cookieParser,
     key: 'connect.sid',
-    secret: 'super secret',
+    secret: sessionSecret,
     store: new SequelizeStore({ db: db.sequelize }),
     success: authorizeSuccess,
     fail: authorizeFailure,
