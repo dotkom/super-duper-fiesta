@@ -37,7 +37,7 @@ const UserList = ({ users, toggleCanVote }) => {
       </thead>
       <tbody>
         {Object.keys(users)
-          .sort((a, b) => users[a].name > users[b].name)
+          .sort((a, b) => users[a].name.localeCompare(users[b].name))
           .map((key) => {
             const user = users[key];
             return (<UserContainer
