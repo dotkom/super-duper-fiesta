@@ -24,6 +24,7 @@ class AdminLogin extends React.Component {
   }
 
   authenticateAdmin(e) {
+    console.log('wtf')
     e.preventDefault();
     if (this.props.meetingExists) {
       this.props.login(this.state.password);
@@ -50,6 +51,7 @@ class AdminLogin extends React.Component {
           </Heading>
           <main>
             <ErrorContainer />
+
             <div className={css.component}>
               <h1>Logg inn som tellekorps</h1>
 
@@ -64,39 +66,41 @@ class AdminLogin extends React.Component {
               {this.props.loggedIn && (
                 <Fragment>
                   <form onSubmit={event => this.authenticateAdmin(event)}>
-                    {!this.props.meetingExists && (
-                      <div className={css.createGenfors}>
+                    <div className={css.formInputs}>
+                      {!this.props.meetingExists && (
+                        <div className={css.createGenfors}>
+                          <input
+                            type="text"
+                            placeholder="Tittel"
+                            value={this.state.title}
+                            onChange={e => this.setState({ title: e.target.value })}
+                          />
+                          <input
+                            type="date"
+                            value={formattedDate}
+                            onChange={e => this.setState({ date: new Date(e.target.value) })}
+                          />
+                        </div>
+                      )}
+
+                      <div className={css.adminPassword}>
                         <input
-                          type="text"
-                          placeholder="Tittel"
-                          value={this.state.title}
-                          onChange={e => this.setState({ title: e.target.value })}
-                        />
-                        <input
-                          type="date"
-                          value={formattedDate}
-                          onChange={e => this.setState({ date: new Date(e.target.value) })}
+                          type="password"
+                          placeholder="Administratorpassord"
+                          value={this.state.password}
+                          onChange={e => this.setState({ password: e.target.value })}
                         />
                       </div>
-                    )}
-
-                    <div className={css.adminPassword}>
-                      <input
-                        type="password"
-                        placeholder="Administratorpassord"
-                        value={this.state.password}
-                        onChange={e => this.setState({ password: e.target.value })}
-                      />
                     </div>
+
+                    <Button
+                      background
+                      size="lg"
+                      type="submit"
+                    >
+                      Logg inn
+                    </Button>
                   </form>
-                  
-                  <Button
-                    background
-                    size="lg"
-                    onClick={e => this.authenticateAdmin(e)}
-                  >
-                    Logg inn
-                  </Button>
                 </Fragment>
               )}
             </div>
