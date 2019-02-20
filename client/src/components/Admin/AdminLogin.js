@@ -55,7 +55,7 @@ class AdminLogin extends React.Component {
               {this.props.meetingExists
                 ? <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
                 : <p>Vennligst opprett en generalforsamling</p>}
-              <form action="">
+              <form onSubmit={event => this.authenticateAdmin(event)}>
                 {!this.props.meetingExists &&
                 (<div className={css.createGenfors}>
                   <input
