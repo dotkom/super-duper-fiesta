@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -52,41 +52,53 @@ class AdminLogin extends React.Component {
             <ErrorContainer />
             <div className={css.component}>
               <h1>Logg inn som tellekorps</h1>
-              {this.props.meetingExists
-                ? <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
-                : <p>Vennligst opprett en generalforsamling</p>}
-              <form onSubmit={event => this.authenticateAdmin(event)}>
-                {!this.props.meetingExists &&
-                (<div className={css.createGenfors}>
-                  <input
-                    type="text"
-                    placeholder="Tittel"
-                    value={this.state.title}
-                    onChange={e => this.setState({ title: e.target.value })}
-                  />
-                  <input
-                    type="date"
-                    value={formattedDate}
-                    onChange={e => this.setState({ date: new Date(e.target.value) })}
-                  />
-                </div>
-                )}
-                <div className={css.adminPassword}>
-                  <input
-                    type="password"
-                    placeholder="Administratorpassord"
-                    value={this.state.password}
-                    onChange={e => this.setState({ password: e.target.value })}
-                  />
-                </div>
-              </form>
-              <Button
-                background
-                size="lg"
-                onClick={e => this.authenticateAdmin(e)}
-              >
-                Logg inn
-              </Button>
+
+              {(!this.props.loggedIn || this.props.loggedIn && this.props.meetingExists) && (
+                <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
+              )}
+
+              {(this.props.loggedIn && !this.props.meetingExists) && (
+                <p>Vennligst opprett en generalforsamling</p>
+              )}
+
+              {this.props.loggedIn && (
+                <Fragment>
+                  <form onSubmit={event => this.authenticateAdmin(event)}>
+                    {!this.props.meetingExists && (
+                      <div className={css.createGenfors}>
+                        <input
+                          type="text"
+                          placeholder="Tittel"
+                          value={this.state.title}
+                          onChange={e => this.setState({ title: e.target.value })}
+                        />
+                        <input
+                          type="date"
+                          value={formattedDate}
+                          onChange={e => this.setState({ date: new Date(e.target.value) })}
+                        />
+                      </div>
+                    )}
+
+                    <div className={css.adminPassword}>
+                      <input
+                        type="password"
+                        placeholder="Administratorpassord"
+                        value={this.state.password}
+                        onChange={e => this.setState({ password: e.target.value })}
+                      />
+                    </div>
+                  </form>
+                  
+                  <Button
+                    background
+                    size="lg"
+                    onClick={e => this.authenticateAdmin(e)}
+                  >
+                    Logg inn
+                  </Button>
+                </Fragment>
+              )}
             </div>
           </main>
         </div>
@@ -108,6 +120,7 @@ const mapStateToProps = state => ({
                  state.meeting.title !== '' &&
                  state.meeting.title.length > 0,
   reloadPage: state.auth.reloadPage,
+  loggedIn: state.auth.loggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
