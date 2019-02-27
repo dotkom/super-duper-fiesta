@@ -32,13 +32,13 @@ class Issue extends React.Component {
     this.setState({ showDeleteIssueDialog: true });
   }
 
+  onClickCloseIssue() {
+    this.setState({ showCloseIssueDialog: true });
+  }
+
   deleteIssue() {
     this.setState({ showDeleteIssueDialog: false });
     this.props.deleteIssue();
-  }
-
-  onClickCloseIssue() {
-    this.setState({ showCloseIssueDialog: true });
   }
 
   closeIssue() {
@@ -49,13 +49,13 @@ class Issue extends React.Component {
   votingBtnOnClick() {
     if (this.props.issueStatus === VOTING_NOT_STARTED) {
       this.props.enableVoting();
-    } else if(this.props.issueStatus === VOTING_IN_PROGRESS) {
-      this.setState({showDisableVotingDialog: true});
+    } else if (this.props.issueStatus === VOTING_IN_PROGRESS) {
+      this.setState({ showDisableVotingDialog: true });
     }
   }
 
-  disableVoting(){
-    this.setState({showDisableVotingDialog: false});
+  disableVoting() {
+    this.setState({ showDisableVotingDialog: false });
     this.props.disableVoting();
   }
 
@@ -139,7 +139,10 @@ class Issue extends React.Component {
               iconClass={css.edit}
               onClick={() => { this.setState({ redirectToEditIssue: true }); }}
             />
-            <ButtonIconText text="Avslutt" iconClass={css.end} onClick={() => this.onClickCloseIssue()} />
+            <ButtonIconText
+              text="Avslutt" iconClass={css.end}
+              onClick={() => this.onClickCloseIssue()}
+            />
             <ButtonIconText
               text="Slett"
               iconClass={css.delete}
