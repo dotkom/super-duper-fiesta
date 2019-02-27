@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
-import { CAN_VOTE } from 'common/auth/permissions';
+import { CAN_VOTE, getPermissionDisplay } from 'common/auth/permissions';
 import { adminToggleCanVote } from 'features/user/actionCreators';
 import { UserContainer } from '../User';
 import ReactTable from 'react-table'
@@ -25,12 +25,26 @@ const UserList = ({ users, toggleCanVote }) => {
   const data = Object.keys(users)
     .sort((a, b) => users[a].name.localeCompare(users[b].name))
     .map((key) => users[key]);
-  console.log(data)
-
+  console.log(data);
   const columns = [{
     Header: `Name (${totalUsers})` ,
     accessor: 'name', // String-based value accessors!
-  },
+  }, {
+    Header: `Registrert (${usersRegistered})`,
+    accessor: `completedRegistration`,
+    Cell: props => <div
+            className={classNames(css.action,
+              { [css.success]: props.value,
+                [css.close]: !props.value,
+                [css.toggle]: props.value,
+              },
+          )}
+          >{props.value}</div>
+  }, {
+    Header: `Rettigheter`,
+    accessor: `permissions`,
+    Cell:  props => getPermissionDisplay(props.value)
+  }
   ]
 
   return (
