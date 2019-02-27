@@ -24,7 +24,6 @@ class AdminLogin extends React.Component {
   }
 
   authenticateAdmin(e) {
-    console.log('wtf')
     e.preventDefault();
     if (this.props.meetingExists) {
       this.props.login(this.state.password);
@@ -55,7 +54,7 @@ class AdminLogin extends React.Component {
             <div className={css.component}>
               <h1>Logg inn som tellekorps</h1>
 
-              {(!this.props.loggedIn || this.props.loggedIn && this.props.meetingExists) && (
+              {(!this.props.loggedIn || (this.props.loggedIn && this.props.meetingExists)) && (
                 <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
               )}
 
