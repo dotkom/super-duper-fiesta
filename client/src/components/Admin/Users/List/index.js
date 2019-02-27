@@ -5,6 +5,7 @@ import Fuse from 'fuse.js';
 import { CAN_VOTE } from 'common/auth/permissions';
 import { adminToggleCanVote } from 'features/user/actionCreators';
 import { UserContainer } from '../User';
+import ReactTable from 'react-table'
 import css from './List.css';
 
 const UserList = ({ users, toggleCanVote }) => {
@@ -19,8 +20,30 @@ const UserList = ({ users, toggleCanVote }) => {
   const usersRegistered = userKeys
     .filter(u => users[u].completedRegistration)
     .length;
+  const data = Object.keys(users)
+    .sort((a, b) => users[a].name.localeCompare(users[b].name))
+    .map((key) => users[key])
+
+  const columns = [{
+    Header: 'Name',
+    accessor: 'name' // String-based value accessors!
+  }, {
+    Header: 'Age',
+    accessor: 'age',
+    Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
+  }, {
+    id: 'friendName', // Required because our accessor is not a string
+    Header: 'Friend Name',
+    accessor: d => d.friend.name // Custom value accessors!
+  }, {
+    Header: props => <span>Friend Age</span>, // Custom header components!
+    accessor: 'friend.age'
+  }]
+
   return (
-    <table className={css.list}>
+  
+
+  /*  <table className={css.list}>
       <thead>
         <tr>
           <th className={css.left}>Bruker ({totalUsers})</th>
@@ -36,25 +59,10 @@ const UserList = ({ users, toggleCanVote }) => {
         </tr>
       </thead>
       <tbody>
-        {Object.keys(users)
-          .sort((a, b) => users[a].name.localeCompare(users[b].name))
-          .map((key) => {
-            const user = users[key];
-            return (<UserContainer
-              name={user.name}
-              canVote={user.canVote}
-              completedRegistration={user.completedRegistration}
-              key={user.id}
-              permissions={user.permissions}
-              registered={user.registered}
-              toggleCanVote={toggleCanVote}
-              id={user.id}
-            />);
-          },
-        )}
+        
       </tbody>
     </table>
-  );
+  );*/
 };
 
 UserList.propTypes = {
