@@ -7,6 +7,8 @@ import { adminToggleCanVote } from 'features/user/actionCreators';
 import { UserContainer } from '../User';
 import ReactTable from 'react-table'
 import css from './List.css';
+import 'react-table/react-table.css'
+import classNames from 'classnames';
 
 const UserList = ({ users, toggleCanVote }) => {
   const userKeys = Object.keys(users);
@@ -22,28 +24,23 @@ const UserList = ({ users, toggleCanVote }) => {
     .length;
   const data = Object.keys(users)
     .sort((a, b) => users[a].name.localeCompare(users[b].name))
-    .map((key) => users[key])
+    .map((key) => users[key]);
+  console.log(data)
 
   const columns = [{
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }, {
-    Header: 'Age',
-    accessor: 'age',
-    Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-  }, {
-    id: 'friendName', // Required because our accessor is not a string
-    Header: 'Friend Name',
-    accessor: d => d.friend.name // Custom value accessors!
-  }, {
-    Header: props => <span>Friend Age</span>, // Custom header components!
-    accessor: 'friend.age'
-  }]
+    Header: `Name (${totalUsers})` ,
+    accessor: 'name', // String-based value accessors!
+  },
+  ]
 
   return (
-  
-
-  /*  <table className={css.list}>
+  <ReactTable
+    data={data}
+    columns={columns}
+  />)
+}
+/*
+   <table className={css.list}>
       <thead>
         <tr>
           <th className={css.left}>Bruker ({totalUsers})</th>
@@ -61,9 +58,9 @@ const UserList = ({ users, toggleCanVote }) => {
       <tbody>
         
       </tbody>
-    </table>
-  );*/
-};
+    </table>*/
+  
+
 
 UserList.propTypes = {
   users: PropTypes.objectOf(PropTypes.shape({
