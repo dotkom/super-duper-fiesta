@@ -24,6 +24,7 @@ class Issue extends React.Component {
       redirectToEditIssue: false,
       showDeleteIssueDialog: false,
       showCloseIssueDialog: false,
+      showDisableVotingDialog: false,
     };
   }
 
@@ -48,9 +49,14 @@ class Issue extends React.Component {
   votingBtnOnClick() {
     if (this.props.issueStatus === VOTING_NOT_STARTED) {
       this.props.enableVoting();
-    } else {
-      this.props.disableVoting();
+    } else if(this.props.issueStatus === VOTING_IN_PROGRESS) {
+      this.setState({showDisableVotingDialog: true});
     }
+  }
+
+  disableVoting(){
+    this.setState({showDisableVotingDialog: false});
+    this.props.disableVoting();
   }
 
   closeDeleteDialog() {
@@ -61,11 +67,16 @@ class Issue extends React.Component {
     this.setState({ showCloseIssueDialog: false });
   }
 
+
+  closeDisableVotingDialog() {
+    this.setState({ showDisableVotingDialog: false });
+  }
+
   render() {
     const {
       issueIsActive, issueStatus, issueText, pin, registrationOpen,
     } = this.props;
-    const { showDeleteIssueDialog, showCloseIssueDialog } = this.state;
+    const { showDeleteIssueDialog, showCloseIssueDialog, showDisableVotingDialog } = this.state;
     const votingInProgress = issueStatus === VOTING_IN_PROGRESS;
     let enableDisableVotingBtnText;
     if (issueStatus === VOTING_NOT_STARTED) enableDisableVotingBtnText = 'Start votering';
@@ -96,6 +107,18 @@ class Issue extends React.Component {
           <Button
             background
             onClick={() => this.closeCloseDialog()}
+          >Avbryt</Button>
+        </Dialog>
+        <Dialog
+          title="Bekreft avslutting av votering"
+          subtitle={`Bekreft avslutting av votering for "${issueText}"`}
+          visible={showDisableVotingDialog}
+          onClose={() => this.closeDisableVotingDialog()}
+        >
+          <Button background onClick={() => this.disableVoting()}>Bekreft</Button>
+          <Button
+            background
+            onClick={() => this.closeDisableVotingDialog()}
           >Avbryt</Button>
         </Dialog>
         <div className={css.content}>
