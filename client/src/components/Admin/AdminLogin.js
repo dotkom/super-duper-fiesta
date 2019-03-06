@@ -24,7 +24,6 @@ class AdminLogin extends React.Component {
   }
 
   authenticateAdmin(e) {
-    console.log('wtf')
     e.preventDefault();
     if (this.props.meetingExists) {
       this.props.login(this.state.password);
@@ -55,7 +54,7 @@ class AdminLogin extends React.Component {
             <div className={css.component}>
               <h1>Logg inn som tellekorps</h1>
 
-              {(!this.props.loggedIn || this.props.loggedIn && this.props.meetingExists) && (
+              {(!this.props.loggedIn || (this.props.loggedIn && this.props.meetingExists)) && (
                 <p>Du må autorisere deg for å få tilgang til denne funksjonaliteten.</p>
               )}
 
@@ -116,6 +115,7 @@ AdminLogin.propTypes = {
   login: PropTypes.func.isRequired,
   meetingExists: PropTypes.bool.isRequired,
   reloadPage: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -135,10 +135,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(adminCreateGenfors(password, title, date));
   },
 });
-
-AdminLogin.propTypes = {
-  login: PropTypes.func.isRequired,
-};
 
 export default AdminLogin;
 export const AdminLoginContainer = connect(mapStateToProps,
