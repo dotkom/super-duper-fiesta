@@ -3,14 +3,6 @@
   font-weight: bold;
 }
 
-.left {
-  composes: left from '../List/List.css';
-}
-
-.right {
-  composes: right from '../List/List.css';
-}
-
 .action {
   display: inline;
   font-size: 2rem;
