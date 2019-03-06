@@ -46,32 +46,32 @@ const UserList = ({ users }) => {
     Header: `Registrert (${usersRegistered})`,
     accessor: 'registered',
     className: css.center,
-    Cell: props => 
-           <div
-            className={classNames(css.action,
-              { 
-                [css.success]:props.value.completedRegistration,
-                [css.close]: !props.value.completedRegistration,
-                [css.toggle]: props.value.completedRegistration,
-              }
+    Cell: props =>
+      <div
+        className={classNames(css.action,
+          {
+            [css.success]: props.value.completedRegistration,
+            [css.close]: !props.value.completedRegistration,
+            [css.toggle]: props.value.completedRegistration,
+          },
             )}
-            title={`${moment(props.value.registeredDate).format('LLL')} (${moment(props.value.registeredDate).fromNow()})`}
-          >{props.value.completedRegistration}</div>
-    }, {
+        title={`${moment(props.value.registeredDate).format('LLL')} (${moment(props.value.registeredDate).fromNow()})`}
+      >{props.value.completedRegistration}</div>,
+  }, {
     Header: `Rettigheter (${usersHasPermsToVote})`,
     accessor: 'permissions',
-    Cell:  props => getPermissionDisplay(props.value)
-    }, {
-    Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`
-    }
-  ]
+    Cell: props => getPermissionDisplay(props.value),
+  }, {
+    Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`,
+  },
+  ];
 
   return (
-  <ReactTable
-    data={data}
-    columns={columns}
-  />)
-}
+    <ReactTable
+      data={data}
+      columns={columns}
+    />);
+};
 /*
    <table className={css.list}>
       <thead>
@@ -89,10 +89,9 @@ const UserList = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        
+
       </tbody>
-    </table>*/
-  
+    </table> */
 
 
 UserList.propTypes = {
