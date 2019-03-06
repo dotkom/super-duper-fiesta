@@ -7,10 +7,11 @@ import { adminToggleCanVote } from 'features/user/actionCreators';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import classNames from 'classnames';
+import { ToggleCanVoteContainer } from '../ToggleCanVote';
 import moment from 'moment';
 import css from './List.css';
 
-const UserList = ({ users }) => {
+const UserList = ({ users, toggleCanVote }) => {
   const userKeys = Object.keys(users);
   const totalUsers = userKeys.length;
   const usersCanVote = userKeys
@@ -36,7 +37,6 @@ const UserList = ({ users }) => {
       id: user.id,
       permissions: user.permissions,
       setPermissions: user.setPermissions,
-      toggleCanVote: user.toggleCanVote,
     }))];
 
   const columns = [{
@@ -63,8 +63,16 @@ const UserList = ({ users }) => {
     Cell: props => getPermissionDisplay(props.value),
   }, {
     Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`,
-  },
-  ];
+    accessor: 'canVote',
+    Cell: props =>
+      <ToggleCanVoteContainer
+        canVote={props.value}
+        id={props.original.id}
+        permissions={props.original.permissions}
+        setPermissions={props.original.setPermissions}
+        toggleCanVote={toggleCanVote}
+      />,
+  }];
 
   return (
     <ReactTable
