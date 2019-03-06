@@ -37,7 +37,7 @@ const UserList = ({ users, toggleCanVote }) => {
       </thead>
       <tbody>
         {Object.keys(users)
-          .sort((a, b) => users[a].name > users[b].name)
+          .sort((a, b) => users[a].name.localeCompare(users[b].name))
           .map((key) => {
             const user = users[key];
             return (<UserContainer
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
   // Filter users by using Fuse fuzzy search
   if (state.userFilter && state.userFilter.length > 0) {
     presentedUsers = new Fuse(Object.keys(state.users).map(key => state.users[key]), {
-      threshold: 0.6,
+      threshold: 0.2,
       location: 0,
       distance: 100,
       maxPatternLength: 32,
