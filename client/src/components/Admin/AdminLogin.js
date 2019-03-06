@@ -115,6 +115,7 @@ AdminLogin.propTypes = {
   login: PropTypes.func.isRequired,
   meetingExists: PropTypes.bool.isRequired,
   reloadPage: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -134,10 +135,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(adminCreateGenfors(password, title, date));
   },
 });
-
-AdminLogin.propTypes = {
-  login: PropTypes.func.isRequired,
-};
 
 export default AdminLogin;
 export const AdminLoginContainer = connect(mapStateToProps,
