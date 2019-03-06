@@ -95,14 +95,17 @@ const emitActiveQuestion = async (socket, meeting) => {
     } else {
       voter = user;
     }
-    const vote = await getUserVote(issue.id, voter.id);
 
-    // Emit own vote if voted
-    if (vote) {
-      emit(socket, USER_VOTE, {
-        alternativeId: vote.alternativeId,
-        issueId: vote.issueId,
-      });
+    if (voter) {
+      const vote = await getUserVote(issue.id, voter.id);
+
+      // Emit own vote if voted
+      if (vote) {
+        emit(socket, USER_VOTE, {
+          alternativeId: vote.alternativeId,
+          issueId: vote.issueId,
+        });
+      }
     }
   } catch (err) {
     logger.error('Getting currently active issue failed.', err);
