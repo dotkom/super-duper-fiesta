@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { CAN_VOTE, getPermissionDisplay } from 'common/auth/permissions';
 import { adminToggleCanVote } from 'features/user/actionCreators';
-import { UserContainer } from '../User';
-import ReactTable from 'react-table'
-import css from './List.css';
-import 'react-table/react-table.css'
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 import classNames from 'classnames';
+import moment from 'moment';
+import css from './List.css';
 
-const UserList = ({ users, toggleCanVote }) => {
+const UserList = ({ users }) => {
   const userKeys = Object.keys(users);
   const totalUsers = userKeys.length;
   const usersCanVote = userKeys
@@ -22,29 +22,48 @@ const UserList = ({ users, toggleCanVote }) => {
   const usersRegistered = userKeys
     .filter(u => users[u].completedRegistration)
     .length;
-  const data = Object.keys(users)
+
+  const data = [...Object.keys(users)
     .sort((a, b) => users[a].name.localeCompare(users[b].name))
-    .map((key) => users[key]);
-  console.log(data);
+    .map(key => users[key])
+    .map(user => ({
+      name: user.name,
+      canVote: user.canVote,
+      registered: {
+        completedRegistration: user.completedRegistration,
+        registeredDate: user.registered,
+      },
+      id: user.id,
+      permissions: user.permissions,
+      setPermissions: user.setPermissions,
+      toggleCanVote: user.toggleCanVote,
+    }))];
+
   const columns = [{
-    Header: `Name (${totalUsers})` ,
+    Header: `Name (${totalUsers})`,
     accessor: 'name', // String-based value accessors!
-  }, {
+    },{
     Header: `Registrert (${usersRegistered})`,
-    accessor: `completedRegistration`,
-    Cell: props => <div
+    accessor: 'registered',
+    className: css.center,
+    Cell: props => 
+           <div
             className={classNames(css.action,
-              { [css.success]: props.value,
-                [css.close]: !props.value,
-                [css.toggle]: props.value,
-              },
-          )}
-          >{props.value}</div>
-  }, {
-    Header: `Rettigheter`,
-    accessor: `permissions`,
+              { 
+                [css.success]:props.value.completedRegistration,
+                [css.close]: !props.value.completedRegistration,
+                [css.toggle]: props.value.completedRegistration,
+              }
+            )}
+            title={`${moment(props.value.registeredDate).format('LLL')} (${moment(props.value.registeredDate).fromNow()})`}
+          >{props.value.completedRegistration}</div>
+    }, {
+    Header: `Rettigheter (${usersHasPermsToVote})`,
+    accessor: 'permissions',
     Cell:  props => getPermissionDisplay(props.value)
-  }
+    }, {
+    Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`
+    }
   ]
 
   return (
