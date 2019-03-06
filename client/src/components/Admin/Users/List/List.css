@@ -1,22 +1,5 @@
-table.list {
-  width: 100%;
-  margin-top: 1rem;
-  border-collapse: collapse;
-}
-
-.list th {
-  border-bottom: 1px solid #9597b1;
-  font-weight: normal;
-  padding: 0.25rem 0.25rem;
-}
-
-.list td {
-  padding: 0.5rem 0.25rem;
-  border-bottom: 1px solid #dbdce0;
-}
-
-.list tr:nth-child(even) td {
-  background: #f9f9f9;
+.table {
+  margin-top: 25px;
 }
 
 .left {

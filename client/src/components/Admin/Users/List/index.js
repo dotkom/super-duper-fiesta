@@ -70,29 +70,9 @@ const UserList = ({ users }) => {
     <ReactTable
       data={data}
       columns={columns}
+      className={css.table}
     />);
 };
-/*
-   <table className={css.list}>
-      <thead>
-        <tr>
-          <th className={css.left}>Bruker ({totalUsers})</th>
-          <th className={css.right} title="Har fullført oppmøteregistrering">
-            Registrert ({usersRegistered})
-          </th>
-          <th className={css.right} title="(Antall med stemmerett)">
-            Rettigheter ({usersHasPermsToVote})
-          </th>
-          <th className={css.right}>
-            Stemmeberettigelse ({usersCanVote}/{usersHasPermsToVote})
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table> */
-
 
 UserList.propTypes = {
   users: PropTypes.objectOf(PropTypes.shape({
