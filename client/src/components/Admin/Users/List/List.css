@@ -3,7 +3,14 @@
 }
 
 .center {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.tableCell {
+  display: flex;
+  align-items: center;
+  margin-left: 0.25rem;
 }
 
 .action {

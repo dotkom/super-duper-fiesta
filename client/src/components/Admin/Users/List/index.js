@@ -41,7 +41,7 @@ const UserList = ({ users, toggleCanVote }) => {
 
   const columns = [{
     Header: `Name (${totalUsers})`,
-    accessor: 'name', // String-based value accessors!
+    accessor: 'name',
     },{
     Header: `Registrert (${usersRegistered})`,
     accessor: 'registered',
@@ -64,6 +64,7 @@ const UserList = ({ users, toggleCanVote }) => {
   }, {
     Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`,
     accessor: 'canVote',
+    className: css.center,
     Cell: props =>
       <ToggleCanVoteContainer
         canVote={props.value}
@@ -79,6 +80,15 @@ const UserList = ({ users, toggleCanVote }) => {
       data={data}
       columns={columns}
       className={css.table}
+      getTrProps={(state, rowInfo, column, instance) => ({
+        className: classNames({
+          [css.canNotVote]: !(rowInfo && rowInfo.row.canVote),
+        }),
+      })}
+      getTdProps={() => ({
+        className: css.tableCell,
+      })}
+      resizable={false}
     />);
 };
 
