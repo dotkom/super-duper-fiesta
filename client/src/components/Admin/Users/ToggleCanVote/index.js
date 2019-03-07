@@ -37,43 +37,43 @@ class ToggleCanVote extends React.Component {
 
     return (
       <Fragment>
-          <Dialog
-            title="Gi stemmerett"
-            subtitle={'Denne personen er ikke medlem av Online. Ønsker du å ' +
+        <Dialog
+          title="Gi stemmerett"
+          subtitle={'Denne personen er ikke medlem av Online. Ønsker du å ' +
             'gi dem stemmerett?'}
-            visible={this.state.showToggleCanVoteWarning}
-            onClose={() => this.setState({ showToggleCanVoteWarning: false })}
-          >
-            <p>Dette kan bare gjøres dersom generalforsamlingen vedtar det.</p>
-            <Button
-              background
-              onClick={() => this.canVoteHandler(id, true)}
-            >Bekreft</Button>
-            <Button
-              background
-              onClick={() => this.setState({ showToggleCanVoteWarning: false })}
-            >Avbryt</Button>
-          </Dialog>
+          visible={this.state.showToggleCanVoteWarning}
+          onClose={() => this.setState({ showToggleCanVoteWarning: false })}
+        >
+          <p>Dette kan bare gjøres dersom generalforsamlingen vedtar det.</p>
+          <Button
+            background
+            onClick={() => this.canVoteHandler(id, true)}
+          >Bekreft</Button>
+          <Button
+            background
+            onClick={() => this.setState({ showToggleCanVoteWarning: false })}
+          >Avbryt</Button>
+        </Dialog>
 
-          <button
-            className={css.action}
-            onClick={() => (permissions >= CAN_VOTE
+        <button
+          className={css.action}
+          onClick={() => (permissions >= CAN_VOTE
               ? toggleCanVote(id, true)
               : this.setState({ showToggleCanVoteWarning: true }))}
-          >
-            <div
-              className={permissions >= CAN_VOTE ? successToggle : css.unavailable}
-              title={permissions >= CAN_VOTE
+        >
+          <div
+            className={permissions >= CAN_VOTE ? successToggle : css.unavailable}
+            title={permissions >= CAN_VOTE
                 ? 'Gi brukeren stemmerett'
                 : 'Brukeren har ikke rett til å få stemmerett.'}
-            />
-          </button>
-          <button
-            className={css.action}
-            onClick={() => toggleCanVote(id, false)}
-          >
-            <div className={closeToggle} title="Fjern brukerens stemmerett" />
-          </button>
+          />
+        </button>
+        <button
+          className={css.action}
+          onClick={() => toggleCanVote(id, false)}
+        >
+          <div className={closeToggle} title="Fjern brukerens stemmerett" />
+        </button>
       </Fragment>
     );
   }

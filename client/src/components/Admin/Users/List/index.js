@@ -7,9 +7,9 @@ import { adminToggleCanVote } from 'features/user/actionCreators';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import classNames from 'classnames';
-import { ToggleCanVoteContainer } from '../ToggleCanVote';
 import moment from 'moment';
 import css from './List.css';
+import { ToggleCanVoteContainer } from '../ToggleCanVote';
 
 const UserList = ({ users, toggleCanVote }) => {
   const userKeys = Object.keys(users);
@@ -42,7 +42,7 @@ const UserList = ({ users, toggleCanVote }) => {
   const columns = [{
     Header: `Name (${totalUsers})`,
     accessor: 'name',
-    },{
+  }, {
     Header: `Registrert (${usersRegistered})`,
     accessor: 'registered',
     className: css.center,
