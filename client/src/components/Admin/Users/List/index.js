@@ -40,7 +40,7 @@ const UserList = ({ users, toggleCanVote }) => {
     }))];
 
   const columns = [{
-    Header: `Name (${totalUsers})`,
+    Header: `Navn (${totalUsers})`,
     accessor: 'name',
   }, {
     Header: `Registrert (${usersRegistered})`,
@@ -80,7 +80,7 @@ const UserList = ({ users, toggleCanVote }) => {
       data={data}
       columns={columns}
       className={css.table}
-      getTrProps={(state, rowInfo, column, instance) => ({
+      getTrProps={(state, rowInfo) => ({
         className: classNames({
           [css.canNotVote]: !(rowInfo && rowInfo.row.canVote),
         }),
@@ -88,7 +88,13 @@ const UserList = ({ users, toggleCanVote }) => {
       getTdProps={() => ({
         className: css.tableCell,
       })}
-      resizable={false}
+      previousText= 'Forrige'
+      nextText= 'Neste'
+      loadingText= 'Laster inn...'
+      noDataText= 'Ingen rekker funnet'
+      pageText= 'Side'
+      ofText= 'av'
+      rowsText= 'rekker'
     />);
 };
 
