@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
-import { CAN_VOTE, getPermissionDisplay } from 'common/auth/permissions';
+import { CAN_VOTE } from 'common/auth/permissions';
 import { adminToggleCanVote } from 'features/user/actionCreators';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import classNames from 'classnames';
-import moment from 'moment';
 import css from './List.css';
-import { ToggleCanVoteContainer } from '../ToggleCanVote';
+import { RegisteredIndicator, PermissionDisplay, ToggleCanVoteIndicator } from './Table';
 
 const UserList = ({ users, toggleCanVote }) => {
   const userKeys = Object.keys(users);
@@ -31,13 +30,15 @@ const UserList = ({ users, toggleCanVote }) => {
       name: user.name,
       canVote: user.canVote,
       registered: {
-        completedRegistration: user.completedRegistration,
         registeredDate: user.registered,
+        isRegistered: user.completedRegistration,
       },
       id: user.id,
       permissions: user.permissions,
       setPermissions: user.setPermissions,
     }))];
+
+  console.log(data);
 
   const columns = [{
     Header: `Navn (${totalUsers})`,
@@ -46,33 +47,16 @@ const UserList = ({ users, toggleCanVote }) => {
     Header: `Registrert (${usersRegistered})`,
     accessor: 'registered',
     className: css.center,
-    Cell: props =>
-      <div
-        className={classNames(css.action,
-          {
-            [css.success]: props.value.completedRegistration,
-            [css.close]: !props.value.completedRegistration,
-            [css.toggle]: props.value.completedRegistration,
-          },
-            )}
-        title={`${moment(props.value.registeredDate).format('LLL')} (${moment(props.value.registeredDate).fromNow()})`}
-      >{props.value.completedRegistration}</div>,
+    Cell: RegisteredIndicator,
   }, {
     Header: `Rettigheter (${usersHasPermsToVote})`,
     accessor: 'permissions',
-    Cell: props => getPermissionDisplay(props.value),
+    Cell: PermissionDisplay,
   }, {
     Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`,
     accessor: 'canVote',
     className: css.center,
-    Cell: props =>
-      <ToggleCanVoteContainer
-        canVote={props.value}
-        id={props.original.id}
-        permissions={props.original.permissions}
-        setPermissions={props.original.setPermissions}
-        toggleCanVote={toggleCanVote}
-      />,
+    Cell: props => ToggleCanVoteIndicator(props, toggleCanVote),
   }];
 
   return (
@@ -80,6 +64,13 @@ const UserList = ({ users, toggleCanVote }) => {
       data={data}
       columns={columns}
       className={css.table}
+      previousText="Forrige"
+      nextText="Neste"
+      loadingText="Laster inn..."
+      noDataText="Ingen rekker funnet"
+      pageText="Side"
+      ofText="av"
+      rowsText="rekker"
       getTrProps={(state, rowInfo) => ({
         className: classNames({
           [css.canNotVote]: !(rowInfo && rowInfo.row.canVote),
@@ -88,13 +79,6 @@ const UserList = ({ users, toggleCanVote }) => {
       getTdProps={() => ({
         className: css.tableCell,
       })}
-      previousText="Forrige"
-      nextText="Neste"
-      loadingText="Laster inn..."
-      noDataText="Ingen rekker funnet"
-      pageText="Side"
-      ofText="av"
-      rowsText="rekker"
     />);
 };
 
