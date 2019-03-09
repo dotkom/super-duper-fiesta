@@ -88,13 +88,13 @@ const UserList = ({ users, toggleCanVote }) => {
       getTdProps={() => ({
         className: css.tableCell,
       })}
-      previousText= 'Forrige'
-      nextText= 'Neste'
-      loadingText= 'Laster inn...'
-      noDataText= 'Ingen rekker funnet'
-      pageText= 'Side'
-      ofText= 'av'
-      rowsText= 'rekker'
+      previousText="Forrige"
+      nextText="Neste"
+      loadingText="Laster inn..."
+      noDataText="Ingen rekker funnet"
+      pageText="Side"
+      ofText="av"
+      rowsText="rekker"
     />);
 };
 
