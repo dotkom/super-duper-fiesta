@@ -64,6 +64,7 @@ const UserList = ({ users, toggleCanVote }) => {
       data={data}
       columns={columns}
       className={css.table}
+      resizable={false}
       previousText="Forrige"
       nextText="Neste"
       loadingText="Laster inn..."
