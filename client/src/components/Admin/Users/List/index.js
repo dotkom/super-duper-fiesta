@@ -38,8 +38,6 @@ const UserList = ({ users, toggleCanVote }) => {
       setPermissions: user.setPermissions,
     }))];
 
-  console.log(data);
-
   const columns = [{
     Header: `Navn (${totalUsers})`,
     accessor: 'name',
