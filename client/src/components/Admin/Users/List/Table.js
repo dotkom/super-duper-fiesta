@@ -14,7 +14,7 @@ export const RegisteredIndicator = props =>
         [css.close]: !props.value.isRegistered,
         [css.toggle]: props.value.isRegistered,
       },
-        )}
+    )}
     title={`${moment(props.value.registeredDate).format('LLL')} (${moment(props.value.registeredDate).fromNow()})`}
   >{props.value.isRegistered}</div>;
 

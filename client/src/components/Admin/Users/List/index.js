@@ -24,7 +24,6 @@ const UserList = ({ users, toggleCanVote }) => {
     .length;
 
   const data = [...Object.keys(users)
-    .sort((a, b) => users[a].name.localeCompare(users[b].name))
     .map(key => users[key])
     .map(user => ({
       name: user.name,
