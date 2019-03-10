@@ -22,36 +22,61 @@ class Issue extends React.Component {
     super(props);
     this.state = {
       redirectToEditIssue: false,
+      showDeleteIssueDialog: false,
       showCloseIssueDialog: false,
+      showDisableVotingDialog: false,
     };
   }
 
   onClickDeleteIssue() {
+    this.setState({ showDeleteIssueDialog: true });
+  }
+
+  onClickCloseIssue() {
     this.setState({ showCloseIssueDialog: true });
   }
 
   deleteIssue() {
-    this.setState({ showCloseIssueDialog: false });
+    this.setState({ showDeleteIssueDialog: false });
     this.props.deleteIssue();
+  }
+
+  closeIssue() {
+    this.setState({ showCloseIssueDialog: false });
+    this.props.closeIssue();
   }
 
   votingBtnOnClick() {
     if (this.props.issueStatus === VOTING_NOT_STARTED) {
       this.props.enableVoting();
-    } else {
-      this.props.disableVoting();
+    } else if (this.props.issueStatus === VOTING_IN_PROGRESS) {
+      this.setState({ showDisableVotingDialog: true });
     }
   }
 
+  disableVoting() {
+    this.setState({ showDisableVotingDialog: false });
+    this.props.disableVoting();
+  }
+
   closeDeleteDialog() {
+    this.setState({ showDeleteIssueDialog: false });
+  }
+
+  closeCloseDialog() {
     this.setState({ showCloseIssueDialog: false });
+  }
+
+
+  closeDisableVotingDialog() {
+    this.setState({ showDisableVotingDialog: false });
   }
 
   render() {
     const {
-      closeIssue, issueIsActive, issueStatus, issueText, pin, registrationOpen,
+      issueIsActive, issueStatus, issueText, pin, registrationOpen,
     } = this.props;
-    const { showCloseIssueDialog } = this.state;
+    const { showDeleteIssueDialog, showCloseIssueDialog, showDisableVotingDialog } = this.state;
     const votingInProgress = issueStatus === VOTING_IN_PROGRESS;
     let enableDisableVotingBtnText;
     if (issueStatus === VOTING_NOT_STARTED) enableDisableVotingBtnText = 'Start votering';
@@ -63,13 +88,37 @@ class Issue extends React.Component {
         <Dialog
           title="Bekreft sletting av sak"
           subtitle={`Bekreft sletting av "${issueText}"`}
-          visible={showCloseIssueDialog}
+          visible={showDeleteIssueDialog}
           onClose={() => this.closeDeleteDialog()}
         >
           <Button background onClick={() => this.deleteIssue()}>Bekreft</Button>
           <Button
             background
             onClick={() => this.closeDeleteDialog()}
+          >Avbryt</Button>
+        </Dialog>
+        <Dialog
+          title="Bekreft avslutting av sak"
+          subtitle={`Bekreft avslutting av "${issueText}"`}
+          visible={showCloseIssueDialog}
+          onClose={() => this.closeCloseDialog()}
+        >
+          <Button background onClick={() => this.closeIssue()}>Bekreft</Button>
+          <Button
+            background
+            onClick={() => this.closeCloseDialog()}
+          >Avbryt</Button>
+        </Dialog>
+        <Dialog
+          title="Bekreft avslutting av votering"
+          subtitle={`Bekreft avslutting av votering for "${issueText}"`}
+          visible={showDisableVotingDialog}
+          onClose={() => this.closeDisableVotingDialog()}
+        >
+          <Button background onClick={() => this.disableVoting()}>Bekreft</Button>
+          <Button
+            background
+            onClick={() => this.closeDisableVotingDialog()}
           >Avbryt</Button>
         </Dialog>
         <div className={css.content}>
@@ -90,7 +139,10 @@ class Issue extends React.Component {
               iconClass={css.edit}
               onClick={() => { this.setState({ redirectToEditIssue: true }); }}
             />
-            <ButtonIconText text="Avslutt" iconClass={css.end} onClick={closeIssue} />
+            <ButtonIconText
+              text="Avslutt" iconClass={css.end}
+              onClick={() => this.onClickCloseIssue()}
+            />
             <ButtonIconText
               text="Slett"
               iconClass={css.delete}
