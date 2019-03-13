@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import { CAN_VOTE } from 'common/auth/permissions';
 import { adminToggleCanVote } from 'features/user/actionCreators';
-import { UserContainer } from '../User';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
+import classNames from 'classnames';
 import css from './List.css';
+import { RegisteredIndicator, PermissionDisplay, ToggleCanVoteIndicator } from './Table';
 
 const UserList = ({ users, toggleCanVote }) => {
   const userKeys = Object.keys(users);
@@ -19,42 +22,62 @@ const UserList = ({ users, toggleCanVote }) => {
   const usersRegistered = userKeys
     .filter(u => users[u].completedRegistration)
     .length;
+
+  const data = [...Object.keys(users)
+    .map(key => users[key])
+    .map(user => ({
+      name: user.name,
+      canVote: user.canVote,
+      registered: {
+        registeredDate: user.registered,
+        isRegistered: user.completedRegistration,
+      },
+      id: user.id,
+      permissions: user.permissions,
+      setPermissions: user.setPermissions,
+    }))];
+
+  const columns = [{
+    Header: `Navn (${totalUsers})`,
+    accessor: 'name',
+  }, {
+    Header: `Registrert (${usersRegistered})`,
+    accessor: 'registered',
+    className: css.center,
+    Cell: RegisteredIndicator,
+  }, {
+    Header: `Rettigheter (${usersHasPermsToVote})`,
+    accessor: 'permissions',
+    Cell: PermissionDisplay,
+  }, {
+    Header: `Stemmeberettigelse (${usersCanVote}/${usersHasPermsToVote})`,
+    accessor: 'canVote',
+    className: css.center,
+    Cell: props => ToggleCanVoteIndicator(props, toggleCanVote),
+  }];
+
   return (
-    <table className={css.list}>
-      <thead>
-        <tr>
-          <th className={css.left}>Bruker ({totalUsers})</th>
-          <th className={css.right} title="Har fullført oppmøteregistrering">
-            Registrert ({usersRegistered})
-          </th>
-          <th className={css.right} title="(Antall med stemmerett)">
-            Rettigheter ({usersHasPermsToVote})
-          </th>
-          <th className={css.right}>
-            Stemmeberettigelse ({usersCanVote}/{usersHasPermsToVote})
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(users)
-          .sort((a, b) => users[a].name.localeCompare(users[b].name))
-          .map((key) => {
-            const user = users[key];
-            return (<UserContainer
-              name={user.name}
-              canVote={user.canVote}
-              completedRegistration={user.completedRegistration}
-              key={user.id}
-              permissions={user.permissions}
-              registered={user.registered}
-              toggleCanVote={toggleCanVote}
-              id={user.id}
-            />);
-          },
-        )}
-      </tbody>
-    </table>
-  );
+    <ReactTable
+      data={data}
+      columns={columns}
+      className={css.table}
+      resizable={false}
+      previousText="Forrige"
+      nextText="Neste"
+      loadingText="Laster inn..."
+      noDataText="Ingen rekker funnet"
+      pageText="Side"
+      ofText="av"
+      rowsText="rekker"
+      getTrProps={(state, rowInfo) => ({
+        className: classNames({
+          [css.canNotVote]: !(rowInfo && rowInfo.row.canVote),
+        }),
+      })}
+      getTdProps={() => ({
+        className: css.tableCell,
+      })}
+    />);
 };
 
 UserList.propTypes = {
