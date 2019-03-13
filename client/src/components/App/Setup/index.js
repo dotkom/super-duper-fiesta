@@ -72,10 +72,10 @@ class Setup extends Component {
     const { registered, registrationOpen, authenticated } = this.props;
     const errorMessage = !registered && this.validate();
     let buttonText = 'Registreringen er ikke åpen';
-    if (registrationOpen) {
-      buttonText = 'Fullfør registering';
-    } else if (registered) {
+    if (registered) {
       buttonText = 'Logg inn';
+    } else if (registrationOpen) {
+      buttonText = 'Fullfør registering';
     }
     // Redirect to home if already registered
     if (authenticated) {

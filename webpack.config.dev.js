@@ -11,8 +11,24 @@ module.exports = merge.smart(config, {
   devtool: 'eval-source-map',
   module: {
     rules: [
+            {
+          test: /\.css$/,
+          include: [/node_modules/],
+          use: [
+              {
+                  loader: "style-loader",
+              },
+              {
+                  loader: "css-loader",
+                  options: {
+                      modules: false,
+                  },
+              },
+          ],
+      },
       {
         test: /\.css$/,
+        exclude: [/node_modules/],
         use: [
           {
             loader: 'style-loader',
@@ -23,6 +39,7 @@ module.exports = merge.smart(config, {
               sourceMap: true,
               modules: true,
               localIdentName: '[name]__[local]___[hash:base64:5]',
+              importLoaders:1,
             },
           },
           {
