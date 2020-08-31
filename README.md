@@ -130,7 +130,8 @@ These variables are required in development. The others are safe to skip.
 | `SDF_BACKEND_HOST` | Host to run the app on | `127.0.0.1` | `127.0.0.1` |
 | `SDF_BACKEND_PORT` | Port to run the app on | `3000` | `3000` |
 | `SDF_SCHEME` | HTTP Scheme to run the app on | `http` | `http` |
-
+| `SDF_SESSION_STORE_SECRET` | Secret to encrypt session storage with | `super secret` | `super secret` |
+| `SDF_GENFORS_ADMIN_PASSWORD` | Admin pass | `Super_secret_admin_pass` | `''` |
 ### Database
 
 The database connection can be configured using DATABASE_URL, which is a connection URI exposed to ENV on the format:
@@ -169,6 +170,10 @@ This requires an OpenID Client ID as well as an OpenID Provider capable of provi
 
 _If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
+## Deployment to Elastic Beanstalk
+The application is deployed to elastic beanstalk with the EB cli, ex. ```eb deploy```. When running the dev environment you should run single instance with spot requests to minimize cost. When deploying to production there should be a load balanced environment. Environment variables should be set in the AWS console. The PORT environment variable needs to be set to whatever port the application is running on. 
+
+When deploying the EB cli will run git archve. You will normally not get any git info inside the archive which is created, but the .gitattributes and version.txt makes sure that we at least get the commit hash. Which we can then use when supplying Sentry with the version hash. 
 ## WIP Screenshots
 
 ### Front page, no active issue

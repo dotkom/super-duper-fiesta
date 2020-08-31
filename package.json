@@ -1,6 +1,9 @@
 {
   "name": "super-duper-fiesta",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=12.18.2"
+  },
   "main": "index.js",
   "repository": "git@github.com:dotKom/super-duper-fiesta.git",
   "author": "",
@@ -11,6 +14,7 @@
     "codecov": "codecov",
     "coverage": "codecov",
     "db:migrate": "sequelize db:migrate",
+    "db:init": "sequelize init",
     "frontend": "webpack-dev-server --hot --config webpack.config.dev.js",
     "backend": "node server/server.js",
     "lint": "eslint client/src/ server/",
@@ -46,8 +50,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "express": "^4.14.0",
-    "express-session": "^1.15.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^0.10.0",
@@ -56,7 +60,7 @@
     "jest": "^21.0.2",
     "jest-fetch-mock": "^1.2.1",
     "mock-socket": "^7.0.0",
-    "moment": "^2.18.1",
+    "moment": "^2.27.0",
     "node-fetch": "^1.6.3",
     "normalize.css": "^6.0.0",
     "offline-plugin": "^4.9.0",
@@ -93,7 +97,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.10.1",
-    "webpack-dev-server": "^2.4.2",
+    "webpack-dev-server": "^2.11.5",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0",
     "winston": "^2.4.0",
@@ -101,7 +105,7 @@
   },
   "devDependencies": {
     "eslint-import-resolver-webpack": "^0.8.4",
-    "sqlite3": "^3.1.13",
+    "sqlite3": "^4.2.0",
     "supertest": "^3.0.0"
   }
 }
