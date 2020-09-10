@@ -14,13 +14,13 @@ Check out the [todo list](https://github.com/dotkom/super-duper-fiesta/projects/
 ### Dependencies
 
 - Node.JS(8.9 or higher)
-- npm
+- yarn
 
 ### Instructions
 
-- Start by cloning the repository, then running `npm install` (or `yarn`) from the root directory.
-- Run backend with `npm run backend` (or `yarn backend`)
-- Run frontend with `npm run frontend` (or `yarn frontend`)
+- Start by cloning the repository, then running `yarn` from the root directory.
+- Run backend with `yarn backend`
+- Run frontend with `yarn frontend`
 
 ### Instructions (production)
 
@@ -44,13 +44,13 @@ docker run \
 
 #### Other
 
-- `npm install`
-- `npm run build:prod`
+- `yarn`
+- `yarn build:prod`
 - Make sure the relevant environment variables are set
   - `NODE_ENV=production`
   - `PRODUCTION=true`
   - Any other required variables, see the [configuration section](#configuration)
-- `npm start` (or `node server/app.js`)
+- `yarn start` (or `node server/app.js`)
 
 #### Other requirements
 
@@ -171,7 +171,7 @@ This requires an OpenID Client ID as well as an OpenID Provider capable of provi
 _If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
 ## Deployment with Elastic Beanstalk
-The application is deployed to elastic beanstalk with the EB cli, ex. ```eb deploy```. When running the dev environment you should run single instance with spot requests to minimize cost. When deploying to production there should be a load balanced environment. Environment variables should be set in the AWS console. The PORT environment variable needs to be set to whatever port the application is running on. 
+The application is deployed to elastic beanstalk with the EB cli, ex. ```eb deploy```. When running the dev environment you should run single instance with spot requests to minimize cost. When deploying to production there should be a load balanced environment. Environment variables should be set in the AWS console. The SDF_BACKEND_PORT environment variable needs to be set to 8081 because that is what Elastic Beanstalk assumes. 
 
 When deploying the EB cli will run git archve. You will normally not get any git info inside the archive which is created, but the .gitattributes and version.txt makes sure that we at least get the commit hash. Which we can then use when supplying Sentry with the version hash. 
 ## WIP Screenshots
