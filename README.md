@@ -170,7 +170,7 @@ This requires an OpenID Client ID as well as an OpenID Provider capable of provi
 
 _If running the OpenID Connect provider in [onlineweb4](/dotkom/onlineweb4) locally, remember that webpack uses port 3000 by default, so you'll likely have to use another port for super-duper-fiesta._
 
-## Deployment to Elastic Beanstalk
+## Deployment with Elastic Beanstalk
 The application is deployed to elastic beanstalk with the EB cli, ex. ```eb deploy```. When running the dev environment you should run single instance with spot requests to minimize cost. When deploying to production there should be a load balanced environment. Environment variables should be set in the AWS console. The PORT environment variable needs to be set to whatever port the application is running on. 
 
 When deploying the EB cli will run git archve. You will normally not get any git info inside the archive which is created, but the .gitattributes and version.txt makes sure that we at least get the commit hash. Which we can then use when supplying Sentry with the version hash. 

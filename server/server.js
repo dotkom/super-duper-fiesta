@@ -18,8 +18,8 @@ const { getGitSha } = require('./utils/git');
     captureUnhandledRejections: true,
     tags: {
       app: 'backend',
-      release: getGitSha(),
     },
+    release: getGitSha(),
   })
   .install();
 
