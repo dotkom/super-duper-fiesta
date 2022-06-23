@@ -35,7 +35,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
-    "codecov": "^2.3.0",
+    "codecov": "^3.8.3",
     "connect-session-sequelize": "^5.2.0",
     "cookie-parser": "^1.4.3",
     "crypto-js": "^3.1.9-1",
